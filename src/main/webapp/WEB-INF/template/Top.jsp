@@ -1,87 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<style>
- 		body{
- 			padding-top:60px;
- 		}
- 		@media all and (min-width: 768px) {
-		.navbar-fixed-width {
-							    width: 768px;
-							    margin:0 auto;
-							 }
-	}
+<nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-lg">
 
-	@media all and (min-width: 992px) {
-	  .navbar-fixed-width {
-	    						width: 992px;
-	    						margin:0 auto;
-	  						}
+	<a href="#" class="navbar-brand">
+		<img src="<c:url value='/resources/Images/logo.png' />" />
+		LOGO Image
+	</a>
 
-	}
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-	@media all and (min-width: 1200px) {
-	  .navbar-fixed-width {
-	    						width: 1200px;
-	    						margin:0 auto;
-	  						}
-	}
-	
-	.active{
-		font-weight: bold;
-		font-size:1.2em;
-	}	
-</style>
-<script>  	
-	$(function(){	 		
-			$(".navbar-right li a").click(function(){		 			
-				 $('.navbar-right li').each(function(){
-	  			$(this).removeClass("active");
-	  		});    			
-			$(this).parent().addClass("active");
-		
-		});
-	});	
- </script>
-<!-- DataRoomTop.jsp -->
-<!-- 네비게이션바 시작 -->
-<nav class="navbar navbar-default navbar-fixed-top navbar-fixed-width  navbar-inverse ">
-<div class="container">
-  <div class="navbar-header">
-  <!-- 화면크기가 작을때 보여지는 메뉴버튼 -->
-    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapseMenu">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>		        
-    </button>	
-       
-    <a class="navbar-brand" href="#" style="color:white;font-weight:bold">		      		
-        	OneLine Comment Project
-    </a>
-    
-  </div><!-- navbar-header -->
-  <!-- 화면 크기가 클때 상단에 보이는 메뉴 -->
-    <div class="collapse navbar-collapse" id="collapseMenu">
-    	
-    	<ul class="nav navbar-nav navbar-right">
-    		
-    		<li class="active"><a href="<c:url value='/'/>">HOME</a></li>
-      		<li>
-      			<c:if test="${empty sessionScope.id}" var="isNotLogin">
-      				
-      				<a href='<c:url value="/Member/login.bbs"/>'>로그인</a>
-      			</c:if>
-      			<c:if test="${not isNotLogin}">
-      				<a href='<c:url value="/Member/logout.bbs"/>'>로그아웃</a>
-      			</c:if>
-      		</li>
-      		<li><a href='<c:url value="/BBS/List.bbs"/>'>OneLine Board</a></li>
-      		
-    	</ul>
-    	
-    </div>
-</div><!-- div:container-fluid -->
+	<div class="collapse navbar-collapse" id="navbarTop">
+		<ul class="navbar-nav nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="#">main</a>
+			</li>
+			<li>
+				<a class="nav-link" href="#">recommend</a>
+			</li>
+			<li>
+				<a class="nav-link" href="#">target</a>
+			</li>
+			<li>
+				<a class="nav-link" href="#">real-time</a>
+			</li>
+			<li>
+				<a class="nav-link" href="#">hot topic</a>
+			</li>
+		</ul>
+		<ul class="navbar-nav navbar-right">
+			<li class="nav-item dropdown">
+				<button class="btn btn-secondary dropdown-toggle" id="DropdownBtn" data-toggle="dropdown">Login</button>
+				<div class="dropdown-menu dropdown-menu-right">
+					<a href="#" class="dropdown-item">Sign In</a>
+					<a href="#" class="dropdown-item">Sign Up</a>
+					<a href="#" class="dropdown-item">Sing Out</a>
+					<a href="#" class="dropdown-item">My Profile</a>
+				</div>
+			</li>
+		</ul>
+	</div>
 </nav>
-   
-   <!-- 네비게이션바 끝 -->  
