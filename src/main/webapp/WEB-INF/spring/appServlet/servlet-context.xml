@@ -30,7 +30,7 @@
 	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<beans:property name="definitions">
 			<beans:list>
-				<beans:value>/WEB-INF/template/layouts.xml</beans:value>
+				<beans:value>/WEB-INF/template/layouts_o.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

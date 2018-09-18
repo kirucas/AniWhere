@@ -14,6 +14,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <%-- <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/bootstrap.min.css'/>"> --%>
+    <link rel="styleSheet" href="<c:url value='/resources/css/update.css' />">
     <!-- Main Style -->
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/main.css'/>">
     <!-- Responsive Style -->

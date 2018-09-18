@@ -36,4 +36,9 @@ public class HomeController {
 		return "home.tiles";
 	}
 	
+	@RequestMapping("/main.aw")
+	public String goMain() throws Exception {
+		return "mainTemplate.tiles";
+	}
+	
 }
