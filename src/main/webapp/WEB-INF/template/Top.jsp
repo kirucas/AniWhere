@@ -34,7 +34,7 @@
           </button>
           <!-- Brand -->
           <a class="navbar-brand" href="#">
-            <img src="<c:url value='/resources/images/1.png'/>" alt="" style="width:150px;height:50px">
+            <img src="<c:url value='/resources/images/logoLong.png'/>" alt="" style="width:120px;height:51px">
           </a>
           <div class="collapse navbar-toggleable-sm pull-xs-left pull-md-right" id="main-menu">
             <!-- Navbar Starts -->
@@ -52,6 +52,7 @@
                   <a class="dropdown-item" href="#"><img src="<c:url value='/resources/images/animal/reptiles.png'/>" style="width:30px;height:30px;"/>  파충류 & 양서류 </a>
                   <a class="dropdown-item" href="<c:url value='/bird_list.aw' />"><img src="<c:url value='/resources/images/animal/bird.png'/>" style="width:30px;height:30px;"/>  조류</a>
                   <a class="dropdown-item" href="#"><img src="<c:url value='/resources/images/animal/rat.png'/>" style="width:30px;height:30px;"/>  기타 포유류</a>
+                  <a class="dropdown-item" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;자유 게시판</a>
                 </div>
               </li>             
               <li class="nav-item dropdown">
