@@ -10,27 +10,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
+    <!-- Bootstrap -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/bootstrap.min.css'/>">
+    <%-- <link rel="styleSheet" href="<c:url value='/resources/css/update.css' />"> --%>
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/main.css'/>">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/responsive.css'/>">
+    <!--Fonts-->
+    <link rel="stylesheet" media="screen" href="<c:url value='/resources/assets/fonts/font-awesome/font-awesome.min.css'/>">
+    <link rel="stylesheet" media="screen" href="<c:url value='/resources/assets/fonts/simple-line-icons.css'/>">    
+     
+    <!-- Extras -->
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/extras/owl/owl.carousel.css'/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/extras/owl/owl.theme.css'/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/extras/animate.css'/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/extras/normalize.css'/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/extras/settings.css'/>">
 
-	<title>AniWhere</title>
-	
-	<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    
-    <!-- jQuery UI용 CDN -->
-	<script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/jquery-ui.min.js"></script>
-	
-	<!-- include summernote css/js -->
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-	<%-- <script src="<c:url value='/WEB-INF/replyBbs/template/summernote-ko-KR.js' />"></script> --%>
+    <!-- Color CSS Styles  -->
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/colors/greensea.css'/>" media="screen" />       
 	
 </head>
-<body style="padding-top: 74px;">
+<body>
 	<div class="container">
 		<!-- navigation bar start -->
 		<tiles:insertAttribute name="Top" />
@@ -45,4 +49,29 @@
 		<!-- footer end -->
 	</div><!-- container -->
 </body>
+	<!-- JavaScript & jQuery Plugins -->
+	<!-- jQuery Load -->
+	<script src="<c:url value='/resources/assets/js/jquery-min.js'/>"></script>
+	<!-- <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script> -->
+	<!-- Bootstrap JS -->
+	<script src="<c:url value='/resources/assets/js/bootstrap.min.js'/>"></script>
+	<!--Text Rotator-->
+	<script src="<c:url value='/resources/assets/js/jquery.mixitup.js'/>"></script>
+	<!--WOW Scroll Spy-->
+	<script src="<c:url value='/resources/assets/js/wow.js'/>"></script>
+	<!-- OWL Carousel -->
+	<script src="<c:url value='/resources/assets/js/owl.carousel.js'/>"></script>
+	
+	<!-- WayPoint -->
+	<script src="<c:url value='/resources/assets/js/waypoints.min.js'/>"></script>
+	<!-- CounterUp -->
+	<script src="<c:url value='/resources/assets/js/jquery.counterup.min.js'/>"></script>
+	<!-- ScrollTop -->
+	<script src="<c:url value='/resources/assets/js/scroll-top.js'/>"></script>
+	<!-- Appear -->
+	<script src="<c:url value='/resources/assets/js/jquery.appear.js'/>"></script>
+	<script src="<c:url value='/resources/assets/js/jquery.vide.js'/>"></script>
+	 <!-- All JS plugin Triggers -->
+	<script src="<c:url value='/resources/assets/js/main.js'/>"></script>
+
 </html>
