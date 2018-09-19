@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<!-- Start Content -->
+
+    <div class="row">
+        <div class="col-md-12">
+              <img src="<c:url value='/resources/images/main2.jpg'/>" width="100%"/>
+        </div>
+    </div>         
+ 
+  	<!-- End Content --> 
     <!-- 메뉴 섹션 -->
     <section id="clients" class="section">
       <!-- Container Ends -->

@@ -2,5 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="container" style="background-color: #1E90FF; height: 900px;">
+<div class="container" style="background-color: #1E90FF;">
+
+	<div class="row">
+		
+	</div>
+
 </div>
