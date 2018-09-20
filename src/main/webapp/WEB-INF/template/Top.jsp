@@ -80,8 +80,8 @@
                  	 ♡ 만나요
                 </a>                    
                 <div class="dropdown-menu">                      
-                  <a class="dropdown-item" href="#">만나요!</a>
-                  <a class="dropdown-item" href="#">프로필 카드 등록해요</a>
+                  <a class="dropdown-item" href="<c:url value='/mating.aw'/>">만나요!</a>
+                  <a class="dropdown-item" href="<c:url value='/matingProfile.aw'/>">프로필 카드 등록해요</a>
                 </div>                   
               </li> 
               <li class="nav-item dropdown">
