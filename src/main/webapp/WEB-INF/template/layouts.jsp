@@ -32,6 +32,22 @@
 
     <!-- Color CSS Styles  -->
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/colors/greensea.css'/>" media="screen" />       
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  	<style>
+  		thead{
+  			background-color:rgba(50,50,50,50);
+  			color: white;
+  		}
+  		#heart{
+  			color:red;
+  		}
+  		#badge{
+  			background-color:teal;
+  		}
+  		#h2{
+  			color:maroon;
+  		}
+  	</style>
 	
 </head>
 <body>
