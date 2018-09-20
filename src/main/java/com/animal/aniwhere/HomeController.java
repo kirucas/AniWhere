@@ -33,7 +33,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "/miss/miss_main.tiles";
+		return "/home.tiles";
 	}
 	
 	@RequestMapping("/main.aw")
