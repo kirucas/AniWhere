@@ -9,11 +9,12 @@ public class MatingController {
 	@RequestMapping("/mating.aw")
 	public String mating_main() throws Exception {
 		return "mating/matingMain.tiles";
-	}
+	}////////// mating_main
 	
 	@RequestMapping("/matingProfile.aw")
 	public String mating_profile() throws Exception {
 		return "mating/matingProfile.tiles";
-	}
-}
+	}////////// mating_profile
+	
+}//////////////////// MatingController class
 
