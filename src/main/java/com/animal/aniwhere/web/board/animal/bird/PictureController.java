@@ -11,4 +11,9 @@ public class PictureController {
 		return "board/animal/bird/picture/picture_list.tiles";
 	}
 	
+	@RequestMapping("/clip/clip.aw")
+	public String clip() throws Exception {
+		return "board/animal/bird/clip/birdClip.tiles";
+	}
+	
 }

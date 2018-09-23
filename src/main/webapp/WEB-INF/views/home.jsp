@@ -11,5 +11,7 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <a href="<c:url value="/main.aw" />">mainTemplate</a>
+<br/>
+<a href="<c:url value='/clip/clip.aw' />">clip</a>
 </body>
 </html>
