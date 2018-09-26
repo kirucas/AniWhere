@@ -8,7 +8,7 @@ public class MemberController {
 
 	@RequestMapping("/login.aw")
 	public String go_login() throws Exception {
-		return "";
+		return "member/sign_in.tiles";
 	}
 	
 }

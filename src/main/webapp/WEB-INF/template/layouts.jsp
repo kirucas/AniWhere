@@ -70,6 +70,7 @@
 	<!-- jQuery Load -->
 	<script src="<c:url value='/resources/assets/js/jquery-min.js'/>"></script>
 	<!-- <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<!-- Bootstrap JS -->
 	<script src="<c:url value='/resources/assets/js/bootstrap.min.js'/>"></script>
 	<!--Text Rotator-->
@@ -90,5 +91,7 @@
 	<script src="<c:url value='/resources/assets/js/jquery.vide.js'/>"></script>
 	 <!-- All JS plugin Triggers -->
 	<script src="<c:url value='/resources/assets/js/main.js'/>"></script>
+	
+	<jsp:include page="/resources/js/move_dropdowns.jsp" />
 
 </html>

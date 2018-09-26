@@ -43,10 +43,10 @@
 					<!-- Navbar Starts -->
 					<ul class="nav nav-inline">
 						<li class="nav-item dropdown">
-							<a class="nav-link active" href="<c:url value="/main.aw" />" role="button" aria-haspopup="true" aria-expanded="false">AniWhere</a>                  
+							<a class="nav-link active" href="<c:url value="/main.aw" />" role="button">AniWhere</a>                  
 						</li>                                     
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
 								동물
 							</a>
 							<div class="dropdown-menu">                      
@@ -59,36 +59,36 @@
 							</div>
 						</li>             
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="<c:url value="/market/main.aw" />" role="button" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" id="market_main">
 								장터
 							</a>
 							<div class="dropdown-menu">                      
-								<a class="dropdown-item" href="#">팔아요</a>
-								<a class="dropdown-item" href="#">사요</a>
-								<a class="dropdown-item" href="#">같이 싸게 사요</a>
+								<a class="dropdown-item" href="<c:url value='/market/sell.aw' />">팔아요</a>
+								<a class="dropdown-item" href="<c:url value='/market/buy.aw' />">사요</a>
+								<a class="dropdown-item" href="<c:url value='/market/groupbuy.aw' />">같이 싸게 사요</a>
 							</div> 
 						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" id="miss_main">
 								유기동물
 							</a>                    
 							<div class="dropdown-menu">                      
-								<a class="dropdown-item" href="#">봤어요</a>
-								<a class="dropdown-item" href=#>찾아요</a>
-								<a class="dropdown-item" href="#">보호소</a>
+								<a class="dropdown-item" href="<c:url value='/miss/see.aw' />">봤어요</a>
+								<a class="dropdown-item" href="<c:url value='/miss/find.aw' />">찾아요</a>
+								<a class="dropdown-item" href="<c:url value='/miss/shelter.aw' />">보호소</a>
 							</div>  
 						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" id="mating_main">
 								♡ 만나요
 							</a>                    
 							<div class="dropdown-menu">                      
-								<a class="dropdown-item" href="<c:url value='/mating.aw'/>">만나요!</a>
-								<a class="dropdown-item" href="<c:url value='/matingProfile.aw'/>">프로필 카드 등록해요</a>
+								<a class="dropdown-item" href="<c:url value='/mating/main.aw'/>">만나요!</a>
+								<a class="dropdown-item" href="<c:url value='/mating/matingProfile.aw'/>">프로필 카드 등록해요</a>
 							</div>                   
 						</li> 
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
 								위치
 							</a>
 							<div class="dropdown-menu">                      
@@ -116,7 +116,7 @@
 						
 						<!-- login btn -->  
 						<li class="nav-item">
-							<button type="button" class="btn btn-default navbar-btn" style="color:black">LOGIN</button>
+							<button type="button" class="btn btn-default navbar-btn" style="color:black" id="login">LOGIN</button>
 						</li>
 					</ul>  
 				</div>          
