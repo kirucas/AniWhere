@@ -4,6 +4,7 @@
 
 <style>
 .card-title {
+/* 일정 글자 수 이상은 안보이게 하는 효과 */
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
@@ -12,10 +13,10 @@
 	line-height: 1.2em;
 	height: 3.6em; 
 }
-
-
 	 
 </style>
+
+
 
 <div class="container">
 	<!-- Content here -->
