@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-lg">
+<nav class="navbar navbar-dark bg-dark sticky-top navbar-expand-lg">
 
 	<a href="#" class="navbar-brand">
-		<img src="<c:url value='/resources/Images/logo.png' />" />
+		<img src="<c:url value='/resources/images/logo.png' />" />
 		LOGO Image
 	</a>
 
