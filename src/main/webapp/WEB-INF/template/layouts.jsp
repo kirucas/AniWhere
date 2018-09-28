@@ -10,11 +10,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+	<title>AniWhere</title>
 	
     <!-- Bootstrap -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/bootstrap.min.css'/>">
-    <%-- <link rel="styleSheet" href="<c:url value='/resources/css/update.css' />"> --%>
+    <link rel="styleSheet" href="<c:url value='/resources/css/update.css' />">
     <!-- Main Style -->
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/main.css'/>">
     <!-- Responsive Style -->
@@ -32,6 +33,22 @@
 
     <!-- Color CSS Styles  -->
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/colors/greensea.css'/>" media="screen" />       
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  	<style>
+  		thead{
+  			background-color:rgba(50,50,50,50);
+  			color: white;
+  		}
+  		#heart{
+  			color:red;
+  		}
+  		#badge{
+  			background-color:teal;
+  		}
+  		#h2{
+  			color:maroon;
+  		}
+  	</style>
 	
 </head>
 <body>
@@ -53,6 +70,7 @@
 	<!-- jQuery Load -->
 	<script src="<c:url value='/resources/assets/js/jquery-min.js'/>"></script>
 	<!-- <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<!-- Bootstrap JS -->
 	<script src="<c:url value='/resources/assets/js/bootstrap.min.js'/>"></script>
 	<!--Text Rotator-->
@@ -73,5 +91,7 @@
 	<script src="<c:url value='/resources/assets/js/jquery.vide.js'/>"></script>
 	 <!-- All JS plugin Triggers -->
 	<script src="<c:url value='/resources/assets/js/main.js'/>"></script>
+	
+	<jsp:include page="/resources/js/move_dropdowns.jsp" />
 
 </html>

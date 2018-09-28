@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!-- Footer -->
 <!-- 
 https://mdbootstrap.com/components/bootstrap-footer/
  -->
@@ -69,9 +71,3 @@ https://mdbootstrap.com/components/bootstrap-footer/
 </a>
 
 <div class="bottom"> <a href="#" class="settings"></a> </div>
-
-
-
-
-
-
