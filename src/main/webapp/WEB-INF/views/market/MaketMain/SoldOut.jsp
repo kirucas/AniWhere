@@ -46,7 +46,7 @@
   
     <div class="container" style="width: 600px;padding:10px;">
     	
-    	<img class="center-block" src="../Images/판매완료_copy.jpg" >
+    	<img class="center-block" src="/resources/images/maketimages/판매완료_copy.jpg" >
     
     </div>
    
