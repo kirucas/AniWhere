@@ -3,22 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
-	nav{
+	*{
 		font-family:메이플스토리;
 	}
-	p{
-		font-family:메이플스토리;
-	}
-	h2{
-		font-family:메이플스토리;
-	}
-	h1{
-		font-family:메이플스토리;
-	}
-	body{
-		font-family:메이플스토리;
-	}
-
 </style>
 
 <!-- Header area wrapper starts -->

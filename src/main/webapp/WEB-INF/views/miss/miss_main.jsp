@@ -57,19 +57,25 @@
 		<div class="swiper-wrapper">
 			<!-- Slides -->
 			<div class="swiper-slide text-xs-center text-lg-center">
+				<a href="/miss/find.aw">
 				<img class="img-thumbnail img-fluid"
 					style="align: center; margin-bottom: 5px; height: 100%"
 					src="<c:url value='/resources/images/miss/find.jpg'/>" />
+				</a>
 			</div>
 			<div class="swiper-slide text-xs-center text-lg-center">
+				<a href="/miss/see.aw">
 				<img class="img-thumbnail img-fluid"
 					style="align: center; margin-bottom: 5px; height: 100%"
 					src="<c:url value='/resources/images/miss/sample.jpg'/>" />
+				</a>
 			</div>
 			<div class="swiper-slide text-xs-center text-lg-center">
+				<a href="/miss/shelter.aw">
 				<img class="img-thumbnail img-fluid"
 					style="align: center; margin-bottom: 5px; height: 100%"
 					src="<c:url value='/resources/images/miss/dogNBoy.jpg'/>" />
+				</a>	
 			</div>
 		</div>
 		<!-- If we need navigation buttons -->

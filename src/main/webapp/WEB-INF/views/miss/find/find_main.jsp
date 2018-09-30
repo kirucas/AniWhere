@@ -11,8 +11,7 @@
 				<div>
 				<h2 class="sub-header__title" style="display:inline">
 					<a href="<c:url value='/miss/find.aw'/>">찾아요</a>
-				</h2>
-				
+				</h2>		
 				<ul class="sub-header-button">
 					<li class="sub-header-button__item sub-header-button__item--search">
 						<button id="search-toggle-button" class="button">
@@ -106,7 +105,6 @@
 						<li class="article-list-paging__item "><a
 							href="https://talk.op.gg/s/lol/all?page=10"
 							class="article-list-paging__link">10</a></li>
-
 						<li
 							class="article-list-paging__item article-list-paging__item--next">
 							<a href="https://talk.op.gg/s/lol/all?page=2"
