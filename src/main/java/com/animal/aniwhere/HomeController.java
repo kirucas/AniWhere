@@ -33,7 +33,12 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home.tiles";
+		return "/home.tiles";
+	}
+	
+	@RequestMapping("/main.aw")
+	public String goMain() throws Exception {
+		return "mainTemplate.tiles";
 	}
 	
 }
