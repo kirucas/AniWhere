@@ -15,9 +15,6 @@
     margin-right: auto
 }
 
-.card{
-	margin-top:50px;
-}
 
 @keyframes animateHeartBeat {
 	0% {
@@ -66,7 +63,7 @@
 <!-- 내용 시작 -->
 <div class="container">
 	<!-- 프로필 카드 -->
-	<div class="container" style="padding:50px;">
+	<div class="container">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -133,81 +130,16 @@
                 
             </div>
             
+            <!-- 매치 버튼 -->
 			<div class="container center">
 	            <div class="heart_img col-md-offset-4 col-md-4" style="padding-top:50px;">
-	            	<a href=""><img src="<c:url value='/resources/images/mating/matchButton.png'/>" style="align:center;width:100%" class="img-center"/></a>
+	            	<a href="<c:url value='/matingMatch.aw'/>"><img src="<c:url value='/resources/images/mating/matchButton.png'/>" style="align:center;width:100%;margin-bottom:100px" class="img-center"/></a>
 	            </div>
             </div>
+            <!-- 매치 버튼 끝 -->
             
-            <div class="container">
-            	<div class="col-lg-12 text-center" style="margin-top:50px;">
-            		<h2>연지를 위한 카드</h2>
-            	</div>
-            	<div class="card col-12 col-lg-3">
-				  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
-				  <div class="card-body">
-				    <h2 class="card-title" style="color:#1ABC9C">곤지</h2>
-				    <p class="card-text">고슴도치</p>
-				    <a href="#" class="btn btn-primary">프로필 보기</a>
-				  </div>
-				</div>
-				<div class="card col-12 col-lg-3">
-				  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
-				  <div class="card-body">
-				    <h2 class="card-title" style="color:#1ABC9C">곤지</h2>
-				    <p class="card-text">고슴도치</p>
-				    <a href="#" class="btn btn-primary">프로필 보기</a>
-				  </div>
-				</div>
-				<div class="card col-12 col-lg-3">
-				  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
-				  <div class="card-body">
-				    <h2 class="card-title" style="color:#1ABC9C">곤지</h2>
-				    <p class="card-text">고슴도치</p>
-				    <a href="#" class="btn btn-primary">프로필 보기</a>
-				  </div>
-				</div>
-				<div class="card col-12 col-lg-3">
-				  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
-				  <div class="card-body">
-				    <h2 class="card-title" style="color:#1ABC9C">곤지</h2>
-				    <p class="card-text">고슴도치</p>
-				    <a href="#" class="btn btn-primary">프로필 보기</a>
-				  </div>
-				</div>
-				<div class="card col-12 col-lg-3">
-				  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
-				  <div class="card-body">
-				    <h2 class="card-title" style="color:#1ABC9C">곤지</h2>
-				    <p class="card-text">고슴도치</p>
-				    <a href="#" class="btn btn-primary">프로필 보기</a>
-				  </div>
-				</div>
-				<div class="card col-12 col-lg-3">
-				  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
-				  <div class="card-body">
-				    <h2 class="card-title" style="color:#1ABC9C">곤지</h2>
-				    <p class="card-text">고슴도치</p>
-				    <a href="#" class="btn btn-primary">프로필 보기</a>
-				  </div>
-				</div>
-				<div class="card col-12 col-lg-3">
-				  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
-				  <div class="card-body">
-				    <h2 class="card-title" style="color:#1ABC9C">곤지</h2>
-				    <p class="card-text">고슴도치</p>
-				    <a href="#" class="btn btn-primary">프로필 보기</a>
-				  </div>
-				</div>
-				<div class="card col-12 col-lg-3">
-				  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
-				  <div class="card-body">
-				    <h2 class="card-title" style="color:#1ABC9C">곤지</h2>
-				    <p class="card-text">고슴도치</p>
-				    <a href="#" class="btn btn-primary">프로필 보기</a>
-				  </div>
-				</div>
-            </div>
+            
+			
         </div>
     </div>
 </div>

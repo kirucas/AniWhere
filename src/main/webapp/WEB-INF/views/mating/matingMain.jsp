@@ -98,7 +98,7 @@
       </div><!-- Container Ends -->
     </section><!-- Service Main Section Ends -->
     <div class="row">
-    	<a href="<c:url value='/matingLogin.aw'/>" class="col-md-12 text-center" style="font-size:4em;margin-top:50px;margin-bottom:50px">시작하기</a>
+    	<a href="<c:url value='/matingLogin.aw'/>" class="col-md-12 text-center" style="font-size:4em;margin-top:50px;margin-bottom:200px">시작하기</a>
     </div>
 </div>
 <!-- 내용 끝 -->
