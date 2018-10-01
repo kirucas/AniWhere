@@ -24,13 +24,13 @@
 	    transform: scale(1);
 	}
 	5% {
-	    transform: scale(1.4);
+	    transform: scale(1.2);
 	}
 	10% {
-	    transform: scale(1.3);
+	    transform: scale(1.1);
 	}
 	15% {
-	    transform: scale(1.8);
+	    transform: scale(1.4);
 	}
 	50% {
 	    transform: scale(1);
@@ -44,13 +44,13 @@
 	    transform: scale(1);
 	}
 	5% {
-	    transform: scale(1.4);
+	    transform: scale(1.2);
 	}
 	10% {
-	    transform: scale(1.3);
+	    transform: scale(1.1);
 	}
 	15% {
-	    transform: scale(1.8);
+	    transform: scale(1.4);
 	}
 	50% {
 	    transform: scale(1);
@@ -132,9 +132,10 @@
                 <!--/card-block-->
                 
             </div>
+            
 			<div class="container center">
-	            <div class="heart_img col-md-4" style="padding-top:50px;">
-	            	<a href=""><img src="<c:url value='/resources/images/mating/matchButton.png'/>" style="height:100px;align:center;" class="img-center"/></a>
+	            <div class="heart_img col-md-offset-4 col-md-4" style="padding-top:50px;">
+	            	<a href=""><img src="<c:url value='/resources/images/mating/matchButton.png'/>" style="align:center;width:100%" class="img-center"/></a>
 	            </div>
             </div>
             
