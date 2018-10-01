@@ -3,25 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
-	nav{
+	*{
 		font-family:메이플스토리;
 	}
-	p{
-		font-family:메이플스토리;
-	}
-	h2{
-		font-family:메이플스토리;
-	}
-	h1{
-		font-family:메이플스토리;
-	}
-	body{
-		font-family:메이플스토리;
-	}
-
 </style>
 
-<!-- Header area wrapper starts -->
 <header id="header-wrap">
 <!-- Header area starts -->
 	<section id="header">
@@ -49,7 +35,7 @@
 							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
 								동물
 							</a>
-							<div class="dropdown-menu">                      
+							<div class="dropdown-menu">                     
 								<a class="dropdown-item" href="<c:url value='/animal/dog/main.aw' />"><i class="pulse-shrink"><img src="<c:url value='/resources/images/animal/dog.png'/>" style="width:30px;height:30px;"/> </i> 강아지</a>
 								<a class="dropdown-item" href="<c:url value='/animal/cat/main.aw' />"><img src="<c:url value='/resources/images/animal/cat.png'/>" style="width:30px;height:30px;"/>  고양이</a>
 								<a class="dropdown-item" href="<c:url value='/animal/rna/main.aw' />"><img src="<c:url value='/resources/images/animal/reptiles.png'/>" style="width:30px;height:30px;"/>  파충류 & 양서류 </a>

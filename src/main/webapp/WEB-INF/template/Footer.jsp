@@ -50,7 +50,7 @@ div .mbr-footer-content {
 
 <!-- footer -->
 <section class="mbr-section mbr-section-md-padding mbr-footer footer1"
-	id="aniFooter" style="padding-top: 90px; padding-bottom: 90px;">
+	 style="padding-top: 90px; padding-bottom: 90px;" id="aniFooter">
 	<div class="container">
 		<div class="row" style="margin-left:50px">
 			<div class="mbr-footer-content col-xs-12 col-md-2">
