@@ -35,204 +35,215 @@
 .line {
 	text-align: center;
 }
+/* 아이디, 조회수, 아래 페이지네이션에 메인 칼라 추가 */
+.id {
+	color: #1ABC9C;
+}
+
+.hits {
+	color: #1ABC9C;
+}
+
+.page-link {
+	color: #1ABC9C;
+}
 </style>
 
-	<div class="container">
-		<div class="row margin-top-10">
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">간만에 산책나와 무척 신나긴 한데</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
+<div class="container">
+	<div class="row margin-top-30">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
+					allowfullscreen></iframe>
 			</div>
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">사람들이 앵무새를 키우는 이유 2018 웃긴영상
-						ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
+			<div class="media-body">
+				<h5 class="title">간만에 산책나와 무척 신나긴 한데</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">List-based media object</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
 		</div>
-
-		<div class="row margin-top-10">
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">List-based media object</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
+					allowfullscreen></iframe>
 			</div>
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">List-based media object</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
+			<div class="media-body">
+				<h5 class="title">사람들이 앵무새를 키우는 이유 2018 웃긴영상
+					ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">List-based media object</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
 		</div>
-		<div class="margin-top-30">
-			<hr class="line"></hr>
-		</div>
-		<div class="margin-top-30">
-		</div>
-		<div class="row margin-top-10">
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">List-based media object</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
+					allowfullscreen></iframe>
 			</div>
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">List-based media object</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">List-based media object</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
-		</div>
-
-		<div class="row margin-top-10">
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">List-based media object</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
-			</div>
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">List-based media object</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
-			</div>
-			<div class="col-sm">
-				<div class="embed-responsive embed-responsive-16by9 movie-size">
-					<iframe class="embed-responsive-item"
-						src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
-						allowfullscreen></iframe>
-				</div>
-				<div class="media-body">
-					<h5 class="title">List-based media object</h5>
-					<p class="id">올린 사람의 아이디</p>
-				</div>
-				<div class="media-footer">
-					<small class="text-muted">조회수</small>
-				</div>
-			</div>
-		</div>
-		<div class="footer margin-top-20">
-			<nav class="mx-auto" style="width: 270px;"
-				aria-label="Page navigation example">
-				<ul class="pagination">
-					<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
-			</nav>
 		</div>
 	</div>
+
+	<div class="row margin-top-10">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
+			</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
+			</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
+			</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
+			</div>
+		</div>
+	</div>
+	<div class="margin-top-30">
+		<hr class="line"></hr>
+	</div>
+	<div class="margin-top-30"></div>
+	<div class="row margin-top-10">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
+			</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
+			</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
+			</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
+			</div>
+		</div>
+	</div>
+
+	<div class="row margin-top-10">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
+			</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
+			</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
+			</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
+			</div>
+		</div>
+	</div>
+	<div class="footer margin-top-20">
+		<nav class="mx-auto" style="width: 270px;"
+			aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#">Next</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
 
