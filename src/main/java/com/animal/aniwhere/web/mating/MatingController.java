@@ -15,5 +15,10 @@ public class MatingController {
 	public String mating_profile() throws Exception {
 		return "mating/matingProfile.tiles";
 	}
+	
+	@RequestMapping("/matingLogin.aw")
+	public String mating_login() throws Exception {
+		return "mating/matingLogin.tiles";
+	}
 }
 
