@@ -24,12 +24,22 @@
 					<img style="float:left;margin-top:5px;" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
 					</a>
                 <form style="display:inline;" action="">
+                	<label>
+                    	<select name="target" style="margin-left:10px" class="sub-header-search__select">
+                            <option value="total">전체</option>
+                            <option value="gab">잡담</option>
+                            <option value="info">정보</option>
+                            <option value="humor">유머</option>
+                            <option value="issue">이슈</option>
+                            <option value="current_affairs">시사</option>
+                        </select>
+                    </label>
                     <label>
                     	<select name="target" style="margin-left:10px" class="sub-header-search__select">
-                            <option value="title" >제목</option>
-                            <option value="content" >내용</option>
-                            <option value="title_content" >제목+내용</option>
-                            <option value="user_name" >작성자</option>
+                            <option value="title">제목</option>
+                            <option value="content">내용</option>
+                            <option value="title_content">제목+내용</option>
+                            <option value="user_name">작성자</option>
                         </select>
                     </label>
                     <input style="float:right" type="text" name="q" class="sub-header-search__input" placeholder="검색">
