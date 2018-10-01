@@ -98,8 +98,8 @@ div .mbr-footer-content {
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-3">
 				<p style="margin-left:10px">
-					<strong class="footerP">주소</strong><br> 서울시 금천구 가산동<br>
-					한국소프트웨어인재개발원
+					<strong class="footerP">주소</strong><br> 경기도 부천시 오정구 고강본동<br>
+					 313-13번지 4층
 				</p>
 				<p style="margin-left:10px">
 					<strong>연락처</strong><br> Email: cres87@me.com<br> Phone:
