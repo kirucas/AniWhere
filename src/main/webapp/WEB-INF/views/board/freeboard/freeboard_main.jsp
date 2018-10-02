@@ -10,7 +10,7 @@
 			<div class="sub-header-info">
 				<div>
 				<h2 class="sub-header__title" style="display:inline">
-					<a href="<c:url value='/miss/find.aw'/>">찾아요</a>
+					<a href="<c:url value='/miss/find.aw'/>">자유 게시판</a>
 				</h2>		
 				<ul class="sub-header-button">
 					<li class="sub-header-button__item sub-header-button__item--search">
@@ -24,12 +24,22 @@
 					<img style="float:left;margin-top:5px;" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
 					</a>
                 <form style="display:inline;" action="">
+                	<label>
+                    	<select name="target" style="margin-left:10px" class="sub-header-search__select">
+                            <option value="total">전체</option>
+                            <option value="gab">잡담</option>
+                            <option value="info">정보</option>
+                            <option value="humor">유머</option>
+                            <option value="issue">이슈</option>
+                            <option value="current_affairs">시사</option>
+                        </select>
+                    </label>
                     <label>
                     	<select name="target" style="margin-left:10px" class="sub-header-search__select">
-                            <option value="title" >제목</option>
-                            <option value="content" >내용</option>
-                            <option value="title_content" >제목+내용</option>
-                            <option value="user_name" >작성자</option>
+                            <option value="title">제목</option>
+                            <option value="content">내용</option>
+                            <option value="title_content">제목+내용</option>
+                            <option value="user_name">작성자</option>
                         </select>
                     </label>
                     <input style="float:right" type="text" name="q" class="sub-header-search__input" placeholder="검색">
@@ -45,9 +55,7 @@
 		<section class="article-list">
 			<article class="article-list-item ">
 				<div class="article-list-item__content">
-					<a
-						href="https://talk.op.gg/s/lol/free/829951/%EC%A0%80%EC%83%88%EB%82%80-%ED%98%BC%EC%9E%90%EC%84%9C-%EC%9E%98-%EB%AA%BB%ED%95%9C%EB%8B%A4%ED%95%98%EB%8A%94%EB%8D%B0"
-						class="article-list-item__info">
+					<a href="#"	class="article-list-item__info">
 						<div class="article-list-item__title">
 							<span>저새낀 혼자서 잘 못한다하는데</span> <em>[21]</em>
 						</div>
@@ -60,7 +68,7 @@
 						<div
 							class="article-list-item-meta__item article-list-item-meta__item--author">
 							<a
-								href="https://talk.op.gg/s/lol/all?q=%ED%91%B8%EB%A5%B8%EB%B9%9B%EB%B6%88%EA%BD%83&amp;target=user_name">
+								href="#">
 								푸른빛불꽃 </a>
 						</div>
 					</div>
@@ -118,7 +126,6 @@
 					</ul>
 				</div>
 			</section>
-			<!-- 페이징 끝 -->
 		</section>
 	</div>
 <!-- 바디 끝 -->

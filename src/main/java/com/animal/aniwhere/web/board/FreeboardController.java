@@ -8,7 +8,7 @@ public class FreeboardController {
 
 	@RequestMapping("/animal/freeboard.aw")
 	public String free_main() throws Exception {
-		return "board/freeboard/temporarily.tiles";
+		return "board/freeboard/freeboard_main.tiles";
 	}////////// free_main
 	
 }//////////////////// FreeboardController

@@ -9,7 +9,7 @@
 		});
 		
 		$("#miss_main").click(function(){
-			location.href = "<c:url value='/miss/main.aw' />";
+			location.href = "<c:url value='/miss/miss_main.aw' />";
 		});
 		
 		$("#mating_main").click(function(){
