@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html lang="ko">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,9 +26,11 @@
 	crossorigin="anonymous"></script>
     
   </head>
+  
+  
   <body>
-  <main class="container pt-5">
-    <div class="container-fluid">
+
+    <div class="container">
     	 <div class="row" style="margin-top: 50px" >
           <div class="col-lg-4" style="border: 1px solid gray">
        
@@ -57,7 +58,6 @@
         </div><!-- /.row -->
     
     </div>
-    </main>
+
     
   </body>
-</html>

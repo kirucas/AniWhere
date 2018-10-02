@@ -102,7 +102,7 @@
 
 
      <div class="col-md-8">
-     <textarea rows="" cols="" style="border: 1px;border-color: black;width:1080px;height: 500px"></textarea>
+     <textarea rows="" cols="" style=" border: 1px solid blue;width:1080px;height: 500px"></textarea>
        
         </div>
 
