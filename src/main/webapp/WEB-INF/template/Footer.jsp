@@ -2,30 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- Footer -->
-<!-- 
-https://mdbootstrap.com/components/bootstrap-footer/
- -->
 <style>
-nav {
-	font-family: 메이플스토리;
-}
-
-p {
-	font-family: 메이플스토리;
-}
-
-h2 {
-	font-family: 메이플스토리;
-}
-
-h1 {
-	font-family: 메이플스토리;
-}
-
-body {
-	font-family: 메이플스토리;
-}
 
 #aniFooter {
 	background: url("<c:url value='/resources/images/footer1.png'/>");
@@ -38,78 +15,84 @@ body {
 div .mbr-footer-content {
 	color: black;
 	font-weight: bold;
-	/* background-color:pink; */
 }
-
-.mbr-footer-content p a {
-	color: black;
+.footul{
+	font-size:20px;	
 }
-
+.footul li{
+	list-style:none;
+	margin-left:4px;
+	font-size:13px;	
+	margin-top:5px;
+}
+.footul li a{
+	color:#08088A;
+}
+.footul a{
+	color:black;
+}
+.footul 
 
 </style>
 
 <!-- footer -->
+<div class="container">
 <section class="mbr-section mbr-section-md-padding mbr-footer footer1"
 	 style="padding-top: 90px; padding-bottom: 90px;" id="aniFooter">
-	<div class="container">
+
 		<div class="row" style="margin-left:50px">
 			<div class="mbr-footer-content col-xs-12 col-md-2">
-				<p style="margin-left:10px">
-					<strong>동물</strong><br> 
-					<a class="text-black" href="#">강아지</a><br>
-					<a class="text-black" href="#">고양이</a><br> 
-					<a class="text-black" href="#">파충류 & 양서류</a><br> 
-					<a class="text-black" href="#">조류</a><br> 
-					<a class="text-black" href="#">기타 포유류</a><br> 
-					<a class="text-black" href="#">자유 게시판</a>
-				</p>
+				<ul class="footul"><span>동물</span>
+					<li><a href="#">강아지</a></li>
+					<li><a href="#">고양이</a></li>
+					<li><a href="#">파충류&양서류</a></li>
+					<li><a href="#">조류</a></li>
+					<li><a href="#">기타 포유류</a></li>
+					<li><a href="#">자유 게시판</a></li>
+				</ul>
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-2">
-				<p style="margin-left:10px">
-					<strong>장터</strong><br> 
-					<a class="text-black" href="#">팔아요</a><br>
-					<a class="text-black" href="#">사요</a><br> 
-					<a class="text-black" href="#">같이 싸게 사요</a><br> 
-				</p>
-				<p style="margin-left:10px">
-					<strong>♡ 만나요</strong><br> 
-					<a class="text-black" href="#">만나요!</a><br>
-					<a class="text-black" href="#">프로필 카드 등록해요</a><br> 
-					
-				</p>
+					<ul class="footul"><a href="#"><span>장터</span></a>
+						<li><a href="#">팔아요</a></li>
+						<li><a href="#">사요</a></li>
+						<li><a href="#">같이 싸게 사요</a></li>
+					</ul>
+					<ul class="footul"><a href="#"><span>♡만나요</span></a>
+						<li><a href="#">만나요!</a></li>
+						<li><a href="#">프로필 카드 등록</a></li>
+					</ul>
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-2">
-				<p style="margin-left:10px">
-					<strong>유기동물</strong><br> 
-					<a class="text-black" href="#">봤어요</a><br>
-					<a class="text-black" href="#">찾아요</a><br> 
-					<a class="text-black" href="#">보호소</a><br> 
-				</p>
-			</div>
-			<div class="mbr-footer-content col-xs-12 col-md-2">
-				<p style="margin-left:10px">
-					<strong>위치</strong><br> 
-					<a class="text-black" href="#">우리 아이가 아플때</a><br>
-					<a class="text-black" href="#">아이를 맡겨야 할때</a><br> 
-					<a class="text-black" href="#">용품을 사고 싶을때</a><br> 
-					<a class="text-black" href="#">입양을 하고 싶을때</a><br> 
-					<a class="text-black" href="#">산책을 하고 싶을때</a><br> 
-				</p>
+					<ul class="footul"><a id="miss_main" href="#"><span>유기동물</span></a>
+						<li><a href="#">봤어요</a></li>
+						<li><a href="#">찾아요</a></li>
+						<li><a href="#">보호소</a></li>
+					</ul>
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-3">
-				<p style="margin-left:10px">
-					<strong class="footerP">주소</strong><br> 서울시 금천구 가산동<br>
-					한국소프트웨어인재개발원
-				</p>
-				<p style="margin-left:10px">
-					<strong>연락처</strong><br> Email: cres87@me.com<br> Phone:
-					+82 010-8957-3287
-				</p>
+					<ul class="footul"><a href="#"><span>위치</span></a>
+						<li><a href="#">우리 아이가 아플때</a></li>
+						<li><a href="#">아이를 맡겨야 할때</a></li>
+						<li><a href="#">용품을 사고 싶을때</a></li>
+						<li><a href="#">입양을 하고 싶을때</a></li>
+						<li><a href="#">산책을 하고 싶을때</a></li>
+					</ul>
+			</div>
+			<div class="mbr-footer-content col-xs-12 col-md-3">
+					<ul class="footul"><span>주소</span>
+						<li>서울시 금천구 가산동 </li>
+						<li>한국소프트웨어인재개발원</li>
+					</ul>
+					<ul class="footul"><span>연락처</span>
+						<li>Email: cres87@me.com Phone:</li>
+						<li>+82 010-8957-3287</li>
+					</ul>
 			</div>
 			
 		</div>
-	</div>
-</section>
+	</section>
+</div>
+
 <!-- Go To Top Link -->
 <a href="#" class="back-to-top"> <i class="fa fa-angle-up"> </i>
 </a>
