@@ -66,63 +66,63 @@ nav a{
                             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">동물</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             	<li class="dropdown">
-	                                <a class="dropdown-toggle" href="/animal/dog/main.aw" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <a class="dropdown-toggle" href="<c:url value='/animal/dog/main.aw'/>" id="dog_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                	<img src="<c:url value='/resources/images/animal/dog.png'/>" style="width:30px;height:30px;"/>
 	                                		&nbsp;강아지
 	                                </a>
-	                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-		                                <li><a href="/animal/dog/photo.aw">사진 게시판</a></li>
-		                                <li><a href="/animal/dog/movie.aw">동영상 게시판</a></li>
-		                                <li><a href="/animal/dog/quest.aw">질문 게시판</a></li>
-		                                <li><a href="/animal/dog/tip.aw">팁 게시판</a></li>
+	                                <ul class="dropdown-menu" aria-labelledby="dog_main">
+		                                <li><a href="<c:url value='/animal/dog/photo.aw'/>">사진 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/dog/movie.aw'/>">동영상 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/dog/quest.aw'/>">질문 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/dog/tip.aw'/>">팁 게시판</a></li>
 	                                </ul>
                             	</li>
 	                            <li class="dropdown">
-	                                <a class="dropdown-toggle" href="/animal/cat/main.aw" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <a class="dropdown-toggle" href="<c:url value='/animal/cat/main.aw'/>" id="cat_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                	<img src="<c:url value='/resources/images/animal/cat.png'/>" style="width:30px;height:30px;"/>
 	                                		&nbsp;고양이
                                 	</a>
-	                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-		                                <li><a href="/animal/cat/photo.aw">사진 게시판</a></li>
-		                                <li><a href="/animal/cat/movie.aw">동영상 게시판</a></li>
-		                                <li><a href="/animal/cat/quest.aw">질문 게시판</a></li>
-		                                <li><a href="/animal/cat/tip.aw">팁 게시판</a></li>
+	                                <ul class="dropdown-menu" aria-labelledby="cat_main">
+		                                <li><a href="<c:url value='/animal/cat/photo.aw'/>">사진 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/cat/movie.aw'/>">동영상 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/cat/quest.aw'/>">질문 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/cat/tip.aw'/>">팁 게시판</a></li>
 	                                </ul>
                             	</li>
 	                            <li class="dropdown">
-	                                <a class="dropdown-toggle" href="/animal/rna/main.aw" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <a class="dropdown-toggle" href="<c:url value='/animal/rna/main.aw'/>" id="rna_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                	<img src="<c:url value='/resources/images/animal/reptiles.png'/>" style="width:30px;height:30px;"/>
 	                                		&nbsp;파충류 & 양서류
                                		</a>
-	                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-		                                <li><a href="/animal/rna/photo.aw">사진 게시판</a></li>
-		                                <li><a href="/animal/rna/movie.aw">동영상 게시판</a></li>
-		                                <li><a href="/animal/rna/quest.aw">질문 게시판</a></li>
-		                                <li><a href="/animal/rna/tip.aw">팁 게시판</a></li>
+	                                <ul class="dropdown-menu" aria-labelledby="rna_main">
+		                                <li><a href="<c:url value='/animal/rna/photo.aw'/>">사진 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/rna/movie.aw'/>">동영상 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/rna/quest.aw'/>">질문 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/rna/tip.aw'/>">팁 게시판</a></li>
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown">
-	                                <a class="dropdown-toggle" href="/animal/bird/main.aw" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <a class="dropdown-toggle" href="<c:url value='/animal/bird/main.aw'/>" id="bird_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                	<img src="<c:url value='/resources/images/animal/bird.png'/>" style="width:30px;height:30px;"/>
 	                                		&nbsp;조류
 	                                </a>
-	                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-		                                <li><a href="/animal/bird/photo.aw">사진 게시판</a></li>
-		                                <li><a href="/animal/bird/movie.aw">동영상 게시판</a></li>
-		                                <li><a href="/animal/bird/quest.aw">질문 게시판</a></li>
-		                                <li><a href="/animal/bird/tip.aw">팁 게시판</a></li>
+	                                <ul class="dropdown-menu" aria-labelledby="bird_main">
+		                                <li><a href="<c:url value='/animal/bird/photo.aw'/>">사진 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/bird/movie.aw'/>">동영상 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/bird/quest.aw'/>">질문 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/bird/tip.aw'/>">팁 게시판</a></li>
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown">
-	                                <a class="dropdown-toggle" href="/animal/etc/main.aw" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <a class="dropdown-toggle" href="<c:url value='/animal/etc/main.aw'/>" id="etc_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                	<img src="<c:url value='/resources/images/animal/rat.png'/>" style="width:30px;height:30px;"/>
 	                                		&nbsp;기타 포유류
 	                                </a>
-	                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-		                                <li><a href="/animal/etc/photo.aw">사진 게시판</a></li>
-		                                <li><a href="/animal/etc/movie.aw">동영상 게시판</a></li>
-		                                <li><a href="/animal/etc/quest.aw">질문 게시판</a></li>
-		                                <li><a href="/animal/etc/tip.aw">팁 게시판</a></li>
+	                                <ul class="dropdown-menu" aria-labelledby="etc_main">
+		                                <li><a href="<c:url value='/animal/etc/photo.aw'/>">사진 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/etc/movie.aw'/>">동영상 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/etc/quest.aw'/>">질문 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/etc/tip.aw'/>">팁 게시판</a></li>
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown-divider"></li>
@@ -130,27 +130,23 @@ nav a{
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
+                            <a class="dropdown-toggle" href="<c:url value='/animal/market/main.aw'/>" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			                                <li><a href="#">팔아요</a></li>
-			                                <li><a href="#">사요</a></li>
-			                                <li><a href="#">같이 싸게 사요</a></li>
+			                                <li><a href="<c:url value='/animal/market/main.aw'/>">팔아요</a></li>
+			                                <li><a href="<c:url value='/animal/market/main.aw'/>">사요</a></li>
+			                                <li><a href="<c:url value='/animal/market/main.aw'/>">같이 싸게 사요</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" id="miss_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">유기동물</a>
+                            <a class="dropdown-toggle" href="<c:url value='/miss/miss_main.aw'/>" id="miss_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">유기동물</a>
                             <ul class="dropdown-menu" aria-labelledby="miss_main">
 			                                <li><a href="<c:url value='/miss/see.aw'/>">봤어요</a></li>
 			                                <li><a href="<c:url value='/miss/find.aw'/>">찾아요</a></li>
 			                                <li><a href="<c:url value='/miss/shelter.aw'/>">보호소</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" id="mating_main" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">♡만나요</a>
-                            <ul class="dropdown-menu" aria-labelledby="mating_main">
-			                                <li><a href="#">만나요!</a></li>
-			                                <li><a href="#">프로필 카드 등록해요</a></li>
-                            </ul>
+                        <li>
+                            <a href="#" id="mating_main">♡만나요</a>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">위치</a>
