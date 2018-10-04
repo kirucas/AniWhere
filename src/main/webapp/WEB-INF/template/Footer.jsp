@@ -64,8 +64,8 @@
 					</ul>
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-3">
-					<ul class="footul"><a href="#">
-					<span>위치</span></a>
+					<ul class="footul">
+						<a href="#"><span>위치</span></a>
 						<li><a href="#">우리 아이가 아플때</a></li>
 						<li><a href="#">아이를 맡겨야 할때</a></li>
 						<li><a href="#">용품을 사고 싶을때</a></li>
@@ -74,6 +74,9 @@
 					</ul>
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-3">
+					<ul class="footul">
+						<a href="#"><span>공지사항</span></a>
+					</ul>
 					<ul class="footul">
 					<span>주소</span>
 						<li>서울시 금천구 가산동 </li>

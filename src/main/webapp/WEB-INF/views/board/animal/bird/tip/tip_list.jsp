@@ -12,12 +12,12 @@
 }
 </style>
 <!-- 바디 -->
-<div class="container" style="padding-left:0px;padding-right:0px">
+<div class="container" style="padding-left:0px;padding-right:0px;margin-bottom:15px">
 		<div class="sub-header">
 			<div class="sub-header-info">
 				<div>
 				<h2 class="sub-header__title" style="display:inline">
-					<a href="#">팁 게시판</a>
+					<a href="#">조류 팁</a>
 				</h2>
 				<ul class="sub-link__list">
 					<li class="sub-link__item sub-link__item--active">
@@ -71,7 +71,7 @@
 					<span id="free_category">[유머]</span>
 					<a href="#"	class="article-list-item__info">
 						<div class="article-list-item__title">
-							<span id="free_title">저새낀 혼자서 잘 못한다하는데</span> <em><span id="free_count">[21]</span></em>
+							<span id="free_title">저새낀 혼자서 잘 못한다하는데</span> <em>[21]</em>
 						</div>
 					</a>
 					<div class="article-list-item-meta">
@@ -81,6 +81,9 @@
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
 							<a href="#">푸른빛불꽃 </a>
 						</div>
+						<div class="article-list-item-meta__item">
+							조회수 <span id="tip_count">0</span>
+						</div>
 					</div>
 				</div>
 				<div class="article-list-item__vote">
@@ -89,7 +92,7 @@
 			</article>
 
 			<!-- 페이징 부분 -->
-			<section class="article-list-paging">
+			<section class="article-list-paging" >
 				<div class="article-list-paging-content">
 					<ul class="article-list-paging-list">
 						<li class="article-list-paging__item article-list-paging__item--prev">
