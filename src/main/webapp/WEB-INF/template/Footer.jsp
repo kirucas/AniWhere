@@ -10,13 +10,11 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 100%;
-}
-
-div .mbr-footer-content {
-	color: black;
-	font-weight: bold;
+	padding-top:90px;
+	padding-bottom:90px;
 }
 .footul{
+	font-weight:bold;
 	font-size:20px;	
 }
 .footul li{
@@ -31,16 +29,11 @@ div .mbr-footer-content {
 .footul a{
 	color:black;
 }
-.footul 
-
 </style>
 
 <!-- footer -->
-<div class="container">
-<section class="mbr-section mbr-section-md-padding mbr-footer footer1"
-	 style="padding-top: 90px; padding-bottom: 90px;" id="aniFooter">
-
-		<div class="row" style="margin-left:50px">
+<div class="container" id="aniFooter">
+		<div class="row">
 			<div class="mbr-footer-content col-xs-12 col-md-2">
 				<ul class="footul"><span>동물</span>
 					<li><a href="#">강아지</a></li>
@@ -48,7 +41,7 @@ div .mbr-footer-content {
 					<li><a href="#">파충류&양서류</a></li>
 					<li><a href="#">조류</a></li>
 					<li><a href="#">기타 포유류</a></li>
-					<li><a href="#">자유 게시판</a></li>
+					<li><a href="<c:url value='/animal/freeboard.aw'/>">자유 게시판</a></li>
 				</ul>
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-2">
@@ -63,10 +56,10 @@ div .mbr-footer-content {
 					</ul>
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-2">
-					<ul class="footul"><a id="miss_main" href="#"><span>유기동물</span></a>
-						<li><a href="#">봤어요</a></li>
-						<li><a href="#">찾아요</a></li>
-						<li><a href="#">보호소</a></li>
+					<ul class="footul"><a href="<c:url value='/miss/miss.aw'/>"><span>유기동물</span></a>
+						<li><a href="<c:url value='/miss/see.aw'/>">봤어요</a></li>
+						<li><a href="<c:url value='/miss/find.aw'/>">찾아요</a></li>
+						<li><a href="<c:url value='/miss/shelter.aw'/>">보호소</a></li>
 					</ul>
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-3">
@@ -84,19 +77,9 @@ div .mbr-footer-content {
 						<li>한국소프트웨어인재개발원</li>
 					</ul>
 					<ul class="footul"><span>연락처</span>
-						<li>Email: cres87@me.com Phone:</li>
-						<li>+82 010-8957-3287</li>
+						<li>Email: cres87@me.com</li>
+						<li>Phone: +82 010-8957-3287</li>
 					</ul>
 			</div>
-			
-		</div>
-	</section>
-</div>
-
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"> <i class="fa fa-angle-up"> </i>
-</a>
-
-<div class="bottom">
-	<a href="#" class="settings"></a>
+	</div>
 </div>
