@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -25,11 +26,62 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
+	
+	<script>
+function changeimage() {
+	
+    var image = document.getElementById('product');
+    
+    if (image.src.match("good")) {
+        image.src ="/gooddog.jpg";
+    } else if((image.src.match("accident")) {
+        image.src = "/accidentdog.jpg";
+    } else if((image.src.match("lazy")) {
+        image.src = "<c:url value='/resources/images/maketimages/lazydog.jpg'/>";
+    } else if((image.src.match("product4")){
+	image.src = "<c:url value='/resources/images/maketimages/product4.jpg'/>"}
+}
+</script>
+	
+	<style>
+	
+	
+
+ .scale {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+}
+.scale:hover {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+}
+
+</style>
+
+<script>
+function changeimage() {
+    var image = document.getElementById('abc');
+    if (image.src.match("naver")) {
+        image.src = "/images/maketimages/product4.jpg";
+    } else {
+        image.src = "http://placehold.it/750x500";
+    }
+}
+</script>
+
+
+
     
   </head>
   <body>
-  <!DOCTYPE html>
-<html lang="en">
+
 
   
     <!-- Page Content -->
@@ -42,10 +94,11 @@
 
       <!-- Portfolio Item Row -->
       <div class="row">
+   
 
         <div class="col-md-8">
          <!--  <img class="img-fluid" src="http://placehold.it/750x500" alt="" > -->
-           <img class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/dog.jpg'/>" style="width: 750px; height: 500px;">
+           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/gooddog.jpg'/>" style="width: 750px; height: 500px;">
         
         </div>
 
@@ -69,32 +122,32 @@
 
       <div class="row">
 
-        <div class="col-md-3 col-sm-6 mb-4">
-          <a href="#">
-            <img class="img-fluid" src="<c:url value='/resources/images/maketimages/dog.jpg'/>" alt="" style="width: 300px; height: 200px;">
-          </a>
+        <div class="col-md-3 col-sm-6 mb-4 view overlay zoom" >
+        
+            <img  onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/gooddog.jpg'/>" alt="" style="width: 300px; height: 200px;">
+         
         </div>
 
-        <div class="col-md-3 col-sm-6 mb-4">
-          <a href="#">
-            <img class="img-fluid" src="<c:url value='/resources/images/maketimages/dog.jpg'/>" alt="" style="width: 300px; height: 200px;">
-          </a>
+        <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+         
+            <img  onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/accidentdog.jpg'/>" alt="" style="width: 300px; height: 200px;">
+       
         </div>
 
-        <div class="col-md-3 col-sm-6 mb-4">
-          <a href="#">
-            <img class="img-fluid" src="<c:url value='/resources/images/maketimages/dog.jpg'/>" alt="" style="width: 300px; height: 200px;">
-          </a>
+        <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+        
+            <img  onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/lazydog.jpg'/>" alt="" style="width: 300px; height: 200px;">
+        
         </div>
 
-        <div class="col-md-3 col-sm-6 mb-4">
-          <a href="#">
-            <img class="img-fluid" src="<c:url value='/resources/images/maketimages/dog.jpg'/>" alt="" style="width: 300px; height: 200px;">
-          </a>
+        <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+      
+            <img  onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product4.jpg'/>" alt="" style="width: 300px; height: 200px;">
+        
         </div>
 
       </div>
-      <!-- /.row -->
+      <!-- /.row -->	
 
 
      <div class="col-md-8">
@@ -102,17 +155,12 @@
        
         </div>
 
-
     </div>
-    <!-- /.container -->
+    
+<img id="abc"  src="<c:url value='/resources/images/maketimages/product4.jpg'/>">
+<img  onclick="changeimage()" src="//placeimg.com/250/250/nature">
 
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     
   </body>
-
-
-
-</html>
+  </html>
+  

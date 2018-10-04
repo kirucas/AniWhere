@@ -130,7 +130,7 @@ a{
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="/market/main.aw" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
+                            <a class="dropdown-toggle" href="/aniwhere/market/main.aw" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 			                                <li><a href="/aniwhere/market/sell.aw">팔아요</a></li>
 			                                <li><a href="/aniwhere/market/buy.aw">사요</a></li>
