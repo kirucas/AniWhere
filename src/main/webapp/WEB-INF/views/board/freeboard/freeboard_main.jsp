@@ -7,6 +7,9 @@
 	text-align:center;
 	font-size: 1.5em;
 }
+.sub-header-info{
+	padding-bottom:0px;
+}
 </style>
 <!-- 바디 -->
 <div class="container" style="padding-left:0px;padding-right:0px">
@@ -15,7 +18,22 @@
 				<div>
 				<h2 class="sub-header__title" style="display:inline">
 					<a href="<c:url value='/miss/find.aw'/>">자유 게시판</a>
-				</h2>		
+				</h2>
+				<ul class="sub-link__list">
+					<li class="sub-link__item sub-link__item--active"><a
+						href="https://talk.op.gg/s/lol/all"> <img
+							src="https://talk.op.gg/images/icon-hot-on@2x.png" width="24"
+							alt=""><span>인기</span>
+					</a></li>
+					<li class="sub-link__item "><a
+						href="https://talk.op.gg/s/lol/all?sort=recent"> <img
+							src="https://talk.op.gg/images/icon-new@2x.png" width="24" alt=""><span>최신</span>
+					</a></li>
+					<li class="sub-link__item "><a
+						href="https://talk.op.gg/s/lol/all?sort=top"> <img
+							src="https://talk.op.gg/images/icon-top@2x.png" width="24" alt=""><span>TOP</span>
+					</a></li>
+				</ul>		
 				<ul class="sub-header-button">
 					<li class="sub-header-button__item sub-header-button__item--search">
 						<button id="search-toggle-button" class="button">
@@ -23,7 +41,7 @@
 						</button>
 					</li>
 				</ul>
-				<div class="sub-header-search">
+				<div class="sub-header-search" style="margin-bottom:5px">
 				<a href="/animal/freeboard/write.aw">
 					<img style="float:left;margin-top:5px;" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
 					</a>
@@ -54,10 +72,11 @@
 			</div>
 		</div>
 
-		<!-- 내용 부분 시작 -->
+		<!-- 내용 부분 시작  -->
 		<section class="article-list article-list--fixed"></section>
 		<section class="article-list">
-			<article class="article-list-item ">
+			<!-- 여기서 반복문 돌려서 글 -->
+			<article class="article-list-item">
 				<div class="article-list-item__vote">
 					<img src="https://talk.op.gg/images/icon-vote-up.png" alt="">
 					<div><span id="free_hit">26</span></div>

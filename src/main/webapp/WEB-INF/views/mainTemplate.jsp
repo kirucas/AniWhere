@@ -19,6 +19,9 @@
        .card span{
           text-align: center;
        }
+       #card-slider{
+          float: left;
+       }
     </style>
     <!-- Client Section End -->
     <div class="container">
@@ -29,235 +32,200 @@
            <p class="section-subcontent">아래의 메뉴를 선택하면 해당 동물 페이지로 이동해요.</p>
         </div>
     </div>        
-      <div class="mainDiv">
+    
+      <div class="mainDiv" style="margin-left: 15px;">
          <div class="card" style="width: 13.5rem;">
         <a href="www.nate.com"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/dog-crop.jpg'/>" alt="Card image cap"></a>
-        <div class="card-body">
+        <div class="card-body" style="text-align:center">
           <span class="card-text">강아지</span>
         </div>
       </div>
       
          <div class="card" style="width: 13.5rem;">
         <a href="www.nate.com"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/cat-crop.jpg'/>" alt="Card image cap"></a>
-        <div class="card-body">
+        <div class="card-body" style="text-align:center">
           <span class="card-text">고양이</span>
         </div>
       </div>
-         <div class="card" style="width: 13.5rem;">
+         <div class="card" style="width: 13rem;">
         <a href="www.nate.com"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/gecko2-crop.jpg'/>" alt="Card image cap"></a>
-        <div class="card-body">
+        <div class="card-body" style="text-align:center">
           <span class="card-text">파충류 & 양서류</span>
         </div>
       </div>
          <div class="card" style="width: 13.5rem;">
         <a href="www.nate.com"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_bird.jpg'/>" alt="Card image cap"></a>
-        <div class="card-body">
+        <div class="card-body" style="text-align:center">
           <span class="card-text">조류</span>
         </div>
       </div>
          <div class="card" style="width: 13.5rem;">
         <a href="www.nate.com"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/hamster-crop.jpg'/>" alt="Card image cap"></a>
-        <div class="card-body">
+        <div class="card-body" style="text-align:center">
           <span class="card-text">기타 포유류</span>
         </div>
       </div>
       </div>
+
        <!-- 뉴스 섹션 -->
     <section id="testimonial" class="section">
       <!-- Container Starts -->
       <div class="container">
         <div class="row">
-          <div class="col-sm-12">
-             <h1>오늘은 동물들에게 어떤 일이 있었을까요?</h1>
-            <div id="testimonial-item" class="owl-carousel">
-              <div class="item">
-                <div class="testimonial-inner">
-                  <div class="testimonial-images">
-                    <img src="<c:url value='/resources/images/pictures/dog.jpg'/>" style="width:160px;height:160px">
-                  </div>
-                  <div class="testimonial-content">
-                    <p>
-                         강아지와 함께하는 세상! <br/>
-                         강아지와 함께하는 세상! <br/>
-                         강아지와 함께하는 세상! <br/>
-                         강아지와 함께하는 세상! <br/>
-                         강아지와 함께하는 세상! <br/>
-                         강아지와 함께하는 세상!
-                    </p>
-                  </div>
-                  <div class="testimonial-footer">
-                    <i class="fa fa-quote-left"></i>
-                       김길동 기자 <br/><a href="#">출처: http://naver.com </a>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-inner">
-                  <div class="testimonial-images">
-                    <img src="<c:url value='/resources/images/pictures/cat.jpg'/>" style="width:160px;height:160px">
-                  </div>
-                  <div class="testimonial-content">
-                    <p>
-                         고양이와 함께하는 세상! <br/>
-                         고양이와 함께하는 세상! <br/>
-                         고양이와 함께하는 세상! <br/>
-                         고양이와 함께하는 세상! <br/>
-                         고양이와 함께하는 세상! <br/>
-                         고양이와 함께하는 세상!
-                    </p>
-                  </div>
-                  <div class="testimonial-footer">
-                    <i class="fa fa-quote-left"></i>
-                        박길동 기자 <br/><a href="#">출처: http://naver.com </a>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-inner">
-                  <div class="testimonial-images">
-                    <img src="<c:url value='/resources/images/pictures/hamster.jpg'/>" style="width:160px;height:160px">
-                  </div>
-                  <div class="testimonial-content">
-                    <p>
-                        고슴도치와 함께하는 세상! <br/>
-                         고슴도치와 함께하는 세상! <br/>
-                         고슴도치와 함께하는 세상! <br/>
-                         고슴도치와 함께하는 세상! <br/>
-                         고슴도치와 함께하는 세상! <br/>
-                         고슴도치와 함께하는 세상!
-                    </p>
-                  </div>
-                  <div class="testimonial-footer">
-                    <i class="fa fa-quote-left"></i>
-                          이길동 기자 <br/><a href="#">출처: http://daum.net </a>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-inner">
-                  <div class="testimonial-images">
-                    <img src="<c:url value='/resources/images/pictures/gecko.jpg'/>" style="width:160px;height:160px">
-                  </div>
-                  <div class="testimonial-content">
-                    <p>
-                         게코와 함께하는 세상! <br/>
-                         게코와 함께하는 세상! <br/>
-                         게코와 함께하는 세상! <br/>
-                         게코와 함께하는 세상! <br/>
-                         게코와 함께하는 세상! <br/>
-                         게코와 함께하는 세상!
-                    </p>
-                  </div>
-                  <div class="testimonial-footer">
-                    <i class="fa fa-quote-left"></i>
-                       이길동 기자 <br/><a href="#">출처: http://dcinside.com </a>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-inner">
-                  <div class="testimonial-images">
-                    <img src="<c:url value='/resources/images/pictures/bird.jpg'/>" style="width:160px;height:160px">
-                  </div>
-                  <div class="testimonial-content">
-                    <p>
-                          앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상!
-                    </p>
-                  </div>
-                  <div class="testimonial-footer">
-                    <i class="fa fa-quote-left"></i>
-                        이길동 기자 <br/><a href="#">출처: http://dcinside.com </a>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-inner">
-                  <div class="testimonial-images">
-                    <img src="<c:url value='/resources/images/pictures/bird.jpg'/>" style="width:160px;height:160px">
-                  </div>
-                  <div class="testimonial-content">
-                    <p>
-                          앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상!
-                    </p>
-                  </div>
-                  <div class="testimonial-footer">
-                    <i class="fa fa-quote-left"></i>
-                        이길동 기자 <br/><a href="#">출처: http://dcinside.com </a>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-inner">
-                  <div class="testimonial-images">
-                    <img src="<c:url value='/resources/images/pictures/bird.jpg'/>" style="width:160px;height:160px">
-                  </div>
-                  <div class="testimonial-content">
-                    <p>
-                          앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상!
-                    </p>
-                  </div>
-                  <div class="testimonial-footer">
-                    <i class="fa fa-quote-left"></i>
-                        이길동 기자 <br/><a href="#">출처: http://dcinside.com </a>
-                  </div>
-                </div>
-              </div><div class="item">
-                <div class="testimonial-inner">
-                  <div class="testimonial-images">
-                    <img src="<c:url value='/resources/images/pictures/bird.jpg'/>" style="width:160px;height:160px">
-                  </div>
-                  <div class="testimonial-content">
-                    <p>
-                          앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상!
-                    </p>
-                  </div>
-                  <div class="testimonial-footer">
-                    <i class="fa fa-quote-left"></i>
-                        이길동 기자 <br/><a href="#">출처: http://dcinside.com </a>
-                  </div>
-                </div>
-              </div><div class="item">
-                <div class="testimonial-inner">
-                  <div class="testimonial-images">
-                    <img src="<c:url value='/resources/images/pictures/bird.jpg'/>" style="width:160px;height:160px">
-                  </div>
-                  <div class="testimonial-content">
-                    <p>
-                          앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상! <br/>
-                         앵무새와 함께하는 세상!
-                    </p>
-                  </div>
-                  <div class="testimonial-footer">
-                    <i class="fa fa-quote-left"></i>
-                        이길동 기자 <br/><a href="#">출처: http://dcinside.com </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="col-sm-12" style="padding:0px;">
+             <span style="font-weight: bold;margin-left:15%;font-size: 50px;">오늘은 동물들에게 어떤 일이 있었을까요?</span>
+             <!--Carousel Wrapper-->
+         <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+         
+           <!--Controls-->
+           <div class="controls-top">
+             <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+             <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+           </div>
+           <!--/.Controls-->
+         
+           <!--Slides-->
+           <div class="carousel-inner" role="listbox">
+         
+             <!--First slide-->
+             <div class="carousel-item active">
+         
+               <div class="col-md-4" style="float:left" id="card-slider">
+                 <div class="card mb-2">
+                   <img class="card-img-top" src="<c:url value='/resources/images/pictures/hamster.jpg'/>"
+                     alt="Card image cap">
+                   <div class="card-body" style="text-align:center">
+                     <h4 class="card-title">고슴도치</h4>
+                     <p class="card-text">고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!
+                       </p>
+                     
+                   </div>
+                 </div>
+               </div>
+         
+               <div class="col-md-4" style="float:left">
+                 <div class="card mb-2">
+                   <img class="card-img-top" src="<c:url value='/resources/images/pictures/hamster.jpg'/>"
+                     alt="Card image cap">
+                   <div class="card-body" style="text-align:center">
+                     <h4 class="card-title">고슴도치</h4>
+                     <p class="card-text">고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!
+                       </p>
+                     
+                   </div>
+                 </div>
+               </div>
+         
+               <div class="col-md-4" style="float:left">
+                 <div class="card mb-2">
+                   <img class="card-img-top" src="<c:url value='/resources/images/pictures/hamster.jpg'/>"
+                     alt="Card image cap">
+                   <div class="card-body" style="text-align:center">
+                     <h4 class="card-title">고슴도치</h4>
+                     <p class="card-text">고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!
+                       </p>
+                     
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <!--/.First slide-->
+         
+             <!--Second slide-->
+             <div class="carousel-item" id="card-slider">
+         
+               <div class="col-md-4" style="float:left">
+                 <div class="card mb-2">
+                   <img class="card-img-top" src="<c:url value='/resources/images/pictures/hamster.jpg'/>"
+                     alt="Card image cap">
+                   <div class="card-body" style="text-align:center">
+                     <h4 class="card-title">고슴도치</h4>
+                     <p class="card-text">고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!
+                       </p>
+                     
+                   </div>
+                 </div>
+               </div>
+         
+               <div class="col-md-4" style="float:left">
+                 <div class="card mb-2">
+                   <img class="card-img-top" src="<c:url value='/resources/images/pictures/hamster.jpg'/>"
+                     alt="Card image cap">
+                   <div class="card-body" style="text-align:center">
+                     <h4 class="card-title">고슴도치</h4>
+                     <p class="card-text">고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!
+                       </p>
+                     
+                   </div>
+                 </div>
+               </div>
+         
+               <div class="col-md-4" style="float:left">
+                 <div class="card mb-2">
+                   <img class="card-img-top" src="<c:url value='/resources/images/pictures/hamster.jpg'/>"
+                     alt="Card image cap">
+                   <div class="card-body" style="text-align:center">
+                     <h4 class="card-title">고슴도치</h4>
+                     <p class="card-text">고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!
+                       </p>
+                     
+                   </div>
+                 </div>
+               </div>
+         
+             </div>
+             <!--/.Second slide-->
+         
+             <!--Third slide-->
+             <div class="carousel-item" id="card-slider">
+         
+               <div class="col-md-4" style="float:left">
+                 <div class="card mb-2">
+                   <img class="card-img-top" src="<c:url value='/resources/images/pictures/hamster.jpg'/>"
+                     alt="Card image cap">
+                   <div class="card-body" style="text-align:center">
+                     <h4 class="card-title">고슴도치</h4>
+                     <p class="card-text">고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!
+                       </p>
+                     
+                   </div>
+                 </div>
+               </div>
+         
+               <div class="col-md-4" style="float:left">
+                 <div class="card mb-2">
+                   <img class="card-img-top" src="<c:url value='/resources/images/pictures/hamster.jpg'/>"
+                     alt="Card image cap">
+                   <div class="card-body" style="text-align:center">
+                     <h4 class="card-title">고슴도치</h4>
+                     <p class="card-text">고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!
+                       </p>
+                     
+                   </div>
+                 </div>
+               </div>
+         
+               <div class="col-md-4" style="float:left">
+                 <div class="card mb-2">
+                   <img class="card-img-top" src="<c:url value='/resources/images/pictures/hamster.jpg'/>"
+                     alt="Card image cap">
+                   <div class="card-body" style="text-align:center">
+                     <h4 class="card-title">고슴도치</h4>
+                     <p class="card-text">고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!
+                       </p>
+                     
+                   </div>
+                 </div>
+               </div>
+         
+             </div>
+             <!--/.Third slide-->
+         
+           </div>
+           <!--/.Slides-->
+         
+         </div>
+         <!--/.Carousel Wrapper-->
           </div>
         </div>
       </div><!-- Container Ends -->
@@ -268,7 +236,7 @@
 
 
     <!-- 오늘의 동물 섹션 -->
-    <section class="split section">
+    <section class="split section" style="margin-top:20px;margin-bottom:20px;">
       <!-- Container Starts -->
       <div class="container">
         <div class="row">
