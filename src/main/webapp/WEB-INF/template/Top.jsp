@@ -159,7 +159,7 @@ nav a{
                             </ul>
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-default navbar-btn" style="color:black;margin-left:30px" id="login">
+                    <button type="button" class="btn btn-default" style="color:black;margin-left:30px" id="login">
                     	LOGIN
                     </button>
                 </div>
