@@ -11,4 +11,9 @@ public class FreeboardController {
 		return "board/freeboard/freeboard_main.tiles";
 	}////////// free_main
 	
+	@RequestMapping("/animal/freeboard/write.aw")
+	public String free_write() throws Exception{
+		return "board/freeboard/freeboard_write.tiles";
+	}////////// free_write
+	
 }//////////////////// FreeboardController

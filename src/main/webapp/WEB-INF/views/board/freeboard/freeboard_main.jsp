@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
+#free_no{
+	text-align:center;
+	font-size: 1.5em;
+}
 </style>
 <!-- 바디 -->
 <div class="container" style="padding-left:0px;padding-right:0px">
@@ -20,7 +24,7 @@
 					</li>
 				</ul>
 				<div class="sub-header-search">
-				<a href="#">
+				<a href="/animal/freeboard/write.aw">
 					<img style="float:left;margin-top:5px;" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
 					</a>
                 <form style="display:inline;" action="">
@@ -54,10 +58,15 @@
 		<section class="article-list article-list--fixed"></section>
 		<section class="article-list">
 			<article class="article-list-item ">
+				<div class="article-list-item__vote">
+					<img src="https://talk.op.gg/images/icon-vote-up.png" alt="">
+					<div><span id="free_hit">26</span></div>
+				</div>
 				<div class="article-list-item__content">
+					<span id="free_category">[유머]</span>
 					<a href="#"	class="article-list-item__info">
 						<div class="article-list-item__title">
-							<span>저새낀 혼자서 잘 못한다하는데</span> <em>[21]</em>
+							<span id="free_title">저새낀 혼자서 잘 못한다하는데</span> <em><span id="free_count">[21]</span></em>
 						</div>
 					</a>
 					<div class="article-list-item-meta">
@@ -65,16 +74,13 @@
 							<span data-tooltip data-date="2018-09-27T05:45:00+00:00" title="">2
 								시간 전</span>
 						</div>
-						<div
-							class="article-list-item-meta__item article-list-item-meta__item--author">
-							<a
-								href="#">
-								푸른빛불꽃 </a>
+						<div class="article-list-item-meta__item article-list-item-meta__item--author">
+							<a href="#">푸른빛불꽃 </a>
 						</div>
 					</div>
-					<a
-						href="https://talk.op.gg/s/lol/free/829951/%EC%A0%80%EC%83%88%EB%82%80-%ED%98%BC%EC%9E%90%EC%84%9C-%EC%9E%98-%EB%AA%BB%ED%95%9C%EB%8B%A4%ED%95%98%EB%8A%94%EB%8D%B0"
-						class="article-list-item__mobile-link"></a>
+				</div>
+				<div class="article-list-item__vote">
+					<div><span id="free_no" style="text-align:center">1</span></div>
 				</div>
 			</article>
 
@@ -83,7 +89,6 @@
 			<section class="article-list-paging">
 				<div class="article-list-paging-content">
 					<ul class="article-list-paging-list">
-
 						<li
 							class="article-list-paging__item article-list-paging__item--current">
 							<span class="article-list-paging__link">1</span>

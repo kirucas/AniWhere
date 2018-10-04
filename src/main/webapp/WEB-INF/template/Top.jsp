@@ -145,12 +145,8 @@ nav a{
 			                                <li><a href="<c:url value='/miss/shelter.aw'/>">보호소</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" id="mating_main" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">♡만나요</a>
-                            <ul class="dropdown-menu" aria-labelledby="mating_main">
-			                                <li><a href="#">만나요!</a></li>
-			                                <li><a href="#">프로필 카드 등록해요</a></li>
-                            </ul>
+                        <li>
+                            <a href="#" id="mating_main">♡만나요</a>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">위치</a>
