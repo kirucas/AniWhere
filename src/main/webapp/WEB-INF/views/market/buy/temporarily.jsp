@@ -37,12 +37,7 @@
 
 <!-- 팝니다 게시판의 swiper 로직 -->
  <script>
-  
-  </style>
-  
-</head>
-<body>
-
+ 
 
 <!-- top 와야하는 자리 -->
 

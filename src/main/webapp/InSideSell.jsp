@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-    <title>부트스트랩  템플릿</title>
+    <title>판매게시판 내부</title>
 	
     <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -32,12 +32,6 @@
 <html lang="en">
 
   
-
-   
-
-   
-   
-
     <!-- Page Content -->
     <div class="container">
 
@@ -50,12 +44,14 @@
       <div class="row">
 
         <div class="col-md-8">
-          <img class="img-fluid" src="http://placehold.it/750x500" alt="" >
+         <!--  <img class="img-fluid" src="http://placehold.it/750x500" alt="" > -->
+           <img class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/dog.jpg'/>" style="width: 750px; height: 500px;">
+        
         </div>
 
         <div class="col-md-4">
-          <h3 class="my-3">판매자 이름</h3>
-          <p>판매자 내부글 내용표시못하면 ...으로 대체</p>
+          <h3 class="my-3">판매자 아이디</h3>
+          <p>판매자 내부글 1번쨰줄 의 내용</p>
           <h3 class="my-3">상품종류[개][대형][사료]</h3>
           <ul>
             <li>거래 횟수</li>
@@ -75,25 +71,25 @@
 
         <div class="col-md-3 col-sm-6 mb-4">
           <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            <img class="img-fluid" src="<c:url value='/resources/images/maketimages/dog.jpg'/>" alt="" style="width: 300px; height: 200px;">
           </a>
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4">
           <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            <img class="img-fluid" src="<c:url value='/resources/images/maketimages/dog.jpg'/>" alt="" style="width: 300px; height: 200px;">
           </a>
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4">
           <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            <img class="img-fluid" src="<c:url value='/resources/images/maketimages/dog.jpg'/>" alt="" style="width: 300px; height: 200px;">
           </a>
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4">
           <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            <img class="img-fluid" src="<c:url value='/resources/images/maketimages/dog.jpg'/>" alt="" style="width: 300px; height: 200px;">
           </a>
         </div>
 
