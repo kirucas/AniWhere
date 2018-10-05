@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,36 +27,26 @@
 	crossorigin="anonymous"></script>
     
   </head>
+  <body>
+  <div class="container">
+  	
   
-<style>
-
-</style>
-
-<!-- 팝니다 게시판의 swiper 로직 -->
- <script>
+  
+  
+  	
+  	<div>
+  		<jsp:include page="../template/SellPart.jsp" />
  
-
-<!-- top 와야하는 자리 -->
-
-<div class="container">
-
-
-
-	
-		<jsp:include page="../template/MaketTop.jsp" />
-		<jsp:include page="../template/BuyPart.jsp" />
-
-	
-	
-	<!-- 푸터 와야하는 자리 -->
-	<div style="margin-top: 50px;">
-	
+  	</div>
+   
+  
+  
+  
+	<div style="margin-top: 50px">
 	</div>
-	
-	
+ </div>
 
 
-</div>
-	
-</body>
+    
+  </body>
 </html>

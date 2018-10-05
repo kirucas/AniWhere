@@ -26,7 +26,7 @@
 
 
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-<title>거래 게시판 통합 페이지</title>
+<title>구매게시판</title>
 
 <!-- 부트스트랩 -->
 <link href="<c:url value='/Bootstrap/css/bootstrap.min.css'/>"
@@ -68,66 +68,6 @@ html {
 	vertical-align: middle;
 }
 
-.page-item>* {
-	border: none;
-}
-
-.custom-checkbox {
-	min-height: 1rem;
-	padding-left: 0;
-	margin-right: 0;
-	cursor: pointer;
-}
-
-.custom-checkbox .custom-control-indicator {
-	content: "";
-	display: inline-block;
-	position: relative;
-	width: 30px;
-	height: 10px;
-	background-color: #818181;
-	border-radius: 15px;
-	margin-right: 10px;
-	-webkit-transition: background .3s ease;
-	transition: background .3s ease;
-	vertical-align: middle;
-	margin: 0 16px;
-	box-shadow: none;
-}
-
-.custom-checkbox .custom-control-indicator:after {
-	content: "";
-	position: absolute;
-	display: inline-block;
-	width: 18px;
-	height: 18px;
-	background-color: #f1f1f1;
-	border-radius: 21px;
-	box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
-	left: -2px;
-	top: -4px;
-	-webkit-transition: left .3s ease, background .3s ease, box-shadow .1s
-		ease;
-	transition: left .3s ease, background .3s ease, box-shadow .1s ease;
-}
-
-.custom-checkbox .custom-control-input:checked ~
-	.custom-control-indicator {
-	background-color: #84c7c1;
-	background-image: none;
-	box-shadow: none !important;
-}
-
-.custom-checkbox .custom-control-input:checked ~
-	.custom-control-indicator:after {
-	background-color: #84c7c1;
-	left: 15px;
-}
-
-.custom-checkbox .custom-control-input:focus ~ .custom-control-indicator
-	{
-	box-shadow: none !important;
-}
 
 .public{ color:red;
 font-weight: bold;
@@ -138,25 +78,7 @@ font-weight: bold;
 </style>
 
 <!-- 팝니다 게시판의 swiper 로직 -->
- <script>
-    var swiper = new Swiper('.swiper-container', {
-      effect: 'coverflow',
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: 'auto',
-      coverflowEffect: {
-        rotate: 50,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows : true,
-      },
-      pagination: {
-        el: '.swiper-pagination',
-      },
-    });
-  </script>
-  
+ 
   
   
 </head>
@@ -183,7 +105,7 @@ font-weight: bold;
 			<table class="table table-bordered table-sm m-0">
 				<thead class="table-warning">
 					<tr>
-						<th style="width: 20px">핫클립</th>
+					
 						<th style="width: 50px">게시번호</th>
 						
 						<th style="width: 400px">제목</th>
@@ -194,7 +116,7 @@ font-weight: bold;
 				</thead>
 				<tbody>
 				<tr class="public">
-						<td></td>
+						
 						<td>1</td>
 						<td>[공지사항]민사상 법률 팁 사기예방 공지사항 </td>
 						<td>관리자</td>
@@ -204,10 +126,7 @@ font-weight: bold;
 				
 				
 					<tr>
-						<td><label class="custom-control custom-checkbox"> <input
-								type="checkbox" class="custom-control-input"> <span
-								class="custom-control-indicator"></span>
-						</label></td>
+						
 						<td>95</td>
 		
 						<td>[조류][소형][새장]카나리아 넣어서 키울만한 새장 사요</td>
@@ -217,10 +136,7 @@ font-weight: bold;
 					</tr>
 
 					<tr>
-						<td><label class="custom-control custom-checkbox"> <input
-								type="checkbox" class="custom-control-input"> <span
-								class="custom-control-indicator"></span>
-						</label></td>
+						
 						<td>90</td>
 
 						<td>[파충류][소형][케이지]도마뱀용 유리 케이지 구매합니다 깨끗한걸로</td>
@@ -230,10 +146,7 @@ font-weight: bold;
 					</tr>
 					
 					<tr>
-						<td><label class="custom-control custom-checkbox"> <input
-								type="checkbox" class="custom-control-input"> <span
-								class="custom-control-indicator"></span>
-						</label></td>
+						
 						<td>67</td>
 
 						<td>[개][대형][사료]골든리트리버 사료 구매합니다 완전 새거! [2]</td>
@@ -246,7 +159,8 @@ font-weight: bold;
 		</div>
 
 
-		<div class="card-footer p-0">
+		<div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4" style="float: none; margin: 0 auto;"  >
+		
 			<nav aria-label="...">
 				<ul class="pagination justify-content-end mt-3 mr-3">
 
@@ -260,6 +174,9 @@ font-weight: bold;
 							class="sr-only">(current)</span>
 					</span></li>
 					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#">4</a></li>
+					<li class="page-item"><a class="page-link" href="#">5</a></li>
+					<li class="page-item"><a class="page-link" href="#">6</a></li>
 					<li class="page-item"><a class="page-link" href="#">Next</a></li>
 				</ul>
 				

@@ -29,12 +29,10 @@
   </head>
   <body>
   <div class="container">
-  	<main class="container pt-5">
+  	
   
   
-  <div>
-  	<jsp:include page="../template/MaketTop.jsp" />
-  	</div>
+  
   	
   	<div>
   		<jsp:include page="../template/SellPart.jsp" />
@@ -48,7 +46,7 @@
 	</div>
  </div>
 
-</main>
+
     
   </body>
 </html>
