@@ -27,15 +27,18 @@
 	margin-top: 3.0em;
 }
 
-.margin-top-60 {
-	margin-top: 6.0em;
-}
-
 /* 라인 긋기 */
 .line {
 	text-align: center;
 }
+
+
 /* 아이디, 조회수, 아래 페이지네이션에 메인 칼라 추가 */
+.btn-primary{
+	background-color: #1ABC9C;
+	border-color: #1ABC9C;
+}
+
 .id {
 	color: #1ABC9C;
 }
@@ -140,6 +143,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- 중간에 라인 -->
 	<div class="margin-top-30">
 		<hr class="line"></hr>
 	</div>
@@ -233,6 +237,18 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 아래에 글쓰기 버튼 -->
+	<div class="text-right">
+	<a class="btn btn-primary" href="<c:url value='/animal/bird/movie/write.aw'/>" 
+	role="button">동영상 올리기</a>
+	</div> 
+	
+	<!-- 아래 라인 -->
+	<div class="margin-top-10">
+		<hr class="line"></hr>
+	</div>
+	
 	<div class="footer margin-top-20">
 		<nav class="mx-auto" style="width: 450px;"
 			aria-label="Page navigation example">
