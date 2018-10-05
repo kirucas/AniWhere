@@ -3,269 +3,252 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-.card-title {
+.title {
+	/* 일정 글자 수 이상은 안보이게 하는 효과 */
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	line-height: 1.2em;
-	height: 3.6em; 
+	height: 2.4em;
 }
 
+/* 행 사이 공간 주기 */
+.margin-top-10 {
+	margin-top: 1.0em;
+}
 
-	 
+.margin-top-20 {
+	margin-top: 2.0em;
+}
+
+.margin-top-30 {
+	margin-top: 3.0em;
+}
+
+.margin-top-60 {
+	margin-top: 6.0em;
+}
+
+/* 라인 긋기 */
+.line {
+	text-align: center;
+}
+/* 아이디, 조회수, 아래 페이지네이션에 메인 칼라 추가 */
+.id {
+	color: #1ABC9C;
+}
+
+.hits {
+	color: #1ABC9C;
+}
+
+.page-link {
+	color: #1ABC9C;
+}
 </style>
 
 <div class="container">
-	<!-- Content here -->
-	<!-- 클립 영상 첫줄 -->
-	<div class="card-deck" >
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
+	<div class="row margin-top-30">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
 				<iframe class="embed-responsive-item"
-					src="https://www.youtube.com/embed/hY7m5jjJ9mM" frameborder="0"
-					allowfullscreen></iframe>
+					src="https://www.youtube.com/embed/jxq3F9PQ_FA"
+					frameborder="0" allowfullscreen></iframe>
 			</div>
-			<div class="card-body">
-				<h5 class="card-title">CATS will make you LAUGH YOUR HEAD OFF - Funny CAT compilation</h5>
-				<p class="card-text">올린 사람의 아이디</p>
+			<div class="media-body">
+				<h5 class="title">How to train my cats</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
 		</div>
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe class="embed-responsive-item"
-					src="https://www.youtube.com/embed/5530I_pYjbo" frameborder="0"
-					allowfullscreen></iframe>
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item" 
+				src="https://www.youtube.com/embed/zcGOoDThC1E" 
+				frameborder="0" allowfullscreen></iframe>
 			</div>
-			<div class="card-body">
-				<h5 class="card-title">How I Trained My Cats</h5>
-				<p class="card-text">올린 사람의 아이디2</p>
+			<div class="media-body">
+				<h5 class="title">Funny Cats 2018</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
-			</div>
-
-		</div>
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe class="embed-responsive-item"
-					src="https://www.youtube.com/embed/5dsGWM5XGdg" frameborder="0"
-					allowfullscreen></iframe>
-			</div>
-			<div class="card-body">
-				<h5 class="card-title">Cats are so funny you will die laughing - Funny cat compilation</h5>
-				<p class="card-text">올린 사람의 아이디3</p>
-			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
-			</div>
-
-		</div>
-
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe class="embed-responsive-item"
-					src="https://www.youtube.com/embed/pOmu0LtcI6Y" frameborder="0"
-					allowfullscreen></iframe>
-			</div>
-			<div class="card-body">
-				<h5 class="card-title">It's TIME for SUPER LAUGH! - Best FUNNY CAT videos</h5>
-				<p class="card-text">올린 사람의 아이디4</p>
-			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
 		</div>
-	</div>
-	<!-- 클립 영상 둘째줄 -->
-	<div class="card-deck">
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
 				<iframe class="embed-responsive-item"
-					src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
-					allowfullscreen></iframe>
+				src="https://www.youtube.com/embed/69zLx7mVs5k"
+				frameborder="0" allowfullscreen></iframe>
 			</div>
-			<div class="card-body">
-				<h5 class="card-title">간만의 산책</h5>
-				<p class="card-text">올린 사람의 아이디</p>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
-			</div>
-		</div>
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe class="embed-responsive-item"
-					src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
-					allowfullscreen></iframe>
-			</div>
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">올린 사람의 아이디</p>
-			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
-			</div>
-
-		</div>
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe class="embed-responsive-item"
-					src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
-					allowfullscreen></iframe>
-			</div>
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">올린 사람의 아이디</p>
-			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
-			</div>
-
-		</div>
-
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe class="embed-responsive-item"
-					src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
-					allowfullscreen></iframe>
-			</div>
-			<div class="card-body">
-				<h5 class="card-title">간만의 산책</h5>
-				<p class="card-text">올린 사람의 아이디</p>
-			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
 		</div>
 	</div>
 
-	<!-- 클립 영상 셋째줄 -->
-	<div class="card-deck">
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe class="embed-responsive-item"
-					src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
-					allowfullscreen></iframe>
+	<div class="row margin-top-10">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item" 
+				src="https://www.youtube.com/embed/5530I_pYjbo" 
+				frameborder="0" allowfullscreen></iframe>
 			</div>
-			<div class="card-body">
-				<h5 class="card-title">간만의 산책</h5>
-				<p class="card-text">올린 사람의 아이디</p>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
 		</div>
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
 				<iframe class="embed-responsive-item"
 					src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
 					allowfullscreen></iframe>
 			</div>
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">올린 사람의 아이디</p>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
-
 		</div>
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
 				<iframe class="embed-responsive-item"
 					src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
 					allowfullscreen></iframe>
 			</div>
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">올린 사람의 아이디</p>
+			<div class="media-body">
+				<h5 class="title">How to train my cats</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
-			</div>
-
-		</div>
-
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe class="embed-responsive-item"
-					src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
-					allowfullscreen></iframe>
-			</div>
-			<div class="card-body">
-				<h5 class="card-title">간만의 산책</h5>
-				<p class="card-text">올린 사람의 아이디</p>
-			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
 		</div>
 	</div>
-	<!-- 클립 영상 넷째줄 -->
-	<div class="card-deck">
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
+	<div class="margin-top-30">
+		<hr class="line"></hr>
+	</div>
+	<div class="margin-top-30"></div>
+	<div class="row margin-top-10">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
 				<iframe class="embed-responsive-item"
 					src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
 					allowfullscreen></iframe>
 			</div>
-			<div class="card-body">
-				<h5 class="card-title">간만의 산책</h5>
-				<p class="card-text">올린 사람의 아이디</p>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
 		</div>
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
 				<iframe class="embed-responsive-item"
 					src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
 					allowfullscreen></iframe>
 			</div>
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">올린 사람의 아이디</p>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
-
 		</div>
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
 				<iframe class="embed-responsive-item"
 					src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
 					allowfullscreen></iframe>
 			</div>
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">올린 사람의 아이디</p>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
-
 		</div>
+	</div>
 
-		<div class="card">
-			<div class="embed-responsive embed-responsive-16by9">
+	<div class="row margin-top-10">
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
 				<iframe class="embed-responsive-item"
 					src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
 					allowfullscreen></iframe>
 			</div>
-			<div class="card-body">
-				<h5 class="card-title">간만의 산책</h5>
-				<p class="card-text">올린 사람의 아이디</p>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
 			</div>
-			<div class="card-footer">
-				<small class="text-muted">올린 시간</small>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
 			</div>
 		</div>
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/lWjKdyWsDMI" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
+			</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="embed-responsive embed-responsive-16by9 movie-size">
+				<iframe class="embed-responsive-item"
+					src="https://www.youtube.com/embed/jxq3F9PQ_FA" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+			<div class="media-body">
+				<h5 class="title">List-based media object</h5>
+				<p class="id">올린 사람의 아이디</p>
+			</div>
+			<div class="media-footer">
+				<small class="hits">조회수</small>
+			</div>
+		</div>
+	</div>
+	<div class="footer margin-top-20">
+		<nav class="mx-auto" style="width: 450px;"
+			aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#">4</a></li>
+				<li class="page-item"><a class="page-link" href="#">5</a></li>
+				<li class="page-item"><a class="page-link" href="#">6</a></li>
+				<li class="page-item"><a class="page-link" href="#">7</a></li>
+				<li class="page-item"><a class="page-link" href="#">8</a></li>
+				<li class="page-item"><a class="page-link" href="#">9</a></li>
+				<li class="page-item"><a class="page-link" href="#">Next</a></li>
+			</ul>
+		</nav>
 	</div>
 </div>
+
