@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 내용 시작 -->
+<!--
+	해야할일 
+	제목을 제외한 대부분의 가로폭 줄이기
+	뱃지 확인하고 작성자,제목 확인하고
+	아이콘의 색깔지정
+-->
 <div class="container">
 	<div class="page-header">
 		<h2>
@@ -18,54 +24,54 @@
 		<table class="table table-hover table-bordered">
 			<thead id="thead" class="co">
 				<tr>
-					<th scope="col">글번호</th>
-					<th scope="col">제목<small>(댓글)</small></th>
-					<th scope="col">작성자</th>
-					<th scope="col">작성일</th>
-					<th scope="col">조회수</th>
-					<th scope="col">좋아요</th>
+					<th scope="col" style="width: 90px">글번호</th>
+					<th scope="col" >제목<small>(댓글)</small></th>
+					<th scope="col" style="width: 90px">작성자</th>
+					<th scope="col" style="width: 90px">조회수</th>
+					<th scope="col" style="width: 90px">좋아요</th>
+					<th scope="col" style="width: 150px">작성일</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<th scope="row">July</th>
-					<td>Dooley <span class="badge" id="badge">2</span></td>
-					<td>july@example.com</td>
+					<td >july@example.com<span class="badge" id="badge">2</span></td>
 					<td>Dooley</td>
 					<td>Dooley</td>
 					<td><i class="fas fa-heart" id="heart"></i> 2</td>
+					<td >2018-05-05</td>
 				</tr>
 				<tr>
 					<th scope="row">July</th>
-					<td>Doe</td>
-					<td>john@example.com</td>
-					<td>Doe</td>
+					<td >john@example.com</td>
 					<td>Doe</td>
 					<td>Doe</td>
+					<td>Doe</td>
+					<td >2018-05-05</td>
 				</tr>
 				<tr>
 					<th scope="row">July</th>
-					<td>Moe</td>
-					<td>mary@example.com</td>
+					<td >mary@example.com</td>
 					<td>Moe</td>
 					<td>Moe</td>
 					<td>Doe</td>
+					<td >2018-05-05</td>
 				</tr>
 				<tr>
 					<th scope="row">July</th>
+					<td >july@example.com</td>
 					<td>Dooley</td>
-					<td>july@example.com</td>
-					<td>Dooley</td>
 					<td>Dooley</td>
 					<td>Doe</td>
+					<td >2018-05-05</td>
 				</tr>
 				<tr>
 					<th scope="row">July</th>
-					<td>Moe</td>
-					<td>mary@example.com</td>
+					<td >mary@example.com</td>
 					<td>Moe</td>
 					<td>Moe</td>
 					<td>Doe</td>
+					<td >2018-05-05</td>
 				</tr>
 			</tbody>
 		</table>
