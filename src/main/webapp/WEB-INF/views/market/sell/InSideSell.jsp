@@ -28,16 +28,95 @@
     
   </head>
   <body>
-  <main class="container pt-5">
+  <!DOCTYPE html>
+<html lang="en">
+
   
-    <div class="container-fluid">
-    	<div class="row">
-    		<div class="col-md-12">col-md-12</div>
-    	</div>
-    
+
+   
+
+   
+   
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Portfolio Item Heading -->
+      <h1 class="my-4">[관련태그]
+        <small>DB연동 게시글의 제목</small>
+      </h1>
+
+      <!-- Portfolio Item Row -->
+      <div class="row">
+
+        <div class="col-md-8">
+          <img class="img-fluid" src="http://placehold.it/750x500" alt="" >
+        </div>
+
+        <div class="col-md-4">
+          <h3 class="my-3">판매자 이름</h3>
+          <p>판매자 내부글 내용표시못하면 ...으로 대체</p>
+          <h3 class="my-3">상품종류[개][대형][사료]</h3>
+          <ul>
+            <li>거래 횟수</li>
+            <li>만족 불만족 표시</li>
+            <li>회원의 등급</li>
+            <li>연락처 정보공개시에만 공개</li>
+          </ul>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+      <!-- Related Projects Row -->
+      <h3 class="my-4">판매자가 올린 사진 3개이상</h3>
+
+      <div class="row">
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+
+     <div class="col-md-8">
+     <textarea rows="" cols="" style="border: 1px;border-color: black;width:1080px;height: 500px"></textarea>
+       
+        </div>
+
+
     </div>
+    <!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     
-    
-    </main>
   </body>
+
+
+
 </html>

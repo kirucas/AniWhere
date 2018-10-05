@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import controller.fileupdown.FileUpDownUtils;
-
 @Controller
 public class FreeboardController {
 
@@ -23,7 +21,7 @@ public class FreeboardController {
 		return "board/freeboard/freeboard_write.tiles";
 	}////////// free_write
 	
-	@ResponseBody
+/*	@ResponseBody
 	@RequestMapping(value="/ReplyBBS/BBS/Upload.bbs",produces="text/plain; charset=UTF-8")
 	public String upload(MultipartHttpServletRequest mhsr) throws Exception{
 		//1]서버의 물리적 경로 얻기
@@ -36,5 +34,5 @@ public class FreeboardController {
 	    //3] 업로드 처리
 	    upload.transferTo(file);
 		return "/Upload/"+newFilename;
-	}
+	}*/
 }//////////////////// FreeboardController
