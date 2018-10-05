@@ -131,12 +131,24 @@
             </div>
             
             <!-- 매치 버튼 -->
+<<<<<<< HEAD
 			<div class="container" style="text-align:center">
 	            <div class="heart_img col-md-offset-4 col-md-4" style="padding-top:50px;display:inline-block">
 	            	<a href="<c:url value='/matingMatch.aw'/>"><img src="<c:url value='/resources/images/mating/matchButton.png'/>" style="align:center;width:100%;margin-bottom:100px" class="img-center"/></a>
 	            </div>
             </div>
             <!-- 매치 버튼 끝 -->
+=======
+			<div class="container center">
+	            <div class="heart_img col-md-offset-4 col-md-4" style="padding-top:50px;">
+	            	<a href="<c:url value='/matingMatch.aw'/>"><img src="<c:url value='/resources/images/mating/matchButton.png'/>" style="align:center;width:100%;margin-bottom:100px" class="img-center"/></a>
+	            </div>
+            </div>
+            <!-- 매치 버튼 끝 -->
+            
+            
+			
+>>>>>>> refs/remotes/origin/mating
         </div>
     </div>
 </div>

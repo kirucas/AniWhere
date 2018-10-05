@@ -10,6 +10,7 @@
  <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<<<<<<< HEAD
 <title>AniWhere</title>
 
 <!-- Bootstrap -->
@@ -50,6 +51,13 @@ strong{
 	font-family: 메이플스토리;
 }
 </style>
+=======
+	
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+          
+	
+>>>>>>> refs/remotes/origin/mating
 </head>
 <body>
 	<div class="container">

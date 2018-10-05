@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MatingController {
+<<<<<<< HEAD
    
    @RequestMapping("/mating/main.aw")
    public String mating_main() throws Exception {
@@ -25,4 +26,26 @@ public class MatingController {
    public String mating_match() throws Exception {
       return "mating/matingMatch.tiles";
    }
+=======
+	
+	@RequestMapping("/mating.aw")
+	public String mating_main() throws Exception {
+		return "mating/matingMain.tiles";
+	}
+	
+	@RequestMapping("/matingProfile.aw")
+	public String mating_profile() throws Exception {
+		return "mating/matingProfile.tiles";
+	}
+	
+	@RequestMapping("/matingLogin.aw")
+	public String mating_login() throws Exception {
+		return "mating/matingLogin.tiles";
+	}
+	
+	@RequestMapping("/matingMatch.aw")
+	public String mating_match() throws Exception {
+		return "mating/matingMatch.tiles";
+	}
+>>>>>>> refs/remotes/origin/mating
 }
