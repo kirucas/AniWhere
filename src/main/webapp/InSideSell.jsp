@@ -27,21 +27,7 @@
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
 	
-	<script>
-function changeimage() {
-	
-    var image = document.getElementById('product');
-    
-    if (image.src.match("good")) {
-        image.src ="/gooddog.jpg";
-    } else if((image.src.match("accident")) {
-        image.src = "/accidentdog.jpg";
-    } else if((image.src.match("lazy")) {
-        image.src = "<c:url value='/resources/images/maketimages/lazydog.jpg'/>";
-    } else if((image.src.match("product4")){
-	image.src = "<c:url value='/resources/images/maketimages/product4.jpg'/>"}
-}
-</script>
+
 	
 	<style>
 	
@@ -68,11 +54,23 @@ function changeimage() {
 <script>
 function changeimage() {
     var image = document.getElementById('abc');
-    if (image.src.match("naver")) {
-        image.src = "/images/maketimages/product4.jpg";
-    } else {
-        image.src = "http://placehold.it/750x500";
-    }
+    var changeimage1=document.getElementById('changeimage1');
+    var changeimage2=document.getElementById('changeimage2');
+    var changeimage3=document.getElementById('changeimage3');
+    var changeimage4=document.getElementById('changeimage4');
+    
+    if (changeimage1.id.match("product1")) {
+        image.src = "<c:url value='/resources/images/maketimages/product1.jpg'/>";
+    } else if(changeimage2.id.match("product2")) {
+        image.src = "<c:url value='/resources/images/maketimages/product2.jpg'/>";}
+    
+    else if(changeimage3.id.match("product3")) {
+        image.src = "<c:url value='/resources/images/maketimages/product3.jpg'/>";}
+    
+    else if(changeimage4.id.match("product4")) {
+        image.src = "<c:url value='/resources/images/maketimages/product4.jpg'/>";}
+         	     
+    else
 }
 </script>
 
@@ -98,7 +96,7 @@ function changeimage() {
 
         <div class="col-md-8">
          <!--  <img class="img-fluid" src="http://placehold.it/750x500" alt="" > -->
-           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/gooddog.jpg'/>" style="width: 750px; height: 500px;">
+           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" style="width: 750px; height: 500px;">
         
         </div>
 
@@ -124,25 +122,25 @@ function changeimage() {
 
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom" >
         
-            <img  onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/gooddog.jpg'/>" alt="" style="width: 300px; height: 200px;">
+            <img id="product1"  onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" alt="" style="width: 300px; height: 200px;">
          
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
          
-            <img  onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/accidentdog.jpg'/>" alt="" style="width: 300px; height: 200px;">
+            <img id="product2" onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product2.jpg'/>" alt="" style="width: 300px; height: 200px;">
        
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
         
-            <img  onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/lazydog.jpg'/>" alt="" style="width: 300px; height: 200px;">
+            <img id="product3" onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product3.jpg'/>" alt="" style="width: 300px; height: 200px;">
         
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
       
-            <img  onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product4.jpg'/>" alt="" style="width: 300px; height: 200px;">
+            <img id="product4" onclick="changeimage()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product4.png'/>" alt="" style="width: 300px; height: 200px;">
         
         </div>
 
@@ -156,10 +154,13 @@ function changeimage() {
         </div>
 
     </div>
-    
-<img id="abc"  src="<c:url value='/resources/images/maketimages/product4.jpg'/>">
-<img  onclick="changeimage()" src="//placeimg.com/250/250/nature">
+    <div class="row">
+<img id="abc"  style="width: 300px; height: 200px"; src="<c:url value='/resources/images/maketimages/lazydog.jpg'/>">
+<img id="aaa" style="width: 300px; height: 200px"; onclick="changeimage()" src="//placeimg.com/250/250/nature">
+<img  style="width: 300px; height: 200px"; onclick="changeimage()" src="<c:url value='/resources/images/maketimages/accidentdog.jpg'/>">
+<img  style="width: 300px; height: 200px"; onclick="changeimage()" src="<c:url value='/resources/images/maketimages/gooddog.jpg'/>">
 
+</div>
     
   </body>
   </html>
