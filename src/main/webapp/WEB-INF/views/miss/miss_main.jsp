@@ -2,12 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
@@ -16,15 +10,20 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.esm.bundle.js"></script>
 <style>
-@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css");
+@import
+	url("https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.css")
+	;
+
+@import
+	url("https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css")
+	;
+
 .swiper-container {
 	width: 1000px;
 	height: 500px;
 }
 </style>
-	<script>
+<script>
   $(document).ready(function () {
 	    //initialize swiper when document ready
 	    var mySwiper = new Swiper ('.swiper-container', {
@@ -51,153 +50,160 @@
 	    })
 	  });
   </script>
-	<!-- Slider main container -->
-	<div class="swiper-container">
-		<!-- Additional required wrapper -->
-		<div class="swiper-wrapper">
-			<!-- Slides -->
-			<div class="swiper-slide text-xs-center text-lg-center">
-				<a href="/miss/find.aw">
-				<img class="img-thumbnail img-fluid"
-					style="align: center; margin-bottom: 5px; height: 100%"
-					src="<c:url value='/resources/images/miss/find.jpg'/>" />
-				</a>
+<!-- Slider main container -->
+<div class="swiper-container">
+	<!-- Additional required wrapper -->
+	<div class="swiper-wrapper">
+		<!-- Slides -->
+		<div class="swiper-slide text-xs-center text-lg-center">
+			<a href="<c:url value='/miss/find.aw'/>"> <img class="img-thumbnail img-fluid"
+				style="align: center; margin-bottom: 5px; height: 100%"
+				src="<c:url value='/resources/images/miss/find.jpg'/>" />
+			</a>
+		</div>
+		<div class="swiper-slide text-xs-center text-lg-center">
+			<a href="<c:url value='/miss/see.aw'/>"> <img class="img-thumbnail img-fluid"
+				style="align: center; margin-bottom: 5px; height: 100%"
+				src="<c:url value='/resources/images/miss/sample.jpg'/>" />
+			</a>
+		</div>
+		<div class="swiper-slide text-xs-center text-lg-center">
+			<a href="<c:url value='/miss/shelter.aw'/>"> <img class="img-thumbnail img-fluid"
+				style="align: center; margin-bottom: 5px; height: 100%"
+				src="<c:url value='/resources/images/miss/dogNBoy.jpg'/>" />
+			</a>
+		</div>
+	</div>
+	<!-- If we need navigation buttons -->
+	<div class="swiper-button-prev"></div>
+	<div class="swiper-button-next"></div>
+
+	<!-- If we need scrollbar -->
+	<div class="swiper-scrollbar-drag"></div>
+</div>
+<div class="col-sm-12">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="col-sm-6" style="float: left">
+				<a href="<c:url value='/miss/see.aw'/>"><button type="button" class="btn btn-info">봤어요</button></a>
+				<br> 
+				<a href="#" class="alert-link"><span>글 제목1</span></a><br>
+				<a href="#"><span>글 제목2</span></a><br> 
+				<a href="#"><span>글	제목3</span></a><br> 
+				<a href="#"><span>글 제목4</span></a><br> 
+				<a href="#"><span>글 제목5</span></a><br> 
+				<a href="#"><span>글	제목6</span></a><br> 
+				<a href="#"><span>글 제목7</span></a><br> 
+				<a href="#"><span>글 제목8</span></a><br> 
+				<a href="#"><span>글	제목9</span></a><br> 
+				<a href="#"><span>글 제목10</span></a><br> 
+				<a href="#"><span>글이 하나도 없으면 - 등록된 게시글이 없어요.</span></a><br>
 			</div>
-			<div class="swiper-slide text-xs-center text-lg-center">
-				<a href="/miss/see.aw">
-				<img class="img-thumbnail img-fluid"
-					style="align: center; margin-bottom: 5px; height: 100%"
-					src="<c:url value='/resources/images/miss/sample.jpg'/>" />
-				</a>
-			</div>
-			<div class="swiper-slide text-xs-center text-lg-center">
-				<a href="/miss/shelter.aw">
-				<img class="img-thumbnail img-fluid"
-					style="align: center; margin-bottom: 5px; height: 100%"
-					src="<c:url value='/resources/images/miss/dogNBoy.jpg'/>" />
-				</a>	
+			<div class="col-sm-6" style="float: left">
+				<a href="<c:url value='/miss/find.aw'/>"><button type="button" class="btn btn-info">찾아요</button></a><br> 
+				<a href="#" class="alert-link"><span>글 제목1</span></a><br>
+				<a href="#"><span>글 제목2</span></a><br> 
+				<a href="#"><span>글	제목3</span></a><br> 
+				<a href="#"><span>글 제목4</span></a><br> 
+				<a href="#"><span>글 제목5</span></a><br> 
+				<a href="#"><span>글	제목6</span></a><br> 
+				<a href="#"><span>글 제목7</span></a><br> 
+				<a href="#"><span>글 제목8</span></a><br> 
+				<a href="#"><span>글	제목9</span></a><br> 
+				<a href="#"><span>글 제목10</span></a><br> 
+				<a href="#"><span>글이 하나도 없으면 - 등록된 게시글이 없어요.</span></a><br>
 			</div>
 		</div>
-		<!-- If we need navigation buttons -->
-		<div class="swiper-button-prev"></div>
-		<div class="swiper-button-next"></div>
+		<div class="col-sm-12">
+			<a href="<c:url value='/miss/shelter.aw'/>"><span>보호소</span></a>
 
-		<!-- If we need scrollbar -->
-		<div class="swiper-scrollbar-drag"></div>
-	</div>
-	<div class="col-sm-10">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="col-sm-6" style="float: left">
-					<button type="button" class="btn btn-info">찾아요</button>
-					<br> <a href="#" class="alert-link"><span>글 제목1</span></a><br>
-					<a href="#"><span>글 제목2</span></a><br> <a href="#"><span>글
-							제목3</span></a><br> <a href="#"><span>글 제목4</span></a><br> <a
-						href="#"><span>글 제목5</span></a><br> <a href="#"><span>글
-							제목6</span></a><br> <a href="#"><span>글 제목7</span></a><br> <a
-						href="#"><span>글 제목8</span></a><br> <a href="#"><span>글
-							제목9</span></a><br> <a href="#"><span>글 제목10</span></a><br> <a
-						href="#"><span>글이 하나도 없으면 - 등록된 게시글이 없어요.</span></a><br>
+			<div class="row text-center text-lg-left">
+
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/owl.jpg'/>"
+						alt="no picture"> <span>XX 보호소 - 지역</span>
+					</a>
 				</div>
-				<div class="col-sm-6" style="float: left">
-					<button type="button" class="btn btn-info">봤어요</button>
-					<br> <a href="#" class="alert-link"><span>글 제목1</span></a><br>
-					<a href="#"><span>글 제목2</span></a><br> <a href="#"><span>글
-							제목3</span></a><br> <a href="#"><span>글 제목4</span></a><br> <a
-						href="#"><span>글 제목5</span></a><br> <a href="#"><span>글
-							제목6</span></a><br> <a href="#"><span>글 제목7</span></a><br> <a
-						href="#"><span>글 제목8</span></a><br> <a href="#"><span>글
-							제목9</span></a><br> <a href="#"><span>글 제목10</span></a><br> <a
-						href="#"><span>글이 하나도 없으면 - 등록된 게시글이 없어요.</span></a><br>
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/1.JPG'/>" alt=""> <span>XX
+							보호소 - 지역</span>
+					</a>
+				</div>
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/2.JPG'/>" alt=""> <span>XX
+							보호소 - 지역</span>
+					</a>
+				</div>
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/3.JPG'/>" alt=""> <span>XX
+							보호소 - 지역</span>
+					</a>
+				</div>
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/4.JPG'/>" alt=""> <span>XX
+							보호소 - 지역</span>
+					</a>
+				</div>
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/1.JPG'/>" alt=""> <span>XX
+							보호소 - 지역</span>
+					</a>
+				</div>
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/2.JPG'/>" alt=""> <span>XX
+							보호소 - 지역</span>
+					</a>
+				</div>
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/3.JPG'/>" alt=""> <span>XX
+							보호소 - 지역</span>
+					</a>
+				</div>
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/4.JPG'/>" alt=""> <span>XX
+							보호소 - 지역</span>
+					</a>
+				</div>
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/1.JPG'/>" alt=""> <span>XX
+							보호소 - 지역</span>
+					</a>
+				</div>
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/2.JPG'/>" alt=""> <span>XX
+							보호소 - 지역</span>
+					</a>
+				</div>
+				<div class="col-lg-3 col-md-4 col-xs-6">	
+					<a href="#" class="d-block mb-4 h-100"> <img
+						class="img-fluid img-thumbnail"
+						src="<c:url value='/resources/images/etc/3.JPG'/>" alt=""> <span>XX
+							보호소 - 지역</span>
+					</a>
 				</div>
 			</div>
-			<div class="col-sm-12">
-				<h1 class="my-4 text-center text-lg-left">보호소</h1>
-
-				<div class="row text-center text-lg-left">
-
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/owl.jpg'/>"
-							alt="no picture"> <span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/1.JPG'/>" alt="">
-							<span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/2.JPG'/>" alt="">
-							<span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/3.JPG'/>" alt="">
-							<span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/4.JPG'/>" alt="">
-							<span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/1.JPG'/>" alt="">
-							<span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/2.JPG'/>" alt="">
-							<span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/3.JPG'/>" alt="">
-							<span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/4.JPG'/>" alt="">
-							<span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/1.JPG'/>" alt="">
-							<span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/2.JPG'/>" alt="">
-							<span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-					<div class="col-lg-3 col-md-4 col-xs-6">
-						<a href="#" class="d-block mb-4 h-100"> <img
-							class="img-fluid img-thumbnail"
-							src="<c:url value='/resources/images/etc/3.JPG'/>" alt="">
-							<span>XX 보호소 - 지역</span>
-						</a>
-					</div>
-
+		</div>
+	</div>
+</div>
