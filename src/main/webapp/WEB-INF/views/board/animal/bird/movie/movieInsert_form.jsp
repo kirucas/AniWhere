@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <style>
+@import url('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet');
 .center_div {
 	margin: 0 auto;
 	width: 80% /* value of your choice which suits your alignment */
@@ -39,6 +41,7 @@
 	background-color: #1ABC9C;
 }
 </style>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 	<div class="container">
 		<div class="center_div">
 			<div class="form-row margin-top-30">
