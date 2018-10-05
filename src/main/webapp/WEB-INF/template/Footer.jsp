@@ -75,15 +75,15 @@
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-3">
 					<ul class="footul">
-						<a href="#"><span>공지사항</span></a>
+						<a href="<c:url value='/notice.aw' />"><span>공지사항</span></a>
 					</ul>
 					<ul class="footul">
-					<span>주소</span>
+						<span>주소</span>
 						<li>서울시 금천구 가산동 </li>
 						<li>한국소프트웨어인재개발원</li>
 					</ul>
 					<ul class="footul">
-					<span>연락처</span>
+						<span>연락처</span>
 						<li>Email: cres87@me.com</li>
 						<li>Phone: +82 010-8957-3287</li>
 					</ul>
