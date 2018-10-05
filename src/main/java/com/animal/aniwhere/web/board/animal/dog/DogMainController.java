@@ -10,7 +10,7 @@ public class DogMainController {
 
 	@RequestMapping("/animal/dog/main.aw")
 	public String dog_main() throws Exception {
-		return "board/animal/dog/dog_temporarily.tiles";
+		return "board/animal/dog/dog_main.tiles";
 	}////////// dog_main
 
 	@RequestMapping(value = "/animal/dog/{path}", method = RequestMethod.GET)
