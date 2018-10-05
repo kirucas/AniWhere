@@ -38,7 +38,7 @@
 					</li>
 				</ul>
 				<div class="sub-header-search" style="margin-bottom:5px">
-				<a href="/animal/freeboard/write.aw">
+				<a href="<c:url value='/animal/freeboard/write.aw'/>">
 					<img style="float:left;margin-top:5px;" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
 				</a>
                 <form style="display:inline;" action="">
