@@ -9,7 +9,7 @@ public class MarketMainController {
 
 	@RequestMapping("/market/main.aw")
 	public String market_main() throws Exception {
-		return "market/temporarily.tiles";
+		return "market/MainMaket.tiles";
 	}////////// market_main
 	
 	@RequestMapping("/market/{path}")
