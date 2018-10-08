@@ -26,7 +26,7 @@
 
 
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-<title>구매게시판</title>
+<title>판매게시판</title>
 
 <!-- 부트스트랩 -->
 <link href="<c:url value='/Bootstrap/css/bootstrap.min.css'/>"
@@ -78,9 +78,7 @@ font-weight: bold;
 </style>
 
 <!-- 팝니다 게시판의 swiper 로직 -->
- 
-  
-  
+
 </head>
 <body>
 
@@ -100,10 +98,10 @@ font-weight: bold;
 	
 	
 	
-		<div class="card-header" >구매게시판</div>
+		<div class="card-header" >판매게시판</div>
 		<div class="card-block p-0">
 			<table class="table table-bordered table-sm m-0">
-				<thead class="table-warning">
+				<thead class="table" style="background-Color:CYAN" >
 					<tr>
 					
 						<th style="width: 50px">게시번호</th>
@@ -129,7 +127,7 @@ font-weight: bold;
 						
 						<td>95</td>
 		
-						<td>[조류][소형][새장]카나리아 넣어서 키울만한 새장 사요</td>
+						<td>[조류][소형][새장]카나리아 넣어서 키울만한 새장 팔아요</td>
 						<td>Jan_sina</td>
 						<td>180</td>
 						<td>20180-09-14</td>
@@ -139,7 +137,7 @@ font-weight: bold;
 						
 						<td>90</td>
 
-						<td>[파충류][소형][케이지]도마뱀용 유리 케이지 구매합니다 깨끗한걸로</td>
+						<td>[파충류][소형][케이지]도마뱀용 유리 케이지 판매합니다 깨끗한걸로</td>
 						<td>Jan_sina</td>
 						<td>180</td>
 						<td>20180-09-14</td>
@@ -149,7 +147,7 @@ font-weight: bold;
 						
 						<td>67</td>
 
-						<td>[개][대형][사료]골든리트리버 사료 구매합니다 완전 새거! [2]</td>
+						<td>[개][대형][사료]골든리트리버 사료 판매합니다 완전 새거! [2]</td>
 						<td>Jan_sina</td>
 						<td>200</td>
 						<td>20180-09-14</td>
