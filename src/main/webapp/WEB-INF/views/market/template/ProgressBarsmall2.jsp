@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+v<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -33,9 +33,9 @@
 
         .progress-bar {
             background-color: White;
-            height: 25px;
+            height: 15px;
             padding: 5px;
-            width: 1080px;
+            width: 250px;
             margin: 10px 0 10px 0;			
             -moz-border-radius: 5px;
 			-webkit-border-radius: 5px;
@@ -65,7 +65,7 @@
 		/*---------------------------*/			
 		
         .blue span {
-            background-color: #34c2e3;   
+            background-color:RED;   
         }
 
         
@@ -159,38 +159,21 @@
             -moz-animation: animate-glow 1s ease-out infinite; 			
 		}
 
-		@-webkit-keyframes animate-glow {
-		 0% { -webkit-box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;} 
-		 50% { -webkit-box-shadow: 0 5px 5px rgba(255, 255, 255, .3) inset, 0 -5px 5px rgba(255, 255, 255, .3) inset;} 
-		 100% { -webkit-box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;}
-		 }
-
-		@-moz-keyframes animate-glow {
-		 0% { -moz-box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;} 
-		 50% { -moz-box-shadow: 0 5px 5px rgba(255, 255, 255, .3) inset, 0 -5px 5px rgba(255, 255, 255, .3) inset;} 
-		 100% { -moz-box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;}
-		 }
-		 
+	
 		 
     </style>
 </head>
 
 <body>
 <div style="border:1px solid silver;">
-<p>%%개 달성시 공동구매 가격이 더 저렴해져요 또는 사은품을 드립니다   </p>
-    <p style="text-align:center;">현재 몇% 달성중 입니다</p>
+<p>%%개 달성시<br/> 공동구매 성공입니다!   </p>
+    <p style="text-align:center;">현재 몇 60% 달성중 입니다</p>
     <div class="col-md-4 col-sm-6 ">
 
 <div class="progress-bar blue stripes">
-    <span style="width: 80%"></span>
+    <span style="width: 60%"></span>
 </div>
 
-<p>Set above to:
-	<a href="#" class="quarter">25%</a> /
-	<a href="#" class="half">50%</a> /
-	<a href="#" class="three-quarters">75%</a> /
-	<a href="#" class="full">100%</a>
-</p>
 </div>
 </div>
 

@@ -33,9 +33,9 @@
 
         .progress-bar {
             background-color: White;
-            height: 25px;
+            height: 15px;
             padding: 5px;
-            width: 1080px;
+            width: 250px;
             margin: 10px 0 10px 0;			
             -moz-border-radius: 5px;
 			-webkit-border-radius: 5px;
@@ -48,7 +48,7 @@
         .progress-bar span {
             display: inline-block;
             height: 100%;
-			background-color: #777;
+			background-color: red;
             -moz-border-radius: 3px;
 			-webkit-border-radius: 3px;
 			border-radius: 3px;
@@ -65,7 +65,7 @@
 		/*---------------------------*/			
 		
         .blue span {
-            background-color: #34c2e3;   
+            background-color:red;   
         }
 
         
@@ -176,21 +176,15 @@
 </head>
 
 <body>
-<div style="border:1px solid silver;">
-<p>%%개 달성시 공동구매 가격이 더 저렴해져요 또는 사은품을 드립니다   </p>
-    <p style="text-align:center;">현재 몇% 달성중 입니다</p>
+<div >
+<p>%%개 달성시 공동구매 가격이 더 저렴해져요   </p>
+    <p style="text-align:center;">현재 80% 달성중 입니다</p>
     <div class="col-md-4 col-sm-6 ">
 
 <div class="progress-bar blue stripes">
     <span style="width: 80%"></span>
 </div>
 
-<p>Set above to:
-	<a href="#" class="quarter">25%</a> /
-	<a href="#" class="half">50%</a> /
-	<a href="#" class="three-quarters">75%</a> /
-	<a href="#" class="full">100%</a>
-</p>
 </div>
 </div>
 

@@ -30,7 +30,7 @@
   <body>
    <div class="container">
    
-   	<div class="card-header" >공동구매 게시판</div>
+   	<div class="card-header" style="margin-top: 50px" >공동구매 게시판</div>
    <h3 class="pb-3 mb-4 font-italic border-bottom">
 
    </h3>
@@ -44,7 +44,11 @@
                </h6>
                <div class="mb-1 text-muted small">DB연동작성날자</div>
                <p class="card-text mb-auto">DB연동내용</p>
-               <a class="btn btn-outline-primary btn-sm" role="button" href="http://www.jquery2dotnet.com/">상세보기</a>
+                  
+  		<jsp:include page="ProgressBarsmall.jsp" />
+ 
+  	
+               <a class="btn btn-outline-primary btn-sm" role="button" href="/aniwhere/market/InSideWithBuy.aw">상세보기</a>
             </div>
             <img  class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="//placeimg.com/250/250/arch" style="width: 200px; height: 250px;">
    
@@ -59,7 +63,11 @@
                </h6>
                <div class="mb-1 text-muted small">DB연동작성날자</div>
                <p class="card-text mb-auto">DB연동내용</p>
-               <a class="btn btn-outline-success btn-sm" href="http://www.jquery2dotnet.com/">상세보기</a>
+            
+  		<jsp:include page="ProgressBarsmall.jsp" />
+ 
+  	
+               <a class="btn btn-outline-success btn-sm" href="/aniwhere/market/InSideWithBuy.aw">상세보기</a>
             </div>
             <img class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="//placeimg.com/250/250/nature" style="width: 200px; height: 250px;">
          </div>
@@ -73,6 +81,10 @@
             <div class="card-body">
                <h5 class="card-title">[급매!]급매 말머리가 들어간 DB 제목</h5>
                <p class="card-text">DB연동 내용</p>
+                 
+  		<jsp:include page="ProgressBarsmall2.jsp" />
+ 
+  
                <a href="http://www.jquery2dotnet.com/" class="btn btn-outline-dark btn-sm">상세보기</a>
             </div>
          </div>
@@ -83,6 +95,9 @@
             <div class="card-body">
                <h5 class="card-title">[급매!]급매 말머리가 들어간 DB 제목</h5>
                <p class="card-text">DB연동 내용</p>
+              
+  		<jsp:include page="ProgressBarsmall2.jsp" />
+ 
                <a href="http://www.jquery2dotnet.com/" class="btn btn-outline-dark btn-sm">상세보기</a>
             </div>
          </div>
@@ -93,6 +108,9 @@
             <div class="card-body">
                <h5 class="card-title">[급매!]급매 말머리가 들어간 DB 제목</h5>
                <p class="card-text">DB연동 내용</p>
+                 
+  		<jsp:include page="ProgressBarsmall2.jsp" />
+ 
                <a href="http://www.jquery2dotnet.com/" class="btn btn-outline-dark btn-sm">상세보기</a>
             </div>
          </div>
