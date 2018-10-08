@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 내용 시작 -->
+<!--
+	해야할일 
+	제목을 제외한 대부분의 가로폭 줄이기
+	뱃지 확인하고 작성자,제목 확인하고
+	아이콘의 색깔지정
+	write 및 edit 교체하기
+	썸머노트
+-->
 <div class="container">
 	<div class="page-header">
 		<h2>

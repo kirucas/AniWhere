@@ -9,7 +9,7 @@
 		<input class="form-control" type="text" placeholder="제목을 입력해주세요" />
 	</div>
 	<div class="form-row pad">
-		<textarea class="form-control" rows="20" placeholder="내용을  입력하세요"></textarea>
+		<textarea id="summernote" class="form-control" rows="30" placeholder="내용을  입력하세요"></textarea>
 	</div>
 	<div class="form-row">
 		<div class="form-group offset-md-5 col-md-1">
