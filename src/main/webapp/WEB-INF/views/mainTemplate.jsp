@@ -13,7 +13,6 @@
     <!-- 메뉴 섹션 -->
     <style>
        .mainDiv div{
-       
           display: inline-block;
        }
        .card span{
@@ -35,32 +34,32 @@
     
       <div class="mainDiv" style="margin-left: 15px;">
          <div class="card" style="width: 13.5rem;">
-        <a href="www.nate.com"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/dog-crop.jpg'/>" alt="Card image cap"></a>
+        <a href="<c:url value='/animal/dog/main.aw'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/dog-crop.jpg'/>" alt="Card image cap"></a>
         <div class="card-body" style="text-align:center">
           <span class="card-text">강아지</span>
         </div>
       </div>
       
          <div class="card" style="width: 13.5rem;">
-        <a href="www.nate.com"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/cat-crop.jpg'/>" alt="Card image cap"></a>
+        <a href="<c:url value='/animal/cat/main.aw'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/cat-crop.jpg'/>" alt="Card image cap"></a>
         <div class="card-body" style="text-align:center">
           <span class="card-text">고양이</span>
         </div>
       </div>
          <div class="card" style="width: 13rem;">
-        <a href="www.nate.com"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/gecko2-crop.jpg'/>" alt="Card image cap"></a>
+        <a href="<c:url value='/animal/rna/main.aw'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/gecko2-crop.jpg'/>" alt="Card image cap"></a>
         <div class="card-body" style="text-align:center">
           <span class="card-text">파충류 & 양서류</span>
         </div>
       </div>
          <div class="card" style="width: 13.5rem;">
-        <a href="www.nate.com"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_bird.jpg'/>" alt="Card image cap"></a>
+        <a href="<c:url value='/animal/bird/main.aw'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_bird.jpg'/>" alt="Card image cap"></a>
         <div class="card-body" style="text-align:center">
           <span class="card-text">조류</span>
         </div>
       </div>
          <div class="card" style="width: 13.5rem;">
-        <a href="www.nate.com"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/hamster-crop.jpg'/>" alt="Card image cap"></a>
+        <a href="<c:url value='/animal/etc/main.aw'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/hamster-crop.jpg'/>" alt="Card image cap"></a>
         <div class="card-body" style="text-align:center">
           <span class="card-text">기타 포유류</span>
         </div>
