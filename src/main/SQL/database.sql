@@ -137,7 +137,6 @@ CREATE TABLE bird_photo
 	photo_count number DEFAULT 0,
 	photo_title nvarchar2(50) NOT NULL,
 	photo_content nvarchar2(2000) NOT NULL,
-	photo_pic nvarchar2(2000) NOT NULL,
 	photo_hit number DEFAULT 0,
 	photo_regidate date DEFAULT sysdate,
 	PRIMARY KEY (photo_no)
@@ -248,7 +247,6 @@ CREATE TABLE cat_photo
 	photo_count number DEFAULT 0,
 	photo_title nvarchar2(50) NOT NULL,
 	photo_content nvarchar2(2000) NOT NULL,
-	photo_pic nvarchar2(2000) NOT NULL,
 	photo_hit number DEFAULT 0,
 	photo_regidate date DEFAULT sysdate,
 	PRIMARY KEY (photo_no)
@@ -469,7 +467,6 @@ CREATE TABLE etc_photo
 	photo_count number DEFAULT 0,
 	photo_title nvarchar2(50) NOT NULL,
 	photo_content nvarchar2(2000) NOT NULL,
-	photo_pic nvarchar2(2000) NOT NULL,
 	photo_hit number DEFAULT 0,
 	photo_regidate date DEFAULT sysdate,
 	PRIMARY KEY (photo_no)
@@ -785,7 +782,6 @@ CREATE TABLE rna_photo
 	photo_count number DEFAULT 0,
 	photo_title nvarchar2(50) NOT NULL,
 	photo_content nvarchar2(2000) NOT NULL,
-	photo_pic nvarchar2(2000) NOT NULL,
 	photo_hit number DEFAULT 0,
 	photo_regidate date DEFAULT sysdate,
 	PRIMARY KEY (photo_no)
