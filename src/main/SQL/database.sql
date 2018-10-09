@@ -1,6 +1,8 @@
 
 /* Drop Tables */
 
+DROP TABLE notice CASCADE CONSTRAINTS;
+DROP TABLE admin_member CASCADE CONSTRAINTS;
 DROP TABLE mating CASCADE CONSTRAINTS;
 DROP TABLE animal CASCADE CONSTRAINTS;
 DROP TABLE market_buy_cmt CASCADE CONSTRAINTS;
@@ -70,6 +72,17 @@ DROP TABLE store_category CASCADE CONSTRAINTS;
 
 
 /* Create Tables */
+
+CREATE TABLE admin_member
+(
+	am_no number NOT NULL,
+	am_id varchar2(20) NOT NULL,
+	am_pw varchar2(20) NOT NULL,
+	am_level number(1) NOT NULL,
+	am_profile_link varchar2(300) NOT NULL,
+	PRIMARY KEY (am_no)
+);
+
 
 CREATE TABLE animal
 (
@@ -658,7 +671,7 @@ CREATE TABLE member
 	mem_id varchar2(20) NOT NULL,
 	mem_name nvarchar2(20) NOT NULL,
 	mem_nickname nvarchar2(10) NOT NULL UNIQUE,
-	mem_gender varchar2(1) NOT NULL,
+	mem_gender varchar2(1) NOT NULL CHECK (mem_gender IN ('F', 'M', 'U'),
 	mem_birth date,
 	mem_loc number NOT NULL,
 	mem_log number NOT NULL,
@@ -714,6 +727,18 @@ CREATE TABLE miss_see_cmt
 	hit number DEFAULT 0,
 	regidate date DEFAULT sysdate,
 	PRIMARY KEY (cmt_no)
+);
+
+
+CREATE TABLE notice
+(
+	no number NOT NULL,
+	am_no number NOT NULL,
+	title nvarchar2(50) NOT NULL,
+	content nvarchar2(2000) NOT NULL,
+	regidate date DEFAULT SYSDATE,
+	count number DEFAULT 0,
+	PRIMARY KEY (no)
 );
 
 
@@ -849,6 +874,12 @@ CREATE TABLE store_category
 
 
 /* Create Foreign Keys */
+
+ALTER TABLE notice
+	ADD FOREIGN KEY (am_no)
+	REFERENCES admin_member (am_no)
+;
+
 
 ALTER TABLE mating
 	ADD FOREIGN KEY (ani_no)
@@ -1382,3 +1413,6 @@ ALTER TABLE rna_tip_cmt
 	ADD FOREIGN KEY (tip_no)
 	REFERENCES rna_tip (tip_no)
 ;
+
+
+
