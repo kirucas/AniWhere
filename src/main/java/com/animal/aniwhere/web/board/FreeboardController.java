@@ -11,4 +11,4 @@ public class FreeboardController {
 		return "board/freeboard/temporarily.tiles";
 	}////////// free_main
 	
-}//////////////////// FreeboardController
+}////////////////////// FreeboardController
