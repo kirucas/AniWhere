@@ -658,6 +658,7 @@ CREATE TABLE mating
 	mating_no number NOT NULL,
 	ani_no number NOT NULL,
 	mating_loc number NOT NULL,
+	mating_regidate date DEFAULT SYSDATE,
 	PRIMARY KEY (mating_no)
 );
 
