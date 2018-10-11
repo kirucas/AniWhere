@@ -9,43 +9,35 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <script>
-	$(function() {
-		$('#summernote').summernote(
-				{
-					height : 350,
-					fontNames : [ '맑은고딕', 'Arial', 'Arial Black',
-							'Comic Sans MS', 'Courier New', ],
-					fontNamesIgnoreCheck : [ '맑은고딕' ],
-					callbacks : {
-						onImageUpload : function(files, editor, welEditable) {
-							for (var i = files.length - 1; i >= 0; i--) {
-								sendFile(files[i], this);
-							}
-						}
-					}
-				});
-	});
-	function sendFile(file, el) {
-		var form_data = new FormData();
-		form_data.append('file', file);
-		$.ajax({
-			data : form_data,
-			type : "POST",
-			url : "<c:url value='/animal/freeboard/Upload.aw'/>",
-			cache : false,
-			contentType : false,
-			enctype : 'multipart/form-data',
-			processData : false,
-			success : function(img_name) {
-				$(el).summernote('editor.insertImage',
-						"<c:url value='/"+img_name+"'/>");
-				$('#summernote').append('<img src="'+url+'" width="480" height="auto"/>');
-			},
-			error : function(code) {
-				console.log("에러가 났다");
-			}
-		});
-	}
+   $(function() {
+      $('#summernote').summernote({
+         callbacks : {
+            onImageUpload : function(files, editor, welEditable) {
+               for (var i = files.length - 1; i >= 0; i--) {
+                  sendFile(files[i], this);
+               }
+            }
+         }
+      });
+      function sendFile(file, el, wel) {
+         var form_data = new FormData();
+         form_data.append('file', file);
+         $.ajax({
+            data: form_data,
+            type: "POST",
+            url : "<c:url value='/animal/freeboard/Upload.aw'/>",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(url) {
+                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
+            },
+            error : function() {
+               console.log("error");
+            }
+         });
+      }
+   });
 </script>
 <div class="container">
 	<div class="page-header">
@@ -54,8 +46,7 @@
 		</h2>
 	</div>
 	<div class="row">
-		<form class="form-horizontal" method="post"
-			action="<c:url value='/animal/freeboard/write.aw'/>">
+		<form class="form-horizontal" method="post" action="<c:url value='/animal/freeboard/write.aw'/>">
 			<div class="form-group">
 				<label for="title" class="col-sm-2  control-label">제목</label>
 				<div class="col-sm-12">

@@ -2,17 +2,23 @@ package com.animal.aniwhere.web.board;
 
 import java.io.File;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartRequest;	
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.oreilly.servlet.MultipartRequest;	
 
 @Controller
 public class FreeboardController {
@@ -46,26 +52,17 @@ public class FreeboardController {
 	*/	//뷰정보반환:목록으로 이동
 		return "forward:/animal/freeboard.aw";//접두어 접미어 설정 적용 안되게끔 하려고 forward:를 붙임
 	}////////////////
-	
+
 	@ResponseBody
-	   @RequestMapping(value="/animal/freeboard/Upload.aw", produces="text/plain; charset=UTF-8")
-	   public String fileUp(HttpServletRequest req) throws Exception {
-	      
-	      req.setCharacterEncoding("UTF-8");
-	      
-	      MultipartRequest mr = FileUtils.upload(req, req.getServletContext().getRealPath("/Upload"));
-	      String filename = "";
-	      if(mr != null) {
-	         Enumeration fileNames = mr.getFileNames();
-	         String file = fileNames.nextElement().toString();
-	         filename = "Upload" + File.separator + mr.getFilesystemName("file");
-	      }
-	      
-	      System.out.println(req.getRequestURL().substring(0, req.getRequestURL().lastIndexOf("/")));
-	      System.out.println("http://" + req.getServerName() + ":" + req.getServerPort() + "/SpringProj" + filename);
-	      // filename = "http://" + req.getServerName() + ":" + req.getServerPort() + "/SpringProj" + filename;
-	      return filename;
-	      
+    @RequestMapping(value="/animal/freeboard/Upload.aw")
+    public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
+		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+		MultipartFile upload = mhsr.getFile("file");
+		
+		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+		File file = new File(phisicalPath+File.separator+newFilename);
+		upload.transferTo(file);
+        return "/Upload/"+newFilename;
 	   }
 }//////////////////// FreeboardController
 
