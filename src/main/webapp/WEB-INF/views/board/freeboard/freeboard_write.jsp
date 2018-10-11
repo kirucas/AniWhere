@@ -11,6 +11,10 @@
 <script>
    $(function() {
       $('#summernote').summernote({
+    	 maxHeight:null,
+    	 minHeight:null,
+    	 width: 1000,
+    	 height:350,
          callbacks : {
             onImageUpload : function(files, editor, welEditable) {
                for (var i = files.length - 1; i >= 0; i--) {
@@ -42,35 +46,39 @@
 <div class="container">
 	<div class="page-header">
 		<h2>
-			자유 게시판<small>글쓰기</small>
+			자유 게시판
 		</h2>
 	</div>
-	<div class="row">
-		<form class="form-horizontal" method="post" action="<c:url value='/animal/freeboard/write.aw'/>">
-			<div class="form-group">
-				<label for="title" class="col-sm-2  control-label">제목</label>
-				<div class="col-sm-12">
-					<input type="text" class="form-control" id="title" name="title"
-						placeholder="제목을 입력하세요">
+	<div class="form-row">
+		<form method="post" action="<c:url value='/animal/freeboard/write.aw'/>">
+			<div class="form-group form-row">
+				<input type="hidden" id="mem_no" name="mem_no" />
+                 	<select name="free_category" id="free_category">
+                         <option value="1">잡담</option>
+                         <option value="2">정보</option>
+                         <option value="3">유머</option>
+                         <option value="4">이슈</option>
+                         <option value="5">시사</option>
+                  	</select>
+				<div class="form-row">
+					<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" style="margin-left:20px">
 				</div>
 			</div>
-			<script>
+			<script>	
 				
 			</script>
-			<div class="form-group">
-				<label for="summernote" class="col-sm-2  control-label">내용</label>
-				<div class="col-sm-12">
-					<textarea rows="10" placeholder="내용을 입력하세요" class="form-control"
+			<div class="form-group form-row">
+				<div>
+					<textarea rows="10" placeholder="내용을 입력하세요" class="form-control" style="width:100%;height:100%"
 						id="summernote" name="content"></textarea>
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
+			<div class="form-group form-row">
+				<div class="col-sm-offset-2">
 					<button type="submit" class="btn btn-danger">등록</button>
 				</div>
 			</div>
 		</form>
-
 	</div>
 </div>
 <!-- 내용 끝 -->
