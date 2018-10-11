@@ -1,189 +1,89 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
+    <title>판매게시판 내부</title>
+	
+    <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
+	
 
-<html>
-<head>
-    <title>프로그레스바 </title>
+
     
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script>
-	$(document).ready(function(){  // 몇퍼센트나 채웠는 결과값 계산해서 뿌려주는 로직
-		$('.quarter').click(function(){
-			$(this).parent().prev().children('span').css('width','25%');
-			});
-		$('.half').click(function(){
-			$(this).parent().prev().children('span').css('width','50%');
-			});
-		$('.three-quarters').click(function(){
-			$(this).parent().prev().children('span').css('width','75%');
-			});
-		$('.full').click(function(){
-			$(this).parent().prev().children('span').css('width','100%');
-			});			
-	});
-</script>
+  </head>
+  <body>
+  
+    <!-- Page Content -->
+    <div class="container">
 
-    <style>
-       
-
-        .progress-bar {
-            background-color: #1a1a1a;
-            height: 25px;
-            padding: 5px;
-            width: 350px;
-            margin: 70px 0 20px 0;			
-            -moz-border-radius: 5px;
-			-webkit-border-radius: 5px;
-			border-radius: 5px;
-            -moz-box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
-			-webkit-box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
-			box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;           
-        }
-        
-        .progress-bar span {
-            display: inline-block;
-            height: 100%;
-			background-color: #777;
-            -moz-border-radius: 3px;
-			-webkit-border-radius: 3px;
-			border-radius: 3px;
-            -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
-			-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
-			box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
-			-webkit-transition: width .4s ease-in-out;
-			-moz-transition: width .4s ease-in-out;
-			-ms-transition: width .4s ease-in-out;
-			-o-transition: width .4s ease-in-out;
-			transition: width .4s ease-in-out;		
-        }
-		
-		/*---------------------------*/			
-		
-        .blue span {
-            background-color: #34c2e3;   
-        }
-
-        
-
-      	
-		
-		/*---------------------------*/		
-		
-		.stripes span {
-            -webkit-background-size: 30px 30px;
-            -moz-background-size: 30px 30px;
-            background-size: 30px 30px;			
-			background-image: -webkit-gradient(linear, left top, right bottom,
-								color-stop(.25, rgba(255, 255, 255, .15)), color-stop(.25, transparent),
-								color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .15)),
-								color-stop(.75, rgba(255, 255, 255, .15)), color-stop(.75, transparent),
-								to(transparent));
-            background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
-                                transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
-                                transparent 75%, transparent);
-            background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
-                                transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
-                                transparent 75%, transparent);
-            background-image: -ms-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
-                                transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
-                                transparent 75%, transparent);
-            background-image: -o-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
-                                transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
-                                transparent 75%, transparent);
-            background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
-                                transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
-                                transparent 75%, transparent);            
-            
-            -webkit-animation: animate-stripes 3s linear infinite;
-            -moz-animation: animate-stripes 3s linear infinite;       		
-		}
-        
-        @-webkit-keyframes animate-stripes { 
-			0% {background-position: 0 0;} 100% {background-position: 60px 0;}
-        }
-        
-        
-        @-moz-keyframes animate-stripes {
-			0% {background-position: 0 0;} 100% {background-position: 60px 0;}
-        }
-		
-		/*---------------------------*/	 
-
-		.shine span {
-			position: relative;
-		}
-		
-		.shine span::after {
-			content: '';
-			opacity: 0;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			background: #fff;
-            -moz-border-radius: 3px;
-			-webkit-border-radius: 3px;
-			border-radius: 3px;			
-			
-            -webkit-animation: animate-shine 2s ease-out infinite;
-            -moz-animation: animate-shine 2s ease-out infinite; 			
-		}
-
-        @-webkit-keyframes animate-shine { 
-			0% {opacity: 0; width: 0;}
-			50% {opacity: .5;}
-			100% {opacity: 0; width: 95%;}
-        }
-        
-        
-        @-moz-keyframes animate-shine {
-			0% {opacity: 0; width: 0;}
-			50% {opacity: .5;}
-			100% {opacity: 0; width: 95%;}
-        }
-
-		/*---------------------------*/	 
-		
-		.glow span {
-            -moz-box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;
-			-webkit-box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;
-			box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;
-			
-            -webkit-animation: animate-glow 1s ease-out infinite;
-            -moz-animation: animate-glow 1s ease-out infinite; 			
-		}
-
-		@-webkit-keyframes animate-glow {
-		 0% { -webkit-box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;} 
-		 50% { -webkit-box-shadow: 0 5px 5px rgba(255, 255, 255, .3) inset, 0 -5px 5px rgba(255, 255, 255, .3) inset;} 
-		 100% { -webkit-box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;}
-		 }
-
-		@-moz-keyframes animate-glow {
-		 0% { -moz-box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;} 
-		 50% { -moz-box-shadow: 0 5px 5px rgba(255, 255, 255, .3) inset, 0 -5px 5px rgba(255, 255, 255, .3) inset;} 
-		 100% { -moz-box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;}
-		 }
-		 
-    </style>
-</head>
-
-<body>
-
-<div class="progress-bar blue stripes">
-    <span style="width: 70%"></span>
+      <!-- Portfolio Item Heading -->
+      <div >
+      <h1 class="my-4">[관련태그]
+        <small>DB연동 게시글의 제목</small>
+      </h1>
 </div>
-<p>Set above to:
-	<a href="#" class="quarter">25%</a> /
-	<a href="#" class="half">50%</a> /
-	<a href="#" class="three-quarters">75%</a> /
-	<a href="#" class="full">100%</a>
-</p>
+      <!-- Portfolio Item Row -->
+      <div class="row">
+   
+
+        <div class="col-md-8" style="border:1px solid silver">
+          <h3 class="my-3">판매자 아이디</h3>
+          <p>판매자 내부글 1번쨰줄 의 내용</p>
+            <h3 class="my-3">상품종류[개][대형][사료]</h3>
+        </div>
+
+        <div class="col-md-4" style="border:1px solid silver">
+        
+          <h3 class="my-3">거래자 평가</h3>
+          <ul>
+            <li>거래 횟수</li>
+            <li>만족 불만족 표시</li>
+            <li>회원의 등급</li>
+            <li>연락처 정보공개시에만 공개</li>
+          </ul>
+        </div>
+
+      </div>
+      <!-- /.row -->
+      <div style="margin-top:10px">
+   </div><br/>
+      
+ 
+	
+
+     	
 
 
+     <div class="col-md-8">
+     <textarea rows="" cols="" style=" border: 1px solid blue;width:1080px;height: 500px"></textarea>
+       
+        </div>
+        
+        
 
+    </div>
 
-
-
-</body>
-</html>
+    
+  </body>
+  </html>
+  

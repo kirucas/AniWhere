@@ -42,13 +42,9 @@
 <!-- top 와야하는 자리 -->
 
 <div class="container">
-
-
-
 	
-		<jsp:include page="../template/BuyPart.jsp" />
+		<jsp:include page="../template/BuyPart.jsp"/>
 
-	
 	
 	<!-- 푸터 와야하는 자리 -->
 	<div style="margin-top: 50px;">
@@ -56,8 +52,6 @@
 	</div>
 	
 	
-
-
 </div>
 	
 </body>

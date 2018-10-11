@@ -135,6 +135,8 @@ a{
                                             <li><a href="/aniwhere/market/buy.aw">사요</a></li>
 			                                <li><a href="/aniwhere/market/sell.aw">팔아요</a></li>			                            
 			                                <li><a href="/aniwhere/market/groupbuy.aw">같이 싸게 사요</a></li>
+			                                
+			                               
                             </ul>
                         </li>
                         <li class="dropdown">

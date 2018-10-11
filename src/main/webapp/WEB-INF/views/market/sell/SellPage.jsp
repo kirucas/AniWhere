@@ -39,7 +39,8 @@
   		<jsp:include page="../template/SellPart.jsp" />
  
   	</div>
-   
+  	
+  
   
   
   

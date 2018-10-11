@@ -42,13 +42,14 @@
 
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 <script src="<c:url value='/Bootstrap/js/bootstrap.min.js'/>"></script>
-   <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js">
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js">
 
-  
+
 <style>
-
 html {
 	font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 	font-size: 14px;
@@ -68,46 +69,43 @@ html {
 	vertical-align: middle;
 }
 
-
-.public{ color:red;
-font-weight: bold;
-
-
-
+.public {
+	color: red;
+	font-weight: bold;
 }
 </style>
 
 <!-- 팝니다 게시판의 swiper 로직 -->
- 
-  
-  
+
+
+
 </head>
 <body>
 
 
-<!-- top 와야하는 자리 -->
+	<!-- top 와야하는 자리 -->
 
 
 
 	<header> </header>
 
 
-	
-	
-	
+
+
+
 	<div class="card mb-5" style="margin-top: 50px">
-	
-	
-	
-	
-		<div class="card-header" >구매게시판</div>
+
+
+<a href="/aniwhere/market/insidebuy.aw"> asdasd</a>
+
+		<div class="card-header">구매게시판</div>
 		<div class="card-block p-0">
+		<a href="/aniwhere/market/insidebuy.aw">sad</a>
 			<table class="table table-bordered table-sm m-0">
 				<thead class="table-warning">
 					<tr>
-					
+
 						<th style="width: 50px">게시번호</th>
-						
 						<th style="width: 400px">제목</th>
 						<th style="width: 50px">작성자</th>
 						<th style="width: 50px">조회수</th>
@@ -115,28 +113,28 @@ font-weight: bold;
 					</tr>
 				</thead>
 				<tbody>
-				<tr class="public">
-						
+					<tr class="public">
+
 						<td>1</td>
-						<td>[공지사항]민사상 법률 팁 사기예방 공지사항 </td>
+						<td>[공지사항]민사상 법률 팁 사기예방 공지사항</td>
 						<td>관리자</td>
 						<td>557</td>
 						<td>20180-08-17</td>
 					</tr>
-				
-				
+
+
 					<tr>
-						
+
 						<td>95</td>
-		
-						<td>[조류][소형][새장]카나리아 넣어서 키울만한 새장 사요</td>
+
+						<td><a href="/aniwhere/market/insidebuy.aw">[조류][소형][새장]카나리아 넣어서키울만한 새장 사요</a></td>
 						<td>Jan_sina</td>
 						<td>180</td>
 						<td>20180-09-14</td>
 					</tr>
 
 					<tr>
-						
+
 						<td>90</td>
 
 						<td>[파충류][소형][케이지]도마뱀용 유리 케이지 구매합니다 깨끗한걸로</td>
@@ -144,9 +142,9 @@ font-weight: bold;
 						<td>180</td>
 						<td>20180-09-14</td>
 					</tr>
-					
+
 					<tr>
-						
+
 						<td>67</td>
 
 						<td>[개][대형][사료]골든리트리버 사료 구매합니다 완전 새거! [2]</td>
@@ -159,13 +157,14 @@ font-weight: bold;
 		</div>
 
 
-		<div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4" style="float: none; margin: 0 auto;"  >
-		
+		<div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4"
+			style="float: none; margin: 0 auto;">
+
 			<nav aria-label="...">
 				<ul class="pagination justify-content-end mt-3 mr-3">
 
 
-					
+
 
 					<li class="page-item disabled"><span class="page-link">Previous</span>
 					</li>
@@ -179,47 +178,43 @@ font-weight: bold;
 					<li class="page-item"><a class="page-link" href="#">6</a></li>
 					<li class="page-item"><a class="page-link" href="#">Next</a></li>
 				</ul>
-				
+
 
 			</nav>
-			</div>
-			
-			<!-- 검색용 UI -->
-			
-<div class="row">
-	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="float: none; margin: 0 auto;">
-		<form class="form-inline" method="post"
-			action="<c:url value='/ReplyBBS/BBS/List.bbs'/>">
-			<div class="form-group">
-				<select name="searchColumn" class="form-control">
-					<option value="title">제목</option>
-					<option value="name">작성자</option>
-					<option value="content">내용</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<input type="text" name="searchWord" class="form-control" />
-			</div>
-			<button type="submit" class="btn btn-primary">검색</button>
+		</div>
 
-		</form>
-	</div>
-</div>
+		<!-- 검색용 UI -->
+
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
+				style="float: none; margin: 0 auto;">
+				<form class="form-inline" method="post"
+					action="<c:url value='/ReplyBBS/BBS/List.bbs'/>">
+					<div class="form-group">
+						<select name="searchColumn" class="form-control">
+							<option value="title">제목</option>
+							<option value="name">작성자</option>
+							<option value="content">내용</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<input type="text" name="searchWord" class="form-control" />
+					</div>
+					<button type="submit" class="btn btn-primary">검색</button>
+
+				</form>
+			</div>
+		</div>
 
 		<!-- 마우스 오버시 1.사진 나오는 api필요 2.색바뀜 3.댓글수 옆에 표시 -->
-        
-</div>
-
-<div>
-
 
 	</div>
-		
+
+	<div></div>
+
 	<!-- 푸터 와야하는 자리 -->
-	<div style="margin-top: 50px;">
-	
-	</div>
-	
+	<div style="margin-top: 50px;"></div>
+
 
 	<section></section>
 

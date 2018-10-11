@@ -65,7 +65,7 @@
 	
 	<div class="card mb-12" style="margin-top: 50px">
 		<div class="card-header" class="border border-primary">공동구매게시판</div>
-	<jsp:include page="../market/template/WithBuyPart.jsp" />
+	<jsp:include page="../market/template/WithBuyPart.jsp"/>
 	</div>
 
 	

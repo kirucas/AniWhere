@@ -113,7 +113,7 @@ function changeimage1() {
 
         <div class="col-md-8">
          <!--  <img class="img-fluid" src="http://placehold.it/750x500" alt="" > -->
-           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" style="width: 750px; height: 500px;">
+           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" style="width: 700px; height: 500px;">
         
         </div>
 
@@ -135,7 +135,7 @@ function changeimage1() {
    </div><br/>
       
  
-   <jsp:include page="../template/ProgressBar.jsp" />
+   <jsp:include page="WEB-INF/views/market/template/ProgressBar.jsp" />
   
 	
 

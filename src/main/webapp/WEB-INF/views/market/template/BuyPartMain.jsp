@@ -126,10 +126,7 @@ font-weight: bold;
 				
 				
 					<tr>
-						<td><label class="custom-control custom-checkbox"> <input
-								type="checkbox" class="custom-control-input"> <span
-								class="custom-control-indicator"></span>
-						</label></td>
+					
 						<td>95</td>
 		
 						<td>[조류][소형][새장]카나리아 넣어서 키울만한 새장 사요</td>
@@ -139,10 +136,7 @@ font-weight: bold;
 					</tr>
 
 					<tr>
-						<td><label class="custom-control custom-checkbox"> <input
-								type="checkbox" class="custom-control-input"> <span
-								class="custom-control-indicator"></span>
-						</label></td>
+					
 						<td>90</td>
 
 						<td>[파충류][소형][케이지]도마뱀용 유리 케이지 구매합니다 깨끗한걸로</td>
@@ -152,10 +146,7 @@ font-weight: bold;
 					</tr>
 					
 					<tr>
-						<td><label class="custom-control custom-checkbox"> <input
-								type="checkbox" class="custom-control-input"> <span
-								class="custom-control-indicator"></span>
-						</label></td>
+					
 						<td>67</td>
 
 						<td>[개][대형][사료]골든리트리버 사료 구매합니다 완전 새거! [2]</td>
