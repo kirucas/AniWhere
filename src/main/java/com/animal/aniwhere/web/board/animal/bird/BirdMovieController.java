@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BirdMovieController {
 	@RequestMapping("/animal/bird/movie/write.aw")
 	   public String movie_write() throws Exception {
-	      return "board/animal/bird/movie/movieInsert_form.tiles";
+	      return "board/animal/bird/movie/movieWrite_form.tiles";
 	   }
 }//////////////////// MovieController class
