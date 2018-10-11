@@ -191,19 +191,19 @@ font-weight: bold;
 
 	<main class="container pt-5">
 	
-		<jsp:include page="../template/MaketTop.jsp" />
+		<jsp:include page="template/MaketTop.jsp" />
 	
 	<div class="card mb-5" style="margin-top: 50px" >
 	
 	
-		<jsp:include page="../template/BuyPart.jsp" />
+		<jsp:include page="template/BuyPart.jsp" />
 	
 		</div>
 
 <div>
 <div class="card mb-5" style="margin-top: 50px">
 		<div class="card-header" class="border border-primary">판매게시판</div>
-	<jsp:include page="../template/SellPart.jsp" />
+	<jsp:include page="template/SellPart.jsp" />
 	
 	
 	
@@ -213,7 +213,7 @@ font-weight: bold;
 	
 	<div class="card mb-12" style="margin-top: 50px">
 		<div class="card-header" class="border border-primary">공동구매게시판</div>
-	<jsp:include page="../template/WithBuyPart.jsp" />
+	<jsp:include page="template/WithBuyPart.jsp" />
 	</div>
 
 	

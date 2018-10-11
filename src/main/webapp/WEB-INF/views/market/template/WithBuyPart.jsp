@@ -36,6 +36,7 @@
 
     <!-- Custom styles for this template -->
     <link href="carousel.css" rel="stylesheet">
+    
     <style>
     
     
@@ -68,7 +69,7 @@
             <div class="container-fluid">
               <div class="carousel-caption text-left">
            
-                <p><a class="btn btn-lg btn-primary" href="../MaketPart/SoldOut.jsp" role="button">buy NOW!</a></p>
+                <p><a class="btn btn-lg btn-primary" href="../template/SoldOut.jsp" role="button">buy NOW!</a></p>
               </div>
             </div>
           </div>
@@ -77,7 +78,7 @@
             <div class="container">
               <div class="carousel-caption"> 
                
-                <p><a class="btn btn-lg btn-primary" href="../MaketPart/SoldOut.jsp" role="button" >buy NOW!</a></p>
+                <p><a class="btn btn-lg btn-primary" href="../template/SoldOut.jsp" role="button" >buy NOW!</a></p>
               </div>
             </div>
           </div>
@@ -86,7 +87,7 @@
             <div class="container">
               <div class="carousel-caption text-right">
                
-                <p><a class="btn btn-lg btn-primary" href="../MaketPart/SoldOut.jsp" role="button">buy NOW!</a></p>
+                <p><a class="btn btn-lg btn-primary" href="../template/SoldOut.jsp" role="button">buy NOW!</a></p>
               </div>
             </div>
           </div>
