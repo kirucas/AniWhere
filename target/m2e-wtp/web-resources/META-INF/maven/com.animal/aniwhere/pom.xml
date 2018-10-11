@@ -176,13 +176,18 @@
 		</dependency>
 		<!-- JSON 사용을 위한 dependency 끝 -->
 		
-		<!-- MultipartRequest를 사용하기 위한 dependency 추가 -->
+		<!-- MultipartHttpServletRequest를 사용하기 위한 dependency 추가 -->
 		<dependency>
-		    <groupId>com.servlets</groupId>
-		    <artifactId>cos</artifactId>
-		    <version>09May2002</version>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
 		</dependency>
-		<!-- MultipartRequest를 사용하기 위한 dependency 추가 끝 -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.3.3</version>
+		</dependency>
+		<!-- MultipartHttpServletRequest를 사용하기 위한 dependency 추가 끝 -->
 		
 	</dependencies>
     <build>
