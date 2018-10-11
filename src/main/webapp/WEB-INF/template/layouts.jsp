@@ -18,28 +18,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <jsp:include page="/resources/js/move_dropdowns.jsp"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote-bs4.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/lang/summernote-ko-KR.js"></script>
 <!-- 아이콘 사용을 위한 fontawesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-<script>
-	$(function(){
-		$("#summernote").summernote({
-			placeholder: "내용을 입력하세요",
-			height: 300,
-			maxHeight: null,
-			minHeight: null,
-			lang : 'ko-KR',
-			width: 1200
-		})
-	});
-</script>
-
 <style>
-#heart{
-	color:red
-}
 .co{
 	background-color:#1ABC9C;
 }

@@ -8,7 +8,7 @@
 			조류&nbsp;<small>질문 게시판</small>
 		</h2>
 	</div>
-	<div class="wr offset-md-9 col-md-3">
+	<div class="wr offset-sm-9 col-sm-3">
 		<div align="right" >
 			<a href="#" class="btn btn-success"><i class="fas fa-pen-square" >글쓰기</i></a>
 		</div>
@@ -18,22 +18,22 @@
 		<table class="table table-hover table-bordered">
 			<thead id="thead" class="co">
 				<tr>
-					<th scope="col" style="width: 90px">글번호</th>
-					<th scope="col" >제목<small>(댓글)</small></th>
-					<th scope="col" style="width: 90px">작성자</th>
-					<th scope="col" style="width: 90px">조회수</th>
-					<th scope="col" style="width: 90px">좋아요</th>
-					<th scope="col" style="width: 150px">작성일</th>
+					<th scope="col" style="width:8%" class="text-center">글번호</th>
+					<th class="text-center" scope="col" >제목<small>(댓글)</small></th>
+					<th class="text-center" scope="col" style="width:8%">작성자</th>
+					<th class="text-center" scope="col" style="width:8%">조회수</th>
+					<th class="text-center" scope="col" style="width:8%">추천수</th>
+					<th class="text-center" scope="col" style="width:18%">작성일</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<th scope="row">July</th>
-					<td >july@example.com <span class="badge badge-info">2</span></td>
-					<td>Dooley</td>
-					<td>Dooley</td>
-					<td><i class="fas fa-heart" id="heart"></i> 2</td>
-					<td >2018-05-05</td>
+					<th class="text-center" scope="row">July</th>
+					<td>july@example.com <span class="badge badge-info">2</span></td>
+					<td class="text-center">Dooley</td>
+					<td class="text-center">Dooley</td>
+					<td class="text-center"> 2</td>
+					<td class="text-center">2018-05-05</td>
 				</tr>
 				<tr>
 					<th scope="row">July</th>
@@ -70,7 +70,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="row offset-md-5 col-md-4">
+	<div class="row offset-sm-5 col-sm-4">
 		<div class="text-center">
 			<ul class="pagination text-center">
 			  <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
@@ -81,7 +81,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="row offset-md-3 col-md-7">
+	<div class="row offset-sm-3 col-sm-7">
 		<div class="form-row">
 				<div class="form-group">
 					<select name="searchColumn" class="form-control ">
