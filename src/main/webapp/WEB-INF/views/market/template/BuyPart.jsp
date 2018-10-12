@@ -96,7 +96,7 @@ html {
 	<div class="card mb-5" style="margin-top: 50px">
 
 
-<a href="/aniwhere/market/insidebuy.aw"> asdasd</a>
+<a href="<c:url value='/views/market/insidebuy.aw'/>"> asdasd</a>
 
 		<div class="card-header">구매게시판</div>
 		<div class="card-block p-0">
