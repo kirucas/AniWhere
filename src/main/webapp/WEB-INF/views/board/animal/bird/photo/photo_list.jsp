@@ -2,7 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.esm.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.esm.bundle.js"></script>
 <style>
 	.card-group {
 		margin-bottom: 5px;
@@ -47,21 +53,71 @@
 			height: 180px;
 		}
 	}
-	
 </style>
 	<script>
-	$(function(){
-		$(".moda").click(function(){
-			console.log("클릭 발생");
-			var sr1 = $(this).prop("src");
-			$("#modal").prop("src",sr1);
-		});
-		$(".card-title").click(function(){
-			var sr1 = $(this).children("a").prop("title");
-			console.log(sr1);
-			$("#modal").prop("src",sr1);
-		});
+	var popupGallery;
+	$(document).ready(function () {
+	  $('.moda').click(function (e) {
+	    e.preventDefault();
+		var sr1 = $(this).prop("src");
+		$("#modal").prop("src",sr1);
+	    $('#myModal').on('show.bs.modal', function (e) {
+	      popupGallery = new Swiper('#popupGallery', {
+	    	// Optional parameters
+		      direction: 'horizontal',
+		      // Navigation arrows
+		      navigation: {
+		        nextEl: '.swiper-button-next',
+		        prevEl: '.swiper-button-prev',
+		        hideOnClick : true
+		      },
+	      });
+	    });
+	    $('#myModal').on('shown.bs.modal', function (e) {
+	      popupGallery.update();
+	    });
+	    $('#myModal').modal();
+	  });
 	});
+	
+	
+// 	var mySwiper;
+// 	$(document).ready(function(){
+// 		$(".moda").click(function(e){
+// 			e.preventDefault();
+// 			console.log("클릭 발생");
+// 			var sr1 = $(this).prop("src");
+// 			$("#modal").prop("src",sr1);
+// 			$('#modalIMG').on('show.bs.modal', function (e) {
+// 		 		mySwiper = new Swiper('#popImg', {
+// 		 			  // Optional parameters
+// 				      direction: 'horizontal',
+// 				      // Navigation arrows
+// 				      navigation: {
+// 				        nextEl: '.swiper-button-next',
+// 				        prevEl: '.swiper-button-prev',
+// 				        hideOnClick : true
+// 				      },
+// 		 		 });
+// 		});
+// 		$(".card-title").click(function(e){
+// 			e.preventDefault();
+// 			var sr1 = $(this).children("a").prop("title");
+// 			console.log(sr1);
+// 			$("#modal").prop("src",sr1);
+// 			$('#modalIMG').on('show.bs.modal', function (e) {
+// 		 		mySwiper = new Swiper('#popImg', {
+// 		 			  // Optional parameters
+// 				      direction: 'horizontal',
+// 				      // Navigation arrows
+// 				      navigation: {
+// 				        nextEl: '.swiper-button-next',
+// 				        prevEl: '.swiper-button-prev',
+// 				        hideOnClick : true
+// 				      },
+// 		 		 });
+// 		});
+// 	});
 		
 		
 		
@@ -342,22 +398,35 @@
 			</div>
 		</div>
 	</div>
-	<!-- modal 프로필 -->
-			<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG" role="dialog" tabindex="-1">
-				<div class="modal-dialog modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-body mb-0 p-0">
-							<img id="modal" src="" alt="사진이 없습니다." style="width:100%">
-							
-							<h2 style="margin:10px">곤지의 프로필</h2>
-							<p id="content" style="margin:10px">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
-						</div>
-	
-						<div class="modal-footer">
-							<div><a href="#" data-dismiss="modal">닫기</a></div>
-						</div>
-					</div>
-				</div>
+	<!-- 모달 swiper -->
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        <div class="swiper-container" id="popupGallery">
+	          <div class="swiper-wrapper">
+	          <div class="swiper-slide text-xs-center text-lg-center">
+				 <img class="img-thumbnai" style="align:center;width:100%;height:100%;object-fit:contain" id="modal" src="" alt="사진이 없습니다.">
+			  </div>
+			  <div class="swiper-slide text-xs-center text-lg-center">
+				 <img class="img-thumbnail" style="align:center;width:100%;height:100%;object-fit:contain" src="<c:url value='/resources/images/board/animal/bird/bird_15.jpg' />" alt="사진이 없습니다.">
+			  </div>
+			  <div class="swiper-slide text-xs-center text-lg-center">
+				 <img class="img-thumbnail" style="align:center;width:100%;height:100%;object-fit:contain" src="<c:url value='/resources/images/board/animal/bird/bird_14.jpg' />" alt="사진이 없습니다.">
+			  </div>
+	          </div>
+	          <div class="swiper-button-prev"></div>
+	          <div class="swiper-button-next"></div>
+	        </div>
+	        <h2 style="margin:10px">곤지의 프로필</h2>
+				<p id="content" style="margin:10px">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
 			</div>
-			<!-- modal 사진 끝 -->
+			<div class="modal-footer">
+				<div><a href="#" data-dismiss="modal">닫기</a></div>
+			</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>

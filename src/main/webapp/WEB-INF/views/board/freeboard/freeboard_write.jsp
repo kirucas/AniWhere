@@ -13,12 +13,11 @@
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
-    	 width: 1000,
     	 height:350,
          callbacks : {
             onImageUpload : function(files, editor, welEditable) {
                for (var i = files.length - 1; i >= 0; i--) {
-                  sendFile(files[i], this);
+                  sendFile(files[i], this);	
                }
             }
          }
@@ -43,34 +42,45 @@
       }
    });
 </script>
+<style>
+@media (max-width: 575.98px) {
+	#titlediv {
+		margin-top:16px;
+		margin-left:1px;
+		
+	}
+	#title{
+		width:468.7px;
+	}
+}
+</style>
 <div class="container">
 	<div class="page-header">
 		<h2>
 			자유 게시판
 		</h2>
 	</div>
-	<div class="form-row">
+	<div style="width:100%">
 		<form method="post" action="<c:url value='/animal/freeboard/write.aw'/>">
 			<div class="form-group form-row">
 				<input type="hidden" id="mem_no" name="mem_no" />
-                 	<select name="free_category" id="free_category">
+                 	<select name="free_category" id="free_category" style="width:53px;height:38px;margin-right:10px;">
                          <option value="1">잡담</option>
                          <option value="2">정보</option>
                          <option value="3">유머</option>
                          <option value="4">이슈</option>
                          <option value="5">시사</option>
                   	</select>
-				<div class="form-row">
-					<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" style="margin-left:20px">
+				<div class="form-row" style="width:87.5%;"id="titlediv">
+					<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요">
 				</div>
 			</div>
 			<script>	
 				
 			</script>
 			<div class="form-group form-row">
-				<div>
-					<textarea rows="10" placeholder="내용을 입력하세요" class="form-control" style="width:100%;height:100%"
-						id="summernote" name="content"></textarea>
+				<div style="width:92.75%">
+					<textarea rows="10" class="form-control" id="summernote" name="content"></textarea>
 				</div>
 			</div>
 			<div class="form-group form-row">

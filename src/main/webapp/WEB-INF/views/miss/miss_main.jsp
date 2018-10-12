@@ -47,7 +47,7 @@
 	      scrollbar: {
 	        el: '.swiper-scrollbar',
 	      },
-	    })
+	    });
 	  });
   </script>
 <!-- Slider main container -->
@@ -56,8 +56,8 @@
 	<div class="swiper-wrapper">
 		<!-- Slides -->
 		<div class="swiper-slide text-xs-center text-lg-center">
-			<a href="<c:url value='/miss/find.aw'/>"> <img class="img-thumbnail img-fluid"
-				style="align: center; margin-bottom: 5px; height: 100%"
+			<a href="<c:url value='/miss/find.aw'/>"> 
+			<img class="img-thumbnail img-fluid" style="align: center; margin-bottom: 5px; height: 100%"
 				src="<c:url value='/resources/images/miss/find.jpg'/>" />
 			</a>
 		</div>
