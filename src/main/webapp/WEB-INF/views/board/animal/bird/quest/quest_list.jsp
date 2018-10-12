@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 내용 시작 -->
 <div class="container">
-	<div class="page-header">
+	<div class="page-header" style="border:2px solid white">
 		<h2>
-			조류&nbsp;<small>질문 게시판</small>
+			새&nbsp;<small>질문 게시판</small>
 		</h2>
 	</div>
 	<div class="wr offset-sm-9 col-sm-3">
@@ -23,53 +23,22 @@
 					<th class="text-center" scope="col" style="width:8%">작성자</th>
 					<th class="text-center" scope="col" style="width:8%">조회수</th>
 					<th class="text-center" scope="col" style="width:8%">추천수</th>
-					<th class="text-center" scope="col" style="width:18%">작성일</th>
+					<th class="text-center" scope="col" style="width:12%">작성일</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<th class="text-center" scope="row">July</th>
-					<td>july@example.com <span class="badge badge-info">2</span></td>
+					<td><a href="#">july@example.com <span class="badge badge-info">2</span></a></td>
 					<td class="text-center">Dooley</td>
 					<td class="text-center">Dooley</td>
 					<td class="text-center"> 2</td>
 					<td class="text-center">2018-05-05</td>
 				</tr>
-				<tr>
-					<th scope="row">July</th>
-					<td >john@example.com</td>
-					<td>Doe</td>
-					<td>Doe</td>
-					<td>Doe</td>
-					<td >2018-05-05</td>
-				</tr>
-				<tr>
-					<th scope="row">July</th>
-					<td >mary@example.com</td>
-					<td>Moe</td>
-					<td>Moe</td>
-					<td>Doe</td>
-					<td >2018-05-05</td>
-				</tr>
-				<tr>
-					<th scope="row">July</th>
-					<td >july@example.com</td>
-					<td>Dooley</td>
-					<td>Dooley</td>
-					<td>Doe</td>
-					<td >2018-05-05</td>
-				</tr>
-				<tr>
-					<th scope="row">July</th>
-					<td >mary@example.com</td>
-					<td>Moe</td>
-					<td>Moe</td>
-					<td>Doe</td>
-					<td >2018-05-05</td>
-				</tr>
 			</tbody>
 		</table>
 	</div>
+	<!-- 페이징 시작 -->
 	<div class="row offset-sm-5 col-sm-4">
 		<div class="text-center">
 			<ul class="pagination text-center">
@@ -81,6 +50,7 @@
 			</ul>
 		</div>
 	</div>
+	<!-- 페이징 끝 -->
 	<div class="row offset-sm-3 col-sm-7">
 		<div class="form-row">
 				<div class="form-group">

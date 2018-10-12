@@ -40,7 +40,7 @@
 		<div class="list-group">
 			<a href="<c:url value='/animal/cat/photo.aw' />" class="list-group-item list-group-item-action">photo</a>
 			<a href="<c:url value='/animal/cat/movie.aw' />" class="list-group-item list-group-item-action">movie</a>
-			<a href="<c:url value='/animal/cat/story.aw' />" class="list-group-item list-group-item-action">story</a>
+			<a href="<c:url value='/animal/cat/quest.aw' />" class="list-group-item list-group-item-action">Q&A</a>
 			<a href="<c:url value='/animal/cat/tip.aw' />" class="list-group-item list-group-item-action">tip</a>
 		</div>
 	</div>
