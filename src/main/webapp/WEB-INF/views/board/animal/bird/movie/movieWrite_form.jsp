@@ -54,7 +54,9 @@
 
 		<div class="form-group row">
 		<!-- 섬머노트 부분 -->
-			<textarea id="summernote" name="editordata"></textarea>
+			<div class="offset-sm-1 col-sm-10">
+				<textarea id="summernote" name="editordata"></textarea>
+			</div>
 		</div>
 
 		
@@ -72,6 +74,7 @@
 			height : 300, // set editor height
 			minHeight : null, // set minimum height of editor
 			maxHeight : null, // set maximum height of editor
+			width : $('#summernote').parent().css('width'),
 			focus : true,
 			// set focus to editable area after initializing summernote
 			toolbar: [
@@ -85,4 +88,5 @@
 						['video',['video']]
 					  ]
 		});
+		console.log();
 	</script>
