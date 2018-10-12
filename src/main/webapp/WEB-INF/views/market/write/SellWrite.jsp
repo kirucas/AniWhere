@@ -24,11 +24,8 @@
 
 
 <!-- include summernote css/js-->
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <body>
 	<div class="container">
 
@@ -96,16 +93,10 @@
 			
 			</div>
 			
-			<div>
-			  
-			
-			
-			</div>
-			
 			
 
 			<!-- Related Projects Row -->
-			<h3 class="my-4">판매자 물품사진 3개이상올려주세요</h3>
+			<h3 class="my-4">판매자가 올린 사진 3개이상</h3>
 
 			<div class="row">
 

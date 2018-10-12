@@ -91,37 +91,33 @@ function changeimage1() {
     if (changeimage1.id.match("product1")) {
         image.src = "<c:url value='/resources/images/maketimages/product1.jpg'/>";
     } 
-
 }
 </script>
-
-
 
     
   </head>
   <body>
-
-
   
     <!-- Page Content -->
     <div class="container">
 
       <!-- Portfolio Item Heading -->
+      <div >
       <h1 class="my-4">[관련태그]
         <small>DB연동 게시글의 제목</small>
       </h1>
-
+</div>
       <!-- Portfolio Item Row -->
       <div class="row">
    
 
         <div class="col-md-8">
          <!--  <img class="img-fluid" src="http://placehold.it/750x500" alt="" > -->
-           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" style="width: 750px; height: 500px;">
+           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" style="width: 700px; height: 500px;">
         
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4" style="border:1px solid silver">
           <h3 class="my-3">판매자 아이디</h3>
           <p>판매자 내부글 1번쨰줄 의 내용</p>
           <h3 class="my-3">상품종류[개][대형][사료]</h3>
@@ -135,6 +131,12 @@ function changeimage1() {
 
       </div>
       <!-- /.row -->
+      <div style="margin-top:10px">
+   </div><br/>
+      
+ 
+  
+	
 
       <!-- Related Projects Row -->
       <h3 class="my-4">판매자가 올린 사진 3개이상</h3>
@@ -173,6 +175,8 @@ function changeimage1() {
      <textarea rows="" cols="" style=" border: 1px solid blue;width:1080px;height: 500px"></textarea>
        
         </div>
+        
+        
 
     </div>
 

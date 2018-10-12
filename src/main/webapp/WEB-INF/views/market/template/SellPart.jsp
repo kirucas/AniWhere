@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ㅍ<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -98,6 +98,10 @@ html {
 
 		<div class="card-header">판매게시판</div>
 		<div class="card-block p-0">
+		
+		<div style="text-align:right"> 
+		<a href="<c:url value='/market/SellWrite.aw'/>"><button style="width:65px;height:40px" type="submit" class="btn btn-primary"><img src = "<c:url value='/resources/images/maketimages/Write.png'/>" style="width:20px;height:20px"/>등록</button></a>
+		</div>
 			<table class="table table-bordered table-sm m-0">
 				<thead class="table" style="background-Color: CYAN">
 					<tr>
@@ -125,7 +129,7 @@ html {
 
 						<td>95</td>
 
-						<td>[조류][소형][새장]카나리아 넣어서 키울만한 새장 팔아요</td>
+						<td><a href="<c:url value='/market/sellinside.aw'/>">[조류][소형][새장]카나리아 넣어서 키울만한 새장 팔아요</a></td>
 						<td>Jan_sina</td>
 						<td>180</td>
 						<td>20180-09-14</td>

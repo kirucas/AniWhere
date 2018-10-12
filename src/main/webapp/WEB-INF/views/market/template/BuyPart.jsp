@@ -95,12 +95,17 @@ html {
 
 	<div class="card mb-5" style="margin-top: 50px">
 
-
-<a href="<c:url value='/views/market/insidebuy.aw'/>"> asdasd</a>
+<!-- 
+<a href="<c:url value='/views/market/insidebuy.aw'/>"> asdasd</a> -->
 
 		<div class="card-header">구매게시판</div>
+		
 		<div class="card-block p-0">
-		<a href="/aniwhere/market/insidebuy.aw">sad</a>
+		
+		<div style="text-align:right"> 
+	<a href="<c:url value='/market/buyWrite.aw'/>">	<button style="width:65px;height:40px" type="submit" class="btn btn-primary"><img src = "<c:url value='/resources/images/maketimages/Write.png'/>" style="width:20px;height:20px"/>
+		등록</button></a>
+		</div>
 			<table class="table table-bordered table-sm m-0">
 				<thead class="table-warning">
 					<tr>
@@ -127,7 +132,9 @@ html {
 
 						<td>95</td>
 
-						<td><a href="/aniwhere/market/insidebuy.aw">[조류][소형][새장]카나리아 넣어서키울만한 새장 사요</a></td>
+						<td><a href="<c:url value='/market/buyinside.aw'/>">[조류][소형][새장]카나리아 넣어서키울만한 새장 사요</a>
+					
+						 </td>
 						<td>Jan_sina</td>
 						<td>180</td>
 						<td>20180-09-14</td>
@@ -205,10 +212,13 @@ html {
 				</form>
 			</div>
 		</div>
+		
+		
+		</div>
 
 		<!-- 마우스 오버시 1.사진 나오는 api필요 2.색바뀜 3.댓글수 옆에 표시 -->
 
-	</div>
+	
 
 	<div></div>
 

@@ -34,6 +34,9 @@
    
    	<div class="card-header" style="margin-top: 50px" >공동구매 게시판</div>
    	
+   	<div style="text-align:right"> 
+		<button style="width:65px;height:40px" type="submit" class="btn btn-primary"><img src = "<c:url value='/resources/images/maketimages/Write.png'/>" style="width:20px;height:20px"/>등록</button>
+		</div>
    	<div class="row">
       <div class="col-md-4">
          <div class="card mb-4">
@@ -45,7 +48,7 @@
   		<jsp:include page="ProgressBarsmall2.jsp" />
  
   
-               <a href="http://www.jquery2dotnet.com/" class="btn btn-outline-dark btn-sm">상세보기</a>
+               <a  href="<c:url value='/market/groupbuyinside.aw'/>" class="btn btn-outline-dark btn-sm">상세보기</a>
             </div>
          </div>
       </div>

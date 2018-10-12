@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MarketBuyController {
 
 
-	@RequestMapping("/market/insidebuy.aw")
-	public String insidebuy(@PathVariable String path) throws Exception {
-		return "market/buy/insidebuy.tiles";
+	//@RequestMapping("/market/buyinside.aw")
+	//public String buyinside(@PathVariable String path) throws Exception {
+		//return "market/buy/buyinside.tiles";
 		
 		
 	
-	}////////// move
+	//}////////// move
 	
 	
 	

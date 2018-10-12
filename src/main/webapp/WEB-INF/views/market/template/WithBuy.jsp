@@ -32,6 +32,8 @@
    <h3 class="pb-3 mb-4 font-italic border-bottom">
 
    </h3>
+   
+   
    <div class="row">
       <div class="col-md-6">
          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
