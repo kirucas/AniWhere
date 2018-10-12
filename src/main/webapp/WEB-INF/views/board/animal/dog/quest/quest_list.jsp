@@ -10,7 +10,8 @@
 	</div>
 	<div class="wr offset-sm-9 col-sm-3">
 		<div align="right" >
-			<a href="#" class="btn btn-success"><i class="fas fa-pen-square" >글쓰기</i></a>
+			<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>" 
+			class="btn btn-success"><i class="fas fa-pen-square" >글쓰기</i></a>
 		</div>
 	</div>
 	<div class="row">
@@ -28,12 +29,12 @@
 			</thead>
 			<tbody>
 				<tr>
-					<th class="text-center" scope="row">July</th>
-					<td><a href="#">july@example.com <span class="badge badge-info">2</span></a></td>
-					<td class="text-center">Dooley</td>
-					<td class="text-center">Dooley</td>
-					<td class="text-center"> 2</td>
-					<td class="text-center">2018-05-05</td>
+					<td class="text-center" scope="row">July</td><!-- quest_no -->
+					<td><a href="<c:url value='/animal/dog/quest/quest_view.aw'/>">july@example.com <span class="badge badge-info">2</span></a></td><!-- quest_title -->
+					<td class="text-center">Dooley</td><!-- mem_nickname -->
+					<td class="text-center">Dooley</td><!-- quest_count -->
+					<td class="text-center"> 2</td><!-- quest_hit -->
+					<td class="text-center">2018-05-05</td><!-- quest_regidate -->
 				</tr>
 			</tbody>
 		</table>
@@ -53,6 +54,7 @@
 	<!-- 페이징 끝 -->
 	<div class="row offset-sm-3 col-sm-7">
 		<div class="form-row">
+			<form class="form-inline" style="padding-bottom: 10px">
 				<div class="form-group">
 					<select name="searchColumn" class="form-control ">
 						<option value="title">제목</option>
@@ -61,11 +63,12 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<input type="text" name="searchWord" class="form-control" />
+					<input type="text" class="form-control" />
 				</div>
 				<div class="form-group">
-					<a href="#" class="si"><i class="fas fa-search"></i>검색</a>
+					<a type="submit" href="#" class="si"><i class="fas fa-search"></i>검색</a>
 				</div>
+			</form>
 		</div>
 	</div>
 </div>

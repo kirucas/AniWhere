@@ -15,23 +15,26 @@
 			width: 1200
 		})
 	});
+	
 </script>
 <div class="container border">
-	<div class="row col-md-2" >
-		<h2>강아지 질문 게시판</h2>
+	<div class="row col-sm-2" >
+		강아지 질문 게시판
 	</div>
-	<div class="form-row">
-		<input class="form-control" type="text" placeholder="제목을 입력해주세요" />
-	</div>
-	<div class="form-row pad">
-		<textarea id="summernote" class="form-control" rows="30"></textarea>
-	</div>
-	<div class="form-row">
-		<div class="form-group offset-md-5 col-md-1">
-			<input type="button" class="btn btn-lg btn-outline-danger" value="취소"/>
+	<form class="form-horizontal" method="post">
+		<div class="form-row">
+			<input class="form-control" type="text" placeholder="제목을 입력해주세요" />
 		</div>
-		<div class="form-group col-md-1">
-			<input type="button" class="btn btn-lg btn-outline-primary" value="등록"/>
+		<div class="form-row pad">
+			<textarea id="summernote" class="form-control" rows="30"></textarea>
 		</div>
-	</div>
+		<div class="form-row">
+			<div class="form-group offset-sm-5 col-sm-1">
+				<a href="javascript:history.back()"><input type="button" class="btn btn-lg btn-outline-danger" value="취소"/></a>
+			</div>
+			<div class="form-group col-sm-1">
+				<input type="button" class="btn btn-lg btn-outline-primary" value="등록"/>
+			</div>
+		</div>
+	</form>
 </div>

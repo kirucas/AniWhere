@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container border">
-	<div class="row offset-sm-11 col-sm-2">
-		강아지 질문 게시판
+	<div class="row offset-sm-10 col-sm-2">
+		<p class="text-right">질문 게시판</p>
 	</div>
-	<div class="row h1">
+	<div class="row">
 		<h1>제목12</h1>
 	</div>	
 	<div class="row border">
