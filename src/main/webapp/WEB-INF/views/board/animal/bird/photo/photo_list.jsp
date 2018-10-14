@@ -53,6 +53,18 @@
 			height: 180px;
 		}
 	}
+	#popupGallery div div img{
+		width: 100%;
+		height: 400px;	
+	}
+	@media (max-width : 500px){
+			#popupGallery div div img{
+			width: 100%;
+			height: 200px;	
+		}
+	}
+	
+	
 </style>
 	<script>
 	var popupGallery;
@@ -406,15 +418,15 @@
 	      <div class="modal-body">
 	        <div class="swiper-container" id="popupGallery">
 	          <div class="swiper-wrapper">
-	          <div class="swiper-slide text-xs-center text-lg-center">
-				 <img class="img-thumbnai" style="align:center;width:100%;height:100%;object-fit:contain" id="modal" src="" alt="사진이 없습니다.">
-			  </div>
-			  <div class="swiper-slide text-xs-center text-lg-center">
-				 <img class="img-thumbnail" style="align:center;width:100%;height:100%;object-fit:contain" src="<c:url value='/resources/images/board/animal/bird/bird_15.jpg' />" alt="사진이 없습니다.">
-			  </div>
-			  <div class="swiper-slide text-xs-center text-lg-center">
-				 <img class="img-thumbnail" style="align:center;width:100%;height:100%;object-fit:contain" src="<c:url value='/resources/images/board/animal/bird/bird_14.jpg' />" alt="사진이 없습니다.">
-			  </div>
+		          <div class="swiper-slide text-xs-center text-lg-center">
+					 <img class="modaru" class="img-thumbnai" src="" id="modal" alt="사진이 없습니다.">
+				  </div>
+				  <div class="swiper-slide text-xs-center text-lg-center">
+					 <img class="modaru" class="img-thumbnail" src="<c:url value='/resources/images/board/animal/bird/bird_15.jpg' />" alt="사진이 없습니다.">
+				  </div>
+				  <div class="swiper-slide text-xs-center text-lg-center">
+					 <img class="modaru" class="img-thumbnail" src="<c:url value='/resources/images/board/animal/bird/bird_14.jpg' />" alt="사진이 없습니다.">
+				  </div>
 	          </div>
 	          <div class="swiper-button-prev"></div>
 	          <div class="swiper-button-next"></div>
@@ -429,4 +441,3 @@
 	    </div>
 	  </div>
 	</div>
-</div>
