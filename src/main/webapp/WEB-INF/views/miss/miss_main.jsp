@@ -115,7 +115,7 @@
 			</div>
 		</div>
 		<div class="col-sm-12">
-			<a href="<c:url value='/miss/shelter.aw'/>"><span>보호소</span></a>
+			<a href="<c:url value='/miss/shelter.aw'/>"><button type="button" class="btn btn-info">보호소</button></a>
 
 			<div class="row text-center text-lg-left">
 

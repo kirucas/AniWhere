@@ -69,7 +69,7 @@
 				</div>
 				<div class="article-list-item__content">
 					<span id="free_category">[유머]</span>
-					<a href="#"	class="article-list-item__info">
+					<a href="<c:url value='/animal/freeboard_view.aw'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
 							<span id="free_title">저새낀 혼자서 잘 못한다하는데</span> <em>[21]</em>
 						</div>

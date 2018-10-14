@@ -53,6 +53,10 @@
 			height: 180px;
 		}
 	}
+	#popupGallery div div img{
+		width: 100%;
+		height: 400px;
+	}
 </style>
 	<script>
 	var popupGallery;
@@ -79,51 +83,13 @@
 	    $('#myModal').modal();
 	  });
 	});
-	
-	
-// 	var mySwiper;
-// 	$(document).ready(function(){
-// 		$(".moda").click(function(e){
-// 			e.preventDefault();
-// 			console.log("클릭 발생");
-// 			var sr1 = $(this).prop("src");
-// 			$("#modal").prop("src",sr1);
-// 			$('#modalIMG').on('show.bs.modal', function (e) {
-// 		 		mySwiper = new Swiper('#popImg', {
-// 		 			  // Optional parameters
-// 				      direction: 'horizontal',
-// 				      // Navigation arrows
-// 				      navigation: {
-// 				        nextEl: '.swiper-button-next',
-// 				        prevEl: '.swiper-button-prev',
-// 				        hideOnClick : true
-// 				      },
-// 		 		 });
-// 		});
-// 		$(".card-title").click(function(e){
-// 			e.preventDefault();
-// 			var sr1 = $(this).children("a").prop("title");
-// 			console.log(sr1);
-// 			$("#modal").prop("src",sr1);
-// 			$('#modalIMG').on('show.bs.modal', function (e) {
-// 		 		mySwiper = new Swiper('#popImg', {
-// 		 			  // Optional parameters
-// 				      direction: 'horizontal',
-// 				      // Navigation arrows
-// 				      navigation: {
-// 				        nextEl: '.swiper-button-next',
-// 				        prevEl: '.swiper-button-prev',
-// 				        hideOnClick : true
-// 				      },
-// 		 		 });
-// 		});
-// 	});
-		
-		
-		
-	</script>
+</script>
 <c:set var="now" value="<%=new java.util.Date() %>" />
-
+		<div class="row" style="padding-bottom:10px;" >
+			<div class="col-12">
+				<button type="button" class="btn btn-info float-right">사진글 등록</button>
+			</div>
+		</div>
 <div class="container">
 	<div class="row">
 		<div class="card-group">
@@ -407,13 +373,13 @@
 	        <div class="swiper-container" id="popupGallery">
 	          <div class="swiper-wrapper">
 	          <div class="swiper-slide text-xs-center text-lg-center">
-				 <img class="img-thumbnai" style="align:center;width:100%;height:100%;object-fit:contain" id="modal" src="" alt="사진이 없습니다.">
+				 <img class="img-thumbnai" id="modal" src="" alt="사진이 없습니다.">
 			  </div>
 			  <div class="swiper-slide text-xs-center text-lg-center">
-				 <img class="img-thumbnail" style="align:center;width:100%;height:100%;object-fit:contain" src="<c:url value='/resources/images/board/animal/bird/bird_15.jpg' />" alt="사진이 없습니다.">
+				 <img class="img-thumbnail" src="<c:url value='/resources/images/board/animal/bird/bird_15.jpg' />" alt="사진이 없습니다.">
 			  </div>
 			  <div class="swiper-slide text-xs-center text-lg-center">
-				 <img class="img-thumbnail" style="align:center;width:100%;height:100%;object-fit:contain" src="<c:url value='/resources/images/board/animal/bird/bird_14.jpg' />" alt="사진이 없습니다.">
+				 <img class="img-thumbnail" src="<c:url value='/resources/images/board/animal/bird/bird_14.jpg' />" alt="사진이 없습니다.">
 			  </div>
 	          </div>
 	          <div class="swiper-button-prev"></div>

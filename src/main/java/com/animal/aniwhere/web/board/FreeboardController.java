@@ -28,6 +28,11 @@ public class FreeboardController {
 		return "board/freeboard/freeboard_main.tiles";
 	}////////// free_main
 	
+	@RequestMapping("/animal/freeboard_view.aw")
+	public String free_view() throws Exception {
+		return "board/freeboard/freeboard_view.tiles";
+	}////////// free_main
+	
 	//등록 폼으로 이동 및 입력처리]
 	@RequestMapping(value="/animal/freeboard/write.aw",method=RequestMethod.GET)
 	public String write() throws Exception{
@@ -63,6 +68,7 @@ public class FreeboardController {
 		File file = new File(phisicalPath+File.separator+newFilename);
 		upload.transferTo(file);
         return "/Upload/"+newFilename;
-	   }
+   }
+	
 }//////////////////// FreeboardController
 
