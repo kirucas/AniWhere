@@ -53,10 +53,54 @@
 			height: 180px;
 		}
 	}
-	#popupGallery div div img{
-		width: 100%;
-		height: 400px;
-	}
+#popupGallery div div img{
+      width: 100%;
+      height: 400px;   
+   }
+   @media (max-width : 500px){
+         #popupGallery div div img{
+         width: 100%;
+         height: 200px;   
+      }
+   }
+   @media (max-width : 800px){
+      #popupGallery div div img{
+         width: 100%;
+         height: 300px;   
+      }
+   }
+   
+   @media (min-width :1200px){
+         .moda {
+            width: 277.5px;
+            height: 180px;
+      }
+   }
+   @media (min-width : 992px) and (max-width : 1199px){
+      .moda {
+            width: 231.25px;
+            height: 160.75px;
+      }
+   }
+   @media (min-width : 768px) and (max-width : 991px){
+      .moda {
+            width: 171.25px;
+            height: 100.75px;
+      }
+   }
+   @media (min-width : 576px) and (max-width : 767px){
+      .moda {
+            width: 126.25px;
+            height: 150.75px;
+      }
+   }
+   @media (max-width : 575px){
+      .moda {
+            width: 100%;
+            height: 220.75px;
+      }
+   }
+   
 </style>
 	<script>
 	var popupGallery;
