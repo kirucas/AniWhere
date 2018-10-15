@@ -868,9 +868,10 @@ CREATE TABLE rna_tip_cmt
 
 CREATE TABLE store_category
 (
+	store_no number NOT NULL,
 	store_code varchar2(20) NOT NULL,
 	store_name nvarchar2(30) NOT NULL,
-	PRIMARY KEY (store_code)
+	PRIMARY KEY (store_no)
 );
 
 
