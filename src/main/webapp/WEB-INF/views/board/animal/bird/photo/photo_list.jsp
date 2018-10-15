@@ -63,7 +63,43 @@
 			height: 200px;	
 		}
 	}
+	@media (max-width : 800px){
+		#popupGallery div div img{
+			width: 100%;
+			height: 300px;	
+		}
+	}
 	
+	@media (min-width :1200px){
+			.moda {
+				width: 277.5px;
+				height: 180px;
+		}
+	}
+	@media (min-width : 992px) and (max-width : 1199px){
+		.moda {
+				width: 231.25px;
+				height: 160.75px;
+		}
+	}
+	@media (min-width : 768px) and (max-width : 991px){
+		.moda {
+				width: 171.25px;
+				height: 100.75px;
+		}
+	}
+	@media (min-width : 576px) and (max-width : 767px){
+		.moda {
+				width: 126.25px;
+				height: 150.75px;
+		}
+	}
+	@media (max-width : 575px){
+		.moda {
+				width: 100%;
+				height: 220.75px;
+		}
+	}
 	
 </style>
 	<script>
@@ -139,7 +175,7 @@
 <div class="container">
 	<div class="row">
 		<div class="card-group">
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_1.jpg'/>" alt="bird_1" />
 				</a>
@@ -155,7 +191,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_2.jpg' />" alt="bird_2" />
 				</a>
@@ -171,7 +207,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 				<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_3.jpg' />" alt="bird_3" />
 				</a>
@@ -187,7 +223,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_4.jpg' />" alt="bird_4" />
 				</a>
@@ -207,7 +243,7 @@
 	</div>
 	<div class="row">
 		<div class="card-group">
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_5.jpg' />" alt="bird_5" />
 				</a>
@@ -224,7 +260,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_6.jpg' />" alt="bird_6" />
 				</a>
@@ -240,7 +276,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_7.jpg' />" alt="bird_7" />
 				</a>
@@ -256,7 +292,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_8.jpg' />" alt="bird_8" />
 				</a>
@@ -276,7 +312,7 @@
 	</div>
 	<div class="row">
 		<div class="card-group">
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_9.jpg' />" alt="bird_9" />
 				</a>
@@ -292,7 +328,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_10.jpg' />" alt="bird_10" />
 				</a>
@@ -308,7 +344,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_11.jpg' />" alt="bird_11" />
 				</a>
@@ -324,7 +360,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_12.jpg' />" alt="bird_12" />
 				</a>
@@ -344,7 +380,7 @@
 	</div>
 	<div class="row">
 		<div class="card-group">
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_13.jpg' />" alt="bird_13" />
 				</a>
@@ -360,7 +396,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_14.jpg' />" alt="bird_14" />
 				</a>
@@ -376,7 +412,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_15.jpg' />" alt="bird_15" />
 				</a>
@@ -392,7 +428,7 @@
 					<small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
 				</div>
 			</div>
-			<div class="card">
+			<div class="card" id="card-size">
 				<a href="#" data-target="#modalIMG" data-toggle="modal">
 					<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_16.jpg' />" alt="bird_16" />
 				</a>
