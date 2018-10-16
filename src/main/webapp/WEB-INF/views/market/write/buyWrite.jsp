@@ -57,6 +57,7 @@ $(document).ready(function() {
  
      <div class="col-md-12">
      <form method="post" action="buywriteAction.jsp">
+     
      	<label for="" class="">제목</label> <input class="form-control" type="text" id="title" name="title">
      
                               <p style="margin-top:30px">
