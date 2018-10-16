@@ -18,4 +18,10 @@ public class DogStoryController {
 		return "board/animal/dog/quest/quest_view.tiles";
 	}
 
+	@RequestMapping("/animal/dog/quest/quest_edit.aw")
+	public String quest_edit() throws Exception{
+		
+		return "board/animal/dog/quest/quest_edit.tiles";
+	}
+	
 }//////////////////// StoryController

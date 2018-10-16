@@ -33,7 +33,7 @@
 				<a href="javascript:history.back()"><input type="button" class="btn btn-lg btn-outline-danger" value="취소"/></a>
 			</div>
 			<div class="form-group col-sm-1">
-				<input type="button" class="btn btn-lg btn-outline-primary" value="등록"/>
+				<button type="submit" class="btn btn-lg btn-outline-primary" >등록</button>
 			</div>
 		</div>
 	</form>

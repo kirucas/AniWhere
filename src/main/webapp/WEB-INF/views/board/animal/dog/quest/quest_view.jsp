@@ -22,7 +22,7 @@
 			2018-10-04
 		</div>
 		<div class="offset-sm-3 col-sm-4" style="text-align: right;">
-			<a href="#">수정 </a><a href="#">| 삭제 </a><a href="#">| 목록</a>
+			<a href="<c:url value='/animal/dog/quest/quest_edit.aw'/>">수정 </a><a href="#">| 삭제 </a><a href="javascript:history.back()">| 목록</a>
 		</div>
 	</div>
 	<div class="row border-top-0">
@@ -41,10 +41,6 @@
 		<div class="offset-sm-5 col-sm-1" style="padding: 10px">
 			<i class="far fa-thumbs-up fa-4x ic"></i>
 		</div><!-- 누른면 색이 꽉차고 빌수도 있게하게 hideen주기 -->
-		<div class="col-sm-1">
-			<i class="far fa-thumbs-down fa-4x" style="padding: 10px"></i>
-			<h5 class="text-center">1</h5>
-		</div>
 	</div>
 </div>
 <div class="container border" style="margin-top: 10px;margin-bottom: 10px">

@@ -8,7 +8,7 @@
 			강아지&nbsp;<small>질문 게시판</small>
 		</h2>
 	</div>
-	<div class="wr offset-sm-9 col-sm-3">
+	<div class="wr offset-sm-9 col-sm-3">	
 		<div align="right" >
 			<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>" 
 			class="btn btn-success"><i class="fas fa-pen-square" >글쓰기</i></a>
@@ -29,12 +29,12 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td class="text-center" scope="row">July</td><!-- quest_no -->
-					<td><a href="<c:url value='/animal/dog/quest/quest_view.aw'/>">july@example.com <span class="badge badge-info">2</span></a></td><!-- quest_title -->
-					<td class="text-center">Dooley</td><!-- mem_nickname -->
-					<td class="text-center">Dooley</td><!-- quest_count -->
-					<td class="text-center"> 2</td><!-- quest_hit -->
-					<td class="text-center">2018-05-05</td><!-- quest_regidate -->
+					<td class="text-center" scope="row">July</td><!-- ${record.quest_no} -->
+					<td><a href="<c:url value='/animal/dog/quest/quest_view.aw'/>">july@example.com<span class="badge badge-info">2</span></a></td><!-- ${record.quest_title} -->
+					<td class="text-center">Dooley</td><!-- ${record.mem_nickname} -->
+					<td class="text-center">Dooley</td><!-- ${record.quest_count} -->
+					<td class="text-center">2</td><!-- ${record.quest_hit} -->
+					<td class="text-center">2018-05-05</td><!-- ${record.quest_regidate} -->
 				</tr>
 			</tbody>
 		</table>
@@ -72,4 +72,3 @@
 		</div>
 	</div>
 </div>
-
