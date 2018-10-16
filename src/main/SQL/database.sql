@@ -671,9 +671,10 @@ CREATE TABLE member
 (
 	mem_no number NOT NULL,
 	mem_id varchar2(20) NOT NULL,
+	mem_pw varchar2(20) NOT NULL,
 	mem_name nvarchar2(20) NOT NULL,
 	mem_nickname nvarchar2(10) NOT NULL UNIQUE,
-	mem_gender varchar2(1) NOT NULL CHECK (mem_gender IN ('F', 'M', 'U'),
+	mem_gender varchar2(1) NOT NULL CHECK (mem_gender IN ('F', 'M', 'U')),
 	mem_birth date,
 	mem_loc number NOT NULL,
 	mem_log number NOT NULL,
@@ -867,9 +868,10 @@ CREATE TABLE rna_tip_cmt
 
 CREATE TABLE store_category
 (
-	store_code number NOT NULL,
+	store_no number NOT NULL,
+	store_code varchar2(20) NOT NULL,
 	store_name nvarchar2(30) NOT NULL,
-	PRIMARY KEY (store_code)
+	PRIMARY KEY (store_no)
 );
 
 
