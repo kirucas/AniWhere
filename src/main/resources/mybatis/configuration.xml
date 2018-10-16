@@ -26,7 +26,6 @@
 
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑) 정보 설정 -->
 	<mappers>
-		<mapper resource="mybatis/Administrator.xml" />
 		<mapper resource="mybatis/Member.xml" />
 		<mapper resource="mybatis/AllComment.xml" />
 		<mapper resource="mybatis/Animal.xml" />
