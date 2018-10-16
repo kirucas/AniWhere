@@ -56,6 +56,7 @@ $(document).ready(function() {
    </div><br/>
  
      <div class="col-md-12">
+     <form method="post" action="buywriteAction.jsp">
      	<label for="" class="">제목</label> <input class="form-control" type="text" id="title" name="title">
      
                               <p style="margin-top:30px">
@@ -100,15 +101,16 @@ $(document).ready(function() {
       
           
      <div class="col-md-12 container">
-     <textarea id="summernote" class="col-md-12 container" rows="" cols="" style=" border: 1px solid blue;height: 500px" name="body"></textarea>
+     <textarea id="summernote" class="col-md-12 container" rows="" cols="" style=" border: 1px solid blue;height: 500px" name="body" maxlength="2048"></textarea>
        
         </div>
          <div style="text-align:center">
 	        <input name="reset" class="btn btn-info" type="button" id="enterBtn" value="취소" >
 	        <input name="submit" class="btn btn-danger" type="button" id="exitBtn" value="확인">
 	        
-	    
+	  
 	       </div>
+	       </form>
 	       <div style="margin-bottom: 50px" ></div>
         </div>
   </div>

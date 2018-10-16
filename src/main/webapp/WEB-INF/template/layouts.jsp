@@ -19,7 +19,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <jsp:include page="/resources/js/move_dropdowns.jsp"/>
 <style>
-body {
+*{
 	font-family: 메이플스토리;
 }
 </style>
@@ -40,7 +40,4 @@ body {
 	</div>
 	<!-- container -->
 </body>
-
-
-
 </html>

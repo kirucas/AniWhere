@@ -4,18 +4,30 @@
 
 <script>
 	$(function(){
+		$("#dog_main").click(function(){
+			location.href = "<c:url value='/animal/dog/main.aw'/>";
+		});
+		$("#cat_main").click(function(){
+			location.href = "<c:url value='/animal/cat/main.aw'/>";
+		});
+		$("#rna_main").click(function(){
+			location.href = "<c:url value='/animal/rna/main.aw'/>";
+		});
+		$("#bird_main").click(function(){
+			location.href = "<c:url value='/animal/bird/main.aw'/>";
+		});
+		$("#etc_main").click(function(){
+			location.href = "<c:url value='/animal/etc/main.aw'/>";
+		});
 		$("#market_main").click(function(){
-			location.href = "<c:url value='/market/main.aw' />";
+			location.href = "<c:url value='/animal/dog/main.aw'/>";
 		});
-		
 		$("#miss_main").click(function(){
-			location.href = "<c:url value='/miss/miss_main.aw' />";
+			location.replace("<c:url value='/miss/miss_main.aw' />");
 		});
-		
 		$("#mating_main").click(function(){
 			location.href = "<c:url value='/mating/main.aw' />";
 		});
-		
 		$("#login").click(function(){
 			location.href = "<c:url value='/login.aw' />";
 		});

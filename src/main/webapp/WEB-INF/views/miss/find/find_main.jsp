@@ -5,7 +5,7 @@
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
 </style>
 <!-- 바디 -->
-<div class="container" style="padding-left:0px;padding-right:0px">
+<div class="container">
 		<div class="sub-header">
 			<div class="sub-header-info">
 				<div>

@@ -5,4 +5,4 @@
  * @author kosmo06
  *
  */
-package com.animal.aniwhere.service;
+package com.animal.aniwhere.web.notice;
