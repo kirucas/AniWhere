@@ -27,12 +27,7 @@
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
 	
-
-	
 	<style>
-	
-	
-
  .scale {
   transform: scale(1);
   -webkit-transform: scale(1);
@@ -41,6 +36,7 @@
   -o-transform: scale(1);
   transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
 }
+
 .scale:hover {
   transform: scale(1.2);
   -webkit-transform: scale(1.2);
@@ -139,7 +135,7 @@ function changeimage1() {
 	
 
       <!-- Related Projects Row -->
-      <h3 class="my-4">판매자가 올린 사진 3개이상</h3>
+      <h3 class="my-4">판매자가 올린 사진 3개이상</h3> 
 
       <div class="row">
 
@@ -170,14 +166,11 @@ function changeimage1() {
       </div>
       <!-- /.row -->	
 
-
-     <div class="col-md-8">
-     <textarea rows="" cols="" style=" border: 1px solid blue;width:1080px;height: 500px"></textarea>
+     <div class="col-md-12 container">
+     <textarea class="col-md-12 container" rows="" cols="" style=" border: 1px solid blue;height: 500px"></textarea>
        
         </div>
-        
-        
-
+         <div style="margin-bottom: 50px" ></div>
     </div>
 
     

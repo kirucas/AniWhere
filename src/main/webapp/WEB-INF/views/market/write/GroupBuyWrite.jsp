@@ -49,6 +49,8 @@ $(document).ready(function() {
 
   </head>
   <body>
+  
+  <form action = "#" accept-charset="utf-8" name = "groupbuy_info" method = "post">
   <div class="container">
  
       <div style="margin-top:10px">
@@ -57,9 +59,11 @@ $(document).ready(function() {
      <div class="col-md-12">
      	<label for="" class="">제목</label> <input class="form-control" type="text" id="nickname">
      
-                              <p>
+                              <p style="margin-top: 30px;">
+	
 									<label for="" class="">크기분류</label>
 									<select id="size_listSelect" class="select_filter" onclick="">
+										<option value="">-----</option>
 										<option value="small">소형</option>
 										<option value="middle">중형</option>
 										<option value="large">대형</option>
@@ -69,6 +73,7 @@ $(document).ready(function() {
 								   
 									<label for="" class="">용도분류</label>
 									<select id="use_listSelect" class="select_filter" onclick="">
+									    <option value="">-----</option>
 										<option value="food">사료</option>
 										<option value="playtoy">장난감</option>
 										<option value="home">보금자리</option>
@@ -80,6 +85,7 @@ $(document).ready(function() {
 								 
 									<label for="" class="">동물분류</label>
 									<select id="animal_listSelect" class="select_filter" onclick="">
+									    <option value="">-----</option>
 										<option value="dog">개</option>
 										<option value="cat">고양이</option>
 										<option value="bird">조류</option>
@@ -90,13 +96,100 @@ $(document).ready(function() {
 									    <option value="otheranimal">기타</option>
 									</select>
 								</p>
+								
+								<div style="border: 1px silver solid">
+			<div class="row" style="text-align: center; margin-left: 20px">
+				<div class="my-4">
+					<span style="margin-right: 20px">희망가</span><input
+						class="form-control" type="text" id="wishprice" />
+				</div>
+				<div class="my-4">
+					<span>거래기간</span> <input type = "date" min = "2018-10-19" max = "2020-01-01" name = "date" class="form-control" type="text"
+						id="wishtime" />
+				</div>
+			
+				<div class="my-4">
+					<span>연락처</span> <input class="form-control" type="text"
+						id="wishcount" />
+				</div>
+				
+				
+			</div>
+			
+			</div>
+			
+			
+			<p>
+									<label for="" class=""  style="margin-top: 30px">프로그래스바 설정:목표수량</label>
+									 <input  type="text" id="nickname">개 
+								
+								   
+									<label for="" class=""> 해택종류</label>
+									<select id="use_listSelect" class="select_filter" onclick="">
+										<option value="buty">혜택없음</option>	
+										<option value="food">가격할인</option>
+										<option value="playtoy">사은품추가</option>
+										<option value="home">포인트 추가</option>																	
+									    <option value="other">기타</option>
+									</select>
+							
+								 	<label for="" class="">해택상세설명</label>
+										 <input  type="text" id="nickname"> 
+										 
+										 <!-- Related Projects Row -->
+			<h3 class="my-4">판매자가 올린 사진 3개이상필요</h3>
+  <input multiple="multiple" type="file" name="sellfile" style="color:slategray;border:1 solid silver;width:300; height:20"> (최대 5M)</td>
+                         
+			<div class="row">
+
+				<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+
+					<img id="product1" onclick="javascript:changeimage1()"
+						class="img-fluid shadow scale"
+						src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
+						alt="" style="width: 300px; height: 200px;">
+
+				</div>
+
+				<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+
+					<img id="product2" onclick="javascript:changeimage2()"
+						class="img-fluid shadow scale"
+						src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
+						alt="" style="width: 300px; height: 200px;">
+
+				</div>
+
+				<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+
+					<img id="product3" onclick="javascript:changeimage3()"
+						class="img-fluid shadow scale"
+						src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
+						alt="" style="width: 300px; height: 200px;">
+
+				</div>
+
+				<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+
+					<img id="product4" onclick="javascript:changeimage4()"
+						class="img-fluid shadow scale"
+						src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
+						alt="" style="width: 300px; height: 200px;">
+
+				</div>
+
+			</div>
+			<!-- /.row -->
      
      
      
       
-             <input class="form-control" type="text" id="nickname"> 
-      <textarea name="content" id="summernote" style=" border: 1px solid blue;width:1080px;height: 500px"></textarea>
+            
+     <div class="col-md-12 container">
+     <textarea id="summernote" class="col-md-12 container" rows="" cols="" style=" border: 1px solid blue;height: 500px"></textarea>
        
+        </div>
+        
          <div style="text-align:center">
 	        <input class="btn btn-info" type="button" id="enterBtn" value="취소" >
 	        <input class="btn btn-danger" type="button" id="exitBtn" value="확인">
@@ -104,8 +197,10 @@ $(document).ready(function() {
 	    
 	       </div>
         </div>
+          <div style="margin-bottom: 50px" ></div>
                 
     </div>
+   </form>
    
   </body>
   </html>

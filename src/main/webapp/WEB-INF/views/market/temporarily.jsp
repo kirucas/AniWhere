@@ -36,37 +36,30 @@
 <div class="container">
 
 <!-- top 와야하는 자리 -->
-
-
-
-	<header> </header>
-
-	
-	
+<div class="card mb-5" style="margin-top: 50px" >
+		
 		<jsp:include page="../market/template/MaketTop.jsp" />
-	
-	<div class="card mb-5" style="margin-top: 50px" >
-	
-	
-		<jsp:include page="../market/template/BuyPart.jsp" />
 	
 		</div>
 
-<div>
-<div class="card mb-5" style="margin-top: 50px">
-		<div class="card-header" class="border border-primary">판매게시판</div>
-	<jsp:include page="../market/template/SellPart.jsp" />
-	
-	
-	
-	</div>
 
+	<div class="card mb-5" style="margin-top: 50px" >
+		
+		<jsp:include page="../market/template/BuyPartMain.jsp" />
+	
+		</div>
+
+
+<div class="card mb-5" style="margin-top: 50px">
+	
+	<jsp:include page="../market/template/SellPartMain.jsp" />
+	
 	</div>
 	
 	<div class="card mb-12" style="margin-top: 50px">
-		<div class="card-header" class="border border-primary">공동구매게시판</div>
-	<jsp:include page="../market/template/WithBuyPart.jsp"/>
-	</div>
+	
+	<jsp:include page="../market/template/WithBuyMain.jsp"/>
+	
 
 	
 	<!-- 푸터 와야하는 자리 -->
@@ -77,6 +70,7 @@
 	
 
 </div>
+
 </body>
 
 

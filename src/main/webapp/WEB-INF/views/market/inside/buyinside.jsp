@@ -66,10 +66,11 @@
       <div style="margin-top:10px">
    </div><br/>
       
-     <div class="col-md-8">
-     <textarea rows="" cols="" style=" border: 1px solid blue;width:1080px;height: 500px"></textarea>
+     <div class="col-md-12 container">
+     <textarea class="col-md-12 container" rows="" cols="" style=" border: 1px solid blue;height: 500px"></textarea>
        
         </div>
+         <div style="margin-bottom: 50px" ></div>
         
     </div>
 

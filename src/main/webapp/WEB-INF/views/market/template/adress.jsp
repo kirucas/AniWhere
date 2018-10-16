@@ -3,9 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <script language="javascript">
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
 //document.domain = "abc.go.kr";
@@ -30,14 +28,14 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 }
 </script>
 <title>주소 입력 </title>
-</head>
+
 <body>
 
-<input type="text" name="" class="postcodify_postcode5" value="우편번호" />
+<input type="text" name="" class="postcodify_postcode5"  style="text-align: right" />
 <button id="postcodify_search_button">검색</button><br />
-<input type="text" name="" class="postcodify_address" style="width:300px" value="주소" /><br />
-<input type="text" name="" class="postcodify_details" style="width:300px" value="상세주소" /><br />
-<input type="text" name="" class="postcodify_extra_info" style="width:300px" value="동이름" /><br />
+<input type="text" name="" class="postcodify_address" style="width:300px;text-align: right" placeholder="주소" /><br />
+<input type="text" name="" class="postcodify_details" style="width:300px;text-align: right" placeholder="상세주소" /><br />
+<input type="text" name="" class="postcodify_extra_info" style="width:300px;text-align: right" placeholder="동이름"  /><br />
 
 <!-- jQuery와 Postcodify를 로딩한다 -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -49,4 +47,3 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 
 </body>
-</html>

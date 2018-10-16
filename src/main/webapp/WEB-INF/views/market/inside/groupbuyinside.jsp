@@ -93,8 +93,7 @@ function changeimage1() {
     } 
 }
 </script>
-
-    
+   
   </head>
   <body>
   
@@ -130,16 +129,7 @@ function changeimage1() {
         </div>
 
       </div>
-      <!-- /.row -->
-      <div style="margin-top:10px">
-   </div><br/>
-      
- 
-   <jsp:include page="../template/ProgressBar.jsp" />
-  
-	
-
-      <!-- Related Projects Row -->
+   <!-- Related Projects Row -->
       <h3 class="my-4">판매자가 올린 사진 3개이상</h3>
 
       <div class="row">
@@ -170,13 +160,24 @@ function changeimage1() {
 
       </div>
       <!-- /.row -->	
+      <div style="margin-top:10px">
+   </div><br/>
+      
+ 
+   <jsp:include page="../template/ProgressBar.jsp" />
+  
+	
 
+      
+  <div style="margin-top:10px">
+   </div><br/>
 
-     <div class="col-md-8">
-     <textarea rows="" cols="" style=" border: 1px solid blue;width:1080px;height: 500px"></textarea>
+    <div class="col-md-12 container">
+     <textarea class="col-md-12 container" rows="" cols="" style=" border: 1px solid blue;height: 500px"></textarea>
        
         </div>
         
+         <div style="margin-bottom: 50px" ></div>
         
 
     </div>

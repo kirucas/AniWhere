@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html lang="ko">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,13 +29,10 @@
   <body>
    <div class="container">
    
+   <div class="card-header">공동구매 게시판</div>
    
    
-   	<div class="card-header" style="margin-top: 50px" >공동구매 게시판</div>
-   	
-   	<div style="text-align:right"> 
-		<a href="<c:url value='/market/GroupBuyWrite.aw'/>"><button style="width:65px;height:40px" type="submit" class="btn btn-primary"><img src = "<c:url value='/resources/images/maketimages/Write.png'/>" style="width:20px;height:20px"/>등록</button></a>
-		</div>
+  
    	<div class="row">
       <div class="col-md-4">
          <div class="card mb-4">
@@ -47,7 +43,7 @@
                  
   		<jsp:include page="ProgressBarsmall2.jsp" />
  
-  
+  	
                <a  href="<c:url value='/market/groupbuyinside.aw'/>" class="btn btn-outline-dark btn-sm">상세보기</a>
             </div>
          </div>
@@ -84,50 +80,12 @@
    <h3 class="pb-3 mb-4 font-italic border-bottom">
 
    </h3>
-   <div class="row">
-      <div class="col-md-6">
-         <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-               <strong class="d-inline-block mb-2 text-primary">DB연동제목</strong>
-               <h6 class="mb-0">
-                  <a class="text-dark" href="#">DB연동작성자</a>
-               </h6>
-               <div class="mb-1 text-muted small">DB연동작성날자</div>
-               <p class="card-text mb-auto">DB연동내용</p>
-                  
-  		<jsp:include page="ProgressBarsmall.jsp" />
- 
-  	
-               <a class="btn btn-outline-primary btn-sm" role="button" href="">상세보기</a>
-            </div>
-            <img  class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="//placeimg.com/250/250/arch" style="width: 200px; height: 250px;">
+  
    
-         </div>
       </div>
-      <div class="col-md-6">
-         <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-               <strong class="d-inline-block mb-2 text-success">DB연동제목</strong>
-               <h6 class="mb-0">
-                  <a class="text-dark" href="#">DB연동작성자</a>
-               </h6>
-               <div class="mb-1 text-muted small">DB연동작성날자</div>
-               <p class="card-text mb-auto">DB연동내용</p>
-            
-  		<jsp:include page="ProgressBarsmall.jsp" />
- 
-  	
-               <a class="btn btn-outline-success btn-sm" href="">상세보기</a>
-            </div>
-            <img class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="//placeimg.com/250/250/nature" style="width: 200px; height: 250px;">
-         </div>
-      </div>
-   </div>
-   
       
-   </div>
+  
   
 
     
   </body>
-</html>

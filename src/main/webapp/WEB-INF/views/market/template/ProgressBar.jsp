@@ -2,30 +2,87 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8">
-
 <head>
     <title>프로그레스바 </title>
     
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script>
-	$(document).ready(function(){  // 몇퍼센트나 채웠는 결과값 계산해서 뿌려주는 로직 만들것
-		$('.quarter').click(function(){
-			$(this).parent().prev().children('span').css('width','25%');
-			});
-		$('.half').click(function(){
-			$(this).parent().prev().children('span').css('width','50%');
-			});
-		$('.three-quarters').click(function(){
-			$(this).parent().prev().children('span').css('width','75%');
-			});
-		$('.full').click(function(){
-			$(this).parent().prev().children('span').css('width','100%');
-			});			
-	});
+
+<SCRIPT> 
+//시간 구하기 표시하기 로직
+function getTime() { 
+now = new Date(); 
+dday = new Date(2018,9,19,18,00,00); 
+
+// 원하는 날짜, 시간 정확하게 초단위까지 기입.
+days = (dday - now) / 1000 / 60 / 60 / 24; 
+daysRound = Math.floor(days); 
+hours = (dday - now) / 1000 / 60 / 60 - (24 * daysRound); 
+hoursRound = Math.floor(hours); 
+minutes = (dday - now) / 1000 /60 - (24 * 60 * daysRound) - (60 * hoursRound); 
+minutesRound = Math.floor(minutes); 
+seconds = (dday - now) / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound); 
+secondsRound = Math.round(seconds);
+
+document.getElementById("counter0").innerHTML = daysRound; 
+document.getElementById("counter1").innerHTML = hoursRound; 
+document.getElementById("counter2").innerHTML = minutesRound; 
+document.getElementById("counter3").innerHTML = secondsRound; 
+newtime = window.setTimeout("getTime();", 1000); 
+} 
+
+</SCRIPT>
+<style type="text/css">
+
+#bt {
+	height: 100px;
+	width: 400;
+	padding-left: 100px;
+	padding-top: 0px;
+}
+</STYLE>
+
+<script> 
+
+function printClock() {
+    
+	var now='현재시각 '
+	var end='입니다'
+	
+    var clock = document.getElementById("clock");            // 출력할 장소 선택
+    var currentDate = new Date();                                     // 현재시간
+    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
+    var amPm = 'AM'; // 초기값 AM
+    var currentHours = addZeros(currentDate.getHours(),2); 
+    var currentMinute = addZeros(currentDate.getMinutes() ,2);
+    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
+    
+    if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+    	amPm = 'PM';
+    	currentHours = addZeros(currentHours - 12,2);
+    }
+
+    if(currentSeconds >= 0){// 50초 이상일 때 색을 변환해 준다.
+       currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
+    }
+    clock.innerHTML =now+currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:20px;'>"+ amPm+"</span>"+end; //날짜를 출력해 줌
+    
+    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
+}
+
+function addZeros(num, digit) { // 자릿수 맞춰주기
+	  var zero = '';
+	  num = num.toString();
+	  if (num.length < digit) {
+	    for (i = 0; i < digit - num.length; i++) {
+	      zero += '0';
+	    }
+	  }
+	  return zero + num;
+}
+
+
+
+
 </script>
 
     <style>
@@ -35,7 +92,7 @@
             background-color: White;
             height: 25px;
             padding: 5px;
-            width: 1080px;
+            <%-- width: 1040px; --%>
             margin: 10px 0 10px 0;			
             -moz-border-radius: 5px;
 			-webkit-border-radius: 5px;
@@ -175,29 +232,36 @@
     </style>
 </head>
 
-<body>
+<body onload="printClock()">
+
 <div style="border:1px solid silver;">
-<p>%%개 달성시 공동구매 가격이 더 저렴해져요 또는 사은품을 드립니다   </p>
+
+<div onload="printClock()" class="col-ms-12" style="line-height:50px; color:#666;font-size:30px; text-align:center;" id="clock">
+
+	
+	</div>
+	<DIV  class="col-ms-12" style="line-height:60px; color:#666;font-size:50px; text-align:center;border:1px solid yellow;	">
+	<FONT >거래시간</FONT>
+	<SPAN  id=counter0></SPAN><FONT style="FONT-FAMILY: '굴림'; ">일</FONT>
+	<SPAN  id=counter1></SPAN><FONT >시간</FONT> <SPAN  id=counter2></SPAN><FONT >분</FONT> <SPAN  id=counter3></SPAN><FONT >초 남았습니다</FONT>
+    <SPAN style="text-align:center"></SPAN></div>
+    <SCRIPT>getTime()</SCRIPT>
+	
+	
+
+
+
+
+<p style="text-align:center;">%%개 달성시 %% 해택을 드립니다   </p>
     <p style="text-align:center;">현재 몇% 달성중 입니다</p>
-    <div class="col-md-4 col-sm-6 ">
+   
 
-<div class="progress-bar blue stripes">
-    <span style="width: 80%"></span>
-</div>
-
-<p>Set above to:
-	<a href="#" class="quarter">25%</a> /
-	<a href="#" class="half">50%</a> /
-	<a href="#" class="three-quarters">75%</a> /
-	<a href="#" class="full">100%</a>
-</p>
-</div>
+<div class="progress-bar blue stripes col-ms-12">
+    <span style="width: 80%"></span> <!-- 안쪽에 % 숫자 로직으로 조절 -->
 </div>
 
 
-
-
+</div>
 
 
 </body>
-</html>
