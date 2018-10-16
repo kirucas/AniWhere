@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.Animal">
+
+	<select id="animalCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM animal
+		<if test="mem_no != null">
+			WHERE mem_no=#{mem_no}
+		</if>
+	</select>
+	
+	<select id="animalSelectList" parameterType="java.util.Map" resultType="AnimalDTO">
+		SELECT *, 
+		FROM animal ani
+	</select>
+	
+	<select id="animalSelectOne" parameterType="java.util.Map" resultType="AnimalDTO">
+		SELECT *
+		FROM animal
+		WHERE ani_no=#{ani_no}
+	</select>
+	
+	<insert id="animalInsert" parameterType="java.util.Map">
+		INSERT INTO animal
+		VALUES(seq_animal.nextval, #{mem_no}, #{ani_name}, #{ani_age}, #{ani_species}, #{ani_kind}, #{ani_pic})
+	</insert>
+	
+	<update id="animalUpdate" parameterType="java.util.Map">
+		UPDATE animal
+		SET ani_name=#{ani_name}, ani_age=#{ani_age}, ani_species=#{ani_species}, ani_kind=#{ani_kind}, ani_pic=#{ani_pic}
+		WHERE ani_no=#{ani_no}
+	</update>
+	
+	<delete id="animalDelete" parameterType="java.util.Map">
+		DELETE FROM animal
+		WHERE ani_no=#{ani_no}
+	</delete>
+	
+	<delete id="animalDeleteAll" parameterType="java.util.Map">
+		DELETE FROM animal
+		WHERE mem_no=#{mem_no}
+	</delete>
+	
+</mapper>

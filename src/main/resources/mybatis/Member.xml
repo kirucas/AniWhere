@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.Member">
+
+	<select id="memberCheck" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM member
+		WHERE mem_id=#{mem_id} AND mem_pw=#{mem_pw}
+	</select>
+	
+	<select id="memberSelectList" parameterType="java.util.Map" resultType="MemberDTO">
+		SELECT *
+		FROM member
+		ORDER BY mem_no;
+	</select>
+	
+	<select id="memberSelectOne" parameterType="java.util.Map" resultType="MemberDTO">
+		SELECT *
+		FROM member
+		WHERE mem_no=#{mem_no}
+	</select>
+	
+	<insert id="memberInsert">
+		INSERT INTO member
+		VALUES(seq_member, 
+				#{mem_id}, 
+				#{mem_name}, 
+				#{mem_nickname}, 
+				#{mem_gender}, 
+				#{mem_birth}, 
+				#{mem_loc}, 
+				#{mem_log}, 
+				#{mem_interani})
+	</insert>
+	
+	<update id="memberUpdate">
+		UPDATE member
+		SET mem_id=#{mem_id}, mem_name=#{mem_name}, mem_nickname=#{mem_nickname}, mem_gender=#{mem_gender}, mem_birth=#{mem_birth}, mem_loc=#{mem_loc}, mem_interani=#{mem_interani}
+		WHERE mem_no=#{mem_no}
+	</update>
+	
+	<delete id="memberDelete">
+		DELETE member
+		WHERE mem_no=#{mem_no}
+	</delete>
+	
+</mapper>
