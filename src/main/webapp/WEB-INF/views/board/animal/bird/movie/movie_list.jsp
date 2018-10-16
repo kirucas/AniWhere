@@ -65,7 +65,7 @@
 				<div class="col-sm">
 					<div class="embed-responsive embed-responsive-16by9 movie-size">
 						<iframe class="embed-responsive-item"
-							src="${record.src }https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
+							src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
 							allowfullscreen></iframe>
 					</div>
 					<c:forEach begin="1"
@@ -73,10 +73,10 @@
 		    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		    				<c:if test="${loopvar.last}"></c:if>
 						</c:forEach>
-						<a href="<c:url value='/animal/bird/movie/write.aw?no=${record.no}'/>">${record.title }</a>
+						<a href="<c:url value='/animal/bird/movie/write.aw?no=${record.movie_no }'/>">${record.title }</a>
 					<div class="media-body">
 						<h5 class="title">${record.title}간만에 산책나와 무척 신나긴 한데</h5>
-						<p class="id">${record.id}올린 사람의 아이디</p>
+						<p class="mem_nickname">${record.mem_nickname}올린 사람의 아이디</p>
 					</div>
 					<div class="media-footer">
 						<small class="hits">${record.hits}조회수</small>
@@ -93,7 +93,7 @@
 				allowfullscreen></iframe>
 		</div>
 		<div class="media-body">
-			<h5 class="title">사람들이 앵무새를 키우는 이유 2018 웃긴영상
+			<h5 class="title" data-toggle="tooltip" data-placement="bottom" title="${record.title}">사람들이 앵무새를 키우는 이유 2018 웃긴영상
 				ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</h5>
 			<p class="id">올린 사람의 아이디</p>
 		</div>
@@ -256,7 +256,7 @@
 	</div>
 </div>
 
-<!-- 아래에 글쓰기 버튼 -->
+<!-- 아래에 동영상 올리기 버튼 -->
 <div class="text-right">
 	<a class="btn btn-primary"
 		href="<c:url value='/animal/bird/movie/write.aw'/>" role="button">동영상
@@ -268,6 +268,7 @@
 	<hr class="line"></hr>
 </div>
 
+<!-- 페이지네이션 -->
 <div class="footer margin-top-20">
 	<nav class="mx-auto" style="width: 450px;"
 		aria-label="Page navigation example">
@@ -285,6 +286,5 @@
 			<li class="page-item"><a class="page-link" href="#">Next</a></li>
 		</ul>
 	</nav>
-</div>
 </div>
 

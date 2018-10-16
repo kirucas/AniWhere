@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-
 .content {
 	text-align: left;
 	font-size: 16px;
@@ -36,53 +35,83 @@
 }
 </style>
 
+<script>
+	function pre_view() {
+		var ntWin;
+		ntWin = window.open('', 'popup', 'width=600,height=500');
+		ntWin.document.getElementsByTagName("body")[0].innerHTML = '';
+		/* 내용 */
+		ntWin.document.write("<br/>" + document.forms[0].editordata.value
+				+ "<br/>");
+		/* 제목 */
+		ntWin.document.write("<br/>" + document.forms[0].title.value + "<br/>");
+		/* 조회수 */
+		ntWin.document.write("<br/>" + document.movie_hit + "<br/>");
+		/* 작성자 별명 */
+		ntWin.document.write("<br/>" + document.mem_nickname + "<br/>");
+		/* 게시일 */
+		ntWin.document.write("<br/>" + document.movie_regidate + "<br/>");
+
+	}
+</script>
+
 <div class="container">
 	<form method="post" action="#">
 		<div class="form-group row">
-			<label for="validationDefaultUsername" class="offset-sm-1 col-sm-1 col-form-label">게시판</label>
+			<label for="validationDefaultUsername"
+				class="offset-sm-1 col-sm-1 col-form-label">게시판</label>
 			<!-- 내가 지금 어느 게시판에서 쓰고 있는지를 보여주는 disabled input태그 -->
 			<div class="col-sm-9">
-				<input type="text" class="form-control-planintext" id="validationDefaultUsername" placeholder="예:조류게시판"><!-- required disabled -->
+				<input type="text" class="form-control-planintext"
+					id="validationDefaultUsername" disabled="disabled"
+					placeholder="예:조류게시판">
+				<!-- required disabled -->
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="movie_title" class="offset-sm-1 col-sm-1 col-form-label">제목</label>
 			<div class="col-sm-9">
-				<input class="form-control" type="text" id="movie_title" name="title" placeholder="제목">
+				<input class="form-control" type="text" id="movie_title"
+					name="title" placeholder="제목">
 			</div>
 		</div>
 
 		<div class="form-group row">
-		<!-- 섬머노트 부분 -->
-			<textarea id="summernote" name="editordata"></textarea>
+			<!-- 섬머노트 부분 -->
+			<div class="offset-sm-1 col-sm-10">
+				<textarea id="summernote" name="editordata"></textarea>
+			</div>
 		</div>
 
-		
-		<!-- 임시 저장, 미리보기, 확인 -->
+		<!-- 미리보기, 확인 -->
 		<div class="margin-top-10 text-right">
-			
-			<button class="btn btn-primary border-success margin-right-10" type="button">미리보기</button>
-			<button class="btn btn-primary border-success" type="submit">확인</button>
+
+			<button class="btn btn-primary border-success margin-right-10"
+				name="view" onclick="pre_view()" type="button">미리보기</button>
+			<a class="btn btn-primary"
+				href="<c:url value='/animal/bird/movie/list.aw'/>" role="button">확인</a>
 		</div>
 	</form>
 </div>
+
 <script>
-		/* 섬머노트 부분  */
-		$('#summernote').summernote({
-			height : 300, // set editor height
-			minHeight : null, // set minimum height of editor
-			maxHeight : null, // set maximum height of editor
-			focus : true,
-			// set focus to editable area after initializing summernote
-			toolbar: [
-					    // [groupName, [list of button]]
-					    ['style', ['bold', 'italic', 'underline', 'clear']],
-					    ['font', ['strikethrough', 'superscript', 'subscript']],
-					    ['fontsize', ['fontsize']],
-					    ['color', ['color']],
-					    ['para', ['ul', 'ol', 'paragraph']],
-					    ['height', ['height']],
-						['video',['video']]
-					  ]
-		});
-	</script>
+	/* 섬머노트 부분  */
+	$('#summernote').summernote(
+			{
+				height : 600, // set editor height
+				width : $('#summernote').parent().css('width'),
+				minHeight : null, // set minimum height of editor
+				maxHeight : null, // set maximum height of editor
+				/* airMode: true, */
+				focus : true,
+				// set focus to editable area after initializing summernote
+				toolbar : [
+				// [groupName, [list of button]]
+				[ 'style', [ 'bold', 'italic', 'underline', 'clear' ] ],
+						[ 'font', [ 'strikethrough' ] ],
+						[ 'fontsize', [ 'fontsize' ] ],
+						[ 'color', [ 'color' ] ],
+						[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+						[ 'height', [ 'height' ] ], [ 'video', [ 'video' ] ] ]
+			});
+</script>
