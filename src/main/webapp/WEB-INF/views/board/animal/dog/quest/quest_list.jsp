@@ -28,33 +28,33 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td class="text-center" scope="row">July</td><!-- ${record.quest_no} -->
-					<td><a href="<c:url value='/animal/dog/quest/quest_view.aw'/>">july@example.com<span class="badge badge-info">2</span></a></td><!-- ${record.quest_title} -->
-					<td class="text-center">Dooley</td><!-- ${record.mem_nickname} -->
-					<td class="text-center">Dooley</td><!-- ${record.quest_count} -->
-					<td class="text-center">2</td><!-- ${record.quest_hit} -->
-					<td class="text-center">2018-05-05</td><!-- ${record.quest_regidate} -->
-				</tr>
+				<c:if test="">
+					<tr>
+						<td colspan="6" class="text-center">등록된 게시물이 없습니다</td>
+					</tr>
+				</c:if>
+				<c:if test="">
+					<tr>
+						<td class="text-center" scope="row">July</td><!-- ${record.quest_no} -->
+						<td><a href="<c:url value='/animal/dog/quest/quest_view.aw'/>">${record.quest_title}<span class="badge badge-info">${record.quest_hit}</span></a></td>
+						<td class="text-center">${record.mem_nickname}</td>
+						<td class="text-center">${record.quest_count}</td>
+						<td class="text-center">${record.quest_hit}</td>
+						<td class="text-center">${record.quest_regidate}</td>
+					</tr>
+				</c:if>
 			</tbody>
 		</table>
 	</div>
 	<!-- 페이징 시작 -->
-	<div class="row offset-sm-5 col-sm-4">
-		<div class="text-center">
-			<ul class="pagination text-center">
-			  <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-			  <li class="page-item"><a class="page-link" href="#">1</a></li>
-			  <li class="page-item"><a class="page-link" href="#">2</a></li>
-			  <li class="page-item"><a class="page-link" href="#">3</a></li>
-			  <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-			</ul>
-		</div>
+	<div class="form-row">
+		<div>${pagingString}</div>
 	</div>
 	<!-- 페이징 끝 -->
 	<div class="row offset-sm-3 col-sm-7">
 		<div class="form-row">
-			<form class="form-inline" style="padding-bottom: 10px">
+			<form class="form-inline" style="padding-bottom: 10px"
+				action="<c:url value='/animal/dog/quest/quest_list.aw'/>">
 				<div class="form-group">
 					<select name="searchColumn" class="form-control ">
 						<option value="title">제목</option>
@@ -66,7 +66,7 @@
 					<input type="text" class="form-control" />
 				</div>
 				<div class="form-group">
-					<a type="submit" href="#" class="si"><i class="fas fa-search"></i>검색</a>
+					<a type="submit" href="<c:url value='/animal/dog/quest/quest_list.aw'/>" class="si"><i class="fas fa-search"></i>검색</a>
 				</div>
 			</form>
 		</div>

@@ -21,7 +21,8 @@
 	<div class="row col-sm-2" >
 		강아지 질문 게시판
 	</div>
-	<form class="form-horizontal" method="post">
+	<form class="form-horizontal" method="post"
+		action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
 		<div class="form-row">
 			<input class="form-control" type="text" placeholder="제목을 입력해주세요" />
 		</div>
