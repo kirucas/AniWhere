@@ -4,8 +4,7 @@
 
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 <title>쓰기게시판 내부</title>
@@ -47,7 +46,7 @@
 									<label for="" class="">용도분류</label>
 									<select id="use_listSelect" class="select_filter" onclick="">
 									    <option value="">-----</option>
-										<option value="food">사료</option>
+										<option value="food">사료및간식</option>
 										<option value="playtoy">장난감</option>
 										<option value="home">보금자리</option>
 										<option value="buty">미용용품</option>
@@ -149,8 +148,8 @@
        
         </div>
 			<div style="text-align: center">
-				<input class="btn btn-info" type="button" id="enterBtn" value="취소">
-				<input class="btn btn-danger" type="submit" id="exitBtn" value="확인">
+				<input class="btn btn-info" type="button" id="exitBtn" value="취소">
+				<input class="btn btn-danger" type="submit" id="enterBtn" value="확인">
 
 			</div>
 		</div>

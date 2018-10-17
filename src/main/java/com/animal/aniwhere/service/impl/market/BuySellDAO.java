@@ -17,34 +17,7 @@ import com.animal.aniwhere.service.market.BuySellDTO;
 @Repository
 public class BuySellDAO implements AllBoardService {
 
-	private Connection conn;
-	private PreparedStatement pstmt;
-	private ResultSet rs;
-	
-	public BuySellDAO() {
-		try {
-			//String dbURL="oracle.jdbc.OracleDriver://localhost:11080/BUYBOARD";
-			
-			String dbURL="jdbc:OracleDriver://localhost:11080/BUYBOARD";
-			String dbID="SPRING";
-			String dbPassword="SPRING";
-			
-		
-			
-			
-		} catch (Exception e) {
-			
-			
-			
-		}
-		
-		
-		
-	}
-	
-	
-	
-	
+
 	@Resource(name = "template")
 	private SqlSessionTemplate template;
 	
@@ -77,6 +50,7 @@ public class BuySellDAO implements AllBoardService {
 	@Override
 	public int delete(Map map) {
 		return template.delete("bsDelete", map);
-	}////////// delete
+		
+	}//////////delete
 
 }//////////////////// BuyDAO class
