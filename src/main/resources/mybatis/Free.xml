@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.Free">
+
+	<select id="freeCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM freeboard
+	</select>
+	
+	<select id="freeSelectList" parameterType="java.util.Map" resultType="FreeDTO">
+		SELECT fb.*, mem_nickname
+		FROM freeboard fb JOIN member mb ON fb.mem_no = mb.mem_no
+	</select>
+	
+	<select id="freeSelectOne" parameterType="java.util.Map" resultType="FreeDTO">
+		SELECT fb.*, mem_nickname
+		FROM freeboard fb JOIN member mb ON fb.mem_no = mb.mem_no
+		WHERE free_no=#{free_no}
+	</select>
+	
+	<insert id="freeInsert" parameterType="java.util.Map">
+		INSERT INTO freeboard(free_no, mem_no, free_title, free_content, free_category)
+		VALUES(seq_freeboard.nextval, #{mem_no}, #{free_title}, #{free_content}, #{free_category})
+	</insert>
+	
+	<update id="freeUpdate" parameterType="java.util.Map">
+		UPDATE freeboard
+		SET free_title=#{free_title}, free_content=#{free_content}, #{free_category})
+		WHERE free_no=#{free_no}
+	</update>
+	
+	<delete id="freeDelete" parameterType="java.util.Map">
+		DELETE FROM freeboard
+		WHERE free_no=#{free_no}
+	</delete>
+	
+	<delete id="freeDeleteAll" parameterType="java.util.Map">
+		DELETE FROM freeboard
+		WHERE mem_no=#{mem_no}
+	</delete>
+	
+</mapper>

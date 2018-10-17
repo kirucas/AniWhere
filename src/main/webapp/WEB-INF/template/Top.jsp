@@ -159,9 +159,16 @@ nav a{
                             </ul>
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-default navbar-btn" style="color:black;margin-left:30px" id="login">
-                    	LOGIN
-                    </button>
+                   	<c:if test="${not empty mem_id }" var="sign_check">
+	                    <button type="button" class="btn btn-default navbar-btn" style="color:black;margin-left:30px" id="logout">
+                    		LOGOUT
+        	            </button>
+                   	</c:if>
+                   	<c:if test="${not sign_check }">
+	                    <button type="button" class="btn btn-default navbar-btn" style="color:black;margin-left:30px" id="login">
+    	               		LOGIN
+        	            </button>
+                   	</c:if>
                 </div>
             </nav>
         </div>
