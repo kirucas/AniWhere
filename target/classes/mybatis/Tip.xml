@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<!-- table_name은 (동물)_tip의 형식으로 넘어와야함 -->
+<mapper namespace="mybatis.Tip">
+
+	<select id="tipCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM ${table_name}
+	</select>
+	
+	<select id="tipSelectList" parameterType="java.util.Map" resultType="TipDTO">
+		SELECT tn.*, mem_nickname
+		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+	</select>
+	
+	<select id="tipSelectOne" parameterType="java.util.Map" resultType="TipDTO">
+		SELECT tn.*, mem_nickname
+		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+		WHERE tip_no=#{tip_no}
+	</select>
+	
+	<insert id="tipInsert" parameterType="java.util.Map">
+		INSERT INTO ${table_name}(tip_no, mem_no, tip_title, tip_content)
+		VALUES(seq_${table_name}, #{mem_no}, #{tip_title}, #{tip_content})
+	</insert>
+	
+	<update id="tipUpdate" parameterType="java.util.Map">
+		UPDATE ${table_name}
+		SET tip_title=#{tip_title}, tip_content=#{tip_content}
+		WHERE tip_no=#{tip_no}
+	</update>
+	
+	<delete id="tipDelete" parameterType="java.util.Map">
+		DELETE FROM ${table_name}
+		WHERE tip_no=#{tip_no}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<!-- table_name은 (동물)_quest의 형식으로 넘어와야 함 -->
+<mapper namespace="mybatis.Quest">
+
+	<select id="questCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM ${table_name}
+	</select>
+	
+	<select id="questSelectList" parameterType="java.util.Map" resultType="QuestDTO">
+		SELECT tn.*, mem_nickname
+		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+	</select>
+	
+	<select id="questSelectOne" parameterType="java.util.Map" resultType="QuestDTO">
+		SELECT tn.*, mem_nickname
+		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+		WHERE quest_no=#{quest_no}
+	</select>
+	
+	<insert id="questInsert" parameterType="java.util.Map">
+		INSERT INTO ${table_name}(quest_no, mem_no, quest_title, quest_content)
+		VALUES(seq_${table_name}.nextval, #{mem_no}, #{quest_title}, #{quest_content})
+	</insert>
+	
+	<update id="questUpdate" parameterType="java.util.Map">
+		UPDATE ${table_name}
+		SET quest_title=#{quest_title}, quest_content=#{quest_content}
+		WHERE quest_no=#{quest_no}
+	</update>
+	
+	<delete id="questDelete" parameterType="java.util.Map">
+		DELETE ${table_name}
+		WHERE quest_no=#{quest_no}
+	</delete>
+	
+</mapper>

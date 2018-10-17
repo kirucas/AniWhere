@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<!-- table_name은 (동물)_movie 의 형식으로 넘어와야 함 -->
+<mapper namespace="mybatis.Movie">
+
+	<select id="movieCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM ${table_name}
+	</select>
+	
+	<select id="movieSelectList" parameterType="java.util.Map" resultType="MovieDTO">
+		SELECT tn.*, mem_nickname
+		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+	</select>
+	
+	<select id="movieSelectOne" parameterType="java.util.Map" resultType="MovieDTO">
+		SELECT tn.*, mem_nickname
+		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+		WHERE movie_no=#{movie_no}
+	</select>
+	
+	<insert id="movieInsert" parameterType="java.util.Map">
+		INSERT INTO ${table_name}(movie_no, mem_no, movie_title, movie_cotent)
+		VALUES(seq_${table_name}.nextval, #{mem_no}, #{movie_title}, #{movie_content})
+	</insert>
+	
+	<update id="movieUpdate" parameterType="java.util.Map">
+		UPDATE ${table_name}
+		SET movie_title=#{movie_title}, movie_content=#{movie_content}
+		WHERE movie_no=#{movie_no}
+	</update>
+	
+	<delete id="movieDelete" parameterType="java.util.Map">
+		DELETE ${table_name}
+		WHERE movie_no=#{movie_no}
+	</delete>
+	
+</mapper>

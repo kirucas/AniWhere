@@ -16,41 +16,41 @@ public class MemberDAO implements AllMemberService {
 
 	@Resource(name = "template")
 	private SqlSessionTemplate template;
-	
+
 	@Override
 	public List<MemberDTO> selectList(Map map) {
-		return null;
+		return template.selectList("memberSelectList", map);
 	}////////// selectList
 
 	@Override
 	public int getTotalRecord(Map map) {
-		return 0;
+		return template.selectOne("memberCount", map);
 	}////////// getTotalRecord
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public MemberDTO selectOne(Map map) {
-		return null;
+		return template.selectOne("memberSelectOne", map);
 	}////////// selectOne
 
 	@Override
 	public int insert(Map map) {
-		return 0;
+		return template.insert("memberInsert", map);
 	}////////// insert
 
 	@Override
 	public int update(Map map) {
-		return 0;
+		return template.update("memberUpdate", map);
 	}////////// update
 
 	@Override
 	public int delete(Map map) {
-		return 0;
+		return template.delete("memberDelete", map);
 	}////////// delete
 
 	@Override
 	public boolean isMember(Map map) {
-		return false;
+		return (int) template.selectOne("memberCheck", map) == 1 ? true : false;
 	}////////// isMemeber
 
 }//////////////////// MemberDAO class

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.Reservation">
+
+	<select id="reservationCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM reservation
+	</select>
+	
+	<select id="reservationSelectList" parameterType="java.util.Map" resultType="ReservationDTO">
+		SELECT rv.*, mem_name
+		FROM reservation rv JOIN member mb ON rv.mem_no = mb.mem_no
+	</select>
+	
+	<select id="reservationSelectOne" parameterType="java.util.Map" resultType="ReservationDTO">
+		SELECT rv.*, mem_name
+		FROM reservation rv JOIN member mb ON rv.mem_no = mb.mem_no
+		WHERE rv_no=#{rv_no}
+	</select>
+	
+	<insert id="reservationInsert" parameterType="java.util.Map">
+		INSERT INTO reservation(rv_no, mem_no, store_no, booking_date)
+		VALUES(seq_reservation, #{mem_no}, #{store_no}, #{booking_date})
+	</insert>
+	
+	<update id="reservationUpdate" parameterType="java.util.Map">
+		UPDATE reservation
+		SET store_no=#{store_no}, booking_date=#{booking_date}
+		WHERE rv_no=#{rv_no}
+	</update>
+	
+	<delete id="reservationDelete" parameterType="java.util.Map">
+		DELETE FROM reservation
+		WHERE rv_no=#{rv_no}
+	</delete>
+	
+</mapper>
