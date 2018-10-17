@@ -14,6 +14,7 @@
 	<select id="movieSelectList" parameterType="java.util.Map" resultType="MovieDTO">
 		SELECT tn.*, mem_nickname
 		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+		ORDER BY movie_no DESC
 	</select>
 	
 	<select id="movieSelectOne" parameterType="java.util.Map" resultType="MovieDTO">

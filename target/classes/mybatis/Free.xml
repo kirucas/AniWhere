@@ -13,6 +13,7 @@
 	<select id="freeSelectList" parameterType="java.util.Map" resultType="FreeDTO">
 		SELECT fb.*, mem_nickname
 		FROM freeboard fb JOIN member mb ON fb.mem_no = mb.mem_no
+		ORDER BY free_no DESC
 	</select>
 	
 	<select id="freeSelectOne" parameterType="java.util.Map" resultType="FreeDTO">

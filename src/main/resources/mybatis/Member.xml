@@ -37,7 +37,7 @@
 		INSERT INTO member
 		VALUES(seq_member.nextval, 
 				#{mem_id},
-				#{mem_pw},
+				#{mem_pw}, 
 				#{mem_name}, 
 				#{mem_nickname}, 
 				#{mem_gender}, 
