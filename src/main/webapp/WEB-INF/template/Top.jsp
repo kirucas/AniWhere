@@ -130,21 +130,16 @@ nav a{
                             </ul>
                         </li>
                         <li class="dropdown">
-<<<<<<< HEAD
-                            <a class="dropdown-toggle" href="#" id="market_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
+
+                          <a class="dropdown-toggle" href="#" id="market_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
                             <ul class="dropdown-menu" aria-labelledby="market_main">
                                             <li><a href="/aniwhere/market/buy.aw">사요</a></li>
 			                                <li><a href="/aniwhere/market/sell.aw">팔아요</a></li>			                            
 			                                <li><a href="/aniwhere/market/groupbuy.aw">같이 싸게 사요</a></li>
 			                                
-			                               
-=======
-                            <a class="dropdown-toggle" href="<c:url value='/animal/market/main.aw'/>" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			                                <li><a href="<c:url value='/animal/market/main.aw'/>">팔아요</a></li>
-			                                <li><a href="<c:url value='/animal/market/main.aw'/>">사요</a></li>
-			                                <li><a href="<c:url value='/animal/market/main.aw'/>">같이 싸게 사요</a></li>
->>>>>>> branch 'develop' of https://github.com/kirucas/AniWhere.git
+			    
+
+
                             </ul>
                         </li>
                         <li class="dropdown">

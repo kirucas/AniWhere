@@ -11,23 +11,7 @@
     <title>프로그레스바 </title>
     
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script>
-	$(document).ready(function(){  // 몇퍼센트나 채웠는 결과값 계산해서 뿌려주는 로직 만들것
-		$('.quarter').click(function(){
-			$(this).parent().prev().children('span').css('width','25%');
-			});
-		$('.half').click(function(){
-			$(this).parent().prev().children('span').css('width','50%');
-			});
-		$('.three-quarters').click(function(){
-			$(this).parent().prev().children('span').css('width','75%');
-			});
-		$('.full').click(function(){
-			$(this).parent().prev().children('span').css('width','100%');
-			});			
-	});
-</script>
-
+  
     <style>
        
 
