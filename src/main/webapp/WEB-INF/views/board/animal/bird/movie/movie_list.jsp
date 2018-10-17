@@ -60,7 +60,7 @@
 	</c:if>
 
 	<c:if test="${not isEmpty }">
-		<c:forEach var="record" items="${list}" varStatus="loop">
+		<c:forEach var="dto" items="${list}" varStatus="loop">
 			<div class="row margin-top-30">
 				<div class="col-sm">
 					<div class="embed-responsive embed-responsive-16by9 movie-size">
@@ -69,17 +69,17 @@
 							allowfullscreen></iframe>
 					</div>
 					<c:forEach begin="1"
-							end="${record.depth}" varStatus="loopvar">
+							end="${dto.depth}" varStatus="loopvar">
 		    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		    				<c:if test="${loopvar.last}"></c:if>
 						</c:forEach>
-						<a href="<c:url value='/animal/bird/movie/write.aw?no=${record.movie_no }'/>">${record.title }</a>
+						<a href="<c:url value='/animal/bird/movie/write.aw?no=${dto.movie_no }'/>">${dto.title }</a>
 					<div class="media-body">
-						<h5 class="title">${record.title}간만에 산책나와 무척 신나긴 한데</h5>
-						<p class="mem_nickname">${record.mem_nickname}올린 사람의 아이디</p>
+						<h5 class="title">${dto.title}간만에 산책나와 무척 신나긴 한데</h5>
+						<p class="mem_nickname">${dto.mem_nickname}올린 사람의 아이디</p>
 					</div>
 					<div class="media-footer">
-						<small class="hits">${record.hits}조회수</small>
+						<small class="hits">${dto.hits}조회수</small>
 					</div>
 				</div>
 			</div>

@@ -59,10 +59,17 @@ public class BirdMovieController {
 		return "forward:/animal/bird/movie/List.aw";
 	}
 	
-	@RequestMapping("/animal/bird/movie/view.aw")
-	   public String movie_view() throws Exception {
-	      return "board/animal/bird/movie/movie_view.tiles";
-	   }
+	//상세보기]
+		@RequestMapping("/animal/bird/movie/view.aw")
+		public String movie_view(@RequestParam Map map,Model model) throws Exception{
+			//서비스 호출]
+			//게시글 
+			MovieBoardDTO dto= service.selectOne(map);		
+			//데이타 저장]
+			model.addAttribute("dto", dto);	
+			//뷰정보 반환]
+			return "board/animal/bird/movie/movie_view.tiles";
+		}/////////////////////
 	
 	@RequestMapping("/animal/bird/movie/edit.aw")
 	   public String movie_edit() throws Exception {
