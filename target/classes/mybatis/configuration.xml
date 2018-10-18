@@ -8,26 +8,24 @@
 <configuration>
 	<!-- 자바빈 별칭:매퍼파일에서 환경설정 파일로 위치됨. -->
 	<typeAliases>
-		<typeAlias type="com.animal.aniwhere_back.service.member.AdministratorDTO" alias="AdminDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.member.MemberDTO" alias="MemberDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.AllCommentDTO" alias="CommentDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.MatingDTO" alias="MatingDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.ReservationDTO" alias="ReservationDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.animal.FreeBoardDTO" alias="FreeDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.animal.MovieBoardDTO" alias="MovieDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.animal.PhotoBoardDTO" alias="PhotoDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.animal.QuestBoardDTO" alias="QuestDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.animal.TipBoardDTO" alias="TipDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.market.BuySellDTO" alias="BSDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.market.GroupBuyDTO" alias="GroupDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.miss.FindSeeDTO" alias="FSDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.member.AnimalDTO" alias="AnimalDTO" />
-		<typeAlias type="com.animal.aniwhere_back.service.NoticeDTO" alias="NoticeDTO" />
+		<typeAlias type="com.animal.aniwhere.service.member.MemberDTO" alias="MemberDTO" />
+		<typeAlias type="com.animal.aniwhere.service.AllCommentDTO" alias="CommentDTO" />
+		<typeAlias type="com.animal.aniwhere.service.MatingDTO" alias="MatingDTO" />
+		<typeAlias type="com.animal.aniwhere.service.ReservationDTO" alias="ReservationDTO" />
+		<typeAlias type="com.animal.aniwhere.service.animal.FreeBoardDTO" alias="FreeDTO" />
+		<typeAlias type="com.animal.aniwhere.service.animal.MovieBoardDTO" alias="MovieDTO" />
+		<typeAlias type="com.animal.aniwhere.service.animal.PhotoBoardDTO" alias="PhotoDTO" />
+		<typeAlias type="com.animal.aniwhere.service.animal.QuestBoardDTO" alias="QuestDTO" />
+		<typeAlias type="com.animal.aniwhere.service.animal.TipBoardDTO" alias="TipDTO" />
+		<typeAlias type="com.animal.aniwhere.service.market.BuySellDTO" alias="BSDTO" />
+		<typeAlias type="com.animal.aniwhere.service.market.GroupBuyDTO" alias="GroupDTO" />
+		<typeAlias type="com.animal.aniwhere.service.miss.FindSeeDTO" alias="FSDTO" />
+		<typeAlias type="com.animal.aniwhere.service.member.AnimalDTO" alias="AnimalDTO" />
+		<typeAlias type="com.animal.aniwhere.service.NoticeDTO" alias="NoticeDTO" />
 	</typeAliases>
 
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑) 정보 설정 -->
 	<mappers>
-		<mapper resource="mybatis/Administrator.xml" />
 		<mapper resource="mybatis/Member.xml" />
 		<mapper resource="mybatis/AllComment.xml" />
 		<mapper resource="mybatis/Animal.xml" />
