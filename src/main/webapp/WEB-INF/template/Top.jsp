@@ -148,15 +148,8 @@ nav a{
                         <li>
                             <a href="#" id="mating_main">♡만나요</a>
                         </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">위치</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			                                <li><a href="#">우리 아이가 아플 때</a></li>
-			                                <li><a href="#">아이를 맡겨야 할 때</a></li>
-			                                <li><a href="#">용품을 사고 싶을 때</a></li>
-			                                <li><a href="#">입양을 하고 싶을 때</a></li>
-			                                <li><a href="#">산책을 하고 싶을 때</a></li>
-                            </ul>
+                        <li>
+                            <a href="#" id="where_main">위치</a>
                         </li>
                     </ul>
                    	<c:if test="${not empty mem_id }" var="sign_check">

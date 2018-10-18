@@ -10,9 +10,9 @@
 	</script>
 </c:if>
  --%>
- <sec:authorize access="isAnonymous()">
+<!--  <sec:authorize access="isAnonymous()">
  <script>
 		alert('로그인 후 이용하세요');
 		location.replace('<c:url value="/ReplyBBS/Member/login.bbs"/>');
 	</script>
-</sec:authorize>
+</sec:authorize> -->
