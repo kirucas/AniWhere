@@ -36,7 +36,7 @@ public class BirdMovieController {
 		@Value("${BLOCKPAGE}")
 		private int blockPage;
 		
-		@RequestMapping("/movie/List.aw")
+		@RequestMapping("/bird/movie/List.aw")
 		public String list(Model model,
 				HttpServletRequest req,//페이징용 메소드에 전달
 				@RequestParam Map map,//검색용 파라미터 받기
@@ -66,41 +66,26 @@ public class BirdMovieController {
 			return "movie/List.tiles";
 		}////////////////list()
 			
-		//등록 폼으로 이동]
-		@RequestMapping(value="/animal/bird/movie/Write.aw",method=RequestMethod.GET)
-		public String movie_write() throws Exception{
-			return "board/animal/bird/movie/movieWrite_form.tiles";
-		}///////////////////////////
+	//등록 폼으로 이동]
+	@RequestMapping(value="/animal/bird/movie/Write.aw",method=RequestMethod.GET)
+	public String movie_write() throws Exception{
+		return "board/animal/bird/movie/movieWrite_form.tiles";
+	}///////////////////////////
 	
-	@RequestMapping(value="/animal/bird/movie/{path}",method=RequestMethod.POST)
-	public String form(@PathVariable String path,Model model,@RequestParam Map map) throws Exception{
-		switch(path) {
-			case "Write":
-				//뷰정보 반환]
-				return "movie/movieWrite_form.tiles";
-			default:
-				//서비스 호출]
-				MovieBoardDTO dto= service.selectOne(map);
-				//데이타 저장] 
-				model.addAttribute("dto", dto);
-				//뷰정보 반환]
-				return "movie/"+path+".tiles";		
-		}		
-	}///////////////write()
+	
 	//입력처리용]
 	@RequestMapping(value="/animal/bird/movie/Write.aw",method=RequestMethod.POST)
-	public String write(
-			MovieBoardDTO dto,@RequestParam Map map
+	public String write(@RequestParam Map map
 			) throws Exception{
 		//서비스 호출
 		map.put("table_name", TABLE_NAME);
 		service.insert(map);
 		//뷰정보 반환
-		return "forward:/animal/bird/movie/List.aw";
+		return "forward:/bird/movie/List.aw";
 	}
 	
 	//상세보기]
-		@RequestMapping("/animal/bird/movie/view.aw")
+		@RequestMapping("/bird/movie/view.aw")
 		public String movie_view(@RequestParam Map map,Model model) throws Exception{
 			//서비스 호출]
 			//게시글 
@@ -108,11 +93,11 @@ public class BirdMovieController {
 			//데이타 저장]
 			model.addAttribute("dto", dto);	
 			//뷰정보 반환]
-			return "board/animal/bird/movie/movie_view.tiles";
+			return "/bird/movie/movie_view.tiles";
 		}/////////////////////
 	
-	@RequestMapping("/animal/bird/movie/edit.aw")
+	@RequestMapping("/bird/movie/edit.aw")
 	   public String movie_edit() throws Exception {
-	      return "board/animal/bird/movie/movieEdit_form.tiles";
+	      return "/board/animal/bird/movie/movieEdit_form.tiles";
 	   }
 }//////////////////// MovieController class

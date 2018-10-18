@@ -85,7 +85,6 @@
 
 		<!-- 미리보기, 확인 -->
 		<div class="margin-top-10 text-right">
-
 			<button class="btn btn-primary border-success margin-right-10"
 				name="view" onclick="pre_view()" type="button">미리보기</button>
 			<button class="btn btn-primary"
