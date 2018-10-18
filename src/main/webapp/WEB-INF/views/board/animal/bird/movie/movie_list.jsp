@@ -68,18 +68,13 @@
 							src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
 							allowfullscreen></iframe>
 					</div>
-					<c:forEach begin="1"
-							end="${dto.depth}" varStatus="loopvar">
-		    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		    				<c:if test="${loopvar.last}"></c:if>
-						</c:forEach>
-						<a href="<c:url value='/animal/bird/movie/write.aw?no=${dto.movie_no }'/>">${dto.title }</a>
+						<a href="<c:url value='/animal/bird/movie/write.aw?no=${dto.movie_no }'/>">${dto.movie_title }</a>
 					<div class="media-body">
-						<h5 class="title">${dto.title}간만에 산책나와 무척 신나긴 한데</h5>
-						<p class="mem_nickname">${dto.mem_nickname}올린 사람의 아이디</p>
+						<h5 class="title">${dto.movie_title}</h5>
+						<p class="mem_nickname">${dto.mem_nickname}</p>
 					</div>
 					<div class="media-footer">
-						<small class="hits">${dto.hits}조회수</small>
+						<small class="hits">${dto.movie_count}조회수</small>
 					</div>
 				</div>
 			</div>

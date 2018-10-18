@@ -8,44 +8,77 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.animal.PhotoBoardDTO;
+import com.animal.aniwhere.service.animal.PhotoService;
 
 @Repository
-public class PhotoBoardDAO implements AllBoardService {
+public class PhotoBoardDAO implements PhotoService {
 
 	@Resource(name = "template")
 	private SqlSessionTemplate template;
-
+	
 	@Override
 	public List<PhotoBoardDTO> selectList(Map map) {
-		return null;
+		return template.selectList("photoSelectList", map);
 	}////////// selectList
 
 	@Override
 	public int getTotalRecord(Map map) {
-		return 0;
+		return template.selectOne("photoCount", map);
 	}////////// getTotalRecord
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public PhotoBoardDTO selectOne(Map map) {
-		return null;
+		return template.selectOne("photoSelectOne", map);
 	}////////// selectOne
 
 	@Override
 	public int insert(Map map) {
-		return 0;
+		return template.insert("photoInsert", map);
 	}////////// insert
 
 	@Override
 	public int update(Map map) {
-		return 0;
+		return template.update("photoUpdate", map);
 	}////////// update
 
 	@Override
 	public int delete(Map map) {
-		return 0;
+		return template.delete("photoDelete", map);
 	}////////// delete
+
+	@Override
+	public List<Map> linkSelectList(Map map) {
+		return template.selectList("linkSelectList", map);
+	}////////// linkSelectList
+
+	@Override
+	public void linkInsert(Map map) {
+		
+		List list = (List) map.get("link_list");
+		
+		for(Object obj : list) {
+			map.put("link_url", obj);
+			template.insert("linkInsert", map);
+		}
+		
+	}////////// linkInsert
+
+	@Override
+	public void linkUpdate(Map map) {
+		
+		List list = (List) map.get("link_list");
+		
+		for(Object obj:list) {
+			map.put("link_url", obj);
+		}
+		
+	}////////// linkUpdate
+
+	@Override
+	public void linkDelete(Map map) {
+		template.delete("linkDelete", map);
+	}////////// linkDelete
 
 }//////////////////// PhotoBoardDAO

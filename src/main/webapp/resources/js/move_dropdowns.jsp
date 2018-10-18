@@ -31,6 +31,9 @@
 		$("#login").click(function(){
 			location.href = "<c:url value='/login.aw' />";
 		});
+		$("#logout").click(function(){
+			location.href = "<c:url value='/signout.aw' />";
+		});
 		
 	});
 </script>

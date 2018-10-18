@@ -30,11 +30,6 @@
 		VALUES(#{photo_no}, #{mem_no}, #{photo_title}, #{photo_content})
 	</insert>
 	
-	<insert id="linkInsert" parameterType="java.util.Map">
-		INSERT INTO ${table_name}_link
-		VALUES(seq_${table_name}_link.nextval, #{photo_no}, #{link_url})
-	</insert>
-	
 	<update id="photoUpdate" parameterType="java.util.Map">
 		UPDATE ${table_name}
 		SET photo_title=#{photo_title}, photo_content=#{photo_content}
@@ -45,6 +40,20 @@
 		DELETE FROM ${table_name}
 		WHERE photo_no=#{photo_no}
 	</delete>
+	
+	<select id="linkSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT *
+		FROM ${table_name}_link
+		WHERE photo_no=#{photo_no}
+	</select>
+	
+	<insert id="linkInsert" parameterType="java.util.Map">
+		INSERT INTO ${table_name}_link
+		VALUES(seq_${table_name}_link.nextval, #{photo_no}, #{link_url})
+	</insert>
+	
+	<update id="linkUpate" parameterType="java.util.Map">
+	</update>
 	
 	<delete id="linkDelete" parameterType="java.util.Map">
 		DELETE FROM ${table_name}_link

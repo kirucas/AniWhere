@@ -11,6 +11,11 @@
 		WHERE mem_id=#{mem_id} AND mem_pw=#{mem_pw}
 	</select>
 	
+	<select id="memberCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM member
+	</select>
+	
 	<select id="memberSelectList" parameterType="java.util.Map" resultType="MemberDTO">
 		SELECT *
 		FROM member
@@ -20,13 +25,19 @@
 	<select id="memberSelectOne" parameterType="java.util.Map" resultType="MemberDTO">
 		SELECT *
 		FROM member
-		WHERE mem_no=#{mem_no}
+		<if test="mem_no != null">
+			WHERE mem_no=#{mem_no}
+		</if>
+		<if test="mem_id != null">
+			WHERE mem_id=#{mem_id}
+		</if>
 	</select>
 	
 	<insert id="memberInsert">
 		INSERT INTO member
-		VALUES(seq_member, 
-				#{mem_id}, 
+		VALUES(seq_member.nextval, 
+				#{mem_id},
+				#{mem_pw},
 				#{mem_name}, 
 				#{mem_nickname}, 
 				#{mem_gender}, 

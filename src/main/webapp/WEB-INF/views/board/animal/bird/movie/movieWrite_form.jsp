@@ -56,7 +56,8 @@
 </script>
 
 <div class="container">
-	<form method="post" action="#">
+	<form method="post" action="<c:url value='/animal/bird/movie/Write.aw'/>">
+		<input type="hidden" name="mem_no" value="${mem_no }">
 		<div class="form-group row">
 			<label for="validationDefaultUsername"
 				class="offset-sm-1 col-sm-1 col-form-label">게시판</label>
@@ -69,17 +70,17 @@
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="movie_title" class="offset-sm-1 col-sm-1 col-form-label">제목</label>
+			<label for="title" class="offset-sm-1 col-sm-1 col-form-label">제목</label>
 			<div class="col-sm-9">
-				<input class="form-control" type="text" id="movie_title"
-					name="title" placeholder="제목">
+				<input class="form-control" type="text" id="title"
+					name="movie_title" placeholder="제목">
 			</div>
 		</div>
 
 		<div class="form-group row">
 			<!-- 섬머노트 부분 -->
 			<div class="offset-sm-1 col-sm-10">
-				<textarea id="summernote" name="editordata"></textarea>
+				<textarea id="summernote" name="movie_content"></textarea>
 			</div>
 		</div>
 
@@ -88,8 +89,8 @@
 
 			<button class="btn btn-primary border-success margin-right-10"
 				name="view" onclick="pre_view()" type="button">미리보기</button>
-			<a class="btn btn-primary"
-				href="<c:url value='/animal/bird/movie/list.aw'/>" role="button">확인</a>
+			<button class="btn btn-primary"
+				type="submit" role="button">확인</button>
 		</div>
 	</form>
 </div>
@@ -114,4 +115,5 @@
 						[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
 						[ 'height', [ 'height' ] ], [ 'video', [ 'video' ] ] ]
 			});
+	$('textarea[name="Contents"]').html($('.summernote').code());
 </script>
