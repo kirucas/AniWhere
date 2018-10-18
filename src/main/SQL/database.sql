@@ -174,6 +174,7 @@ CREATE TABLE bird_quest
 	quest_regidate date DEFAULT sysdate,
 	quest_count number DEFAULT 0,
 	origin_no number DEFAULT 0,
+	checking number(1) DEFAULT 0,
 	PRIMARY KEY (quest_no)
 );
 
@@ -199,7 +200,6 @@ CREATE TABLE bird_tip
 	tip_count number DEFAULT 0,
 	tip_regidate date DEFAULT sysdate,
 	tip_hit number DEFAULT 0,
-	checking number(1) DEFAULT 0,
 	PRIMARY KEY (tip_no)
 );
 
@@ -285,6 +285,7 @@ CREATE TABLE cat_quest
 	quest_regidate date DEFAULT sysdate,
 	quest_count number DEFAULT 0,
 	origin_no number DEFAULT 0,
+	checking number(1) DEFAULT 0,
 	PRIMARY KEY (quest_no)
 );
 
@@ -310,7 +311,6 @@ CREATE TABLE cat_tip
 	tip_count number DEFAULT 0,
 	tip_regidate date DEFAULT sysdate,
 	tip_hit number DEFAULT 0,
-	checking number(1) DEFAULT 0,
 	PRIMARY KEY (tip_no)
 );
 
@@ -396,6 +396,7 @@ CREATE TABLE dog_quest
 	quest_regidate date DEFAULT sysdate,
 	quest_count number DEFAULT 0,
 	origin_no number DEFAULT 0,
+	checking number(1) DEFAULT 0,
 	PRIMARY KEY (quest_no)
 );
 
@@ -421,7 +422,6 @@ CREATE TABLE dog_tip
 	tip_count number DEFAULT 0,
 	tip_regidate date DEFAULT sysdate,
 	tip_hit number DEFAULT 0,
-	checking number(1) DEFAULT 0,
 	PRIMARY KEY (tip_no)
 );
 
@@ -507,6 +507,7 @@ CREATE TABLE etc_quest
 	quest_regidate date DEFAULT sysdate,
 	quest_count number DEFAULT 0,
 	origin_no number DEFAULT 0,
+	checking number(1) DEFAULT 0,
 	PRIMARY KEY (quest_no)
 );
 
@@ -532,7 +533,6 @@ CREATE TABLE etc_tip
 	tip_count number DEFAULT 0,
 	tip_regidate date DEFAULT sysdate,
 	tip_hit number DEFAULT 0,
-	checking number(1) DEFAULT 0,
 	PRIMARY KEY (tip_no)
 );
 
@@ -829,6 +829,7 @@ CREATE TABLE rna_quest
 	quest_regidate date DEFAULT sysdate,
 	quest_count number DEFAULT 0,
 	origin_no number DEFAULT 0,
+	checking number(1) DEFAULT 0,
 	PRIMARY KEY (quest_no)
 );
 
@@ -854,7 +855,6 @@ CREATE TABLE rna_tip
 	tip_count number DEFAULT 0,
 	tip_regidate date DEFAULT sysdate,
 	tip_hit number DEFAULT 0,
-	checking number(1) DEFAULT 0,
 	PRIMARY KEY (tip_no)
 );
 
