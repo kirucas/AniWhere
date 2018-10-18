@@ -199,6 +199,7 @@ CREATE TABLE bird_tip
 	tip_count number DEFAULT 0,
 	tip_regidate date DEFAULT sysdate,
 	tip_hit number DEFAULT 0,
+	checking number(1) DEFAULT 0,
 	PRIMARY KEY (tip_no)
 );
 
@@ -309,6 +310,7 @@ CREATE TABLE cat_tip
 	tip_count number DEFAULT 0,
 	tip_regidate date DEFAULT sysdate,
 	tip_hit number DEFAULT 0,
+	checking number(1) DEFAULT 0,
 	PRIMARY KEY (tip_no)
 );
 
@@ -419,6 +421,7 @@ CREATE TABLE dog_tip
 	tip_count number DEFAULT 0,
 	tip_regidate date DEFAULT sysdate,
 	tip_hit number DEFAULT 0,
+	checking number(1) DEFAULT 0,
 	PRIMARY KEY (tip_no)
 );
 
@@ -529,6 +532,7 @@ CREATE TABLE etc_tip
 	tip_count number DEFAULT 0,
 	tip_regidate date DEFAULT sysdate,
 	tip_hit number DEFAULT 0,
+	checking number(1) DEFAULT 0,
 	PRIMARY KEY (tip_no)
 );
 
@@ -850,6 +854,7 @@ CREATE TABLE rna_tip
 	tip_count number DEFAULT 0,
 	tip_regidate date DEFAULT sysdate,
 	tip_hit number DEFAULT 0,
+	checking number(1) DEFAULT 0,
 	PRIMARY KEY (tip_no)
 );
 
