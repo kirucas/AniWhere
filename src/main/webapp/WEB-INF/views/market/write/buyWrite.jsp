@@ -2,15 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
   <head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
     <title>쓰기게시판 내부</title>
-	
- 
-	
+		
 <!-- include summernote css/js-->
 
 <!-- include summernote css/js-->
@@ -33,7 +30,7 @@ $(document).ready(function() {
 
   </head>
   <body>
-  <form action = "#" accept-charset="utf-8" name = "buy_info" method = "post">
+ 
   
   <div class="container">
  
@@ -41,7 +38,7 @@ $(document).ready(function() {
    </div><br/>
  
      <div class="col-md-12">
-     <form method="post" action="<c:url value='/buywriteAction.jsp'/>"> 
+     <form action ="<c:url value='/market/buy/write.aw'/>" accept-charset="utf-8" name = "buy_info" method = "post" class="form-horizontal" > 
      
      	<label for="title" class="col-sm-2 control-label">제목</label> <input class="form-control" type="text" id="title" name="title" placeholder="제목을 입력하세요">
      
@@ -91,11 +88,12 @@ $(document).ready(function() {
        
         </div>
          <div style="text-align:center">
-	        <input name="reset" class="btn btn-info" type="button" id="exitBtn" value="취소" >
+	    <a href="<c:url value='/market/buy.aw'/>"><input name="reset" class="btn btn-info" type="button" id="exitBtn" value="취소" ></a>
 	        <input name="submit" class="btn btn-danger" type="button" id="enterBtn" value="확인">
 	        
 	  
 	       </div>
+	       
 	       </form>
 	       
 	       <div style="margin-bottom: 50px" ></div>

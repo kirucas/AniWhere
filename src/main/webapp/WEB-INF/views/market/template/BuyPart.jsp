@@ -102,15 +102,23 @@ html {
 						<td>20180-09-14</td>
 					</tr>
 
-					<tr>
-
-						<td></td>
-
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+					<c:forEach var="record" items="${list}" varStatus="loop">
+						<tr>
+						<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}일련번호</td>
+							<td class="text-left"><c:forEach begin="1"
+									end="${record.depth}" varStatus="loopvar">
+		    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    				<c:if test="${loopvar.last}">
+		    					└☞
+		    				</c:if>
+								</c:forEach> <a
+								href="<c:url value='/ReplyBBS/BBS/View.bbs?no=${record.no}'/>">${record.title }</a>
+							제목</td>
+							<td>${record.name} 작성자</td>
+							<td>조회수   </td>
+							<td>${record.postdate} 등록일</td>
+						</tr>
+					</c:forEach>
 
 					<tr>
 

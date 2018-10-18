@@ -9,12 +9,9 @@
 
 <head>
     <title>프로그레스바 </title>
-    
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  
+
     <style>
        
-
         .progress-bar {
             background-color: White;
             height: 15px;
@@ -51,10 +48,6 @@
         .blue span {
             background-color:red;   
         }
-
-        
-
-      	
 		
 		/*---------------------------*/		
 		
@@ -154,8 +147,7 @@
 		 50% { -moz-box-shadow: 0 5px 5px rgba(255, 255, 255, .3) inset, 0 -5px 5px rgba(255, 255, 255, .3) inset;} 
 		 100% { -moz-box-shadow: 0 5px 5px rgba(255, 255, 255, .7) inset, 0 -5px 5px rgba(255, 255, 255, .7) inset;}
 		 }
-		 
-		 
+		  
     </style>
 </head>
 

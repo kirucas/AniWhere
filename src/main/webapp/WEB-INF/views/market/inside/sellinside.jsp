@@ -148,9 +148,26 @@ function changeimage1() {
       <!-- /.row -->	
 
      <div class="col-md-12 container">
-     <textarea class="col-md-12 container" rows="" cols="" style=" border: 1px solid blue;height: 500px"></textarea>
-       
+     <div class="col-md-12 container">
+     <table class="table table-hover table-striped table-bordered"><tr>
+    	<th colspan="2" class="text-center">내용</th>
+				</tr>
+				<tr>
+					<td colspan="2">${record.content}<br/>
+					==================================================<br/>
+					
+					
+					</td>
+				</tr>
+       </table>
         </div>
+        </div>
+            <div style="text-align:center">
+      <a href="<c:url value='/market/sell.aw'/>">   <input name="reset" class="btn btn-info" type="button" id="list" value="목록" ></a>
+	        <input name="submit" class="btn btn-danger" type="button" id="fix" value="수정">
+	         <input name="reset" class="btn btn-suceess" style="background-color: #4CAF50;" type="button" id="repl" value="답글" >
+	        <input name="submit" class="btn " type="button" id="del" value="삭제">
+	        </div>
          <div style="margin-bottom: 50px" ></div>
     </div>
 

@@ -161,18 +161,14 @@ $(document).ready(function() {
 
 			</div>
 			<!-- /.row -->
-     
-     
-     
-      
-            
+              
      <div class="col-md-12 container">
      <textarea id="summernote" class="col-md-12 container" rows="" cols="" style=" border: 1px solid blue;height: 500px" maxlength="2048"></textarea>
        
         </div>
         
          <div style="text-align:center">
-	        <input class="btn btn-info" type="button" id="exitBtn" value="취소" >
+	      <a href="<c:url value='/market/groupbuy.aw'/>"><input class="btn btn-info" type="button" id="exitBtn" value="취소" ></a>
 	        <input class="btn btn-danger" type="button" id="enterBtn" value="확인">
 	        
 	    
