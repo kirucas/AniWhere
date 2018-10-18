@@ -13,7 +13,7 @@
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
-    	 height:350,
+    	 height:375,
          callbacks : {
             onImageUpload : function(files, editor, welEditable) {
                for (var i = files.length - 1; i >= 0; i--) {

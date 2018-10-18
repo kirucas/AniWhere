@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% session.setAttribute("table_name","dog_quest"); %>
+<style>
+@import("https://use.fontawesome.com/releases/v5.3.1/css/all.css" )
+</style>
 <!-- 내용 시작 -->
 <div class="container">
 	<div class="page-header" style="border:2px solid white">
