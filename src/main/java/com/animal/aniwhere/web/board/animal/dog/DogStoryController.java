@@ -47,7 +47,7 @@ public class DogStoryController {
 	@RequestMapping("/animal/dog/quest/quest_view.aw")
 	public String quest_view(@RequestParam Map map,Model model) throws Exception{
 		QuestBoardDTO record = questSevice.selectOne(map);
-		record.setQuest_content(record.getQuest_content().replace("\r\n","<br/>"));
+		record.setQuest_count(record.getQuest_content().replace("\r\n","<br/>"));
 		model.addAttribute("record",record);
 		return "board/animal/dog/quest/quest_view.tiles";
 	}
