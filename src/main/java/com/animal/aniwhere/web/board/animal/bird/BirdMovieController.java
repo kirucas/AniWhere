@@ -65,13 +65,13 @@ public class BirdMovieController {
 			//뷰정보반환]
 			return "movie/List.tiles";
 		}////////////////list()
-		/*	
+			
 		//등록 폼으로 이동]
-		@RequestMapping(value="/animal/bird/movie/Write.aw",method=RequestMethod.POST)
+		@RequestMapping(value="/animal/bird/movie/Write.aw",method=RequestMethod.GET)
 		public String movie_write() throws Exception{
 			return "board/animal/bird/movie/movieWrite_form.tiles";
 		}///////////////////////////
-	*/
+	
 	@RequestMapping(value="/animal/bird/movie/{path}",method=RequestMethod.POST)
 	public String form(@PathVariable String path,Model model,@RequestParam Map map) throws Exception{
 		switch(path) {

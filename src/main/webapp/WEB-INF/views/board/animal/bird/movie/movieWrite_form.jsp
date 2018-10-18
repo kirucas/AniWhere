@@ -41,10 +41,9 @@
 		ntWin = window.open('', 'popup', 'width=600,height=500');
 		ntWin.document.getElementsByTagName("body")[0].innerHTML = '';
 		/* 내용 */
-		ntWin.document.write("<br/>" + document.forms[0].editordata.value
-				+ "<br/>");
+		ntWin.document.write("<br/>" + document.forms[0].movie_content.value + "<br/>");
 		/* 제목 */
-		ntWin.document.write("<br/>" + document.forms[0].title.value + "<br/>");
+		ntWin.document.write("<br/>" + document.forms[0].movie_title.value + "<br/>");
 		/* 조회수 */
 		ntWin.document.write("<br/>" + document.movie_hit + "<br/>");
 		/* 작성자 별명 */
@@ -115,5 +114,4 @@
 						[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
 						[ 'height', [ 'height' ] ], [ 'video', [ 'video' ] ] ]
 			});
-	$('textarea[name="Contents"]').html($('.summernote').code());
 </script>
