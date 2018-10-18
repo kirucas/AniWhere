@@ -65,28 +65,26 @@ public class BirdMovieController {
 			//뷰정보반환]
 			return "movie/List.tiles";
 		}////////////////list()
-		
-		
-		
+		/*	
 		//등록 폼으로 이동]
-		@RequestMapping(value="/animal/bird/movie/write.aw",method=RequestMethod.GET)
+		@RequestMapping(value="/animal/bird/movie/Write.aw",method=RequestMethod.POST)
 		public String movie_write() throws Exception{
 			return "board/animal/bird/movie/movieWrite_form.tiles";
 		}///////////////////////////
-	
-	@RequestMapping(value="/animal/bird/movie/{path}",method=RequestMethod.GET)
+	*/
+	@RequestMapping(value="/animal/bird/movie/{path}",method=RequestMethod.POST)
 	public String form(@PathVariable String path,Model model,@RequestParam Map map) throws Exception{
 		switch(path) {
 			case "Write":
 				//뷰정보 반환]
-				return "movie/Write.tiles";
+				return "movie/movieWrite_form.tiles";
 			default:
 				//서비스 호출]
 				MovieBoardDTO dto= service.selectOne(map);
 				//데이타 저장] 
 				model.addAttribute("dto", dto);
 				//뷰정보 반환]
-				return "bbs/"+path+".tiles";		
+				return "movie/"+path+".tiles";		
 		}		
 	}///////////////write()
 	//입력처리용]

@@ -68,13 +68,13 @@
 							src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
 							allowfullscreen></iframe>
 					</div>
-						<a href="<c:url value='/animal/bird/movie/write.aw?no=${dto.movie_no }'/>">${dto.movie_title }</a>
+						<a href="<c:url value='/animal/bird/movie/Write.aw?no=${dto.movie_no }'/>">${dto.movie_title }</a>
 					<div class="media-body">
 						<h5 class="title">${dto.movie_title}</h5>
-						<p class="mem_nickname">${dto.mem_nickname}</p>
+						<p class="nickname">${dto.mem_nickname}</p>
 					</div>
 					<div class="media-footer">
-						<small class="hits">${dto.movie_count}조회수</small>
+						<small class="count">${dto.movie_count}조회수</small>
 					</div>
 				</div>
 			</div>
@@ -254,7 +254,7 @@
 <!-- 아래에 동영상 올리기 버튼 -->
 <div class="text-right">
 	<a class="btn btn-primary"
-		href="<c:url value='/animal/bird/movie/write.aw'/>" role="button">동영상
+		href="<c:url value='/animal/bird/movie/Write.aw'/>" role="button">동영상
 		올리기</a>
 </div>
 
