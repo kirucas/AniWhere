@@ -28,14 +28,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="">
+				<c:if test="${empty requestScope.list}" var="isEmpty">
 					<tr>
 						<td colspan="6" class="text-center">등록된 게시물이 없습니다</td>
 					</tr>
 				</c:if>
-				<c:if test="">
+				<c:if test="${not isEmpty}">
 					<tr>
-						<td class="text-center" scope="row">July</td><!-- ${record.quest_no} -->
+						<td class="text-center" scope="row">${record.quest_no}</td>
 						<td><a href="<c:url value='/animal/dog/quest/quest_view.aw'/>">${record.quest_title}<span class="badge badge-info">${record.quest_hit}</span></a></td>
 						<td class="text-center">${record.mem_nickname}</td>
 						<td class="text-center">${record.quest_count}</td>
