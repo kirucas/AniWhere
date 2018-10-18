@@ -18,7 +18,7 @@
 </script>
 <div class="container border">
 	<div class="row col-md-2" >
-		<h2>조류 질문 게시판</h2>
+		<h2>기타 포유류 질문 게시판</h2>
 	</div>
 	<div class="form-row">
 		<input class="form-control" type="text" placeholder="제목을 입력해주세요" />

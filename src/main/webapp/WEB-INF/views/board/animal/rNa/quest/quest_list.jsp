@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="page-header" style="border:2px solid white">
 		<h2>
-			새&nbsp;<small>질문 게시판</small>
+			파충류 & 양서류&nbsp;<small>질문 게시판</small>
 		</h2>
 	</div>
 	<div class="wr offset-sm-9 col-sm-3">
