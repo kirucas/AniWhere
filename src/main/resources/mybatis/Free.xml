@@ -29,7 +29,7 @@
 	
 	<update id="freeUpdate" parameterType="java.util.Map">
 		UPDATE freeboard
-		SET free_title=#{free_title}, free_content=#{free_content}, #{free_category})
+		SET free_title=#{free_title}, free_content=#{free_content}, free_category=#{free_category})
 		WHERE free_no=#{free_no}
 	</update>
 	

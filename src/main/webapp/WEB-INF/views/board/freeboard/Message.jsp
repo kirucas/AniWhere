@@ -7,12 +7,12 @@
 	<c:when test="${WHERE eq 'EDT' }">
 		<c:set var="successMessage" value="수정 성공했어요"/>
 		<c:set var="failMessage" value="수정 실패했어요"/>
-		<c:set var="successMoveUrl" value="/BBS/View.bbs?no=${param.no}"/>
+		<c:set var="successMoveUrl" value="/animal/freeboard_view.aw?free_no=${param.free_no}"/>
 	</c:when>
 	<c:otherwise>
 		<c:set var="successMessage" value="삭제 성공했어요"/>
 		<c:set var="failMessage" value="삭제 실패했어요"/>
-		<c:set var="successMoveUrl" value="/BBS/List.bbs"/>	
+		<c:set var="successMoveUrl" value="/animal/freeboard.aw"/>	
 	</c:otherwise>
 </c:choose>
 
