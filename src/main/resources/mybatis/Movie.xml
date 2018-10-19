@@ -24,7 +24,7 @@
 	</select>
 	
 	<insert id="movieInsert" parameterType="java.util.Map">
-		INSERT INTO ${table_name}(movie_no, mem_no, movie_title, movie_cotent)
+		INSERT INTO ${table_name}(movie_no, mem_no, movie_title, movie_content)
 		VALUES(seq_${table_name}.nextval, #{mem_no}, #{movie_title}, #{movie_content})
 	</insert>
 	

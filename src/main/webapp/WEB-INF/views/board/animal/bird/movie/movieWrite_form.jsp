@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<c:if test="${not empty mem_no }">
+<script>
+	alert("${mem_no}");
+</script>
+</c:if>
 <style>
 .content {
 	text-align: left;
@@ -85,7 +89,6 @@
 
 		<!-- 미리보기, 확인 -->
 		<div class="margin-top-10 text-right">
-
 			<button class="btn btn-primary border-success margin-right-10"
 				name="view" onclick="pre_view()" type="button">미리보기</button>
 			<button class="btn btn-primary"
