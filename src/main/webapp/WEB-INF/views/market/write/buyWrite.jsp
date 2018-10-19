@@ -89,7 +89,7 @@ $(document).ready(function() {
         </div>
          <div style="text-align:center">
 	    <a href="<c:url value='/market/buy.aw'/>"><input name="reset" class="btn btn-info" type="button" id="exitBtn" value="취소" ></a>
-	        <input name="submit" class="btn btn-danger" type="button" id="enterBtn" value="확인">
+	        <input name="submit" class="btn btn-danger" type="submit" id="enterBtn" value="확인">
 	        
 	  
 	       </div>
