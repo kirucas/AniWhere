@@ -14,13 +14,17 @@
 	</select>
 	
 	<select id="animalSelectList" parameterType="java.util.Map" resultType="AnimalDTO">
-		SELECT *, 
-		FROM animal ani
+		SELECT ani.*, mem_name, mem_nickname
+		FROM animal ani JOIN member mem ON ani.mem_no = mem.mem_no
+		<if test="mem_no != null">
+			WHERE mem_no=#{mem_no}
+		</if>
+		ORDER BY ani_no DESC
 	</select>
 	
 	<select id="animalSelectOne" parameterType="java.util.Map" resultType="AnimalDTO">
-		SELECT *
-		FROM animal
+		SELECT ani.*, mem_name, mem_nickname
+		FROM animal ani JOIN member mem ON ani.mem_no = mem_mem_no
 		WHERE ani_no=#{ani_no}
 	</select>
 	

@@ -14,6 +14,7 @@
 		SELECT gb.*, mem_nickname, animal_name
 		FROM market_group_buy gb JOIN member mb ON gb.mem_no = mb.mem_no
 		JOIN animal_category ac ON gb.animal_code = ac.animal_code
+		ORDER BY no DESC
 	</select>
 	
 	<select id="groupbuySelectOne" parameterType="java.util.Map" resultType="GroupDTO">

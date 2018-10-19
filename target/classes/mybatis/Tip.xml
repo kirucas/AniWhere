@@ -14,6 +14,7 @@
 	<select id="tipSelectList" parameterType="java.util.Map" resultType="TipDTO">
 		SELECT tn.*, mem_nickname
 		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+		ORDER BY tip_no DESC
 	</select>
 	
 	<select id="tipSelectOne" parameterType="java.util.Map" resultType="TipDTO">

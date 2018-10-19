@@ -14,6 +14,7 @@
 		SELECT m.mating_no, m.mating_loc, m.mating_regidate, a.*, mem_nickname
 		FROM mating m JOIN animal a ON m.ani_no = a.ani_no
 		JOIN member mb ON a.mem_no = mb.mem_no
+		ORDER BY mating_no DESC
 	</select>
 	
 	<select id="matingSelectOne" parameterType="java.util.Map" resultType="MatingDTO">

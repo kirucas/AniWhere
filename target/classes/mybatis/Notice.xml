@@ -13,6 +13,7 @@
 	<select id="noticeSelectList" parameterType="java.util.Map" resultType="NoticeDTO">
 		SELECT nt.*, am_id
 		FROM notice nt JOIN admin_member am ON nt.am_no = am.am_no 
+		ORDER BY no DESC
 	</select>
 	
 	<select id="noticeSelectOne" parameterType="java.util.Map" resultType="NoticeDTO">

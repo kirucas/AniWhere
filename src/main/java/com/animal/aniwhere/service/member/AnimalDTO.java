@@ -10,6 +10,10 @@ public class AnimalDTO {
 	private String ani_kind;
 	private String ani_pic;
 	
+	// 해당 동물에 대한 주인 정보를 저장 할 속성 추가
+	private String mem_name;
+	private String mem_nickname;
+	
 	public String getAni_no() {
 		return ani_no;
 	}//////////
@@ -64,6 +68,22 @@ public class AnimalDTO {
 	
 	public void setAni_pic(String ani_pic) {
 		this.ani_pic = ani_pic;
+	}//////////
+
+	public String getMem_name() {
+		return mem_name;
+	}//////////
+
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
+	}//////////
+
+	public String getMem_nickname() {
+		return mem_nickname;
+	}//////////
+
+	public void setMem_nickname(String mem_nickname) {
+		this.mem_nickname = mem_nickname;
 	}//////////
 	
 }//////////////////// AnimalDTO

@@ -13,6 +13,7 @@
 	<select id="reservationSelectList" parameterType="java.util.Map" resultType="ReservationDTO">
 		SELECT rv.*, mem_name
 		FROM reservation rv JOIN member mb ON rv.mem_no = mb.mem_no
+		ORDER BY rv_no DESC
 	</select>
 	
 	<select id="reservationSelectOne" parameterType="java.util.Map" resultType="ReservationDTO">
