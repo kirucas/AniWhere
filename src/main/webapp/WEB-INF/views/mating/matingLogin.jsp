@@ -67,6 +67,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+            	<!-- 반복 시작할 부분  -->
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 col-lg-8 col-md-12">
@@ -118,7 +119,7 @@
                     <div class="row">
                     	 <div class="col-12 col-lg-4">
                             <h2 style="color:#1ABC9C;text-align:center">교배지역</h2>
-                            <p style="text-align:center;">서울시</p>
+                            <p style="text-align:center;">서울시 ~ </p>
                         </div>
                         <div class="col-12 col-lg-4">
                         	<h2 style="color:#1ABC9C;text-align:center">매칭여부</h2>
@@ -127,9 +128,10 @@
                     </div>
                 </div>
                 <!--/card-block-->
-                
+                <!-- 반복 끗날 부분 부분  -->
             </div>
             
+            <!-- 매치 버튼을 카드마다 넣어야 할 이유도 있을 듯 -->
             <!-- 매치 버튼 -->
 			<div class="container" style="text-align:center">
 	            <div class="heart_img col-md-offset-4 col-md-4" style="padding-top:50px;display:inline-block">
