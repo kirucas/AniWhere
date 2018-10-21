@@ -8,34 +8,52 @@
 
 	<select id="movieCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
-		FROM ${table_name}
+		FROM (
+			SELECT mo.*, mem_nickname
+			FROM movie mo JOIN member me ON mo.mem_no=me.mem_no
+			WHERE ani_category=#{ani_category}
+			<if test="">
+				AND ${searchColumn} like '%'||#{searchWord}||'%'
+			</if>
+			)
 	</select>
 	
 	<select id="movieSelectList" parameterType="java.util.Map" resultType="MovieDTO">
-		SELECT tn.*, mem_nickname
-		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
-		ORDER BY movie_no DESC
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT mo.*, mem_nickname
+				FROM movie mo JOIN member me ON mo.mem_no=me.mem_no
+				WHERE ani_category=#{ani_category}
+				<if test="searchColumn != null">
+					AND ${searchColumn} like '%' || #{searchWord} || '%'
+				</if>
+				ORDER BY movie_no DESC
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="movieSelectOne" parameterType="java.util.Map" resultType="MovieDTO">
 		SELECT tn.*, mem_nickname
-		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+		FROM movie tn JOIN member mb ON tn.mem_no = mb.mem_no
 		WHERE movie_no=#{movie_no}
 	</select>
 	
 	<insert id="movieInsert" parameterType="java.util.Map">
-		INSERT INTO ${table_name}(movie_no, mem_no, movie_title, movie_content)
-		VALUES(seq_${table_name}.nextval, #{mem_no}, #{movie_title}, #{movie_content})
+		INSERT INTO movie(movie_no, mem_no, movie_title, movie_content, ani_category)
+		VALUES(seq_movie.nextval, #{mem_no}, #{movie_title}, #{movie_content}, #{ani_category})
 	</insert>
 	
 	<update id="movieUpdate" parameterType="java.util.Map">
-		UPDATE ${table_name}
+		UPDATE movie
 		SET movie_title=#{movie_title}, movie_content=#{movie_content}
 		WHERE movie_no=#{movie_no}
 	</update>
 	
 	<delete id="movieDelete" parameterType="java.util.Map">
-		DELETE ${table_name}
+		DELETE movie
 		WHERE movie_no=#{movie_no}
 	</delete>
 	

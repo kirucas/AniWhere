@@ -7,14 +7,43 @@
 
 	<select id="fsCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
-		FROM miss_${table_name}
+		FROM (
+			SELECT tn.*, mem_nickname, animal_name
+			FROM miss_${table_name} tn JOIN member mb ON tn.mem_no=mb.mem_no
+			JOIN animal_category ac ON tn.animal_code=ac.animal_code			
+			<if test="animal_code != null and searchColumn != null">
+				WHERE animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
+			</if>
+			<if test="animal_code != null">
+				WHERE animal_code=#{animal_code}
+			</if>
+			<if test="searchColumn != null">
+				WHERE ${searchColumn} like '%'||#{searchWord}||'%'
+			</if>
+			)
 	</select>
 	
 	<select id="fsSelectList" parameterType="java.util.Map" resultType="FSDTO">
-		SELECT tn.*, mem_nickname, animal_name
-		FROM miss_${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
-		JOIN animal_category ac ON tn.animal_code = ac.animal_code
-		ORDER BY no DESC
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT tn.*, mem_nickname, animal_name
+				FROM miss_${table_name} tn JOIN member mb ON tn.mem_no=mb.mem_no
+				JOIN animal_category ac ON tn.animal_code=ac.animal_code			
+				<if test="animal_code != null and searchColumn != null">
+					WHERE animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
+				</if>
+				<if test="animal_code != null">
+					WHERE animal_code=#{animal_code}
+				</if>
+				<if test="searchColumn != null">
+					WHERE ${searchColumn} like '%'||#{searchWord}||'%'
+				</if>
+				ORDER BY no DESC
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="fsSelectOne" parameterType="java.util.Map" resultType="FSDTO">

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.MatingDTO;
+import com.animal.aniwhere.service.member.AnimalDTO;
 
 @Service("matingService")
 public class MatingServiceImpl implements AllBoardService {
@@ -46,5 +47,9 @@ public class MatingServiceImpl implements AllBoardService {
 	public int delete(Map map) {
 		return dao.delete(map);
 	}////////// delete
+	
+	public List<AnimalDTO> selectMyMating(Map map){
+		return dao.selectMyMating(map);
+	}////////// selectMyMating
 
 }//////////////////// MatingBoardServiceImpl class

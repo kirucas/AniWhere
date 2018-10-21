@@ -19,7 +19,18 @@
 	<select id="memberSelectList" parameterType="java.util.Map" resultType="MemberDTO">
 		SELECT *
 		FROM member
-		ORDER BY mem_no;
+		ORDER BY mem_no
+		
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT *
+				FROM member
+				ORDER BY mem_no
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="memberSelectOne" parameterType="java.util.Map" resultType="MemberDTO">
