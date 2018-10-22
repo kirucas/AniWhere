@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<<<<<<< HEAD
-=======
 <% session.setAttribute("table_name","dog_quest"); %>
->>>>>>> refs/remotes/origin/integration_test
 <style>
 @import("https://use.fontawesome.com/releases/v5.3.1/css/all.css" )
 </style>
