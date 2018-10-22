@@ -65,8 +65,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group" style="float:left;">
-                                    <a href="#" class="btn btn-primary submit-btn">SIGN IN</a> 
-                                    <a href="<c:url value='/member/sign_in.aw'/>" class="btn btn-primary submit-btn">SIGN UP</a>
+                                    <button class="btn btn-primary submit-btn">SIGN IN</button>
+                                    <a href="<c:url value='/member/sign_in.aw'/>" class="btn btn-primary">SIGN UP</a>
                                 </div>
                                    
                                 <div class="wrapper mt-5 text-gray">

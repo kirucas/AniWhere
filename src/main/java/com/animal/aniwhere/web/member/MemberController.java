@@ -25,7 +25,7 @@ public class MemberController {
       return "member/sign_in";
    }////////// go_login
 
-   @RequestMapping(value = "/s ignInProcess.aw", method = RequestMethod.POST)
+   @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
    public String signInProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
 
       if(!service.isMember(map)) {
