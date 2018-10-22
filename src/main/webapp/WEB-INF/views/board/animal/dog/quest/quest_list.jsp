@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<% session.setAttribute("table_name","dog_quest"); %>
 <style>
 @import("https://use.fontawesome.com/releases/v5.3.1/css/all.css" )
 </style>
@@ -12,10 +11,10 @@
 			강아지&nbsp;<small>질문 게시판</small>
 		</h2>
 	</div>
-	<form action="<c:url value='/animal/dog/quest/quest_write.aw'/>">
+	<form action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
 		<div class="wr offset-sm-9 col-sm-3">	
 			<div align="right" >
-				<input type="hidden" name="table_name" value="dog_quest" />
+				<input type="hidden" id="ani_category" name="ani_category" value="">
 				<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>" 
 				class="btn btn-success"><i class="fas fa-pen-square" >글쓰기</i></a>
 			</div>
@@ -43,27 +42,17 @@
 				<c:if test="${not isEmpty }">
 					<c:forEach var="record" items="${list}" varStatus="loop">
 						<tr>
-							<td class="text-center" scope="row">${record.quest_no}</td>
+							<td class="text-center" scope="row">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
 							<td>
-								<form action="<c:url value='/animal/dog/quest/quest_view.aw'/>">
-									<input type="hidden" name="table_name" value="dog_quest" />
-									<a href="<c:url value='/animal/dog/quest/quest_view.aw?quest_no=${record.quest_no}'/>">${record.quest_title}
-									
-										<span class="badge badge-info">${record.quest_hit}</span>
-									</a>
-								</form>
+								<a href="<c:url value='/animal/dog/quest/quest_view.aw?quest_no=${record.quest_no}'/>">${record.quest_title}
+									<span class="badge badge-info">${record.quest_hit}</span>
+								</a>
 							</td>
 							<td class="text-center">${record.mem_nickname}</td>
 							<td class="text-center">${record.quest_count}</td>
 							<td class="text-center">${record.quest_hit}</td>
 							<td class="text-center">${record.quest_regidate}</td>
 							<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
-							<td class="text-left">
-							 <a	href="<c:url value='/BBS/View.bbs?no=${record.no}'/>">${record.title }</a>
-							 <span class="badge">${record.commentCount}</span>
-							</td>
-							<td>${record.name}</td>
-							<td>${record.postdate}</td>
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -91,7 +80,6 @@
 				</div>
 				<div class="form-group">
 					<a type="submit" href="<c:url value='/animal/dog/quest/quest_list.aw'/>" class="si"><i class="fas fa-search"></i>검색</a>
-					<input type="hidden" name="table_name" value="dog_quest" />
 				</div>
 			</form>
 		</div>

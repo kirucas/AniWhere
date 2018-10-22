@@ -6,20 +6,20 @@
 		<p class="text-right">질문 게시판</p>
 	</div>
 	<div class="row">
-		<h1>제목12</h1>
+		<h1> ${record.quest_title}</h1>
 	</div>	
 	<div class="row border">
 		<div class="col-sm-1" >
 			글쓴이
 		</div>
 		<div class="col-sm-1">
-			홍길동
+			 ${record.mem_nickname }
 		</div>
 		<div class="col-sm-1">
 			작성일
 		</div>
 		<div class="col-sm-2">
-			2018-10-04
+			 ${record.quest_regidate}
 		</div>
 		<div class="offset-sm-3 col-sm-4" style="text-align: right;">
 			<a href="<c:url value='/animal/dog/quest/quest_edit.aw'/>">수정 </a><a href="#">| 삭제 </a><a href="javascript:history.back()">| 목록</a>
@@ -27,16 +27,12 @@
 	</div>
 	<div class="row border-top-0">
 		<div class="offset-sd-8 col-sm-4" style="text-align: right;">
-			조회수  12 &nbsp;&nbsp;| &nbsp;&nbsp;댓글수  5&nbsp;&nbsp; |&nbsp;&nbsp; 추천수  12<!-- 스페이스바 주기 -->
+			조회수  ${record.quest_count } &nbsp;&nbsp;| &nbsp;&nbsp;댓글수  5&nbsp;&nbsp; |&nbsp;&nbsp; 추천수   ${record.quest_hit}<!-- 스페이스바 주기 -->
 		</div>
 	</div>
 	<div class="row border">
 		<div>
-			내용내용내용내용내용내용내용내용
-			내용내용내용내용내용내용내용내용내용내용내용내용
-			내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-			내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-			내용내용내용내용내용내용내용내용
+			${record.quest_content}
 		</div>
 		<div class="offset-sm-5 col-sm-1" style="padding: 10px">
 			<i class="far fa-thumbs-up fa-4x ic"></i>

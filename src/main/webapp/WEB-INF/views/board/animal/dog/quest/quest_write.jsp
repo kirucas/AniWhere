@@ -22,6 +22,7 @@
 			<div class="form-group offset-sm-5 col-sm-1">
 				<a href="javascript:history.back()"><input type="button" class="btn btn-lg btn-outline-danger" value="취소"/></a>
 			</div>
+			<input type="hidden" id="ani_category" name="ani_category" value="1" />
 			<div class="form-group col-sm-1">
 				<button type="submit" class="btn btn-lg btn-outline-primary">등록</button>
 			</div>
