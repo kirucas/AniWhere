@@ -148,12 +148,11 @@
 	<div id="where-list">
 		<div id="list-select">
 			<ul class="nav nav-tabs">
-				<li class="nav-item"><a class="nav-link" href="#">전체보기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">동물병원</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">애견카페</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">애견호텔</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">애견용품</a></li>
-				<li class="nav-item"><a class="nav-link" id="ip" href="#" title="1">입양시설</a>
+				<li class="nav-item"><a class="nav-link" href="#">애완미용</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">동물병원</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">동물약국</a></li>
+				<li class="nav-item"><a class="nav-link" id="ip" href="#" title="1">동물기타</a>
 				</li>
 			</ul>
 		</div>
@@ -163,6 +162,7 @@
 			</div>
 			<div id="list-view">
 				<ul style="list-style: none;">
+					<!-- 리스트 목록 반복 -->
 					<li>
 						<div style="padding: 10px; float: left;">
 							<div style="float: left; width: 10%; height: 100px;">
@@ -181,186 +181,7 @@
 							</dl>
 						</div>
 					</li>
-					<li>
-						<div style="padding: 10px; float: left;">
-							<div style="float: left; width: 10%; height: 100px;">
-								<div style="width: 18px; height: 28px;">
-									<img
-										src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_b_over.png">
-								</div>
-							</div>
-							<dl style="margin-left: 40px; margin-right: 8px;">
-								<dt>
-									<a href="#">동물병원이름</a>
-								</dt>
-								<dd>경기도 광명동 오리로 39-2 102호</dd>
-								<dd>010-8191-4693</dd>
-								<dd>건강 , 의료 > 동물병원</dd>
-							</dl>
-						</div>
-					</li>
-					<li>
-						<div style="padding: 10px; float: left;">
-							<div style="float: left; width: 10%; height: 100px;">
-								<div style="width: 18px; height: 28px;">
-									<img
-										src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_c_over.png">
-								</div>
-							</div>
-							<dl style="margin-left: 40px; margin-right: 8px;">
-								<dt>
-									<a href="#">동물병원이름</a>
-								</dt>
-								<dd>경기도 광명동 오리로 39-2 102호</dd>
-								<dd>010-8191-4693</dd>
-								<dd>건강 , 의료 > 동물병원</dd>
-							</dl>
-						</div>
-					</li>
-					<li>
-						<div style="padding: 10px; float: left;">
-							<div style="float: left; width: 10%; height: 100px;">
-								<div style="width: 18px; height: 28px;">
-									<img
-										src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_d_over.png">
-								</div>
-							</div>
-							<dl style="margin-left: 40px; margin-right: 8px;">
-								<dt>
-									<a href="#">동물병원이름</a>
-								</dt>
-								<dd>경기도 광명동 오리로 39-2 102호</dd>
-								<dd>010-8191-4693</dd>
-								<dd>건강 , 의료 > 동물병원</dd>
-							</dl>
-						</div>
-					</li>
-					<li>
-						<div style="padding: 10px; float: left;">
-							<div style="float: left; width: 10%; height: 100px;">
-								<div style="width: 18px; height: 28px;">
-									<img
-										src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_d_over.png">
-								</div>
-							</div>
-							<dl style="margin-left: 40px; margin-right: 8px;">
-								<dt>
-									<a href="#">동물병원이름</a>
-								</dt>
-								<dd>경기도 광명동 오리로 39-2 102호</dd>
-								<dd>010-8191-4693</dd>
-								<dd>건강 , 의료 > 동물병원</dd>
-							</dl>
-						</div>
-					</li>
-					<li>
-						<div style="padding: 10px; float: left;">
-							<div style="float: left; width: 10%; height: 100px;">
-								<div style="width: 18px; height: 28px;">
-									<img
-										src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_d_over.png">
-								</div>
-							</div>
-							<dl style="margin-left: 40px; margin-right: 8px;">
-								<dt>
-									<a href="#">동물병원이름</a>
-								</dt>
-								<dd>경기도 광명동 오리로 39-2 102호</dd>
-								<dd>010-8191-4693</dd>
-								<dd>건강 , 의료 > 동물병원</dd>
-							</dl>
-						</div>
-					</li>
-					<li>
-						<div style="padding: 10px; float: left;">
-							<div style="float: left; width: 10%; height: 100px;">
-								<div style="width: 18px; height: 28px;">
-									<img
-										src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_d_over.png">
-								</div>
-							</div>
-							<dl style="margin-left: 40px; margin-right: 8px;">
-								<dt>
-									<a href="#">동물병원이름</a>
-								</dt>
-								<dd>경기도 광명동 오리로 39-2 102호</dd>
-								<dd>010-8191-4693</dd>
-								<dd>건강 , 의료 > 동물병원</dd>
-							</dl>
-						</div>
-					</li>
-					<li>
-						<div style="padding: 10px; float: left;">
-							<div style="float: left; width: 10%; height: 100px;">
-								<div style="width: 18px; height: 28px;">
-									<img
-										src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_d_over.png">
-								</div>
-							</div>
-							<dl style="margin-left: 40px; margin-right: 8px;">
-								<dt>
-									<a href="#">동물병원이름</a>
-								</dt>
-								<dd>경기도 광명동 오리로 39-2 102호</dd>
-								<dd>010-8191-4693</dd>
-								<dd>건강 , 의료 > 동물병원</dd>
-							</dl>
-						</div>
-					</li>
-					<li>
-						<div style="padding: 10px; float: left;">
-							<div style="float: left; width: 10%; height: 100px;">
-								<div style="width: 18px; height: 28px;">
-									<img
-										src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_d_over.png">
-								</div>
-							</div>
-							<dl style="margin-left: 40px; margin-right: 8px;">
-								<dt>
-									<a href="#">동물병원이름</a>
-								</dt>
-								<dd>경기도 광명동 오리로 39-2 102호</dd>
-								<dd>010-8191-4693</dd>
-								<dd>건강 , 의료 > 동물병원</dd>
-							</dl>
-						</div>
-					</li>
-					<li>
-						<div style="padding: 10px; float: left;">
-							<div style="float: left; width: 10%; height: 100px;">
-								<div style="width: 18px; height: 28px;">
-									<img
-										src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_d_over.png">
-								</div>
-							</div>
-							<dl style="margin-left: 40px; margin-right: 8px;">
-								<dt>
-									<a href="#">동물병원이름</a>
-								</dt>
-								<dd>경기도 광명동 오리로 39-2 102호</dd>
-								<dd>010-8191-4693</dd>
-								<dd>건강 , 의료 > 동물병원</dd>
-							</dl>
-						</div>
-					</li>
-					<li>
-						<div style="padding: 10px; float: left;">
-							<div style="float: left; width: 10%; height: 100px;">
-								<div style="width: 18px; height: 28px;">
-									<img
-										src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_d_over.png">
-								</div>
-							</div>
-							<dl style="margin-left: 40px; margin-right: 8px;">
-								<dt>
-									<a href="#">동물병원이름</a>
-								</dt>
-								<dd>경기도 광명동 오리로 39-2 102호</dd>
-								<dd>010-8191-4693</dd>
-								<dd>건강 , 의료 > 동물병원</dd>
-							</dl>
-						</div>
-					</li>
+					<!-- 리스트 목록 반복 끝-->
 				</ul>
 			</div>
 		</div>

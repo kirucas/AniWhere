@@ -25,28 +25,21 @@ public class WhereController {
 	      return "where/whereMain.tiles";
 	   }////////// mating_main
 	  
-	  
 	  @RequestMapping(value= "/where/map/radius.awa", method= RequestMethod.POST,produces="text/plain; charset=UTF-8")
 	  @ResponseBody
 	  public String  mapdata(@RequestParam Map map,HttpServletResponse response) throws Exception{
 		  JSONObject jsonObj =  new JSONObject();
 		  	String[] codes = ((String)map.get("code")).split("/");
-		  	System.out.println((String)map.get("lon"));
-		  	System.out.println(map.get("lat"));
-		  	System.out.println("넘어왔니1");
 		  	for(String code : codes) {
-		  		System.out.println("넘어왔니2");
 				String API_URL = "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius?radius=2000&type=json&cx="+map.get("lon")+"&cy="+map.get("lat")+"&ServiceKey=snZhl9X76KcGuXrNuvglRr41nB8iUW9CZ%2F96V4aVUEANTSVsQOIeOM1o7f2cxlsD%2BBOcP%2BElAe12PhHaKfRyTA%3D%3D";
 				HttpURLConnection conn = (HttpURLConnection) new URL(API_URL).openConnection();
 				conn.setRequestMethod("GET");
 				int responseCode = conn.getResponseCode();
-				System.out.println("넘어왔니3");
 				if(responseCode != 200) {
 					System.err.println("연결 실패: " + responseCode);
 					System.err.println("실패 코드 값 : "+ code);
 					continue;
 				}
-				System.out.println("넘어왔니4");
 				String line;
 				StringBuilder json = new StringBuilder();
 				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -59,7 +52,6 @@ public class WhereController {
 				String result = json.toString();
 				jsonObj.put(code, result);
 		  	}
-			System.out.println("잘가고");
 			return jsonObj.toJSONString();
 	  }//////////////mapdata
 	  

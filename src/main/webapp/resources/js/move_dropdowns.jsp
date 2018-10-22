@@ -20,7 +20,7 @@
 			location.href = "<c:url value='/animal/etc/main.aw'/>";
 		});
 		$("#market_main").click(function(){
-			location.href = "<c:url value='/animal/dog/main.aw'/>";
+			location.href = "<c:url value='/market/main.aw'/>";
 		});
 		$("#miss_main").click(function(){
 			location.replace("<c:url value='/miss/miss_main.aw' />");
@@ -33,6 +33,9 @@
 		});
 		$("#login").click(function(){
 			location.href = "<c:url value='/login.aw' />";
+		});
+		$("#logout").click(function(){
+			location.href = "<c:url value='/signout.aw' />";
 		});
 		
 	});

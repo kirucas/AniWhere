@@ -25,4 +25,5 @@ public class MatingController {
    public String mating_match() throws Exception {
       return "mating/matingMatch.tiles";
    }
+
 }

@@ -130,11 +130,11 @@ nav a{
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="<c:url value='/animal/market/main.aw'/>" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
+                            <a class="dropdown-toggle" href="/aniwhere/market/main.aw" id="market_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			                                <li><a href="<c:url value='/animal/market/main.aw'/>">팔아요</a></li>
-			                                <li><a href="<c:url value='/animal/market/main.aw'/>">사요</a></li>
-			                                <li><a href="<c:url value='/animal/market/main.aw'/>">같이 싸게 사요</a></li>
+			                                <li><a href="/aniwhere/market/sell.aw">팔아요</a></li>
+			                                <li><a href="/aniwhere/market/buy.aw">사요</a></li>
+			                                <li><a href="/aniwhere/market/groupbuy.aw">같이 싸게 사요</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -152,9 +152,16 @@ nav a{
                             <a href="#" id="where_main">위치</a>
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-default" style="color:black;margin-left:30px" id="login">
-                    	LOGIN
-                    </button>
+                   	<c:if test="${not empty mem_id }" var="sign_check">
+	                    <button type="button" class="btn btn-default navbar-btn" style="color:black;margin-left:30px" id="logout">
+                    		LOGOUT
+        	            </button>
+                   	</c:if>
+                   	<c:if test="${not sign_check }">
+	                    <button type="button" class="btn btn-default navbar-btn" style="color:black;margin-left:30px" id="login">
+    	               		LOGIN
+        	            </button>
+                   	</c:if>
                 </div>
             </nav>
         </div>

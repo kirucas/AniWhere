@@ -2,6 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
+<script>
+	var isDelete = function(){
+		if(confirm("글을 삭제 하시겠습니까?"))
+			location.replace("<c:url value='/animal/freeboard/delete.aw?free_no=${record.free_no}'/>");
+	};
+</script>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
 #content{
@@ -14,39 +20,64 @@
 		<div id="view">
 			<div class="article">
 				<div class="article-header">
-					<div class="article__title">보고 느끼는게 있었으면 좋겠다</div>
+					<div class="article__title">
+					<c:choose>
+							<c:when test="${record.free_category eq '1'}">
+								<span>[잡담]</span>
+							</c:when>
+							<c:when test="${record.free_category eq '2'}">
+								<span>[정보]</span>		
+							</c:when>
+							<c:when test="${record.free_category eq '3'}">
+								<span>[유머]</span>
+							</c:when>
+							<c:when test="${record.free_category eq '4'}">
+								<span>[이슈]</span>
+							</c:when>
+							<c:otherwise>
+								<span>[시사]</span>
+							</c:otherwise>
+						</c:choose>
+						${record.free_title}
+						<div style="float:right;">
+							<!-- 글에 대한 버튼들(자기가 쓴 글이면 수정과 삭제 가능) -->
+							<!-- a href="<c:url value='/ReplyBBS/BBS/Reply.bbs?free_no=${record.free_no}'/>" class="btn btn-success">답변</a> -->
+							<c:if test="${sessionScope.mem_no==record.mem_no }">
+								<a href="<c:url value='/animal/freeboard/edit.aw?free_no=${record.free_no}'/>" class="article-action__button button">수정</a>
+								<a href="javascript:isDelete()" class="article-action__button button button--red button--red--border">삭제</a>
+							</c:if>
+							<a href="<c:url value='/animal/freeboard.aw'/>" class="article-action__button button">목록</a>	
+							</div>
+					</div>
 					<div class="article-meta">
+								
 						<div class="article-meta-list">
 							<div class="article-meta__item article-meta__item--name">
 								<a
 									href="https://talk.op.gg/s/lol/free?q=%EB%9F%B0%EB%B9%8C%EB%A1%9C%EA%BE%B8%EA%BA%BC&amp;target=user_name">
-									런빌로꾸꺼 </a>
+									${record.mem_no} </a>
 							</div>
 							<div class="article-meta__item">
 								<span data-tooltip data-date="2018-10-14T06:40:37+00:00"
-									title="">3 시간 전</span>
+									title="">${record.free_regidate}</span>
 							</div>
 						</div>
 						<div class="article-meta-list article-meta-list--right">
 							<div class="article-meta__item">
-								<span>조회 12,742</span>
+								<span>${record.free_count}</span>
 							</div>
 							<div class="article-meta__item">
 								<span>댓글 56</span>
 							</div>
 							<div class="article-meta__item">
-								<span>추천 68</span>
+								<span>${record.free_hit}</span>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="article-content-wrap">
 					<div class="article-content">
-						<p>
-							<img
-								src="https://opgg-com-image.akamaized.net/attach/images/20181014064005.586261.jpeg"
-								alt="5cd60af01b8e744babffaa4bc107db00.jpg" />
-						</p>
+						${record.free_content}
 					</div>
 				</div>
 				<post-vote data-my_vote_score="0" data-downvote_score="3"
