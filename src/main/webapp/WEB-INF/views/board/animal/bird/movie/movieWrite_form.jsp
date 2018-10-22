@@ -57,6 +57,7 @@
 <div class="container">
 	<form method="post" action="<c:url value='/animal/bird/movie/Write.aw'/>">
 		<input type="hidden" name="mem_no" value="${mem_no }">
+		<input type="hidden" name="ani_category" value="4">
 		<div class="form-group row">
 			<label for="validationDefaultUsername"
 				class="offset-sm-1 col-sm-1 col-form-label">게시판</label>

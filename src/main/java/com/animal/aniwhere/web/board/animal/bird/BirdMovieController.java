@@ -22,9 +22,6 @@ import com.animal.aniwhere.service.impl.animal.MovieBoardServiceImpl;
 @Controller
 public class BirdMovieController {
 	
-	//테이블 이름 : 조류 동영상
-	public final static String TABLE_NAME = "bird_movie";
-	
 	//서비스 주입]
 		@Resource(name="movieService")
 		private MovieBoardServiceImpl service;
@@ -47,7 +44,6 @@ public class BirdMovieController {
 			//서비스 호출]
 			//페이징을 위한 로직 시작]
 			//전체 레코드 수
-			map.put("table_name",TABLE_NAME);
 			int totalRecordCount= service.getTotalRecord(map);			
 			//시작 및 끝 ROWNUM구하기]
 			int start = (nowPage-1)*pageSize+1;
@@ -96,7 +92,6 @@ public class BirdMovieController {
 	public String write(@RequestParam Map map
 			) throws Exception{
 		//서비스 호출
-		map.put("table_name", TABLE_NAME);
 		System.out.println(map.get("table_name"));
 		service.insert(map);
 		//뷰정보 반환
