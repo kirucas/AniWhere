@@ -23,11 +23,11 @@
     <link rel="shortcut icon" href="<c:url value='/resources/assets/images/favicon.png' />" />
 </head>
 <body>
-	<c:if test="${not empty sign_error }">
-		<script>
-			alert("${sign_error}");
-		</script>
-	</c:if>
+   <c:if test="${not empty sign_error }">
+      <script>
+         alert("${sign_error}");
+      </script>
+   </c:if>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper auth p-0 theme-two">
@@ -64,9 +64,11 @@
                                         <input type="password" class="form-control" placeholder="Password" name="mem_pw">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="float:left;">
                                     <button class="btn btn-primary submit-btn">SIGN IN</button>
+                                    <a href="<c:url value='/member/sign_in.aw'/>" class="btn btn-primary">SIGN UP</a>
                                 </div>
+                                   
                                 <div class="wrapper mt-5 text-gray">
                                     <p class="footer-text">Copyright © 2018 Bootstrapdash. All rights reserved.</p>
                                     <ul class="auth-footer text-gray">
