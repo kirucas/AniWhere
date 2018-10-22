@@ -2,6 +2,7 @@
 
 DROP TABLE notice CASCADE CONSTRAINTS;
 DROP TABLE admin_member CASCADE CONSTRAINTS;
+DROP TABLE drafting CASCADE CONSTRAINTS;
 DROP TABLE mating CASCADE CONSTRAINTS;
 DROP TABLE animal CASCADE CONSTRAINTS;
 DROP TABLE market_buy_cmt CASCADE CONSTRAINTS;
@@ -53,6 +54,7 @@ CREATE TABLE animal
 	mem_no number NOT NULL,
 	ani_name nvarchar2(20) NOT NULL,
 	ani_age number NOT NULL,
+	ani_gender varchar2(1) NOT NULL CHECK (ani_gender IN ('F', 'M', 'U')),
 	ani_species nvarchar2(10) NOT NULL,
 	ani_kind nvarchar2(20) NOT NULL,
 	ani_pic nvarchar2(500) NOT NULL,
@@ -64,6 +66,17 @@ CREATE TABLE animal_category
 (
 	animal_code number NOT NULL,
 	PRIMARY KEY (animal_code)
+);
+
+
+CREATE TABLE drafting
+(
+	dtf_no number NOT NULL,
+	send_no number NOT NULL,
+	receive_no number NOT NULL,
+	apply number(1),
+	dtf_date date DEFAULT SYSDATE,
+	PRIMARY KEY (dtf_no)
 );
 
 
@@ -475,6 +488,18 @@ ALTER TABLE market_group_buy_cmt
 ALTER TABLE market_sell_cmt
 	ADD FOREIGN KEY (origin_no)
 	REFERENCES market_sell (no)
+;
+
+
+ALTER TABLE drafting
+	ADD FOREIGN KEY (send_no)
+	REFERENCES mating (mating_no)
+;
+
+
+ALTER TABLE drafting
+	ADD FOREIGN KEY (receive_no)
+	REFERENCES mating (mating_no)
 ;
 
 
