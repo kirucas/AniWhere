@@ -1,5 +1,3 @@
-[MemberController.java]
-
 package com.animal.aniwhere.web.member;
 
 import java.util.Map;
