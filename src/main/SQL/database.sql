@@ -2,6 +2,7 @@
 
 DROP TABLE notice CASCADE CONSTRAINTS;
 DROP TABLE admin_member CASCADE CONSTRAINTS;
+DROP TABLE drafting CASCADE CONSTRAINTS;
 DROP TABLE mating CASCADE CONSTRAINTS;
 DROP TABLE animal CASCADE CONSTRAINTS;
 DROP TABLE market_buy_cmt CASCADE CONSTRAINTS;
@@ -16,54 +17,18 @@ DROP TABLE miss_find CASCADE CONSTRAINTS;
 DROP TABLE miss_see_cmt CASCADE CONSTRAINTS;
 DROP TABLE miss_see CASCADE CONSTRAINTS;
 DROP TABLE animal_category CASCADE CONSTRAINTS;
-DROP TABLE bird_movie_cmt CASCADE CONSTRAINTS;
-DROP TABLE bird_movie CASCADE CONSTRAINTS;
-DROP TABLE bird_photo_cmt CASCADE CONSTRAINTS;
-DROP TABLE bird_photo_link CASCADE CONSTRAINTS;
-DROP TABLE bird_photo CASCADE CONSTRAINTS;
-DROP TABLE bird_quest_cmt CASCADE CONSTRAINTS;
-DROP TABLE bird_quest CASCADE CONSTRAINTS;
-DROP TABLE bird_tip_cmt CASCADE CONSTRAINTS;
-DROP TABLE bird_tip CASCADE CONSTRAINTS;
-DROP TABLE cat_movie_cmt CASCADE CONSTRAINTS;
-DROP TABLE cat_movie CASCADE CONSTRAINTS;
-DROP TABLE cat_photo_cmt CASCADE CONSTRAINTS;
-DROP TABLE cat_photo_link CASCADE CONSTRAINTS;
-DROP TABLE cat_photo CASCADE CONSTRAINTS;
-DROP TABLE cat_quest_cmt CASCADE CONSTRAINTS;
-DROP TABLE cat_quest CASCADE CONSTRAINTS;
-DROP TABLE cat_tip_cmt CASCADE CONSTRAINTS;
-DROP TABLE cat_tip CASCADE CONSTRAINTS;
-DROP TABLE dog_movie_cmt CASCADE CONSTRAINTS;
-DROP TABLE dog_movie CASCADE CONSTRAINTS;
-DROP TABLE dog_photo_cmt CASCADE CONSTRAINTS;
-DROP TABLE dog_photo_link CASCADE CONSTRAINTS;
-DROP TABLE dog_photo CASCADE CONSTRAINTS;
-DROP TABLE dog_quest_cmt CASCADE CONSTRAINTS;
-DROP TABLE dog_quest CASCADE CONSTRAINTS;
-DROP TABLE dog_tip_cmt CASCADE CONSTRAINTS;
-DROP TABLE dog_tip CASCADE CONSTRAINTS;
-DROP TABLE etc_movie_cmt CASCADE CONSTRAINTS;
-DROP TABLE etc_movie CASCADE CONSTRAINTS;
-DROP TABLE etc_photo_cmt CASCADE CONSTRAINTS;
-DROP TABLE etc_photo_link CASCADE CONSTRAINTS;
-DROP TABLE etc_photo CASCADE CONSTRAINTS;
-DROP TABLE etc_quest_cmt CASCADE CONSTRAINTS;
-DROP TABLE etc_quest CASCADE CONSTRAINTS;
-DROP TABLE etc_tip_cmt CASCADE CONSTRAINTS;
-DROP TABLE etc_tip CASCADE CONSTRAINTS;
 DROP TABLE freeboard_cmt CASCADE CONSTRAINTS;
 DROP TABLE freeboard CASCADE CONSTRAINTS;
+DROP TABLE movie_cmt CASCADE CONSTRAINTS;
+DROP TABLE movie CASCADE CONSTRAINTS;
+DROP TABLE photo_cmd CASCADE CONSTRAINTS;
+DROP TABLE photo_link CASCADE CONSTRAINTS;
+DROP TABLE photo CASCADE CONSTRAINTS;
+DROP TABLE quest_cmt CASCADE CONSTRAINTS;
+DROP TABLE quest CASCADE CONSTRAINTS;
 DROP TABLE reservation CASCADE CONSTRAINTS;
-DROP TABLE rna_movie_cmt CASCADE CONSTRAINTS;
-DROP TABLE rna_movie CASCADE CONSTRAINTS;
-DROP TABLE rna_photo_cmt CASCADE CONSTRAINTS;
-DROP TABLE rna_photo_link CASCADE CONSTRAINTS;
-DROP TABLE rna_photo CASCADE CONSTRAINTS;
-DROP TABLE rna_quest_cmt CASCADE CONSTRAINTS;
-DROP TABLE rna_quest CASCADE CONSTRAINTS;
-DROP TABLE rna_tip_cmt CASCADE CONSTRAINTS;
-DROP TABLE rna_tip CASCADE CONSTRAINTS;
+DROP TABLE tip_cmt CASCADE CONSTRAINTS;
+DROP TABLE tip CASCADE CONSTRAINTS;
 DROP TABLE member CASCADE CONSTRAINTS;
 DROP TABLE store_category CASCADE CONSTRAINTS;
 
@@ -89,6 +54,7 @@ CREATE TABLE animal
 	mem_no number NOT NULL,
 	ani_name nvarchar2(20) NOT NULL,
 	ani_age number NOT NULL,
+	ani_gender varchar2(1) NOT NULL CHECK (ani_gender IN ('F', 'M', 'U')),
 	ani_species nvarchar2(10) NOT NULL,
 	ani_kind nvarchar2(20) NOT NULL,
 	ani_pic nvarchar2(500) NOT NULL,
@@ -99,452 +65,18 @@ CREATE TABLE animal
 CREATE TABLE animal_category
 (
 	animal_code number NOT NULL,
-	animal_name nvarchar2(20) NOT NULL,
 	PRIMARY KEY (animal_code)
 );
 
 
-CREATE TABLE bird_movie
+CREATE TABLE drafting
 (
-	movie_no number NOT NULL,
-	mem_no number NOT NULL,
-	movie_title nvarchar2(50) NOT NULL,
-	movie_count number DEFAULT 0,
-	movie_content nvarchar2(2000) NOT NULL,
-	movie_hit number DEFAULT 0,
-	movie_regidate date DEFAULT sysdate,
-	PRIMARY KEY (movie_no)
-);
-
-
-CREATE TABLE bird_movie_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE bird_photo
-(
-	photo_no number NOT NULL,
-	mem_no number NOT NULL,
-	photo_count number DEFAULT 0,
-	photo_title nvarchar2(50) NOT NULL,
-	photo_content nvarchar2(2000) NOT NULL,
-	photo_hit number DEFAULT 0,
-	photo_regidate date DEFAULT sysdate,
-	PRIMARY KEY (photo_no)
-);
-
-
-CREATE TABLE bird_photo_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE bird_photo_link
-(
-	link_no number NOT NULL,
-	photo_no number NOT NULL,
-	link nvarchar2(300) NOT NULL,
-	PRIMARY KEY (link_no)
-);
-
-
-CREATE TABLE bird_quest
-(
-	quest_no number NOT NULL,
-	mem_no number NOT NULL,
-	quest_title nvarchar2(50) NOT NULL,
-	quest_content nvarchar2(2000) NOT NULL,
-	quest_hit number DEFAULT 0,
-	quest_regidate date DEFAULT sysdate,
-	quest_count number DEFAULT 0,
-	origin_no number DEFAULT 0,
-	checking number(1) DEFAULT 0,
-	PRIMARY KEY (quest_no)
-);
-
-
-CREATE TABLE bird_quest_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE bird_tip
-(
-	tip_no number NOT NULL,
-	mem_no number NOT NULL,
-	tip_title nvarchar2(50) NOT NULL,
-	tip_content nvarchar2(2000) NOT NULL,
-	tip_count number DEFAULT 0,
-	tip_regidate date DEFAULT sysdate,
-	tip_hit number DEFAULT 0,
-	PRIMARY KEY (tip_no)
-);
-
-
-CREATE TABLE bird_tip_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE cat_movie
-(
-	movie_no number NOT NULL,
-	mem_no number NOT NULL,
-	movie_title nvarchar2(50) NOT NULL,
-	movie_count number DEFAULT 0,
-	movie_content nvarchar2(2000) NOT NULL,
-	movie_hit number DEFAULT 0,
-	movie_regidate date DEFAULT sysdate,
-	PRIMARY KEY (movie_no)
-);
-
-
-CREATE TABLE cat_movie_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE cat_photo
-(
-	photo_no number NOT NULL,
-	mem_no number NOT NULL,
-	photo_count number DEFAULT 0,
-	photo_title nvarchar2(50) NOT NULL,
-	photo_content nvarchar2(2000) NOT NULL,
-	photo_hit number DEFAULT 0,
-	photo_regidate date DEFAULT sysdate,
-	PRIMARY KEY (photo_no)
-);
-
-
-CREATE TABLE cat_photo_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE cat_photo_link
-(
-	link_no number NOT NULL,
-	photo_no number NOT NULL,
-	link nvarchar2(300) NOT NULL,
-	PRIMARY KEY (link_no)
-);
-
-
-CREATE TABLE cat_quest
-(
-	quest_no number NOT NULL,
-	mem_no number NOT NULL,
-	quest_title nvarchar2(50) NOT NULL,
-	quest_content nvarchar2(2000) NOT NULL,
-	quest_hit number DEFAULT 0,
-	quest_regidate date DEFAULT sysdate,
-	quest_count number DEFAULT 0,
-	origin_no number DEFAULT 0,
-	checking number(1) DEFAULT 0,
-	PRIMARY KEY (quest_no)
-);
-
-
-CREATE TABLE cat_quest_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE cat_tip
-(
-	tip_no number NOT NULL,
-	mem_no number NOT NULL,
-	tip_title nvarchar2(50) NOT NULL,
-	tip_content nvarchar2(2000) NOT NULL,
-	tip_count number DEFAULT 0,
-	tip_regidate date DEFAULT sysdate,
-	tip_hit number DEFAULT 0,
-	PRIMARY KEY (tip_no)
-);
-
-
-CREATE TABLE cat_tip_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE dog_movie
-(
-	movie_no number NOT NULL,
-	mem_no number NOT NULL,
-	movie_title nvarchar2(50) NOT NULL,
-	movie_count number DEFAULT 0,
-	movie_content nvarchar2(2000) NOT NULL,
-	movie_hit number DEFAULT 0,
-	movie_regidate date DEFAULT sysdate,
-	PRIMARY KEY (movie_no)
-);
-
-
-CREATE TABLE dog_movie_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE dog_photo
-(
-	photo_no number NOT NULL,
-	mem_no number NOT NULL,
-	photo_count number DEFAULT 0,
-	photo_title nvarchar2(50) NOT NULL,
-	photo_content nvarchar2(2000) NOT NULL,
-	photo_hit number DEFAULT 0,
-	photo_regidate date DEFAULT sysdate,
-	PRIMARY KEY (photo_no)
-);
-
-
-CREATE TABLE dog_photo_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE dog_photo_link
-(
-	link_no number NOT NULL,
-	link nvarchar2(300) NOT NULL,
-	photo_no number NOT NULL,
-	PRIMARY KEY (link_no)
-);
-
-
-CREATE TABLE dog_quest
-(
-	quest_no number NOT NULL,
-	mem_no number NOT NULL,
-	quest_title nvarchar2(50) NOT NULL,
-	quest_content nvarchar2(2000) NOT NULL,
-	quest_hit number DEFAULT 0,
-	quest_regidate date DEFAULT sysdate,
-	quest_count number DEFAULT 0,
-	origin_no number DEFAULT 0,
-	checking number(1) DEFAULT 0,
-	PRIMARY KEY (quest_no)
-);
-
-
-CREATE TABLE dog_quest_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE dog_tip
-(
-	tip_no number NOT NULL,
-	mem_no number NOT NULL,
-	tip_title nvarchar2(50) NOT NULL,
-	tip_content nvarchar2(2000) NOT NULL,
-	tip_count number DEFAULT 0,
-	tip_regidate date DEFAULT sysdate,
-	tip_hit number DEFAULT 0,
-	PRIMARY KEY (tip_no)
-);
-
-
-CREATE TABLE dog_tip_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE etc_movie
-(
-	movie_no number NOT NULL,
-	mem_no number NOT NULL,
-	movie_title nvarchar2(50) NOT NULL,
-	movie_count number DEFAULT 0,
-	movie_content nvarchar2(2000) NOT NULL,
-	movie_hit number DEFAULT 0,
-	movie_regidate date DEFAULT sysdate,
-	PRIMARY KEY (movie_no)
-);
-
-
-CREATE TABLE etc_movie_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE etc_photo
-(
-	photo_no number NOT NULL,
-	mem_no number NOT NULL,
-	photo_count number DEFAULT 0,
-	photo_title nvarchar2(50) NOT NULL,
-	photo_content nvarchar2(2000) NOT NULL,
-	photo_hit number DEFAULT 0,
-	photo_regidate date DEFAULT sysdate,
-	PRIMARY KEY (photo_no)
-);
-
-
-CREATE TABLE etc_photo_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE etc_photo_link
-(
-	link_no number NOT NULL,
-	photo_no number NOT NULL,
-	link nvarchar2(300) NOT NULL,
-	PRIMARY KEY (link_no)
-);
-
-
-CREATE TABLE etc_quest
-(
-	quest_no number NOT NULL,
-	mem_no number NOT NULL,
-	quest_title nvarchar2(50) NOT NULL,
-	quest_content nvarchar2(2000) NOT NULL,
-	quest_hit number DEFAULT 0,
-	quest_regidate date DEFAULT sysdate,
-	quest_count number DEFAULT 0,
-	origin_no number DEFAULT 0,
-	checking number(1) DEFAULT 0,
-	PRIMARY KEY (quest_no)
-);
-
-
-CREATE TABLE etc_quest_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE etc_tip
-(
-	tip_no number NOT NULL,
-	mem_no number NOT NULL,
-	tip_title nvarchar2(50) NOT NULL,
-	tip_content nvarchar2(2000) NOT NULL,
-	tip_count number DEFAULT 0,
-	tip_regidate date DEFAULT sysdate,
-	tip_hit number DEFAULT 0,
-	PRIMARY KEY (tip_no)
-);
-
-
-CREATE TABLE etc_tip_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
+	dtf_no number NOT NULL,
+	send_no number NOT NULL,
+	receive_no number NOT NULL,
+	apply number(1),
+	dtf_date date DEFAULT SYSDATE,
+	PRIMARY KEY (dtf_no)
 );
 
 
@@ -736,6 +268,32 @@ CREATE TABLE miss_see_cmt
 );
 
 
+CREATE TABLE movie
+(
+	movie_no number NOT NULL,
+	mem_no number NOT NULL,
+	movie_title nvarchar2(50) NOT NULL,
+	movie_content nvarchar2(2000) NOT NULL,
+	movie_count number DEFAULT 0,
+	movie_hit number DEFAULT 0,
+	movie_regidate date DEFAULT SYSDATE,
+	ani_category number(1) CHECK (ani_category IN (1, 2, 3, 4, 5)),
+	PRIMARY KEY (movie_no)
+);
+
+
+CREATE TABLE movie_cmt
+(
+	cmt_no number NOT NULL,
+	origin_no number NOT NULL,
+	mem_no number NOT NULL,
+	cmt_content nvarchar2(200) NOT NULL,
+	hit number DEFAULT 0,
+	regidate date DEFAULT SYSDATE,
+	PRIMARY KEY (cmt_no)
+);
+
+
 CREATE TABLE notice
 (
 	no number NOT NULL,
@@ -745,6 +303,69 @@ CREATE TABLE notice
 	regidate date DEFAULT SYSDATE,
 	count number DEFAULT 0,
 	PRIMARY KEY (no)
+);
+
+
+CREATE TABLE photo
+(
+	photo_no number NOT NULL,
+	mem_no number NOT NULL,
+	photo_title nvarchar2(50) NOT NULL,
+	photo_content nvarchar2(2000) NOT NULL,
+	photo_count number DEFAULT 0,
+	photo_hit number DEFAULT 0,
+	photo_regidate date DEFAULT SYSDATE,
+	ani_category number(1) NOT NULL CHECK (ani_category IN (1, 2, 3, 4, 5)),
+	PRIMARY KEY (photo_no)
+);
+
+
+CREATE TABLE photo_cmd
+(
+	cmt_no number NOT NULL,
+	origin_no number NOT NULL,
+	mem_no number NOT NULL,
+	cmt_content nvarchar2(200) NOT NULL,
+	hit number DEFAULT 0,
+	regidate date DEFAULT SYSDATE,
+	PRIMARY KEY (cmt_no)
+);
+
+
+CREATE TABLE photo_link
+(
+	link_no number NOT NULL,
+	photo_no number NOT NULL,
+	link nvarchar2(300) NOT NULL,
+	PRIMARY KEY (link_no)
+);
+
+
+CREATE TABLE quest
+(
+	quest_no number NOT NULL,
+	mem_no number NOT NULL,
+	quest_title nvarchar2(50) NOT NULL,
+	quest_content nvarchar2(2000) NOT NULL,
+	quest_count number DEFAULT 0,
+	quest_hit number DEFAULT 0,
+	quest_regidate date DEFAULT SYSDATE,
+	origin_no number NOT NULL,
+	checking number(1) DEFAULT 0 NOT NULL CHECK (checking IN (0, 1)),
+	ani_category number(1) NOT NULL CHECK (ani_category IN (1, 2, 3, 4, 5)),
+	PRIMARY KEY (quest_no)
+);
+
+
+CREATE TABLE quest_cmt
+(
+	cmt_no number NOT NULL,
+	origin_no number NOT NULL,
+	mem_no number NOT NULL,
+	cmt_content nvarchar2(200) NOT NULL,
+	hit number DEFAULT 0,
+	regidate date DEFAULT SYSDATE,
+	PRIMARY KEY (cmt_no)
 );
 
 
@@ -759,123 +380,39 @@ CREATE TABLE reservation
 );
 
 
-CREATE TABLE rna_movie
+CREATE TABLE store_category
 (
-	movie_no number NOT NULL,
-	mem_no number NOT NULL,
-	movie_title nvarchar2(50) NOT NULL,
-	movie_count number DEFAULT 0,
-	movie_content nvarchar2(2000) NOT NULL,
-	movie_hit number DEFAULT 0,
-	movie_regidate date DEFAULT sysdate,
-	PRIMARY KEY (movie_no)
+	store_no number NOT NULL,
+	store_code varchar2(20) NOT NULL,
+	animal_name nvarchar2(20) NOT NULL,
+	store_name nvarchar2(30) NOT NULL,
+	PRIMARY KEY (store_no)
 );
 
 
-CREATE TABLE rna_movie_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE rna_photo
-(
-	photo_no number NOT NULL,
-	mem_no number NOT NULL,
-	photo_count number DEFAULT 0,
-	photo_title nvarchar2(50) NOT NULL,
-	photo_content nvarchar2(2000) NOT NULL,
-	photo_hit number DEFAULT 0,
-	photo_regidate date DEFAULT sysdate,
-	PRIMARY KEY (photo_no)
-);
-
-
-CREATE TABLE rna_photo_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE rna_photo_link
-(
-	link_no number NOT NULL,
-	photo_no number NOT NULL,
-	link nvarchar2(300) NOT NULL,
-	PRIMARY KEY (link_no)
-);
-
-
-CREATE TABLE rna_quest
-(
-	quest_no number NOT NULL,
-	mem_no number NOT NULL,
-	quest_title nvarchar2(50) NOT NULL,
-	quest_content nvarchar2(2000) NOT NULL,
-	quest_hit number DEFAULT 0,
-	quest_regidate date DEFAULT sysdate,
-	quest_count number DEFAULT 0,
-	origin_no number DEFAULT 0,
-	checking number(1) DEFAULT 0,
-	PRIMARY KEY (quest_no)
-);
-
-
-CREATE TABLE rna_quest_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number NOT NULL,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date,
-	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE rna_tip
+CREATE TABLE tip
 (
 	tip_no number NOT NULL,
 	mem_no number NOT NULL,
 	tip_title nvarchar2(50) NOT NULL,
 	tip_content nvarchar2(2000) NOT NULL,
 	tip_count number DEFAULT 0,
-	tip_regidate date DEFAULT sysdate,
 	tip_hit number DEFAULT 0,
+	tip_regidate date DEFAULT SYSDATE,
+	ani_category number(1) NOT NULL CHECK (ani_category IN (1, 2, 3, 4, 5)),
 	PRIMARY KEY (tip_no)
 );
 
 
-CREATE TABLE rna_tip_cmt
+CREATE TABLE tip_cmt
 (
 	cmt_no number NOT NULL,
 	origin_no number NOT NULL,
 	mem_no number NOT NULL,
 	cmt_content nvarchar2(200) NOT NULL,
-	hit number,
-	regidate date DEFAULT sysdate,
+	hit number DEFAULT 0,
+	regidate date DEFAULT SYSDATE,
 	PRIMARY KEY (cmt_no)
-);
-
-
-CREATE TABLE store_category
-(
-	store_no number NOT NULL,
-	store_code varchar2(20) NOT NULL,
-	store_name nvarchar2(30) NOT NULL,
-	PRIMARY KEY (store_no)
 );
 
 
@@ -924,126 +461,6 @@ ALTER TABLE miss_see
 ;
 
 
-ALTER TABLE bird_movie_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES bird_movie (movie_no)
-;
-
-
-ALTER TABLE bird_photo_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES bird_photo (photo_no)
-;
-
-
-ALTER TABLE bird_photo_link
-	ADD FOREIGN KEY (photo_no)
-	REFERENCES bird_photo (photo_no)
-;
-
-
-ALTER TABLE bird_quest_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES bird_quest (quest_no)
-;
-
-
-ALTER TABLE bird_tip_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES bird_tip (tip_no)
-;
-
-
-ALTER TABLE cat_movie_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES cat_movie (movie_no)
-;
-
-
-ALTER TABLE cat_photo_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES cat_photo (photo_no)
-;
-
-
-ALTER TABLE cat_photo_link
-	ADD FOREIGN KEY (photo_no)
-	REFERENCES cat_photo (photo_no)
-;
-
-
-ALTER TABLE cat_quest_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES cat_quest (quest_no)
-;
-
-
-ALTER TABLE cat_tip_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES cat_tip (tip_no)
-;
-
-
-ALTER TABLE dog_movie_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES dog_movie (movie_no)
-;
-
-
-ALTER TABLE dog_photo_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES dog_photo (photo_no)
-;
-
-
-ALTER TABLE dog_photo_link
-	ADD FOREIGN KEY (photo_no)
-	REFERENCES dog_photo (photo_no)
-;
-
-
-ALTER TABLE dog_quest_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES dog_quest (quest_no)
-;
-
-
-ALTER TABLE dog_tip_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES dog_tip (tip_no)
-;
-
-
-ALTER TABLE etc_movie_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES etc_movie (movie_no)
-;
-
-
-ALTER TABLE etc_photo_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES etc_photo (photo_no)
-;
-
-
-ALTER TABLE etc_photo_link
-	ADD FOREIGN KEY (photo_no)
-	REFERENCES etc_photo (photo_no)
-;
-
-
-ALTER TABLE etc_quest_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES etc_quest (quest_no)
-;
-
-
-ALTER TABLE etc_tip_cmt
-	ADD FOREIGN KEY (origin_no)
-	REFERENCES etc_tip (tip_no)
-;
-
-
 ALTER TABLE freeboard_cmt
 	ADD FOREIGN KEY (origin_no)
 	REFERENCES freeboard (free_no)
@@ -1074,199 +491,19 @@ ALTER TABLE market_sell_cmt
 ;
 
 
+ALTER TABLE drafting
+	ADD FOREIGN KEY (send_no)
+	REFERENCES mating (mating_no)
+;
+
+
+ALTER TABLE drafting
+	ADD FOREIGN KEY (receive_no)
+	REFERENCES mating (mating_no)
+;
+
+
 ALTER TABLE animal
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE bird_movie
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE bird_movie_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE bird_photo
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE bird_photo_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE bird_quest
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE bird_quest_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE bird_tip
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE bird_tip_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE cat_movie
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE cat_movie_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE cat_photo
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE cat_photo_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE cat_quest
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE cat_quest_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE cat_tip
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE cat_tip_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE dog_movie
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE dog_movie_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE dog_photo
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE dog_photo_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE dog_quest
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE dog_quest_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE dog_tip
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE dog_tip_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE etc_movie
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE etc_movie_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE etc_photo
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE etc_photo_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE etc_quest
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE etc_quest_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE etc_tip
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE etc_tip_cmt
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 ;
@@ -1350,55 +587,55 @@ ALTER TABLE miss_see_cmt
 ;
 
 
+ALTER TABLE movie
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+;
+
+
+ALTER TABLE movie_cmt
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+;
+
+
+ALTER TABLE photo
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+;
+
+
+ALTER TABLE photo_cmd
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+;
+
+
+ALTER TABLE quest
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+;
+
+
+ALTER TABLE quest_cmt
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+;
+
+
 ALTER TABLE reservation
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 ;
 
 
-ALTER TABLE rna_movie
+ALTER TABLE tip
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 ;
 
 
-ALTER TABLE rna_movie_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE rna_photo
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE rna_photo_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE rna_quest
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE rna_quest_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE rna_tip
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-;
-
-
-ALTER TABLE rna_tip_cmt
+ALTER TABLE tip_cmt
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 ;
@@ -1416,33 +653,33 @@ ALTER TABLE miss_see_cmt
 ;
 
 
-ALTER TABLE rna_movie_cmt
+ALTER TABLE movie_cmt
 	ADD FOREIGN KEY (origin_no)
-	REFERENCES rna_movie (movie_no)
+	REFERENCES movie (movie_no)
 ;
 
 
-ALTER TABLE rna_photo_cmt
+ALTER TABLE photo_cmd
 	ADD FOREIGN KEY (origin_no)
-	REFERENCES rna_photo (photo_no)
+	REFERENCES photo (photo_no)
 ;
 
 
-ALTER TABLE rna_photo_link
+ALTER TABLE photo_link
 	ADD FOREIGN KEY (photo_no)
-	REFERENCES rna_photo (photo_no)
+	REFERENCES photo (photo_no)
 ;
 
 
-ALTER TABLE rna_quest_cmt
+ALTER TABLE quest_cmt
 	ADD FOREIGN KEY (origin_no)
-	REFERENCES rna_quest (quest_no)
+	REFERENCES quest (quest_no)
 ;
 
 
-ALTER TABLE rna_tip_cmt
+ALTER TABLE tip_cmt
 	ADD FOREIGN KEY (origin_no)
-	REFERENCES rna_tip (tip_no)
+	REFERENCES tip (tip_no)
 ;
 
 
