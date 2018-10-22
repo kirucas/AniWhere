@@ -31,7 +31,7 @@ public class DogStoryController {
 	private int pageSize;
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
-	@RequestMapping(value="/animal/dog/quest/quest_list.aw",method=RequestMethod.POST)
+	@RequestMapping("/animal/dog/quest/quest_list.aw")
 	public String list(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
 			@RequestParam Map map,//검색용 파라미터 받기
@@ -61,7 +61,7 @@ public class DogStoryController {
 		return "board/animal/dog/quest/quest_list.tiles";
 	}////////////////list()
 	
-	@RequestMapping(value="/animal/dog/quest/quest_write.aw",method=RequestMethod.GET)
+	@RequestMapping("/animal/dog/quest/quest_write.aw")
 	public String quest_write() throws Exception {
 		return "board/animal/dog/quest/quest_write.tiles";
 	}
