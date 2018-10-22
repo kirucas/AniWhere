@@ -37,14 +37,17 @@ public class BirdMovieController {
 		private int blockPage;
 		
 		@RequestMapping("/bird/movie/List.aw")
-		public String list(Model model,
-				HttpServletRequest req,//페이징용 메소드에 전달
+		public String list(
 				@RequestParam Map map,//검색용 파라미터 받기
-				@RequestParam(required=false,defaultValue="1") int nowPage//페이징용 nowPage파라미터 받기용
+				@RequestParam(required=false,defaultValue="1") 
+				int nowPage,//페이징용 nowPage파라미터 받기용
+				Model model,
+				HttpServletRequest req//페이징용 메소드에 전달
 				) throws Exception{
 			//서비스 호출]
 			//페이징을 위한 로직 시작]
 			//전체 레코드 수
+			map.put("table_name",TABLE_NAME);
 			int totalRecordCount= service.getTotalRecord(map);			
 			//시작 및 끝 ROWNUM구하기]
 			int start = (nowPage-1)*pageSize+1;
@@ -53,6 +56,21 @@ public class BirdMovieController {
 			map.put("end",end);
 			//페이징을 위한 로직 끝]	
 			List<MovieBoardDTO> list= service.selectList(map);
+			
+			MovieBoardDTO dto = list.get(0);
+			String content = dto.getMovie_content();
+			String src="<iframe>";
+			int target_num = content.indexOf(src);
+			String result;
+			if(target_num!=-1) {
+					result=content.substring(target_num,(content.substring(target_num).indexOf("</iframe>")+target_num));
+					System.out.println(result);
+			}
+			else {
+				
+			}
+				
+			
 			//페이징 문자열을 위한 로직 호출]
 			String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/movie/List.aw?");
 			//데이타 저장]
@@ -63,7 +81,7 @@ public class BirdMovieController {
 			model.addAttribute("pageSize", pageSize);
 			
 			//뷰정보반환]
-			return "movie/List.tiles";
+			return "forward:/animal/bird/movie.aw";
 		}////////////////list()
 			
 	//등록 폼으로 이동]
@@ -79,6 +97,7 @@ public class BirdMovieController {
 			) throws Exception{
 		//서비스 호출
 		map.put("table_name", TABLE_NAME);
+		System.out.println(map.get("table_name"));
 		service.insert(map);
 		//뷰정보 반환
 		return "forward:/bird/movie/List.aw";

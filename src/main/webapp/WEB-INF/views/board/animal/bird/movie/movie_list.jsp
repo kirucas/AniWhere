@@ -22,7 +22,6 @@
 .margin-top-20 {
 	margin-top: 2.0em;
 }
-
 .margin-top-30 {
 	margin-top: 3.0em;
 }
@@ -53,13 +52,13 @@
 
 <div class="container">
 
-	<c:if test="${empty requestScope.list }" var="isEmpty">
+	 <c:if test="${empty requestScope.list}" var="isEmpty">
 		<div>
 			<h5 colspan="4">등록된 게시물이 없어요</h5>
 		</div>
 	</c:if>
 
-	<c:if test="${not isEmpty }">
+	<c:if test="${not isEmpty}">
 		<c:forEach var="dto" items="${list}" varStatus="loop">
 			<div class="row margin-top-30">
 				<div class="col-sm">
@@ -269,15 +268,7 @@
 		aria-label="Page navigation example">
 		<ul class="pagination">
 			<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item"><a class="page-link" href="#">6</a></li>
-			<li class="page-item"><a class="page-link" href="#">7</a></li>
-			<li class="page-item"><a class="page-link" href="#">8</a></li>
-			<li class="page-item"><a class="page-link" href="#">9</a></li>
+			<li class="page-item"><a class="page-link" href="#">${pagingString}</a></li>
 			<li class="page-item"><a class="page-link" href="#">Next</a></li>
 		</ul>
 	</nav>

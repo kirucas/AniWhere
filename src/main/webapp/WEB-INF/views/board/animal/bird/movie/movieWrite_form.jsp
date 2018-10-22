@@ -45,7 +45,7 @@
 		/* 제목 */
 		ntWin.document.write("<br/>" + document.forms[0].movie_title.value + "<br/>");
 		/* 조회수 */
-		ntWin.document.write("<br/>" + document.movie_hit + "<br/>");
+		ntWin.document.write("<br/>" + document.movie_count + "<br/>");
 		/* 작성자 별명 */
 		ntWin.document.write("<br/>" + document.mem_nickname + "<br/>");
 		/* 게시일 */
