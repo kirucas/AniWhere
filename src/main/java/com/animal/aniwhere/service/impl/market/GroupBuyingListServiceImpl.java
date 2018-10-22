@@ -1,4 +1,4 @@
-package com.animal.aniwhere.service.impl;
+package com.animal.aniwhere.service.impl.market;
 
 import java.util.List;
 import java.util.Map;
@@ -8,17 +8,16 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.animal.aniwhere.service.AllBoardService;
-import com.animal.aniwhere.service.MatingDTO;
-import com.animal.aniwhere.service.member.AnimalDTO;
+import com.animal.aniwhere.service.market.GroupBuyingListDTO;
 
-@Service("matingService")
-public class MatingServiceImpl implements AllBoardService {
+@Service("gbListService")
+public class GroupBuyingListServiceImpl implements AllBoardService {
 
-	@Resource(name = "matingDAO")
-	private MatingDAO dao;
+	@Resource(name = "groupBuyingListDAO")
+	private GroupBuyingListDAO dao;
 
 	@Override
-	public List<MatingDTO> selectList(Map map) {
+	public List<GroupBuyingListDTO> selectList(Map map) {
 		return dao.selectList(map);
 	}////////// selectList
 
@@ -29,7 +28,7 @@ public class MatingServiceImpl implements AllBoardService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public MatingDTO selectOne(Map map) {
+	public GroupBuyingListDTO selectOne(Map map) {
 		return dao.selectOne(map);
 	}////////// selectOne
 
@@ -47,9 +46,5 @@ public class MatingServiceImpl implements AllBoardService {
 	public int delete(Map map) {
 		return dao.delete(map);
 	}////////// delete
-	
-	public List<AnimalDTO> selectMyMating(Map map){
-		return dao.selectMyMating(map);
-	}////////// selectMyMating
 
-}//////////////////// MatingBoardServiceImpl class
+}//////////////////// GroupBuyingListServiceImple class

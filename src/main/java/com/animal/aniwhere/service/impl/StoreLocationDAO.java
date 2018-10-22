@@ -9,48 +9,43 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.animal.aniwhere.service.AllBoardService;
-import com.animal.aniwhere.service.MatingDTO;
-import com.animal.aniwhere.service.member.AnimalDTO;
+import com.animal.aniwhere.service.StoreLocationDTO;
 
 @Repository
-public class MatingDAO implements AllBoardService {
+public class StoreLocationDAO implements AllBoardService {
 
 	@Resource(name = "template")
 	private SqlSessionTemplate template;
 
 	@Override
-	public List<MatingDTO> selectList(Map map) {
-		return template.selectList("matingSelectList", map);
+	public List<StoreLocationDTO> selectList(Map map) {
+		return template.selectList("storeSelectList", map);
 	}////////// selectList
 
 	@Override
 	public int getTotalRecord(Map map) {
-		return template.selectOne("matingCount", map);
+		return template.selectOne("storeCount", map);
 	}////////// getTotalRecord
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public MatingDTO selectOne(Map map) {
-		return template.selectOne("matingSelectOne", map);
+	public StoreLocationDTO selectOne(Map map) {
+		return template.selectOne("storeSelectOne", map);
 	}////////// selectOne
 
 	@Override
 	public int insert(Map map) {
-		return template.insert("matingInsert", map);
+		return template.insert("storeInsert", map);
 	}////////// insert
 
 	@Override
 	public int update(Map map) {
-		return template.update("matingUpdate", map);
+		return template.update("storeUpdate", map);
 	}////////// update
 
 	@Override
 	public int delete(Map map) {
-		return template.delete("matingDelete", map);
+		return template.delete("storeDelete", map);
 	}////////// delete
-	
-	public List<AnimalDTO> selectMyMating(Map map){
-		return template.selectList("selectMyMating", map);
-	}////////// selectMyMating
 
-}//////////////////// MatingBoardDAO
+}//////////////////// StoreLocationDAO class

@@ -7,13 +7,29 @@
 
 	<select id="noticeCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
-		FROM notice
+		FROM (
+			SELECT nt.*, am_id
+			FROM notice nt JOIN admin_member am ON nt.am_no=am.am_no
+			<if test="searchColumn != null">
+				WHERE ${searchColumn} like '%'||#{searchWord}||'%'
+			</if>
+			)
 	</select>
 	
 	<select id="noticeSelectList" parameterType="java.util.Map" resultType="NoticeDTO">
-		SELECT nt.*, am_id
-		FROM notice nt JOIN admin_member am ON nt.am_no = am.am_no 
-		ORDER BY no DESC
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT nt.*, am_id
+				FROM notice nt JOIN admin_member am ON nt.am_no=am.am_no
+				<if test="searchColumn != null">
+					WHERE ${searchColumn like '%'||#{searchWord}||'%'
+				</if>
+				ORDER BY nt.no DESC
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="noticeSelectOne" parameterType="java.util.Map" resultType="NoticeDTO">
