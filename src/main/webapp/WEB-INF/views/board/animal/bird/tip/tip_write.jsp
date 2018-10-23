@@ -66,12 +66,12 @@
 			<div class="form-group form-row">
 				<input type="hidden" name="tip_no"/>
 				<input type="hidden" name="mem_no" value="${mem_no}" />
-                 	<select name="tip_category" style="width:53px;height:38px;margin-right:10px;">
-                         <option value="1">잡담</option>
-                         <option value="2">정보</option>
-                         <option value="3">유머</option>
-                         <option value="4">이슈</option>
-                         <option value="5">시사</option>
+                 	<select name="ani_category" style="width:53px;height:38px;margin-right:10px;">
+                         <option value="1">강아지</option>
+                         <option value="2">고양이</option>
+                         <option value="3">파충류,양서류</option>
+                         <option value="4">조류</option>
+                         <option value="5">기타</option>
                   	</select>
 				<div class="form-row" style="width:87.5%;"id="titlediv">
 					<input type="text" class="form-control" id="title" name="tip_title" placeholder="제목을 입력하세요">

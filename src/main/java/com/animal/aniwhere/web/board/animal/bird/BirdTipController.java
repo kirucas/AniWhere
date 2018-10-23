@@ -26,7 +26,7 @@ import com.animal.aniwhere.web.board.FileUpDownUtils;
 @Controller
 public class BirdTipController {
 
-	@Resource(name="freeBoardService")
+	@Resource(name="tipService")
 	private AllBoardService allBoardService;
 	
 	@Value("${PAGESIZE}")
@@ -91,7 +91,7 @@ public class BirdTipController {
 		
 		allBoardService.insert(map);
 		//뷰정보반환
-		return "forward:/animal/tip_list.aw";//접두어 접미어 설정 적용 안되게끔 하려고 forward:를 붙임
+		return "forward:/board/animal/bird/tip/list.aw";//접두어 접미어 설정 적용 안되게끔 하려고 forward:를 붙임
 	}////////////////
 
 	//수정폼으로 이동 및 수정 처리]

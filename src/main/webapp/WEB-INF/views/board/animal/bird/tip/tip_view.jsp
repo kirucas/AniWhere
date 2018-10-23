@@ -22,20 +22,20 @@
 				<div class="article-header">
 					<div class="article__title">
 					<c:choose>
-							<c:when test="${record.tip_category eq '1'}">
-								<span>[잡담]</span>
+							<c:when test="${record.ani_category eq '1'}">
+								<span>[강아지]</span>
 							</c:when>
-							<c:when test="${record.tip_category eq '2'}">
-								<span>[정보]</span>		
+							<c:when test="${record.ani_category eq '2'}">
+								<span>[고양이]</span>		
 							</c:when>
-							<c:when test="${record.tip_category eq '3'}">
-								<span>[유머]</span>
+							<c:when test="${record.ani_category eq '3'}">
+								<span>[파충류,양서류]</span>
 							</c:when>
-							<c:when test="${record.tip_category eq '4'}">
-								<span>[이슈]</span>
+							<c:when test="${record.ani_category eq '4'}">
+								<span>[조류]</span>
 							</c:when>
 							<c:otherwise>
-								<span>[시사]</span>
+								<span>[기타]</span>
 							</c:otherwise>
 						</c:choose>
 						${record.tip_title}
@@ -46,7 +46,7 @@
 								<a href="<c:url value='board/animal/bird/tip/edit.aw?tip_no=${record.tip_no}'/>" class="article-action__button button">수정</a>
 								<a href="javascript:isDelete()" class="article-action__button button button--red button--red--border">삭제</a>
 							</c:if>
-							<a href="<c:url value='board/animal/bird/tip/list.aw'/>" class="article-action__button button">목록</a>	
+							<a href="<c:url value='/board/animal/bird/tip/list.aw'/>" class="article-action__button button">목록</a>	
 							</div>
 					</div>
 					<div class="article-meta">
@@ -54,7 +54,7 @@
 						<div class="article-meta-list">
 							<div class="article-meta__item article-meta__item--name">
 								<a
-									href="https://talk.op.gg/s/lol/tip?q=%EB%9F%B0%EB%B9%8C%EB%A1%9C%EA%BE%B8%EA%BA%BC&amp;target=user_name">
+					ㅇ				href="https://talk.op.gg/s/lol/tip?q=%EB%9F%B0%EB%B9%8C%EB%A1%9C%EA%BE%B8%EA%BA%BC&amp;target=user_name">
 									${record.mem_no} </a>
 							</div>
 							<div class="article-meta__item">

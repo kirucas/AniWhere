@@ -98,7 +98,7 @@
 					</a>
 					<div class="article-list-item-meta">
 						<div class="article-list-item-meta__item">
-							<span data-tooltip data-date=${record.tip_regidate } title=""></span>
+							<span data-tooltip data-date=${record.tip_regidate} title=""></span>
 						</div>
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
 							<a href="#" id="mem_no">${record.mem_no} </a>
