@@ -25,7 +25,7 @@
 	
 	<insert id="tipInsert" parameterType="java.util.Map">
 		INSERT INTO ${table_name}(tip_no, mem_no, tip_title, tip_content)
-		VALUES(seq_${table_name}, #{mem_no}, #{tip_title}, #{tip_content})
+		VALUES(seq_${table_name}.nextval, #{mem_no}, #{tip_title}, #{tip_content})
 	</insert>
 	
 	<update id="tipUpdate" parameterType="java.util.Map">
