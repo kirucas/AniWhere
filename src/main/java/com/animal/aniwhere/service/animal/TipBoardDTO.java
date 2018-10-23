@@ -80,7 +80,7 @@ public class TipBoardDTO {
 
 	public String getAni_category() {
 		return ani_category;
-	}/////////
+	}//////////
 
 	public void setAni_category(String ani_category) {
 		this.ani_category = ani_category;
