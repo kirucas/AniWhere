@@ -75,16 +75,16 @@
 		    		</div>
 				<div class="article-list-item__content">
 						<c:choose>
-							<c:when test="${record.tip_category eq '1'}">
+							<c:when test="${record.ani_category eq '1'}">
 								<span>[잡담]</span>
 							</c:when>
-							<c:when test="${record.tip_category eq '2'}">
+							<c:when test="${record.ani_category eq '2'}">
 								<span>[정보]</span>		
 							</c:when>
-							<c:when test="${record.tip_category eq '3'}">
+							<c:when test="${record.ani_category eq '3'}">
 								<span>[유머]</span>
 							</c:when>
-							<c:when test="${record.tip_category eq '4'}">
+							<c:when test="${record.ani_category eq '4'}">
 								<span>[이슈]</span>
 							</c:when>
 							<c:otherwise>

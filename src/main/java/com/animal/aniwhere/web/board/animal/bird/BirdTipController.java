@@ -52,7 +52,7 @@ public class BirdTipController {
 		//페이징을 위한 로직 끝]
 		List<TipBoardDTO> list = (List<TipBoardDTO>) allBoardService.selectList(map);
 		//페이징 문자열을 위한 로직 호출]
-		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/animal/tipboard.aw?");
+		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/board/animal/bird/tip/list.aw?");
 		//데이터 저장]
 		model.addAttribute("pagingString", pagingString);
 		model.addAttribute("list", list);
