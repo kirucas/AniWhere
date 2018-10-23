@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<form action="/animal/dog/quest/quest_list.aw" id="form1"></form>
 <script>
 	(function($){
 		$('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
@@ -72,7 +71,7 @@ nav a{
 	                                		&nbsp;강아지
 	                                </a>
 	                                <ul class="dropdown-menu" aria-labelledby="dog_main">
-		                                <li><a href="<c:url value='/animal/dog/photo.aw'/>"><input type="hidden" id="ani_category" name="ani_category" value="1" form="form1"/>사진 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/dog/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/dog/movie.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/dog/quest.aw'/>">질문 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/dog/tip.aw'/>">팁 게시판</a></li>

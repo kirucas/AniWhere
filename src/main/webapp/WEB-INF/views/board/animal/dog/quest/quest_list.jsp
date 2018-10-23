@@ -14,7 +14,6 @@
 	<form action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
 		<div class="wr offset-sm-9 col-sm-3">	
 			<div align="right" >
-				<input type="hidden" id="ani_category" name="ani_category" value="1">
 				<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>" 
 				class="btn btn-success"><i class="fas fa-pen-square" >글쓰기</i></a>
 			</div>

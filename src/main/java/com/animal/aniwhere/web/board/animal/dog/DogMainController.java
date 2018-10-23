@@ -18,4 +18,6 @@ public class DogMainController {
 		return "board/animal/dog/" + path + "/" + path + "_list.tiles";
 	}////////// move_board
 	
+	
+	
 }//////////////////// DogMainController class

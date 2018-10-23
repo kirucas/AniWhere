@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container border">
-<form action="/animal/dog/quest/quest_edit.aw" id="form1"></form>
-<form action="/animal/dog/quest/quest_edit.aw" id="form2"></form>
+<form action='<c:url value="/animal/dog/quest/quest_edit.aw"/>' id="form1"></form>
+<form action='<c:url value="/animal/dog/quest/quest_list.aw"/>' id="form2"></form>
 	<div class="row offset-sm-10 col-sm-2">
 		<p class="text-right">질문 게시판</p>
 	</div>
@@ -18,16 +18,14 @@
 			 ${record.mem_nickname }
 		</div>
 		<div class="col-sm-1">
-			작성일
+			작성일  
 		</div>
 		<div class="col-sm-2">
 			 ${record.quest_regidate}
 		</div>
-		<form>
-		<div class="offset-sm-3 col-sm-4" style="text-align: right;">
-			<a href="<c:url value='/animal/dog/quest/quest_edit.aw?=quest_no${record.quest_no}'/>"><input type="hidden" id="ani_category" name="ani_category" value="1" form="form1"/>수정 </a><a href="#">| 삭제 </a><a href="<c:url value='/animal/dog/quest/quest_list.aw'/>"><input type="hidden" id="ani_category" name="ani_category" value="1" form="form2"/>| 목록</a>
+		<div class="offset-sm-2 col-sm-4" style="text-align: right;">
+			<a href="<c:url value='/animal/dog/quest/quest_edit.aw?=quest_no${record.quest_no}'/>"><input type="hidden" id="ani_category" name="ani_category" value="1" form="form1" />수정 </a><a href="#">| 삭제 </a><a href="<c:url value='/animal/dog/quest/quest_list.aw'/>"><input type="hidden" id="ani_category" name="ani_category" value="1" form="form2" />| 목록</a>
 		</div>
-		</form>
 	</div>
 	<div class="row border-top-0">
 		<div class="offset-sm-8 col-sm-4" style="text-align: right;">
