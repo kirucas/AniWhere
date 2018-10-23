@@ -24,11 +24,6 @@
 	</select>
 	
 	<select id="bsSelectList" parameterType="java.util.Map" resultType="BSDTO">
-		SELECT tn.*, mem_nickname, animal_name
-		FROM market_${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
-		JOIN animal_category ac ON tn.animal_code = ac.animal_code
-		ORDER BY no DESC
-		
 		SELECT *
 		FROM (
 			SELECT T.*, ROWNUM R
