@@ -28,6 +28,9 @@
 		$("#mating_main").click(function(){
 			location.href = "<c:url value='/mating/main.aw' />";
 		});
+		$("#where_main").click(function(){
+			location.href = "<c:url value='/where/main.aw' />";
+		});
 		$("#login").click(function(){
 			location.href = "<c:url value='/login.aw' />";
 		});

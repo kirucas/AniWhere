@@ -14,6 +14,7 @@
 	<select id="photoSelectList" parameterType="java.util.Map" resultType="PhotoDTO">
 		SELECT tn.*, mem_nickname
 		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+		ORDER BY photo_no DESC
 	</select>
 	
 	<select id="photoSelectOne" parameterType="java.util.Map" resultType="PhotoDTO">
@@ -45,6 +46,7 @@
 		SELECT *
 		FROM ${table_name}_link
 		WHERE photo_no=#{photo_no}
+		ORDER link_no
 	</select>
 	
 	<insert id="linkInsert" parameterType="java.util.Map">

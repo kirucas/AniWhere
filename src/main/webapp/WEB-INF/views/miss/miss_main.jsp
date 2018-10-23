@@ -47,7 +47,7 @@
 	      scrollbar: {
 	        el: '.swiper-scrollbar',
 	      },
-	    })
+	    });
 	  });
   </script>
 <!-- Slider main container -->
@@ -56,8 +56,8 @@
 	<div class="swiper-wrapper">
 		<!-- Slides -->
 		<div class="swiper-slide text-xs-center text-lg-center">
-			<a href="<c:url value='/miss/find.aw'/>"> <img class="img-thumbnail img-fluid"
-				style="align: center; margin-bottom: 5px; height: 100%"
+			<a href="<c:url value='/miss/find.aw'/>"> 
+			<img class="img-thumbnail img-fluid" style="align: center; margin-bottom: 5px; height: 100%"
 				src="<c:url value='/resources/images/miss/find.jpg'/>" />
 			</a>
 		</div>
@@ -115,7 +115,7 @@
 			</div>
 		</div>
 		<div class="col-sm-12">
-			<a href="<c:url value='/miss/shelter.aw'/>"><span>보호소</span></a>
+			<a href="<c:url value='/miss/shelter.aw'/>"><button type="button" class="btn btn-info">보호소</button></a>
 
 			<div class="row text-center text-lg-left">
 

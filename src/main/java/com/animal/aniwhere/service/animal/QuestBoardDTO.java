@@ -10,6 +10,7 @@ public class QuestBoardDTO {
 	private java.sql.Date quest_regidate;
 	private String quest_count;
 	private String origin_no;
+	private String checking;
 	
 	// 작성자 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
@@ -84,6 +85,14 @@ public class QuestBoardDTO {
 
 	public void setMem_nickname(String mem_nickname) {
 		this.mem_nickname = mem_nickname;
+	}//////////
+
+	public String getChecking() {
+		return checking;
+	}//////////
+
+	public void setChecking(String checking) {
+		this.checking = checking;
 	}//////////
 	
 }//////////////////// QuestBoardDTO class

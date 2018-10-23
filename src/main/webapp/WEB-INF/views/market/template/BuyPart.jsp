@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,13 +45,7 @@ html {
 
 	<!-- top 와야하는 자리 -->
 
-
-
 	<header> </header>
-
-
-
-
 
 	<div class="card mb-5" style="margin-top: 50px">
 
@@ -64,14 +56,15 @@ html {
 		
 		<div class="card-block p-0">
 		
-		<div style="text-align:right"> 
+		<div style="text-align:right">
+		 
 	<a href="<c:url value='/market/buyWrite.aw'/>">	<button style="width:65px;height:40px" type="submit" class="btn btn-primary"><img src = "<c:url value='/resources/images/maketimages/Write.png'/>" style="width:20px;height:20px"/>
 		등록</button></a>
+		
 		</div>
 			<table class="table table-bordered table-sm m-0">
 				<thead class="table-warning">
 					<tr>
-
 						<th style="width: 50px">게시번호</th>
 						<th style="width: 400px">제목</th>
 						<th style="width: 50px">작성자</th>
@@ -86,10 +79,8 @@ html {
 						<td>[공지사항]민사상 법률 팁 사기예방 공지사항</td>
 						<td>관리자</td>
 						<td>557</td>
-						<td>20180-08-17</td>
+						<td>2018-08-17</td>
 					</tr>
-
-
 					<tr>
 
 						<td>95</td>
@@ -99,49 +90,40 @@ html {
 						 </td>
 						<td>Jan_sina</td>
 						<td>180</td>
-						<td>20180-09-14</td>
+						<td>2018-09-14</td>
 					</tr>
 
 					<c:forEach var="record" items="${list}" varStatus="loop">
 						<tr>
 						<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}일련번호</td>
-							<td class="text-left"><c:forEach begin="1"
+							<td class="text-left">
+							<c:forEach begin="1"
 									end="${record.depth}" varStatus="loopvar">
 		    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		    				<c:if test="${loopvar.last}">
 		    					└☞
 		    				</c:if>
-								</c:forEach> <a
-								href="<c:url value='/ReplyBBS/BBS/View.bbs?no=${record.no}'/>">${record.title }</a>
+								</c:forEach> 
+								<a href="<c:url value='/market/buyinside.aw?no=${record.no}'/>">${record.title }</a>
 							제목</td>
 							<td>${record.name} 작성자</td>
-							<td>조회수   </td>
+							<td>${record.count}  </td>
 							<td>${record.postdate} 등록일</td>
 						</tr>
 					</c:forEach>
 
-					<tr>
-
-						<td>67</td>
-
-						<td>[개][대형][사료]골든리트리버 사료 구매합니다 완전 새거! [2]</td>
-						<td>Jan_sina</td>
-						<td>200</td>
-						<td>20180-09-14</td>
-					</tr>
+					
 				</tbody>
 			</table>
 		</div>
 
 
+<!-- 검색용  -->
 		<div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4"
 			style="float: none; margin: 0 auto;">
 
 			<nav aria-label="...">
 				<ul class="pagination justify-content-end mt-3 mr-3">
-
-
-
 
 					<li class="page-item disabled"><span class="page-link">Previous</span>
 					</li>
@@ -166,7 +148,7 @@ html {
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
 				style="float: none; margin: 0 auto;">
 				<form class="form-inline" method="post"
-					action="<c:url value='/ReplyBBS/BBS/List.bbs'/>">
+					action="<c:url value='/market/buyinside.aw'/>">
 					<div class="form-group">
 						<select name="searchColumn" class="form-control">
 							<option value="title">제목</option>

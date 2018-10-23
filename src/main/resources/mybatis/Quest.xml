@@ -14,6 +14,7 @@
 	<select id="questSelectList" parameterType="java.util.Map" resultType="QuestDTO">
 		SELECT tn.*, mem_nickname
 		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+		ORDER BY quest_no DESC
 	</select>
 	
 	<select id="questSelectOne" parameterType="java.util.Map" resultType="QuestDTO">
@@ -23,8 +24,15 @@
 	</select>
 	
 	<insert id="questInsert" parameterType="java.util.Map">
-		INSERT INTO ${table_name}(quest_no, mem_no, quest_title, quest_content)
-		VALUES(seq_${table_name}.nextval, #{mem_no}, #{quest_title}, #{quest_content})
+		INSERT INTO ${table_name}
+		<if test="checking == null">
+			(quest_no, mem_no, quest_title, quest_content, origin_no)
+			VALUES(seq_${table_name}.nextval, #{mem_no}, #{quest_title}, #{quest_content}, seq_${table_name}.currval)
+		</if>
+		<if test="checking != null">
+			(quest_no, mem_no, quest_title, quest_content, origin_no, checking)
+			VALUES(seq_${table_name}.nextval, #{mem_no}, #{quest_title}, #{quest_content}, origin_no, 1)
+		</if>
 	</insert>
 	
 	<update id="questUpdate" parameterType="java.util.Map">
