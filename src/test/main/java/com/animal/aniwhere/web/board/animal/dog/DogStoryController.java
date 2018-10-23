@@ -20,14 +20,14 @@ import com.animal.aniwhere.service.impl.animal.QuestBoardServiceImpl;
 @Controller
 public class DogStoryController {
 	
-	@Resource(name="questSevice")
-	private QuestBoardServiceImpl questSevice;
+	@Resource(name="questService")
+	private QuestBoardServiceImpl questService;
 	@Resource(name="allCommentService")
 	private AllCommentService allCommentService;
 	
 	@RequestMapping("/animal/dog/quest/quest_list.aw")
 	public String quest_list(@RequestParam Map map,Model model) throws Exception{
-		List<QuestBoardDTO> list = questSevice.selectList(map);
+		List<QuestBoardDTO> list = questService.selectList(map);
 		model.addAttribute("list",list);
 		return "board/animal/dog/quest/quest_list.tiles";
 	}
@@ -40,13 +40,13 @@ public class DogStoryController {
 	@RequestMapping(value="/animal/dog/quest/quest_write.aw",method=RequestMethod.POST)
 	public String quest_writeOk(@RequestParam Map map,HttpSession session) throws Exception{
 		map.put("mem_no",session.getAttribute("mem_no"));
-		questSevice.insert(map);
+		questService.insert(map);
 		return "forward:/animal/dog/quest/quest_list.aw";
 	}
 	
 	@RequestMapping("/animal/dog/quest/quest_view.aw")
 	public String quest_view(@RequestParam Map map,Model model) throws Exception{
-		QuestBoardDTO record = questSevice.selectOne(map);
+		QuestBoardDTO record = questService.selectOne(map);
 		record.setQuest_count(record.getQuest_content().replace("\r\n","<br/>"));
 		model.addAttribute("record",record);
 		return "board/animal/dog/quest/quest_view.tiles";
