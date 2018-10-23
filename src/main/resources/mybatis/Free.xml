@@ -6,8 +6,6 @@
 <mapper namespace="mybatis.Free">
 
 	<select id="freeCount" parameterType="java.util.Map" resultType="int">
-		SELECT COUNT(*)
-		FROM freeboard
 		
 		SELECT COUNT(*)
 		FROM (
@@ -20,10 +18,6 @@
 	</select>
 	
 	<select id="freeSelectList" parameterType="java.util.Map" resultType="FreeDTO">
-		SELECT fb.*, mem_nickname
-		FROM freeboard fb JOIN member mb ON fb.mem_no = mb.mem_no
-		ORDER BY free_no DESC
-		
 		SELECT *
 		FROM (
 			SELECT T.*, ROWNUM R
