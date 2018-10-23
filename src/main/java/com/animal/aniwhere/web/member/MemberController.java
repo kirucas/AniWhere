@@ -58,11 +58,11 @@ public class MemberController {
    @RequestMapping("/signUpProcess.aw")
    public String signUpProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
       int signup = service.insert(map);
-      
-      session.setAttribute("mem_id", map.get("mem_id"));
-      if(signup!=0)
-    	  System.out.println("<script>alert(회원가입이 성공적으로 완료 되었습니다. 로그인창으로 이이이동)</script>");
-      return "forward:/login.aw";
+      if(signup==1)
+    	  model.addAttribute("check",true);
+      else
+    	  model.addAttribute("check",false);
+      return "/login.aw";
       
    }////////// signInProcess
 }//////////////////// MemberController class

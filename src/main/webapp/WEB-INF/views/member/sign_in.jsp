@@ -33,7 +33,7 @@
             <div class="content-wrapper auth p-0 theme-two">
                 <div class="row d-flex align-items-stretch">
                     <div class="col-md-4 banner-section d-none d-md-flex align-items-stretch justify-content-center">
-                        <div class="slide-content bg-1"> </div>
+                        <div class="slide-content bg-1" style='background: url("<c:url value='/resources/images/loginlogo.jpg'/>");background-size: cover;'> </div>
                     </div>
                     <div class="col-12 col-md-8 h-100 bg-white">
                         <div class="auto-form-wrapper d-flex align-items-center justify-content-center flex-column">

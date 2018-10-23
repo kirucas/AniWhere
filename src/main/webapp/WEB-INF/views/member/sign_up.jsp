@@ -18,13 +18,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 <style>
-body{
-	background-color:#e3f2fd;
+html { background: url("<c:url value='/resources/images/signup1.jpg'/>") no-repeat center center fixed; 
+-webkit-background-size: cover;
+ -moz-background-size: cover;
+  -o-background-size: cover;
+   background-size: cover; }
+.input-field>label{
+	color:white;
+}
+.btn:hover, .btn-large:hover, .btn-small:hover {
+    background-color: white;
+    color:black;
 }
 *{
    font-family: 메이플스토리;
+   color:white;
 }
-
+.btn{
+   background-color: #ccd5f0;
+   font-family: 메이플스토리;
+   color:black;
+}
+[type="checkbox"]:checked+span:not(.lever):before {
+	border-right: 2px solid #ebc594;
+    border-bottom: 2px solid #ebc594;
+}
+[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:before, [type="radio"].with-gap:checked+span:after {
+    border: 2px solid #ebc594;
+}
+[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
+    background-color: #ebc594;
+}
+[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:before, [type="radio"].with-gap:checked+span:after {
+    border: 2px solid #ebc594;
+}
+input.valid:not([type]), input.valid:not([type]):focus, input.valid[type=text]:not(.browser-default), input.valid[type=text]:not(.browser-default):focus, input.valid[type=password]:not(.browser-default), input.valid[type=password]:not(.browser-default):focus, input.valid[type=email]:not(.browser-default), input.valid[type=email]:not(.browser-default):focus, input.valid[type=url]:not(.browser-default), input.valid[type=url]:not(.browser-default):focus, input.valid[type=time]:not(.browser-default), input.valid[type=time]:not(.browser-default):focus, input.valid[type=date]:not(.browser-default), input.valid[type=date]:not(.browser-default):focus, input.valid[type=datetime]:not(.browser-default), input.valid[type=datetime]:not(.browser-default):focus, input.valid[type=datetime-local]:not(.browser-default), input.valid[type=datetime-local]:not(.browser-default):focus, input.valid[type=tel]:not(.browser-default), input.valid[type=tel]:not(.browser-default):focus, input.valid[type=number]:not(.browser-default), input.valid[type=number]:not(.browser-default):focus, input.valid[type=search]:not(.browser-default), input.valid[type=search]:not(.browser-default):focus, textarea.materialize-textarea.valid, textarea.materialize-textarea.valid:focus, .select-wrapper.valid>input.select-dropdown {
+    border-bottom: 1px solid #ebc594;
+    -webkit-box-shadow: 0 1px 0 0 #ebc594;
+    box-shadow: 0 1px 0 0 #ebc594;
+}
+input[type=text]:not(.browser-default):focus:not([readonly]){
+	border-bottom: 1px solid #ebc594;
+    -webkit-box-shadow: 0 1px 0 0 #ebc594;
+    box-shadow: 0 1px 0 0 #ebc594;
+}
+input[type=password]:not(.browser-default):focus:not([readonly]){
+	border-bottom: 1px solid #ebc594;
+    -webkit-box-shadow: 0 1px 0 0 #ebc594;
+    box-shadow: 0 1px 0 0 #ebc594;
+}
+input[type=date]:not(.browser-default):focus:not([readonly]){
+	border-bottom: 1px solid #ebc594;
+    -webkit-box-shadow: 0 1px 0 0 #ebc594;
+    box-shadow: 0 1px 0 0 #ebc594;
+}
 </style>
 
 <script>
@@ -50,7 +97,7 @@ $(document).ready(function() {
 
 </script>
     <body>
-		<div class="container">
+		<div class="container" id="signup">
 	      	<div class="row">
 		        <div class="input-field col s12 center">
 		          <h4>회원가입</h4>
@@ -148,7 +195,7 @@ $(document).ready(function() {
 				  </div>
 				  <div class="row">
 				  	<div class="input-field inline col s2 offset-s4">
-         			 <button type="submit" class="btn waves-effect waves-light col s12">회원가입 ㄱㄱ</button>
+         			 <button type="submit" class="btn waves-effect waves-light col s12">회 원 가 입</button>
 				  	</div>
 			  	    <div class="input-field col s12">
          			 	<p class="margin center medium-small sign-up">이미 계정이 있으세요? <a href="<c:url value='/login.aw' />">Login</a></p>
