@@ -1,4 +1,4 @@
-package com.animal.aniwhere.service.impl.animal;
+package com.animal.aniwhere.service.impl.market;
 
 import java.util.List;
 import java.util.Map;
@@ -8,16 +8,16 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.animal.aniwhere.service.AllBoardService;
-import com.animal.aniwhere.service.animal.QuestBoardDTO;
+import com.animal.aniwhere.service.market.GroupBuyingListDTO;
 
-@Service("questService")
-public class QuestBoardServiceImpl implements AllBoardService {
+@Service("gbListService")
+public class GroupBuyingListServiceImpl implements AllBoardService {
 
-	@Resource(name = "questBoardDAO")
-	private QuestBoardDAO dao;
-	
+	@Resource(name = "groupBuyingListDAO")
+	private GroupBuyingListDAO dao;
+
 	@Override
-	public List<QuestBoardDTO> selectList(Map map) {
+	public List<GroupBuyingListDTO> selectList(Map map) {
 		return dao.selectList(map);
 	}////////// selectList
 
@@ -28,7 +28,7 @@ public class QuestBoardServiceImpl implements AllBoardService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public QuestBoardDTO selectOne(Map map) {
+	public GroupBuyingListDTO selectOne(Map map) {
 		return dao.selectOne(map);
 	}////////// selectOne
 
@@ -47,4 +47,4 @@ public class QuestBoardServiceImpl implements AllBoardService {
 		return dao.delete(map);
 	}////////// delete
 
-}//////////////////// QuestBoardServiceImpl class
+}//////////////////// GroupBuyingListServiceImple class

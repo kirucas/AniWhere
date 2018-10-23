@@ -1,4 +1,4 @@
-package com.animal.aniwhere.service.impl.animal;
+package com.animal.aniwhere.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -8,16 +8,16 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.animal.aniwhere.service.AllBoardService;
-import com.animal.aniwhere.service.animal.QuestBoardDTO;
+import com.animal.aniwhere.service.StoreLocationDTO;
 
-@Service("questService")
-public class QuestBoardServiceImpl implements AllBoardService {
+@Service("StoreLocService")
+public class StoreLocationServiceImpl implements AllBoardService {
 
-	@Resource(name = "questBoardDAO")
-	private QuestBoardDAO dao;
-	
+	@Resource(name = "storeLocationDAO")
+	private StoreLocationDAO dao;
+
 	@Override
-	public List<QuestBoardDTO> selectList(Map map) {
+	public List<StoreLocationDTO> selectList(Map map) {
 		return dao.selectList(map);
 	}////////// selectList
 
@@ -28,7 +28,7 @@ public class QuestBoardServiceImpl implements AllBoardService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public QuestBoardDTO selectOne(Map map) {
+	public StoreLocationDTO selectOne(Map map) {
 		return dao.selectOne(map);
 	}////////// selectOne
 
@@ -47,4 +47,4 @@ public class QuestBoardServiceImpl implements AllBoardService {
 		return dao.delete(map);
 	}////////// delete
 
-}//////////////////// QuestBoardServiceImpl class
+}//////////////////// StoreLocationServiceImpl class
