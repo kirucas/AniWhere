@@ -13,7 +13,6 @@
 		action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
 		<div class="form-row">
 			<input class="form-control" type="text" name="quest_title" id="quest_title" placeholder="제목을 입력해주세요" />
-			<input type="hidden" name="table_name" value="dog_quest" />
 		</div>
 		<div class="form-row pad">
 			<textarea class="form-control" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요"></textarea>

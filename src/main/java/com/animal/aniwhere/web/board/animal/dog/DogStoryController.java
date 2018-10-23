@@ -31,6 +31,7 @@ public class DogStoryController {
 	private int pageSize;
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
+	
 	@RequestMapping("/animal/dog/quest/quest_list.aw")
 	public String list(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
@@ -49,7 +50,7 @@ public class DogStoryController {
 		//페이징을 위한 로직 끝]	
 		List<QuestBoardDTO> list= (List<QuestBoardDTO>) questService.selectList(map);
 		//페이징 문자열을 위한 로직 호출]
-		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/BBS/List.bbs?");
+		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/animal/dog/quest/quest_list.aw");
 		//데이타 저장]
 		model.addAttribute("list", list);
 		model.addAttribute("pagingString", pagingString);
@@ -76,9 +77,28 @@ public class DogStoryController {
 	@RequestMapping("/animal/dog/quest/quest_view.aw")
 	public String quest_view(@RequestParam Map map,Model model) throws Exception{
 		QuestBoardDTO record = questService.selectOne(map);
-		record.setQuest_count(record.getQuest_content().replace("\r\n","<br/>"));
+		record.setQuest_content(record.getQuest_content().replace("\r\n","<br/>"));
 		model.addAttribute("record",record);
 		return "board/animal/dog/quest/quest_view.tiles";
 	}
+	
+	@RequestMapping("/animal/dog/quest/quest_edit.aw")
+	public String edit(Model model,@RequestParam Map map, HttpServletRequest req) throws Exception{
+		if(req.getMethod().equals("GET")) {
+			QuestBoardDTO record = questService.selectOne(map);
+			model.addAttribute("record",record);
+			return "/board/animal/dog/quest/quest_edit.tiles";
+		}
+		int successFail = questService.update(map);
+		model.addAttribute("successFail",successFail);
+		model.addAttribute("WHERE","EDT");
+		return "";
+	}
 
+	@RequestMapping("/animal/dog/quest/quest_delete.aw")
+	public String delete(@RequestParam Map map,Model model) throws Exception{
+		int successFail = questService.delete(map);
+		model.addAttribute("successFail",successFail);
+		return "";
+	}
 }//////////////////// StoryController

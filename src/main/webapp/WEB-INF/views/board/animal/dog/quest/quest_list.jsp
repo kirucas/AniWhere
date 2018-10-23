@@ -14,7 +14,7 @@
 	<form action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
 		<div class="wr offset-sm-9 col-sm-3">	
 			<div align="right" >
-				<input type="hidden" id="ani_category" name="ani_category" value="">
+				<input type="hidden" id="ani_category" name="ani_category" value="1">
 				<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>" 
 				class="btn btn-success"><i class="fas fa-pen-square" >글쓰기</i></a>
 			</div>
@@ -42,7 +42,7 @@
 				<c:if test="${not isEmpty }">
 					<c:forEach var="record" items="${list}" varStatus="loop">
 						<tr>
-							<td class="text-center" scope="row">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
+							<td class="text-center" scope="row">${record.quest_no}</td>
 							<td>
 								<a href="<c:url value='/animal/dog/quest/quest_view.aw?quest_no=${record.quest_no}'/>">${record.quest_title}
 									<span class="badge badge-info">${record.quest_hit}</span>
@@ -52,7 +52,6 @@
 							<td class="text-center">${record.quest_count}</td>
 							<td class="text-center">${record.quest_hit}</td>
 							<td class="text-center">${record.quest_regidate}</td>
-							<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
 						</tr>
 					</c:forEach>
 				</c:if>
