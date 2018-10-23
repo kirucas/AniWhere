@@ -20,6 +20,7 @@ DROP TABLE miss_see CASCADE CONSTRAINTS;
 DROP TABLE animal_category CASCADE CONSTRAINTS;
 DROP TABLE freeboard_cmt CASCADE CONSTRAINTS;
 DROP TABLE freeboard CASCADE CONSTRAINTS;
+DROP TABLE lost_animal CASCADE CONSTRAINTS;
 DROP TABLE movie_cmt CASCADE CONSTRAINTS;
 DROP TABLE movie CASCADE CONSTRAINTS;
 DROP TABLE photo_cmd CASCADE CONSTRAINTS;
@@ -32,6 +33,7 @@ DROP TABLE tip_cmt CASCADE CONSTRAINTS;
 DROP TABLE tip CASCADE CONSTRAINTS;
 DROP TABLE member CASCADE CONSTRAINTS;
 DROP TABLE store_category CASCADE CONSTRAINTS;
+DROP TABLE store_location CASCADE CONSTRAINTS;
 
 
 
@@ -66,6 +68,7 @@ CREATE TABLE animal
 CREATE TABLE animal_category
 (
 	animal_code number NOT NULL,
+	animal_name nvarchar2(20) NOT NULL,
 	PRIMARY KEY (animal_code)
 );
 
@@ -117,6 +120,24 @@ CREATE TABLE group_buy
 );
 
 
+CREATE TABLE lost_animal
+(
+	no number NOT NULL,
+	place nvarchar2(150) NOT NULL,
+	kind nvarchar2(100) NOT NULL,
+	start_notice date NOT NULL,
+	end_notice date NOT NULL,
+	img_src nvarchar2(200) NOT NULL,
+	gender varchar2(1) NOT NULL CHECK (gender IN ('F', 'M', 'Q')),
+	neuter varchar2(1) CHECK (neuter IN ('Y', 'N', 'U')),
+	addr nvarchar2(250) NOT NULL,
+	careNm nvarchar2(50) NOT NULL,
+	careTel nvarchar2(20) NOT NULL,
+	chargeNm nvarchar2(20),
+	PRIMARY KEY (no)
+);
+
+
 CREATE TABLE market_buy
 (
 	no number NOT NULL,
@@ -151,6 +172,7 @@ CREATE TABLE market_group_buy
 	content nvarchar2(2000) NOT NULL,
 	regidate date DEFAULT sysdate,
 	count number DEFAULT 0,
+	goal number NOT NULL,
 	deadline date NOT NULL,
 	PRIMARY KEY (no)
 );
@@ -388,6 +410,25 @@ CREATE TABLE store_category
 	animal_name nvarchar2(20) NOT NULL,
 	store_name nvarchar2(30) NOT NULL,
 	PRIMARY KEY (store_no)
+);
+
+
+CREATE TABLE store_location
+(
+	no number NOT NULL,
+	bizesId number NOT NULL,
+	bizesNm nvarchar2(150) NOT NULL,
+	brchNm nvarchar2(70),
+	indsSclsCd varchar2(10) NOT NULL,
+	indsSclsNm nvarchar2(50) NOT NULL,
+	lnoAdr nvarchar2(150) NOT NULL,
+	rdnmAdr nvarchar2(150) NOT NULL,
+	lon number NOT NULL,
+	lat number NOT NULL,
+	dongNo nvarchar2(20),
+	flrNo nvarchar2(20),
+	hoNo nvarchar2(20),
+	PRIMARY KEY (no)
 );
 
 
@@ -675,6 +716,12 @@ ALTER TABLE photo_link
 ALTER TABLE quest_cmt
 	ADD FOREIGN KEY (origin_no)
 	REFERENCES quest (quest_no)
+;
+
+
+ALTER TABLE reservation
+	ADD FOREIGN KEY (store_no)
+	REFERENCES store_location (no)
 ;
 
 
