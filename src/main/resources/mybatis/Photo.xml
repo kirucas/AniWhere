@@ -8,57 +8,75 @@
 
 	<select id="photoCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
-		FROM ${table_name}
+		FROM (
+			SELECT p.*, mem_nickname
+			FROM photo p JOIN member m ON p.mem_no=m.mem_no
+			WHERE ani_category=#{ani_category}
+			<if test="searchColumn != null">
+				AND ${searchColumn} like '%'||#{searchWord}||'%'
+			</if>
+			)
 	</select>
 	
 	<select id="photoSelectList" parameterType="java.util.Map" resultType="PhotoDTO">
-		SELECT tn.*, mem_nickname
-		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
-		ORDER BY photo_no DESC
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT p.*, mem_nickname
+				FROM photo p JOIN member m ON p.mem_no=m.mem_no
+				WHERE ani_category=#{ani_category}
+				<if test="searchColumn != null">
+					AND ${searchColumn} like '%'||#{searchWord}||'%'
+				</if>
+				ORDER BY photo_no DESC
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="photoSelectOne" parameterType="java.util.Map" resultType="PhotoDTO">
 		SELECT tn.*, mem_nickname
-		FROM ${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+		FROM photo tn JOIN member mb ON tn.mem_no = mb.mem_no
 		WHERE photo_no=#{photo_no}
 	</select>
 	
 	<insert id="photoInsert" parameterType="java.util.Map">
 		<selectKey order="BEFORE" resultType="int" keyProperty="photo_no">
-			SELECT seq_${table_name}.nextval FROM DUAL
+			SELECT seq_photo.nextval FROM DUAL
 		</selectKey>
-		INSERT INTO ${table_name}(photo_no, mem_no, photo_title, photo_content)
-		VALUES(#{photo_no}, #{mem_no}, #{photo_title}, #{photo_content})
+		INSERT INTO photo(photo_no, mem_no, photo_title, photo_content, ani_category)
+		VALUES(#{photo_no}, #{mem_no}, #{photo_title}, #{photo_content}, #{ani_category})
 	</insert>
 	
 	<update id="photoUpdate" parameterType="java.util.Map">
-		UPDATE ${table_name}
+		UPDATE photo
 		SET photo_title=#{photo_title}, photo_content=#{photo_content}
 		WHERE photo_no=#{photo_no}
 	</update>
 	
 	<delete id="photoDelete" parameterType="java.util.Map">
-		DELETE FROM ${table_name}
+		DELETE FROM photo
 		WHERE photo_no=#{photo_no}
 	</delete>
 	
 	<select id="linkSelectList" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT *
-		FROM ${table_name}_link
+		FROM photo_link
 		WHERE photo_no=#{photo_no}
 		ORDER link_no
 	</select>
 	
 	<insert id="linkInsert" parameterType="java.util.Map">
-		INSERT INTO ${table_name}_link
-		VALUES(seq_${table_name}_link.nextval, #{photo_no}, #{link_url})
+		INSERT INTO photo_link
+		VALUES(seq_photo_link.nextval, #{photo_no}, #{link_url})
 	</insert>
 	
 	<update id="linkUpate" parameterType="java.util.Map">
 	</update>
 	
 	<delete id="linkDelete" parameterType="java.util.Map">
-		DELETE FROM ${table_name}_link
+		DELETE FROM photo_link
 		WHERE origin_no=#{photo_no}
 	</delete>
 	
