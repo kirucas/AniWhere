@@ -9,6 +9,7 @@ public class PhotoBoardDTO {
 	private String photo_content;
 	private String photo_hit;
 	private java.sql.Date photo_regidate;
+	private String ani_category;
 	
 	// 작성자 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
@@ -75,6 +76,14 @@ public class PhotoBoardDTO {
 
 	public void setMem_nickname(String mem_nickname) {
 		this.mem_nickname = mem_nickname;
+	}//////////
+
+	public String getAni_category() {
+		return ani_category;
+	}//////////
+
+	public void setAni_category(String ani_category) {
+		this.ani_category = ani_category;
 	}//////////
 	
 }//////////////////// PhotoBoardDTO class

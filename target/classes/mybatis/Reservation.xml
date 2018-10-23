@@ -7,13 +7,23 @@
 
 	<select id="reservationCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
-		FROM reservation
+		FROM (
+			SELECT r.*, mem_name
+			FROM reservation r JOIN member m ON r.mem_no=m.mem_no
+			)
 	</select>
 	
 	<select id="reservationSelectList" parameterType="java.util.Map" resultType="ReservationDTO">
-		SELECT rv.*, mem_name
-		FROM reservation rv JOIN member mb ON rv.mem_no = mb.mem_no
-		ORDER BY rv_no DESC
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT r.*, mem_name
+				FROM reservation r JOIN member m ON r.mem_no=m.mem_no
+				ORDER BY rv_no DESC
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="reservationSelectOne" parameterType="java.util.Map" resultType="ReservationDTO">
