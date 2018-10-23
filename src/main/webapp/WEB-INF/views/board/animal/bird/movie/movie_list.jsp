@@ -63,9 +63,11 @@
 			<div class="row margin-top-30">
 				<div class="col-sm">
 					<div class="embed-responsive embed-responsive-16by9 movie-size">
+						${dto.movie_tempsrc}
+						<!-- 
 						<iframe class="embed-responsive-item"
 							src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
-							allowfullscreen></iframe>
+							allowfullscreen></iframe> -->
 					</div>
 						<a href="<c:url value='/animal/bird/movie/Write.aw?no=${dto.movie_no }'/>">${dto.movie_title }</a>
 					<div class="media-body">
@@ -73,13 +75,13 @@
 						<p class="nickname">${dto.mem_nickname}</p>
 					</div>
 					<div class="media-footer">
-						<small class="count">${dto.movie_count}조회수</small>
+						<small class="count">조회수: ${dto.movie_count}</small>
 					</div>
 				</div>
 			</div>
 		</c:forEach>
 	</c:if>
-
+<%-- 
 	<div class="col-sm">
 		<div class="embed-responsive embed-responsive-16by9 movie-size">
 			<iframe class="embed-responsive-item"
@@ -155,10 +157,12 @@
 		</div>
 	</div>
 </div>
+ --%>
 <!-- 중간에 라인 -->
 <div class="margin-top-30">
 	<hr class="line"></hr>
 </div>
+<!-- 
 <div class="margin-top-30"></div>
 <div class="row margin-top-10">
 	<div class="col-sm">
@@ -249,7 +253,7 @@
 		</div>
 	</div>
 </div>
-
+ -->
 <!-- 아래에 동영상 올리기 버튼 -->
 <div class="text-right">
 	<a class="btn btn-primary"

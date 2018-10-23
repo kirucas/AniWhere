@@ -44,7 +44,9 @@ public class BirdMovieController {
 			//서비스 호출]
 			//페이징을 위한 로직 시작]
 			//전체 레코드 수
-			int totalRecordCount= service.getTotalRecord(map);			
+			System.out.println(map.get("ani_category"));
+			int totalRecordCount= service.getTotalRecord(map);	
+			System.out.println(totalRecordCount);
 			//시작 및 끝 ROWNUM구하기]
 			int start = (nowPage-1)*pageSize+1;
 			int end   = nowPage*pageSize;
@@ -52,21 +54,25 @@ public class BirdMovieController {
 			map.put("end",end);
 			//페이징을 위한 로직 끝]	
 			List<MovieBoardDTO> list= service.selectList(map);
+			System.out.println("list:"+list);
 			
-			MovieBoardDTO dto = list.get(0);
-			String content = dto.getMovie_content();
-			String src="<iframe>";
-			int target_num = content.indexOf(src);
-			String result;
-			if(target_num!=-1) {
-					result=content.substring(target_num,(content.substring(target_num).indexOf("</iframe>")+target_num));
-					System.out.println(result);
-			}
-			else {
+			for(MovieBoardDTO dto : list) {
+			
+				String content = dto.getMovie_content();
+				System.out.println("content:"+content);
+				String src="<iframe";
+				int target_num = content.indexOf(src);
+				String result;
+				if(target_num!=-1) {
+						result=content.substring(target_num,(content.substring(target_num).indexOf("</iframe>")+target_num));
+						System.out.println("result:"+result);
+						dto.setMovie_tempsrc(result);	
+				}
+				else {
+					
+				}
 				
 			}
-				
-			
 			//페이징 문자열을 위한 로직 호출]
 			String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/movie/List.aw?");
 			//데이타 저장]
@@ -92,8 +98,8 @@ public class BirdMovieController {
 	public String write(@RequestParam Map map
 			) throws Exception{
 		//서비스 호출
-		System.out.println(map.get("table_name"));
 		service.insert(map);
+		System.out.println("리턴직저어어언");
 		//뷰정보 반환
 		return "forward:/bird/movie/List.aw";
 	}
