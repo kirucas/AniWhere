@@ -8,7 +8,6 @@ public class MemberDTO {
 	private String mem_nickname;
 	private String mem_gender;
 	private java.sql.Date mem_birth;
-	private String mem_loc;
 	private String mem_log;
 	private String mem_interani;
 	
@@ -58,14 +57,6 @@ public class MemberDTO {
 	
 	public void setMem_birth(java.sql.Date mem_birth) {
 		this.mem_birth = mem_birth;
-	}//////////
-	
-	public String getMem_loc() {
-		return mem_loc;
-	}//////////
-	
-	public void setMem_loc(String mem_loc) {
-		this.mem_loc = mem_loc;
 	}//////////
 	
 	public String getMem_log() {
