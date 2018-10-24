@@ -3,6 +3,6 @@ package com.animal.aniwhere.web.board.animal.bird;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class BirdStoryController {
+public class BirdQuestController {
 
 }//////////////////// StoryController

@@ -12,7 +12,7 @@
 			SELECT mo.*, mem_nickname
 			FROM movie mo JOIN member me ON mo.mem_no=me.mem_no
 			WHERE ani_category=#{ani_category}
-			<if test="">
+			<if test="searchColumn != null">
 				AND ${searchColumn} like '%'||#{searchWord}||'%'
 			</if>
 			)

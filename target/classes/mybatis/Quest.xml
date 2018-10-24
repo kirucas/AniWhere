@@ -21,7 +21,7 @@
 	<select id="questSelectList" parameterType="java.util.Map" resultType="QuestDTO">
 		SELECT *
 		FROM (
-			SELCT T.*, ROWNUM R
+			SELECT T.*, ROWNUM R
 			FROM (
 				SELECT q.*, mem_nickname
 				FROM quest q JOIN member m ON q.mem_no=m.mem_no

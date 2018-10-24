@@ -32,7 +32,7 @@
 				ORDER BY tip_no DESC
 				) T
 			)
-		WHERE R BETWEEN #{start} AND {#end}
+		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="tipSelectOne" parameterType="java.util.Map" resultType="TipDTO">
@@ -43,7 +43,7 @@
 	
 	<insert id="tipInsert" parameterType="java.util.Map">
 		INSERT INTO tip(tip_no, mem_no, tip_title, tip_content, ani_category)
-		VALUES(seq_tip, #{mem_no}, #{tip_title}, #{tip_content}, ani_category)
+		VALUES(seq_tip.nextval, #{mem_no}, #{tip_title}, #{tip_content}, #{ani_category})
 	</insert>
 	
 	<update id="tipUpdate" parameterType="java.util.Map">

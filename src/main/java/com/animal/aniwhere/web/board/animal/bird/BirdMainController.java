@@ -13,7 +13,7 @@ public class BirdMainController {
 		return "board/animal/bird/bird_main.tiles";
 	}////////// bird_main
 
-	@RequestMapping(value = "/animal/bird/{path}", method = RequestMethod.GET)
+	@RequestMapping(value = "/animal/bird/{path}")
 	public String move_board(@PathVariable String path) throws Exception {
 		return "board/animal/bird/" + path + "/" + path + "_list.tiles";
 	}////////// move_board
