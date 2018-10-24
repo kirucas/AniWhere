@@ -99,7 +99,7 @@
 					<img data-v-f39b78c2="" src="/images/icon-refresh@2x.png"
 						width="16" alt=""> <span data-v-f39b78c2="">새로고침</span>
 				</button>
-				<form action="<c:url value='/miss/see_cmt_write.aw?see_no=${record.no}'/>" method="posts">
+				<form action="#" method="post">
 					<div>
 						<textarea rows="3" cols="20" class="form-control" style="margin-top: 10px" id="cmt_content" name="cmt_content"></textarea>
 					</div>

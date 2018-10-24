@@ -90,12 +90,12 @@ public class MissMainController {
 		map.put("start",start);
 		map.put("end",end);
 		//페이징을 위한 로직 끝]
-				
+		/*	
 		Set<String> set = map.keySet();
 		for(String key:set) {
 			System.out.println(key+":"+map.get(key));
 		}
-		
+		*/
 		List<FindSeeDTO> list = (List<FindSeeDTO>) service.selectList(map);
 		
 		String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount,pageSize,blockPage,nowPage,req.getContextPath()+"/miss/see.aw?");
@@ -191,11 +191,6 @@ public class MissMainController {
 			
 			map.put("mem_no", session.getAttribute("mem_no"));
 			
-			Set<String> set = map.keySet();
-			for(String key:set) {
-				System.out.println(key+":"+map.get(key));
-			}
-			
 			service.insert(map);
 				
 			return "forward:/miss/find.aw";
@@ -203,15 +198,33 @@ public class MissMainController {
 		
 		//리스트로 이동
 		@RequestMapping("/miss/find.aw")
-		public String find_list(@RequestParam Map map,HttpSession session,Model model) throws Exception {
+		public String find_list(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req,@RequestParam(required=false,defaultValue="1") int nowPage) throws Exception {
 			
 			map.put("table_name", "find");
 			
+			//전체 레코드 수
+			int totalRecordCount= service.getTotalRecord(map);
+			//페이지 사이즈
+			//전체 페이지수]
+			int totalPage = (int)Math.ceil(((double)totalRecordCount/pageSize));
+			//현재 페이지를 파라미터로 받기]		
+			//시작 및 끝 ROWNUM구하기]
+			int start = (nowPage-1)*pageSize+1;
+			int end   = nowPage*pageSize;
+			map.put("start",start);
+			map.put("end",end);
+			//페이징을 위한 로직 끝]
+			
 			List<FindSeeDTO> list = (List<FindSeeDTO>) service.selectList(map);
+			
+			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount,pageSize,blockPage,nowPage,req.getContextPath()+"/miss/find.aw?");
 			
 			model.addAttribute("list", list);
 			
-			service.selectList(map);
+			model.addAttribute("pagingString", pagingString);		
+			model.addAttribute("totalRecordCount", totalRecordCount);
+			model.addAttribute("nowPage", nowPage);
+			model.addAttribute("pageSize", pageSize);
 					
 			return "miss/find/find_main.tiles";
 		}////////// miss_write
@@ -289,31 +302,5 @@ public class MissMainController {
 		
 		
 		//================================================================================================================
-		
-		
-		@Resource(name="allCommentService")
-		private AllCommentService com_service;
-		
-		//코멘트 입력
-		@RequestMapping("/miss/see_cmt_write.aw")
-		public String see_coment(@RequestParam Map map,HttpSession session,Model model) throws Exception {
-			
-			map.put("mem_no", session.getAttribute("mem_no"));
-			map.put("table_name","see_cmt");
-			map.put("no", session.getAttribute("no"));
-			FindSeeDTO record = service.selectOne(map);
-			//데이터 저장]
-			model.addAttribute("record", record);
-
-			
-			
-			
-			Set<String> set = map.keySet();
-			for(String key:set) {
-				System.out.println(key+":"+map.get(key));
-			}
-			
-			return "forward:/miss/see_view.aw";
-		}////////// comment_insert
 		
 }//////////////////// MissMainController class

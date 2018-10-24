@@ -92,7 +92,7 @@
 					</div>
 				</div>
 				<div class="article-list-item__vote">
-					<div><span id="no" style="text-align:center">${record.no}</span></div>
+					<div><span id="no" style="text-align:center">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</span></div>
 				</div>
 			</article>
 
