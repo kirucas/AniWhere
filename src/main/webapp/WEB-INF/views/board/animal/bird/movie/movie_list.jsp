@@ -50,8 +50,8 @@
 	color: #1ABC9C;
 }
 
-.page-link {
-	color: #1ABC9C;
+.pagination {
+	margin-left: 150px;
 }
 </style>
 
@@ -87,34 +87,28 @@
 			</div>
 			<!-- 중간에 라인 -->
 			<c:if test="${(loop.index+1) % 6==0}">
-				<div class="col-xs-12 col-sm-12" style="border: 1px solid gray;margin-top: 10px"></div>	
-				
+				<div class="col-xs-12 col-sm-12"
+					style="border: 1px solid gray; margin-top: 10px"></div>
 			</c:if>
- 
 		</c:forEach>
 	</c:if>
 </div>
 
+<div>
+	<!-- 페이지네이션 -->
+	<div class="margin-top-20 pagination">
+		<nav class="mx-auto" style="width: 450px;"
+			aria-label="Page navigation example">
+			<div class="row">
+				<div>${pagingString}</div>
+			</div>
+		</nav>
+	</div>
 
-<!-- 아래에 동영상 올리기 버튼 -->
-<div class="text-right">
-	<a class="btn btn-primary"
-		href="<c:url value='/animal/bird/movie/Write.aw'/>" role="button">동영상
-		올리기</a>
+	<!-- 아래에 동영상 올리기 버튼 -->
+	<div class="text-right">
+		<a class="btn btn-primary"
+			href="<c:url value='/animal/bird/movie/Write.aw'/>" role="button">동영상
+			올리기</a>
+	</div>
 </div>
-
-<!-- 아래 라인 -->
-<div class="margin-top-10">
-	<hr class="line"></hr>
-</div>
-
-<!-- 페이지네이션 -->
-<div class="footer margin-top-20">
-	<nav class="mx-auto" style="width: 450px;"
-		aria-label="Page navigation example">
-		<ul class="pagination">
-			<li class="page-item"><a class="page-link" href="#">${pagingString}</a></li>
-		</ul>
-	</nav>
-</div>
-

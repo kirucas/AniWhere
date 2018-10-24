@@ -75,7 +75,7 @@ public class BirdMovieController {
 				
 			}
 			//페이징 문자열을 위한 로직 호출]
-			String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/movie/List.aw?");
+			String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/bird/movie/List.aw?");
 			//데이타 저장]
 			model.addAttribute("list", list);
 			model.addAttribute("pagingString", pagingString);
