@@ -37,13 +37,9 @@
                     </div>
                     <div class="col-12 col-md-8 h-100 bg-white">
                         <div class="auto-form-wrapper d-flex align-items-center justify-content-center flex-column">
-                            <div class="nav-get-started">
-                                <p>Don't have an account?</p>
-                                <a class="btn get-started-btn" href="register-2.html">GET STARTED</a>
-                            </div>
                             <form action="<c:url value='/signInProcess.aw' />" method="post">
-                                <h3 class="mr-auto">Hello! let's get started</h3>
-                                <p class="mb-5 mr-auto">Enter your details below.</p>
+                                <h3 class="mr-auto">안녕하세요! 시작하자.</h3>
+                                <p class="mb-5 mr-auto">아래에 세부 정보를 입력하십시오.</p>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -65,8 +61,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group" style="float:left;">
-                                    <button class="btn btn-primary submit-btn">SIGN IN</button>
-                                    <a href="<c:url value='/member/sign_up.aw'/>" class="btn btn-primary">SIGN UP</a>
+                                    <button class="btn btn-primary submit-btn">로그인</button>
+                                    <a href="<c:url value='/member/sign_up.aw'/>" class="btn btn-primary">회원가입</a>
                                 </div>
                                    
                                 <div class="wrapper mt-5 text-gray">
