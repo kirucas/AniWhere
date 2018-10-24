@@ -19,7 +19,9 @@ import com.animal.aniwhere.service.AllCommentService;
 import com.animal.aniwhere.service.animal.QuestBoardDTO;
 
 @Controller
-public class DogStoryController {
+public class DogQuestController {
+	
+	public static final int ANI_CATEGORY = 1;
 	
 	@Resource(name="questService")
 	private AllBoardService questService;
@@ -38,6 +40,7 @@ public class DogStoryController {
 			@RequestParam Map map,//검색용 파라미터 받기
 			@RequestParam(required=false,defaultValue="1") int nowPage//페이징용 nowPage파라미터 받기용
 			) throws Exception{
+		map.put("ani_category", ANI_CATEGORY);
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		//전체 레코드 수
@@ -62,7 +65,7 @@ public class DogStoryController {
 		return "board/animal/dog/quest/quest_list.tiles";
 	}////////////////list()
 	
-	@RequestMapping("/animal/dog/quest/quest_write.aw")
+	@RequestMapping(value="/animal/dog/quest/quest_write.aw",method=RequestMethod.GET)
 	public String quest_write() throws Exception {
 		return "board/animal/dog/quest/quest_write.tiles";
 	}
@@ -87,18 +90,18 @@ public class DogStoryController {
 		if(req.getMethod().equals("GET")) {
 			QuestBoardDTO record = questService.selectOne(map);
 			model.addAttribute("record",record);
-			return "/board/animal/dog/quest/quest_edit.tiles";
+			return "board/animal/dog/quest/quest_edit.tiles";
 		}
 		int successFail = questService.update(map);
 		model.addAttribute("successFail",successFail);
 		model.addAttribute("WHERE","EDT");
-		return "";
+		return "board/animal/dog/quest/quest_message";
 	}
 
 	@RequestMapping("/animal/dog/quest/quest_delete.aw")
 	public String delete(@RequestParam Map map,Model model) throws Exception{
 		int successFail = questService.delete(map);
 		model.addAttribute("successFail",successFail);
-		return "";
+		return "board/animal/dog/quest/quest_message";
 	}
 }//////////////////// StoryController

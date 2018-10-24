@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script>
+	$(function(){
+		//메모글 삭제처리]
+		$('#delete').on('click',function(){
+			if(confirm('삭제 하시겠습니까')){
+				location.replace("<c:url value='/animal/dog/quest/quest_delete.aw?quest_no=${record.quest_no}'/>");				
+			}
+		});
+	});
+</script>
 <div class="container border">
-<form action='<c:url value="/animal/dog/quest/quest_edit.aw"/>' id="form1"></form>
-<form action='<c:url value="/animal/dog/quest/quest_list.aw"/>' id="form2"></form>
-	<div class="row offset-sm-10 col-sm-2">
-		<p class="text-right">질문 게시판</p>
+	<div class="row">
+		<p>질문 게시판</p>
 	</div>
 	<div class="row">
 		<h1> ${record.quest_title}</h1>
@@ -23,8 +31,10 @@
 		<div class="col-sm-2">
 			 ${record.quest_regidate}
 		</div>
-		<div class="offset-sm-2 col-sm-4" style="text-align: right;">
-			<a href="<c:url value='/animal/dog/quest/quest_edit.aw?=quest_no${record.quest_no}'/>"><input type="hidden" id="ani_category" name="ani_category" value="1" form="form1" />수정 </a><a href="#">| 삭제 </a><a href="<c:url value='/animal/dog/quest/quest_list.aw'/>"><input type="hidden" id="ani_category" name="ani_category" value="1" form="form2" />| 목록</a>
+		<div style="align-content: right">
+			<a href="<c:url value='/animal/dog/quest/quest_edit.aw?quest_no=${record.quest_no}'/>">수정 </a>
+			<a id="delete" href="#">| 삭제 </a>
+			<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>">| 목록</a>
 		</div>
 	</div>
 	<div class="row border-top-0">
@@ -37,7 +47,7 @@
 			${record.quest_content}
 		</div>
 	</div>
-	<div class="row border">
+	<div class="row">
 		<div class="offset-sm-5 col-sm-1" style="padding: 10px">
 			<i class="far fa-thumbs-up fa-4x ic"></i>
 		</div><!-- 누른면 색이 꽉차고 빌수도 있게하게 hideen주기 -->
