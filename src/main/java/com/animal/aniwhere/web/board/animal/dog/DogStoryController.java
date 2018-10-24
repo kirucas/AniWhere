@@ -20,7 +20,7 @@ import com.animal.aniwhere.service.impl.animal.QuestBoardServiceImpl;
 @Controller
 public class DogStoryController {
 	
-	@Resource(name="questSevice")
+	@Resource(name="questService")
 	private QuestBoardServiceImpl questSevice;
 	@Resource(name="allCommentService")
 	private AllCommentService allCommentService;

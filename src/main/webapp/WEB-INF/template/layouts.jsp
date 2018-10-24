@@ -19,32 +19,12 @@
 <jsp:include page="/resources/js/move_dropdowns.jsp"/>
 <!-- 아이콘 사용을 위한 fontawesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+<!-- summernote 사용을 위한 설정 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 <style>
-.co{
-	background-color:#1ABC9C;
-}
-.wr{
-	padding: 5px;
-	padding-right: 0px
-}
-.si{
-	padding-left:10px;
-	font-size:25px
-}
-.pad{
-	padding-top: 10px;
-	padding-bottom: 20px
-}
-strong{
-	font-size: 3em
-}
-.ic{
-	color:#1ABC9C
-}
 *{
 	font-family: 메이플스토리;
 }
