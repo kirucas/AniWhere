@@ -13,6 +13,12 @@
 	padding-top:90px;
 	padding-bottom:90px;
 }
+
+@media (max-width: 767px) {
+	#aniFooter {
+		display:none;
+	}
+}
 .footul{
 	font-weight:bold;
 	font-size:20px;	
@@ -29,6 +35,8 @@
 .footul a{
 	color:black;
 }
+
+
 </style>
 
 <!-- footer -->
