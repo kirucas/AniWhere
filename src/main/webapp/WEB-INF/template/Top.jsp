@@ -74,7 +74,7 @@ nav a{
 		                                <li><a href="<c:url value='/animal/dog/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/dog/movie.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/dog/quest.aw'/>">질문 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/dog/tip.aw'/>">팁 게시판</a></li>
+		                                <li><a href="<c:url value='/board/animal/dog/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
                             	</li>
 	                            <li class="dropdown">
@@ -86,7 +86,7 @@ nav a{
 		                                <li><a href="<c:url value='/animal/cat/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/cat/movie.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/cat/quest.aw'/>">질문 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/cat/tip.aw'/>">팁 게시판</a></li>
+		                                <li><a href="<c:url value='/board/animal/cat/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
                             	</li>
 	                            <li class="dropdown">
@@ -98,7 +98,7 @@ nav a{
 		                                <li><a href="<c:url value='/animal/rna/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/rna/movie.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/rna/quest.aw'/>">질문 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/rna/tip.aw'/>">팁 게시판</a></li>
+		                                <li><a href="<c:url value='/board/animal/rNa/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown">
@@ -110,7 +110,7 @@ nav a{
 		                                <li><a href="<c:url value='/animal/bird/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/bird/movie.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/bird/quest.aw'/>">질문 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/bird/tip.aw'/>">팁 게시판</a></li>
+		                                <li><a href="<c:url value='/board/animal/bird/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown">
@@ -122,7 +122,7 @@ nav a{
 		                                <li><a href="<c:url value='/animal/etc/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/etc/movie.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/etc/quest.aw'/>">질문 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/etc/tip.aw'/>">팁 게시판</a></li>
+		                                <li><a href="<c:url value='/board/animal/etc/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown-divider"></li>

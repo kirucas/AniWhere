@@ -33,7 +33,7 @@ $(function() {
        $.ajax({
           data: form_data,
           type: "POST",
-          url : "<c:url value='board/animal/bird/tip/Upload.aw'/>",
+          url : "<c:url value='board/animal/cat/tip/Upload.aw'/>",
           cache: false,
           contentType: false,
           processData: false,
@@ -62,15 +62,15 @@ $(function() {
 <div class="container">
 	<div class="page-header">
 		<h2>
-			조류 팁 게시판
+			고양이 팁 게시판
 		</h2>
 	</div>
 	<div style="width:100%">
-		<form method="post" action="<c:url value='/board/animal/bird/tip/edit.aw'/>">
+		<form method="post" action="<c:url value='/board/animal/cat/tip/edit.aw'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="tip_no" value="${param.tip_no}" />
 				<input type="hidden" name="mem_no" value="${mem_no}" />
-				<input type="hidden" name="ani_category" value="4"/>
+				<input type="hidden" name="ani_category" value="2"/>
 				<div class="form-row" style="width:87.5%;"id="titlediv">
 					<input type="text" class="form-control" id="title" name="tip_title" placeholder="제목을 입력하세요" value=${record.tip_title }/>
 				</div>

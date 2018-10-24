@@ -28,7 +28,7 @@
          $.ajax({
             data: form_data,
             type: "POST",
-            url : "<c:url value='board/animal/bird/tip/Upload.aw'/>",
+            url : "<c:url value='board/animal/cat/tip/Upload.aw'/>",
             cache: false,
             contentType: false,
             processData: false,
@@ -62,10 +62,10 @@
 		</h2>
 	</div>
 	<div style="width:100%">
-		<form method="post" action="<c:url value='/animal/bird/tip/write.aw'/>">
+		<form method="post" action="<c:url value='/animal/cat/tip/write.aw'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="mem_no" value="${mem_no}" />
-                <input type="hidden" name="ani_category" value="4"/>
+                <input type="hidden" name="ani_category" value="2"/>
 				<div class="form-row" style="width:87.5%;"id="titlediv">
 					<input type="text" class="form-control" id="title" name="tip_title" placeholder="제목을 입력하세요">
 				</div>

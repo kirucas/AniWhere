@@ -18,7 +18,7 @@
 			<div class="sub-header-info">
 				<div>
 				<h2 class="sub-header__title" style="display:inline">
-					자유 게시판
+					조류 팁 게시판
 				</h2>
 				<ul class="sub-link__list">
 					<li class="sub-link__item sub-link__item--active">
@@ -63,10 +63,10 @@
 		<section class="article-list article-list--fixed"></section>
 		<section class="article-list">
 			<!-- 여기서 반복문 돌려서 글 -->
-			<c:if test="${empty requestScope.list }" var="isEmpty">
+			<c:if test="${empty requestScope.list}" var="isEmpty">
 				   등록된 게시물이 없어요
     		</c:if>
-    		<c:if test="${not isEmpty }">
+    		<c:if test="${not isEmpty}">
     			<c:forEach var="record" items="${list}" varStatus="loop">
 		    		<article class="article-list-item">
 					<div class="article-list-item__vote">
@@ -74,31 +74,14 @@
 						<div><span id="tip_hit">${record.tip_hit}</span></div>
 		    		</div>
 				<div class="article-list-item__content">
-						<c:choose>
-							<c:when test="${record.ani_category eq '1'}">
-								<span>[잡담]</span>
-							</c:when>
-							<c:when test="${record.ani_category eq '2'}">
-								<span>[정보]</span>		
-							</c:when>
-							<c:when test="${record.ani_category eq '3'}">
-								<span>[유머]</span>
-							</c:when>
-							<c:when test="${record.ani_category eq '4'}">
-								<span>[이슈]</span>
-							</c:when>
-							<c:otherwise>
-								<span>[시사]</span>
-							</c:otherwise>
-						</c:choose>
-					<a href="<c:url value='board/animal/bird/tip/view.aw?tip_no=${record.tip_no}'/>" class="article-list-item__info">
+					<a href="<c:url value='/animal/bird/tip/tip_view.aw?tip_no=${record.tip_no}'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
 							<span id="tip_title">${record.tip_title}</span> <em>[21]</em>
 						</div>
 					</a>
 					<div class="article-list-item-meta">
 						<div class="article-list-item-meta__item">
-							<span data-tooltip data-date=${record.tip_regidate} title=""></span>
+							<span data-tooltip data-date=${record.tip_regidate } title=""></span>
 						</div>
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
 							<a href="#" id="mem_no">${record.mem_no} </a>

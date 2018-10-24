@@ -25,7 +25,8 @@ import com.animal.aniwhere.web.board.FileUpDownUtils;
 
 @Controller
 public class BirdTipController {
-
+	
+	
 	@Resource(name="tipService")
 	private AllBoardService allBoardService;
 	
@@ -40,6 +41,7 @@ public class BirdTipController {
 			@RequestParam Map map,//검색용 파라미터 받기
 			@RequestParam(required=false,defaultValue="1") int nowPage//페이징용 nowPage파라미터 받기용
 			)throws Exception {
+		map.put("ani_category",4);
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		//전체 레코드 수
@@ -65,7 +67,7 @@ public class BirdTipController {
 	}////////// tip_main
 	
 	//상세보기
-	@RequestMapping("/board/animal/bird/tip/view.aw")
+	@RequestMapping("/animal/bird/tip/tip_view.aw")
 	public String view(@RequestParam Map map,Model model) throws Exception {
 		//서비스 호출]
 		//게시글
@@ -97,6 +99,7 @@ public class BirdTipController {
 	//수정폼으로 이동 및 수정 처리]
 	@RequestMapping("/board/animal/bird/tip/edit.aw")
 	public String edit(HttpServletRequest req,@RequestParam Map map,Model model) throws Exception{
+		System.out.println(map.get("tip_no"));
 		if(req.getMethod().equals("GET")) {
 			//서비스 호출]
 			TipBoardDTO record = allBoardService.selectOne(map);
