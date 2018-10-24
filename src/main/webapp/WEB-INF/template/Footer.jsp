@@ -76,6 +76,7 @@
 			<div class="mbr-footer-content col-xs-12 col-md-3">
 					<ul class="footul">
 						<a href="<c:url value='/notice.aw' />"><span>공지사항</span></a>
+						<li><a href="<c:url value='/qna.aw' />"><span>1대1 문의</span></a></li>
 					</ul>
 					<ul class="footul">
 						<span>주소</span>

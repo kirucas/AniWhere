@@ -18,7 +18,7 @@
 <div class="container">
 	<!-- 반복 시작 -->
 	<div class="card col-12 col-md-3 ">
-		  <img class="card-img-top img-fluid" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
+		  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
 		  <div class="card-body">
 		    <h2 class="card-title" style="color:#1ABC9C">이름</h2>
 		    <p class="card-text">종류</p>
@@ -31,7 +31,7 @@
 	</div>
 	<!-- 반복 끗 -->
 	<div class="card col-12 col-md-3 ">
-		<img class="card-img-top img-fluid" src="<c:url value='/resources/images/mating/yeonji.JPG'/>" alt="Card image">
+		<img class="card-img-top" src="<c:url value='/resources/images/mating/yeonji.JPG'/>" alt="Card image">
 		<div class="card-body">
 			<h2 class="card-title" style="color:#1ABC9C">이름</h2>
 			<p class="card-text">종류</p>
@@ -43,7 +43,7 @@
 		  </div>
 	</div>
 	<div class="card col-12 col-md-3 ">
-		  <img class="card-img-top img-fluid" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
+		  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
 		  <div class="card-body">
 		    <h2 class="card-title" style="color:#1ABC9C">이름</h2>
 		    <p class="card-text">종류</p>
@@ -51,7 +51,7 @@
 		  </div>
 	</div>
 	<div class="card col-12 col-md-3 ">
-		  <img class="card-img-top img-fluid" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
+		  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
 		  <div class="card-body">
 		    <h2 class="card-title" style="color:#1ABC9C">이름</h2>
 		    <p class="card-text">종류</p>
