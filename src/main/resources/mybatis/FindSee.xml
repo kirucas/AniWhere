@@ -14,7 +14,7 @@
 		SELECT tn.*, mem_nickname, animal_name
 		FROM miss_${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
 		JOIN animal_category ac ON tn.animal_code = ac.animal_code
-		ORDER BY no DESC
+		ORDER BY no DESC 
 	</select>
 	
 	<select id="fsSelectOne" parameterType="java.util.Map" resultType="FSDTO">
@@ -26,7 +26,7 @@
 	
 	<insert id="fsInsert" parameterType="java.util.Map">
 		INSERT INTO miss_${table_name}(no, mem_no, animal_code, title, content)
-		VALUES(seq_${table_name}, #{mem_no}, #{animal_code}, #{title}, #{content})		
+		VALUES(seq_${table_name}.nextval, #{mem_no}, #{animal_code}, #{title}, #{content})		
 	</insert>
 	
 	<update id="fsUpdate" parameterType="java.util.Map">
