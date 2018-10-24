@@ -1,8 +1,8 @@
-package com.animal.aniwhere.web.board.animal.cat;
+package com.animal.aniwhere.web.board.animal.etc;
 
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class CatStoryController {
+public class EtcQuestController {
 
 }//////////////////// StoryController
