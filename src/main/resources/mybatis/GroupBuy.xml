@@ -12,13 +12,13 @@
 			FROM market_group_buy mgb JOIN member mb ON mbg.mem_no=mb.mem_no
 			JOIN animal_category ac ON mbg.animal_code = ac.animal_code
 			<if test="animal_code != null and title != null">
-				WHERE animal_code=#{animal_code} AND title like '%'||#{title}||'%'
+				WHERE mbg.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
 			</if>
 			<if test="animal_code != null and content != null">
-				WHERE animal_code=#{animal_code} AND content like '%'||#{content}||'%'
+				WHERE mbg.animal_code=#{animal_code} AND content like '%'||#{content}||'%'
 			</if>
 			<if test="animal_code != null">
-				WHERE animal_code=#{animal_code}
+				WHERE mbg.animal_code=#{animal_code}
 			</if>
 			<if test="title != null">
 				WHERE title=#{title}
@@ -38,13 +38,13 @@
 				FROM market_group_buy gb JOIN member mb ON gb.mem_no = mb.mem_no
 				JOIN animal_category ac ON gb.animal_code = ac.animal_code
 				<if test="animal_code != null and title != null">
-					WHERE animal_code=#{animal_code} AND title like '%'||#{title}||'%'
+					WHERE gb.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
 				</if>
 				<if test="animal_code != null and content != null">
-					WHERE animal_code=#{animal_code} AND content like '%'||#{content}||'%'
+					WHERE gb.animal_code=#{animal_code} AND content like '%'||#{content}||'%'
 				</if>
 				<if test="animal_code != null">
-					WHERE animal_code=#{animal_code}
+					WHERE gb.animal_code=#{animal_code}
 				</if>
 				<if test="title != null">
 					WHERE title=#{title}

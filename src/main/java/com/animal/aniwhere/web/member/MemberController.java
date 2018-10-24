@@ -49,10 +49,20 @@ public class MemberController {
       
       return "forward:/main.aw";
    }
-   @RequestMapping("/member/sign_in.aw")
+   @RequestMapping("/member/sign_up.aw")
    public String signUp(){
       
       return "member/sign_up";
    }
 
+   @RequestMapping("/signUpProcess.aw")
+   public String signUpProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+      int signup = service.insert(map);
+      if(signup==1)
+    	  model.addAttribute("check",true);
+      else
+    	  model.addAttribute("check",false);
+      return "/login.aw";
+      
+   }////////// signInProcess
 }//////////////////// MemberController class
