@@ -11,6 +11,17 @@ public class MovieBoardDTO {
 	private java.sql.Date movie_regidate;
 	private String ani_category;
 	
+	//임시 선언(동영상 경로 받아 jsp에서 뿌려주기 위한 변수)
+	private String movie_tempsrc;
+	
+	public String getMovie_tempsrc() {
+		return movie_tempsrc;
+	}
+
+	public void setMovie_tempsrc(String movie_tempsrc) {
+		this.movie_tempsrc = movie_tempsrc;
+	}
+
 	// 작성자의 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
 

@@ -108,7 +108,7 @@ nav a{
 	                                </a>
 	                                <ul class="dropdown-menu" aria-labelledby="bird_main">
 		                                <li><a href="<c:url value='/animal/bird/photo.aw'/>">사진 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/bird/movie.aw'/>">동영상 게시판</a></li>
+		                                <li><a href="<c:url value='/bird/movie/List.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/bird/quest.aw'/>">질문 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/bird/tip.aw'/>">팁 게시판</a></li>
 	                                </ul>

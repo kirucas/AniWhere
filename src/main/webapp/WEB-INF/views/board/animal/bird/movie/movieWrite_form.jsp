@@ -49,7 +49,7 @@
 		/* 제목 */
 		ntWin.document.write("<br/>" + document.forms[0].movie_title.value + "<br/>");
 		/* 조회수 */
-		ntWin.document.write("<br/>" + document.movie_hit + "<br/>");
+		ntWin.document.write("<br/>" + document.movie_count + "<br/>");
 		/* 작성자 별명 */
 		ntWin.document.write("<br/>" + document.mem_nickname + "<br/>");
 		/* 게시일 */
@@ -61,6 +61,7 @@
 <div class="container">
 	<form method="post" action="<c:url value='/animal/bird/movie/Write.aw'/>">
 		<input type="hidden" name="mem_no" value="${mem_no }">
+		<input type="hidden" name="ani_category" value="4">
 		<div class="form-group row">
 			<label for="validationDefaultUsername"
 				class="offset-sm-1 col-sm-1 col-form-label">게시판</label>
