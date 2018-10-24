@@ -11,6 +11,7 @@ public class QuestBoardDTO {
 	private String quest_count;
 	private String origin_no;
 	private String checking;
+	private String ani_category;
 	
 	// 작성자 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
@@ -93,6 +94,14 @@ public class QuestBoardDTO {
 
 	public void setChecking(String checking) {
 		this.checking = checking;
+	}//////////
+
+	public String getAni_category() {
+		return ani_category;
+	}//////////
+
+	public void setAni_category(String ani_category) {
+		this.ani_category = ani_category;
 	}//////////
 	
 }//////////////////// QuestBoardDTO class
