@@ -17,8 +17,9 @@ public class MarketMainController {
 	public String buyinside() throws Exception {
 		return "market/inside/buyinside.tiles";
 		
-		*/
+		
 	}
+	*/
 	@RequestMapping("/market/sellinside.aw")
 	public String sellinside() throws Exception {
 		return "market/inside/sellinside.tiles";
