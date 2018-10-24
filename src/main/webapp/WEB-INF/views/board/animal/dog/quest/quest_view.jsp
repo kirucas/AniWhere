@@ -31,7 +31,7 @@
 		<div class="col-sm-2">
 			 ${record.quest_regidate}
 		</div>
-		<div style="align-content: right">
+		<div>
 			<a href="<c:url value='/animal/dog/quest/quest_edit.aw?quest_no=${record.quest_no}'/>">수정 </a>
 			<a id="delete" href="#">| 삭제 </a>
 			<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>">| 목록</a>

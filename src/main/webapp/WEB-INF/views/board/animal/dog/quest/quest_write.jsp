@@ -4,7 +4,9 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote-bs4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/lang/summernote-ko-KR.js"></script>
-
+<script>
+	
+</script>
 <div class="container border">
 	<div class="row col-sm-2" >
 		강아지 질문 게시판
