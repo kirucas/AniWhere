@@ -41,6 +41,7 @@ public class BirdMovieController {
 				Model model,
 				HttpServletRequest req//페이징용 메소드에 전달
 				) throws Exception{
+			map.put("ani_category", 4);
 			//서비스 호출]
 			//페이징을 위한 로직 시작]
 			//전체 레코드 수
@@ -99,7 +100,6 @@ public class BirdMovieController {
 			) throws Exception{
 		//서비스 호출
 		service.insert(map);
-		System.out.println("리턴직저어어언");
 		//뷰정보 반환
 		return "forward:/bird/movie/List.aw";
 	}

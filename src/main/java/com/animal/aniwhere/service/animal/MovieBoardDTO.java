@@ -9,6 +9,7 @@ public class MovieBoardDTO {
 	private String movie_content;
 	private String movie_hit;
 	private java.sql.Date movie_regidate;
+	private String ani_category;
 	
 	//임시 선언(동영상 경로 받아 jsp에서 뿌려주기 위한 변수)
 	private String movie_tempsrc;
@@ -86,6 +87,14 @@ public class MovieBoardDTO {
 
 	public void setMem_nickname(String mem_nickname) {
 		this.mem_nickname = mem_nickname;
+	}//////////
+
+	public String getAni_category() {
+		return ani_category;
+	}//////////
+
+	public void setAni_category(String ani_category) {
+		this.ani_category = ani_category;
 	}//////////
 	
 }//////////////////// MovieBoardDTO class
