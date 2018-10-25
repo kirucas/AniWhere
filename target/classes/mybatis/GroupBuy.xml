@@ -9,7 +9,7 @@
 		SELECT COUNT(*)
 		FROM (
 			SELECT mgb.*, mem_nickname, animal_name
-			FROM market_group_buy mgb JOIN member mb ON mbg.mem_no=mb.mem_no
+			FROM market_group_buy mgb LEFT JOIN member mb ON mbg.mem_no=mb.mem_no
 			JOIN animal_category ac ON mbg.animal_code = ac.animal_code
 			<if test="animal_code != null and title != null">
 				WHERE mbg.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
@@ -35,7 +35,7 @@
 			SELECT T.*, ROWNUM R
 			FROM (
 				SELECT gb.*, mem_nickname, animal_name
-				FROM market_group_buy gb JOIN member mb ON gb.mem_no = mb.mem_no
+				FROM market_group_buy gb LEFT JOIN member mb ON gb.mem_no = mb.mem_no
 				JOIN animal_category ac ON gb.animal_code = ac.animal_code
 				<if test="animal_code != null and title != null">
 					WHERE gb.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
@@ -60,7 +60,7 @@
 	
 	<select id="groupbuySelectOne" parameterType="java.util.Map" resultType="GroupDTO">
 		SELECT gb.*, mem_nickname, animal_name
-		FROM market_group_buy gb JOIN member mb ON gb.mem_no = mb.mem_no
+		FROM market_group_buy gb LEFT JOIN member mb ON gb.mem_no = mb.mem_no
 		JOIN animal_category ac ON gb.animal_code = ac.animal_code
 		WHERE no=#{no}
 	</select>

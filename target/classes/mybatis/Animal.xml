@@ -17,7 +17,7 @@
 		SELECT ani.*, mem_name, mem_nickname
 		FROM animal ani JOIN member mem ON ani.mem_no = mem.mem_no
 		<if test="mem_no != null">
-			WHERE mem_no=#{mem_no}
+			WHERE mem.mem_no=#{mem_no}
 		</if>
 		ORDER BY ani_no DESC
 	</select>
