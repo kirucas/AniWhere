@@ -26,7 +26,7 @@
 	</div>
 	<div>
 		<!-- 입력 폼 시작 -->
-		<form class="form-horizontal" method="POST" action="<c:url value='/board/animal/bird/photo/write.aw'/>">
+		<form class="form-horizontal" method="POST" action="<c:url value='/board/animal/bird/photo/write.aw'/>" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title" class="col-md-2 control-label">제목</label>
 				<div class="col-md-12">
@@ -48,7 +48,7 @@
 				</div>
 				<div style="float:right; display: flex;justify-content: right;">
 					<input type="submit" class="btn btn-primary" value="등록"/>
-	<!-- 				<a href="#" class="btn btn-primary">등록</a> -->
+<!-- 					<a href="#" class="btn btn-primary">등록</a> -->
 				</div>
 			</div>
 			<div id="result">
@@ -69,14 +69,22 @@
 		console.log("fileUploadAction");
 		$("#files").trigger('click');
 	}
-
+	
+	// 어따넣어야되냐..
+	/* var formData = new FormData($('#files')[0]);
+	$.ajax({
+		url : "<c:url value='/Upload.aw'/>",
+		processData : false,
+		contentType : false,
+		data : formData,
+		type : 'POST'
+	}); */
+	
 	window.onload = function() {
 		var filelength = 0;
-		var form_data;
 		//Check File API support
 		if (window.File && window.FileList && window.FileReader) {
 			var filesInput = document.getElementById("files");
-
 			filesInput.addEventListener("change",function(event) {
 				var files = event.target.files; //FileList object
 				var output = document.getElementById("result");
@@ -84,7 +92,6 @@
 				console.log(filelength);
 				for (var i = 0; i < files.length; i++) {
 					var file = files[i];
-
 					//Only pics
 					if (!file.type.match('image'))
 						continue;
@@ -100,14 +107,8 @@
 						alert('사진은 최대 5장 까지만 가능합니다');
 						break;
 					}
-					if (filelength >= 6) {
-						alert('사진은 최대 5장 까지만 가능합니다');
-						break;
-					}
 					//Read the image
 					picReader.readAsDataURL(file);
-					
-					sendFile(file, this);	
 				}
 			});
 		} else {
@@ -118,22 +119,4 @@
 			filelength.pop();
 		});
 	}
-	
-	function sendFile(file, el, wel) {
-        form_data.append('file', file);
-        $.ajax({
-           data: form_data,
-           type: "POST",
-           url : "<c:url value='/Upload.aw'/>",
-           cache: false,
-           contentType: false,
-           processData: false,
-           success: function(url) {
-              	
-           },
-           error : function() {
-              console.log("error");
-           }
-        });
-     }
 </script>

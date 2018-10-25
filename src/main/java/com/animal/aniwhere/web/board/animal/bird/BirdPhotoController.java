@@ -1,6 +1,7 @@
 package com.animal.aniwhere.web.board.animal.bird;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,11 +36,13 @@ public class BirdPhotoController {
     @RequestMapping(value="/Upload.aw")
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
-		MultipartFile upload = mhsr.getFile("file");
+		MultipartFile upload = mhsr.getFile("files");
 		
 		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
 		File file = new File(phisicalPath+File.separator+newFilename);
 		upload.transferTo(file);
+		
+		System.out.println("업로드으!");
         return "/Upload/"+newFilename;
    }/// imageUpload
 	
