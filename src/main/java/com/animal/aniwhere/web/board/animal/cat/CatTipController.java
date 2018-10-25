@@ -99,7 +99,6 @@ public class CatTipController {
 	//수정폼으로 이동 및 수정 처리]
 	@RequestMapping("/board/animal/cat/tip/edit.aw")
 	public String edit(HttpServletRequest req,@RequestParam Map map,Model model) throws Exception{
-		System.out.println(map.get("tip_no"));
 		if(req.getMethod().equals("GET")) {
 			//서비스 호출]
 			TipBoardDTO record = allBoardService.selectOne(map);
