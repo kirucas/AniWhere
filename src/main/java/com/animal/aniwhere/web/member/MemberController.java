@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 import com.animal.aniwhere.service.member.MemberDTO;
@@ -46,8 +47,8 @@ public class MemberController {
       return "forward:/main.aw";
    }
    @RequestMapping("/member/sign_up.aw")
-   public String signUp(){
-	   
+   public String signUp() throws Exception{
+      
       return "member/sign_up";
    }
 
@@ -95,4 +96,15 @@ public class MemberController {
    }
 
    
+ //안드로이드 용
+ 	@ResponseBody
+ 	@RequestMapping(value = "/android.aw", method = RequestMethod.POST)
+ 	public String androidLogin(@RequestParam Map map) throws Exception{
+ 		if(!service.isMember(map)) {
+ 			return "false";
+ 		}		
+ 		MemberDTO dto = service.selectOne(map);				
+ 		return dto.getMem_id();
+       
+    }
 }//////////////////// MemberController class

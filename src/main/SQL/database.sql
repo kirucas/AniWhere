@@ -1,3 +1,4 @@
+
 /* Drop Tables */
 
 DROP TABLE notice CASCADE CONSTRAINTS;
@@ -553,6 +554,7 @@ ALTER TABLE animal
 ALTER TABLE freeboard
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
+	ON DELETE SET 0
 ;
 
 
