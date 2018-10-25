@@ -55,7 +55,7 @@ CREATE TABLE admin_member
 CREATE TABLE animal
 (
 	ani_no number NOT NULL,
-	mem_no number,
+	mem_no number NOT NULL,
 	ani_name nvarchar2(20) NOT NULL,
 	ani_age number NOT NULL,
 	ani_gender varchar2(1) NOT NULL CHECK (ani_gender IN ('F', 'M', 'U')),
@@ -563,22 +563,22 @@ ALTER TABLE market_sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
-	REFERENCES mating (mating_no)
-;
-
-
-ALTER TABLE drafting
 	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
 	ON DELETE CASCADE
 ;
 
 
+ALTER TABLE drafting
+	ADD FOREIGN KEY (send_no)
+	REFERENCES mating (mating_no)
+;
+
+
 ALTER TABLE animal
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
-	ON DELETE SET NULL
+	ON DELETE CASCADE
 ;
 
 
@@ -725,7 +725,7 @@ ALTER TABLE quest_cmt
 ALTER TABLE reservation
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
-	ON DELETE SET NULL
+	ON DELETE CASCADE
 ;
 
 

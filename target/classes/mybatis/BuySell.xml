@@ -9,7 +9,7 @@
 		SELECT COUNT(*)
 		FROM (
 			SELECT tn.*, mem_nickname, animal_name
-			FROM market_${table_name} tn JOIN member mb ON tn.mem_no=mb.mem_no
+			FROM market_${table_name} tn LEFT JOIN member mb ON tn.mem_no=mb.mem_no
 			JOIN animal_category ac ON tn.animal_code=ac.animal_code
 			<if test="animal_code != null and searchColumn != null">
 				WHERE tn.animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
@@ -29,7 +29,7 @@
 			SELECT T.*, ROWNUM R
 			FROM (
 				SELECT tn.*, mem_nickname, animal_name
-				FROM market_${table_name} tn JOIN member mb ON tn.mem_no=mb.mem_no
+				FROM market_${table_name} tn LEFT JOIN member mb ON tn.mem_no=mb.mem_no
 				JOIN animal_category ac ON tn.animal_code=ac.animal_code
 				<if test="animal_code != null and searchColumn != null">
 					WHERE tn.animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
@@ -48,7 +48,7 @@
 	
 	<select id="bsSelectOne" parameterType="java.util.Map" resultType="BSDTO">
 		SELECT tn.*, mem_nickname, animal_name
-		FROM market_${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
+		FROM market_${table_name} tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
 		JOIN animalCategory ac ON tn.animal_code = ac.animal_code
 		WHERE no=#{no}
 	</select>
