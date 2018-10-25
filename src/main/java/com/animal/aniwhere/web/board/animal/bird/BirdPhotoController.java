@@ -31,14 +31,19 @@ public class BirdPhotoController {
 		for(String key:set)	System.out.println("value:"+map.get(key));
 		
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
-		MultipartFile upload = mhsr.getFile("files");
-		
-		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-		File file = new File(phisicalPath+File.separator+newFilename);
-		upload.transferTo(file);
-		
+		//MultipartFile upload = mhsr.getFile("files");
+		Iterator<String> files=mhsr.getFileNames();
+		while(files.hasNext()) {
+			String uploadFile=files.next();
+			MultipartFile upload=mhsr.getFile(uploadFile);
+			String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+			System.out.println("파일 이름:"+newFilename);
+			try {
+				upload.transferTo(new File(phisicalPath+File.separator+newFilename));
+			} catch (Exception e) { e.printStackTrace();}
+		}
 		System.out.println("업로드으!");
-        return "/Upload/"+newFilename;
+        return "";
 	}/// writeComplete
 	
 }//////////////////// PhotoController class

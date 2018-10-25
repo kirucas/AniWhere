@@ -26,7 +26,7 @@
 	</div>
 	<div>
 		<!-- 입력 폼 시작 -->
-		<form class="form-horizontal" method="POST" action="upload()" enctype="multipart/form-data">
+		<form class="form-horizontal" method="POST" action="/board/animal/bird/photo/write.aw" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title" class="col-md-2 control-label">제목</label>
 				<div class="col-md-12">
@@ -41,13 +41,17 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group" style="display: flex;justify-content: left;">
+				<div class="form-group"">
 					<a href="javascript:" onclick="fileUploadAction();"	class="btn btn-primary">사진 업로드</a> 
 					<a href="javascript:" id="imgdelete" class="btn btn-danger">되돌리기</a> 
-					<input id="files" type="file" multiple name="files" style="display:none;"/>
+					<input id="files" type="file" multiple name="files" style=""/>
+					<div id="hiddenInput">
+						<!-- 인풋 태그 동적 생성용 -->
+						
+					</div>
 				</div>
-				<div style="float:right; display: flex;justify-content: right;">
-					<input type="submit" class="btn btn-primary" value="등록"/>
+				<div style="float:right;">
+					<input id="uploadButton" type="button" class="btn btn-primary" value="등록"/>
 <!-- 					<a href="#" class="btn btn-primary">등록</a> -->
 				</div>
 			</div>
@@ -70,20 +74,16 @@
 		$("#files").trigger('click');
 	}
 	
-	
-	
 	window.onload = function() {
 		var filelength = 0;
-		var fileList=new Array();
 		//Check File API support
 		if (window.File && window.FileList && window.FileReader) {
 			var filesInput = document.getElementById("files");
-			
 			filesInput.addEventListener("change",function(event) {
 				var files = event.target.files; //FileList object
+				// input 태그 동적 생성d
 				var output = document.getElementById("result");
 				filelength += files.length;
-				fileList.push(files[0]);
 				for (var i = 0; i < files.length; i++) {
 					var file = files[i];
 					//Only pics
@@ -96,6 +96,8 @@
 						var div = document.createElement("div");
 						div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +"title='" + picFile.name + "'/>";
 						output.insertBefore(div, null);
+						filesInput.removeAttribute("id");
+						$('<input id="files" type="file" multiple name="files" style=""/>').insertAfter('input[type=file]');
 					});
 					if (files.length >= 6) {
 						alert('사진은 최대 5장 까지만 가능합니다');
@@ -110,23 +112,28 @@
 		}
 		$('#imgdelete').click(function() {
 			console.log('삭제ㄸ ㅣ : ', filelength);
-			filelength.pop();
+			files.pop();
+		});
+		
+		$('#uploadButton').click(function() {
+			upload();
 		});
 	}
 	
 	function upload(){
-		console.log("으아아 인풋");
+		var formData=new FormData($("form")[0]);
 		$.ajax({
 			url : "<c:url value='/board/animal/bird/photo/write.aw'/>",
 			processData : false,
 			contentType : false,
-			data : {"files":fileList},
+			data : formData,
 			type : 'POST',	
 			success:function(data){
 	            alert("완료!");
 	        },
-	        error:function(jqXHR, textStatus, errorThrown){
-	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+	        error:function(error){
+	            alert("에러");
+	            console.log(error);
 	        }
 		});
 	}
