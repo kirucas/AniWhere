@@ -37,6 +37,8 @@
 		$("#logout").click(function(){
 			location.href = "<c:url value='/signout.aw' />";
 		});
-		
+		$("#profile_main").click(function(){
+			location.href = "<c:url value='/profile_main.aw' />";
+		});
 	});
 </script>

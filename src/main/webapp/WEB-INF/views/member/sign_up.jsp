@@ -152,9 +152,11 @@ $(document).ready(function() {
 				    </div>  
 			      </div>
 			      <div class="row">
+			      	<div class="col s4 offset-s4">
+		      			<span>생년월일</span>
+	      			</div>
 			      	<div class="input-field col s4 offset-s4">
 			      		<input id="birthdate" type="date" class="datepicker" name="mem_birth">
- 						<label for="birthdate">생년월일</label>
 			      	</div>
 				  </div>
 				  		<input type="hidden" name="mem_log" value="0">
