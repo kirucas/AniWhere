@@ -24,27 +24,23 @@
     
 </head>
 <body>
-	<c:if test="${not empty sign_error }">
-		<script>
-			alert("${sign_error}");
-		</script>
-	</c:if>
+   <c:if test="${not empty sign_error }">
+      <script>
+         alert("${sign_error}");
+      </script>
+   </c:if>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper auth p-0 theme-two">
                 <div class="row d-flex align-items-stretch">
                     <div class="col-md-4 banner-section d-none d-md-flex align-items-stretch justify-content-center">
-                        <div class="slide-content bg-1"> </div>
+                        <div class="slide-content bg-1" style='background: url("<c:url value='/resources/images/loginlogo.jpg'/>");background-size: cover;'> </div>
                     </div>
                     <div class="col-12 col-md-8 h-100 bg-white">
                         <div class="auto-form-wrapper d-flex align-items-center justify-content-center flex-column">
-                            <div class="nav-get-started">
-                                <p>Don't have an account?</p>
-                                <a class="btn get-started-btn" href="register-2.html">GET STARTED</a>
-                            </div>
                             <form action="<c:url value='/signInProcess.aw' />" method="post">
-                                <h3 class="mr-auto">Hello! let's get started</h3>
-                                <p class="mb-5 mr-auto">Enter your details below.</p>
+                                <h3 class="mr-auto">안녕하세요! 시작하자.</h3>
+                                <p class="mb-5 mr-auto">아래에 세부 정보를 입력하십시오.</p>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -65,10 +61,12 @@
                                         <input type="password" class="form-control" placeholder="Password" name="mem_pw">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <button id="android" class="btn btn-primary submit-btn">SIGN IN</button>
+
+                                <div class="form-group" style="float:left;">
+                                    <button class="btn btn-primary submit-btn">로그인</button>
+                                    <a href="<c:url value='/member/sign_up.aw'/>" class="btn btn-primary">회원가입</a>
                                 </div>
-                           
+                                   
                                 <div class="wrapper mt-5 text-gray">
                                     <p class="footer-text">Copyright © 2018 Bootstrapdash. All rights reserved.</p>
                                     <ul class="auth-footer text-gray">

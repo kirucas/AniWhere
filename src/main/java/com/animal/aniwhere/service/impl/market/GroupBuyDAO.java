@@ -48,4 +48,5 @@ public class GroupBuyDAO implements AllBoardService {
 		return template.delete("groupbuyDelete", map);
 	}////////// delete
 
+	
 }//////////////////// GroupBuyDAO class

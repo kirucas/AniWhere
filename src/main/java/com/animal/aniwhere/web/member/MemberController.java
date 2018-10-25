@@ -18,16 +18,16 @@ import com.animal.aniwhere.service.member.MemberDTO;
 @Controller
 public class MemberController {
 
-	@Resource(name="memberService")
-	private MemberServiceImpl service;
-	
-	@RequestMapping("/login.aw")
-	public String go_login() throws Exception {
-		return "member/sign_in";
-	}////////// go_login
+   @Resource(name="memberService")
+   private MemberServiceImpl service;
+   
+   @RequestMapping("/login.aw")
+   public String go_login() throws Exception {
+      return "member/sign_in";
+   }////////// go_login
 
-	@RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
-	public String signInProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+   @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
+   public String signInProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
 
 		if(!service.isMember(map)) {
 			model.addAttribute("sign_error", "ID 혹은 Password가 틀렸습니다");
@@ -50,20 +50,33 @@ public class MemberController {
 		
 		return "forward:/main.aw";
 	}
-	
-	//안드로이드 용
-	@ResponseBody
-	@RequestMapping(value = "/android.aw", method = RequestMethod.POST)
-	public String androidLogin(@RequestParam Map map) throws Exception{
-		if(!service.isMember(map)) {
-			return "false";
-		}		
-		MemberDTO dto = service.selectOne(map);				
-		return dto.getMem_id();
-	}
-	
-	
-	
-	
+   
+   @RequestMapping("/member/sign_up.aw")
+   public String signUp() throws Exception{
+      
+      return "member/sign_up";
+   }
 
+   @RequestMapping("/signUpProcess.aw")
+   public String signUpProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+      int signup = service.insert(map);
+      if(signup==1)
+    	  model.addAttribute("check",true);
+      else
+    	  model.addAttribute("check",false);
+      return "/login.aw";
+      
+   }////////// signInProcess
+   
+ //안드로이드 용
+ 	@ResponseBody
+ 	@RequestMapping(value = "/android.aw", method = RequestMethod.POST)
+ 	public String androidLogin(@RequestParam Map map) throws Exception{
+ 		if(!service.isMember(map)) {
+ 			return "false";
+ 		}		
+ 		MemberDTO dto = service.selectOne(map);				
+ 		return dto.getMem_id();
+       
+    }
 }//////////////////// MemberController class

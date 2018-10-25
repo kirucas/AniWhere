@@ -53,14 +53,13 @@
 				#{mem_nickname}, 
 				#{mem_gender}, 
 				#{mem_birth}, 
-				#{mem_loc}, 
 				#{mem_log}, 
 				#{mem_interani})
 	</insert>
 	
 	<update id="memberUpdate">
 		UPDATE member
-		SET mem_id=#{mem_id}, mem_pw=#{mem_pw}, mem_name=#{mem_name}, mem_nickname=#{mem_nickname}, mem_gender=#{mem_gender}, mem_birth=#{mem_birth}, mem_loc=#{mem_loc}, mem_interani=#{mem_interani}
+		SET mem_id=#{mem_id}, mem_pw=#{mem_pw}, mem_name=#{mem_name}, mem_nickname=#{mem_nickname}, mem_gender=#{mem_gender}, mem_birth=#{mem_birth}, mem_interani=#{mem_interani}
 		WHERE mem_no=#{mem_no}
 	</update>
 	

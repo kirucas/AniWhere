@@ -73,8 +73,8 @@ nav a{
 	                                <ul class="dropdown-menu" aria-labelledby="dog_main">
 		                                <li><a href="<c:url value='/animal/dog/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/dog/movie.aw'/>">동영상 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/dog/quest.aw'/>">질문 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/dog/tip.aw'/>">팁 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/dog/quest/quest_list.aw'/>">질문 게시판</a></li>
+		                                <li><a href="<c:url value='/board/animal/dog/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
                             	</li>
 	                            <li class="dropdown">
@@ -86,7 +86,7 @@ nav a{
 		                                <li><a href="<c:url value='/animal/cat/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/cat/movie.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/cat/quest.aw'/>">질문 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/cat/tip.aw'/>">팁 게시판</a></li>
+		                                <li><a href="<c:url value='/board/animal/cat/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
                             	</li>
 	                            <li class="dropdown">
@@ -98,7 +98,7 @@ nav a{
 		                                <li><a href="<c:url value='/animal/rna/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/rna/movie.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/rna/quest.aw'/>">질문 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/rna/tip.aw'/>">팁 게시판</a></li>
+		                                <li><a href="<c:url value='/board/animal/rNa/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown">
@@ -108,9 +108,9 @@ nav a{
 	                                </a>
 	                                <ul class="dropdown-menu" aria-labelledby="bird_main">
 		                                <li><a href="<c:url value='/animal/bird/photo.aw'/>">사진 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/bird/movie.aw'/>">동영상 게시판</a></li>
+		                                <li><a href="<c:url value='/bird/movie/List.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/bird/quest.aw'/>">질문 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/bird/tip.aw'/>">팁 게시판</a></li>
+		                                <li><a href="<c:url value='/board/animal/bird/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown">
@@ -122,7 +122,7 @@ nav a{
 		                                <li><a href="<c:url value='/animal/etc/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/etc/movie.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/etc/quest.aw'/>">질문 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/etc/tip.aw'/>">팁 게시판</a></li>
+		                                <li><a href="<c:url value='/board/animal/etc/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown-divider"></li>
@@ -130,11 +130,11 @@ nav a{
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="<c:url value='/animal/market/main.aw'/>" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
+                            <a class="dropdown-toggle" href="/aniwhere/market/main.aw" id="market_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			                                <li><a href="<c:url value='/animal/market/main.aw'/>">팔아요</a></li>
-			                                <li><a href="<c:url value='/animal/market/main.aw'/>">사요</a></li>
-			                                <li><a href="<c:url value='/animal/market/main.aw'/>">같이 싸게 사요</a></li>
+			                                <li><a href="/aniwhere/market/sell.aw">팔아요</a></li>
+			                                <li><a href="/aniwhere/market/buy.aw">사요</a></li>
+			                                <li><a href="/aniwhere/market/groupbuy.aw">같이 싸게 사요</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -148,27 +148,26 @@ nav a{
                         <li>
                             <a href="#" id="mating_main">♡만나요</a>
                         </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">위치</a>
+                        <li>
+                            <a href="#" id="where_main">위치</a>
+                        </li>
+                        <li class="dropdown" style="border:0.1px solid gray;border-radius:10px">
+                            <a class="dropdown-toggle" href="<c:url value='/miss/miss_main.aw'/>" id="miss_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">내 계정</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			                                <li><a href="#">우리 아이가 아플 때</a></li>
-			                                <li><a href="#">아이를 맡겨야 할 때</a></li>
-			                                <li><a href="#">용품을 사고 싶을 때</a></li>
-			                                <li><a href="#">입양을 하고 싶을 때</a></li>
-			                                <li><a href="#">산책을 하고 싶을 때</a></li>
+			                   	<!-- 로그인 되어있을떄 보여주는 탭 -->
+                                <c:if test="${not empty mem_id}" var="sign_check">
+                                	<li><a href="<c:url value='#'/>">내 프로필</a></li>
+	                            	<li><a href="<c:url value='#'/>">동물 프로필	</a></li>
+	                            	<li><a href="#" id="logout">로그아웃</a></li>
+			                   	</c:if>
+			                   	<!-- 로그인 안되어있을떄 보여주는 탭 -->
+                            	<c:if test="${not sign_check }">
+						        	<li><a href="<c:url value='/login.aw'/>">로그인</a></li>
+	                            	<li><a href="<c:url value='/member/sign_up.aw'/>">회원가입</a></li>
+			                   	</c:if>
                             </ul>
                         </li>
                     </ul>
-                   	<c:if test="${not empty mem_id }" var="sign_check">
-	                    <button type="button" class="btn btn-default navbar-btn" style="color:black;margin-left:30px" id="logout">
-                    		LOGOUT
-        	            </button>
-                   	</c:if>
-                   	<c:if test="${not sign_check }">
-	                    <button type="button" class="btn btn-default navbar-btn" style="color:black;margin-left:30px" id="login">
-    	               		LOGIN
-        	            </button>
-                   	</c:if>
                 </div>
             </nav>
         </div>

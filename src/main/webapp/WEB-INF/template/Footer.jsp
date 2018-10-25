@@ -32,7 +32,7 @@
 </style>
 
 <!-- footer -->
-<div class="container" id="aniFooter">
+<div class="container" id="aniFooter" style="margin-top:15px;clear:both">
 		<div class="row">
 			<div class="mbr-footer-content col-xs-12 col-md-2">
 				<ul class="footul">
