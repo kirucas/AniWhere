@@ -21,10 +21,6 @@
 	
 	<select id="memberSelectList" parameterType="java.util.Map" resultType="MemberDTO">
 		SELECT *
-		FROM member
-		ORDER BY mem_no
-		
-		SELECT *
 		FROM (
 			SELECT T.*, ROWNUM R
 			FROM (

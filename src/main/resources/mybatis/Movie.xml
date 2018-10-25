@@ -10,7 +10,7 @@
 		SELECT COUNT(*)
 		FROM (
 			SELECT mo.*, mem_nickname
-			FROM movie mo JOIN member me ON mo.mem_no=me.mem_no
+			FROM movie mo LEFT JOIN member me ON mo.mem_no=me.mem_no
 			WHERE ani_category=#{ani_category}
 			<if test="searchColumn != null">
 				AND ${searchColumn} like '%'||#{searchWord}||'%'
@@ -24,7 +24,7 @@
 			SELECT T.*, ROWNUM R
 			FROM (
 				SELECT mo.*, mem_nickname
-				FROM movie mo JOIN member me ON mo.mem_no=me.mem_no
+				FROM movie mo LEFT JOIN member me ON mo.mem_no=me.mem_no
 				WHERE ani_category=#{ani_category}
 				<if test="searchColumn != null">
 					AND ${searchColumn} like '%' || #{searchWord} || '%'
@@ -37,7 +37,7 @@
 	
 	<select id="movieSelectOne" parameterType="java.util.Map" resultType="MovieDTO">
 		SELECT tn.*, mem_nickname
-		FROM movie tn JOIN member mb ON tn.mem_no = mb.mem_no
+		FROM movie tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
 		WHERE movie_no=#{movie_no}
 	</select>
 	

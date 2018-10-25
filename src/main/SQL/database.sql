@@ -55,7 +55,7 @@ CREATE TABLE admin_member
 CREATE TABLE animal
 (
 	ani_no number NOT NULL,
-	mem_no number,
+	mem_no number NOT NULL,
 	ani_name nvarchar2(20) NOT NULL,
 	ani_age number NOT NULL,
 	ani_gender varchar2(1) NOT NULL CHECK (ani_gender IN ('F', 'M', 'U')),
@@ -411,7 +411,7 @@ CREATE TABLE reservation
 (
 	rv_no number NOT NULL,
 	mem_no number,
-	store_no number NOT NULL,
+	store_no number,
 	apply_date date DEFAULT sysdate,
 	booking_date date NOT NULL,
 	PRIMARY KEY (rv_no)
@@ -430,7 +430,6 @@ CREATE TABLE store_category
 
 CREATE TABLE store_location
 (
-	no number NOT NULL,
 	bizesId number NOT NULL,
 	bizesNm nvarchar2(150) NOT NULL,
 	brchNm nvarchar2(70),
@@ -443,7 +442,7 @@ CREATE TABLE store_location
 	dongNo nvarchar2(20),
 	flrNo nvarchar2(20),
 	hoNo nvarchar2(20),
-	PRIMARY KEY (no)
+	PRIMARY KEY (bizesId)
 );
 
 
@@ -578,7 +577,7 @@ ALTER TABLE drafting
 ALTER TABLE animal
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
-	ON DELETE SET NULL
+	ON DELETE CASCADE
 ;
 
 
@@ -725,7 +724,7 @@ ALTER TABLE quest_cmt
 ALTER TABLE reservation
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
-	ON DELETE SET NULL
+	ON DELETE CASCADE
 ;
 
 
@@ -787,7 +786,7 @@ ALTER TABLE quest_cmt
 
 ALTER TABLE reservation
 	ADD FOREIGN KEY (store_no)
-	REFERENCES store_location (no)
+	REFERENCES store_location (bizesId)
 	ON DELETE CASCADE
 ;
 
