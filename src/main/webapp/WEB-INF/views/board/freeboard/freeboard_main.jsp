@@ -63,7 +63,7 @@
 		<section class="article-list article-list--fixed"></section>
 		<section class="article-list">
 			<!-- 여기서 반복문 돌려서 글 -->
-			<c:if test="${empty requestScope.list }" var="isEmpty">
+			<c:if test="${empty list }" var="isEmpty">
 				   등록된 게시물이 없어요
     		</c:if>
     		<c:if test="${not isEmpty }">

@@ -99,7 +99,6 @@ public class DogTipController {
 	//수정폼으로 이동 및 수정 처리]
 	@RequestMapping("/board/animal/dog/tip/edit.aw")
 	public String edit(HttpServletRequest req,@RequestParam Map map,Model model) throws Exception{
-		System.out.println(map.get("tip_no"));
 		if(req.getMethod().equals("GET")) {
 			//서비스 호출]
 			TipBoardDTO record = allBoardService.selectOne(map);
@@ -124,7 +123,7 @@ public class DogTipController {
 		
 	//Summernote 업로드 기능
 	@ResponseBody
-    @RequestMapping(value="/board/animal/dog/tip/Upload.aw")
+    @RequestMapping(value="/animal/dog/tip/Upload.aw")
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("file");

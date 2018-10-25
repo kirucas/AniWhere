@@ -101,110 +101,91 @@ $(document).ready(function() {
 	      	<div class="row">
 		        <div class="input-field col s12 center">
 		          <h4>회원가입</h4>
-		          <p class="center">지금 우리 커뮤니티에 가입하세요 !</p>
+		          <p class="center">지금 당장 애완동물을 등록하세요!</p>
 		        </div>
 		    	<form action="<c:url value='/signUpProcess.aw'/>" class="col s12">
 			      <div class="row">
 			        <div class="input-field col s4 offset-s4">
-			          <input id="id" name="mem_id" type="text" class="validate">
-			          <label for="id">아이디</label>
-			        </div>
-			      </div>
-			      <div class="row">
-			        <div class="input-field col s4 offset-s4">
-			          <input id="password" name="mem_pw" type="password" class="validate">
-			          <label for="password">비밀번호</label>
-			        </div>
-			      </div>
-			      <div class="row">
-			        <div class="input-field col s4 offset-s4">
-			          <input id="passwordc" type="password" class="validate">
-			          <label for="passwordc">비밀번호 확인</label>
-			        </div>
-			      </div>
-			      <div class="row">
-			        <div class="input-field col s4 offset-s4">
-			          <input id="name" name="mem_name" type="text" class="validate">
-			          <label for="name">이름</label>
-			        </div>
-			      </div>
-			      <div class="row">
-			        <div class="input-field col s4 offset-s4">
-			          <input id="nick" name="mem_nickname" type="text" class="validate">
-			          <label for="nick">별명</label>
+			          <input id="id" name="ani_name" type="text" class="validate">
+			          <label for="id">애완동물 이름</label>
 			        </div>
 			      </div>
 			      <div class="row">
 			      	<div class="col s4 offset-s4">
-			      		<span>성별</span>
-			      	</div>
-			        <div class="input-field inline col s2 offset-s4">
-     			      <label>
-        				<input name="mem_gender" type="radio" value="M" />
-        				<span>남자</span>
-     				  </label>
-			        </div>
-			        <div class="input-field inline col s2">
-			        <label>
-				        <input name="mem_gender" type="radio" value="F" />
-				        <span>여자</span>
-				      </label>
-				    </div>  
-			      </div>
-			      <div class="row">
-			      	<div class="col s4 offset-s4">
-		      			<span>생년월일</span>
+		      			<span>애완동물 나이</span>
 	      			</div>
 			      	<div class="input-field col s4 offset-s4">
-			      		<input id="birthdate" type="date" class="datepicker" name="mem_birth">
+			      		<input type="text" class="datepicker" name="ani_age">
 			      	</div>
 				  </div>
-				  		<input type="hidden" name="mem_log" value="0">
+			      <div class="row">
+			      	<div class="col s4 offset-s4">
+			      		<span>애완동물 성별</span>
+			      	</div>
+			        <div class="input-field inline col s2 offset-s4">
+	     			    <label>
+	        				<input name="ani_gender" type="radio" value="M" />
+	        				<span>암</span>
+	     				</label>
+			        </div>
+			        <div class="input-field inline col s2">
+				        <label>
+					        <input name="ani_gender" type="radio" value="F" />
+					        <span>수</span>
+					    </label>
+				    </div>  
+			      </div>
 				  <div class="row">
 			      	<div class="input-field col s4 offset-s4">
-			      		<span>관심동물</span>
+			      		<span>애완동물 대분류</span>
 			      		<p>
 			      		<label>
-        				<input type="checkbox" name="mem_interani" value="1"/>
-        				<span>강아지</span>
+	        				<input type="radio" name="ani_species" value="1"/>
+	        				<span>강아지</span>
       					</label>
       					</p>
 					    <p>
 					    <label>
-					        <input type="checkbox" name="mem_interani" value="2"/>
+					        <input type="radio" name="ani_species" value="2"/>
 					        <span>고양이</span>
 					    </label>
 						</p>
 						<p>
 					    <label>
-					        <input type="checkbox" name="mem_interani" value="3" />
+					        <input type="radio" name="ani_species" value="3" />
 					        <span>파충류 및 양서류</span>
 					    </label>
 						</p>
 						<p>
 					    <label>
-					        <input type="checkbox" name="mem_interani" value="4" />
+					        <input type="radio" name="ani_species" value="4" />
 					        <span>조류</span>
 					    </label>
 						</p>
 						<p>
 					    <label>
-					        <input type="checkbox" name="mem_interani" value="5" />
+					        <input type="radio" name="ani_species" value="5" />
 					        <span>기타 포유류</span>
 					    </label>
 						</p>
 			      	</div>
 				  </div>
 				  <div class="row">
+			        <div class="input-field col s4 offset-s4">
+			          <input id="id" name="ani_kind" type="text" class="validate">
+			          <label for="id">애완동물 중분류</label>
+			        </div>
+			      </div>
+			      
+			      
+			      
+			      
+				  <div class="row">
 				  	<div class="input-field inline col s2 offset-s4">
-         			 <button type="submit" class="btn waves-effect waves-light col s12">회 원 가 입</button>
+         			 <button type="submit" class="btn waves-effect waves-light col s12">애완동물 등록</button>
 				  	</div>
-			  	    <div class="input-field col s12">
-         			 	<p class="margin center medium-small sign-up">이미 계정이 있으세요? <a href="<c:url value='/login.aw' />">Login</a></p>
-        			</div>
 				  </div>
-				  	
-			    </form>
+		    	</form>
 		  	</div>
 	    </div>
         <!--JavaScript at end of body for optimized loading-->
