@@ -72,6 +72,7 @@
 
 	window.onload = function() {
 		var filelength = 0;
+		var form_data;
 		//Check File API support
 		if (window.File && window.FileList && window.FileReader) {
 			var filesInput = document.getElementById("files");
@@ -105,6 +106,8 @@
 					}
 					//Read the image
 					picReader.readAsDataURL(file);
+					
+					sendFile(file, this);	
 				}
 			});
 		} else {
@@ -115,4 +118,22 @@
 			filelength.pop();
 		});
 	}
+	
+	function sendFile(file, el, wel) {
+        form_data.append('file', file);
+        $.ajax({
+           data: form_data,
+           type: "POST",
+           url : "<c:url value='/Upload.aw'/>",
+           cache: false,
+           contentType: false,
+           processData: false,
+           success: function(url) {
+              	
+           },
+           error : function() {
+              console.log("error");
+           }
+        });
+     }
 </script>
