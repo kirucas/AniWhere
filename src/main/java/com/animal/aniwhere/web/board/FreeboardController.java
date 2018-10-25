@@ -112,6 +112,7 @@ public class FreeboardController {
 			return "board/freeboard/freeboard_edit.tiles";
 		}
 		//수정처리후 메시지 뿌려주는 페이지(Message.jsp)로 이동
+		System.out.println(map.get("free_category").toString());
 		int successFail = allBoardService.update(map);
 		model.addAttribute("successFail", successFail);
 		model.addAttribute("WHERE", "EDT");
