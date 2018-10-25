@@ -3,24 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 @import("https://use.fontawesome.com/releases/v5.3.1/css/all.css" )
+/* 아이콘을 위한 것 */
 </style>
-<!-- 내용 시작 -->
 <div class="container">
-	<div class="page-header" style="border:2px solid white">
+	<div class="page-header">
 		<h2>
 			강아지&nbsp;<small>질문 게시판</small>
 		</h2>
 	</div>
-	<form action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
-		<div class="offset-sm-9 col-sm-3" style="padding: 5px;padding-right: 0px">	
-			<div align="right" >
-				<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>" 
-				class="btn btn-success"><i class="fas fa-pen-square" >글쓰기</i></a>
+	<div>
+		<form action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
+			<div class="offset-sm-9 col-sm-3" style="padding: 5px;padding-right: 0px">	
+				<div align="right">
+					<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>"class="btn btn-success">
+						<i class="fas fa-pen-square" >글쓰기</i><!-- 아이콘 -->
+					</a>
+				</div>
 			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 	<div class="row">
-		<!-- 테이블전체 가로폭은 테이블을 감싸는  div에 col-*-*로 조정 -->
 		<table class="table table-hover table-bordered">
 			<thead id="thead"style="background-color:#1ABC9C">
 				<tr>
@@ -43,7 +45,7 @@
 						<tr>
 							<td class="text-center" scope="row">${record.quest_no}</td>
 							<td>
-								<a href="<c:url value='/animal/dog/quest/quest_view.aw?quest_no=${record.quest_no}'/>">${record.quest_title}
+								<a style="color:black;" href="<c:url value='/animal/dog/quest/quest_view.aw?quest_no=${record.quest_no}'/>">${record.quest_title}
 									<span class="badge badge-info">${record.quest_hit}</span>
 								</a>
 							</td>
@@ -58,8 +60,8 @@
 		</table>
 	</div>
 	<!-- 페이징 시작 -->
-	<div class="form-row">
-		<div>${pagingString}</div>
+	<div class="form-row ">
+		<div class="offset-sm-5 col-sm-2">${pagingString}</div>
 	</div>
 	<!-- 페이징 끝 -->
 	<div class="row offset-sm-3 col-sm-7">
@@ -77,7 +79,9 @@
 					<input type="text" class="form-control" />
 				</div>
 				<div class="form-group">
-					<a type="submit" href="<c:url value='/animal/dog/quest/quest_list.aw'/>"style="padding-left:10px;font-size:25px"><i class="fas fa-search"></i>검색</a>
+					<a type="submit" href="<c:url value='/animal/dog/quest/quest_list.aw'/>"style="padding-left:10px;font-size:25px">
+						<i class="fas fa-search"></i>검색
+					</a>
 				</div>
 			</form>
 		</div>
