@@ -33,11 +33,9 @@
 		<!-- navigation bar start -->
 		<tiles:insertAttribute name="Top" />
 		<!-- navigation bar end -->
-
 		<!-- content start -->
 		<tiles:insertAttribute name="Body" />
 		<!-- content end -->
-
 		<!-- footer start -->
 		<tiles:insertAttribute name="Footer" />
 		<!-- footer end -->
