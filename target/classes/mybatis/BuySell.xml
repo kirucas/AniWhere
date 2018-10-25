@@ -65,7 +65,8 @@
 	</update>
 	
 	<delete id="bsDelete" parameterType="java.util.Map">
-		DELETE market_${table_name} WHERE no=#{no}
+		DELETE market_${table_name}
+		WHERE no=#{no}
 	</delete>
 	
 </mapper>
