@@ -160,7 +160,7 @@
     
       <div class="mainDiv">
 	      <div class="card" style="width: 13.6rem;">
-	        <a href="<c:url value='#'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_dog.jpg'/>" alt="Card image cap">
+	        <a href="<c:url value='/animal/dog/main.aw'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_dog.jpg'/>" alt="Card image cap">
 		        <div class="card-body">
 		          <span class="card-text">강아지</span>
 		        </div>
@@ -205,7 +205,6 @@
              <span style="font-weight: bold;margin-left:15%;font-size: 50px;">오늘은 동물들에게 어떤 일이 있었을까요?</span>
              <!--Carousel Wrapper-->
          <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-         
          
            <!--Slides-->
            <div class="carousel-inner" role="listbox">

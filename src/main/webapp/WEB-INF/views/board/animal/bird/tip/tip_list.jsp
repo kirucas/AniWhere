@@ -11,6 +11,19 @@
 .sub-header-info{
 	padding-bottom:0px;
 }
+.row nav{
+	width: 100%;
+}
+.pagination{
+	width: 100%;
+	margin-left: 35%;
+}
+.pagination li{
+	margin-right: 5%;
+}
+.pagination li a{
+	margin-right: 5%;
+}
 </style>
 <!-- 바디 -->
 <div class="container" style="padding-left:0px;padding-right:0px;margin-bottom:15px">
@@ -139,9 +152,7 @@
 		</section>
 	</div>
 	<!-- 아래는 페이징 -->
-    <div class="row" style="text-aling:center">
-    	<div>
-    		${pagingString}
-    	</div>
+    <div class="row">
+    	${pagingString}
     </div>	
 <!-- 바디 끝 -->
