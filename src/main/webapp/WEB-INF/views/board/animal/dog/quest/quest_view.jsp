@@ -10,6 +10,8 @@
 			}
 		});
 	});
+	
+	var showComment = function()
 </script>
 <div class="container border">
 	<div class="row">
@@ -31,8 +33,8 @@
 		<div class="col-sm-2">
 			 ${record.quest_regidate}
 		</div>
-		<div>
-			<a href="<c:url value='/animal/dog/quest/quest_edit.aw?quest_no=${record.quest_no}'/>">수정 </a>
+		<div >
+			<a class="text-right" href="<c:url value='/animal/dog/quest/quest_edit.aw?quest_no=${record.quest_no}'/>">수정 </a>
 			<a id="delete" href="#">| 삭제 </a>
 			<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>">| 목록</a>
 		</div>
@@ -49,14 +51,14 @@
 	</div>
 	<div class="row">
 		<div class="offset-sm-5 col-sm-1" style="padding: 10px">
-			<i class="far fa-thumbs-up fa-4x ic"></i>
+			<i class="far fa-thumbs-up fa-4x" style="color:#1ABC9C"></i>
 		</div><!-- 누른면 색이 꽉차고 빌수도 있게하게 hideen주기 -->
 	</div>
 </div>
 <div class="container border" style="margin-top: 10px;margin-bottom: 10px">
 	<div class="row">
 		<div class="col-sm-12">
-			<strong>댓글</strong> 댓글 5개
+			<strong style="font-size: 3em">댓글</strong> 댓글 5개
 		</div>
 		<div class="form-row">
 			<div class="form-group offset-sm-1 col-sm-10">

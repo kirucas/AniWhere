@@ -12,7 +12,7 @@
 		</h2>
 	</div>
 	<form action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
-		<div class="wr offset-sm-9 col-sm-3">	
+		<div class="offset-sm-9 col-sm-3" style="padding: 5px;padding-right: 0px">	
 			<div align="right" >
 				<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>" 
 				class="btn btn-success"><i class="fas fa-pen-square" >글쓰기</i></a>
@@ -22,7 +22,7 @@
 	<div class="row">
 		<!-- 테이블전체 가로폭은 테이블을 감싸는  div에 col-*-*로 조정 -->
 		<table class="table table-hover table-bordered">
-			<thead id="thead" class="co">
+			<thead id="thead"style="background-color:#1ABC9C">
 				<tr>
 					<th scope="col" style="width:8%" class="text-center">글번호</th>
 					<th class="text-center" scope="col" >제목<small>(댓글)</small></th>
@@ -77,7 +77,7 @@
 					<input type="text" class="form-control" />
 				</div>
 				<div class="form-group">
-					<a type="submit" href="<c:url value='/animal/dog/quest/quest_list.aw'/>" class="si"><i class="fas fa-search"></i>검색</a>
+					<a type="submit" href="<c:url value='/animal/dog/quest/quest_list.aw'/>"style="padding-left:10px;font-size:25px"><i class="fas fa-search"></i>검색</a>
 				</div>
 			</form>
 		</div>
