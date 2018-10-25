@@ -44,7 +44,6 @@
 
 
 		<!-- 내용 부분 시작  -->
-		<section class="article-list article-list--fixed"></section>
 		<section class="article-list">
 			<!-- 여기서 반복문 돌려서 글 -->
 			<c:if test="${empty requestScope.see_list }" var="isEmpty">

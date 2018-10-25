@@ -25,6 +25,7 @@ import com.animal.aniwhere.service.AllCommentService;
 import com.animal.aniwhere.service.animal.FreeBoardDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.miss.FindSeeDTO;
+import com.animal.aniwhere.service.miss.LostAnimalDTO;
 
 
 @Controller
@@ -302,26 +303,57 @@ public class MissMainController {
 		//================================================================================================================
 		
 		
-		//서비스 주입
-		@Resource(name="allCommentService")
-		private AllCommentService commentService;
+		//보호소 컨트롤러
+		@Resource(name="lostAniService")
+	    private AllBoardService lostservice;
 		
-		@RequestMapping("/miss/see_comment.aw")
-		public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
+		//리스트로 이동
+		@RequestMapping("/miss/shelter.aw")
+		public String lost_main(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req,@RequestParam(required=false,defaultValue="1") int nowPage) throws Exception {
 					
-			map.put("mem_no",session.getAttribute("mem_no"));
-			map.put("table_name", "see");
-			map.put("no","37");
+			//전체 레코드 수
+			int totalRecordCount= lostservice.getTotalRecord(map);
+			//페이지 사이즈
+			//전체 페이지수]
+			int totalPage = (int)Math.ceil(((double)totalRecordCount/pageSize));
+			//현재 페이지를 파라미터로 받기]		
+			//시작 및 끝 ROWNUM구하기]
+			int start = (nowPage-1)*pageSize+1;
+			int end   = nowPage*pageSize;
+			map.put("start",start);
+			map.put("end",end);
+			//페이징을 위한 로직 끝]
+					
+			List<LostAnimalDTO> list = (List<LostAnimalDTO>) lostservice.selectList(map);
+					
+			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount,pageSize,blockPage,nowPage,req.getContextPath()+"/miss/shelter.aw?");
+					
+			model.addAttribute("list", list);
+					
+			model.addAttribute("pagingString", pagingString);		
+			model.addAttribute("totalRecordCount", totalRecordCount);
+			model.addAttribute("nowPage", nowPage);
+			model.addAttribute("pageSize", pageSize);
+							
+			return "miss/shelter/shelter_main.tiles";
+		}////////// miss_write
+		
+		
+		//상세보기
+		@RequestMapping("/miss/shelter_view.aw")
+		public String shelter_view(@RequestParam Map map,Model model,HttpSession session) throws Exception {	
 			
-			Set<String> set = map.keySet();
-			for(String key:set) {
-				System.out.println(key+":"+map.get(key));
-			}
+			map.put("no", map.get("shelter_no"));
 			
-			commentService.insert(map);
-			
-			return "miss/miss_main.tiles";
-		}///////////////////
+			//게시글
+			LostAnimalDTO record = lostservice.selectOne(map);
+			//데이터 저장]
+			model.addAttribute("record", record);
+						
+			//뷰정보 반환]
+			return "miss/shelter/shelter_view.tiles";
+		}////////// miss_view
+		
 		
 }//////////////////// MissMainController class
 
