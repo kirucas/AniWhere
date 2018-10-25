@@ -12,10 +12,10 @@
 			FROM market_${table_name} tn JOIN member mb ON tn.mem_no=mb.mem_no
 			JOIN animal_category ac ON tn.animal_code=ac.animal_code
 			<if test="animal_code != null and searchColumn != null">
-				WHERE animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
+				WHERE tn.animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
 			</if>
 			<if test="animal_code != null">
-				WHERE animal_code=#{animal_code}
+				WHERE tn.animal_code=#{animal_code}
 			</if>
 			<if test="searchColumn != null">
 				WHERE ${searchColumn} like '%'||#{searchWord}||'%'
@@ -24,11 +24,6 @@
 	</select>
 	
 	<select id="bsSelectList" parameterType="java.util.Map" resultType="BSDTO">
-		SELECT tn.*, mem_nickname, animal_name
-		FROM market_${table_name} tn JOIN member mb ON tn.mem_no = mb.mem_no
-		JOIN animal_category ac ON tn.animal_code = ac.animal_code
-		ORDER BY no DESC
-		
 		SELECT *
 		FROM (
 			SELECT T.*, ROWNUM R
@@ -37,10 +32,10 @@
 				FROM market_${table_name} tn JOIN member mb ON tn.mem_no=mb.mem_no
 				JOIN animal_category ac ON tn.animal_code=ac.animal_code
 				<if test="animal_code != null and searchColumn != null">
-					WHERE animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
+					WHERE tn.animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>
 				<if test="animal_code != null">
-					WHERE animal_code=#{animal_code}
+					WHERE tn.animal_code=#{animal_code}
 				</if>
 				<if test="searchColumn != null">
 					WHERE ${searchColumn} like '%'||#{searchWord}||'%'
@@ -60,7 +55,7 @@
 	
 	<insert id="bsInsert" parameterType="java.util.Map">
 		INSERT INTO market_${table_name}(no, mem_no, animal_code, title, content)
-		VALUES(seq_${table_name}, #{mem_no}, #{animal_code}, #{title}, #{content})
+		VALUES(seq_${table_name}.nextval, #{mem_no}, #{animal_code}, #{title}, #{content})
 	</insert>
 	
 	<update id="bsUpdate" parameterType="java.util.Map">
@@ -70,8 +65,7 @@
 	</update>
 	
 	<delete id="bsDelete" parameterType="java.util.Map">
-		DELETE market_${table_name}
-		WHERE no=#{no}
+		DELETE market_${table_name} WHERE no=#{no}
 	</delete>
 	
 </mapper>

@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<c:if test="${not empty mem_no }">
+<script>
+	alert("${mem_no}");
+</script>
+</c:if>
 <style>
 .content {
 	text-align: left;
@@ -40,17 +44,12 @@
 		var ntWin;
 		ntWin = window.open('', 'popup', 'width=600,height=500');
 		ntWin.document.getElementsByTagName("body")[0].innerHTML = '';
-		/* 내용 */
-		ntWin.document.write("<br/>" + document.forms[0].movie_content.value + "<br/>");
+		
 		/* 제목 */
 		ntWin.document.write("<br/>" + document.forms[0].movie_title.value + "<br/>");
-		/* 조회수 */
-		ntWin.document.write("<br/>" + document.movie_count + "<br/>");
-		/* 작성자 별명 */
-		ntWin.document.write("<br/>" + document.mem_nickname + "<br/>");
-		/* 게시일 */
-		ntWin.document.write("<br/>" + document.movie_regidate + "<br/>");
-
+		
+		/* 내용 컨텐츠 */
+		ntWin.document.write("<br/>" + document.forms[0].movie_content.value + "<br/>");
 	}
 </script>
 

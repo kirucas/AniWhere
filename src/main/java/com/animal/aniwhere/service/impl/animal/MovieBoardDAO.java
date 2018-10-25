@@ -19,8 +19,6 @@ public class MovieBoardDAO implements AllBoardService {
 
 	@Override
 	public List<MovieBoardDTO> selectList(Map map) {
-
-
 		return template.selectList("movieSelectList", map);
 	}////////// selectList
 
@@ -37,7 +35,6 @@ public class MovieBoardDAO implements AllBoardService {
 
 	@Override
 	public int insert(Map map) {
-
 		return template.insert("movieInsert", map);
 	}////////// insert
 

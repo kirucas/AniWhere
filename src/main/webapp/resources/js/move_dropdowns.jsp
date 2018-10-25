@@ -20,13 +20,16 @@
 			location.href = "<c:url value='/animal/etc/main.aw'/>";
 		});
 		$("#market_main").click(function(){
-			location.href = "<c:url value='/animal/dog/main.aw'/>";
+			location.href = "<c:url value='/market/main.aw'/>";
 		});
 		$("#miss_main").click(function(){
 			location.replace("<c:url value='/miss/miss_main.aw' />");
 		});
 		$("#mating_main").click(function(){
 			location.href = "<c:url value='/mating/main.aw' />";
+		});
+		$("#where_main").click(function(){
+			location.href = "<c:url value='/where/main.aw' />";
 		});
 		$("#login").click(function(){
 			location.href = "<c:url value='/login.aw' />";

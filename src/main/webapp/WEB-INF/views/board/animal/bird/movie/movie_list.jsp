@@ -75,14 +75,16 @@
 							allowfullscreen></iframe> -->
 					</div>
 					<a
-						href="<c:url value='/animal/bird/movie/Write.aw?no=${dto.movie_no }'/>">${dto.movie_title }</a>
+						href="<c:url value='/animal/bird/movie/Write.aw?no=${dto.movie_no }'/>"></a>
 					<div class="media-body">
 						<h5 class="title">${dto.movie_title}</h5>
-						<p class="nickname">${dto.mem_nickname}</p>
+						<h6 class="nickname">${dto.mem_nickname}</h6>
+						<small class="count">조회수 ${dto.movie_count}</small>
+						<small class="postdate">${dto.movie_regidate}</small>
+						
 					</div>
-					<div class="media-footer">
-						<small class="count">조회수: ${dto.movie_count}</small>
-					</div>
+
+
 				</div>
 			</div>
 			<!-- 중간에 라인 -->
