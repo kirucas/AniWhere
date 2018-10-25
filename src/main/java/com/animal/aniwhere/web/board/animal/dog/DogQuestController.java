@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.AllCommentService;
 import com.animal.aniwhere.service.animal.QuestBoardDTO;
+import com.animal.aniwhere.service.impl.PagingUtil;
 
 @Controller
 public class DogQuestController {

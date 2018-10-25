@@ -152,9 +152,7 @@
 		</section>
 	</div>
 	<!-- 아래는 페이징 -->
-    <div class="row" style="text-aling:center">
-    	<div>
+    <div class="row">
     		${pagingString}
-    	</div>
     </div>	
 <!-- 바디 끝 -->
