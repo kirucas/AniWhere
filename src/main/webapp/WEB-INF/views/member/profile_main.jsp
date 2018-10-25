@@ -16,6 +16,11 @@
 .passwordinput {
 	border-bottom:0.5px solid black !important;
 }
+#aniwarn{
+	width:50%;
+	margin-top:20px;
+	align:center;
+}
 </style>
 <!-- 내용 시작 -->
 <div class="container">
@@ -105,61 +110,74 @@
 				</div>
 			</section>
 		</div>
+			
 		<div class="tab-pane fade" id="animal" role="tabpanel" aria-labelledby="animal-tab">
-			<section class="member-settings-layout__content">
-				<div class="member-settings-layout__content-inner">
-					<h2 class="member-settings-layout__title">동물 프로필 관리</h2>
-					<form action="#" method="post">
-						<div class="edit">
-							<div class="edit__inner">
-								<div class="member-input">
-									<div class="member-input__state">
-										<div class="edit__table">
-											<div class="edit__tr">
-											<div class="edit__th">
-												펫 이름
-											</div>
-												<div class="edit__td">
-													<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_name" disabled value="${ani_name}">
-													<span class="member-input__valid-wrapper"></span>
+			<c:if test="${empty anirecord }" var="isEmpty">
+				<div class="container" style="text-align:center">
+					<div style="display:inline-block">
+						<img id="aniwarn" src="<c:url value='/resources/images/animalwarn.jpg'/>"/>
+					</div>
+					<span style="text-size:18px">등록된 애완동물이 없으시네요.<a href="<c:url value='/animal/enroll.aw'/>"> 펫 등록하러 가기</a></span>
+				</div>
+			</c:if>
+			<c:if test="${not isEmpty}">
+    			<c:forEach var="record" items="${list}" varStatus="loop">
+					<section class="member-settings-layout__content">
+						<div class="member-settings-layout__content-inner">
+							<h2 class="member-settings-layout__title">동물 프로필 관리</h2>
+							<form action="#" method="post">
+								<div class="edit">
+									<div class="edit__inner">
+										<div class="member-input">
+											<div class="member-input__state">
+												<div class="edit__table">
+													<div class="edit__tr">
+													<div class="edit__th">
+														펫 이름
+													</div>
+														<div class="edit__td">
+															<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_name" disabled value="${ani_name}">
+															<span class="member-input__valid-wrapper"></span>
+														</div>
+													</div>
+													<div class="edit__tr">
+													<div class="edit__th">
+														펫 나이
+													</div>
+														<div class="edit__td">
+															<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_age" value="예시: ${ani_age}">
+															<span class="member-input__valid-wrapper"></span>
+														</div>
+													</div>
+													<div class="edit__tr">
+													<div class="edit__th">
+														펫 성별
+													</div>
+														<div class="edit__td">
+															<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_gender" value="예시: ${ani_gender}">
+															<span class="member-input__valid-wrapper"></span>
+														</div>
+													</div>
+													<div class="edit__th">
+														펫 분류
+													</div>
+													<div class="edit__td">
+														<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_kind" value="예시:${ani_kind}">
+														<span class="member-input__valid-wrapper"></span>
+													</div>
 												</div>
 											</div>
-											<div class="edit__tr">
-											<div class="edit__th">
-												펫 나이
-											</div>
-												<div class="edit__td">
-													<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_age" value="예시: ${ani_age}">
-													<span class="member-input__valid-wrapper"></span>
-												</div>
-											</div>
-											<div class="edit__tr">
-											<div class="edit__th">
-												펫 성별
-											</div>
-												<div class="edit__td">
-													<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_gender" value="예시: ${ani_gender}">
-													<span class="member-input__valid-wrapper"></span>
-												</div>
-											</div>
-											<div class="edit__th">
-												펫 분류
-											</div>
-											<div class="edit__td">
-												<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_kind" value="예시:${ani_kind}">
-												<span class="member-input__valid-wrapper"></span>
+											<div class="text-center">
+												<input type="submit" class="member-button" value="수정">
 											</div>
 										</div>
 									</div>
-									<div class="text-center">
-										<input type="submit" class="member-button" value="수정">
-									</div>
 								</div>
-							</div>
+							</form>
 						</div>
-					</form>
-				</div>
-			</section>
+					</section>
+				</c:forEach>
+			</c:if>
 		</div>
 		<div class="tab-pane" id="passchange" role="tabpanel" aria-labelledby="passchange-tab">
 			<section class="member-settings-layout__content">

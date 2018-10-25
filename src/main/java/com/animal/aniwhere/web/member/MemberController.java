@@ -31,7 +31,13 @@ public class MemberController {
    @RequestMapping("/login.aw")
    public String go_login() throws Exception {
       return "member/sign_in";
-   }////////// go_login
+   }//////////go_login
+   
+   @RequestMapping("/animal/enroll.aw")
+   public String animal_enroll() throws Exception {
+      
+      return "member/animal_enroll";
+   }//////////animal_enroll
 
    @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
    public String signInProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
@@ -44,19 +50,20 @@ public class MemberController {
       session.setAttribute("mem_no", dto.getMem_no());
       
       return "forward:/main.aw";
-   }////////// signInProcess
+   }//////////signInProcess()
    
    @RequestMapping("/signout.aw")
    public String signOut(HttpSession session) throws Exception {
       session.invalidate();
       
       return "forward:/main.aw";
-   }
+   }//////////////signOut()
+   
    @RequestMapping("/member/sign_up.aw")
    public String signUp() throws Exception{
       
       return "member/sign_up";
-   }
+   }//////////////signUp()
 
    @RequestMapping("/signUpProcess.aw")
    public String signUpProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
@@ -67,13 +74,13 @@ public class MemberController {
     	  model.addAttribute("check",0);
       
       return "member/sign_process";
-   }////////// signInProcess
+   }//////////signInProcess
    
    @RequestMapping("/profile_main.aw")
    public String profileMain(@RequestParam Map map, HttpSession session, Model model) throws Exception {
 
       return "member/profile_main.tiles";
-   }
+   }//////////////////profileMain
    
    @RequestMapping("/member_bye.aw")
    public String member_bye(@RequestParam Map map, HttpSession session, Model model) throws Exception {
@@ -88,7 +95,7 @@ public class MemberController {
     	  model.addAttribute("check",0);
       }
       return "member/bye_process";
-   }
+   }///////////////member_bye
    
    @RequestMapping("/member_info.aw")
    public String member_info(@RequestParam Map map, HttpSession session, Model model) throws Exception {
@@ -102,17 +109,17 @@ public class MemberController {
 	  model.addAttribute("record", record);
 	  model.addAttribute("anirecord", anirecord);
       return "forward:profile_main.aw";
-   }
+   }///////////////member_info
 
-   
- //안드로이드 용
+   	//안드로이드 용
  	@ResponseBody
- 	@RequestMapping(value = "/android.aw", method = RequestMethod.POST)
+ 	@RequestMapping(value="/android.aw", method = RequestMethod.POST)
  	public String androidLogin(@RequestParam Map map) throws Exception{
  		if(!service.isMember(map)) {
  			return "false";
  		}		
  		MemberDTO dto = service.selectOne(map);				
  		return dto.getMem_id();
-    }
+    }////////////////androidLogin
+ 	
 }//////////////////// MemberController class
