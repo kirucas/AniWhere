@@ -124,7 +124,7 @@ public class EtcTipController {
 		
 	//Summernote 업로드 기능
 	@ResponseBody
-    @RequestMapping(value="/board/animal/etc/tip/Upload.aw")
+    @RequestMapping(value="/animal/etc/tip/Upload.aw")
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("file");
