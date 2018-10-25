@@ -27,31 +27,26 @@ public class MemberController {
 
    @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
    public String signInProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
-
       if(!service.isMember(map)) {
          model.addAttribute("sign_error", "ID 혹은 Password가 틀렸습니다");
          return "member/sign_in";
       }
-      
       MemberDTO dto = service.selectOne(map);
-      
       session.setAttribute("mem_id", map.get("mem_id"));
       session.setAttribute("mem_no", dto.getMem_no());
       
       return "forward:/main.aw";
-      
    }////////// signInProcess
    
    @RequestMapping("/signout.aw")
    public String signOut(HttpSession session) throws Exception {
-      
       session.invalidate();
       
       return "forward:/main.aw";
    }
    @RequestMapping("/member/sign_up.aw")
    public String signUp(){
-      
+	   
       return "member/sign_up";
    }
 
@@ -59,10 +54,17 @@ public class MemberController {
    public String signUpProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
       int signup = service.insert(map);
       if(signup==1)
-    	  model.addAttribute("check",true);
+    	  model.addAttribute("check",1);
       else
-    	  model.addAttribute("check",false);
-      return "/login.aw";
+    	  model.addAttribute("check",0);
       
+      return "member/sign_process";
    }////////// signInProcess
+   
+   @RequestMapping("/profile_main.aw")
+   public String profileMain(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+
+      return "member/profile_main.tiles";
+   }////////// signInProcess
+   
 }//////////////////// MemberController class
