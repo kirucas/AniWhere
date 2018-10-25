@@ -26,7 +26,7 @@
 	</div>
 	<div>
 		<!-- 입력 폼 시작 -->
-		<form class="form-horizontal" method="POST" action="<c:url value='/board/animal/bird/photo/write.aw'/>" enctype="multipart/form-data">
+		<form class="form-horizontal" method="POST" action="upload()" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title" class="col-md-2 control-label">제목</label>
 				<div class="col-md-12">
@@ -70,26 +70,20 @@
 		$("#files").trigger('click');
 	}
 	
-	// 어따넣어야되냐..
-	/* var formData = new FormData($('#files')[0]);
-	$.ajax({
-		url : "<c:url value='/Upload.aw'/>",
-		processData : false,
-		contentType : false,
-		data : formData,
-		type : 'POST'
-	}); */
+	
 	
 	window.onload = function() {
 		var filelength = 0;
+		var fileList=new Array();
 		//Check File API support
 		if (window.File && window.FileList && window.FileReader) {
 			var filesInput = document.getElementById("files");
+			
 			filesInput.addEventListener("change",function(event) {
 				var files = event.target.files; //FileList object
 				var output = document.getElementById("result");
 				filelength += files.length;
-				console.log(filelength);
+				fileList.push(files[0]);
 				for (var i = 0; i < files.length; i++) {
 					var file = files[i];
 					//Only pics
@@ -117,6 +111,23 @@
 		$('#imgdelete').click(function() {
 			console.log('삭제ㄸ ㅣ : ', filelength);
 			filelength.pop();
+		});
+	}
+	
+	function upload(){
+		console.log("으아아 인풋");
+		$.ajax({
+			url : "<c:url value='/board/animal/bird/photo/write.aw'/>",
+			processData : false,
+			contentType : false,
+			data : {"files":fileList},
+			type : 'POST',	
+			success:function(data){
+	            alert("완료!");
+	        },
+	        error:function(jqXHR, textStatus, errorThrown){
+	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+	        }
 		});
 	}
 </script>

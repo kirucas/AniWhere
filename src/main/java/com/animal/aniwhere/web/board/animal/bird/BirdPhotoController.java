@@ -24,17 +24,12 @@ public class BirdPhotoController {
 	}/// write
 	
 	// 등록 완료 후 리스트로 이동
+	@ResponseBody
 	@RequestMapping(value="/board/animal/bird/photo/write.aw",method=RequestMethod.POST)
-	public String writeComplete(@RequestParam Map map) throws Exception{
+	public String writeComplete(@RequestParam Map map,MultipartHttpServletRequest mhsr) throws Exception{
 		Set<String> set=map.keySet();
 		for(String key:set)	System.out.println("value:"+map.get(key));
 		
-		return "forward:/animal/bird/photo.aw";
-	}/// writeComplete
-	
-	@ResponseBody
-    @RequestMapping(value="/Upload.aw")
-    public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("files");
 		
@@ -44,6 +39,6 @@ public class BirdPhotoController {
 		
 		System.out.println("업로드으!");
         return "/Upload/"+newFilename;
-   }/// imageUpload
+	}/// writeComplete
 	
 }//////////////////// PhotoController class
