@@ -51,7 +51,16 @@ public class MemberController {
 		return "forward:/main.aw";
 	}
 	
-
+	//안드로이드 용
+	@ResponseBody
+	@RequestMapping(value = "/android.aw", method = RequestMethod.POST)
+	public String androidLogin(@RequestParam Map map) throws Exception{
+		if(!service.isMember(map)) {
+			return "false";
+		}		
+		MemberDTO dto = service.selectOne(map);				
+		return dto.getMem_id();
+	}
 	
 	
 	
