@@ -1,6 +1,7 @@
 package com.animal.aniwhere.web.member;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.animal.aniwhere.service.impl.member.AnimalServiceImpl;
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
+import com.animal.aniwhere.service.member.AnimalDTO;
 import com.animal.aniwhere.service.member.MemberDTO;
 
 @Controller
@@ -21,6 +24,9 @@ public class MemberController {
 
    @Resource(name="memberService")
    private MemberServiceImpl service;
+   
+   @Resource(name="animalService")
+   private AnimalServiceImpl aniservice;
    
    @RequestMapping("/login.aw")
    public String go_login() throws Exception {
@@ -88,10 +94,13 @@ public class MemberController {
    public String member_info(@RequestParam Map map, HttpSession session, Model model) throws Exception {
 	  map.put("mem_no", session.getAttribute("mem_no"));
 	  MemberDTO record = new MemberDTO();
+	  List<AnimalDTO> anirecord = new ArrayList<AnimalDTO>();
 	  //사람 조회
 	  record = service.selectOne(map);
+	  anirecord = aniservice.selectList(map);
 	  //데이터 저장]
 	  model.addAttribute("record", record);
+	  model.addAttribute("anirecord", anirecord);
       return "forward:profile_main.aw";
    }
 
@@ -105,6 +114,5 @@ public class MemberController {
  		}		
  		MemberDTO dto = service.selectOne(map);				
  		return dto.getMem_id();
-       
     }
 }//////////////////// MemberController class
