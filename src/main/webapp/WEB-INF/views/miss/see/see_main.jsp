@@ -47,11 +47,11 @@
 		<section class="article-list article-list--fixed"></section>
 		<section class="article-list">
 			<!-- 여기서 반복문 돌려서 글 -->
-			<c:if test="${empty requestScope.list }" var="isEmpty">
+			<c:if test="${empty requestScope.see_list }" var="isEmpty">
 				   등록된 게시물이 없어요
     		</c:if>
     		<c:if test="${not isEmpty }">
-    			<c:forEach var="record" items="${list}" varStatus="loop">
+    			<c:forEach var="record" items="${see_list}" varStatus="loop">
 					<article class="article-list-item">
 						<div class="article-list-item__content">
 							<span id="animal_code">
@@ -80,13 +80,13 @@
 					</a>
 					<div class="article-list-item-meta">
 						<div class="article-list-item-meta__item">
-							<span data-tooltip data-date="2018-09-27T05:45:00+00:00" title="">2	시간 전</span>
+							<span data-tooltip data-date="2018-09-27T05:45:00+00:00" title="">${record.regidate }</span>
 						</div>
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
-							<a href="#" id="mem_no"></a>
+							<a href="#" id="mem_no">${record.mem_nickname}</a>
 						</div>
 						<div class="article-list-item-meta__item">
-							조회수 <span class="badge">${record.count}</span>
+							조회수 <span id="count">${record.count}</span>
 						</div>
 					</div>
 				</div>

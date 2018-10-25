@@ -53,9 +53,7 @@
 								
 						<div class="article-meta-list">
 							<div class="article-meta__item article-meta__item--name">
-								<a
-									href="https://talk.op.gg/s/lol/free?q=%EB%9F%B0%EB%B9%8C%EB%A1%9C%EA%BE%B8%EA%BA%BC&amp;target=user_name">
-									${record.mem_no} </a>
+									${record.mem_nickname}
 							</div>
 							<div class="article-meta__item">
 								<span data-tooltip data-date="2018-10-14T06:40:37+00:00"
@@ -64,13 +62,13 @@
 						</div>
 						<div class="article-meta-list article-meta-list--right">
 							<div class="article-meta__item">
-								<span>${record.count}</span>
+								<span>조회수 ${record.count}</span>
 							</div>
 							<div class="article-meta__item">
 								<span>댓글 56</span>
 							</div>
 							<div class="article-meta__item">
-								<span>ㅗㅗ</span>
+								<span>글번호 ${record.no}</span>
 							</div>
 						</div>
 					</div>
@@ -99,55 +97,27 @@
 					<img data-v-f39b78c2="" src="/images/icon-refresh@2x.png"
 						width="16" alt=""> <span data-v-f39b78c2="">새로고침</span>
 				</button>
-				<form action="#" method="post">
+				<form action="<c:url value='/miss/see_comment.aw'/>" method="post">
 					<div>
 						<textarea rows="3" cols="20" class="form-control" style="margin-top: 10px" id="cmt_content" name="cmt_content"></textarea>
-					</div>
-					<input type="submit" style="float: right; margin-top: 5px" class="article-action__button button" value="입력"/>
+						<input type="submit" style="float: right; margin-top: 15px" class="article-action__button button" value="입력"/>
+						</br></br>
+					</div>					
 				</form>
 				<!---->
 			</div>
 			<!---->
 			<div data-v-f39b78c2="">
 				<div data-v-f39b78c2="" class="comment-sort">
-					<ul data-v-f39b78c2="" class="comment-sort__list">
-						<li data-v-f39b78c2="" class="comment-sort__item comment-sort__item--active">
-							<button data-v-f39b78c2="" type="button">인기순</button>
-						</li>
-						<li data-v-f39b78c2="" class="comment-sort__item">
-							<button data-v-f39b78c2="" type="button">최신순</button>
-						</li>
-					</ul>
+					
 				</div>
-				<c:if test="${empty requestScope.list }" var="isEmpty">
-				  	 등록된 댓글이 없어요
-    			</c:if>
-    			<c:if test="${not isEmpty }">
-    				<c:forEach var="record" items="${list}" varStatus="loop">
 				<div data-v-f39b78c2="" class="comment-list">
 					<div data-v-f39b78c2="" class="comment-l">
 						<!---->
-						<div data-v-f39b78c2="" class="comment">
-							<div data-v-f39b78c2="" class="comment-vote">
-								<form data-v-f39b78c2="" method="POST">
-									<input data-v-f39b78c2="" type="hidden" name="comment" value="3731685"> 
-									<input data-v-f39b78c2="" type="hidden" name="type" value="popular"> 
-									<input data-v-f39b78c2="" type="hidden" name="index" value="0">
-									<button data-v-f39b78c2="" type="submit" class="comment-vote__up-button">추천</button>
-								</form>
-								<div data-v-f39b78c2="" class="comment-vote__count">0</div>
-								<form data-v-f39b78c2="" method="POST">
-									<input data-v-f39b78c2="" type="hidden" name="comment" value="3731685"> 
-									<input data-v-f39b78c2="" type="hidden" name="type" value="popular"> 
-									<input data-v-f39b78c2="" type="hidden" name="index" value="0">
-									<button data-v-f39b78c2="" type="submit" class="comment-vote__down-button">비추천</button>
-								</form>
-							</div>
-							<div data-v-f39b78c2="" class="comment-meta">
-								<span data-v-f39b78c2="" class="comment__name">
-								<a data-v-f39b78c2="" href="//talk.op.gg/s/lol/free?target=user_name&amp;q=다이애나">다이애나</a></span>
-								<span data-v-f39b78c2="" data-tooltip="" title="2018년 9월 18일 화요일 오전 10:59" class="comment__date">한달 전</span>
-								<div style="float: right; padding-bottom: 3px">
+							<div data-v-f39b78c2="" class="comment-meta" style="margin-left: 15px">
+								<span data-v-f39b78c2="" class="comment__name"><a data-v-f39b78c2="" style="margin-top: 15px">김길동</a></span>
+								<span data-v-f39b78c2="" data-tooltip="" title="2018년 9월 18일 화요일 오전 10:59" class="comment__date" style="margin-top: 15px">2018.01.10</span>
+								<div style="float: right; padding-bottom: 3px; margin-top: 15px">
 									<c:if test="${sessionScope.mem_no==record.mem_no }">									
 										<a href="#" class="article-action__button button button--red button--red--border">수정</a>
 										<a href="#" class="article-action__button button button--red button--red--border">삭제</a>
@@ -157,7 +127,7 @@
 							
 							<div data-v-f39b78c2="" class="comment-content">
 								<div data-v-f39b78c2="">
-									<p>zz</p>
+									<p>댓글</p>
 								</div>
 								<!---->
 							</div>
@@ -178,8 +148,6 @@
 						<!---->
 					</div>
 				</div>
-				</c:forEach>
-			</c:if>
 				<!---->
 			</div>
 		</div>

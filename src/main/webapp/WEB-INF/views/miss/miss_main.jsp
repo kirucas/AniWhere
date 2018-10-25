@@ -81,23 +81,21 @@
 	<!-- If we need scrollbar -->
 	<div class="swiper-scrollbar-drag"></div>
 </div>
+</br></br>
 <div class="col-sm-12">
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="col-sm-6" style="float: left">
 				<a href="<c:url value='/miss/see.aw'/>"><button type="button" class="btn btn-info">봤어요</button></a>
 				<br> 
-				<a href="#" class="alert-link"><span>글 제목1</span></a><br>
-				<a href="#"><span>글 제목2</span></a><br> 
-				<a href="#"><span>글	제목3</span></a><br> 
-				<a href="#"><span>글 제목4</span></a><br> 
-				<a href="#"><span>글 제목5</span></a><br> 
-				<a href="#"><span>글	제목6</span></a><br> 
-				<a href="#"><span>글 제목7</span></a><br> 
-				<a href="#"><span>글 제목8</span></a><br> 
-				<a href="#"><span>글	제목9</span></a><br> 
-				<a href="#"><span>글 제목10</span></a><br> 
-				<a href="#"><span>글이 하나도 없으면 - 등록된 게시글이 없어요.</span></a><br>
+				<c:if test="${empty requestScope.list }" var="isEmpty">
+				   등록된 게시물이 없어요
+    			</c:if>
+    			<c:if test="${not isEmpty }">
+    				<c:forEach var="record" items="${list}" varStatus="loop">
+						<a href="#" class="alert-link"><span>${record.title }</span></a><br>
+					</c:forEach>
+				</c:if>
 			</div>
 			<div class="col-sm-6" style="float: left">
 				<a href="<c:url value='/miss/find.aw'/>"><button type="button" class="btn btn-info">찾아요</button></a><br> 
@@ -114,10 +112,10 @@
 				<a href="#"><span>글이 하나도 없으면 - 등록된 게시글이 없어요.</span></a><br>
 			</div>
 		</div>
-		<div class="col-sm-12">
+		<div class="col-sm-12" style="margin-top: 30px">
 			<a href="<c:url value='/miss/shelter.aw'/>"><button type="button" class="btn btn-info">보호소</button></a>
 
-			<div class="row text-center text-lg-left">
+			<div class="row text-center text-lg-left" style="margin-top: 10px">
 
 				<div class="col-lg-3 col-md-4 col-xs-6">
 					<a href="#" class="d-block mb-4 h-100"> <img

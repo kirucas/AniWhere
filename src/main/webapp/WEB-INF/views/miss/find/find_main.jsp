@@ -48,11 +48,11 @@
 		<section class="article-list article-list--fixed"></section>
 		<section class="article-list">
 			<!-- 여기서 반복문 돌려서 글 -->
-			<c:if test="${empty requestScope.list }" var="isEmpty">
+			<c:if test="${empty requestScope.find_list }" var="isEmpty">
 				   등록된 게시물이 없어요
     		</c:if>
     		<c:if test="${not isEmpty }">
-    			<c:forEach var="record" items="${list}" varStatus="loop">
+    			<c:forEach var="record" items="${find_list}" varStatus="loop">
 			<article class="article-list-item">
 				<div class="article-list-item__content">
 					<span id="animal_code">
@@ -81,13 +81,13 @@
 					</a>
 					<div class="article-list-item-meta">
 						<div class="article-list-item-meta__item">
-							<span data-tooltip data-date="2018-09-27T05:45:00+00:00" title="">2	시간 전</span>
+							<span data-tooltip data-date="2018-09-27T05:45:00+00:00" title="">${record.regidate }</span>
 						</div>
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
-							<a href="#" id="mem_no">용주형 개바보</a>
+							<a href="#" id="mem_no">${record.mem_nickname}</a>
 						</div>
 						<div class="article-list-item-meta__item">
-							조회수 <span id="count">0</span>
+							조회수 <span id="count">${record.count}</span>
 						</div>
 					</div>
 				</div>
@@ -100,39 +100,8 @@
 			</c:if>
 			<!-- 페이징 부분 -->
 			<section class="article-list-paging" >
-				<div class="article-list-paging-content">
-					<ul class="article-list-paging-list">
-						<li class="article-list-paging__item article-list-paging__item--prev">
-                        <a href="https://talk.op.gg/s/lol/all?page=9" class="article-list-paging__button button">
-                            <img src="https://talk.op.gg/images/icon-arrow-left@2x.png" width="24" alt=""><span>이전</span>
-                        </a>
-						<li class="article-list-paging__item article-list-paging__item--current">
-							<span class="article-list-paging__link">1</span></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">2</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">3</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">4</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">5</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">6</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">7</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">8</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">9</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">10</a></li>
-						<li	class="article-list-paging__item article-list-paging__item--next">
-							<a href="#"	class="article-list-paging__button button"> 
-								<span>다음</span>
-								<img src="https://talk.op.gg/images/icon-arrow-right@2x.png" width="24" alt="">
-							</a>
-						</li>
-					</ul>
+				<div class="row">
+					<div class="col-md-11 ">${pagingString }</div>
 				</div>
 			</section>
 		</section>

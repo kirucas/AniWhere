@@ -26,6 +26,7 @@ import com.animal.aniwhere.service.animal.FreeBoardDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.miss.FindSeeDTO;
 
+
 @Controller
 public class MissMainController {
 	
@@ -39,7 +40,7 @@ public class MissMainController {
 	
 	//miss_main 이동
 	@RequestMapping("/miss/miss_main.aw")
-	public String miss_main() throws Exception {		
+	public String miss_main(@RequestParam Map map,Model model) throws Exception {		
 		return "miss/miss_main.tiles";
 	}////////// miss_main
 	
@@ -51,11 +52,9 @@ public class MissMainController {
 	
 	//_main -> _write로 이동
 	@RequestMapping("/miss/{path}_write.aw")
-	public String miss_write(@PathVariable String path) throws Exception {
-		
+	public String miss_write(@PathVariable String path) throws Exception {		
 		return "miss/" + path + "/" + path + "_write.tiles";
 	}////////// miss_write
-	
 	
 	
 	//========================================================================================
@@ -75,9 +74,8 @@ public class MissMainController {
 	//리스트로 이동
 	@RequestMapping("/miss/see.aw")
 	public String see_list(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req,@RequestParam(required=false,defaultValue="1") int nowPage) throws Exception {
-		
+				
 		map.put("table_name", "see");
-		
 		//전체 레코드 수
 		int totalRecordCount= service.getTotalRecord(map);
 		//페이지 사이즈
@@ -100,7 +98,7 @@ public class MissMainController {
 		
 		String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount,pageSize,blockPage,nowPage,req.getContextPath()+"/miss/see.aw?");
 		
-		model.addAttribute("list", list);
+		model.addAttribute("see_list", list);
 		
 		model.addAttribute("pagingString", pagingString);		
 		model.addAttribute("totalRecordCount", totalRecordCount);
@@ -219,7 +217,7 @@ public class MissMainController {
 			
 			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount,pageSize,blockPage,nowPage,req.getContextPath()+"/miss/find.aw?");
 			
-			model.addAttribute("list", list);
+			model.addAttribute("find_list", list);
 			
 			model.addAttribute("pagingString", pagingString);		
 			model.addAttribute("totalRecordCount", totalRecordCount);
@@ -303,4 +301,29 @@ public class MissMainController {
 		
 		//================================================================================================================
 		
+		
+		//서비스 주입
+		@Resource(name="allCommentService")
+		private AllCommentService commentService;
+		
+		@RequestMapping("/miss/see_comment.aw")
+		public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
+					
+			map.put("mem_no",session.getAttribute("mem_no"));
+			map.put("table_name", "see");
+			map.put("no","37");
+			
+			Set<String> set = map.keySet();
+			for(String key:set) {
+				System.out.println(key+":"+map.get(key));
+			}
+			
+			commentService.insert(map);
+			
+			return "miss/miss_main.tiles";
+		}///////////////////
+		
 }//////////////////// MissMainController class
+
+
+

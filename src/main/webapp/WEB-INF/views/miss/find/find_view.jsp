@@ -53,9 +53,7 @@
 								
 						<div class="article-meta-list">
 							<div class="article-meta__item article-meta__item--name">
-								<a
-									href="https://talk.op.gg/s/lol/free?q=%EB%9F%B0%EB%B9%8C%EB%A1%9C%EA%BE%B8%EA%BA%BC&amp;target=user_name">
-									${record.mem_no} </a>
+									${record.mem_nickname}
 							</div>
 							<div class="article-meta__item">
 								<span data-tooltip data-date="2018-10-14T06:40:37+00:00"
