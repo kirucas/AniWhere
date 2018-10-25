@@ -411,7 +411,7 @@ CREATE TABLE reservation
 (
 	rv_no number NOT NULL,
 	mem_no number,
-	store_no number NOT NULL,
+	store_no number,
 	apply_date date DEFAULT sysdate,
 	booking_date date NOT NULL,
 	PRIMARY KEY (rv_no)
@@ -430,7 +430,6 @@ CREATE TABLE store_category
 
 CREATE TABLE store_location
 (
-	no number NOT NULL,
 	bizesId number NOT NULL,
 	bizesNm nvarchar2(150) NOT NULL,
 	brchNm nvarchar2(70),
@@ -443,7 +442,7 @@ CREATE TABLE store_location
 	dongNo nvarchar2(20),
 	flrNo nvarchar2(20),
 	hoNo nvarchar2(20),
-	PRIMARY KEY (no)
+	PRIMARY KEY (bizesId)
 );
 
 
@@ -563,15 +562,15 @@ ALTER TABLE market_sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
-	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
+	ON DELETE CASCADE
 ;
 
 
@@ -787,7 +786,7 @@ ALTER TABLE quest_cmt
 
 ALTER TABLE reservation
 	ADD FOREIGN KEY (store_no)
-	REFERENCES store_location (no)
+	REFERENCES store_location (bizesId)
 	ON DELETE CASCADE
 ;
 
