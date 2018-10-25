@@ -2,21 +2,26 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
-<head>
-<meta charset="UTF-8">
-<title>AniWhere-Profile</title>
-<meta name="viewport"
-	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="theme-color" content="#1ea1f7">
 <link rel="stylesheet" href="https://member.op.gg/src.45ea0fc1.css">
-</head>
+<style>
+.nav-tabs {
+    border-bottom: none;
+}
+.member-input__state {
+    border-bottom: none;
+}
+*{
+	font-family:메이플스토리 !important;
+}
+.passwordinput {
+	border-bottom:0.5px solid black !important;
+}
+</style>
 <!-- 내용 시작 -->
 <div class="container">
 	<!-- nav부분 -->
 		<div class="settings-navigator">
-			<div class="settings-navigator__inner">
+			<div class="settings-navigator__inner" style="width:100%">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item">
 						<a class="nav-link active" id="person-tab" data-toggle="tab" href="#person" role="tab" aria-controls="person" aria-current="true"> 
@@ -41,46 +46,57 @@
 				</ul>
 			</div>
 		</div>
-	</nav>
 	<!-- 내용 -->
 	<div class="tab-content" id="myTabContent">
 		<div class="tab-pane fade show active" id="person" role="tabpanel" aria-labelledby="person-tab">
 			<section class="member-settings-layout__content">
 				<div class="member-settings-layout__content-inner">
 					<h2 class="member-settings-layout__title">개인 프로필 관리</h2>
-					<form>
+					<form action="#" method="post">
 						<div class="edit">
 							<div class="edit__inner">
-								<div class="edit__table">
-									<div class="edit__tr">
-										<div class="edit__th">아이디</div>
-										<div class="edit__td">
-											<div class="member-input">
-												<div class="member-input__state">
-													<input id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="email" value="">
-													<label for="memberInput7437" class="member-input__label">이메일 주소</label>
+								<div class="member-input">
+									<div class="member-input__state">
+										<div class="edit__table">
+											<div class="edit__tr">
+											<div class="edit__th">
+												아이디
+											</div>
+												<div class="edit__td">
+													<input class="member-input__box" type="text" autocomplete="off" name="mem_id" disabled value="${record.mem_id}">
 													<span class="member-input__valid-wrapper"></span>
 												</div>
 											</div>
+											<div class="edit__tr">
+											<div class="edit__th">
+												이름
+											</div>
+												<div class="edit__td">
+													<input class="member-input__box" type="text" autocomplete="off" name="mem_name" value="${record.mem_name}">
+													<span class="member-input__valid-wrapper"></span>
+												</div>
+											</div>
+											<div class="edit__tr">
+											<div class="edit__th">
+												닉네임
+											</div>
+												<div class="edit__td">
+													<input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" value="${record.mem_nickname}">
+													<span class="member-input__valid-wrapper"></span>
+												</div>
+											</div>
+											<div class="edit__th">
+												관심동물
+											</div>
+											<div class="edit__td">
+												<input class="member-input__box" type="text" autocomplete="off" name="mem_interani" value="${record.mem_interani}">
+												<span class="member-input__valid-wrapper"></span>
+											</div>
+											
 										</div>
 									</div>
-									<div class="edit__tr">
-										<div class="edit__th">이름</div>
-										<div class="edit__td">
-											<div class="edit__id">name: ${record.mem_name}</div>
-										</div>
-									</div>
-									<div class="edit__tr">
-										<div class="edit__th">닉네임</div>
-										<div class="edit__td">
-											<div class="edit__id">nickname: ${record.mem_nickname}</div>
-										</div>
-									</div>
-									<div class="edit__tr">
-										<div class="edit__th">관심동물</div>
-										<div class="edit__td">
-											<div class="edit__id">interani: ${record.mem_interani}</div>
-										</div>
+									<div class="text-center">
+										<input type="submit" class="member-button" value="수정">
 									</div>
 								</div>
 							</div>
@@ -89,31 +105,59 @@
 				</div>
 			</section>
 		</div>
-		<div class="tab-pane" id="animal" role="tabpanel" aria-labelledby="animal-tab">
+		<div class="tab-pane fade" id="animal" role="tabpanel" aria-labelledby="animal-tab">
 			<section class="member-settings-layout__content">
 				<div class="member-settings-layout__content-inner">
 					<h2 class="member-settings-layout__title">동물 프로필 관리</h2>
-					<div class="edit">
-						<div class="edit__inner">
-							<div class="edit__table">
-								<div class="edit__tr">
-									<div class="edit__th">이메일</div>
-									<div class="edit__td">
-										<div class="edit__email">wmffkdla@naver.com</div>
-									</div>
-								</div>
-								<div class="edit__tr">
-									<div class="edit__th">닉네임</div>
-									<div class="edit__td">
-										<div class="member-edit-box-input">
-											<div class="member-box-input">
+					<form action="#" method="post">
+						<div class="edit">
+							<div class="edit__inner">
+								<div class="member-input">
+									<div class="member-input__state">
+										<div class="edit__table">
+											<div class="edit__tr">
+											<div class="edit__th">
+												펫 이름
+											</div>
+												<div class="edit__td">
+													<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_name" disabled value="${ani_name}">
+													<span class="member-input__valid-wrapper"></span>
+												</div>
+											</div>
+											<div class="edit__tr">
+											<div class="edit__th">
+												펫 나이
+											</div>
+												<div class="edit__td">
+													<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_age" value="예시: ${ani_age}">
+													<span class="member-input__valid-wrapper"></span>
+												</div>
+											</div>
+											<div class="edit__tr">
+											<div class="edit__th">
+												펫 성별
+											</div>
+												<div class="edit__td">
+													<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_gender" value="예시: ${ani_gender}">
+													<span class="member-input__valid-wrapper"></span>
+												</div>
+											</div>
+											<div class="edit__th">
+												펫 분류
+											</div>
+											<div class="edit__td">
+												<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_kind" value="예시:${ani_kind}">
+												<span class="member-input__valid-wrapper"></span>
 											</div>
 										</div>
+									</div>
+									<div class="text-center">
+										<input type="submit" class="member-button" value="수정">
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 			</section>
 		</div>
@@ -122,38 +166,30 @@
 				<div class="member-settings-layout__content-inner">
 					<h2 class="member-settings-layout__title">비밀번호 변경</h2>
 					<div class="member-settings-layout__sub">
-						개인정보 보호를 위해 비밀번호를 주기적으로 변경해주세요.<span
-							class="member-settings-layout__deco"> </span>
+						개인정보 보호를 위해 비밀번호를 주기적으로 변경해주세요.
 					</div>
-					<form>
+					<form  action="#" method="post">
 						<div class="change-password">
 							<div class="change-password__inner">
 								<div class="member-input">
 									<div class="member-input__state">
-										<input id="memberInput9152" class="member-input__box" type="password" autocomplete="off" name="currentPassword" value="">
-											<label for="memberInput9152" class="member-input__label">
-												현재 비밀번호</label>
-											<span class="member-input__valid-wrapper"></span>
+										<div>현재 비밀번호</div>
+										<input class="member-input__box passwordinput" type="password" autocomplete="off" name="currentPassword" value="">
 									</div>
 								</div>
 								<div class="member-input">
 									<div class="member-input__state">
-										<input id="memberInput8355" class="member-input__box" type="password" autocomplete="off" name="newPassword" value="">
-										<label for="memberInput8355" class="member-input__label">
-											신규 비밀번호
-										</label>
-										<span class="member-input__valid-wrapper"></span>
+										<div>신규 비밀번호</div>
+										<input class="member-input__box passwordinput" type="password" autocomplete="off" name="newPassword" value="">
 									</div>
 								</div>
 								<div class="member-input">
 									<div class="member-input__state">
-										<input id="memberInput7335" class="member-input__box" type="password" autocomplete="off" name="checkNewPassword" value="">
-											<label for="memberInput7335" class="member-input__label">신규 비밀번호 확인</label>
-											<span class="member-input__valid-wrapper"></span>
+										<div>신규 비밀번호 확인</div>
+										<input class="member-input__box passwordinput" type="password" autocomplete="off" name="checkNewPassword" value="">
 									</div>
 								</div>
-								<button type="submit"
-									class="member-button change-password__save-btn" disabled="">확인</button>
+								<button type="submit" class="member-button change-password__save-btn">확인</button>
 							</div>
 						</div>
 					</form>
@@ -166,7 +202,6 @@
 					<h2 class="member-settings-layout__title">회원탈퇴</h2>
 				<div class="member-settings-layout__sub">
 					회원탈퇴 전에 반드시 유의사항을 확인하고 진행해 주세요.
-					<span class="member-settings-layout__deco"></span>
 				</div>
 					<div class="leave">
 						<div class="leave__inner">
@@ -180,16 +215,8 @@
 							<div class="leave__sub">회원 탈퇴 시 일부 개인정보는 개인정보처리방침에 따라 탈퇴일로부터 30일간 보관되며, 그 이후 관계법령에 필요한 경우에는 별도 보관합니다.</div>
 						</div>
 						<div class="leave__l-line"></div>
-						<div class="leave__inner">
-							<div class="member-checkbox member-circle-checkbox leave__checkbox">
-								<span class="member-checkbox__state">
-									<input id="memberCheckbox6554" type="checkbox" class="member-checkbox__input">
-								</span>
-								<label for="memberCheckbox6554" class="member-checkbox__label">회원탈퇴 시 유의사항을 확인하였으며, 모두 동의합니다.</label>
-							</div>
-						</div>
 						<div class="leave__l-btn">
-							<button type="button" class="member-button leave__agree-btn" disabled="">동의</button>
+							<button type="button" id="bye" class="member-button leave__agree-btn">동의</button>
 							<div class="leave__l-disagree-btn">
 								<button type="button" class="member-button cancel-button leave__disagree-btn">비동의</button>
 							</div>

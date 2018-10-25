@@ -1,5 +1,6 @@
 package com.animal.aniwhere.web.member;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -65,6 +66,33 @@ public class MemberController {
    public String profileMain(@RequestParam Map map, HttpSession session, Model model) throws Exception {
 
       return "member/profile_main.tiles";
-   }////////// signInProcess
+   }
+   
+   @RequestMapping("/member_bye.aw")
+   public String member_bye(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+	  map.put("mem_no", session.getAttribute("mem_no"));
+	  int delete = service.delete(map);
+      if(delete==1) {
+    	  //회원탈퇴이전에 세션기록 없애고
+    	  session.invalidate(); 
+    	  model.addAttribute("check",1);
+      }
+      else {
+    	  model.addAttribute("check",0);
+      }
+      return "member/bye_process";
+   }
+   
+   @RequestMapping("/member_info.aw")
+   public String member_info(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+	  map.put("mem_no", session.getAttribute("mem_no"));
+	  MemberDTO record = new MemberDTO();
+	  //사람 조회
+	  record = service.selectOne(map);
+	  //데이터 저장]
+	  model.addAttribute("record", record);
+      return "forward:profile_main.aw";
+   }
+
    
 }//////////////////// MemberController class

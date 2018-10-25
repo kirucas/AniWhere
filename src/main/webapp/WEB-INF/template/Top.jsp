@@ -132,17 +132,17 @@ nav a{
                         <li class="dropdown">
                             <a class="dropdown-toggle" href="/aniwhere/market/main.aw" id="market_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			                                <li><a href="/aniwhere/market/sell.aw">팔아요</a></li>
-			                                <li><a href="/aniwhere/market/buy.aw">사요</a></li>
-			                                <li><a href="/aniwhere/market/groupbuy.aw">같이 싸게 사요</a></li>
+                                <li><a href="/aniwhere/market/sell.aw">팔아요</a></li>
+                                <li><a href="/aniwhere/market/buy.aw">사요</a></li>
+                                <li><a href="/aniwhere/market/groupbuy.aw">같이 싸게 사요</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" href="<c:url value='/miss/miss_main.aw'/>" id="miss_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">유기동물</a>
                             <ul class="dropdown-menu" aria-labelledby="miss_main">
-			                                <li><a href="<c:url value='/miss/see.aw'/>">봤어요</a></li>
-			                                <li><a href="<c:url value='/miss/find.aw'/>">찾아요</a></li>
-			                                <li><a href="<c:url value='/miss/shelter.aw'/>">보호소</a></li>
+                                <li><a href="<c:url value='/miss/see.aw'/>">봤어요</a></li>
+                                <li><a href="<c:url value='/miss/find.aw'/>">찾아요</a></li>
+                                <li><a href="<c:url value='/miss/shelter.aw'/>">보호소</a></li>
                             </ul>
                         </li>
                         <li>
@@ -156,7 +156,7 @@ nav a{
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 			                   	<!-- 로그인 되어있을떄 보여주는 탭 -->
                                 <c:if test="${not empty mem_id}" var="sign_check">
-                                	<li><a href="<c:url value='/profile_main.aw'/>">내 프로필</a></li>
+                                	<li><a href="<c:url value='/member_info.aw'/>">내 프로필</a></li>
 	                            	<li><a href="#" id="logout">로그아웃</a></li>
 			                   	</c:if>
 			                   	<!-- 로그인 안되어있을떄 보여주는 탭 -->

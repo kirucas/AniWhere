@@ -38,7 +38,12 @@
 			location.href = "<c:url value='/signout.aw' />";
 		});
 		$("#profile_main").click(function(){
-			location.href = "<c:url value='/profile_main.aw' />";
+			location.href = "<c:url value='/member_info.aw' />";
+		});
+		$("#bye").click(function(){
+			if(confirm('탈퇴 하시겠습니까?')){
+				location.href = "<c:url value='/member_bye.aw' />";
+			}
 		});
 	});
 </script>

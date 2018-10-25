@@ -24,7 +24,7 @@
 
 <style>
 *{
-	font-family: 메이플스토리;
+	font-family: 메이플스토리 !important;
 }
 </style>         
 </head>
