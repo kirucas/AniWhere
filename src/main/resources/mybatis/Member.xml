@@ -14,13 +14,12 @@
 	<select id="memberCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM member
+		<if test="mem_nickname != null">
+			WHERE mem_nickname = #{mem_nickname}
+		</if>
 	</select>
 	
 	<select id="memberSelectList" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT *
-		FROM member
-		ORDER BY mem_no
-		
 		SELECT *
 		FROM (
 			SELECT T.*, ROWNUM R
