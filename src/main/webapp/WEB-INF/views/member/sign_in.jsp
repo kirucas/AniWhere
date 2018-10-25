@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/shared/style.css' />">
     <!-- endinject -->
     <link rel="shortcut icon" href="<c:url value='/resources/assets/images/favicon.png' />" />
+    
 </head>
 <body>
 	<c:if test="${not empty sign_error }">
@@ -65,8 +66,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-primary submit-btn">SIGN IN</button>
+                                    <button id="android" class="btn btn-primary submit-btn">SIGN IN</button>
                                 </div>
+                           
                                 <div class="wrapper mt-5 text-gray">
                                     <p class="footer-text">Copyright © 2018 Bootstrapdash. All rights reserved.</p>
                                     <ul class="auth-footer text-gray">
