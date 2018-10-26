@@ -97,7 +97,7 @@
 							<span data-tooltip data-date=${record.tip_regidate } title=""></span>
 						</div>
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
-							<a href="#" id="mem_no">${record.mem_no} </a>
+							<a href="#" id="mem_no">${record.mem_nickname} </a>
 						</div>
 						<div class="article-list-item-meta__item">
 							조회수 <span id="tip_count">${record.tip_count}</span>
