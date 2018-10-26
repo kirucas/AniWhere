@@ -2,7 +2,6 @@ package com.animal.aniwhere.service;
 
 public class StoreLocationDTO {
 
-	private String no;
 	private String bizesId;
 	private String bizesNm;
 	private String brchNm;
@@ -15,14 +14,6 @@ public class StoreLocationDTO {
 	private String dongNo;
 	private String flrNo;
 	private String hoNo;
-	
-	public String getNo() {
-		return no;
-	}//////////
-	
-	public void setNo(String no) {
-		this.no = no;
-	}//////////
 	
 	public String getBizesId() {
 		return bizesId;

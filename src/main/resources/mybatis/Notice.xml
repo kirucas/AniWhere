@@ -9,7 +9,7 @@
 		SELECT COUNT(*)
 		FROM (
 			SELECT nt.*, am_id
-			FROM notice nt JOIN admin_member am ON nt.am_no=am.am_no
+			FROM notice nt LEFT JOIN admin_member am ON nt.am_no=am.am_no
 			<if test="searchColumn != null">
 				WHERE ${searchColumn} like '%'||#{searchWord}||'%'
 			</if>
@@ -22,7 +22,7 @@
 			SELECT T.*, ROWNUM R
 			FROM (
 				SELECT nt.*, am_id
-				FROM notice nt JOIN admin_member am ON nt.am_no=am.am_no
+				FROM notice nt LEFT JOIN admin_member am ON nt.am_no=am.am_no
 				<if test="searchColumn != null">
 					WHERE ${searchColumn like '%'||#{searchWord}||'%'
 				</if>
@@ -34,7 +34,7 @@
 	
 	<select id="noticeSelectOne" parameterType="java.util.Map" resultType="NoticeDTO">
 		SELECT nt.*, am_id
-		FROM notice nt JOIN admin_member am ON nt.am_no = am.am_no
+		FROM notice nt LEFT JOIN admin_member am ON nt.am_no = am.am_no
 		WHERE no=#{no}
 	</select>
 	
