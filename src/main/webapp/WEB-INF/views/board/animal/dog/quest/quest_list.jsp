@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
+/* 아이콘을 위한 것 */	
 @import("https://use.fontawesome.com/releases/v5.3.1/css/all.css" )
-/* 아이콘을 위한 것 */
 </style>
 <div class="container">
 	<div class="page-header">

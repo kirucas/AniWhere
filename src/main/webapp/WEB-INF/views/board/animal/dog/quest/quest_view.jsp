@@ -24,7 +24,7 @@
 	<div class="row" style="padding-left:20px;padding-top: 5px;margin-bottom: 0px;height:45px">
 		<h1>${record.quest_title}</h1>
 	</div>	
-	<div class="row" style="padding: 10px;padding-bottom: 0px;padding-right:0px" >
+	<div class="row" style="padding: 10px;padding-bottom: 0px;text-align:right;padding-right:0px" >
 		<div class="col-sm-1" style="text-align:left;padding-right:0px;" >
 			글쓴이 &nbsp; |
 		</div>
@@ -66,7 +66,7 @@
 		<div class="col-sm-12">
 			<strong style="font-size: 3em">댓글</strong> 댓글 5개
 		</div>
-		<div class="form-row border-bottom">
+		<div class="form-row">
 			<div class="form-group col-sm-11" style="padding-left: 20px">
 				<input class="form-control" type="text" size="200" placeholder="댓글을 입력 하세요" />
 			</div>
@@ -74,14 +74,18 @@
 				<input type="button" class="btn btn-outline-primary" value="등록"/>
 			</div>
 		</div>
-		<div class="col-sm-5" style="padding-top: 10px">
-			홍길동 &nbsp;&nbsp; 2018-05-05
-		</div>
-		<div class="offset-sm-6 col-sm-1" style="text-align:right;padding-top: 10px">
-			<a href="#">삭제</a>
-		</div>
-		<div class="col-sm-12">
-			<h4>마나트카너쟈더근무</h4>
+	</div>
+	<div class="row border-top">
+		<div class="form-row" style="padding-left:10px;padding-right: 10px">
+			<div class="col-sm-5" style="padding-top: 10px">
+				홍길동 &nbsp;&nbsp; 2018-05-05
+			</div>
+			<div class="offset-sm-5 col-sm-2" style="text-align:right;padding-top: 10px">
+				<a href="#">삭제</a>
+			</div>
+			<div class="col-sm-12">
+				<h4>마나트카너쟈더근무</h4>
+			</div>
 		</div>
 	</div>
 </div>
