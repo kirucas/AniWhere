@@ -111,6 +111,27 @@ public class MemberController {
       return "forward:profile_main.aw";
    }///////////////member_info
 
+   @RequestMapping("/enrollProcess.aw")
+   public String enrollProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+	   
+	  map.put("mem_no", session.getAttribute("mem_no"));
+      int enroll = aniservice.insert(map);
+      if(enroll==1)
+    	  model.addAttribute("check",1);
+      else
+    	  model.addAttribute("check",0);
+      
+      return "member/enroll_process";
+   }//////////signInProcess
+   
+   
+   
+   
+   
+   
+   
+   
+   
    	//안드로이드 용
  	@ResponseBody
  	@RequestMapping(value="/android.aw", method = RequestMethod.POST)

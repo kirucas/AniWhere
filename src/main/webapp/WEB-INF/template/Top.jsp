@@ -66,7 +66,7 @@ nav a{
                             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">동물</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             	<li class="dropdown">
-	                                <a class="dropdown-toggle" href="#" id="dog_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                	<img src="<c:url value='/resources/images/animal/dog.png'/>" style="width:30px;height:30px;"/>
 	                                		&nbsp;강아지
 	                                </a>
@@ -78,7 +78,7 @@ nav a{
 	                                </ul>
                             	</li>
 	                            <li class="dropdown">
-	                                <a class="dropdown-toggle" href="#" id="cat_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                	<img src="<c:url value='/resources/images/animal/cat.png'/>" style="width:30px;height:30px;"/>
 	                                		&nbsp;고양이
                                 	</a>
@@ -90,7 +90,7 @@ nav a{
 	                                </ul>
                             	</li>
 	                            <li class="dropdown">
-	                                <a class="dropdown-toggle" href="#" id="rna_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                	<img src="<c:url value='/resources/images/animal/reptiles.png'/>" style="width:30px;height:30px;"/>
 	                                		&nbsp;파충류 & 양서류
                                		</a>
@@ -102,7 +102,7 @@ nav a{
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown">
-	                                <a class="dropdown-toggle" href="#" id="bird_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                	<img src="<c:url value='/resources/images/animal/bird.png'/>" style="width:30px;height:30px;"/>
 	                                		&nbsp;조류
 	                                </a>
@@ -114,7 +114,7 @@ nav a{
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown">
-	                                <a class="dropdown-toggle" href="#" id="etc_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                	<img src="<c:url value='/resources/images/animal/rat.png'/>" style="width:30px;height:30px;"/>
 	                                		&nbsp;기타 포유류
 	                                </a>

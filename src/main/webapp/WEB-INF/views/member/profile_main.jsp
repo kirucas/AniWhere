@@ -69,7 +69,6 @@
 											</div>
 												<div class="edit__td">
 													<input class="member-input__box" type="text" autocomplete="off" name="mem_id" disabled value="${record.mem_id}">
-													<span class="member-input__valid-wrapper"></span>
 												</div>
 											</div>
 											<div class="edit__tr">
@@ -78,7 +77,6 @@
 											</div>
 												<div class="edit__td">
 													<input class="member-input__box" type="text" autocomplete="off" name="mem_name" value="${record.mem_name}">
-													<span class="member-input__valid-wrapper"></span>
 												</div>
 											</div>
 											<div class="edit__tr">
@@ -87,7 +85,6 @@
 											</div>
 												<div class="edit__td">
 													<input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" value="${record.mem_nickname}">
-													<span class="member-input__valid-wrapper"></span>
 												</div>
 											</div>
 											<div class="edit__th">
@@ -95,7 +92,6 @@
 											</div>
 											<div class="edit__td">
 												<input class="member-input__box" type="text" autocomplete="off" name="mem_interani" value="${record.mem_interani}">
-												<span class="member-input__valid-wrapper"></span>
 											</div>
 											
 										</div>
@@ -117,7 +113,7 @@
 					<div style="display:inline-block">
 						<img id="aniwarn" src="<c:url value='/resources/images/animalwarn.jpg'/>"/>
 					</div>
-					<span style="text-size:18px">등록된 애완동물이 없으시네요.<a href="<c:url value='/animal/enroll.aw'/>"> 펫 등록하러 가기</a></span>
+					<span style="font-size:25px">등록된 애완동물이 없으시네요.<a href="<c:url value='/animal/enroll.aw'/>"> 펫 등록하러 가기</a></span>
 				</div>
 			</c:if>
 			<c:if test="${not isEmpty}">
@@ -136,8 +132,7 @@
 														펫 이름
 													</div>
 														<div class="edit__td">
-															<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_name" disabled value="${ani_name}">
-															<span class="member-input__valid-wrapper"></span>
+															<input class="member-input__box" type="text" autocomplete="off" name="ani_name" disabled value="${record.ani_name}">
 														</div>
 													</div>
 													<div class="edit__tr">
@@ -145,26 +140,30 @@
 														펫 나이
 													</div>
 														<div class="edit__td">
-															<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_age" value="예시: ${ani_age}">
-															<span class="member-input__valid-wrapper"></span>
+															<input class="member-input__box" type="text" autocomplete="off" name="ani_age" value="${record.ani_age}">
 														</div>
 													</div>
 													<div class="edit__tr">
 													<div class="edit__th">
 														펫 성별
 													</div>
-														<div class="edit__td">
-															<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_gender" value="예시: ${ani_gender}">
-															<span class="member-input__valid-wrapper"></span>
-														</div>
+													<div class="edit__td">
+														<input class="member-input__box" type="text" autocomplete="off" name="ani_gender" value="${record.ani_gender}">
+													</div>
 													</div>
 													<div class="edit__th">
 														펫 분류
 													</div>
 													<div class="edit__td">
-														<input style="" id="memberInput7437" class="member-input__box" type="text" autocomplete="off" name="ani_kind" value="예시:${ani_kind}">
-														<span class="member-input__valid-wrapper"></span>
+														<input class="member-input__box" type="text" autocomplete="off" name="ani_kind" value="${record.ani_kind}">
 													</div>
+													<div class="edit__th">
+														펫 프로필
+													</div>
+													<div class="edit__td">
+														<input class="member-input__box" type="file" autocomplete="off" name="ani_photo" value="${record.ani_photo}">
+													</div>
+													
 												</div>
 											</div>
 											<div class="text-center">
@@ -229,8 +228,6 @@
 							<div class="leave__sub">이메일 ID에 소셜 계정을 연결한 경우 탈퇴 시 연결 정보도 함께 삭제됩니다.</div>
 								<h3 class="leave__title">커뮤니티 서비스 등록 게시물 유지</h3>
 							<div class="leave__sub">회원가입 이후 등록하신 게시물들은 회원탈퇴 후에도 삭제 되지 않고 유지됩니다. 삭제를 원하시는 경우에는 직접 삭제하신 후 회원탈퇴를 진행하시기 바랍니다.</div>
-								<h3 class="leave__title">개인정보 보관</h3>
-							<div class="leave__sub">회원 탈퇴 시 일부 개인정보는 개인정보처리방침에 따라 탈퇴일로부터 30일간 보관되며, 그 이후 관계법령에 필요한 경우에는 별도 보관합니다.</div>
 						</div>
 						<div class="leave__l-line"></div>
 						<div class="leave__l-btn">

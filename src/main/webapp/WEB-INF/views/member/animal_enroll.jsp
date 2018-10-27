@@ -106,8 +106,8 @@ $(document).ready(function() {
 		    	<form action="<c:url value='/signUpProcess.aw'/>" class="col s12">
 			      <div class="row">
 			        <div class="input-field col s4 offset-s4">
-			          <input id="id" name="ani_name" type="text" class="validate">
-			          <label for="id">애완동물 이름</label>
+			          <input id="ani_name" name="ani_name" type="text" class="validate">
+			          <label for="ani_name">애완동물 이름</label>
 			        </div>
 			      </div>
 			      <div class="row">
@@ -172,14 +172,38 @@ $(document).ready(function() {
 				  </div>
 				  <div class="row">
 			        <div class="input-field col s4 offset-s4">
-			          <input id="id" name="ani_kind" type="text" class="validate">
-			          <label for="id">애완동물 중분류</label>
+			          <input id="ani_kind" name="ani_kind" type="text" class="validate">
+			          <label for="ani_kind">애완동물 중분류</label>
 			        </div>
 			      </div>
-			      
-			      
-			      
-			      
+			      <div class="row">
+			        <div class="input-field col s4 offset-s4">
+			          <input id="ani_photo" name="ani_photo" type="file" class="validate">
+			        </div>
+			      </div>
+					<script>
+					function upload(){
+					      var formData=new FormData($("#ani_photo"));
+					      $.ajax({
+					         url : "<c:url value='/enrollProcess.aw'/>",
+					         processData : false,
+					         contentType : false,
+					         data : formData,
+					         type : 'POST',   
+					         success:function(data){
+					               alert("완료!");
+					           },
+					           error:function(error){
+					               alert("에러");
+					               console.log(error);
+					           }
+					      });					
+				      $('#ani_photo').click(function() {
+				          upload();
+				       });
+					</script>
+
+
 				  <div class="row">
 				  	<div class="input-field inline col s2 offset-s4">
          			 <button type="submit" class="btn waves-effect waves-light col s12">애완동물 등록</button>
