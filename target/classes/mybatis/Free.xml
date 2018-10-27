@@ -6,13 +6,11 @@
 <mapper namespace="mybatis.Free">
 
 	<select id="freeCount" parameterType="java.util.Map" resultType="int">
-		SELECT COUNT(*)
-		FROM freeboard
 		
 		SELECT COUNT(*)
 		FROM (
 			SELECT fb.*, mem_nickname
-			FROM freeboard fb JOIN member m ON fb.mem_no=m.mem_no
+			FROM freeboard fb LEFT JOIN member m ON fb.mem_no=m.mem_no
 			<if test="searchColumn != null">
 				WHERE ${searchColumn} like '%'||#{searchWord}||'%'
 			</if>
@@ -20,16 +18,12 @@
 	</select>
 	
 	<select id="freeSelectList" parameterType="java.util.Map" resultType="FreeDTO">
-		SELECT fb.*, mem_nickname
-		FROM freeboard fb JOIN member mb ON fb.mem_no = mb.mem_no
-		ORDER BY free_no DESC
-		
 		SELECT *
 		FROM (
 			SELECT T.*, ROWNUM R
 			FROM (
 				SELECT fb.*, mem_nickname
-				FROM freeboard fb JOIN member m ON fb.mem_no=m.mem_no
+				FROM freeboard fb LEFT JOIN member m ON fb.mem_no=m.mem_no
 				<if test="searchColumn != null">
 					WHERE ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>
@@ -41,7 +35,7 @@
 	
 	<select id="freeSelectOne" parameterType="java.util.Map" resultType="FreeDTO">
 		SELECT fb.*, mem_nickname
-		FROM freeboard fb JOIN member mb ON fb.mem_no = mb.mem_no
+		FROM freeboard fb LEFT JOIN member mb ON fb.mem_no = mb.mem_no
 		WHERE free_no=#{free_no}
 	</select>
 	

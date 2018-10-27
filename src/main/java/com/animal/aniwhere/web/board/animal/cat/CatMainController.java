@@ -10,7 +10,7 @@ public class CatMainController {
 
 	@RequestMapping("/animal/cat/main.aw")
 	public String cat_main() throws Exception {
-		return "board/animal/cat/cat_temporarily.tiles";
+		return "board/animal/cat/cat_main.tiles";
 	}////////// cat_main
 	
 	@RequestMapping(value="/animal/cat/{path}", method=RequestMethod.GET)

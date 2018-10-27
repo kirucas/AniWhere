@@ -44,6 +44,7 @@ public class BuySellServiceImpl implements AllBoardService {
 
 	@Override
 	public int delete(Map map) {
+		
 		return dao.delete(map);
 	}////////// delete
 

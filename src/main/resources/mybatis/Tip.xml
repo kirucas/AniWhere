@@ -10,7 +10,7 @@
 		SELECT COUNT(*)
 		FROM (
 			SELECT t.*, mem_nickname
-			FROM tip t JOIN member m on t.mem_no = m.mem_no
+			FROM tip t LEFT JOIN member m on t.mem_no = m.mem_no
 			WHERE ani_category=#{ani_category}
 			<if test="searchColumn != null">
 				AND ${searchColumn} like '%'||#{searchWord}||'%'
@@ -24,7 +24,7 @@
 			SELECT T.*, ROWNUM R
 			FROM (
 				SELECT t.*, mem_nickname
-				FROM tip t JOIN member m ON t.mem_no=m.mem_no
+				FROM tip t LEFT JOIN member m ON t.mem_no=m.mem_no
 				WHERE ani_category=#{ani_category}
 				<if test="searchColumn != null">
 					AND ${searchColumn} like '%'||#{searchWord}||'%'
@@ -32,18 +32,18 @@
 				ORDER BY tip_no DESC
 				) T
 			)
-		WHERE R BETWEEN #{start} AND {#end}
+		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="tipSelectOne" parameterType="java.util.Map" resultType="TipDTO">
 		SELECT tn.*, mem_nickname
-		FROM tip tn JOIN member mb ON tn.mem_no = mb.mem_no
+		FROM tip tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
 		WHERE tip_no=#{tip_no}
 	</select>
 	
 	<insert id="tipInsert" parameterType="java.util.Map">
 		INSERT INTO tip(tip_no, mem_no, tip_title, tip_content, ani_category)
-		VALUES(seq_tip, #{mem_no}, #{tip_title}, #{tip_content}, ani_category)
+		VALUES(seq_tip.nextval, #{mem_no}, #{tip_title}, #{tip_content}, #{ani_category})
 	</insert>
 	
 	<update id="tipUpdate" parameterType="java.util.Map">

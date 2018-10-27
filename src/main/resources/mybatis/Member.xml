@@ -14,13 +14,12 @@
 	<select id="memberCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM member
+		<if test="mem_nickname != null">
+			WHERE mem_nickname = #{mem_nickname}
+		</if>
 	</select>
 	
 	<select id="memberSelectList" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT *
-		FROM member
-		ORDER BY mem_no
-		
 		SELECT *
 		FROM (
 			SELECT T.*, ROWNUM R
@@ -53,14 +52,13 @@
 				#{mem_nickname}, 
 				#{mem_gender}, 
 				#{mem_birth}, 
-				#{mem_loc}, 
 				#{mem_log}, 
 				#{mem_interani})
 	</insert>
 	
 	<update id="memberUpdate">
 		UPDATE member
-		SET mem_id=#{mem_id}, mem_name=#{mem_name}, mem_nickname=#{mem_nickname}, mem_gender=#{mem_gender}, mem_birth=#{mem_birth}, mem_loc=#{mem_loc}, mem_interani=#{mem_interani}
+		SET mem_id=#{mem_id}, mem_pw=#{mem_pw}, mem_name=#{mem_name}, mem_nickname=#{mem_nickname}, mem_gender=#{mem_gender}, mem_birth=#{mem_birth}, mem_interani=#{mem_interani}
 		WHERE mem_no=#{mem_no}
 	</update>
 	

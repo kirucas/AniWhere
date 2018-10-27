@@ -4,8 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <h1>
-	Hello world!  
+	Hello world! 
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<a href="<c:url value="/main.aw" />">mainTemplate</a>
+<a href="<c:url value="/animal/bird/tip/write.aw" />">mainTemplate</a>

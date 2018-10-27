@@ -1,5 +1,8 @@
 package com.animal.aniwhere.service.impl.market;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +16,7 @@ import com.animal.aniwhere.service.market.BuySellDTO;
 
 @Repository
 public class BuySellDAO implements AllBoardService {
+
 
 	@Resource(name = "template")
 	private SqlSessionTemplate template;
@@ -46,6 +50,7 @@ public class BuySellDAO implements AllBoardService {
 	@Override
 	public int delete(Map map) {
 		return template.delete("bsDelete", map);
-	}////////// delete
+		
+	}//////////delete
 
 }//////////////////// BuyDAO class

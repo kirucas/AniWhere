@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
-#free_no{
+#tip_no{
 	text-align:center;
 	font-size: 1.5em;
 }
@@ -17,7 +18,7 @@
 			<div class="sub-header-info">
 				<div>
 				<h2 class="sub-header__title" style="display:inline">
-					<a href="#">조류 팁</a>
+					조류 팁 게시판
 				</h2>
 				<ul class="sub-link__list">
 					<li class="sub-link__item sub-link__item--active">
@@ -38,7 +39,7 @@
 					</li>
 				</ul>
 				<div class="sub-header-search" style="margin-bottom:5px">
-				<a href="/animal/freeboard/write.aw">
+				<a href="<c:url value='/animal/bird/tip/write.aw'/>">
 					<img style="float:left;margin-top:5px;" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
 				</a>
                 <form style="display:inline;" action="">
@@ -62,36 +63,41 @@
 		<section class="article-list article-list--fixed"></section>
 		<section class="article-list">
 			<!-- 여기서 반복문 돌려서 글 -->
-			<article class="article-list-item">
-				<div class="article-list-item__vote">
-					<img src="https://talk.op.gg/images/icon-vote-up.png" alt="">
-					<div><span id="free_hit">26</span></div>
-				</div>
+			<c:if test="${empty requestScope.list}" var="isEmpty">
+				   등록된 게시물이 없어요
+    		</c:if>
+    		<c:if test="${not isEmpty}">
+    			<c:forEach var="record" items="${list}" varStatus="loop">
+		    		<article class="article-list-item">
+					<div class="article-list-item__vote">
+						<img src="https://talk.op.gg/images/icon-vote-up.png" alt="">
+						<div><span id="tip_hit">${record.tip_hit}</span></div>
+		    		</div>
 				<div class="article-list-item__content">
-					<span id="free_category">[유머]</span>
-					<a href="#"	class="article-list-item__info">
+					<a href="<c:url value='/animal/bird/tip/tip_view.aw?tip_no=${record.tip_no}'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
-							<span id="free_title">저새낀 혼자서 잘 못한다하는데</span> <em>[21]</em>
+							<span id="tip_title">${record.tip_title}</span> <em>[21]</em>
 						</div>
 					</a>
 					<div class="article-list-item-meta">
 						<div class="article-list-item-meta__item">
-							<span data-tooltip data-date="2018-09-27T05:45:00+00:00" title="">2	시간 전</span>
+							<span data-tooltip data-date=${record.tip_regidate } title=""></span>
 						</div>
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
-							<a href="#">푸른빛불꽃 </a>
+							<a href="#" id="mem_no">${record.mem_no} </a>
 						</div>
 						<div class="article-list-item-meta__item">
-							조회수 <span id="tip_count">0</span>
+							조회수 <span id="tip_count">${record.tip_count}</span>
 						</div>
 					</div>
 				</div>
 				<div class="article-list-item__vote">
-					<div><span id="free_no" style="text-align:center">1</span></div>
+					<div><span id="tip_no" style="text-align:center">${record.tip_no}</span></div>
 				</div>
 			</article>
-
-			<!-- 페이징 부분 -->
+	    		</c:forEach>
+    		</c:if>
+			<!-- 페이징 부분
 			<section class="article-list-paging" >
 				<div class="article-list-paging-content">
 					<ul class="article-list-paging-list">
@@ -128,6 +134,14 @@
 					</ul>
 				</div>
 			</section>
+			 -->
+			
 		</section>
 	</div>
+	<!-- 아래는 페이징 -->
+    <div class="row" style="text-aling:center">
+    	<div>
+    		${pagingString}
+    	</div>
+    </div>	
 <!-- 바디 끝 -->

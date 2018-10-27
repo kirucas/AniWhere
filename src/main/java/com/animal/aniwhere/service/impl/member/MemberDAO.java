@@ -50,7 +50,7 @@ public class MemberDAO implements AllMemberService {
 
 	@Override
 	public boolean isMember(Map map) {
-		return (int) template.selectOne("memberCheck", map) == 1 ? true : false;
+		return (Integer) template.selectOne("memberCheck", map) == 1 ? true : false;
 	}////////// isMemeber
 
 }//////////////////// MemberDAO class
