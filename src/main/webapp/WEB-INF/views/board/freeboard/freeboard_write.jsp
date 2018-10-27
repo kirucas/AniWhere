@@ -9,38 +9,38 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <script>
-   $(function() {
-      $('#summernote').summernote({
-    	 maxHeight:null,
-    	 minHeight:null,
-    	 height:630,
-         callbacks : {
-            onImageUpload : function(files, editor, welEditable) {
-               for (var i = files.length - 1; i >= 0; i--) {
-                  sendFile(files[i], this);	
-               }
-            }
-         }
-      });
-      function sendFile(file, el, wel) {
-         var form_data = new FormData();
-         form_data.append('file', file);
-         $.ajax({
-            data: form_data,
-            type: "POST",
-            url : "<c:url value='/animal/freeboard/Upload.aw'/>",
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
-            },
-            error : function() {
-               console.log("error");
-            }
-         });
-      }
-   });
+	$(function() {
+		$('#summernote').summernote({
+			maxHeight:null,
+			minHeight:null,
+			height:630,
+			callbacks : {
+				onImageUpload : function(files, editor, welEditable) {
+					for (var i = files.length - 1; i >= 0; i--) {
+						sendFile(files[i], this);	
+               		}
+            	}
+         	}
+      	});
+      	function sendFile(file, el, wel) {
+         	var form_data = new FormData();
+         	form_data.append('file', file);
+         	$.ajax({
+	            data: form_data,
+	            type: "POST",
+	            url : "<c:url value='/animal/freeboard/Upload.aw'/>",
+	            cache: false,
+	            contentType: false,
+	            processData: false,
+	            success: function(url) {
+	                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
+	            },
+	            error : function() {
+	               console.log("error");
+	            }
+         	});
+      	}
+   	});
 </script>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
