@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.impl.member.AnimalServiceImpl;
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 import com.animal.aniwhere.service.member.AnimalDTO;
 import com.animal.aniwhere.service.member.MemberDTO;
+import com.animal.aniwhere.web.board.FileUpDownUtils;
 
 @Controller
 public class MemberController {
@@ -111,10 +115,21 @@ public class MemberController {
       return "forward:profile_main.aw";
    }///////////////member_info
 
-   @RequestMapping("/enrollProcess.aw")
-   public String enrollProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
-	   
+   @RequestMapping(value="/enrollProcess.aw", method = RequestMethod.POST)
+   public String enrollProcess(MultipartHttpServletRequest mhsr,@RequestParam Map map, HttpSession session, Model model) throws Exception {
+	  String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+	  MultipartFile upload = mhsr.getFile("ani_photo");
+	  String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+	  List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "animalprofile"); // S3  업로드
+	  
 	  map.put("mem_no", session.getAttribute("mem_no"));
+	  map.put("ani_name", mhsr.getParameter("ani_name").toString());
+	  map.put("ani_age", mhsr.getParameter("ani_age").toString());
+	  map.put("ani_gender", mhsr.getParameter("ani_gender").toString());
+	  map.put("ani_species", mhsr.getParameter("ani_species").toString());
+	  map.put("ani_kind", mhsr.getParameter("ani_kind").toString());
+	  map.put("ani_pic", AwsS3Utils.LINK_ADDRESS+uploadList.get(0)); 
+
       int enroll = aniservice.insert(map);
       if(enroll==1)
     	  model.addAttribute("check",1);

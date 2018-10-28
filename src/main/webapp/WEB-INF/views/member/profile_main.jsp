@@ -21,6 +21,10 @@
 	margin-top:20px;
 	align:center;
 }
+.card{
+	display:inline-block;
+	margin-right:-4px;
+}
 </style>
 <!-- 내용 시작 -->
 <div class="container">
@@ -111,71 +115,39 @@
 			<c:if test="${empty anirecord }" var="isEmpty">
 				<div class="container" style="text-align:center">
 					<div style="display:inline-block">
-						<img id="aniwarn" src="<c:url value='/resources/images/animalwarn.jpg'/>"/>
+						<img id="aniwarn" src="<c:url value='/resources/images/animalwarn.jpg'/>" alt="애완동물 등록이 안되어있습니다."/>
 					</div>
 					<span style="font-size:25px">등록된 애완동물이 없으시네요.<a href="<c:url value='/animal/enroll.aw'/>"> 펫 등록하러 가기</a></span>
 				</div>
 			</c:if>
 			<c:if test="${not isEmpty}">
-    			<c:forEach var="record" items="${list}" varStatus="loop">
-					<section class="member-settings-layout__content">
-						<div class="member-settings-layout__content-inner">
-							<h2 class="member-settings-layout__title">동물 프로필 관리</h2>
-							<form action="#" method="post">
-								<div class="edit">
-									<div class="edit__inner">
-										<div class="member-input">
-											<div class="member-input__state">
-												<div class="edit__table">
-													<div class="edit__tr">
-													<div class="edit__th">
-														펫 이름
-													</div>
-														<div class="edit__td">
-															<input class="member-input__box" type="text" autocomplete="off" name="ani_name" disabled value="${record.ani_name}">
-														</div>
-													</div>
-													<div class="edit__tr">
-													<div class="edit__th">
-														펫 나이
-													</div>
-														<div class="edit__td">
-															<input class="member-input__box" type="text" autocomplete="off" name="ani_age" value="${record.ani_age}">
-														</div>
-													</div>
-													<div class="edit__tr">
-													<div class="edit__th">
-														펫 성별
-													</div>
-													<div class="edit__td">
-														<input class="member-input__box" type="text" autocomplete="off" name="ani_gender" value="${record.ani_gender}">
-													</div>
-													</div>
-													<div class="edit__th">
-														펫 분류
-													</div>
-													<div class="edit__td">
-														<input class="member-input__box" type="text" autocomplete="off" name="ani_kind" value="${record.ani_kind}">
-													</div>
-													<div class="edit__th">
-														펫 프로필
-													</div>
-													<div class="edit__td">
-														<input class="member-input__box" type="file" autocomplete="off" name="ani_photo" value="${record.ani_photo}">
-													</div>
-													
-												</div>
-											</div>
-											<div class="text-center">
-												<input type="submit" class="member-button" value="수정">
-											</div>
-										</div>
-									</div>
-								</div>
-							</form>
+				<section class="member-settings-layout__content">
+					<div class="member-settings-layout__content-inner">
+						<h2 class="member-settings-layout__title">동물 프로필 관리</h2>
+						<div class="container">
+	  						<c:forEach var="record" items="${anirecord}" varStatus="loop">
+							  <div class="card col-12 col-md-3">
+								  <img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진">
+								  <div class="card-body">
+								    <h2 class="card-title">애완동물 이름 : ${record.ani_name}</h2>
+								    <p class="card-text">
+								    	<span>나이 : ${record.ani_age}</span>
+							    		<span>성별 : ${record.ani_gender}</span>
+							    		<span>대분류 : ${record.ani_species}</span>
+							    		<span>중분류 : ${record.ani_kind}</span>
+						    		</p>
+								  </div>
+							  </div>
+							</c:forEach>
+							  <div class="card col-12 col-md-3">
+								  <a href="<c:url value='/animal/enroll.aw'/>"><img class="card-img-top" src="<c:url value='/resources/images/plus.jpg'/>" alt="애완동물 추가"></a>
+								  <div class="card-body">
+								    <h2 class="card-title">추가</h2>
+								  </div>
+							  </div>
 						</div>
-					</section>
-				</c:forEach>
+					</div>	
+				</section>
 			</c:if>
 		</div>
 		<div class="tab-pane" id="passchange" role="tabpanel" aria-labelledby="passchange-tab">

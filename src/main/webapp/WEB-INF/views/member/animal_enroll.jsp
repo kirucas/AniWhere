@@ -103,7 +103,7 @@ $(document).ready(function() {
 		          <h4>회원가입</h4>
 		          <p class="center">지금 당장 애완동물을 등록하세요!</p>
 		        </div>
-		    	<form action="<c:url value='/signUpProcess.aw'/>" class="col s12">
+		    	<form action="<c:url value='/enrollProcess.aw'/>" class="col s12" method="post" enctype="multipart/form-data">
 			      <div class="row">
 			        <div class="input-field col s4 offset-s4">
 			          <input id="ani_name" name="ani_name" type="text" class="validate">
@@ -181,32 +181,9 @@ $(document).ready(function() {
 			          <input id="ani_photo" name="ani_photo" type="file" class="validate">
 			        </div>
 			      </div>
-					<script>
-					function upload(){
-					      var formData=new FormData($("#ani_photo"));
-					      $.ajax({
-					         url : "<c:url value='/enrollProcess.aw'/>",
-					         processData : false,
-					         contentType : false,
-					         data : formData,
-					         type : 'POST',   
-					         success:function(data){
-					               alert("완료!");
-					           },
-					           error:function(error){
-					               alert("에러");
-					               console.log(error);
-					           }
-					      });					
-				      $('#ani_photo').click(function() {
-				          upload();
-				       });
-					</script>
-
-
 				  <div class="row">
 				  	<div class="input-field inline col s2 offset-s4">
-         			 <button type="submit" class="btn waves-effect waves-light col s12">애완동물 등록</button>
+         			 <button id="anienroll" type="submit" class="btn waves-effect waves-light col s12">애완동물 등록</button>
 				  	</div>
 				  </div>
 		    	</form>
