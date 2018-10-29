@@ -16,6 +16,7 @@ import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 
+
 @Service
 public class NaverLoginBO {
 	   /* 인증 요청문을 구성하는 파라미터 */
@@ -24,7 +25,7 @@ public class NaverLoginBO {
 	    //redirect_uri: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩). 애플리케이션을 등록할 때 Callback URL에 설정한 정보입니다.
 	    //state: 애플리케이션이 생성한 상태 토큰
 	    private final static String CLIENT_ID = "NC0HimpNsqgrzxkQ6lz1";       //네이버API Client ID
-	    private final static String CLIENT_SECRET = "NC0HimpNsqgrzxkQ6lz1";                      
+	    private final static String CLIENT_SECRET = "p65rKt9DIi";             //네이버API Client Secret      	  
 	    private final static String REDIRECT_URI = "http://localhost:8080/aniwhere/Member/Callback.aw";
 
 	    private final static String SESSION_STATE = "oauth_state";

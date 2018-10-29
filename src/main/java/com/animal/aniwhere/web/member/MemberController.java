@@ -56,9 +56,10 @@ public class MemberController {
    @RequestMapping(value = "/Member/Callback.aw", method = { RequestMethod.GET, RequestMethod.POST })
     public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
             throws Exception {
+	   
         System.out.println("여기는 callback");
-        OAuth2AccessToken oauthToken;
-        oauthToken = naverLoginBO.getAccessToken(session, code, state);
+        OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
+        System.out.println("터졌니");
         //로그인 사용자 정보를 읽어온다.
         apiResult = naverLoginBO.getUserProfile(oauthToken);  
         System.out.println(apiResult);
