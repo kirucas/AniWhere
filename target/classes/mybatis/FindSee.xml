@@ -70,7 +70,7 @@
 	</delete>
 	
 	<update id="addCountFS" parameterType="java.util.Map">
-		<if test="view == null">
+		<if test="view != null">
 			UPDATE miss_${table_name}
 			SET count=count + 1
 			WHERE no=#{no}
