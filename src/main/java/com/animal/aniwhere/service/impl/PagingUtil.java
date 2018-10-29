@@ -77,10 +77,10 @@ public class PagingUtil {
 		while(blockCount <= blockPage && intTemp <= totalPage){  // 페이지 오버 를 체크
 				//현재 페이지를 의미함
 			if(intTemp == nowPage){  
-				pagingStr+="<li><a href='#'><span style='Color:red'>"+intTemp+"</span></a></li>";
+				pagingStr+="<li><a href='#'><span style='Color:red'>"+intTemp+"</span></a></li>&nbsp&nbsp&nbsp";
 			}
 		     else
-		    	 pagingStr+="<li><a href='"+page+"nowPage="+intTemp+"'>"+intTemp+"</a></li>";
+		    	 pagingStr+="<li><a href='"+page+"nowPage="+intTemp+"'>"+intTemp+"</a></li>&nbsp&nbsp&nbsp";
 		       
 			intTemp = intTemp + 1;
 			blockCount = blockCount + 1;

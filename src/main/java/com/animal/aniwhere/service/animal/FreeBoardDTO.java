@@ -2,7 +2,7 @@ package com.animal.aniwhere.service.animal;
 
 public class FreeBoardDTO {
 
-	private String free_no;
+	private String no;
 	private String mem_no;
 	private String free_title;
 	private String free_content;
@@ -13,14 +13,6 @@ public class FreeBoardDTO {
 	
 	// 작성자 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
-
-	public String getFree_no() {
-		return free_no;
-	}//////////
-
-	public void setFree_no(String free_no) {
-		this.free_no = free_no;
-	}//////////
 
 	public String getMem_no() {
 		return mem_no;
@@ -84,6 +76,14 @@ public class FreeBoardDTO {
 
 	public void setMem_nickname(String mem_nickname) {
 		this.mem_nickname = mem_nickname;
+	}//////////
+
+	public String getNo() {
+		return no;
+	}//////////
+
+	public void setNo(String no) {
+		this.no = no;
 	}//////////
 	
 }//////////////////// FreeBoardDTO class

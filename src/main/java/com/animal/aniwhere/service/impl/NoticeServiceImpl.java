@@ -7,11 +7,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.animal.aniwhere.service.AllBoardService;
+import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.NoticeDTO;
 
 @Service("noticeService")
-public class NoticeServiceImpl implements AllBoardService {
+public class NoticeServiceImpl implements AllCommonService {
 
 	@Resource(name = "noticeDAO")
 	private NoticeDAO dao;

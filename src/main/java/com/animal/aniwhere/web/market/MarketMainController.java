@@ -12,12 +12,14 @@ public class MarketMainController {
 		return "market/MainMaket.tiles";
 	}////////// market_main
 	
+	/*
 	@RequestMapping("/market/buyinside.aw")
 	public String buyinside() throws Exception {
 		return "market/inside/buyinside.tiles";
 		
 		
 	}
+	*/
 	@RequestMapping("/market/sellinside.aw")
 	public String sellinside() throws Exception {
 		return "market/inside/sellinside.tiles";
@@ -33,13 +35,13 @@ public class MarketMainController {
 		
 		
 	}
-	
+	/*
 	@RequestMapping("/market/buyWrite.aw")
 	public String buyWrite() throws Exception {
 		return "market/write/buyWrite.tiles";
 		
 		
-	}
+	}*/
 	
 	@RequestMapping("/market/SellWrite.aw")
 	public String SellWrite() throws Exception {

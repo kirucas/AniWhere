@@ -126,6 +126,17 @@
 		background-repeat: no-repeat;
 		background-size: 100%;
 	}
+	/* 메인페이지에 icon 용 */
+	#icon div div{
+		height:  200px;
+	}
+	 #icon ul li a:hover{
+	 	text-decoration: none;	
+	 }
+	 #icon ul li a{
+	 	color:#9d85ff;
+	 	
+	 }
 </style>
    <!-- Start Content -->
 
@@ -158,41 +169,120 @@
            <p class="section-subcontent" style="font-size: 1.8em;">아래의 메뉴를 선택하면 해당 동물 페이지로 이동해요.</p>
         </div>
     
-      <div class="mainDiv">
+      <div class="mainDiv" id="icon">
 	      <div class="card" style="width: 13.6rem;">
-	        <a href="<c:url value='#'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_dog.jpg'/>" alt="Card image cap">
+	        <img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_dog.jpg'/>" alt="Card image cap">
 		        <div class="card-body">
 		          <span class="card-text">강아지</span>
+		          	<div id="main_board">
+		          		<ul style="list-style: none;padding-left:0px;">
+		          			<li>
+		          				<a href="<c:url value='/animal/dog/photo.aw'/>">
+		          				<img src="<c:url value='/resources/images/icon/photoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사진 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/animal/dog/movie.aw'/>">
+		          				<img src="<c:url value='/resources/images/icon/videoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;동영상 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>">
+		          				<img src="<c:url value='/resources/images/icon/questicon.jpg'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/board/animal/dog/tip/list.aw'/>">
+		          				<img src="<c:url value='/resources/images/icon/tipicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팁 게시판</a>
+		          			</li>
+		          		</ul>
+		          	</div>
 		        </div>
-	        </a>
 	      </div>
 	      <div class="card" style="width: 13.6rem;">
-	        <a href="<c:url value='/animal/cat/main.aw'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_cat.jpg'/>" alt="Card image cap">
+	        <img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_cat.jpg'/>" alt="Card image cap">
 		        <div class="card-body">
 		          <span class="card-text">고양이</span>
+		          <div id="main_board">
+		          		<ul style="list-style: none;padding-left:0px;">
+		          			<li>
+		          				<a href="<c:url value='/animal/cat/photo.aw'/>"><img src="<c:url value='/resources/images/icon/photoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사진 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/animal/cat/movie.aw'/>"><img src="<c:url value='/resources/images/icon/videoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;동영상 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/animal/cat/quest.aw'/>"><img src="<c:url value='/resources/images/icon/questicon.jpg'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/board/animal/cat/tip/list.aw'/>"><img src="<c:url value='/resources/images/icon/tipicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팁 게시판</a>
+		          			</li>
+		          		</ul>
+		          	</div>
 		        </div>
-	        </a>
 	      </div>
 	         <div class="card" style="width: 13.6rem;">
-	        <a href="<c:url value='/animal/rna/main.aw'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_rNa.jpg'/>" alt="Card image cap">
+	         <img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_rNa.jpg'/>" alt="Card image cap">
 		        <div class="card-body">
 		          <span class="card-text">파충류 & 양서류</span>
+		          <div id="main_board">
+		          		<ul style="list-style: none;padding-left:0px;">
+		          			<li>
+		          				<a href="<c:url value='/animal/rna/photo.aw'/>"><img src="<c:url value='/resources/images/icon/photoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사진 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/animal/rna/movie.aw'/>"><img src="<c:url value='/resources/images/icon/videoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;동영상 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/animal/rna/quest.aw'/>"><img src="<c:url value='/resources/images/icon/questicon.jpg'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/board/animal/rNa/tip/list.aw'/>"><img src="<c:url value='/resources/images/icon/tipicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팁 게시판</a>
+		          			</li>
+		          		</ul>
+		          	</div>
 		        </div>
-	        </a>
-	      </div>
+	      	 </div>
 	         <div class="card" style="width: 13.6rem;">
-	        <a href="<c:url value='/animal/bird/main.aw'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_bird1.jpg'/>" alt="Card image cap">
+	         <img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_bird1.jpg'/>" alt="Card image cap">
 		        <div class="card-body">
-		          <span class="card-text">조류</span>
+		          <span class="card-text">&nbsp;조류&nbsp;</span>
+		          <div>
+		          		<ul style="list-style: none;padding-left:0px;">
+		          			<li>
+		          				<a href="<c:url value='/animal/bird/photo.aw'/>"><img src="<c:url value='/resources/images/icon/photoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사진 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/bird/movie/List.aw'/>"><img src="<c:url value='/resources/images/icon/videoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;동영상 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/animal/bird/quest.aw'/>"><img src="<c:url value='/resources/images/icon/questicon.jpg'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/board/animal/bird/tip/list.aw'/>"><img src="<c:url value='/resources/images/icon/tipicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팁 게시판</a>
+		          			</li>
+		          		</ul>
+		          	</div>
 		        </div>
-	        </a>
-	      </div>
+	      	</div>
 	         <div class="card" style="width: 13.6rem;">
-	        <a href="<c:url value='/animal/etc/main.aw'/>"><img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_etc.jpg'/>" alt="Card image cap">
+	         <img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_etc.jpg'/>" alt="Card image cap">
 		        <div class="card-body">
 		          <span class="card-text">기타 포유류</span>
+		          <div id="main_board">
+		          		<ul style="list-style: none;padding-left:0px;">
+		          			<li>
+		          				<a href="<c:url value='/animal/etc/photo.aw'/>"><img src="<c:url value='/resources/images/icon/photoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사진 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/animal/etc/movie.aw'/>"><img src="<c:url value='/resources/images/icon/videoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;동영상 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/animal/etc/quest.aw'/>"><img src="<c:url value='/resources/images/icon/questicon.jpg'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 게시판</a>
+		          			</li>
+		          			<li>
+		          				<a href="<c:url value='/board/animal/etc/tip/list.aw'/>"><img src="<c:url value='/resources/images/icon/tipicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팁 게시판</a>
+		          			</li>
+		          		</ul>
+		          	</div>
 		        </div>
-	        </a>
 	      </div>
       </div>
 	</div>
@@ -205,7 +295,6 @@
              <span style="font-weight: bold;margin-left:15%;font-size: 50px;">오늘은 동물들에게 어떤 일이 있었을까요?</span>
              <!--Carousel Wrapper-->
          <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-         
          
            <!--Slides-->
            <div class="carousel-inner" role="listbox">
