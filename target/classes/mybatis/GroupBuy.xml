@@ -59,8 +59,8 @@
 	</select>
 	
 	<select id="groupbuySum" parameterType="java.util.Map" resultType="int">
-		SELECT SUM(*)
-		FROM market_group_buy
+		SELECT SUM(buy_count)
+		FROM group_buy
 		WHERE no=#{no}
 	</select>
 	
