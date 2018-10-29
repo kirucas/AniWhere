@@ -148,11 +148,11 @@ function changeimage1() {
       <!-- /.row -->	
 
      <div class="col-md-12 container">
-     <div class="col-md-12 container">
-     <table class="table table-hover table-striped table-bordered"><tr>
-    	<th colspan="2" class="text-center">내용</th>
+     <div class="col-md-12 col-ms-4 container">
+     <table class="table table-hover table-striped table-bordered" style="max-width: 100%;"><tr>
+    	<th colspan="2" class="text-center" style="max-width: 100%;">내용</th>
 				</tr>
-				<tr>
+				<tr style="max-width: 100%;">
 					<td colspan="2">${record.content}<br/>
 					==================================================<br/>
 					

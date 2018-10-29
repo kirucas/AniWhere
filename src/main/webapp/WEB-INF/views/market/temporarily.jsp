@@ -37,9 +37,7 @@
 	<div class="card mb-12" style="margin-top: 50px">
 	
 	<jsp:include page="../market/template/WithBuyMain.jsp"/>
-	
-
-	
+		
 	<!-- 푸터 와야하는 자리 -->
 	<div style="margin-top: 50px;">
 	

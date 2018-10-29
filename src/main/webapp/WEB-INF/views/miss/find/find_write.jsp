@@ -63,6 +63,7 @@
 			<div class="form-group form-row">
 				<input type="hidden" name="table_name" value="find"/>
 				<input type="hidden" name="mem_no" value="#" />
+				
                  	<select name="animal_code" style="width:53px;height:38px;margin-right:10px;">
                         <option value="1">고양이</option>
                          <option value="2">강아지</option>

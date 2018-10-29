@@ -161,7 +161,7 @@ font-weight: bold;
 	<main class="container pt-5">
 	
 		<jsp:include page="../template/MaketTop.jsp" />
-		<jsp:include page="../template/BuyPart.jsp" />
+
 	
 <div>
 
