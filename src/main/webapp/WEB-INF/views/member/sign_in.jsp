@@ -75,10 +75,10 @@ span{
                                <p class="footer-text">Copyright © 2018 Bootstrapdash. All rights reserved.</p>
                                <ul class="auth-footer text-gray">
                                    <li>
-                                       <a href="#">Terms & Conditions</a>
+                                       Terms & Conditions
                                    </li>
                                    <li>
-                                       <a href="#">Cookie Policy</a>
+                                       Cookie Policy
                                    </li>
                                </ul>
                            </div>

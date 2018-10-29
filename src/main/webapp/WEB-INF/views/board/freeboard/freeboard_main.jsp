@@ -63,7 +63,7 @@
 		<section class="article-list article-list--fixed"></section>
 		<section class="article-list">
 			<!-- 여기서 반복문 돌려서 글 -->
-			<c:if test="${empty requestScope.list }" var="isEmpty">
+			<c:if test="${empty list }" var="isEmpty">
 				   등록된 게시물이 없어요
     		</c:if>
     		<c:if test="${not isEmpty }">
@@ -101,7 +101,7 @@
 							<span data-tooltip data-date=${record.free_regidate } title=""></span>
 						</div>
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
-							<a href="#" id="mem_no">${record.mem_no} </a>
+							<a href="#" id="mem_no">${record.mem_nickname} </a>
 						</div>
 						<div class="article-list-item-meta__item">
 							조회수 <span id="free_count">${record.free_count}</span>

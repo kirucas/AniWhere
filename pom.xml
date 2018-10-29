@@ -197,6 +197,23 @@
 		    <artifactId>cos</artifactId>
 		    <version>09May2002</version>
 		</dependency>
+		<!-- Amazon Web Service -->
+		<!-- Amazon SDK -->
+	    <!-- Amazon S3 -->
+	    <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-s3</artifactId>
+		    <version>1.11.436</version>
+		</dependency>
+		<!-- Amazon S3 끗 -->
+		<!-- Java.lang.NoClassDefFoundError : com / fasterxml / jackson / databind / exc / InvalidDefinitionException 방지용 -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.4</version>
+		</dependency>
+		<!-- Java.lang.NoClassDefFoundError : com / fasterxml / jackson / databind / exc / InvalidDefinitionException 끗 -->
     </dependencies>
 <build>
         <plugins>
