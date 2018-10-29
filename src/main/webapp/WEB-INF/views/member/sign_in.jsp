@@ -4,12 +4,7 @@
 <!DOCTYPE html>
 <html>
 <style>
-*{
-	font-family: 메이플스토리;
-}
-span{
-	font-size:35px;
-}
+
 </style>
 <head>
     <!-- Required meta tags -->
