@@ -48,7 +48,7 @@
 
 	<div class="loading">
 
-		<img alt="loading" loop=infinite src="<c:url value='/resources/images/loading.gif'/>">
+		<img alt="loading" src="<c:url value='/resources/images/loading.gif'/>">
 
 	</div>
 
