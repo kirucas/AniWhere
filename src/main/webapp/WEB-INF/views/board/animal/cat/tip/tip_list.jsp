@@ -5,7 +5,7 @@
 <%@ include file="/WEB-INF/views/common/loading.jsp" %>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
-#tip_no{
+#no{
 	text-align:center;
 	font-size: 1.5em;
 }
@@ -88,7 +88,7 @@
 						<div><span id="tip_hit">${record.tip_hit}</span></div>
 		    		</div>
 				<div class="article-list-item__content">
-					<a href="<c:url value='/animal/cat/tip/tip_view.aw?tip_no=${record.tip_no}'/>" class="article-list-item__info">
+					<a href="<c:url value='/animal/cat/tip/tip_view.aw?no=${record.no}'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
 							<span id="tip_title">${record.tip_title}</span> <em>[21]</em>
 						</div>
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 				<div class="article-list-item__vote">
-					<div><span id="tip_no" style="text-align:center">${record.tip_no}</span></div>
+					<div><span id="no" style="text-align:center">${record.no}</span></div>
 				</div>
 			</article>
 	    		</c:forEach>
