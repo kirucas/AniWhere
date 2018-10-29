@@ -58,7 +58,7 @@
 		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
-	<select id="groupbuyCount" parameterType="java.util.Map" resultType="int">
+	<select id="groupbuySum" parameterType="java.util.Map" resultType="int">
 		SELECT SUM(*)
 		FROM market_group_buy
 		WHERE no=#{no}
