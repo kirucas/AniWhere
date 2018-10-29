@@ -107,7 +107,7 @@ public class BirdMovieController {
 	public String movie_view(@RequestParam Map map, Model model) throws Exception {
 		// 게시글
 		MovieBoardDTO dto = service.selectOne(map);
-		System.out.printf("dto: %s",dto.getMovie_tempsrc());
+		System.out.printf("dto.getMovie_tempsrc(): %s",dto.getMovie_tempsrc());
 		// 데이타 저장]
 		model.addAttribute("dto", dto);
 		// 뷰정보 반환]
