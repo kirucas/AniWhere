@@ -46,5 +46,9 @@ public class GroupBuyServiceImpl implements AllCommonService {
 	public int delete(Map map) {
 		return dao.delete(map);
 	}////////// delete
+	
+	public int getTotalSell(Map map) {
+		return dao.getTotalSell(map);
+	}////////// getTotalSell
 
 }//////////////////// GroupBuyServiceImpl class
