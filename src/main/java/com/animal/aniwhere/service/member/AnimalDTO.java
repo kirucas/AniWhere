@@ -6,6 +6,7 @@ public class AnimalDTO {
 	private String mem_no;
 	private String ani_name;
 	private String ani_age;
+	private String ani_gender;
 	private String ani_species;
 	private String ani_kind;
 	private String ani_pic;
@@ -84,6 +85,14 @@ public class AnimalDTO {
 
 	public void setMem_nickname(String mem_nickname) {
 		this.mem_nickname = mem_nickname;
+	}//////////
+
+	public String getAni_gender() {
+		return ani_gender;
+	}//////////
+
+	public void setAni_gender(String ani_gender) {
+		this.ani_gender = ani_gender;
 	}//////////
 	
 }//////////////////// AnimalDTO

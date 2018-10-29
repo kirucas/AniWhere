@@ -10,7 +10,7 @@
 		SELECT COUNT(*)
 		FROM (
 			SELECT q.*, mem_nickname
-			FROM quest q JOIN member m ON q.mem_no=m.mem_no
+			FROM quest q LEFT JOIN member m ON q.mem_no=m.mem_no
 			WHERE ani_category=#{ani_category}
 			<if test="searchColumn != null">
 				AND ${searchColumn} like '%'||#{searchWord}||'%'
@@ -24,7 +24,7 @@
 			SELECT T.*, ROWNUM R
 			FROM (
 				SELECT q.*, mem_nickname
-				FROM quest q JOIN member m ON q.mem_no=m.mem_no
+				FROM quest q LEFT JOIN member m ON q.mem_no=m.mem_no
 				WHERE ani_category=#{ani_category}
 				<if test="searchColumn != null">
 					AND ${searchColumn} like '%'||#{searchWord}||'%'
@@ -37,7 +37,7 @@
 	
 	<select id="questSelectOne" parameterType="java.util.Map" resultType="QuestDTO">
 		SELECT tn.*, mem_nickname
-		FROM quest tn JOIN member mb ON tn.mem_no = mb.mem_no
+		FROM quest tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
 		WHERE quest_no=#{quest_no}
 	</select>
 	
