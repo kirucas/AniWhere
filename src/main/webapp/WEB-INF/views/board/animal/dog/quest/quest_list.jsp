@@ -60,7 +60,7 @@
 		</table>
 	</div>
 	<!-- 페이징 시작 -->
-	<div class="form-row ">
+	<div class="form-row">
 		<div class="offset-sm-5 col-sm-2">${pagingString}</div>
 	</div>
 	<!-- 페이징 끝 -->
@@ -70,18 +70,18 @@
 				action="<c:url value='/animal/dog/quest/quest_list.aw'/>">
 				<div class="form-group">
 					<select name="searchColumn" class="form-control ">
-						<option value="title">제목</option>
-						<option value="name">작성자</option>
-						<option value="content">내용</option>
+						<option value="quest_title">제목</option>
+						<option value="mem_nickname">작성자</option>
+						<option value="quest_content">내용</option>
 					</select>
 				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" />
+				<div class="form-group" style="padding-left:5px">
+					<input type="text" class="form-control" name="searchWord" />
 				</div>
-				<div class="form-group">
-					<a type="submit" href="<c:url value='/animal/dog/quest/quest_list.aw'/>"style="padding-left:10px;font-size:25px">
+				<div class="form-group" style="padding-left:5px">
+					<button type="submit" class="btn btn-outline-primary btn-sm" style="padding-left:10px;font-size:20px">
 						<i class="fas fa-search"></i>검색
-					</a>
+					</button>
 				</div>
 			</form>
 		</div>
