@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
+<%@ include file="/WEB-INF/views/common/loading.jsp" %>
 <link rel="stylesheet" href="https://member.op.gg/src.45ea0fc1.css">
 <style>
 .nav-tabs {
