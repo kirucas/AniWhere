@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <head>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 <title>쓰기게시판 내부</title>
 
-<!-- include summernote css/js-->
-
-<!-- include summernote css/js-->
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
 	rel="stylesheet">
@@ -68,7 +65,7 @@
 				<div class="form-row">
 				
 				<input type="hidden" name="table_name" value="find"/>
-				<input type="hidden" name="mem_no" value="#" />
+<!-- 				<input type="hidden" name="mem_no" value="#" /> -->
 				
 					<label for="title" class="col-sm-2 control-label">제목</label> 
 					<input
@@ -102,8 +99,6 @@
 						<option value="other">기타</option>
 
 					</select>
-
-
 
 				</p>
 

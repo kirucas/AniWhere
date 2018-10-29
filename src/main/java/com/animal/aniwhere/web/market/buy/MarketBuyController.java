@@ -3,6 +3,7 @@ package com.animal.aniwhere.web.market.buy;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -37,11 +38,19 @@ public class MarketBuyController {
 	private int pageSize;
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
-	
+		
+	//입력 후 리스트로 이동
+		@RequestMapping("/market/buyinsert.aw")
+		public String miss_insert(@RequestParam Map map,HttpSession session) throws Exception {
+			
+			map.put("mem_no", session.getAttribute("mem_no"));			
+			allBoardService.insert(map);				
+			return "forward:/market/buy.aw";
+		}////////// miss_write
 	
 	//리스트로 이동하기
-	/*
-	@RequestMapping("/market/buy.aw")
+	
+	@RequestMapping("/market/buy/temporarily.aw")
 	public String market_list(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
 			@RequestParam Map map,//검색용 파라미터 받기
@@ -61,6 +70,11 @@ public class MarketBuyController {
 		int end   = nowPage*pageSize;
 		map.put("start",start);
 		map.put("end",end);
+		
+		//시험용
+		Set<String> set = map.keySet();
+		for(String key:set) {
+			System.out.println(key+":"+map.get(key));}
 				
 		//페이징을 위한 로직 끝]
 		List<BuySellDTO> list = (List<BuySellDTO>) allBoardService.selectList(map);
@@ -77,7 +91,9 @@ public class MarketBuyController {
 		return "market/buy/temporarily.tiles";
 		
 	}////////// market_main
-	*/
+	
+	//페이징 로직은 나중에 
+	
 	
 		
 	//상세보기
@@ -111,18 +127,25 @@ public class MarketBuyController {
 	}////////////////
 	
 	
-	// 수정처리로 이동]
+	// 수정처리 폼으로 이동]
 	@RequestMapping(value="/market/buyWrite.aw",method=RequestMethod.POST)
 	public String writeOk(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 		
 		
+		
+		map.put("mem_no", session.getAttribute("mem_no"));
 		map.put("table_name","buy");
-		map.put("no", map.get("buy_no"));
+		//map.put("no", map.get("buy_no"));
+		
+		Set<String> set=map.keySet();
+		for(String key:set) {
+			System.out.println("key:"+key+", value:"+map.get(key));
+		}
+		
 		//서비스 호출
 		//작성자의 id를 DTO에 설정
 		//스프링 시큐리티 적용 전
 		
-		map.put("mem_no", session.getAttribute("mem_no"));
 		//System.out.println("인증된 사용자:"+auth.getPrincipal());
 		//UserDetails authenticatedUser = (UserDetails) auth.getPrincipal();
 		//System.out.println("아이디 : "+authenticatedUser.getUsername());
@@ -132,26 +155,28 @@ public class MarketBuyController {
 		//map.put("id", authenticatedUser.getUsername());
 		
 		//게시글
-		FindSeeDTO record = allBoardService.selectOne(map);
+		allBoardService.insert(map);
+		/*BuySellDTO record = allBoardService.selectOne(map);
 		//데이터 저장]
 	    model.addAttribute("record", record);
 		//줄바꿈처리
-		record.setContent(record.getContent().replace("\r\n", "<br/>"));
+		record.setContent(record.getContent().replace("\r\n", "<br/>"));*/
 
 		//뷰정보반환:목록으로 이동
-		return "market/edit/editbuyWrite.tiles";//접두어 접미어 설정 적용 안되게끔 하려고 forward:를 붙임
+		//return "market/buy/temporarily.tiles";//접두어 접미어 설정 적용 안되게끔 하려고 forward:를 붙임
+		return "forward:/market/buy/temporarily.aw";
 	}////////////////
 
-	//수정 처리]
+	//수정
 	@RequestMapping("/market/buyupdate.aw")
-	public String edit(HttpServletRequest req,@RequestParam Map map,Model model,HttpSession session) throws Exception{
+	public String edit(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 		map.put("mem_no",session.getAttribute("mem_no"));
 		map.put("table_name","buy");
 		map.put("no",map.get("buy_no"));
 		
 		allBoardService.update(map);
 		
-		return "forward:/market/buy.aw";
+		return "forward:/market/buy.aw";//buy목록으로 이동
 	}//////////////edit()
 	
 	
@@ -172,7 +197,8 @@ public class MarketBuyController {
 		
 		return "forward:/market/buy.aw";
 	}//////////////delete()
-		
+			
+	
 	//Summernote 업로드 기능
 	@ResponseBody
     @RequestMapping(value="/market/Upload.aw")
