@@ -68,7 +68,7 @@ $(function() {
 	<div style="width:100%">
 		<form method="post" action="<c:url value='/animal/freeboard/edit.aw'/>">
 			<div class="form-group form-row">
-				<input type="hidden" name="free_no" value="${record.free_no}"/>
+				<input type="hidden" name="no" value="${record.no}"/>
 				<input type="hidden" name="mem_no" value="${mem_no}" />
                  	<select id="sel" name="free_category"style="width:53px;height:38px;margin-right:10px;">
                          <option selected value="1">잡담</option>

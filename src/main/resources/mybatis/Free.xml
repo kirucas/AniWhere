@@ -27,7 +27,7 @@
 				<if test="searchColumn != null">
 					WHERE ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>
-				ORDER BY free_no DESC
+				ORDER BY no DESC
 				) T
 			)
 		WHERE R BETWEEN #{start} AND #{end}
@@ -47,12 +47,12 @@
 	<update id="freeUpdate" parameterType="java.util.Map">
 		UPDATE freeboard
 		SET free_title=#{free_title}, free_content=#{free_content}, free_category=#{free_category}
-		WHERE free_no=#{free_no}
+		WHERE no=#{no}
 	</update>
 	
 	<delete id="freeDelete" parameterType="java.util.Map">
 		DELETE FROM freeboard
-		WHERE free_no=#{free_no}
+		WHERE no=#{no}
 	</delete>
 	
 	<delete id="freeDeleteAll" parameterType="java.util.Map">
