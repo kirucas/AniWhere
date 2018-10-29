@@ -26,7 +26,7 @@
 	</div>
 	<div>
 		<!-- 입력 폼 시작 -->
-		<form class="form-horizontal" method="POST" action="/animal/bird/photo.aw" enctype="multipart/form-data">
+		<form class="form-horizontal" method="POST" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title" class="col-md-2 control-label">제목</label>
 				<div class="col-md-12">
@@ -37,7 +37,7 @@
 			<div class="form-group">
 				<label for="content" class="col-sm-2 control-label">내용</label>
 				<div class="col-sm-12">
-					<textarea rows="10" placeholder="내용을 입력해주세요" id="summernote" name="content" class="form-control" style="height: 300px;"></textarea>
+					<textarea rows="10" placeholder="내용을 입력해주세요" id="content" name="content" class="form-control" style="height: 300px;"></textarea>
 				</div>
 			</div>
 			<div class="row">
@@ -45,10 +45,6 @@
 					<a href="javascript:" onclick="fileUploadAction();"	class="btn btn-primary">사진 업로드</a> 
 					<a href="javascript:" id="imgdelete" class="btn btn-danger">되돌리기</a> 
 					<input id="files" type="file" multiple name="files" style="display:none;"/>
-					<div id="hiddenInput">
-						<!-- 인풋 태그 동적 생성용 -->
-						
-					</div>
 				</div>
 				<div style="float:right;">
 					<input id="uploadButton" type="button" class="btn btn-primary" value="등록"/>
@@ -58,34 +54,14 @@
 			<div id="result">
 				<!-- 사진 업로드 결과가 나오는 div 인듯 -->			
 			</div>
-
-			
 		</form>
 		<!-- 입력 폼 종료 -->
 	</div>
 </div>
 <!-- 내용 끝 -->
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
 <script type="text/javascript">
-	$('#summernote').summernote({
-			height : 600, // set editor height
-			width : $('#summernote').parent().css('width'),
-			minHeight : null, // set minimum height of editor
-			maxHeight : null, // set maximum height of editor
-			/* airMode: true, */
-			focus : true,
-			// set focus to editable area after initializing summernote
-			toolbar : [
-			// [groupName, [list of button]]
-			[ 'style', [ 'bold', 'italic', 'underline', 'clear' ] ],
-			[ 'font', [ 'strikethrough' ] ],
-			[ 'fontsize', [ 'fontsize' ] ],
-			[ 'color', [ 'color' ] ],
-			[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-			[ 'height', [ 'height' ] ], [ 'video', [ 'video' ] ] ]
-	});
-
 	/* 바꾼 파일올리기 버튼 설정 */
 	function fileUploadAction() {
 		console.log("fileUploadAction");
@@ -168,6 +144,7 @@
 			type : 'POST',
 			success:function(url){
 				console.log("success");
+				location.href="<c:url value='/animal/bird/photo.aw'/>";
 	        },
 	        error:function(){
 	            console.log("error");

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class WhereController {
-
+	 
 	  @RequestMapping("/where/main.aw")
 	   public String where_main() throws Exception {
 	      return "where/whereMain.tiles";
@@ -80,4 +80,14 @@ public class WhereController {
 			String result = URLEncoder.encode(json.toString() , "UTF-8");
 			return result;
 	  }//////////////mapdata
+	  
+	  @ResponseBody
+	  @RequestMapping(value= "/android.awa", method= RequestMethod.POST)
+	  public String android() throws Exception{
+		  
+		  
+		  
+		  
+		  return null;
+	  }
 }

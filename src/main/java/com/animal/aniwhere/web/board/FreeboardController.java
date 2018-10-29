@@ -1,6 +1,5 @@
 package com.animal.aniwhere.web.board;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +25,7 @@ import com.animal.aniwhere.service.impl.animal.FreeBoardServiceImpl;
 @Controller
 public class FreeboardController {
 
-	@Resource(name="freeBoardService")
+	@Resource(name="freeService")
 	private FreeBoardServiceImpl freeservice;
 	
 	@Value("${PAGESIZE}")

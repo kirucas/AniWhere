@@ -47,4 +47,9 @@ public class MovieBoardServiceImpl implements AllBoardService {
 		return dao.delete(map);
 	}////////// delete
 
+	@Override
+	public int addHitCount(Map map) {
+		return dao.addHitCount(map);
+	}////////// addHitCount
+
 }//////////////////// MovieBoardServiceImpl class

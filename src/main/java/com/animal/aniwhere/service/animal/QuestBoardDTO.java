@@ -2,7 +2,7 @@ package com.animal.aniwhere.service.animal;
 
 public class QuestBoardDTO {
 
-	private String quest_no;
+	private String no;
 	private String mem_no;
 	private String quest_title;
 	private String quest_content;
@@ -15,14 +15,6 @@ public class QuestBoardDTO {
 	
 	// 작성자 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
-
-	public String getQuest_no() {
-		return quest_no;
-	}//////////
-
-	public void setQuest_no(String quest_no) {
-		this.quest_no = quest_no;
-	}//////////
 
 	public String getMem_no() {
 		return mem_no;
@@ -102,6 +94,14 @@ public class QuestBoardDTO {
 
 	public void setAni_category(String ani_category) {
 		this.ani_category = ani_category;
+	}//////////
+
+	public String getNo() {
+		return no;
+	}//////////
+
+	public void setNo(String no) {
+		this.no = no;
 	}//////////
 	
 }//////////////////// QuestBoardDTO class

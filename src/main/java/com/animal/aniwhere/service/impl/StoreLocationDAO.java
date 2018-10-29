@@ -8,11 +8,11 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.animal.aniwhere.service.AllBoardService;
+import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.StoreLocationDTO;
 
 @Repository
-public class StoreLocationDAO implements AllBoardService {
+public class StoreLocationDAO implements AllCommonService {
 
 	@Resource(name = "template")
 	private SqlSessionTemplate template;

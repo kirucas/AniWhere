@@ -1,5 +1,6 @@
 package com.animal.aniwhere.web.board.animal.dog;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -13,11 +14,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.AllCommentService;
 import com.animal.aniwhere.service.animal.QuestBoardDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
+import com.animal.aniwhere.web.board.FileUpDownUtils;
 
 @Controller
 public class DogQuestController {
@@ -54,7 +59,7 @@ public class DogQuestController {
 		//페이징을 위한 로직 끝]	
 		List<QuestBoardDTO> list= (List<QuestBoardDTO>) questService.selectList(map);
 		//페이징 문자열을 위한 로직 호출]
-		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/animal/dog/quest/quest_list.aw");
+		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/animal/dog/quest/quest_list.aw?");
 		//데이타 저장]
 		model.addAttribute("list", list);
 		model.addAttribute("pagingString", pagingString);
@@ -105,4 +110,16 @@ public class DogQuestController {
 		model.addAttribute("successFail",successFail);
 		return "board/animal/dog/quest/quest_message";
 	}
-}//////////////////// StoryController
+	
+	@ResponseBody
+    @RequestMapping(value="/animal/dog/quest/Upload.aw")
+    public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
+		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+		MultipartFile upload = mhsr.getFile("file");
+		
+		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+		File file = new File(phisicalPath+File.separator+newFilename);
+		upload.transferTo(file);
+        return "/Upload/"+newFilename;
+   }
+}//////////////////// DogQuestController
