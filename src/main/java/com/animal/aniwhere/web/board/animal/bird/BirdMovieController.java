@@ -61,7 +61,6 @@ public class BirdMovieController {
 				String lightBox = " data-toggle=\"lightbox\"";
 				if (target_num != -1) {
 					tempResult = content.substring(target_num, content.indexOf("></iframe>") + "></iframe>".length());
-					System.out.printf("tempResult :", tempResult);
 					result = new StringBuffer(tempResult).insert(tempResult.lastIndexOf("></iframe>"), lightBox)
 							.toString();
 					System.out.println("result:" + result);
@@ -106,9 +105,9 @@ public class BirdMovieController {
 	// 상세보기]
 	@RequestMapping("/bird/movie/view.aw")
 	public String movie_view(@RequestParam Map map, Model model) throws Exception {
-		System.out.println(map.get("nowPage"));
 		// 게시글
 		MovieBoardDTO dto = service.selectOne(map);
+		System.out.printf("dto: %s",dto.getMovie_tempsrc());
 		// 데이타 저장]
 		model.addAttribute("dto", dto);
 		// 뷰정보 반환]

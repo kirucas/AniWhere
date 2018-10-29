@@ -13,7 +13,7 @@
 	 */
 var isDelete = function(){	
 		if(confirm("정말로 삭제 하시겠습니까?"))
-			location.replace("<c:url value='/bird/movie/Delete.aw?no=${dto.movie_no}'/>");
+			location.replace("<c:url value='/bird/movie/delete.aw?no=${dto.movie_no}'/>");
 	}; 
 	
 </script>
@@ -74,10 +74,6 @@ var isDelete = function(){
 				<div class="col-sm moda" data-toggle="modal" id="popupMovie" data-target=".bd-example-modal-lg">
 					<div class="embed-responsive embed-responsive-16by9 movie-size">
 						${dto.movie_tempsrc}
-						<!-- 
-						<iframe class="embed-responsive-item"
-							src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
-							allowfullscreen></iframe> -->
 					</div>
 					<div class="media-body">
 						<h5 class="title">${dto.movie_title}</h5>
