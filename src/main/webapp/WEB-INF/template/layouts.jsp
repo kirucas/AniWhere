@@ -20,11 +20,11 @@
 <!-- summernote 사용을 위한 설정 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 
 <style>
 *{
-	font-family: 메이플스토리;
+	font-family: 메이플스토리 !important;
 }
 </style>         
 </head>
@@ -33,11 +33,9 @@
 		<!-- navigation bar start -->
 		<tiles:insertAttribute name="Top" />
 		<!-- navigation bar end -->
-
 		<!-- content start -->
 		<tiles:insertAttribute name="Body" />
 		<!-- content end -->
-
 		<!-- footer start -->
 		<tiles:insertAttribute name="Footer" />
 		<!-- footer end -->

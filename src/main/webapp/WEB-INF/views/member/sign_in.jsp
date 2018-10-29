@@ -1,9 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
+<style>
+*{
+	font-family: 메이플스토리;
+}
+span .mr-auto{
+	font-size:35px;
+}
+.logins{
+	width:140px;
+	height:45px;
+}
+</style>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -14,15 +25,17 @@
     <link rel="stylesheet" href="<c:url value='/resources/assets/vendors/iconfonts/puse-icons-feather/feather.css' />">
     <link rel="stylesheet" href="<c:url value='/resources/assets/vendors/css/vendor.bundle.base.css' />">
     <link rel="stylesheet" href="<c:url value='/resources/assets/vendors/css/vendor.bundle.addons.css' />">
-    <!-- endinject -->
-    <!-- plugin css for this page -->
-    <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/shared/style.css' />">
     <!-- endinject -->
     <link rel="shortcut icon" href="<c:url value='/resources/assets/images/favicon.png' />" />
+    <!-- 네이버 로그인 -->
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+    <!-- 구글 로그인 -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name = "google-signin-client_id"content = "696950404959-v8jmcjjtc6kubvuoc9r8ctebi5rff7qk.apps.googleusercontent.com">
 </head>
-<body>
+<!-- <body> -->
    <c:if test="${not empty sign_error }">
       <script>
          alert("${sign_error}");
@@ -38,7 +51,7 @@
                     <div class="col-12 col-md-8 h-100 bg-white">
                         <div class="auto-form-wrapper d-flex align-items-center justify-content-center flex-column">
                             <form action="<c:url value='/signInProcess.aw' />" method="post">
-                                <h3 class="mr-auto">안녕하세요! 시작하자.</h3>
+                                <span class="mr-auto">안녕하세요! 시작하자.</span>
                                 <p class="mb-5 mr-auto">아래에 세부 정보를 입력하십시오.</p>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -62,21 +75,32 @@
                                 </div>
                                 <div class="form-group" style="float:left;">
                                     <button class="btn btn-primary submit-btn">로그인</button>
-                                    <a href="<c:url value='/member/sign_up.aw'/>" class="btn btn-primary">회원가입</a>
                                 </div>
-                                   
-                                <div class="wrapper mt-5 text-gray">
-                                    <p class="footer-text">Copyright © 2018 Bootstrapdash. All rights reserved.</p>
-                                    <ul class="auth-footer text-gray">
-                                        <li>
-                                            <a href="#">Terms & Conditions</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Cookie Policy</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </form>
+                           </form>
+                                <div class="row">
+                                	<ul style="list-style:none;margin:0;padding:0">
+                               			<li style="float:left;padding-right:10px">
+                                			<a href="${url}">
+                                				<img class="logins" style="width:126px;height:36px;" id="naverLogin" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
+                               				</a>
+                            			</li>
+                               			<li style="float:left">
+                               				<div class="g-signin2 logins" data-onsuccess="onSignIn"></div>	
+                               			</li>
+                               		</ul>
+                  				</div>
+    			 				<p style="margin-top:1.rem;" class="margin center medium-small sign-up">계정이 없으십니까?<a href="<c:url value='/member/sign_up.aw' />"> Sign Up</a></p>
+                           <div class="wrapper mt-5 text-gray">
+                               <p class="footer-text">Copyright © 2018 Bootstrapdash. All rights reserved.</p>
+                               <ul class="auth-footer text-gray">
+                                   <li>
+                                       Terms & Conditions
+                                   </li>
+                                   <li>
+                                       Cookie Policy
+                                   </li>
+                               </ul>
+                           </div>
                         </div>
                     </div>
                 </div>

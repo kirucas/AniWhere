@@ -7,6 +7,15 @@ public class AnimalDTO {
 	private String ani_name;
 	private String ani_age;
 	private String ani_species;
+	private String ani_gender;
+	public String getAni_gender() {
+		return ani_gender;
+	}
+
+	public void setAni_gender(String ani_gender) {
+		this.ani_gender = ani_gender;
+	}
+
 	private String ani_kind;
 	private String ani_pic;
 	
