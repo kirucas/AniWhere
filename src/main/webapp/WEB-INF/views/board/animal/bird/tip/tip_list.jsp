@@ -11,6 +11,16 @@
 .sub-header-info{
 	padding-bottom:0px;
 }
+#pagingDiv{
+	width: 100%;
+	text-align: center;
+}
+.row nav{
+	margin:0 auto;
+}
+#pagingDiv nav ul li {
+	margin-right: 10px;
+}
 </style>
 <!-- 바디 -->
 <div class="container" style="padding-left:0px;padding-right:0px;margin-bottom:15px">
@@ -84,7 +94,7 @@
 							<span data-tooltip data-date=${record.tip_regidate } title=""></span>
 						</div>
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
-							<a href="#" id="mem_no">${record.mem_no} </a>
+							<a href="#" id="mem_no">${record.mem_nickname} </a>
 						</div>
 						<div class="article-list-item-meta__item">
 							조회수 <span id="tip_count">${record.tip_count}</span>
@@ -139,9 +149,7 @@
 		</section>
 	</div>
 	<!-- 아래는 페이징 -->
-    <div class="row" style="text-aling:center">
-    	<div>
-    		${pagingString}
-    	</div>
+    <div class="row" id="pagingDiv">
+    	${pagingString}
     </div>	
 <!-- 바디 끝 -->

@@ -8,11 +8,11 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.animal.aniwhere.service.AllBoardService;
+import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.miss.FindSeeDTO;
 
 @Repository
-public class FindSeeDAO implements AllBoardService {
+public class FindSeeDAO implements AllCommonService {
 
 	@Resource(name = "template")
 	private SqlSessionTemplate template;
@@ -30,6 +30,7 @@ public class FindSeeDAO implements AllBoardService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public FindSeeDTO selectOne(Map map) {
+		template.update("addCountFS", map);
 		return template.selectOne("fsSelectOne", map);
 	}////////// selectOne
 

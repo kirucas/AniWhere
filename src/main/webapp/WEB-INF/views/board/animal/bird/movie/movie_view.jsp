@@ -13,7 +13,7 @@
 	 */
 var isDelete = function(){	
 		if(confirm("정말로 삭제 하시겠습니까?"))
-			location.replace("<c:url value='/bird/movie/delete.aw?no=${dto.movie_no}'/>");
+			location.replace("<c:url value='/bird/movie/delete.aw?no=${dto.no}'/>");
 	}; 
 	
 </script>
@@ -91,15 +91,15 @@ var isDelete = function(){
 	<div class="row margin-top-10">
 		<div class="text-center">
 			<a
-				href="<c:url value='/bird/movie/Reply.aw?no=${dto.movie_no}'/>"
+				href="<c:url value='/bird/movie/Reply.aw?no=${dto.no}'/>"
 				class="btn btn-success">답변</a>
-			<c:if test="${sessionScope.mem_no == dto.mem_no}">
+			<c:if test="${sessionScope.mem_no == dto.no}">
 				<a
-					href="<c:url value='/bird/movie/Edit.aw?no=${dto.movie_no}'/>"
+					href="<c:url value='/bird/movie/Edit.aw?no=${dto.no}'/>"
 					class="btn btn-success">수정</a>
 				<a href="javascript:isDelete()" class="btn btn-success">삭제</a>
 			</c:if>
-			<a href="<c:url value='/bird/movie/List.aw?no=${dto.movie_no}&nowPage=${param.nowPage}'/>"
+			<a href="<c:url value='/bird/movie/List.aw?no=${dto.no}&nowPage=${param.nowPage}'/>"
 				class="btn btn-success">목록</a>
 		</div>
 	</div>

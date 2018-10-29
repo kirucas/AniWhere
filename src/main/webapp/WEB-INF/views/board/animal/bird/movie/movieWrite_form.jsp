@@ -66,6 +66,17 @@
 			return false;
 
 		} 
+		
+		else if (fr.movie_title.value.length > 50) {
+
+			alert("제목은 50자 이내로 입력해주세요.");
+
+			fr.movie_title.focus();
+
+			return false;
+
+		} 
+		
 		else if (fr.movie_content.value == "") {
 			alert('내용을 입력하세요.');
 			return false;
@@ -109,7 +120,7 @@
 			<label for="title" class="offset-sm-1 col-sm-1 col-form-label">제목</label>
 			<div class="col-sm-9">
 				<input class="form-control" type="text" id="title"
-					name="movie_title" placeholder="제목">
+					name="movie_title" placeholder="제목은 50자 이내로 작성해주세요">
 			</div>
 		</div>
 
@@ -140,7 +151,7 @@
 				maxHeight : null, // set maximum height of editor
 				/* airMode: true, */
 				focus : true,
-				placeholder: '영상 및 내용',
+				placeholder: '영상은 한 개만 첨부해주시고 내용을 반드시 작성해주세요',
 				// set focus to editable area after initializing summernote
 				toolbar : [
 				// [groupName, [list of button]]
