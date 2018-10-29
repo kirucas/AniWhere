@@ -10,6 +10,9 @@
 .member-input__state {
     border-bottom: none;
 }
+.member-settings-layout__title{
+	padding-bottom:40px;
+}
 *{
 	font-family:메이플스토리 !important;
 }
@@ -24,6 +27,21 @@
 .card{
 	display:inline-block;
 	margin-right:-4px;
+}
+#ani_profile{
+	height: 200px;
+}
+.card-body{
+	height: 90px;
+}
+#plus{
+	border: none;
+}
+#plus img{
+	margin-bottom: 40px;
+}
+#profile-text span{
+	margin-bottom: 5px;
 }
 </style>
 <!-- 내용 시작 -->
@@ -122,28 +140,25 @@
 			</c:if>
 			<c:if test="${not isEmpty}">
 				<section class="member-settings-layout__content">
-					<div class="member-settings-layout__content-inner">
+					<div class="member-settings-layout__content-inner" style="height: 500px;">
 						<h2 class="member-settings-layout__title">동물 프로필 관리</h2>
-						<div class="container">
+						<div class="container" style="vertical-align:middle;">
 	  						<c:forEach var="record" items="${anirecord}" varStatus="loop">
-							  <div class="card col-12 col-md-3">
-								  <img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진">
-								  <div class="card-body">
+							  <div class="card col-12 col-md-3" style="padding-top:15px;">
+								  <img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
+								  <div class="card-body" style="height: 120px;">
 								    <h2 class="card-title">애완동물 이름 : ${record.ani_name}</h2>
-								    <p class="card-text">
-								    	<span>나이 : ${record.ani_age}</span>
-							    		<span>성별 : ${record.ani_gender}</span>
-							    		<span>대분류 : ${record.ani_species}</span>
+								    <p class="card-text" id="profile-text">
+								    	<span>나이 : ${record.ani_age}</span><br>
+							    		<span>성별 : ${record.ani_gender}</span><br>
+							    		<span>대분류 : ${record.ani_species}</span><br>
 							    		<span>중분류 : ${record.ani_kind}</span>
 						    		</p>
 								  </div>
 							  </div>
 							</c:forEach>
-							  <div class="card col-12 col-md-3">
-								  <a href="<c:url value='/animal/enroll.aw'/>"><img class="card-img-top" src="<c:url value='/resources/images/plus.jpg'/>" alt="애완동물 추가"></a>
-								  <div class="card-body">
-								    <h2 class="card-title">추가</h2>
-								  </div>
+							  <div class="card col-12 col-md-3" id="plus">
+								  <a href="<c:url value='/animal/enroll.aw'/>"><img style="height: 200px;" class="card-img-top" src="<c:url value='/resources/images/plus.jpg'/>" alt="애완동물 추가"></a>
 							  </div>
 						</div>
 					</div>	
