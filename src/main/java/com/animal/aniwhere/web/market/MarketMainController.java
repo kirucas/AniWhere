@@ -1,6 +1,7 @@
 package com.animal.aniwhere.web.market;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -42,8 +43,8 @@ public class MarketMainController {
 	
 	@RequestMapping(value="/market/{path}")
 	public String move(@PathVariable String path) throws Exception {
-		return "market/" + path + "/temporarily.tiles";
-	
+		return "forward:/market/"+path+"/temporarily.aw";
+	//return "market/"+path+"/temporarily";
 	
 	}////////// move
 	

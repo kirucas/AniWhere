@@ -11,6 +11,7 @@
 }
 </style>
 <!-- 바디 -->
+
 <div class="container" style="padding-left:0px;padding-right:0px;">
 		<div class="sub-header">
 			<div class="sub-header-info">
@@ -76,6 +77,8 @@
 							</c:otherwise>
 						</c:choose>
 					</span>
+					
+					
 					<a href="<c:url value='/miss/find_view.aw?find_no=${record.no}'/>"	class="article-list-item__info">
 						<div class="article-list-item__title">
 						

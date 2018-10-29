@@ -100,7 +100,7 @@ public class MarketBuyController {
 		
 		map.put("mem_no",session.getAttribute("mem_no"));
 		map.put("table_name","buy");
-		map.put("no", map.get("buy_no"));
+		//map.put("no", map.get("buy_no"));
 		
 		
 		//서비스 호출]
@@ -112,7 +112,8 @@ public class MarketBuyController {
 		record.setContent(record.getContent().replace("\r\n", "<br/>")); //???
 		//뷰정보 반환]
 		
-		return "market/inside/buyinside.tiles";
+		return //"forward:/market/"+path+"/temporarily.aw"
+   				"market/inside/buyinside.aw";
 		       
 		
 	}////////// buyinside
@@ -135,10 +136,11 @@ public class MarketBuyController {
 		map.put("table_name","buy");
 		//map.put("no", map.get("buy_no"));
 		
+		/*//키값 확인ㅇ
 		Set<String> set=map.keySet();
 		for(String key:set) {
 			System.out.println("key:"+key+", value:"+map.get(key));
-		}
+		}*/
 		
 		//서비스 호출
 		//작성자의 id를 DTO에 설정
@@ -163,6 +165,7 @@ public class MarketBuyController {
 		//뷰정보반환:목록으로 이동
 		//return "market/buy/temporarily.tiles";//접두어 접미어 설정 적용 안되게끔 하려고 forward:를 붙임
 		return "forward:/market/buy/temporarily.aw";
+		
 	}////////////////
 
 	//수정

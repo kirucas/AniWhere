@@ -71,6 +71,7 @@ html {
 						<th style="width: 50px">등록일</th>
 					</tr>
 				</thead>
+				
 				<tbody>
 					<tr class="public">
 
@@ -80,23 +81,12 @@ html {
 						<td>557</td>
 						<td>2018-08-17</td>
 					</tr>
-					<tr>
-
-						<td>95</td>
-
-						<td><a href="<c:url value='/market/buyinside.aw'/>">[조류][소형][새장]카나리아 넣어서키울만한 새장 사요</a>
 					
-						 </td>
-						<td>Jan_sina</td>
-						<td>180</td>
-						<td>2018-09-14</td>
-					</tr>
-
 					<c:forEach var="record" items="${list}" varStatus="loop">
 				
 						<tr>
 						<td>
-						<span id="no">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}일련번호</span></td>
+						<span id="no">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</span></td>
 							
 						<!-- 타이틀 로직 -->
 							
@@ -125,13 +115,13 @@ html {
 								<a href="<c:url value='/market/buyinside.aw?no=${record.no}'/>">
 								
 								<span id="title">${record.title }</span></a>
-							제목
+							
 						        </td>
 						        <!--  타이틀 끝 -->
 							
-							<td><span id="mem_no">${record.mem_nickname}</span> 작성자</td>
+							<td><span id="mem_no">${record.mem_nickname}</span></td>
 							<td><span id="count">${record.count} </span> </td>
-							<td><span id="regidate">${record.regidate}</span> 등록일</td>
+							<td><span id="regidate">${record.regidate}</span></td>
 						</tr>
 						
 					</c:forEach>
@@ -143,6 +133,7 @@ html {
 
 
 <!-- 검색용  -->
+
 		<div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4"
 			style="float: none; margin: 0 auto;">
 
@@ -151,10 +142,8 @@ html {
 
 					<li class="page-item disabled"><span class="page-link">Previous</span>
 					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item active"><span class="page-link">2<span
-							class="sr-only">(current)</span>
-					</span></li>
+					<li class="page-item active"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><span class="page-link" href="#">2</span></li>
 					<li class="page-item"><a class="page-link" href="#">3</a></li>
 					<li class="page-item"><a class="page-link" href="#">4</a></li>
 					<li class="page-item"><a class="page-link" href="#">5</a></li>

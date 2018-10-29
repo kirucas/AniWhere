@@ -118,8 +118,8 @@
 					<a href="<c:url value='/market/buy.aw'/>"> 
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
 
+				
 					<input class="btn btn-danger" type="submit" id="enterBtn" value="확인">
-
 				</div>
 
 			</form>

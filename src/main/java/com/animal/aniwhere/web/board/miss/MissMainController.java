@@ -58,9 +58,7 @@ public class MissMainController {
 	public String miss_insert(@RequestParam Map map,HttpSession session) throws Exception {
 		
 		map.put("mem_no", session.getAttribute("mem_no"));
-		
 		service.insert(map);
-			
 		return "forward:/miss/see.aw";
 	}////////// miss_write
 	
