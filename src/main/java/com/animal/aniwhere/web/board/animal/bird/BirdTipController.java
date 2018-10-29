@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.animal.TipBoardDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
+import com.animal.aniwhere.service.impl.animal.TipBoardServiceImpl;
 import com.animal.aniwhere.web.board.FileUpDownUtils;	
 
 @Controller
@@ -28,7 +28,7 @@ public class BirdTipController {
 	
 	
 	@Resource(name="tipService")
-	private AllBoardService allBoardService;
+	private TipBoardServiceImpl allBoardService;
 	
 	@Value("${PAGESIZE}")
 	private int pageSize;
@@ -52,7 +52,7 @@ public class BirdTipController {
 		map.put("start",start);
 		map.put("end",end);
 		//페이징을 위한 로직 끝]
-		List<TipBoardDTO> list = (List<TipBoardDTO>) allBoardService.selectList(map);
+		List list = allBoardService.selectList(map);
 		//페이징 문자열을 위한 로직 호출]
 		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/board/animal/bird/tip/list.aw?");
 		//데이터 저장]

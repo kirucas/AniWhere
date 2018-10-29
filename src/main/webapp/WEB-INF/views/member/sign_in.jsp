@@ -7,8 +7,12 @@
 *{
 	font-family: 메이플스토리;
 }
-span{
+span .mr-auto{
 	font-size:35px;
+}
+.logins{
+	width:140px;
+	height:45px;
 }
 </style>
 <head>
@@ -27,8 +31,11 @@ span{
     <link rel="shortcut icon" href="<c:url value='/resources/assets/images/favicon.png' />" />
     <!-- 네이버 로그인 -->
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+    <!-- 구글 로그인 -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name = "google-signin-client_id"content = "696950404959-v8jmcjjtc6kubvuoc9r8ctebi5rff7qk.apps.googleusercontent.com">
 </head>
-<body>
+<!-- <body> -->
    <c:if test="${not empty sign_error }">
       <script>
          alert("${sign_error}");
@@ -66,17 +73,23 @@ span{
                                         <input type="password" class="form-control" placeholder="Password" name="mem_pw">
                                     </div>
                                 </div>
-
                                 <div class="form-group" style="float:left;">
                                     <button class="btn btn-primary submit-btn">로그인</button>
                                 </div>
-                                </form>
-                                <div>
-                                	<a href="${url }">
-                                		<img id="naverLogin" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" />
-                               		</a>
+                           </form>
+                                <div class="row">
+                                	<ul style="list-style:none;margin:0;padding:0">
+                               			<li style="float:left;padding-right:10px">
+                                			<a href="${url}">
+                                				<img class="logins" style="width:126px;height:36px;" id="naverLogin" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
+                               				</a>
+                            			</li>
+                               			<li style="float:left">
+                               				<div class="g-signin2 logins" data-onsuccess="onSignIn"></div>	
+                               			</li>
+                               		</ul>
                   				</div>
-    			 				<p class="margin center medium-small sign-up">계정이 없으십니까?<a href="<c:url value='/member/sign_up.aw' />"> Sign Up</a></p>
+    			 				<p style="margin-top:1.rem;" class="margin center medium-small sign-up">계정이 없으십니까?<a href="<c:url value='/member/sign_up.aw' />"> Sign Up</a></p>
                            <div class="wrapper mt-5 text-gray">
                                <p class="footer-text">Copyright © 2018 Bootstrapdash. All rights reserved.</p>
                                <ul class="auth-footer text-gray">

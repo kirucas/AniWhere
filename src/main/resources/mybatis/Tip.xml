@@ -56,5 +56,5 @@
 		DELETE FROM tip
 		WHERE tip_no=#{tip_no}
 	</delete>
-	
+	<!-- 조회수 -->
 </mapper>

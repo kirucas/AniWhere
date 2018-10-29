@@ -24,6 +24,7 @@ public class TipBoardDAO implements AllBoardService {
 
 	@Override
 	public int getTotalRecord(Map map) {
+		
 		return template.selectOne("tipCount", map);
 	}////////// getTotalRecord
 

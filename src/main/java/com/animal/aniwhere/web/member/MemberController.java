@@ -53,8 +53,8 @@ public class MemberController {
    }//////////go_login
    
    //네이버 로그인 성공시 callback호출 메소드
-   @RequestMapping(value = "/Member/Callback.aw", method = { RequestMethod.GET, RequestMethod.POST })
-    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+   @RequestMapping(value = "/Member/naver/Callback.aw", method = { RequestMethod.GET, RequestMethod.POST })
+    public String ncallback(@RequestParam Map map,Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
             throws Exception {
 	   
         System.out.println("여기는 callback");
@@ -77,9 +77,40 @@ public class MemberController {
 //        }
        // System.out.println(email+" "+name);     
           
+        
+       session.setAttribute("mem_id", map.get("mem_id"));
+       //session.setAttribute("mem_no", dto.getMem_no()); 
+       
        return "redirect://";
     }
    
+   
+   @RequestMapping(value = "/Member/google/Callback.aw", method = { RequestMethod.GET, RequestMethod.POST })
+   public String gcallback(@RequestParam Map map, Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+           throws Exception {
+	   
+       System.out.println("여기는 callback");
+       System.out.println("터졌니");
+       //로그인 사용자 정보를 읽어온다.
+       System.out.println(apiResult);
+		//       String[] result = apiResult.split(",");
+		//       String email = null;
+		//       String name = null;
+		//       for(int i=0;i<result.length;i++) {
+		//       	if(result[i].indexOf("email") != -1) {
+		//       		String[] value = result[i].split(":");
+		//       		email = value[1];
+		//       	}else if(result[i].indexOf("name") != -1) {
+		//       		String[] value = result[i].split(":");
+		//       		name = value[1];
+		//       	}
+		//       }
+      // System.out.println(email+" "+name);     
+      
+       session.setAttribute("mem_id", map.get("mem_id"));
+       //session.setAttribute("mem_no", dto.getMem_no());
+      return "redirect://";
+   }
    @RequestMapping("/animal/enroll.aw")
    public String animal_enroll() throws Exception {
       
@@ -188,10 +219,6 @@ public class MemberController {
   		
   		return "common/member/Login.tiles";
   	}
-   
-   
-   
-   
    
    
    	//안드로이드 용
