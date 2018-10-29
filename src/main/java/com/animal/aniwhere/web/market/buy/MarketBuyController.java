@@ -28,7 +28,7 @@ import com.animal.aniwhere.web.board.FileUpDownUtils;
 @Controller
 public class MarketBuyController {
 
-
+     //buy컨트롤러 
 	@Resource(name="buySellService")
 	private AllCommonService allBoardService;
 	
@@ -37,7 +37,7 @@ public class MarketBuyController {
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
 		
-	//입력 후 리스트로 이동
+	//입력 후 리스트로 이동 
 		@RequestMapping("/market/buyinsert.aw")
 		public String miss_insert(@RequestParam Map map,HttpSession session) throws Exception {
 			

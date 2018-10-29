@@ -129,7 +129,7 @@ html {
 						        </td>
 						        <!--  타이틀 끝 -->
 							
-							<td><span id="mem_no">${record.name}</span> 작성자</td>
+							<td><span id="mem_no">${record.mem_nickname}</span> 작성자</td>
 							<td><span id="count">${record.count} </span> </td>
 							<td><span id="regidate">${record.regidate}</span> 등록일</td>
 						</tr>
