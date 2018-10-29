@@ -1,28 +1,20 @@
 package com.animal.aniwhere.web.board.miss;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.animal.aniwhere.service.AllBoardService;
-import com.animal.aniwhere.service.AllCommentDTO;
-import com.animal.aniwhere.service.AllCommentService;
-import com.animal.aniwhere.service.animal.FreeBoardDTO;
+import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.miss.FindSeeDTO;
 
@@ -30,7 +22,7 @@ import com.animal.aniwhere.service.miss.FindSeeDTO;
 public class MissMainController {
 	
 	@Resource(name="findSeeService")
-    private AllBoardService service;
+    private AllCommonService service;
 	
 	@Value("${PAGESIZE}")
 	private int pageSize;

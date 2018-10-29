@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,8 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.animal.aniwhere.service.AllBoardService;
-import com.animal.aniwhere.service.animal.FreeBoardDTO;
+import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.market.BuySellDTO;
 import com.animal.aniwhere.web.board.FileUpDownUtils;
@@ -30,7 +28,7 @@ public class MarketBuyController {
 
 
 	@Resource(name="buySellService")
-	private AllBoardService allBoardService;
+	private AllCommonService allBoardService;
 	
 	@Value("${PAGESIZE}")
 	private int pageSize;
