@@ -37,6 +37,9 @@
 		$("#logout").click(function(){
 			location.href = "<c:url value='/signout.aw' />";
 		});
+		$("#notice").click(function(){
+			location.href = "<c:url value='/notice/List.aw' />";
+		});
 		
 	});
 </script>
