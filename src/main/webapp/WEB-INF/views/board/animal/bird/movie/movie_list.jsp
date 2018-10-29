@@ -3,8 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 <style>
-.text-right {
+
+a:link { color:black; text-decoration: none;}
+a:visited { color:black; text-decoration: none;}
+
+ .movie-write {
 	text-align: right;
+	color:white!important;
+	
 }
 
 .title {
@@ -50,13 +56,23 @@
 	color: #1ABC9C;
 }
 
-.page-link {
-	color: #1ABC9C;
+.pagination {
+	margin-left: 150px;
 }
+
 </style>
 
-<div class="row">
+<script>
 
+$(function(){
+	$(".link-click").click(function(){
+		location.href="<c:url value='/bird/movie/view.aw?movie_no="+$(this).attr("name")+"&nowPage="+${nowPage}+"'/>";
+	});
+});
+
+</script>
+
+<div class="row">
 	<c:if test="${empty requestScope.list}" var="isEmpty">
 		<div class="col-xs-12">
 			<h5 colspan="4">등록된 게시물이 없어요</h5>
@@ -66,7 +82,7 @@
 	<c:if test="${not isEmpty}">
 		<c:forEach var="dto" items="${list}" varStatus="loop">
 			<div class="col col-xs-12 col-sm-4 margin-top-30">
-				<div class="col-sm">
+				<div class="col-sm link-click" style="cursor:pointer;" name="${dto.movie_no}" title="${dto.movie_title}">
 					<div class="embed-responsive embed-responsive-16by9 movie-size">
 						${dto.movie_tempsrc}
 						<!-- 
@@ -74,47 +90,41 @@
 							src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
 							allowfullscreen></iframe> -->
 					</div>
-					<a
-						href="<c:url value='/animal/bird/movie/Write.aw?no=${dto.movie_no }'/>">${dto.movie_title }</a>
+					
 					<div class="media-body">
-						<h5 class="title">${dto.movie_title}</h5>
-						<p class="nickname">${dto.mem_nickname}</p>
-					</div>
-					<div class="media-footer">
-						<small class="count">조회수: ${dto.movie_count}</small>
+						 <h5 class="title">${dto.movie_title}</h5>
+						<h6 class="nickname">${dto.mem_nickname}</h6>
+						<small class="count">조회수 ${dto.movie_count}</small>
+						<small class="postdate">${dto.movie_regidate}</small>
 					</div>
 				</div>
+				
 			</div>
 			<!-- 중간에 라인 -->
 			<c:if test="${(loop.index+1) % 6==0}">
-				<div class="col-xs-12 col-sm-12" style="border: 1px solid gray;margin-top: 10px"></div>	
-				
+				<div class="col-xs-12 col-sm-12"
+					style="border: 1px solid gray; margin-top: 10px"></div>
 			</c:if>
- 
 		</c:forEach>
 	</c:if>
+		
 </div>
+   
+	<div>
+		<!-- 페이지네이션 -->
+		<div class="margin-top-20 pagination">
+			<nav class="mx-auto" style="width: 450px;"
+				aria-label="Page navigation example">
+				<div class="row">
+					<div>${pagingString}</div>
+				</div>
+			</nav>
+		</div>
 
-
-<!-- 아래에 동영상 올리기 버튼 -->
-<div class="text-right">
-	<a class="btn btn-primary"
-		href="<c:url value='/animal/bird/movie/Write.aw'/>" role="button">동영상
-		올리기</a>
-</div>
-
-<!-- 아래 라인 -->
-<div class="margin-top-10">
-	<hr class="line"></hr>
-</div>
-
-<!-- 페이지네이션 -->
-<div class="footer margin-top-20">
-	<nav class="mx-auto" style="width: 450px;"
-		aria-label="Page navigation example">
-		<ul class="pagination">
-			<li class="page-item"><a class="page-link" href="#">${pagingString}</a></li>
-		</ul>
-	</nav>
-</div>
-
+		<!-- 아래에 동영상 올리기 버튼 -->
+		<div class="text-right">
+			<a class="btn btn-primary movie-write"
+			href="<c:url value='/animal/bird/movie/Write.aw'/>" role="button">동영상
+				올리기 </a>
+		</div>
+	</div>
