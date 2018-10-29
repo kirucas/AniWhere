@@ -21,11 +21,17 @@ import com.animal.aniwhere.service.impl.member.AnimalServiceImpl;
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 import com.animal.aniwhere.service.member.AnimalDTO;
 import com.animal.aniwhere.service.member.MemberDTO;
+import com.animal.aniwhere.service.member.NaverLoginBO;
 import com.animal.aniwhere.web.board.FileUpDownUtils;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @Controller
 public class MemberController {
-
+   private String apiResult = null;
+	    
+   @Resource(name="naverLoginBO")
+   private NaverLoginBO naverLoginBO;
+	
    @Resource(name="memberService")
    private MemberServiceImpl service;
    
@@ -33,9 +39,45 @@ public class MemberController {
    private AnimalServiceImpl aniservice;
    
    @RequestMapping("/login.aw")
-   public String go_login() throws Exception {
+   public String go_login(Model model, HttpSession session) throws Exception {
+	   /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+       String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+       
+       //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
+       //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+       System.out.println("네이버:" + naverAuthUrl);
+       //네이버 
+       model.addAttribute("url", naverAuthUrl); 
+	   
       return "member/sign_in";
    }//////////go_login
+   
+   //네이버 로그인 성공시 callback호출 메소드
+   @RequestMapping(value = "/Member/Callback.aw", method = { RequestMethod.GET, RequestMethod.POST })
+    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+            throws Exception {
+        System.out.println("여기는 callback");
+        OAuth2AccessToken oauthToken;
+        oauthToken = naverLoginBO.getAccessToken(session, code, state);
+        //로그인 사용자 정보를 읽어온다.
+        apiResult = naverLoginBO.getUserProfile(oauthToken);  
+        System.out.println(apiResult);
+//        String[] result = apiResult.split(",");
+//        String email = null;
+//        String name = null;
+//        for(int i=0;i<result.length;i++) {
+//        	if(result[i].indexOf("email") != -1) {
+//        		String[] value = result[i].split(":");
+//        		email = value[1];
+//        	}else if(result[i].indexOf("name") != -1) {
+//        		String[] value = result[i].split(":");
+//        		name = value[1];
+//        	}
+//        }
+       // System.out.println(email+" "+name);     
+          
+       return "redirect://";
+    }
    
    @RequestMapping("/animal/enroll.aw")
    public String animal_enroll() throws Exception {
@@ -138,6 +180,14 @@ public class MemberController {
       
       return "member/enroll_process";
    }//////////signInProcess
+   
+   //네이버 로그인 url 반환
+  	@RequestMapping("/Member/Login.bbs")
+  	public String login(Model model, HttpSession session) throws Exception{
+  		
+  		return "common/member/Login.tiles";
+  	}
+   
    
    	//안드로이드 용
  	@ResponseBody

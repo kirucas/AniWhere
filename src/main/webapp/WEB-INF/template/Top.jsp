@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 	(function($){
 		$('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
@@ -152,7 +152,7 @@ nav a{
                             <a href="#" id="where_main">위치</a>
                         </li>
                         <li class="dropdown" style="border:0.1px solid gray;border-radius:10px">
-                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">내 계정</a>
+                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">내 계정 ∨</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 			                   	<!-- 로그인 되어있을떄 보여주는 탭 -->
                                 <c:if test="${not empty mem_id}" var="sign_check">
