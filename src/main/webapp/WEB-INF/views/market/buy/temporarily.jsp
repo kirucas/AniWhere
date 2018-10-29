@@ -114,7 +114,7 @@ html {
 																																						 
 								<a href="<c:url value='/market/buyinside.aw?no=${record.no}'/>">
 								
-								<span id="title">${record.title }</span></a>
+								<span id="title">${record.title}</span></a>
 							
 						        </td>
 						        <!--  타이틀 끝 -->

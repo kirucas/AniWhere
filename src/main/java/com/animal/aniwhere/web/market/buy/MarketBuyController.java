@@ -109,6 +109,8 @@ public class MarketBuyController {
 		//서비스 호출]
 		//게시글
 		BuySellDTO record = allBoardService.selectOne(map);
+		System.out.printf("record :%s", record);
+		System.out.println(record.getContent()+"====================");
 		//데이터 저장]
 		model.addAttribute("record", record);
 		//줄바꿈처리
@@ -116,7 +118,7 @@ public class MarketBuyController {
 		//뷰정보 반환]
 		
 		return //"forward:/market/"+path+"/temporarily.aw"
-   				"market/inside/buyinside.aw";
+   				"forward:market/inside/buyinside.tiles";
 		       
 		
 	}////////// buyinside

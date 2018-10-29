@@ -40,10 +40,10 @@ public class MarketMainController {
 			
 	}
 	
-	
 	@RequestMapping(value="/market/{path}")
 	public String move(@PathVariable String path) throws Exception {
 		return "forward:/market/"+path+"/temporarily.aw";
+		
 	//return "market/"+path+"/temporarily";
 	
 	}////////// move
