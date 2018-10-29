@@ -2,7 +2,7 @@ package com.animal.aniwhere.service.animal;
 
 public class PhotoBoardDTO {
 
-	private String photo_no;
+	private String no;
 	private String mem_no;
 	private String photo_title;
 	private String photo_count;
@@ -13,14 +13,6 @@ public class PhotoBoardDTO {
 	
 	// 작성자 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
-
-	public String getPhoto_no() {
-		return photo_no;
-	}//////////
-
-	public void setPhoto_no(String photo_no) {
-		this.photo_no = photo_no;
-	}//////////
 
 	public String getMem_no() {
 		return mem_no;
@@ -84,6 +76,14 @@ public class PhotoBoardDTO {
 
 	public void setAni_category(String ani_category) {
 		this.ani_category = ani_category;
+	}//////////
+
+	public String getNo() {
+		return no;
+	}//////////
+
+	public void setNo(String no) {
+		this.no = no;
 	}//////////
 	
 }//////////////////// PhotoBoardDTO class

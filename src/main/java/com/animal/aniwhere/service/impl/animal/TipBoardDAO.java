@@ -30,6 +30,7 @@ public class TipBoardDAO implements AllBoardService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public TipBoardDTO selectOne(Map map) {
+		template.update("addCountTip", map);
 		return template.selectOne("tipSelectOne", map);
 	}////////// getTotalRecord
 
@@ -47,5 +48,10 @@ public class TipBoardDAO implements AllBoardService {
 	public int delete(Map map) {
 		return template.delete("tipDelete", map);
 	}////////// delete
+
+	@Override
+	public int addHitCount(Map map) {
+		return template.update("addHitCountTip", map);
+	}////////// addHitCount
 
 }//////////////////// TipBoardDAO class

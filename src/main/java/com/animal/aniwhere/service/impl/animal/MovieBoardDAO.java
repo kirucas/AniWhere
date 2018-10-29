@@ -30,6 +30,7 @@ public class MovieBoardDAO implements AllBoardService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public MovieBoardDTO selectOne(Map map) {
+		template.update("addCountMovie", map);
 		return template.selectOne("movieSelectOne", map);
 	}////////// selectOne
 
@@ -47,5 +48,10 @@ public class MovieBoardDAO implements AllBoardService {
 	public int delete(Map map) {
 		return template.delete("movieDelete", map);
 	}////////// delete
+
+	@Override
+	public int addHitCount(Map map) {
+		return template.update("addHitCountMovie", map);
+	}////////// addHitCount
 
 }//////////////////// MovieBoardDAO class
