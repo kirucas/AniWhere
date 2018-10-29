@@ -60,7 +60,7 @@
 
 		<div class="col-md-12">
 
-			<form action="<c:url value='/market/buyWrite.aw'/>" accept-charset="utf-8" name="buy_info" method="post"
+			<form action="<c:url value='/market/buyinsert.aw'/>" accept-charset="utf-8" name="buy_info" method="post"
 				class="form-horizontal">				
 				<div class="form-row">
 				

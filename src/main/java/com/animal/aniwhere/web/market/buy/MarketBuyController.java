@@ -41,10 +41,14 @@ public class MarketBuyController {
 		@RequestMapping("/market/buyinsert.aw")
 		public String miss_insert(@RequestParam Map map,HttpSession session) throws Exception {
 			
+			map.put("table_name","buy");
 			map.put("mem_no", session.getAttribute("mem_no"));			
 			allBoardService.insert(map);				
-			return "forward:/market/buy.aw";
+			return "redirect:/market/buy/temporarily.aw";
+			
 		}////////// miss_write
+		
+		
 	
 	//리스트로 이동하기
 	
@@ -101,8 +105,7 @@ public class MarketBuyController {
 		map.put("mem_no",session.getAttribute("mem_no"));
 		map.put("table_name","buy");
 		//map.put("no", map.get("buy_no"));
-		
-		
+			
 		//서비스 호출]
 		//게시글
 		BuySellDTO record = allBoardService.selectOne(map);
