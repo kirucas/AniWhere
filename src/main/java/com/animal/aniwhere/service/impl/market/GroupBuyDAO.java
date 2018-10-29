@@ -48,5 +48,9 @@ public class GroupBuyDAO implements AllCommonService {
 	public int delete(Map map) {
 		return template.delete("groupbuyDelete", map);
 	}////////// delete
+	
+	public int getTotalSell(Map map) {
+		return template.selectOne("groupbuySum", map);
+	}////////// getTotalSell
 
 }//////////////////// GroupBuyDAO class
