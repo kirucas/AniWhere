@@ -131,7 +131,11 @@
 		height:  200px;
 	}
 	 #icon ul li a:hover{
-	 	text-decoration: none;
+	 	text-decoration: none;	
+	 }
+	 #icon ul li a{
+	 	color:#9d85ff;
+	 	
 	 }
 </style>
    <!-- Start Content -->

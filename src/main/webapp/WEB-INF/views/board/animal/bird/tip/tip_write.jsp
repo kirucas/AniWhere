@@ -48,7 +48,6 @@
 	#titlediv {
 		margin-top:16px;
 		margin-left:1px;
-		
 	}
 	#title{
 		width:468.7px;
