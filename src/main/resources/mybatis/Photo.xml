@@ -10,7 +10,7 @@
 		SELECT COUNT(*)
 		FROM (
 			SELECT p.*, mem_nickname
-			FROM photo p JOIN member m ON p.mem_no=m.mem_no
+			FROM photo p LEFT JOIN member m ON p.mem_no=m.mem_no
 			WHERE ani_category=#{ani_category}
 			<if test="searchColumn != null">
 				AND ${searchColumn} like '%'||#{searchWord}||'%'
@@ -24,7 +24,7 @@
 			SELECT T.*, ROWNUM R
 			FROM (
 				SELECT p.*, mem_nickname
-				FROM photo p JOIN member m ON p.mem_no=m.mem_no
+				FROM photo p LEFT JOIN member m ON p.mem_no=m.mem_no
 				WHERE ani_category=#{ani_category}
 				<if test="searchColumn != null">
 					AND ${searchColumn} like '%'||#{searchWord}||'%'
@@ -37,7 +37,7 @@
 	
 	<select id="photoSelectOne" parameterType="java.util.Map" resultType="PhotoDTO">
 		SELECT tn.*, mem_nickname
-		FROM photo tn JOIN member mb ON tn.mem_no = mb.mem_no
+		FROM photo tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
 		WHERE photo_no=#{photo_no}
 	</select>
 	

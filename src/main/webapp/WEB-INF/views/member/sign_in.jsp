@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/shared/style.css' />">
     <!-- endinject -->
     <link rel="shortcut icon" href="<c:url value='/resources/assets/images/favicon.png' />" />
+    
 </head>
 <body>
    <c:if test="${not empty sign_error }">
@@ -60,6 +61,7 @@
                                         <input type="password" class="form-control" placeholder="Password" name="mem_pw">
                                     </div>
                                 </div>
+
                                 <div class="form-group" style="float:left;">
                                     <button class="btn btn-primary submit-btn">로그인</button>
                                     <a href="<c:url value='/member/sign_up.aw'/>" class="btn btn-primary">회원가입</a>

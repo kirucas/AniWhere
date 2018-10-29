@@ -19,28 +19,24 @@
 		<if test="indssclscd">
 			WHERE indssclscd=#{indssclscd}
 		</if>
-		ORDER BY no
+		ORDER BY bizesid
 	</select>
 	
 	<select id="storeSelectOne" parameterType="java.util.Map" resultType="StoreDTO">
 		SELECT *
 		FROM store_location
-		WHERE
-		<if test="no != null">no=#{no}</if>
-		<if test="no == null and bizesid != null">bizesid=#{bizesid}</if>
+		WHERE bizesid=#{bizesid}
 	</select>
 	
 	<insert id="storeInsert" parameterType="java.util.Map">
 		INSERT INTO store_location
-		VALUES (seq_st_loc.nextval, #{bizesid}, #{bizesnm}, #{brchnm}, #{indssclscd}, #{indssclsnm}, #{lnoadr}, #{rdnmadr}, #{lon}, #{lat}, #{dongno}, #{flrno}, #{hono})
+		VALUES (#{bizesid}, #{bizesnm}, #{brchnm}, #{indssclscd}, #{indssclsnm}, #{lnoadr}, #{rdnmadr}, #{lon}, #{lat}, #{dongno}, #{flrno}, #{hono})
 	</insert>
 	
 	<update id="storeUpdate" parameterType="java.util.Map">
 		UPDATE store_location
-		SET bizesnm=#{bizesnm}, brchnm=#{brchnm}, indssclscd=#{indssclscd}, indssclsnm=#{indssclsnm}, lnoadr=#{lnoadr}, rdnmadr=#{rdnmadr}, lon=#{lon}, lat=#{lat}, dongno=#{dongno}, flrno=#{flrno}, hono=#{hono}
-		WHERE
-		<if test="no != null">no=#{no}</if>
-		<if test="no == null and bizesid != null">bizesid=#{bizesid}</if>
+		SET brchnm=#{brchnm}, indssclscd=#{indssclscd}, indssclsnm=#{indssclsnm}, lnoadr=#{lnoadr}, rdnmadr=#{rdnmadr}, lon=#{lon}, lat=#{lat}, dongno=#{dongno}, flrno=#{flrno}, hono=#{hono}
+		WHERE bizesid=#{bizesid}
 	</update>
 	
 	<delete id="storeDelete" parameterType="java.util.Map">
