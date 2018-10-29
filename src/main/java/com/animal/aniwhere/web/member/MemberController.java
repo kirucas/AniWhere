@@ -117,6 +117,7 @@ public class MemberController {
       return "member/animal_enroll";
    }//////////animal_enroll
 
+
    @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
    public String signInProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
       if(!service.isMember(map)) {
@@ -143,6 +144,7 @@ public class MemberController {
       return "member/sign_up";
    }//////////////signUp()
 
+
    @RequestMapping("/signUpProcess.aw")
    public String signUpProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
       int signup = service.insert(map);
@@ -152,7 +154,7 @@ public class MemberController {
     	  model.addAttribute("check",0);
       
       return "member/sign_process";
-   }//////////signInProcess
+   }//////////signUpProcess
    
    @RequestMapping("/profile_main.aw")
    public String profileMain(@RequestParam Map map, HttpSession session, Model model) throws Exception {
@@ -231,5 +233,4 @@ public class MemberController {
  		MemberDTO dto = service.selectOne(map);				
  		return dto.getMem_id();
     }////////////////androidLogin
- 	
 }//////////////////// MemberController class
