@@ -28,7 +28,7 @@
          $.ajax({
             data: form_data,
             type: "POST",
-            url : "<c:url value='board/animal/bird/tip/Upload.aw'/>",
+            url : "<c:url value='/animal/bird/tip/Upload.aw'/>",
             cache: false,
             contentType: false,
             processData: false,
@@ -48,7 +48,6 @@
 	#titlediv {
 		margin-top:16px;
 		margin-left:1px;
-		
 	}
 	#title{
 		width:468.7px;

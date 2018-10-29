@@ -7,11 +7,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.animal.aniwhere.service.AllBoardService;
+import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.market.BuySellDTO;
 
 @Service("buySellService")
-public class BuySellServiceImpl implements AllBoardService {
+public class BuySellServiceImpl implements AllCommonService {
 
 	@Resource(name = "buySellDAO")
 	private BuySellDAO dao;
@@ -44,7 +44,6 @@ public class BuySellServiceImpl implements AllBoardService {
 
 	@Override
 	public int delete(Map map) {
-		
 		return dao.delete(map);
 	}////////// delete
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
 
@@ -12,6 +12,12 @@
 	background-size: 100%;
 	padding-top:90px;
 	padding-bottom:90px;
+}
+
+@media (max-width: 767px) {
+	#aniFooter {
+		display:none;
+	}
 }
 .footul{
 	font-weight:bold;
@@ -29,6 +35,8 @@
 .footul a{
 	color:black;
 }
+
+
 </style>
 
 <!-- footer -->
@@ -76,6 +84,7 @@
 			<div class="mbr-footer-content col-xs-12 col-md-3">
 					<ul class="footul">
 						<a href="<c:url value='/notice.aw' />"><span>공지사항</span></a>
+						<li><a href="<c:url value='/qna.aw' />"><span>1대1 문의</span></a></li>
 					</ul>
 					<ul class="footul">
 						<span>주소</span>
