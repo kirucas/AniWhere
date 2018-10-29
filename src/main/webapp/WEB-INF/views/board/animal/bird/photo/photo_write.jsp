@@ -30,14 +30,14 @@
 			<div class="form-group">
 				<label for="title" class="col-md-2 control-label">제목</label>
 				<div class="col-md-12">
-					<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요">
+					<input type="text" class="form-control" id="photo_title" name="photo_title" placeholder="제목을 입력해주세요">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="content" class="col-sm-2 control-label">내용</label>
 				<div class="col-sm-12">
-					<textarea rows="10" placeholder="내용을 입력해주세요" id="content" name="content" class="form-control" style="height: 300px;"></textarea>
+					<textarea rows="10" placeholder="내용을 입력해주세요" id="photo_content" name="photo_content" class="form-control" style="height: 300px;"></textarea>
 				</div>
 			</div>
 			<div class="row">

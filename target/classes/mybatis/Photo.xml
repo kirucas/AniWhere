@@ -64,7 +64,7 @@
 		SELECT *
 		FROM photo_link
 		WHERE no=#{no}
-		ORDER link_no
+		ORDER BY link_no
 	</select>
 	
 	<insert id="linkInsert" parameterType="java.util.Map">

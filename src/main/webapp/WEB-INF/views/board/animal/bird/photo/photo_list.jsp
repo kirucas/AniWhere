@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.esm.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.esm.bundle.js"></script>
@@ -129,38 +129,80 @@
    } */
    
 </style>
-   <script>
-   var popupGallery;
-   $(document).ready(function () {
-     $('.moda').click(function (e) {
-       e.preventDefault();
-      var sr1 = $(this).prop("src");
-      $("#modal").prop("src",sr1);
-       $('#myModal').on('show.bs.modal', function (e) {
-         popupGallery = new Swiper('#popupGallery', {
-          // Optional parameters
-            direction: 'horizontal',
-            // Navigation arrows
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-              hideOnClick : true
-            },
-         });
-       });
-       $('#myModal').on('shown.bs.modal', function (e) {
-         popupGallery.update();
-       });
-       $('#myModal').modal();
-     });
-   });
+<script>
+	var popupGallery;
+	$(document).ready(function() {
+		$('.moda').click(function(e) {
+			e.preventDefault();
+			var sr1 = $(this).prop("src");
+			$("#modal").prop("src", sr1);
+			$('#photoModal').on('show.bs.modal', function(e) {
+				popupGallery = new Swiper('#popupGallery', {
+					// Optional parameters
+					direction : 'horizontal',
+					// Navigation arrows
+					navigation : {
+						nextEl : '.swiper-button-next',
+						prevEl : '.swiper-button-prev',
+						hideOnClick : true
+					},
+				});
+			});
+			$('#photoModal').on('shown.bs.modal', function(e) {
+				popupGallery.update();
+			});
+			$('#photoModal').modal();
+		});
+	});
 </script>
-<c:set var="now" value="<%=new java.util.Date() %>" />
+<%-- <c:set var="now" value="<%=new java.util.Date() %>" /> --%>
 
 <div class="container">
-   <div id="uploadButton" style="text-align: right;">
-      <a href="<c:url value='/board/animal/bird/photo/write.aw'/>" class="btn btn-primary" style="margin-bottom: 20px;">사진 올리기</a>
-   </div>
+	<div id="uploadButton" style="text-align: right;">
+		<a href="<c:url value='/board/animal/bird/photo/write.aw'/>" class="btn btn-primary" style="margin-bottom: 20px;">사진 올리기</a>
+	</div>
+	<c:if test="${empty list}" var="result">
+   		<div class="row">
+   			<div class="card-group">
+   				<h2 style="text-align: center;">등록된 사진이 없습니다</h2>
+   			</div>
+   		</div>
+   	</c:if>
+   	<c:if test="${not result}">
+	   	<c:forEach var="dto" items="${list}" varStatus="loop">
+	   		<c:if test="${loop.index mod 4 eq 0}">
+				<div class="row">
+					<div class="card-group">
+			</c:if>
+				 		<div class="card" id="card-size">
+				       		<a href="#" data-target="#modalIMG" data-toggle="modal">
+				            	<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_1.jpg'/>" alt="bird_1" />
+				            </a>
+				            <div class="card-body">
+				            	<h5 class="card-title">
+				               	<a href="#" title="<c:url value='/resources/images/board/animal/bird/bird_1.jpg'/>" data-target="#modalIMG" data-toggle="modal">
+				                  	${dto.photo_title}
+				               	</a>
+				               	<span title="댓글 수" class="badge badge-secondary">13</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
+				               	<p class="card-text">${dto.mem_nickname}</p>
+				            </div>
+			     			<div class="card-footer">
+			           			<small class="text-muted"><fmt:formatDate value="${dto.photo_regidate}" pattern="yyyy-MM-dd" /></small>
+							</div>
+						</div>
+		   	<c:if test="${loop.index mod 4 eq 3}">
+					</div>
+		   		</div>
+		   	</c:if>
+	   	</c:forEach>
+   	</c:if>
+   	
+   	<div class="row">
+   		${pagingString}
+   	</div>
+   	
+   <%-- 	<hr/>
+   
    <div class="row">
       <div class="card-group">
          <div class="card" id="card-size">
@@ -297,7 +339,7 @@
             </div>
          </div>
       </div>
-   </div>
+
    <div class="row">
       <div class="card-group">
          <div class="card" id="card-size">
@@ -433,41 +475,57 @@
             </div>
          </div>
       </div>
-   </div>
-   <!-- 모달 swiper -->
-   <!-- Modal -->
-   <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
-     <div class="modal-dialog modal-lg" role="document">
-       <div class="modal-content">
-         <div class="modal-body">
-           <div class="swiper-container" id="popupGallery">
-             <div class="swiper-wrapper">
-                <div class="swiper-slide text-xs-center text-lg-center">
-                <img class="modaru" class="img-thumbnai" src="" id="modal" alt="사진이 없습니다.">
-              </div>
-              <div class="swiper-slide text-xs-center text-lg-center">
-                <img class="modaru" class="img-thumbnail" src="<c:url value='/resources/images/board/animal/bird/bird_15.jpg' />" alt="사진이 없습니다.">
-              </div>
-              <div class="swiper-slide text-xs-center text-lg-center">
-                <img class="modaru" class="img-thumbnail" src="<c:url value='/resources/images/board/animal/bird/bird_14.jpg' />" alt="사진이 없습니다.">
-              </div>
-             </div>
-             <div class="swiper-button-prev"></div>
-             <div class="swiper-button-next"></div>
-           </div>
-           <h2 style="margin:10px">곤지의 프로필</h2>
-            <p id="content" style="margin:10px">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
-         </div>
-         <div class="modal-footer">
-            <div id="e-d-button">
-               <a href="#" class="btn btn-primary">수정</a>
-               <a href="#" class="btn btn-danger">삭제</a>
-            </div>
-            <div>
-               <a href="#" data-dismiss="modal" class="btn btn-secondary">닫기</a>
-            </div>
-         </div>
-         </div>
-       </div>
-     </div>
-   </div>
+   </div> --%>
+</div>
+   
+   
+<!-- 모달 swiper -->
+<!-- Modal -->
+<div class="modal fade" id="photoModal" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="swiper-container" id="popupGallery">
+					<div class="swiper-wrapper">
+						<c:if test="${not empty modalData}">
+							<c:forEach var="img" items="${modalData.imgs}">
+								<div class="swiper-slide text-xs-center text-lg-center">
+									<img class="modaru" class="img-thumbnai" id="modal" alt="사진이 없습니다."
+											src="<c:url value='${img}'/>" >
+								</div>
+							</c:forEach>
+						</c:if>
+						
+						<%-- <div class="swiper-slide text-xs-center text-lg-center">
+							<img class="modaru" class="img-thumbnai" src="" id="modal"
+								alt="사진이 없습니다.">
+						</div>
+						<div class="swiper-slide text-xs-center text-lg-center">
+							<img class="modaru" class="img-thumbnail"
+								src="<c:url value='<!-- 사진 경로 -->' />"
+								alt="사진이 없습니다.">
+						</div>
+						<div class="swiper-slide text-xs-center text-lg-center">
+							<img class="modaru" class="img-thumbnail"
+								src="<c:url value='<!-- 사진 경로 -->' />"
+								alt="사진이 없습니다.">
+						</div> --%>
+					</div>
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+				</div>
+				<h2 style="margin: 10px"><!-- 제목 -->${modalDatas.title}</h2>
+				<p id="content" style="margin: 10px"><!-- 내용 -->${modalDatas.content}</p>
+			</div>
+			<div class="modal-footer">
+				<div id="e-d-button">
+					<a href="#" class="btn btn-primary">수정</a> <a href="#"
+						class="btn btn-danger">삭제</a>
+				</div>
+				<div>
+					<a href="#" data-dismiss="modal" class="btn btn-secondary">닫기</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
