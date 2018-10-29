@@ -27,7 +27,7 @@
 				<if test="searchColumn != null">
 					WHERE ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>
-				ORDER BY free_no DESC
+				ORDER BY no DESC
 				) T
 			)
 		WHERE R BETWEEN #{start} AND #{end}
@@ -46,18 +46,32 @@
 	
 	<update id="freeUpdate" parameterType="java.util.Map">
 		UPDATE freeboard
-		SET free_title=#{free_title}, free_content=#{free_content}, free_category=#{free_category}
-		WHERE free_no=#{free_no}
+		SET free_title=#{free_title}, free_content=#{free_content}, #{free_category})
+		WHERE no=#{no}
 	</update>
 	
 	<delete id="freeDelete" parameterType="java.util.Map">
 		DELETE FROM freeboard
-		WHERE free_no=#{free_no}
+		WHERE no=#{no}
 	</delete>
 	
 	<delete id="freeDeleteAll" parameterType="java.util.Map">
 		DELETE FROM freeboard
 		WHERE mem_no=#{mem_no}
 	</delete>
+	
+	<update id="addHitCountFree" parameterType="java.util.Map">
+		UPDATE freeboard
+		SET free_hit=free_hit + 1
+		WHERE no=#{no}
+	</update>
+	
+	<update id="addCountFree" parameterType="java.util.Map">
+		<if test="view != null">
+			UPDATE freeboard
+			SET free_count=free_count + 1
+			WHERE no=#{no}
+		</if>
+	</update>
 	
 </mapper>

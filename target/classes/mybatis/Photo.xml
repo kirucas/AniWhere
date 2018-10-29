@@ -87,7 +87,7 @@
 	</update>
 	
 	<update id="addCountPhoto" parameterType="java.util.Map">
-		<if test="view == null">
+		<if test="view != null">
 			UPDATE photo
 			SET photo_count=photo_count + 1
 			WHERE no=#{no}
