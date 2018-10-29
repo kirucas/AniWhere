@@ -25,7 +25,8 @@ span{
     <link rel="stylesheet" href="<c:url value='/resources/assets/css/shared/style.css' />">
     <!-- endinject -->
     <link rel="shortcut icon" href="<c:url value='/resources/assets/images/favicon.png' />" />
-    
+    <!-- 네이버 로그인 -->
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
 </head>
 <body>
    <c:if test="${not empty sign_error }">
@@ -70,6 +71,11 @@ span{
                                     <button class="btn btn-primary submit-btn">로그인</button>
                                 </div>
                                 </form>
+                                <div>
+                                	<a href="${url }">
+                                		<img id="naverLogin" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" />
+                               		</a>
+                  				</div>
     			 				<p class="margin center medium-small sign-up">계정이 없으십니까?<a href="<c:url value='/member/sign_up.aw' />"> Sign Up</a></p>
                            <div class="wrapper mt-5 text-gray">
                                <p class="footer-text">Copyright © 2018 Bootstrapdash. All rights reserved.</p>

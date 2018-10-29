@@ -100,7 +100,7 @@ $(document).ready(function() {
 		<div class="container" id="signup">
 	      	<div class="row">
 		        <div class="input-field col s12 center">
-		          <h4>회원가입</h4>
+		          <h4>애완동물 등록</h4>
 		          <p class="center">지금 당장 애완동물을 등록하세요!</p>
 		        </div>
 		    	<form action="<c:url value='/enrollProcess.aw'/>" class="col s12" method="post" enctype="multipart/form-data">
