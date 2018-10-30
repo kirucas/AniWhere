@@ -131,11 +131,10 @@ public class MemberController {
    
 	// 구글 Callback호출 메소드
 	@RequestMapping(value = "/Member/google/Callback.aw", method = { RequestMethod.GET, RequestMethod.POST })
-	public String googleCallback(Model model, @RequestParam String code) throws Exception {
+	public String googleCallback(Model model,@RequestParam Map map, @RequestParam String code,HttpSession session) throws Exception {
 		 
         oauthOperations = googleConnectionFactory.getOAuthOperations();
-        AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(),
-                null);
+        AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(),null);
  
         String accessToken = accessGrant.getAccessToken();
         Long expireTime = accessGrant.getExpireTime();
@@ -143,7 +142,6 @@ public class MemberController {
         if (expireTime != null && expireTime < System.currentTimeMillis()) {
             accessToken = accessGrant.getRefreshToken();
             System.out.printf("accessToken is expired. refresh token = {}", accessToken);
- 
         }
  
         Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
@@ -152,12 +150,7 @@ public class MemberController {
  
         PlusOperations plusOperations = google.plusOperations();
         Person profile = plusOperations.getGoogleProfile();
-        System.out.println("User Uid : " + profile.getId());
-        System.out.println("User Name : " + profile.getDisplayName());
-        System.out.println("User Email : " + profile.getAccountEmail());
-        System.out.println("User Profile : " + profile.getImageUrl());
- 
-        // Access Token 취소
+        // Access Token 닫아주기
         try {
             System.out.println("Closing Token....");
             String revokeUrl = "https://accounts.google.com/o/oauth2/revoke?token=" + accessToken + "";
@@ -177,7 +170,33 @@ public class MemberController {
  
             e.printStackTrace();
         }
-		return "member/template";
+        
+        map.put("mem_id", profile.getId());
+        map.put("mem_pw", 8124908);
+        map.put("mem_nickname", profile.getDisplayName());
+        map.put("mem_gender", "U");
+        map.put("mem_name", profile.getDisplayName());
+        map.put("mem_log", 2); //구글 로그인 연동
+        map.put("mem_interani", "0");
+        MemberDTO dto = service.selectOne(map);
+        //구글로 로그인 한적이 있으면 일로 나감.
+        if(dto!=null) {
+     	   session.setAttribute("mem_id", map.get("mem_id"));
+     	   session.setAttribute("mem_no", dto.getMem_no()); 
+     	   return "forward:/main.aw";
+        }
+        int signup = service.insert(map);
+        dto = service.selectOne(map);
+        if(signup==1)
+      	  model.addAttribute("check",3);
+        else
+      	  model.addAttribute("check",0);   
+         
+        session.setAttribute("mem_id", map.get("mem_id"));
+        session.setAttribute("mem_no", dto.getMem_no()); 
+        
+        return "member/sign_process";
+        
 	}//////////////googleCallback
 
    
