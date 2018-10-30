@@ -63,11 +63,9 @@
 	</update>
 	
 	<update id="addCountTip" parameterType="java.util.Map">
-		<if test="view != null">
 			UPDATE tip
 			SET tip_count = tip_count + 1
 			WHERE no=#{no}
-		</if>
 	</update>
 	
 </mapper>
