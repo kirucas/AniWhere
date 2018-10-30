@@ -134,6 +134,10 @@ html {
 
 <!-- 검색용  -->
 
+<div class="row" style="text-align: middle">
+	<div>${pagingString}</div>
+</div>
+
 		<div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4"
 			style="float: none; margin: 0 auto;">
 
@@ -161,11 +165,11 @@ html {
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
 				style="float: none; margin: 0 auto;">
 				<form class="form-inline" method="post"
-					action="<c:url value='/market/buyinside.aw'/>">
+					action="<c:url value='/market/buy/temporarily.aw'/>">
 					<div class="form-group">
 						<select name="searchColumn" class="form-control">
 							<option value="title">제목</option>
-							<option value="name">작성자</option>
+							<option value="mem_nickname">작성자</option>
 							<option value="content">내용</option>
 						</select>
 					</div>

@@ -11,15 +11,42 @@
 	};
 </script>
 
-<head>
+<script>
+   $(function() {
+      $('#summernote').summernote({
+    	 maxHeight:null,
+    	 minHeight:null,
+    	 height:630,
+         callbacks : {
+            onImageUpload : function(files, editor, welEditable) {
+               for (var i = files.length - 1; i >= 0; i--) {
+                  sendFile(files[i], this);	
+               }
+            }
+         }
+      });
+      function sendFile(file, el, wel) {
+         var form_data = new FormData();
+         form_data.append('file', file);
+         $.ajax({
+            data: form_data,
+            type: "POST",
+            url : "<c:url value='/animal/freeboard/Upload.aw'/>",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(url) {
+                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
+            },
+            error : function() {
+               console.log("error");
+            }
+         });
+      }
+   });
+</script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-<title>구매게시판 내부</title>
 
-
-
-</head>
 <body>
 
 	<!-- Page Content -->
@@ -83,7 +110,7 @@
 			</div>
 
 			<div class="col-md-4" style="border: 1px solid silver">
-				<h3 class="my-3">조회수 : ${record.count}</h3>
+				<h3 class="my-3">조회수 :${record.count}</h3>
 				<h3 class="my-3">등록일: ${record.regidate}</h3>
 				<ul>
 					<li>거래 횟수</li>

@@ -64,7 +64,7 @@
 				<div class="form-row">
 				
 				<input type="hidden" name="table_name" value="find"/>
-<!-- 				<input type="hidden" name="mem_no" value="#" /> -->
+        <!--    <input type="hidden" name="mem_no" value="#" /> -->
 				
 					<label for="title" class="col-sm-2 control-label">제목</label> 
 					<input
@@ -74,11 +74,8 @@
 				
 				<p style="margin-top: 30px">
 
-
 					<label for="" class="">동물분류</label> 
-					 <select
-						class="select_filter" 
-						name="animal_code">
+					 <select class="select_filter" name="animal_code">
 						
 						<option value="1">개</option>
 						<option value="2">고양이</option>
