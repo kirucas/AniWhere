@@ -213,6 +213,8 @@ public class MissMainController {
 		model.addAttribute("record", record);
 		//줄바꿈처리
 		record.setContent(record.getContent().replace("\r\n", "<br/>"));
+		
+		record.setCount(record.getCount());
 			
 		//뷰정보 반환]
 		return "miss/see/see_view.tiles";
@@ -348,7 +350,9 @@ public class MissMainController {
 			model.addAttribute("record", record);
 			//줄바꿈처리
 			record.setContent(record.getContent().replace("\r\n", "<br/>"));
-				
+			//조회수 증가
+			record.setCount(record.getCount());
+			
 			//뷰정보 반환]
 			return "miss/find/find_view.tiles";
 		}////////// miss_view
@@ -473,7 +477,8 @@ public class MissMainController {
 		
 	//---------------------------------------------------------------------------------------------------------------------------------
 		
-		
+	
+	
 	
 }//////////////////// MissMainController class
 

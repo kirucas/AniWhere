@@ -76,7 +76,7 @@
 							</span>
 					<a href="<c:url value='/miss/see_view.aw?see_no=${record.no}'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
-							<span id="title">${record.title }</span> <em>[21]</em>
+							<span id="title">${record.title }</span> <span  class="badge"></span>
 						</div>
 					</a>
 					<div class="article-list-item-meta">

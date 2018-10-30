@@ -15,6 +15,101 @@
 	width:100%;
 }
 </style>
+
+<script>
+   //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수
+   var showComments = function(key){
+      $.ajax({
+         url:"<c:url value='/Comment/List.aw'/>",
+         data:{no:key},
+         dataType:'json',
+         type:'post',
+         success:displayComments
+      });
+   };
+   //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수
+   //data;
+   //[{"NO":2,"ONELINECOMMENT":}]
+   var displayComments = function(data){
+      console.log(JSON.stringify(data));
+    
+      var commentString = "<h2>댓글</h2>";
+      
+      commentString='<table class="table table-bordered">';
+      commentString+='<tr><th width="15%">작성자</th><th width="50%">댓글</th><th width="20%">등록일</th><th>삭제</th></tr>'
+      if(data.length==0){
+         commentString+="<tr><td colspan='4'>등록된글이 없어요</td></tr>";
+      }  
+      $.each(data,function(index,comment){
+          commentString+='<tr><td>'+comment['MEM_NICKNAME']+'</td>';
+          if('${sessionScope.origin_no}'!=comment["ORIGIN_NO"])
+             commentString+='<td align="left">'+comment['CMT_CONTENT']+'</td>';
+          else
+             commentString+='<td align="left"><span style="cursor: pointer" title="'+comment['CMT_NO']+'" class="commentEdit">'+comment['CMT_CONTENT']+'</span></td>';
+             
+          commentString+='<td>'+comment['REGIDATE']+'</td>';
+          commentString+='<td>';
+          if('${sessionScope.origin_no}'==comment["ORIGIN_NO"])
+             commentString+='<td><span class="commentDelete" title="'+comment['ORIGIN_NO']+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
+          else
+             commentString+='<span style="color: gray; font-size: 0.7em; font-weight: bold">삭제불가</span>';
+             commentString+='</td></tr>'
+       });
+      commentString+='</table>';
+      
+      $('#comments').html(commentString);
+      
+      //코멘트 수정/삭제 처리
+      $('.commentEdit').click(function() {
+         console.log($(this).attr("title"));
+            $("#title").val($(this).html());
+            $("#submit").val('수정');
+            $('input[name=cno]').val($(this).attr("title"));
+     });
+      $('.commentDelete').click(function() {
+            var cno_value = $(this).attr("title");
+            $.ajax({
+                url:'<c:url value="/Comment/Delete.aw"/>',
+                data:{cno:cno_value,no:${record.no}},
+                dataType:'text',
+                type:'post',
+                success:function(key){
+                   showComments(key);                   
+                }
+             });
+      });
+      
+   };
+    
+   
+   $(function(){
+      //페이지 로드시 코멘트 목록 뿌려주기
+      showComments(${record.no});
+      
+      //코맨트 입력처리
+      $('#submit').click(function(){
+         if($(this).val()=='등록')
+            var action = "<c:url value='/Comment/Write.aw'/>";
+         else
+            var action = "<c:url value='/Comment/Edit.aw'/>";
+         
+         $.ajax({
+            url:action,
+            data:$('#frm').serialize(),
+            dataType:'text',
+            type:'post',
+            success:function(key){
+               showComments(key);
+               if($('#submit').val()=='수정'){
+                  $("#submit").val('등록');
+                  $("#title").val('');
+               }
+            }
+         });
+      });
+   });
+</script>
+
 <div class="container">
 	<div id="content">
 		<div id="view">
@@ -93,61 +188,23 @@
 			<div data-v-f39b78c2="" class="comment-header">
 				<h2 data-v-f39b78c2="" class="comment__title">댓글</h2>
 				<span data-v-f39b78c2="" class="comment__count">총 <em data-v-f39b78c2="">2</em>개</span>
-				<button data-v-f39b78c2="" type="button" class="comment__reflash">
-					<img data-v-f39b78c2="" src="/images/icon-refresh@2x.png"
-						width="16" alt=""> <span data-v-f39b78c2="">새로고침</span>
-				</button>
-				<form action="<c:url value='/miss/see_comment.aw'/>" method="post">
-					<div>
-						<textarea rows="3" cols="20" class="form-control" style="margin-top: 10px" id="cmt_content" name="cmt_content"></textarea>
-						<input type="submit" style="float: right; margin-top: 15px" class="article-action__button button" value="입력"/>
-						</br></br>
-					</div>					
+				<form id="frm" method="post">
+					<input type="hidden" name="origin_no" value="${record.no}" />
+					<!-- 수정 및 삭제용 파라미터 -->
+					<input type="hidden" name="cmt_no" />
+					<input rows="3" cols="20" class="form-control" style="margin-top: 10px; resize: none" id="title" name="cmt_content"/>
+					<input type="button" id="submit" style="float: right; margin-top: 15px" class="btn btn-success" value="등록"/>
+					</br></br>					
 				</form>
 				<!---->
 			</div>
 			<!---->
-			<div data-v-f39b78c2="">
-				<div data-v-f39b78c2="" class="comment-sort">
-					
-				</div>
-				<div data-v-f39b78c2="" class="comment-list">
-					<div data-v-f39b78c2="" class="comment-l">
+
 						<!---->
-							<div data-v-f39b78c2="" class="comment-meta" style="margin-left: 15px">
-								<span data-v-f39b78c2="" class="comment__name"><a data-v-f39b78c2="" style="margin-top: 15px">김길동</a></span>
-								<span data-v-f39b78c2="" data-tooltip="" title="2018년 9월 18일 화요일 오전 10:59" class="comment__date" style="margin-top: 15px">2018.01.10</span>
-								<div style="float: right; padding-bottom: 3px; margin-top: 15px">
-									<c:if test="${sessionScope.mem_no==record.mem_no }">									
-										<a href="#" class="article-action__button button button--red button--red--border">수정</a>
-										<a href="#" class="article-action__button button button--red button--red--border">삭제</a>
-									</c:if>
-								</div>
-							</div>
-							
-							<div data-v-f39b78c2="" class="comment-content">
-								<div data-v-f39b78c2="">
-									<p>댓글</p>
-								</div>
-								<!---->
-							</div>
-							<div data-v-f39b78c2="" class="comment-button">
-								<ul data-v-f39b78c2="">
-									<!---->
-									<li data-v-f39b78c2="">
-										<button data-v-f39b78c2="" class="comment__button">신고</button>
-									</li>
-									<li data-v-f39b78c2="">
-										<button data-v-f39b78c2="" class="comment__button">
-											<img data-v-f39b78c2="" src="/images/icon-reply@2x.png" width="16" alt="">답글쓰기
-										</button>
-									</li>
-								</ul>
-							</div>
+						<div class="row" id="comments">
+						<!-- 한줄 코멘트 목록-->
+						<!-- ajax로 코멘트 목록뿌리기 -->
 						</div>
-						<!---->
-					</div>
-				</div>
 				<!---->
 			</div>
 		</div>

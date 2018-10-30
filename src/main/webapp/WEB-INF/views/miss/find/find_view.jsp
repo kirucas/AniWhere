@@ -62,13 +62,13 @@
 						</div>
 						<div class="article-meta-list article-meta-list--right">
 							<div class="article-meta__item">
-								<span>${record.count}</span>
+								<span>조회수 ${record.count}</span>
 							</div>
 							<div class="article-meta__item">
 								<span>댓글 56</span>
 							</div>
 							<div class="article-meta__item">
-								<span>hh</span>
+								<span>글번호 ${record.no}</span>
 							</div>
 						</div>
 					</div>
@@ -211,6 +211,10 @@
 			</div>
 		</div>
 		<!---->
+		<div class="row" id="comments">
+		<!-- 한줄 코멘트 목록-->
+		<!-- ajax로 코멘트 목록뿌리기 -->
+		</div>
 		<!---->
 	</div>
 </div>
