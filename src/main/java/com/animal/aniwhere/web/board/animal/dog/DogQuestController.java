@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,24 +73,31 @@ public class DogQuestController {
 	}////////////////list()
 	
 	@RequestMapping(value="/animal/dog/quest/quest_{path}",method=RequestMethod.GET)
-	public String quest_write() throws Exception {
-		return "board/animal/dog/quest/quest_write.tiles";
+	public String form(@PathVariable String path,Model model,@RequestParam Map map) throws Exception{
+		switch(path) {
+			case "write":
+				//뷰정보 반환]
+				return "board/animal/dog/quest/quest_write.tiles";
+			default:
+				//서비스 호출]
+				QuestBoardDTO record = questService.selectOne(map);
+				//데이타 저장]
+				model.addAttribute("record", record);
+				//뷰정보 반환]
+				return "board/animal/dog/quest/quest_"+path+".tiles";		
+		}		
 	}
 	
+	
 	@RequestMapping(value="/animal/dog/quest/quest_write.aw",method=RequestMethod.POST)
-	public String quest_writeOk(@RequestParam Map map,HttpSession session) throws Exception{
+	public String quest_write(@RequestParam Map map,HttpSession session) throws Exception{
 		map.put("mem_no",session.getAttribute("mem_no"));
 		questService.insert(map);
 		return "forward:/animal/dog/quest/quest_list.aw";
 	}
 	
-	@RequestMapping(value="/animal/dog/quest/quest_reply.aw",method=RequestMethod.GET)
-	public String quest_reply() throws Exception {
-		return "board/animal/dog/quest/quest_reply.tiles";
-	}
-	
 	@RequestMapping(value="/animal/dog/quest/quest_reply.aw",method=RequestMethod.POST)
-	public String quest_replyOk(@RequestParam Map map,HttpSession session) throws Exception {
+	public String quest_reply(@RequestParam Map map,HttpSession session,Model model) throws Exception {
 		map.put("mem_no",session.getAttribute("mem_no"));
 		questService.insert(map);
 		return "forward:/animal/dog/quest/quest_list.aw";

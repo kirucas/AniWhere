@@ -56,11 +56,11 @@ $(function(){
 		action='<c:url value="/animal/dog/quest/quest_edit.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-sm-2 control-label" style="font-size:20px">제목</label>
-			<input class="form-control" autofocus="autofocus" type="text" name="quest_title" id="quest_title" placeholder="제목을 입력해주세요" value="${record.quest_title}"/>
+			<input maxlength="50" class="form-control" autofocus="autofocus" type="text" name="quest_title" id="quest_title" placeholder="제목을 입력해주세요" value="${record.quest_title}"/>
 		</div>
 		<div class="form-row" style="padding-top: 10px;padding-bottom: 20px">
 			<label for="quest_content" class="col-sm-2 control-label" style="font-size:20px">내용</label>
-			<textarea class="form-control" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요">${record.quest_content}</textarea>
+			<textarea maxlength="2000" class="form-control" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요">${record.quest_content}</textarea>
 		</div>
 		<div class="form-row">
 			<div class="form-group offset-sm-5 col-sm-1">

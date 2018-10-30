@@ -23,31 +23,26 @@ public class DogQuestCmtController {
 	public static final String TABLE_NAME = "quest";
 	
 	@ResponseBody
-	@RequestMapping(value="",produces="text/html; charset=UTF-8")
+	@RequestMapping(value="/animal/quest/questcmt/write.aw",produces="text/html; charset=UTF-8")
 	public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
+		map.put("table_name", TABLE_NAME);
 		map.put("mem_no",session.getAttribute("mem_no"));
 		allCommentService.insert(map);
-		return map.get("origin_no").toString();
+		return map.get("no").toString();
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="",produces="text/html; charset=UTF-8")
+	@RequestMapping(value="/animal/quest/questcmt/list.aw",produces="text/html; charset=UTF-8")
 	public String list(@RequestParam Map map) throws Exception{
+		map.put("table_name", TABLE_NAME);
 		List<AllCommentDTO> comments = allCommentService.selectList(map);
-		
 		return JSONArray.toJSONString(comments);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="",produces="text/html; charset=UTF-8")
-	public String edit(@RequestParam Map map) throws Exception{
-		allCommentService.update(map);
-		return map.get("origin_no").toString();
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="",produces="text/html; charset=UTF-8")
+	@RequestMapping(value="/animal/quest/questcmt/delete.aw",produces="text/html; charset=UTF-8")
 	public String delete(@RequestParam Map map) throws Exception{
+		map.put("table_name", TABLE_NAME);
 		allCommentService.delete(map);
 		return map.get("origin_no").toString();
 	}
