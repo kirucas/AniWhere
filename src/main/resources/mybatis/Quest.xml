@@ -47,7 +47,7 @@
 			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, seq_quest.currval, #{ani_category})
 		</if>
 		<if test="checking != null">
-			(no, mem_no, quest_title, quest_content, origin_no, checking)
+			(no, mem_no, quest_title, quest_content, origin_no, checking, ani_category)
 			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, origin_no, 1, #{ani_category})
 		</if>
 	</insert>
