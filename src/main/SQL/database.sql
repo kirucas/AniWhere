@@ -294,7 +294,7 @@ CREATE TABLE miss_see_cmt
 
 CREATE TABLE movie
 (
-	movie_no number NOT NULL,
+	no number NOT NULL,
 	mem_no number,
 	movie_title nvarchar2(50) NOT NULL,
 	movie_content nvarchar2(2000) NOT NULL,
@@ -302,7 +302,7 @@ CREATE TABLE movie
 	movie_hit number DEFAULT 0,
 	movie_regidate date DEFAULT SYSDATE,
 	ani_category number(1) CHECK (ani_category IN (1, 2, 3, 4, 5)),
-	PRIMARY KEY (movie_no)
+	PRIMARY KEY (no)
 );
 
 
@@ -332,7 +332,7 @@ CREATE TABLE notice
 
 CREATE TABLE photo
 (
-	photo_no number NOT NULL,
+	no number NOT NULL,
 	mem_no number,
 	photo_title nvarchar2(50) NOT NULL,
 	photo_content nvarchar2(2000) NOT NULL,
@@ -340,7 +340,7 @@ CREATE TABLE photo
 	photo_hit number DEFAULT 0,
 	photo_regidate date DEFAULT SYSDATE,
 	ani_category number(1) NOT NULL CHECK (ani_category IN (1, 2, 3, 4, 5)),
-	PRIMARY KEY (photo_no)
+	PRIMARY KEY (no)
 );
 
 
@@ -359,7 +359,7 @@ CREATE TABLE photo_cmt
 CREATE TABLE photo_link
 (
 	link_no number NOT NULL,
-	photo_no number NOT NULL,
+	no number NOT NULL,
 	link nvarchar2(300) NOT NULL,
 	PRIMARY KEY (link_no)
 );
@@ -381,7 +381,7 @@ CREATE TABLE qna
 
 CREATE TABLE quest
 (
-	quest_no number NOT NULL,
+	no number NOT NULL,
 	mem_no number,
 	quest_title nvarchar2(50) NOT NULL,
 	quest_content nvarchar2(2000) NOT NULL,
@@ -391,7 +391,7 @@ CREATE TABLE quest
 	origin_no number NOT NULL,
 	checking number(1) DEFAULT 0 NOT NULL CHECK (checking IN (0, 1)),
 	ani_category number(1) NOT NULL CHECK (ani_category IN (1, 2, 3, 4, 5)),
-	PRIMARY KEY (quest_no)
+	PRIMARY KEY (no)
 );
 
 
@@ -448,7 +448,7 @@ CREATE TABLE store_location
 
 CREATE TABLE tip
 (
-	tip_no number NOT NULL,
+	no number NOT NULL,
 	mem_no number,
 	tip_title nvarchar2(50) NOT NULL,
 	tip_content nvarchar2(2000) NOT NULL,
@@ -456,7 +456,7 @@ CREATE TABLE tip
 	tip_hit number DEFAULT 0,
 	tip_regidate date DEFAULT SYSDATE,
 	ani_category number(1) NOT NULL CHECK (ani_category IN (1, 2, 3, 4, 5)),
-	PRIMARY KEY (tip_no)
+	PRIMARY KEY (no)
 );
 
 
@@ -562,15 +562,15 @@ ALTER TABLE market_sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
-	ON DELETE CASCADE
 ;
 
 
@@ -758,28 +758,28 @@ ALTER TABLE miss_see_cmt
 
 ALTER TABLE movie_cmt
 	ADD FOREIGN KEY (origin_no)
-	REFERENCES movie (movie_no)
+	REFERENCES movie (no)
 	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE photo_cmt
 	ADD FOREIGN KEY (origin_no)
-	REFERENCES photo (photo_no)
+	REFERENCES photo (no)
 	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE photo_link
-	ADD FOREIGN KEY (photo_no)
-	REFERENCES photo (photo_no)
+	ADD FOREIGN KEY (no)
+	REFERENCES photo (no)
 	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE quest_cmt
 	ADD FOREIGN KEY (origin_no)
-	REFERENCES quest (quest_no)
+	REFERENCES quest (no)
 	ON DELETE CASCADE
 ;
 
@@ -793,7 +793,7 @@ ALTER TABLE reservation
 
 ALTER TABLE tip_cmt
 	ADD FOREIGN KEY (origin_no)
-	REFERENCES tip (tip_no)
+	REFERENCES tip (no)
 	ON DELETE CASCADE
 ;
 
