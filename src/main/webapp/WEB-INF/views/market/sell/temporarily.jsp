@@ -47,7 +47,7 @@ html {
 		
 		</div>
 			<table class="table table-bordered table-sm m-0">
-				<thead class="table-warning">
+				<thead class="table-danger">
 					<tr>
 						<th style="width: 50px">게시번호</th>
 						<th style="width: 400px">제목</th>
@@ -97,7 +97,7 @@ html {
 						</c:choose>
 					</span>
 																																						 
-								<a href="<c:url value='/market/buyinside.aw?buy_no=${record.no}'/>">
+								<a href="<c:url value='/market/sellinside.aw?buy_no=${record.no}'/>">
 																  
 								<span id="title">${record.title}</span></a>
 							
