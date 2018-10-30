@@ -150,10 +150,11 @@
 	<div id="where-list">
 		<div id="list-select">
 			<ul class="nav nav-tabs">
-				<li class="nav-item"><a class="nav-link" href="#">애견카페</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">애완미용</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">동물병원</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">동물약국</a></li>
+				<li class="nav-item"><a class="nav-link" id="all" href="#">전체보기</a></li>
+				<li class="nav-item"><a class="nav-link" id="" href="#">애견카페</a></li>
+				<li class="nav-item"><a class="nav-link" id="" href="#">애완미용</a></li>
+				<li class="nav-item"><a class="nav-link" id="" href="#">동물병원</a></li>
+				<li class="nav-item"><a class="nav-link" id="" href="#">동물약국</a></li>
 				<li class="nav-item"><a class="nav-link" id="ip" href="#" title="1">동물기타</a>
 				</li>
 			</ul>
@@ -190,30 +191,43 @@
 	</div>
 	<div id="map"></div>
 </div>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8940a4eb3083abd07d038b8c2839831"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8940a4eb3083abd07d038b8c2839831&libraries=services,clusterer,drawing"></script>
 <script>
 		$(document).ready(function() {
+			
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+		        level: 5 // 지도의 확대 레벨
+	    	};  
+			// 지도를 생성합니다    
+			var map = new daum.maps.Map(mapContainer, mapOption); 
+			
+			var clusterer = new daum.maps.MarkerClusterer({
+		        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+		        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+		        minLevel: 10 // 클러스터 할 최소 지도 레벨 
+	    	});
+			//마커들을 담을 배열 
+			var markers=[];
 			//시작하자마자 store_location테이블에 있는 정보 조회 및 지도에 뿌려주고 클러스터링 하기
 			$.ajax({
 	            type: "POST",
 	            dataType : "json",
 	            url : "<c:url value='/where/map/total.awa'/>",
 	            success: function(jsonObj) {
-					var codes = ["D09A01","D09A02","D25A16","Q12A07","S04A03","S04A01","S04A02"];
-	            	$.each(jsonObj, function(code, co_val){
-	            		$.each(JSON.parse(co_val), function(tag, tag_val){
-	            			if(tag=='body'){
-	            				$.each(tag_val,function(key,val){
-				            		if(key=='items'){
-			            				$.each(val,function(k,v){
-			            					mapMaker(v.lat,v.lon);
-			            				});
-				            		}
-	            				});
-	            			}
-	            		});
+	            	$.each(jsonObj, function(index, value){
+	            		console.log(value.lat);
+	            		console.log(value.lon);
+	            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+	            		var marker = new daum.maps.Marker({
+                            position : new daum.maps.LatLng(value.lat, value.lon)
+                        });
+	            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
+	                    markers.push(marker);	
 	            	});
+	            	// 클러스터러에 마커들을 추가합니다
+            	    clusterer.addMarkers(markers);
 	            },
 	            error : function() {
 	               console.log("error");
@@ -221,7 +235,8 @@
 	         });
 			
          	var space = /\+/g; //" "을 의미하는 값
-			
+         	
+         	
 			var strdata = $("#ip").prop("title");
 			console.log(strdata);
 			$('#ip').click(function(){
@@ -259,7 +274,7 @@
 // 					mapMaker(lat,lng);
 // 				}
 // 			};
-			
+			//마커 생성 함수
 			function mapMaker(lat,lng){
 				// 마커가 표시될 위치입니다 
 				var markerPosition  = new daum.maps.LatLng(lat, lng); 
@@ -272,15 +287,7 @@
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
 			};
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    mapOption = {
-			        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-			        level: 5 // 지도의 확대 레벨
-			    };  
-
-			// 지도를 생성합니다    
-			var map = new daum.maps.Map(mapContainer, mapOption); 
-
+			
 			// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 			if (navigator.geolocation) {
 
@@ -292,13 +299,13 @@
 							lon = position.coords.longitude; // 경도
 							var locPosition = new daum.maps.LatLng(
 									lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-							message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
-
+							message = ' '; // 인포윈도우에 표시될 내용입니다
 							// 마커와 인포윈도우를 표시합니다
 							displayMarker(locPosition, message);
 						});
 
-			} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+			} 
+			else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
 				var locPosition = new daum.maps.LatLng(33.450701, 126.570667),
 						 message = 'geolocation을 사용할수 없어요..'
@@ -329,13 +336,11 @@
 				var skyviewControl = document
 						.getElementById('btnSkyview');
 				if (maptype === 'roadmap') {
-					map
-							.setMapTypeId(daum.maps.MapTypeId.ROADMAP);
+					map.setMapTypeId(daum.maps.MapTypeId.ROADMAP);
 					roadmapControl.className = 'selected_btn';
 					skyviewControl.className = 'btn';
 				} else {
-					map
-							.setMapTypeId(daum.maps.MapTypeId.HYBRID);
+					map.setMapTypeId(daum.maps.MapTypeId.HYBRID);
 					skyviewControl.className = 'selected_btn';
 					roadmapControl.className = 'btn';
 				}
@@ -351,6 +356,8 @@
 			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 			var zoomControl = new daum.maps.ZoomControl();
 			map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+			
+			
 
 			function radius(lat1,lon1){
 				$.ajax({
