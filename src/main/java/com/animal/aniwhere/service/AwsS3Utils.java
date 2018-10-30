@@ -19,6 +19,7 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
@@ -66,9 +67,9 @@ public class AwsS3Utils {
 				System.out.println("파일 이름:"+newFilename);
 				try {
 					upload.transferTo(new File(physicalPath+File.separator+newFilename));
-					String uploadedFileName=s3putObject(physicalPath+File.separator+newFilename,category);
+					String uploadedFileName=s3PutObject(physicalPath+File.separator+newFilename,category);
 					uploadedFileNames.add(uploadedFileName);
-					s3readObjects();
+					s3ReadObjects();
 				} catch (Exception e) { e.printStackTrace();}
 			}/// for
 		}/// while
@@ -78,7 +79,7 @@ public class AwsS3Utils {
 	///////////////////////////////////////////
 	
 	// AWS s3 업로드 메소드
-	public static String s3putObject(String file_path, String category) {
+	public static String s3PutObject(String file_path, String category) {
         String key_name = category+"/"+"AniwhereImg"+System.nanoTime()+"seed"+new Random().nextInt(9999);
 
         System.out.format("Uploading %s to S3 bucket %s...\n", file_path, BUCKET_NAME);
@@ -97,7 +98,7 @@ public class AwsS3Utils {
 	}/// putObject
 	
 	// 버킷에서 파일 목록 불러오기
-	public static void s3readObjects() {
+	public static void s3ReadObjects() {
 	    System.out.format("Objects in S3 bucket %s:\n", BUCKET_NAME);
 	    ListObjectsV2Result result = s3Client.listObjectsV2(BUCKET_NAME);
 	    List<S3ObjectSummary> objects = result.getObjectSummaries();
@@ -105,4 +106,40 @@ public class AwsS3Utils {
 	        System.out.println("* " + os.getKey());
 	    }
 	}/// readObjects
+	
+	// 버킷에서 파일 삭제하기
+	public static boolean deleteFileFromS3(String key_name) {
+		System.out.format("Deleting object %s from S3 bucket: %s\n", key_name,BUCKET_NAME);
+		
+        try {
+            s3Client.deleteObject(BUCKET_NAME,key_name);
+        } catch (AmazonServiceException e) {
+            System.err.println(e.getErrorMessage());
+            return false;
+        }
+        System.out.println("Delete Done!");
+        // 현재 파일 목록 출력
+        s3ReadObjects();
+		return true;
+	}/// deleteFileFromS3
+	
+	// 문자열 배열을 넣어 한번에 삭제하는 메소드
+	public static boolean deleteFileFromS3(String[] key_names) {
+		int result=0;
+		System.out.println("Deleting objects from S3 bucket: " + BUCKET_NAME);
+        for (String k : key_names)
+            System.out.println(" * " + k);
+        
+        try {
+            DeleteObjectsRequest dor = new DeleteObjectsRequest(BUCKET_NAME).withKeys(key_names);
+            s3Client.deleteObjects(dor);
+        } catch (AmazonServiceException e) {
+            System.err.println(e.getErrorMessage());
+            return false;
+        }
+        System.out.println("Delete Done!");
+        // 현재 파일 목록 출력
+        s3ReadObjects();
+        return true;
+	}/// deleteFileFromS3
 }/// class

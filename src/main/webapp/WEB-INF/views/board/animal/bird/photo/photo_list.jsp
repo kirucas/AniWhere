@@ -133,34 +133,41 @@
 	var popupGallery;
 	var photoNo;
 	$(document).ready(function() {
+		$("#delete").click(function(){
+			console.log(document.getElementById("modalNo").innerHTML);
+			var index=document.getElementById("modalNo").innerHTML;
+			
+			location.replace("<c:url value='/bird/photo/delete.aw?no="+url+"'/>");
+// 			location.href="<c:url value='/bird/photo/delete.aw'/>";
+		});
+		
 		$(".moda").click(function(e){			e.preventDefault();
-			$("#modal").prop("src", $(this).prop("src"));
-			$("#modalNo").val($(this).prop("id"));
-			photoNo=Number($(this).prop("id")); // 아이디에 저장된 글번호를 가져온다
+			//$("#modal").prop("src", $(this).prop("src"));
+			photoNo=$(this).prop("id");
+			$("#modalNo").html(photoNo);
+			var photoSet=[];
+			<c:forEach items="${photoList}" var="item">
+				photoSet.push("${item}");
+			</c:forEach>
+			console.log("log:",photoNo);
 			
-			$.ajax({
-				url:'<c:url value="/bird/photo/modalView.aw"/>',
-				type:'post',
-				dataType:'json',
-				data:photoNo,
-				success:function(data){
-// 					successAjax(data,$("#list"));
-				},
-				error:function(request,error){
-					console.log("error:"+error);
-				}
-			});
+			var photoPaths=[];
+			for(var i=0;i<(photoSet[photoNo].match(/https/g) || []).length;i++) {
+				photoPaths.push("<c:out value='${photoList[\""+photoNo+"\"][\""+i+"\"][\'LINK\']}'/>");
+			}
 			
-			
-			<%--/* var imgString;
-			<c:forEach var="img" items="${list}">
+			var imgString="";
+			//$('.swiper-wrapper').innerHTML("");
+			var popup=document.getElementById("popup");
+			for(var photo in photoPaths) {
+				console.log(photo);
 				imgString+='<div class="swiper-slide text-xs-center text-lg-center">';
 				imgString+='<img class="modaru" class="img-thumbnai" id="modal" alt="사진이 없습니다."';
-				imgString+='src="<c:url value="'+${img.LINK}+'"/>">';
+				imgString+='src="<c:url value="'+photoPaths[photo]+'"/>">';
 				imgString+='</div>';
-			</c:forEach> */--%>
-				
-			$('.swiper-wrapper').html(imgList);
+			}
+			popup.innerHTML=imgString;
+			
 			$('#photoModal').on('show.bs.modal', function(e) {
 				popupGallery = new Swiper('#popupGallery', {
 					// Optional parameters
@@ -184,7 +191,7 @@
 
 <div class="container">
 	<div id="uploadButton" style="text-align: right;">
-		<a href="<c:url value='/board/animal/bird/photo/write.aw'/>" class="btn btn-primary" style="margin-bottom: 20px;">사진 올리기</a>
+		<a href="<c:url value='/bird/photo/write.aw'/>" class="btn btn-primary" style="margin-bottom: 20px;">사진 올리기</a>
 	</div>
 	<c:if test="${empty list}" var="result">
    		<div class="row">
@@ -237,17 +244,9 @@
 		<div class="modal-content">
 			<div class="modal-body">
 				<div class="swiper-container" id="popupGallery">
-					<div class="swiper-wrapper">
-						<%-- <div class="swiper-slide text-xs-center text-lg-center">
-							<img class="modaru" class="img-thumbnai" src="" id="modal"
-								alt="사진이 없습니다.">
-						</div>
-						<c:forEach var="img" items="${modalData.imgs}">
-							<div class="swiper-slide text-xs-center text-lg-center">
-								<img class="modaru" class="img-thumbnai" id="modal" alt="사진이 없습니다."
-										src="<c:url value='${img}'/>" >
-							</div>
-						</c:forEach> --%>
+					<!-- 글번호 저장용 -->
+					<label id="modalNo" hidden="true"></label>
+					<div class="swiper-wrapper" id="popup">
 						<%-- <div class="swiper-slide text-xs-center text-lg-center">
 							<img class="modaru" class="img-thumbnail"
 								src="<c:url value='<!-- 사진 경로 -->' />"
@@ -263,7 +262,7 @@
 			<div class="modal-footer">
 				<div id="e-d-button">
 					<a href="#" class="btn btn-primary">수정</a> 
-					<a href="#" class="btn btn-danger">삭제</a>
+					<a id="delete" href="#" class="btn btn-danger">삭제</a>
 				</div>
 				<div>
 					<a href="#" data-dismiss="modal" class="btn btn-secondary">닫기</a>

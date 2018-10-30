@@ -14,6 +14,7 @@ import javax.websocket.Session;
 
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,20 +35,20 @@ public class BirdPhotoController {
 	@Resource(name="photoService")
 	private PhotoBoardServiceImpl service;
 	
-	@Value("${PAGESIZE}")
+	@Value("${PHOTOPAGESIZE}")
 	private int pageSize;
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
 	
 	//등록 폼으로 이동]
-	@RequestMapping(value="/board/animal/bird/photo/write.aw",method=RequestMethod.GET)
+	@RequestMapping(value="/bird/photo/write.aw",method=RequestMethod.GET)
 	public String write() throws Exception{
 		return "board/animal/bird/photo/photo_write.tiles";
 	}/// write
 	
 	// 등록 완료 후 리스트로 이동
 	@ResponseBody
-	@RequestMapping(value="/board/animal/bird/photo/write.aw",method=RequestMethod.POST)
+	@RequestMapping(value="/bird/photo/write.aw",method=RequestMethod.POST)
 	public void writeComplete(@RequestParam Map map,MultipartHttpServletRequest mhsr,HttpSession session) throws Exception{
 		map.put("ani_category", 4);
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -108,16 +109,24 @@ public class BirdPhotoController {
 		return "board/animal/bird/photo/photo_list.tiles";
 	}/// list
 	
-	@RequestMapping("/bird/photo/write.aw")
-	public String delete() throws Exception {
-		
-		
+	@RequestMapping("/bird/photo/delete.aw")
+	public String delete(@RequestParam Map map) throws Exception {
+		List<Map> linkList=service.linkSelectList(map);
+		String[] key_names=new String[linkList.size()];
+		int i=0;
+		for(Map linkMap:linkList) {
+			key_names[i]=linkMap.get("LINK").toString();
+			i++;
+		}
+		service.linkDelete(map);
+		service.delete(map);
+		AwsS3Utils.deleteFileFromS3(key_names);
 		return "forward:/animal/bird/photo.aw";
 	}/// delete
 	
 	@ResponseBody
-	@RequestMapping(value="/bird/photo/modalView.aw",produces="text/plain;charset=UTF-8")
-	public String modalView(@RequestParam int photoNo) throws Exception {
+	@RequestMapping(value="/bird/photo/modalView.aw",produces = MediaType.APPLICATION_JSON_VALUE)
+	public String modalView(@RequestParam(value="no") String photoNo) throws Exception {
 		System.out.println(photoNo);
 		Map map=new HashMap<>();
 		map.put("no", photoNo);
