@@ -96,9 +96,7 @@ public class MarketBuyController {
 	}////////// market_main
 	
 	//페이징 로직은 나중에 
-	
-	
-		
+			
 	//상세보기
 	@RequestMapping("/market/buyinside.aw")
 	public String buyinside(@RequestParam Map map,Model model,HttpSession session) throws Exception {
@@ -135,7 +133,7 @@ public class MarketBuyController {
 	}////////////////
 	
 	
-	// 수정처리 폼으로 이동]
+	// 쓰기에서 db에올리고 목록으로 이동 ]
 	@RequestMapping(value="/market/buyWrite.aw",method=RequestMethod.POST)
 	public String writeOk(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 		
@@ -176,8 +174,29 @@ public class MarketBuyController {
 		return "forward:/market/buy/temporarily.aw";
 		
 	}////////////////
+	
+	
+	
+	//수정폼 이동 --자기아이디로 자기글 view에서 수정 누르면 이쪽으로 이동 
+			@RequestMapping("/market/buyedit.aw")
+			public String find_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
+					
+				map.put("mem_no",session.getAttribute("mem_no"));
+				map.put("table_name","buy");
+				map.put("no", map.get("buy_no"));
+				
+				//게시글
+				BuySellDTO record = allBoardService.selectOne(map);
+				//데이터 저장]
+				model.addAttribute("record", record);
+				//줄바꿈처리
+				record.setContent(record.getContent().replace("\r\n", "<br/>"));
+				
+				return "market/edit/editbuyWrite.tiles";
+				
+			}////////// miss_write
 
-	//수정
+	//수정 실행하기
 	@RequestMapping("/market/buyupdate.aw")
 	public String edit(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 		map.put("mem_no",session.getAttribute("mem_no"));
@@ -186,7 +205,7 @@ public class MarketBuyController {
 		
 		allBoardService.update(map);
 		
-		return "forward:/market/buy.aw";//buy목록으로 이동
+		return "redirect:/market/buy.aw";//buy목록으로 이동
 	}//////////////edit()
 	
 	

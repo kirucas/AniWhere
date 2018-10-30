@@ -80,7 +80,7 @@
 					 <select
 						class="select_filter" 
 						name="animal_code">
-						<option value="0">-----</option>
+						
 						<option value="1">개</option>
 						<option value="2">고양이</option>
 						<option value="3">파충류</option>

@@ -7,7 +7,7 @@
 	var isDelete = function() {
 		if (confirm("글을 삭제 하시겠습니까?"))
 			location
-					.replace("<c:url value='/market/buy/buydelete.aw?no=${record.no}'/>");
+					.replace("<c:url value='/market/buy/delete.aw?buy_no=${record.no}'/>");
 	};
 </script>
 
@@ -121,13 +121,13 @@
 			<input name="reset" class="btn btn-info" type="button" value="목록"></a> 
 			
 			<c:if test="${sessionScope.mem_no==record.mem_no }">
-			<input	name="submit" class="btn btn-danger" type="button" id="fix"value="수정">
+			<a href="<c:url value='/market/buyedit.aw?buy_no=${record.no}'/>" type="button" class="btn btn-danger">수정</a>
 			</c:if>
-			 <input name="reset" class="btn btn-suceess" style="background-color: #4CAF50;" type="button" id="repl"
-	value="답글"> 
+			
+			 <input name="reset" class="btn btn-suceess" style="background-color: #4CAF50;" type="button" id="repl"value="답글"> 
 				
 				<c:if test="${sessionScope.mem_no==record.mem_no }">
-				<input name="submit" class="btn " type="button"	id="del" value="삭제">
+				<a href="javascript:isDelete()" type="button" class="btn">삭제</a>					
 				</c:if>
 				
 		</div>

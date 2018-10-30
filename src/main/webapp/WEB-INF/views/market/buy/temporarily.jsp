@@ -86,7 +86,7 @@ html {
 				
 						<tr>
 						<td>
-						<span id="no">${totalRecordCount +1- (((nowPage - 1) * pageSize) + loop.index)}</span></td>
+						<span id="no">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)+1}</span></td>
 							
 						<!-- 타이틀 로직 -->
 							
