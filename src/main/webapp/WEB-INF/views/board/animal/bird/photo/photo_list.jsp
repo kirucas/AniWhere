@@ -131,11 +131,36 @@
 </style>
 <script>
 	var popupGallery;
+	var photoNo;
 	$(document).ready(function() {
-		$('.moda').click(function(e) {
-			e.preventDefault();
-			var sr1 = $(this).prop("src");
-			$("#modal").prop("src", sr1);
+		$(".moda").click(function(e){			e.preventDefault();
+			$("#modal").prop("src", $(this).prop("src"));
+			$("#modalNo").val($(this).prop("id"));
+			photoNo=Number($(this).prop("id")); // 아이디에 저장된 글번호를 가져온다
+			
+			$.ajax({
+				url:'<c:url value="/bird/photo/modalView.aw"/>',
+				type:'post',
+				dataType:'json',
+				data:photoNo,
+				success:function(data){
+// 					successAjax(data,$("#list"));
+				},
+				error:function(request,error){
+					console.log("error:"+error);
+				}
+			});
+			
+			
+			<%--/* var imgString;
+			<c:forEach var="img" items="${list}">
+				imgString+='<div class="swiper-slide text-xs-center text-lg-center">';
+				imgString+='<img class="modaru" class="img-thumbnai" id="modal" alt="사진이 없습니다."';
+				imgString+='src="<c:url value="'+${img.LINK}+'"/>">';
+				imgString+='</div>';
+			</c:forEach> */--%>
+				
+			$('.swiper-wrapper').html(imgList);
 			$('#photoModal').on('show.bs.modal', function(e) {
 				popupGallery = new Swiper('#popupGallery', {
 					// Optional parameters
@@ -176,14 +201,15 @@
 			</c:if>
 				 		<div class="card" id="card-size">
 				       		<a href="#" data-target="#modalIMG" data-toggle="modal">
-				            	<img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_1.jpg'/>" alt="bird_1" />
+				            	<img id="${loop.index}" class="card-img-top moda" src="<c:url value='${photoList[loop.index][0][\'LINK\']}'/>" alt="bird_missile" />
 				            </a>
 				            <div class="card-body">
 				            	<h5 class="card-title">
-				               	<a href="#" title="<c:url value='/resources/images/board/animal/bird/bird_1.jpg'/>" data-target="#modalIMG" data-toggle="modal">
+				               	<a href="#" data-target="#modalIMG" data-toggle="modal">
 				                  	${dto.photo_title}
 				               	</a>
-				               	<span title="댓글 수" class="badge badge-secondary">13</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
+				               	<span title="댓글 수" class="badge badge-secondary">13</span>
+				               	<span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
 				               	<p class="card-text">${dto.mem_nickname}</p>
 				            </div>
 			     			<div class="card-footer">
@@ -200,285 +226,10 @@
    	<div class="row">
    		${pagingString}
    	</div>
-   	
-   <%-- 	<hr/>
-   
-   <div class="row">
-      <div class="card-group">
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_1.jpg'/>" alt="bird_1" />
-            </a>
-            <div class="card-body">
-            <h5 class="card-title">
-               <a href="#" title="<c:url value='/resources/images/board/animal/bird/bird_1.jpg'/>" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">13</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_2.jpg' />" alt="bird_2" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" title="<c:url value='/resources/images/board/animal/bird/bird_2.jpg'/>" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">15</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-            <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_3.jpg' />" alt="bird_3" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" title="<c:url value='/resources/images/board/animal/bird/bird_3.jpg'/>" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">45</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_4.jpg' />" alt="bird_4" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" title="<c:url value='/resources/images/board/animal/bird/bird_3.jpg'/>" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">50</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-      </div>
-   </div>
-   <div class="row">
-      <div class="card-group">
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_5.jpg' />" alt="bird_5" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-                  <a href="#" data-target="#modalIMG" data-toggle="modal">
-                     사진 제목
-                  </a>
-               <span title="댓글 수" class="badge badge-secondary">13</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_6.jpg' />" alt="bird_6" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">15</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_7.jpg' />" alt="bird_7" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">45</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_8.jpg' />" alt="bird_8" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">50</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-      </div>
-
-   <div class="row">
-      <div class="card-group">
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_9.jpg' />" alt="bird_9" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">13</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_10.jpg' />" alt="bird_10" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">15</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_11.jpg' />" alt="bird_11" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">45</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_12.jpg' />" alt="bird_12" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">50</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-      </div>
-   </div>
-   <div class="row">
-      <div class="card-group">
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_13.jpg' />" alt="bird_13" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">13</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_14.jpg' />" alt="bird_14" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">15</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_15.jpg' />" alt="bird_15" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">45</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-         <div class="card" id="card-size">
-            <a href="#" data-target="#modalIMG" data-toggle="modal">
-               <img class="card-img-top moda" src="<c:url value='/resources/images/board/animal/bird/bird_16.jpg' />" alt="bird_16" />
-            </a>
-            <div class="card-body">
-               <h5 class="card-title">
-               <a href="#" data-target="#modalIMG" data-toggle="modal">
-                  사진 제목
-               </a>
-               <span title="댓글 수" class="badge badge-secondary">50</span><span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
-               <p class="card-text">작성자</p>
-            </div>
-            <div class="card-footer">
-               <small class="text-muted"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" /></small>
-            </div>
-         </div>
-      </div>
-   </div> --%>
 </div>
-   
-   
+
+
+
 <!-- 모달 swiper -->
 <!-- Modal -->
 <div class="modal fade" id="photoModal" role="dialog" aria-labelledby="myModalLabel">
@@ -487,40 +238,32 @@
 			<div class="modal-body">
 				<div class="swiper-container" id="popupGallery">
 					<div class="swiper-wrapper">
-						<c:if test="${not empty modalData}">
-							<c:forEach var="img" items="${modalData.imgs}">
-								<div class="swiper-slide text-xs-center text-lg-center">
-									<img class="modaru" class="img-thumbnai" id="modal" alt="사진이 없습니다."
-											src="<c:url value='${img}'/>" >
-								</div>
-							</c:forEach>
-						</c:if>
-						
 						<%-- <div class="swiper-slide text-xs-center text-lg-center">
 							<img class="modaru" class="img-thumbnai" src="" id="modal"
 								alt="사진이 없습니다.">
 						</div>
-						<div class="swiper-slide text-xs-center text-lg-center">
+						<c:forEach var="img" items="${modalData.imgs}">
+							<div class="swiper-slide text-xs-center text-lg-center">
+								<img class="modaru" class="img-thumbnai" id="modal" alt="사진이 없습니다."
+										src="<c:url value='${img}'/>" >
+							</div>
+						</c:forEach> --%>
+						<%-- <div class="swiper-slide text-xs-center text-lg-center">
 							<img class="modaru" class="img-thumbnail"
 								src="<c:url value='<!-- 사진 경로 -->' />"
 								alt="사진이 없습니다.">
-						</div>
-						<div class="swiper-slide text-xs-center text-lg-center">
-							<img class="modaru" class="img-thumbnail"
-								src="<c:url value='<!-- 사진 경로 -->' />"
-								alt="사진이 없습니다.">
-						</div> --%>
+						</div>--%>
 					</div>
 					<div class="swiper-button-prev"></div>
 					<div class="swiper-button-next"></div>
 				</div>
-				<h2 style="margin: 10px"><!-- 제목 -->${modalDatas.title}</h2>
-				<p id="content" style="margin: 10px"><!-- 내용 -->${modalDatas.content}</p>
+				<h2 id="title" style="margin: 10px"><!-- 제목 --></h2>
+				<p id="content" style="margin: 10px"><!-- 내용 --></p>
 			</div>
 			<div class="modal-footer">
 				<div id="e-d-button">
-					<a href="#" class="btn btn-primary">수정</a> <a href="#"
-						class="btn btn-danger">삭제</a>
+					<a href="#" class="btn btn-primary">수정</a> 
+					<a href="#" class="btn btn-danger">삭제</a>
 				</div>
 				<div>
 					<a href="#" data-dismiss="modal" class="btn btn-secondary">닫기</a>
