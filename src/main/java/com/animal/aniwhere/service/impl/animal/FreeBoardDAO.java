@@ -30,7 +30,8 @@ public class FreeBoardDAO implements AllBoardService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public FreeBoardDTO selectOne(Map map) {
-		template.update("addCountFree", map);
+		if(map.get("view") == null)
+			template.update("addCountFree", map);
 		return template.selectOne("freeSelectOne", map);
 	}////////// selectOne
 

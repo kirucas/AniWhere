@@ -88,11 +88,9 @@
 	</delete>
 	
 	<update id="addCountGroupBuy" parameterType="java.util.Map">
-		<if test="view != null">
-			UPDATE market_group_buy
-			SET count=count + 1
-			WHERE no=#{no}
-		</if>
+		UPDATE market_group_buy
+		SET count=count + 1
+		WHERE no=#{no}
 	</update>
 	
 </mapper>
