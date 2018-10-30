@@ -58,6 +58,12 @@
 		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
+	<select id="groupbuySum" parameterType="java.util.Map" resultType="int">
+		SELECT SUM(buy_count)
+		FROM group_buy
+		WHERE no=#{no}
+	</select>
+	
 	<select id="groupbuySelectOne" parameterType="java.util.Map" resultType="GroupDTO">
 		SELECT gb.*, mem_nickname, animal_name
 		FROM market_group_buy gb LEFT JOIN member mb ON gb.mem_no = mb.mem_no
@@ -80,5 +86,11 @@
 		DELETE FROM market_group_buy
 		WHERE no=#{no}
 	</delete>
+	
+	<update id="addCountGroupBuy" parameterType="java.util.Map">
+		UPDATE market_group_buy
+		SET count=count + 1
+		WHERE no=#{no}
+	</update>
 	
 </mapper>

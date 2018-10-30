@@ -16,7 +16,7 @@ public class PhotoBoardDAO implements PhotoService {
 
 	@Resource(name = "template")
 	private SqlSessionTemplate template;
-	
+
 	@Override
 	public List<PhotoBoardDTO> selectList(Map map) {
 		return template.selectList("photoSelectList", map);
@@ -30,6 +30,8 @@ public class PhotoBoardDAO implements PhotoService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public PhotoBoardDTO selectOne(Map map) {
+		if(map.get("view") == null)
+			template.update("addCountPhoto", map);
 		return template.selectOne("photoSelectOne", map);
 	}////////// selectOne
 
@@ -80,5 +82,10 @@ public class PhotoBoardDAO implements PhotoService {
 	public void linkDelete(Map map) {
 		template.delete("linkDelete", map);
 	}////////// linkDelete
+
+	@Override
+	public int addHitCount(Map map) {
+		return template.update("addHitCountPhoto", map);
+	}////////// addHitCount
 
 }//////////////////// PhotoBoardDAO

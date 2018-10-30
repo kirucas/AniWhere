@@ -3,7 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
 <!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
-<!-- table_name은 (동물)_tip의 형식으로 넘어와야함 -->
 <mapper namespace="mybatis.Tip">
 
 	<select id="tipCount" parameterType="java.util.Map" resultType="int">
@@ -29,7 +28,7 @@
 				<if test="searchColumn != null">
 					AND ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>
-				ORDER BY tip_no DESC
+				ORDER BY no DESC
 				) T
 			)
 		WHERE R BETWEEN #{start} AND #{end}
@@ -38,23 +37,35 @@
 	<select id="tipSelectOne" parameterType="java.util.Map" resultType="TipDTO">
 		SELECT tn.*, mem_nickname
 		FROM tip tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
-		WHERE tip_no=#{tip_no}
+		WHERE no=#{no}
 	</select>
 	
 	<insert id="tipInsert" parameterType="java.util.Map">
-		INSERT INTO tip(tip_no, mem_no, tip_title, tip_content, ani_category)
+		INSERT INTO tip(no, mem_no, tip_title, tip_content, ani_category)
 		VALUES(seq_tip.nextval, #{mem_no}, #{tip_title}, #{tip_content}, #{ani_category})
 	</insert>
 	
 	<update id="tipUpdate" parameterType="java.util.Map">
 		UPDATE tip
 		SET tip_title=#{tip_title}, tip_content=#{tip_content}
-		WHERE tip_no=#{tip_no}
+		WHERE no=#{no}
 	</update>
 	
 	<delete id="tipDelete" parameterType="java.util.Map">
 		DELETE FROM tip
-		WHERE tip_no=#{tip_no}
+		WHERE no=#{no}
 	</delete>
+	
+	<update id="addHitCountTip" parameterType="java.util.Map">
+		UPDATE tip
+		SET tip_hit=tip_hit + 1
+		WHERE no=#{no}
+	</update>
+	
+	<update id="addCountTip" parameterType="java.util.Map">
+			UPDATE tip
+			SET tip_count = tip_count + 1
+			WHERE no=#{no}
+	</update>
 	
 </mapper>

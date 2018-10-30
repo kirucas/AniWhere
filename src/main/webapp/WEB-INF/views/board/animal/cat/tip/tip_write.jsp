@@ -28,7 +28,7 @@
          $.ajax({
             data: form_data,
             type: "POST",
-            url : "<c:url value='board/animal/cat/tip/Upload.aw'/>",
+            url : "<c:url value='/animal/cat/tip/Upload.aw'/>",
             cache: false,
             contentType: false,
             processData: false,
