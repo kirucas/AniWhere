@@ -2,9 +2,9 @@ package com.animal.aniwhere.service.animal;
 
 public class MovieBoardDTO {
 
-	private String no;
+	private String no; //영상 넘버
 	private String mem_no;
-	private String movie_title;
+	private String movie_title; //영상 제목 : value는 50이상 쓸 수 없음
 	private String movie_count;
 	private String movie_content;
 	private String movie_hit;

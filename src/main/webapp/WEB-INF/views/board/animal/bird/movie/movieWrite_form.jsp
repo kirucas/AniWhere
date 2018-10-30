@@ -56,7 +56,6 @@
 	
 	function check() {
 		var isAttached = $('#summernote').summernote('code');
-		console.log(isAttached);
 		if (fr.movie_title.value == "") {
 
 			alert("제목을 입력해 주세요.");
@@ -66,6 +65,17 @@
 			return false;
 
 		} 
+		
+		else if (fr.movie_title.value.length > 50) {
+
+			alert("제목은 50자 이내로 입력해주세요.");
+
+			fr.movie_title.focus();
+
+			return false;
+
+		} 
+		
 		else if (fr.movie_content.value == "") {
 			alert('내용을 입력하세요.');
 			return false;
@@ -76,18 +86,16 @@
 			return false;
 		}
 		
+		/* 영상을 두 개 이상 올리는 것을 막는 루트이나 일단 쓰지 않고 넣어만 둠.
 		else if (isAttached.match(/<\/iframe>/gi).length >= 2) {
-			alert(console.log(isAttached));
 			alert('영상은 하나만 첨부하세요.');
 			return false;
 		}
-
+ */		
 		 else {
-			 alert(console.log(isAttached));
 			 return true;
 		 }
 	}
-
 </script>
 
 <div class="container">
@@ -109,20 +117,14 @@
 			<label for="title" class="offset-sm-1 col-sm-1 col-form-label">제목</label>
 			<div class="col-sm-9">
 				<input class="form-control" type="text" id="title"
-					name="movie_title" placeholder="제목">
+					name="movie_title" placeholder="제목은 50자 이내로 작성해주세요">
 			</div>
 		</div>
 
 		<div class="form-group row">
-<<<<<<< HEAD
-		<!-- 섬머노트 부분 -->
-			<div class="offset-sm-1 col-sm-10">
-				<textarea id="summernote" name="editordata"></textarea>
-=======
 			<!-- 섬머노트 부분 -->
 			<div class="offset-sm-1 col-sm-10">
 				<textarea id="summernote" name="movie_content"></textarea>
->>>>>>> refs/remotes/origin/vagabond
 			</div>
 		</div>
 
@@ -137,29 +139,6 @@
 </div>
 
 <script>
-<<<<<<< HEAD
-		/* 섬머노트 부분  */
-		$('#summernote').summernote({
-			height : 300, // set editor height
-			minHeight : null, // set minimum height of editor
-			maxHeight : null, // set maximum height of editor
-			width : $('#summernote').parent().css('width'),
-			focus : true,
-			// set focus to editable area after initializing summernote
-			toolbar: [
-					    // [groupName, [list of button]]
-					    ['style', ['bold', 'italic', 'underline', 'clear']],
-					    ['font', ['strikethrough', 'superscript', 'subscript']],
-					    ['fontsize', ['fontsize']],
-					    ['color', ['color']],
-					    ['para', ['ul', 'ol', 'paragraph']],
-					    ['height', ['height']],
-						['video',['video']]
-					  ]
-		});
-		console.log();
-	</script>
-=======
 	/* 섬머노트 부분  */
 	$('#summernote').summernote(
 			{
@@ -169,7 +148,7 @@
 				maxHeight : null, // set maximum height of editor
 				/* airMode: true, */
 				focus : true,
-				placeholder: '영상 및 내용',
+				placeholder: '영상을 첨부해주시고 내용을 반드시 작성해주세요.',
 				// set focus to editable area after initializing summernote
 				toolbar : [
 				// [groupName, [list of button]]
@@ -178,10 +157,6 @@
 						[ 'fontsize', [ 'fontsize' ] ],
 						[ 'color', [ 'color' ] ],
 						[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-						[ 'height', [ 'height' ] ], [ 'video', [ 'video' ] ] ]
-				
+						[ 'height', [ 'height' ] ], [ 'video', [ 'video' ] ] ]	
 			});
-	
-	
 </script>
->>>>>>> refs/remotes/origin/vagabond

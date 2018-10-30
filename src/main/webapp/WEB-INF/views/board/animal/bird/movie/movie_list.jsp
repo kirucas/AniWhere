@@ -67,7 +67,7 @@ a:visited { color:black; text-decoration: none;}
 
 $(function(){
 	$(".link-click").click(function(){
-		location.href="<c:url value='/bird/movie/view.aw?movie_no="+$(this).attr("name")+"&nowPage="+${nowPage}+"'/>";
+		location.href="<c:url value='/bird/movie/view.aw?no="+$(this).attr("name")+"&nowPage="+${nowPage}+"'/>";
 	});
 });
 
@@ -82,8 +82,8 @@ $(function(){
 
 	<c:if test="${not isEmpty}">
 		<c:forEach var="dto" items="${list}" varStatus="loop">
-			<div class="col col-xs-12 col-sm-4 margin-top-30">
-				<div class="col-sm link-click" style="cursor:pointer;" name="${dto.movie_no}" title="${dto.movie_title}">
+			<div class="col col-xs-12 col-md-4 margin-top-30">
+				<div class="col-sm link-click" style="cursor:pointer;" name="${dto.no}" title="${dto.movie_title}">
 					<div class="embed-responsive embed-responsive-16by9 movie-size">
 						${dto.movie_tempsrc}
 						<!-- 
