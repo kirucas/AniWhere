@@ -5,25 +5,63 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.animal.aniwhere.service.AllCommonService;
+import com.animal.aniwhere.service.StoreLocationDTO;
+
 @Controller
 public class WhereController {
 	 
+	@Resource(name="StoreLocService")
+	private AllCommonService storelocservice;
+	
 	  @RequestMapping("/where/main.aw")
-	   public String where_main() throws Exception {
+	  public String where_main() throws Exception {
 	      return "where/whereMain.tiles";
-	   }////////// mating_main
+	  }////////// mating_main
+	  
+	  //전체 갖고오기 ajax
+	  @RequestMapping(value= "/where/map/total.awa", method= RequestMethod.POST)
+	  @ResponseBody
+	  public String whole(Model model,@RequestParam Map map,HttpServletResponse response) throws Exception{
+		  List<StoreLocationDTO> lists = (List<StoreLocationDTO>) storelocservice.selectList(map);
+	      List<Map> collections = new Vector<Map>();
+
+		  for(StoreLocationDTO list:lists) {
+		         Map record = new HashMap();
+		         record.put("bizesId", list.getBizesId());
+		         record.put("bizesNm", list.getBizesNm());
+		         record.put("brchNm", list.getBrchNm());
+		         record.put("indsSclsCd", list.getIndsSclsCd());
+		         record.put("indsSclsNm", list.getIndsSclsNm());
+		         record.put("lnoAdr", list.getLnoAdr());
+		         record.put("rdnmAdr", list.getRdnmAdr());
+		         record.put("lon", list.getLon());
+		         record.put("lat", list.getLat());
+		         record.put("dongNo", list.getDongNo());
+		         record.put("flrNo", list.getFlrNo());
+		         record.put("hoNo", list.getHoNo());
+		         collections.add(record);
+		      }////for
+	      System.out.println(JSONArray.toJSONString(collections));
+		  return JSONArray.toJSONString(collections);
+	  }/////////////whole
 	  
 	  @RequestMapping(value= "/where/map/radius.awa", method= RequestMethod.POST,produces="text/plain; charset=UTF-8")
 	  @ResponseBody
@@ -55,9 +93,12 @@ public class WhereController {
 			return jsonObj.toJSONString();
 	  }//////////////mapdata
 	  
+
+	  
+	  //임의의 메소드 (사용하지ㅏㄶ음)
 	  @RequestMapping(value= "/where/map/D09A01.aw", method= RequestMethod.POST)
 	  @ResponseBody
-	  public String  whole(@RequestParam Map map,HttpServletResponse response) throws Exception{
+	  public String  d09a01(@RequestParam Map map,HttpServletResponse response) throws Exception{
 		  JSONObject jsonObj =  new JSONObject();
 		  
 			String API_URL = "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInUpjong?divId=indsSclsCd&pageNo=2&key=D09A01&ServiceKey=snZhl9X76KcGuXrNuvglRr41nB8iUW9CZ%2F96V4aVUEANTSVsQOIeOM1o7f2cxlsD%2BBOcP%2BElAe12PhHaKfRyTA%3D%3D";

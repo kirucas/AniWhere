@@ -158,7 +158,7 @@ nav a{
                                 <c:if test="${not empty mem_id}" var="sign_check">
                                 	<li><a href="<c:url value='/member_info.aw'/>">내 프로필</a></li>
 	                            	<li><a href="#" id="logout">로그아웃</a></li>
-			                   	</c:if>
+								</c:if>
 			                   	<!-- 로그인 안되어있을떄 보여주는 탭 -->
                             	<c:if test="${not sign_check}">
 						        	<li><a href="<c:url value='/login.aw'/>">로그인</a></li>

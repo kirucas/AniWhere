@@ -73,29 +73,6 @@ input[type=date]:not(.browser-default):focus:not([readonly]){
     box-shadow: 0 1px 0 0 #ebc594;
 }
 </style>
-
-<script>
-$(document).ready(function() {
-      $('#birthdate').click(function(){
-        $('.datepicker').pickadate({
-            selectMonths: true,
-            selectYears: 150, 
-            format: 'yyyy-mm-dd',
-            min: new Date(1900,1,1),
-            max: true
-        });
-    });
-
-        initBindings();
-    });
-
-    function initBindings(){
-        $('#birthdate-icon').click(function(){
-            $('#birthdate').click();
-        });
-    };
-
-</script>
     <body>
 		<div class="container" id="signup">
 	      	<div class="row">
@@ -115,7 +92,8 @@ $(document).ready(function() {
 		      			<span>애완동물 나이</span>
 	      			</div>
 			      	<div class="input-field col s4 offset-s4">
-			      		<input type="text" class="datepicker" name="ani_age">
+			      		 <input id="ani_age" name="ani_age" type="text" class="validate">
+			          <label for="ani_age">애완동물 나이</label>
 			      	</div>
 				  </div>
 			      <div class="row">

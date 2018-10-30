@@ -229,13 +229,11 @@ CREATE TABLE mating
 CREATE TABLE member
 (
 	mem_no number NOT NULL,
-	mem_id varchar2(20) NOT NULL,
+	mem_id varchar2(30) NOT NULL,
 	mem_pw varchar2(20) NOT NULL,
 	mem_name nvarchar2(20) NOT NULL,
-	mem_nickname nvarchar2(10) NOT NULL UNIQUE,
+	mem_nickname nvarchar2(40) NOT NULL UNIQUE,
 	mem_gender varchar2(1) NOT NULL CHECK (mem_gender IN ('F', 'M', 'U')),
-	mem_birth date,
-	mem_loc number NOT NULL,
 	mem_log number NOT NULL,
 	mem_interani varchar2(6) NOT NULL,
 	PRIMARY KEY (mem_no)
@@ -562,15 +560,15 @@ ALTER TABLE market_sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
-	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
+	ON DELETE CASCADE
 ;
 
 
