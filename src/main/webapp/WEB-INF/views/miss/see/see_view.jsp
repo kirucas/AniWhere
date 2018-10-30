@@ -47,7 +47,7 @@
 								<a href="javascript:isDelete()" class="article-action__button button button--red button--red--border">삭제</a>
 							</c:if>
 							<a href="<c:url value='/miss/see.aw'/>" class="article-action__button button">목록</a>	
-							</div>
+						</div>
 					</div>
 					<div class="article-meta">
 								

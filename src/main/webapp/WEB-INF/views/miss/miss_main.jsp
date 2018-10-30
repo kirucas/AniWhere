@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
-<%@ include file="/WEB-INF/views/common/loading.jsp" %>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.js"></script>
 <script
@@ -24,6 +23,16 @@
 	width: 1000px;
 	height: 500px;
 }
+</style>
+<style>
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+  }
 </style>
 <script>
   $(document).ready(function () {
@@ -89,120 +98,83 @@
 		<div class="col-sm-12">
 			<div class="col-sm-6" style="float: left">
 				<a href="<c:url value='/miss/see.aw'/>"><button type="button" class="btn btn-info">봤어요</button></a>
-				<br> 
+				</br> 
+				</br> 
 				<c:if test="${empty requestScope.list }" var="isEmpty">
 				   등록된 게시물이 없어요
     			</c:if>
     			<c:if test="${not isEmpty }">
+    				<table style="width: 100%;">
+    				<tr style="text-align: center;background-color: rgba(80, 80, 80, 0.1);">
+    					<td>제목</td>
+    					<td>작성자</td>
+    					<td>등록일</td>
+    				</tr>
     				<c:forEach var="record" items="${list}" varStatus="loop">
-						<a href="#" class="alert-link"><span>${record.title }</span></a><br>
+    					<tr>
+    						<td>
+							<a href="<c:url value='/miss/see_view.aw?see_no=${record.no}'/>" class="alert-link"><span style="color: black;font-weight: normal">${record.title }</span></a>
+							</td>
+							<td style="text-align: center">${record.mem_nickname}</td>
+							<td style="text-align: center">${record.regidate}</td>
+						</tr>
 					</c:forEach>
+					</table>
 				</c:if>
 			</div>
-			<div class="col-sm-6" style="float: left">
-				<a href="<c:url value='/miss/find.aw'/>"><button type="button" class="btn btn-info">찾아요</button></a><br> 
-				<a href="#" class="alert-link"><span>글 제목1</span></a><br>
-				<a href="#"><span>글 제목2</span></a><br> 
-				<a href="#"><span>글	제목3</span></a><br> 
-				<a href="#"><span>글 제목4</span></a><br> 
-				<a href="#"><span>글 제목5</span></a><br> 
-				<a href="#"><span>글	제목6</span></a><br> 
-				<a href="#"><span>글 제목7</span></a><br> 
-				<a href="#"><span>글 제목8</span></a><br> 
-				<a href="#"><span>글	제목9</span></a><br> 
-				<a href="#"><span>글 제목10</span></a><br> 
-				<a href="#"><span>글이 하나도 없으면 - 등록된 게시글이 없어요.</span></a><br>
+			<div class="col-sm-6" style="float: left;" >
+				<a href="<c:url value='/miss/find.aw'/>"><button type="button" class="btn btn-info">찾아요</button></a>
+				</br> 
+				</br> 
+				<c:if test="${empty requestScope.list2 }" var="isEmpty">
+				   등록된 게시물이 없어요
+    			</c:if>
+    			<c:if test="${not isEmpty }">
+    				<table style="width: 100%;">
+    				<tr style="text-align: center;background-color: rgba(80, 80, 80, 0.1);">
+    					<td>제목</td>
+    					<td>작성자</td>
+    					<td>등록일</td>
+    				</tr>
+    				<c:forEach var="record" items="${list2}" varStatus="loop">
+    					<tr>
+    						<td>
+							<a href="<c:url value='/miss/find_view.aw?find_no=${record.no}'/>" class="alert-link"><span style="color: black;font-weight: normal">${record.title }</span></a>
+							</td>
+							<td style="text-align: center">${record.mem_nickname}</td>
+							<td style="text-align: center">${record.regidate}</td>
+						</tr>
+					</c:forEach>
+					</table>
+				</c:if>
 			</div>
 		</div>
 		<div class="col-sm-12" style="margin-top: 30px">
 			<a href="<c:url value='/miss/shelter.aw'/>"><button type="button" class="btn btn-info">보호소</button></a>
-
+			</br>
+			</br>
 			<div class="row text-center text-lg-left" style="margin-top: 10px">
-
-				<div class="col-lg-3 col-md-4 col-xs-6">
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/owl.jpg'/>"
-						alt="no picture"> <span>XX 보호소 - 지역</span>
-					</a>
-				</div>
-				<div class="col-lg-3 col-md-4 col-xs-6">
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/1.JPG'/>" alt=""> <span>XX
-							보호소 - 지역</span>
-					</a>
-				</div>
-				<div class="col-lg-3 col-md-4 col-xs-6">
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/2.JPG'/>" alt=""> <span>XX
-							보호소 - 지역</span>
-					</a>
-				</div>
-				<div class="col-lg-3 col-md-4 col-xs-6">
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/3.JPG'/>" alt=""> <span>XX
-							보호소 - 지역</span>
-					</a>
-				</div>
-				<div class="col-lg-3 col-md-4 col-xs-6">
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/4.JPG'/>" alt=""> <span>XX
-							보호소 - 지역</span>
-					</a>
-				</div>
-				<div class="col-lg-3 col-md-4 col-xs-6">
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/1.JPG'/>" alt=""> <span>XX
-							보호소 - 지역</span>
-					</a>
-				</div>
-				<div class="col-lg-3 col-md-4 col-xs-6">
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/2.JPG'/>" alt=""> <span>XX
-							보호소 - 지역</span>
-					</a>
-				</div>
-				<div class="col-lg-3 col-md-4 col-xs-6">
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/3.JPG'/>" alt=""> <span>XX
-							보호소 - 지역</span>
-					</a>
-				</div>
-				<div class="col-lg-3 col-md-4 col-xs-6">
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/4.JPG'/>" alt=""> <span>XX
-							보호소 - 지역</span>
-					</a>
-				</div>
-				<div class="col-lg-3 col-md-4 col-xs-6">
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/1.JPG'/>" alt=""> <span>XX
-							보호소 - 지역</span>
-					</a>
-				</div>
-				<div class="col-lg-3 col-md-4 col-xs-6">
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/2.JPG'/>" alt=""> <span>XX
-							보호소 - 지역</span>
-					</a>
-				</div>
-				<div class="col-lg-3 col-md-4 col-xs-6">	
-					<a href="#" class="d-block mb-4 h-100"> <img
-						class="img-fluid img-thumbnail"
-						src="<c:url value='/resources/images/etc/3.JPG'/>" alt=""> <span>XX
-							보호소 - 지역</span>
-					</a>
-				</div>
+				<section class="article-list" style="margin-left: 50px">
+				<!-- 여기서 반복문 돌려서 글 -->
+				<c:if test="${empty requestScope.list}" var="isEmpty">
+				   등록된 게시물이 없어요
+    			</c:if>
+				<c:if test="${not isEmpty }">
+					<c:forEach var="record" items="${list3}" varStatus="loop">
+						<a href="<c:url value='/miss/shelter_view.aw?shelter_no=${record.no}'/>" class="article-list-item__info">
+						<div style="margin-bottom: 10px; padding:10px;background-color: rgba(80, 80, 80, 0.1);margin-top:15px;margin-left: 15px;margin-right: 15px;float: left">
+							<div style="width: 200px;height: 200px;">
+								<img src="${record.img_src}" style="width: 200px; height: 200px;">
+							</div>				
+							<div style="width: 200px;height: 50px; font-size:0.8em;color: black;font-style: bold" >
+								<p style="margin-top: 5px">보호소 이름 : ${record.careNm }</br>등록일 : ${record.start_notice }</p>
+							</div>
+						</div>
+						</a>
+					</c:forEach>
+				</c:if>
+				<!-- 페이징 부분 -->
+			</section>
 			</div>
 		</div>
 	</div>

@@ -30,7 +30,6 @@ public class FindSeeDAO implements AllCommonService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public FindSeeDTO selectOne(Map map) {
-		template.update("addCountFS", map);
 		return template.selectOne("fsSelectOne", map);
 	}////////// selectOne
 

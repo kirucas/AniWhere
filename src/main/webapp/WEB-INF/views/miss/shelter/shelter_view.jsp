@@ -16,8 +16,8 @@
 				</div>
 				<!-- Info Table -->
 				<div style=" margin-top: 15px; margin-left: 16px; float: right">
-					<h2 style="margin-top: 10px; margin-left: 20px;">유기동물 정보</h2>
-					<table class="table table-bordered" style=" margin-top: 15px; margin-left: 18px; width: 590px;">
+					<h3 style="margin-top: 5px; margin-left: 20px;">유기동물 정보</h3>
+					<table class="table table-bordered" style=" margin-top:10px; margin-left: 18px; width: 590px;">
 						<tr>
 							<td  style="vertical-align: middle; background-color: rgba(80, 80, 80, 0.1);">품종</td>
 							<td  style="padding-top: 15px; width: 70%">${record.kind}</td>
@@ -47,7 +47,7 @@
 							<td
 								style="vertical-align: middle; background-color: rgba(80, 80, 80, 0.1);">보호소 위치</td>
 							<td>
-								<div style="vertical-align: middle;">${record.addr}</div>
+								<div style="vertical-align: middle; font-size: 0.9em">${record.addr}</div>
 							</td>
 						</tr>
 						<tr>
@@ -66,9 +66,10 @@
 					</table>
 				</div>
 			</div>
-			<div id="totalsize" class="col col-sm-12" style="height: 450px; margin-top:15px">
+			<div id="totalsize" class="col col-sm-12" style="height: 450px; margin-top:15px; background-color: gray">
 					<!-- 지도 들어갈 부분 -->
 			</div>
+			<a href="<c:url value='/miss/shelter.aw'/>"><button style="margin-left: 1050px;margin-top: 20px;margin-bottom:10px; height: 35px;width: 80px">목록</button></a>
 		</div>
 	</div>
 </div>
