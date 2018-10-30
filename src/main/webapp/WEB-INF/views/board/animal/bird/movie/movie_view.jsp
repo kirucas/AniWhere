@@ -22,13 +22,11 @@ var isDelete = function(){
 
 .title {
 	/* 일정 글자 수 이상은 안보이게 하는 효과 */
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	line-height: 1.2em;
-	height: 2.4em;
+	font-size: x-large;
+}
+
+.nickname {
+	font-size: large;
 }
 
 /* 행 사이 공간 주기 */
@@ -44,56 +42,51 @@ var isDelete = function(){
 	margin-top: 3.0em;
 }
 
-/* 라인 긋기 */
-.line {
-	text-align: center;
+/* 우측 공간 줘서 맞추기  */
+.margin-right-10 {
+	margin-left: 1.0em;
 }
 
 /* 아이디, 조회수, 아래 페이지네이션에 메인 칼라 추가 */
-.btn-primary {
+.btn {
 	background-color: #1ABC9C;
 	border-color: #1ABC9C;
+	text-align: right;
 }
 
-.id {
-	color: #1ABC9C;
-}
 
-.hits {
-	color: #1ABC9C;
-}
 
-.pagination {
-	margin-left: 150px;
-}
+
 </style>
 
 <!-- 내용 시작 -->
 <div class="container">
-			<div class="col col-xs-12 col-sm-4 margin-top-30">
-				<div class="col-sm moda" data-toggle="modal" id="popupMovie" data-target=".bd-example-modal-lg">
-					<div class="embed-responsive embed-responsive-16by9 movie-size">
-						${dto.movie_tempsrc}
-					</div>
-					<div class="media-body">
-						<h5 class="title">${dto.movie_title}</h5>
-						<h6 class="nickname">${dto.mem_nickname}</h6>
-						<small class="count">조회수 ${dto.movie_count}</small>
-						<small class="postdate">${dto.movie_regidate}</small>
-					</div>
-				</div>
+	<div class="col margin-top-30">
+		<div class="col moda" data-toggle="modal" id="popupMovie"
+			data-target="bd-example-modal-lg">
+			<div class="col media-header">
+				<div class="title col-xs-12 col-sm-6 col-md-8">${dto.movie_title}</div>
+				<div class="nickname col-xs-6 col-md-4">닉네임 ${dto.mem_nickname}</div>
+				<div class="count col-xs-12 col-sm-6 col-md-8">조회수
+					${dto.movie_count}</div>
+				<div class="postdate col-xs-6 col-md-4">등록일 ${dto.movie_regidate}</div>
 			</div>
+			<div class="media-body">
+				<div class="content">${dto.movie_content}</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="col-xs-12 col-sm-12"
 					style="border: 1px solid gray; margin-top: 10px"></div>
 	<!-- row -->
-	<div class="row margin-top-10">
-		<div class="text-center">
+	<div class="text-right margin-top-10">
+		<div>
 			<a
 				href="<c:url value='/bird/movie/Reply.aw?no=${dto.no}'/>"
-				class="btn btn-success">답변</a>
-			<c:if test="${sessionScope.mem_no == dto.no}">
+				class="btn btn-success">댓글</a>
+			<c:if test="${sessionScope.mem_no == dto.mem_no}">
 				<a
 					href="<c:url value='/bird/movie/Edit.aw?no=${dto.no}'/>"
 					class="btn btn-success">수정</a>

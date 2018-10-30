@@ -56,7 +56,6 @@
 	
 	function check() {
 		var isAttached = $('#summernote').summernote('code');
-		console.log(isAttached);
 		if (fr.movie_title.value == "") {
 
 			alert("제목을 입력해 주세요.");
@@ -87,18 +86,16 @@
 			return false;
 		}
 		
+		/* 영상을 두 개 이상 올리는 것을 막는 루트이나 일단 쓰지 않고 넣어만 둠.
 		else if (isAttached.match(/<\/iframe>/gi).length >= 2) {
-			alert(console.log(isAttached));
 			alert('영상은 하나만 첨부하세요.');
 			return false;
 		}
-
+ */		
 		 else {
-			 alert(console.log(isAttached));
 			 return true;
 		 }
 	}
-
 </script>
 
 <div class="container">
@@ -151,7 +148,7 @@
 				maxHeight : null, // set maximum height of editor
 				/* airMode: true, */
 				focus : true,
-				placeholder: '영상은 한 개만 첨부해주시고 내용을 반드시 작성해주세요',
+				placeholder: '영상을 첨부해주시고 내용을 반드시 작성해주세요.',
 				// set focus to editable area after initializing summernote
 				toolbar : [
 				// [groupName, [list of button]]
@@ -160,9 +157,6 @@
 						[ 'fontsize', [ 'fontsize' ] ],
 						[ 'color', [ 'color' ] ],
 						[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-						[ 'height', [ 'height' ] ], [ 'video', [ 'video' ] ] ]
-				
+						[ 'height', [ 'height' ] ], [ 'video', [ 'video' ] ] ]	
 			});
-	
-	
 </script>

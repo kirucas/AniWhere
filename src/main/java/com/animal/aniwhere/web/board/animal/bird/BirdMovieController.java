@@ -1,5 +1,6 @@
 package com.animal.aniwhere.web.board.animal.bird;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -56,8 +57,7 @@ public class BirdMovieController {
 				System.out.println("content:" + content);
 				String src = "<iframe";
 				int target_num = content.indexOf(src);
-				String tempResult;
-				String result;
+				String tempResult, result;
 				String lightBox = " data-toggle=\"lightbox\"";
 				if (target_num != -1) {
 					tempResult = content.substring(target_num, content.indexOf("></iframe>") + "></iframe>".length());
@@ -97,7 +97,7 @@ public class BirdMovieController {
 	public String write(@RequestParam Map map) throws Exception {
 		
 			// 서비스 호출
-				service.insert(map);
+			service.insert(map);
 		// 뷰정보 반환
 		return "forward:/bird/movie/List.aw";
 	}
@@ -107,24 +107,59 @@ public class BirdMovieController {
 	public String movie_view(@RequestParam Map map, Model model) throws Exception {
 		// 게시글
 		MovieBoardDTO dto = service.selectOne(map);
-		System.out.printf("dto.getMovie_tempsrc(): %s",dto.getMovie_tempsrc());
+		
+		// 유튜브 iframe소스를 가져와서 섬머노트와 같이 있는 내용과 분리하여 뿌리는 메소드
+		//(데이터 베이스 상에는 관련 컬럼이 없으므로)
+		setIframe(dto);
+		
 		// 데이타 저장]
 		model.addAttribute("dto", dto);
+		
 		// 뷰정보 반환]
 		return "board/animal/bird/movie/movie_view.tiles";
 	}/////////////////////
 
 	@RequestMapping("/bird/movie/edit.aw")
 	public String movie_edit() throws Exception {
+		
 		return "/board/animal/bird/movie/movieEdit_form.tiles";
 	}
 	
 	//삭제 처리]
 		@RequestMapping("/bird/movie/delete.aw")
 		public String delete(@RequestParam Map map,Model model) throws Exception{
+			System.out.println("map"+map);
 			int successFail =service.delete(map);
+			System.out.println("successFail"+successFail);
 			model.addAttribute("successFail", successFail);
-			return "/bird/movie/List.aw";
+			return "forward:/bird/movie/List.aw";
 		}////////////////////////////////////////////////
-	
+		
+	// content안에 있는 유튜브 소스와 내용을 순서대로 분리하여
+	//<div>를 넣어준 뒤 뿌려주는 메소드
+	private void setIframe(MovieBoardDTO dto) {
+		String content = dto.getMovie_content(); //content 얻기
+		System.out.println("content:" + content);
+		String src = "<iframe"; 
+		int target_num = content.indexOf(src); //<iframe 글자 수가 target_num
+		String tempResult, result;
+		String lightBox = " data-toggle=\"lightbox\"";
+		if (target_num != -1) { //<iframe이 소스 안에 있다면...
+			//<iframe태그 내용만 도려내기
+			tempResult = content.substring(target_num, content.indexOf("></iframe>") + "></iframe>".length());
+			//result에 light박스 토글 추가
+			result = new StringBuffer(tempResult).insert(tempResult.lastIndexOf("></iframe>"), lightBox).toString();
+			//grandResult에 embed-responsive로 변환
+			String grandResult = result.replace("note-video-clip","embed-responsive-item");
+			System.out.println("grandResult:" + grandResult);
+			dto.setMovie_tempsrc(grandResult);
+		/*	
+			//<iframe>을 잘라낸 나머지를 내용으로 추출.
+			String netContent = content.replace(tempResult, "");
+			System.out.printf("netContent : %s", netContent);
+			dto.setMovie_content(netContent);
+			*/
+		}
+	}
+		
 }//////////////////// MovieController class
