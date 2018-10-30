@@ -1,22 +1,28 @@
 package com.animal.aniwhere.web.board.miss;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.miss.FindSeeDTO;
+import com.animal.aniwhere.service.miss.LostAnimalDTO;
 
 @Controller
 public class MissMainController {
@@ -294,5 +300,41 @@ public class MissMainController {
 		
 		
 		//================================================================================================================
+		
+		//안드로이드
+		@ResponseBody
+		@RequestMapping(value="/miss/AndroidFind.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
+		public String find_list(@RequestParam Map map) throws Exception {
+			
+			map.put("table_name", "find");
+			
+			//전체 레코드 수
+			int totalRecordCount= service.getTotalRecord(map);
+			map.put("start",1);
+			map.put("end",totalRecordCount);					
+			List<FindSeeDTO> lists = (List<FindSeeDTO>) service.selectList(map);
+			List<Map> collections = new Vector<Map>();
+			
+			for(FindSeeDTO list:lists) {
+				Map record = new HashMap();
+				record.put("no", list.getNo());
+				record.put("mem_no", list.getMem_no());
+				record.put("title", list.getTitle());
+				record.put("content", list.getContent());
+				record.put("regidate", list.getRegidate()+"");
+				record.put("count", list.getCount());
+				record.put("animal_code", list.getAnimal_code());	
+				record.put("mem_nickname", list.getMem_nickname());
+				record.put("animal_name", list.getAnimal_name());
+				collections.add(record);
+			}
+			System.out.println(JSONArray.toJSONString(collections));
+		
+					
+			return JSONArray.toJSONString(collections);
+		}////////// miss_write
+		
+		
+		
 		
 }//////////////////// MissMainController class

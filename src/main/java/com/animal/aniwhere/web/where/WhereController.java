@@ -5,8 +5,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
@@ -17,8 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.animal.aniwhere.service.AllCommonService;
+import com.animal.aniwhere.service.StoreLocationDTO;
+
 @Controller
 public class WhereController {
+	  @Resource(name="StoreLocService")
+	  private AllCommonService storelocservice;
 	 
 	  @RequestMapping("/where/main.aw")
 	   public String where_main() throws Exception {
@@ -82,12 +89,22 @@ public class WhereController {
 	  }//////////////mapdata
 	  
 	  @ResponseBody
-	  @RequestMapping(value= "/android.awa", method= RequestMethod.POST)
-	  public String android() throws Exception{
-		  
-		  
-		  
-		  
-		  return null;
+	  @RequestMapping(value= "/androidMap.awa", method= RequestMethod.POST,produces = "text/plain; charset=UTF-8")
+	  public String android(@RequestParam Map map) throws Exception{
+		  List<StoreLocationDTO> lists= (List<StoreLocationDTO>)storelocservice.selectList(map);
+	        
+		  JSONObject finObj = new JSONObject();
+	        for(StoreLocationDTO list:lists) {
+	           JSONObject subObj = new JSONObject();
+	           JSONArray latlon = new JSONArray();
+	           subObj.put("lat",list.getLat().toString());
+	           subObj.put("lon",list.getLon().toString());
+	           latlon.add(subObj);
+	           String bize = list.getBizesId();
+	           finObj.put(bize, latlon);
+	        }
+	        System.out.println(finObj.toJSONString());
+	        return finObj.toJSONString();
 	  }
+
 }
