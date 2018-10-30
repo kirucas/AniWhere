@@ -64,7 +64,7 @@
 		SELECT *
 		FROM photo_link
 		WHERE no=#{no}
-		ORDER link_no
+		ORDER BY link_no
 	</select>
 	
 	<insert id="linkInsert" parameterType="java.util.Map">
@@ -77,7 +77,7 @@
 	
 	<delete id="linkDelete" parameterType="java.util.Map">
 		DELETE FROM photo_link
-		WHERE origin_no=#{no}
+		WHERE no=#{no}
 	</delete>
 	
 	<update id="addHitCountPhoto" parameterType="java.util.Map">

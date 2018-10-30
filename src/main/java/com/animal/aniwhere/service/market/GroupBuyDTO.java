@@ -9,10 +9,11 @@ public class GroupBuyDTO {
 	private String content;
 	private java.sql.Date regidate;
 	private String count;
-	private String buy_count;
 	private String goal;
 	private java.sql.Date deadline;
-	
+
+	// 현재 판매 수량 저장을 위한 속성 추가
+	private String buy_count;
 	// 작성자 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
 	// 동물의 분류 명을 저장하기 위한 속성 추가
