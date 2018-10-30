@@ -105,10 +105,8 @@
 							<span>[기타포유류]</span>
 						</c:otherwise>
 					</c:choose>
-
 				</h3>
 			</div>
-
 			<div class="col-md-4" style="border: 1px solid silver">
 				<h3 class="my-3">조회수 :${record.count}</h3>
 				<h3 class="my-3">등록일: ${record.regidate}</h3>
@@ -135,8 +133,6 @@
 				<tr>
 					<td colspan="2">${record.content}<br />
 
-
-
 					</td>
 				</tr>
 
@@ -159,7 +155,6 @@
 				
 		</div>
 		<div style="margin-bottom: 50px"></div>
-
 
 	</div>
 

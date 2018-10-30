@@ -160,7 +160,7 @@ function changeimage1() {
           <h3 class="my-3">판매자 아이디: ${record.mem_nickname}</h3>
        
          <h3 class="my-3" id="animal_code">
-					관련태그:
+					관련태그:  
 					<c:choose>
 						<c:when test="${record.animal_code eq '1'}">
 							<span>[개]</span>
@@ -198,33 +198,20 @@ function changeimage1() {
       <div style="margin-top:10px">
    </div><br/>
       
- 
-  
-	
-
       <!-- 사진에 대한 유효성 검사 및 로직 필요  -->
       <h3 class="my-4">판매자가 올린 사진 3개이상</h3> 
 
       <div class="row">
 
-        <div class="col-md-3 col-sm-6 mb-4 view overlay zoom" >
-        
-            <img name="product1" id="product1"  onclick="javascript:changeimage1()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" alt="" style="width: 300px; height: 200px;">
-         
+        <div class="col-md-3 col-sm-6 mb-4 view overlay zoom" >   
+            <img name="product1" id="product1"  onclick="javascript:changeimage1()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" alt="" style="width: 300px; height: 200px;">      
         </div>
-
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-         
-            <img name="product2" id="product2" onclick="javascript:changeimage2()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product2.jpg'/>" alt="" style="width: 300px; height: 200px;">
-       
+            <img name="product2" id="product2" onclick="javascript:changeimage2()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product2.jpg'/>" alt="" style="width: 300px; height: 200px;">    
         </div>
-
-        <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-        
-            <img name="product3" id="product3" onclick="javascript:changeimage3()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product3.jpg'/>" alt="" style="width: 300px; height: 200px;">
-        
+        <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">    
+            <img name="product3" id="product3" onclick="javascript:changeimage3()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product3.jpg'/>" alt="" style="width: 300px; height: 200px;">    
         </div>
-
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">     
             <img name="product4" id="product4" onclick="javascript:changeimage4()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product4.png'/>" alt="" style="width: 300px; height: 200px;">
         </div>
@@ -238,22 +225,24 @@ function changeimage1() {
     	<th colspan="2" class="text-center" style="max-width: 100%;">내용</th>
 				</tr>
 				<tr style="max-width: 100%;">
-					<td colspan="2">${record.content}<br/>
+					<td colspan="2">
+					
 					제목: <br/>
 					
 					판매물품: <br/>
 					
-					희망가: <br/>
+					희망가: 원<br/>
 					
 					거래기간:    까지 <br/>
 					
 					거래방법: <br/>
 								
-					연락처: <br/>
+					연락처:  <br/>
 					
-					======================자세한 설명을 구체적으로 해주세요 ============================<br/>
-					
-					
+					===================자세한 설명을 구체적으로 해주세요 =====================<br/>
+							${record.content}<br/>
+							
+										
 					</td>
 				</tr>
        </table>
@@ -277,5 +266,4 @@ function changeimage1() {
          <div style="margin-bottom: 50px" ></div>
     </div>
 
-    
   </body>
