@@ -194,6 +194,32 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8940a4eb3083abd07d038b8c2839831"></script>
 <script>
 		$(document).ready(function() {
+			//시작하자마자 store_location테이블에 있는 정보 조회 및 지도에 뿌려주고 클러스터링 하기
+			$.ajax({
+	            type: "POST",
+	            dataType : "json",
+	            url : "<c:url value='/where/map/total.awa'/>",
+	            success: function(jsonObj) {
+					var codes = ["D09A01","D09A02","D25A16","Q12A07","S04A03","S04A01","S04A02"];
+	            	$.each(jsonObj, function(code, co_val){
+	            		$.each(JSON.parse(co_val), function(tag, tag_val){
+	            			if(tag=='body'){
+	            				$.each(tag_val,function(key,val){
+				            		if(key=='items'){
+			            				$.each(val,function(k,v){
+			            					mapMaker(v.lat,v.lon);
+			            				});
+				            		}
+	            				});
+	            			}
+	            		});
+	            	});
+	            },
+	            error : function() {
+	               console.log("error");
+	            }
+	         });
+			
          	var space = /\+/g; //" "을 의미하는 값
 			
 			var strdata = $("#ip").prop("title");
@@ -270,7 +296,6 @@
 
 							// 마커와 인포윈도우를 표시합니다
 							displayMarker(locPosition, message);
-							test(lat,lon);
 						});
 
 			} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
@@ -326,8 +351,8 @@
 			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 			var zoomControl = new daum.maps.ZoomControl();
 			map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-			
-			function test(lat1,lon1){
+
+			function radius(lat1,lon1){
 				$.ajax({
 		        	data : {code:"D09A01/D09A02/D25A16/Q12A07/S04A03/S04A01/S04A02",'lat':lat1,'lon':lon1},
 		            type: "POST",
