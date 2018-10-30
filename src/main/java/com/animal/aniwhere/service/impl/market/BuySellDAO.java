@@ -30,7 +30,8 @@ public class BuySellDAO implements AllCommonService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public BuySellDTO selectOne(Map map) {
-		template.update("addCountBS", map);
+		if(map.get("view") == null)
+			template.update("addCountBS", map);
 		return template.selectOne("bsSelectOne", map);
 	}////////// selectOne
 
