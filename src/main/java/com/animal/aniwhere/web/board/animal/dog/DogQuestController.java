@@ -71,13 +71,25 @@ public class DogQuestController {
 		return "board/animal/dog/quest/quest_list.tiles";
 	}////////////////list()
 	
-	@RequestMapping(value="/animal/dog/quest/quest_write.aw",method=RequestMethod.GET)
+	@RequestMapping(value="/animal/dog/quest/quest_{path}",method=RequestMethod.GET)
 	public String quest_write() throws Exception {
 		return "board/animal/dog/quest/quest_write.tiles";
 	}
 	
 	@RequestMapping(value="/animal/dog/quest/quest_write.aw",method=RequestMethod.POST)
 	public String quest_writeOk(@RequestParam Map map,HttpSession session) throws Exception{
+		map.put("mem_no",session.getAttribute("mem_no"));
+		questService.insert(map);
+		return "forward:/animal/dog/quest/quest_list.aw";
+	}
+	
+	@RequestMapping(value="/animal/dog/quest/quest_reply.aw",method=RequestMethod.GET)
+	public String quest_reply() throws Exception {
+		return "board/animal/dog/quest/quest_reply.tiles";
+	}
+	
+	@RequestMapping(value="/animal/dog/quest/quest_reply.aw",method=RequestMethod.POST)
+	public String quest_replyOk(@RequestParam Map map,HttpSession session) throws Exception {
 		map.put("mem_no",session.getAttribute("mem_no"));
 		questService.insert(map);
 		return "forward:/animal/dog/quest/quest_list.aw";

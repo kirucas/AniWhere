@@ -37,12 +37,13 @@
 		<div class="col-sm-2"  style="text-align:left;">
 			${record.quest_regidate}
 		</div>
-		<div class="offset-sm-5 col-sm-2" style="text-align:right">
+		<div class="offset-sm-4 col-sm-3" style="text-align:right">
 			<c:if test="${sessionScope.mem_no == record.mem_no}">
 				<a class="text-right" href="<c:url value='/animal/dog/quest/quest_edit.aw?no=${record.no}'/>">수정 &nbsp;</a>
 				<a id="delete" href="#">| &nbsp;삭제 |</a>
 			</c:if>
 			<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>"> &nbsp;&nbsp;목록</a>
+			<a href="<c:url value='/animal/dog/quest/quest_reply.aw'/>">|&nbsp;&nbsp;답변</a>
 		</div>
 	</div>
 	<div class="row border-bottom">

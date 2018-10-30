@@ -1,4 +1,4 @@
-﻿package com.animal.aniwhere.web.board.animal.bird;
+﻿package com.animal.aniwhere.web.board.animal.rna;
 
 public class PagingUtil {
 
