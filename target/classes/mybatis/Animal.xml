@@ -48,4 +48,5 @@
 		DELETE FROM animal
 		WHERE mem_no=#{mem_no}
 	</delete>
+	
 </mapper>
