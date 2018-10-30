@@ -30,7 +30,8 @@ public class PhotoBoardDAO implements PhotoService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public PhotoBoardDTO selectOne(Map map) {
-		template.update("addCountPhoto", map);
+		if(map.get("view") == null)
+			template.update("addCountPhoto", map);
 		return template.selectOne("photoSelectOne", map);
 	}////////// selectOne
 
