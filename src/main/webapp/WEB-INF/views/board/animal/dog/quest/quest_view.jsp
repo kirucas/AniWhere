@@ -6,7 +6,7 @@
 		//메모글 삭제처리]
 		$('#delete').on('click',function(){
 			if(confirm('삭제 하시겠습니까')){
-				location.replace("<c:url value='/animal/dog/quest/quest_delete.aw?quest_no=${record.quest_no}'/>");				
+				location.replace("<c:url value='/animal/dog/quest/quest_delete.aw?no=${record.no}'/>");				
 			}
 		});
 	});
@@ -39,7 +39,7 @@
 		</div>
 		<div class="offset-sm-5 col-sm-2" style="text-align:right">
 			<c:if test="${sessionScope.mem_no == record.mem_no}">
-				<a class="text-right" href="<c:url value='/animal/dog/quest/quest_edit.aw?quest_no=${record.quest_no}'/>">수정 &nbsp;</a>
+				<a class="text-right" href="<c:url value='/animal/dog/quest/quest_edit.aw?no=${record.no}'/>">수정 &nbsp;</a>
 				<a id="delete" href="#">| &nbsp;삭제 |</a>
 			</c:if>
 			<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>"> &nbsp;&nbsp;목록</a>

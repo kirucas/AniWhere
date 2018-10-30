@@ -3,10 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 <%@ include file="/WEB-INF/views/common/loading.jsp" %>
-<style>
-/* 아이콘을 위한 것 */	
-@import("https://use.fontawesome.com/releases/v5.3.1/css/all.css" )
-</style>
 <div class="container">
 	<div class="page-header">
 		<h2>
@@ -45,9 +41,9 @@
 				<c:if test="${not isEmpty }">
 					<c:forEach var="record" items="${list}" varStatus="loop">
 						<tr>
-							<td class="text-center" scope="row">${record.quest_no}</td>
+							<td class="text-center" scope="row">${record.no}</td>
 							<td>
-								<a style="color:black;" href="<c:url value='/animal/dog/quest/quest_view.aw?quest_no=${record.quest_no}'/>">${record.quest_title}
+								<a style="color:black;" href="<c:url value='/animal/dog/quest/quest_view.aw?no=${record.no}'/>">${record.quest_title}
 									<span class="badge badge-info">${record.quest_hit}</span>
 								</a>
 							</td>

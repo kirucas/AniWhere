@@ -68,7 +68,7 @@ $(function(){
 					<input type="button" class="btn btn-lg btn-outline-danger" value="취소"/>
 				</a>
 			</div>
-			<input type="hidden" name="quest_no" value="${record.quest_no}" />
+			<input type="hidden" name="no" value="${record.no}" />
 			<div class="form-group col-sm-1">
 				<button type="submit" class="btn btn-lg btn-outline-primary">수정</button>
 			</div>
