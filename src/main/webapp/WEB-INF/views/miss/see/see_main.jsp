@@ -28,15 +28,16 @@
             <a href="<c:url value='/miss/see_write.aw'/>">
                <img style="float:left;margin-top:5px" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
                </a>
-                <form style="display:inline" action="">
-                    <label><select name="target" class="sub-header-search__select">
+                <form style="display:inline" action="<c:url value='/miss/see.aw'/>">
+                    <label>
+                    	<select name="searchColumn" class="sub-header-search__select">
                             <option value="title">제목</option>
                             <option value="content" >내용</option>
-                            <option value="title_content" >제목+내용</option>
-                            <option value="user_name" >작성자</option>
-                        </select></label>
-                    <input style="float:right" type="text" name="q" class="sub-header-search__input" placeholder="검색">
-                    <button class="sub-header-search__button"><img src="https://talk.op.gg/images/icon-search@2x.png" width="24" alt="검색"></button>
+                            <option value="mem_nickname" >작성자</option>
+                        </select>
+                    </label>
+                    <input style="float:right" type="text" name="searchWord" class="sub-header-search__input" placeholder="검색">
+                    <button type="submit" class="sub-header-search__button"><img src="https://talk.op.gg/images/icon-search@2x.png" width="24" alt="검색"></button>
                 </form>
             </div>
             </div>

@@ -15,7 +15,7 @@
 			<div class="sub-header-info">
 				<div>
 				<h2 class="sub-header__title" style="display:inline">
-					찾아요
+					<a href="<c:url value='/miss/find.aw'/>">찾아요</a>
 				</h2>
 				<ul class="sub-header-button">
 					<li class="sub-header-button__item sub-header-button__item--search">
@@ -30,15 +30,14 @@
 				</a>
                 <form style="display:inline;" action="">
                     <label>
-                    	<select name="target" style="margin-left:10px" class="sub-header-search__select">
+                    	<select name="searchColumn" style="margin-left:10px" class="sub-header-search__select">
                             <option value="title" >제목</option>
                             <option value="content" >내용</option>
-                            <option value="title_content" >제목+내용</option>
-                            <option value="user_name" >작성자</option>
+                            <option value="mem_nickname" >작성자</option>
                         </select>
                     </label>
-                    <input style="float:right" type="text" name="q" class="sub-header-search__input" placeholder="검색">
-                    <button class="sub-header-search__button"><img src="https://talk.op.gg/images/icon-search@2x.png" width="24" alt="검색"></button>
+                    <input style="float:right" type="text" name="searchWord" class="sub-header-search__input" placeholder="검색">
+                    <button type="submit" class="sub-header-search__button"><img src="https://talk.op.gg/images/icon-search@2x.png" width="24" alt="검색"></button>
                 </form>
             </div>
 				</div>

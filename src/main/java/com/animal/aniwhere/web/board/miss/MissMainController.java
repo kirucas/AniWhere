@@ -13,14 +13,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.AllCommonService;
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.miss.FindSeeServiceImpl;
 import com.animal.aniwhere.service.impl.miss.LostAnimalServiceImpl;
 import com.animal.aniwhere.service.miss.FindSeeDTO;
 import com.animal.aniwhere.service.miss.LostAnimalDTO;
+import com.animal.aniwhere.web.board.FileUpDownUtils;
 
 
 @Controller
@@ -264,6 +269,22 @@ public class MissMainController {
 		return "forward:/miss/see.aw";
 	}////////// miss_write
 	
+	//Summernote 업로드 기능
+	@ResponseBody
+	@RequestMapping(value="/miss/see_upload/Upload.aw")
+	public String see_upload(MultipartHttpServletRequest mhsr) throws Exception {
+		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+		MultipartFile upload = mhsr.getFile("file");
+		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+		//File file = new File(phisicalPath+File.separator+newFilename);
+		//upload.transferTo(file);
+			
+		List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "see"); // S3  업로드
+			
+	    //return "/Upload/"+newFilename;
+		return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
+	}
+	
 	
 	//================================================================================================================
 	
@@ -383,6 +404,21 @@ public class MissMainController {
 			return "forward:/miss/find.aw";
 		}////////// miss_write
 		
+		//Summernote 업로드 기능
+		@ResponseBody
+		@RequestMapping(value="/miss/find_upload/Upload.aw")
+		public String find_upload(MultipartHttpServletRequest mhsr) throws Exception {
+			String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+			MultipartFile upload = mhsr.getFile("file");
+			String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+			//File file = new File(phisicalPath+File.separator+newFilename);
+			//upload.transferTo(file);
+				
+			List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "find"); // S3  업로드
+				
+		    //return "/Upload/"+newFilename;
+			return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
+		}
 		
 		//================================================================================================================
 		
