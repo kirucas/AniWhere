@@ -13,12 +13,7 @@ public class MarketMainController {
 		return "market/MainMaket.tiles";
 	}////////// market_main
 	
-	
-	@RequestMapping("/market/sellinside.aw")
-	public String sellinside() throws Exception {
-		return "market/inside/sellinside.tiles";
-			
-	}
+		
 		
 	@RequestMapping("/market/groupbuyinside.aw")
 	public String groupbuyinside() throws Exception {
@@ -27,13 +22,6 @@ public class MarketMainController {
 	}
 	
 
-	
-	@RequestMapping("/market/SellWrite.aw")
-	public String SellWrite() throws Exception {
-		return "market/write/SellWrite.tiles";
-		
-		
-	}
 	@RequestMapping("/market/GroupBuyWrite.aw")
 	public String GroupBuyWrite() throws Exception {
 		return "market/write/GroupBuyWrite.tiles";

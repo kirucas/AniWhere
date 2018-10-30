@@ -177,7 +177,7 @@ public class MarketBuyController {
 	
 	
 	
-	//수정폼 이동 --자기아이디로 자기글 view에서 수정 누르면 이쪽으로 이동 
+	     //수정폼 이동 --자기아이디로 자기글 view에서 수정 누르면 이쪽으로 이동 
 			@RequestMapping("/market/buyedit.aw")
 			public String find_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 					
