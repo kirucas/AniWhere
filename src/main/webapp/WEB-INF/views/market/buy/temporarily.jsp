@@ -86,7 +86,7 @@ html {
 				
 						<tr>
 						<td>
-						<span id="no">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</span></td>
+						<span id="no">${totalRecordCount +1- (((nowPage - 1) * pageSize) + loop.index)}</span></td>
 							
 						<!-- 타이틀 로직 -->
 							
@@ -112,8 +112,8 @@ html {
 						</c:choose>
 					</span>
 																																						 
-								<a href="<c:url value='/market/buyinside.aw?no=${record.no}'/>">
-								
+								<a href="<c:url value='/market/buyinside.aw?buy_no=${record.no}'/>">
+																  
 								<span id="title">${record.title}</span></a>
 							
 						        </td>

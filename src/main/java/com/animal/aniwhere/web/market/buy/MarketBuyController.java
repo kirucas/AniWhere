@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.impl.PagingUtil;
+import com.animal.aniwhere.service.impl.market.BuySellServiceImpl;
 import com.animal.aniwhere.service.market.BuySellDTO;
 import com.animal.aniwhere.service.miss.FindSeeDTO;
 import com.animal.aniwhere.web.board.FileUpDownUtils;
@@ -30,7 +31,7 @@ public class MarketBuyController {
 
      //buy컨트롤러 
 	@Resource(name="buySellService")
-	private AllCommonService allBoardService;
+	private BuySellServiceImpl allBoardService;
 	
 	@Value("${PAGESIZE}")
 	private int pageSize;
@@ -104,14 +105,15 @@ public class MarketBuyController {
 		
 		map.put("mem_no",session.getAttribute("mem_no"));
 		map.put("table_name","buy");
-		//map.put("no", map.get("buy_no"));
+		map.put("no", map.get("buy_no"));
 			
 		//서비스 호출]
 		System.out.println("====================1");
+		System.out.println(map.get("no").toString());
 		//게시글
 		BuySellDTO record = allBoardService.selectOne(map);
-		System.out.printf("record :%s", record);
 		
+		//테스트용 
 		System.out.println(record.getContent()+"====================2");
 		//데이터 저장]
 		model.addAttribute("record", record);
@@ -120,7 +122,7 @@ public class MarketBuyController {
 		//뷰정보 반환]
 		
 		return //"forward:/market/"+path+"/temporarily.aw"
-   				"forward:market/inside/buyinside.tiles";
+   				"market/inside/buyinside.tiles";
 		       
 		
 	}////////// buyinside
