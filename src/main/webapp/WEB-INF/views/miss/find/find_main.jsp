@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
+<%@ include file="/WEB-INF/views/common/loading.jsp" %>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
 #tip_no{
@@ -24,7 +26,7 @@
 					</li>
 				</ul>
 				<div class="sub-header-search">
-				<a href="#">
+				<a href="<c:url value='/miss/find_write.aw'/>">
 					<img style="float:left;margin-top:5px;" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
 				</a>
                 <form style="display:inline;" action="">
@@ -48,12 +50,35 @@
 		<section class="article-list article-list--fixed"></section>
 		<section class="article-list">
 			<!-- 여기서 반복문 돌려서 글 -->
+			<c:if test="${empty requestScope.list }" var="isEmpty">
+				   등록된 게시물이 없어요
+    		</c:if>
+    		<c:if test="${not isEmpty }">
+    			<c:forEach var="record" items="${list}" varStatus="loop">
 			<article class="article-list-item">
 				<div class="article-list-item__content">
-					<span id="animal_code">[강아지]</span>
-					<a href="#"	class="article-list-item__info">
+					<span id="animal_code">
+						<c:choose>
+							<c:when test="${record.animal_code eq '1'}">
+								<span>[고양이]</span>
+							</c:when>
+							<c:when test="${record.animal_code eq '2'}">
+								<span>[강아지]</span>		
+							</c:when>
+							<c:when test="${record.animal_code eq '3'}">
+								<span>[조류]</span>
+							</c:when>
+							<c:when test="${record.animal_code eq '4'}">
+								<span>[파충류]</span>
+							</c:when>
+							<c:otherwise>
+								<span>[양서류]</span>
+							</c:otherwise>
+						</c:choose>
+					</span>
+					<a href="<c:url value='/miss/find_view.aw?find_no=${record.no}'/>"	class="article-list-item__info">
 						<div class="article-list-item__title">
-							<span id="title">find 메인입니다.</span> <em>[21]</em>
+							<span id="title">${record.title }</span> <em>[21]</em>
 						</div>
 					</a>
 					<div class="article-list-item-meta">
@@ -69,11 +94,12 @@
 					</div>
 				</div>
 				<div class="article-list-item__vote">
-					<div><span id="no" style="text-align:center">1</span></div>
+					<div><span id="no" style="text-align:center">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</span></div>
 				</div>
 			</article>
 
-
+				</c:forEach>
+			</c:if>
 			<!-- 페이징 부분 -->
 			<section class="article-list-paging" >
 				<div class="article-list-paging-content">

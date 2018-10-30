@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
+<%@ include file="/WEB-INF/views/common/loading.jsp" %>
 <!-- 내용 시작 -->
 <div class="container">
       <div class="row">
@@ -28,15 +29,9 @@
                 <i class="icon-layers pulse-shrink">
                 </i>
               </div>
-<<<<<<< HEAD
               <h3>
                 	프로필 카드
               </h3>
-=======
-              <h2>
-                	프로필 카드
-              </h2>
->>>>>>> refs/remotes/origin/mating
               <p>
                 	만나요♡ 에서는 동물들간의 <br/>
                 	만남을 주선해요.<br/> 
@@ -53,15 +48,9 @@
                 <i class="icon-heart pulse-shrink">
                 </i>
               </div>
-<<<<<<< HEAD
               <h3>
                 	아무나 만나지 않아요
               </h3>
-=======
-              <h2>
-                	아무나 만나지 않아요
-              </h2>
->>>>>>> refs/remotes/origin/mating
               <p>
                 	여러분의 소중한 반려동물들 <br/>
                 	아무 동물이나 만날 수는 없지요! <br/>
@@ -78,15 +67,9 @@
                 <i class="icon-user pulse-shrink">
                 </i>
               </div>
-<<<<<<< HEAD
               <h3>
                 	거리별 추천
               </h3>
-=======
-              <h2>
-                	거리별 추천
-              </h2>
->>>>>>> refs/remotes/origin/mating
               <p>
                	가까운 동물들을 우선 추천해줘요.<br/>
                	내 주변에 만날 동물이 있는지 찾아봐요!
@@ -102,15 +85,9 @@
                 <i class="icon-cup pulse-shrink">
                 </i>
               </div>
-<<<<<<< HEAD
               <h3>
               		  신청 & 거절
               </h3>
-=======
-              <h2>
-              		  신청 & 거절
-              </h2>
->>>>>>> refs/remotes/origin/mating
               <p>
                	마음에 드는 동물을 만났다면 <br/>
                	메이팅을 신청해요!<br/>

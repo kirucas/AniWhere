@@ -10,7 +10,7 @@ public class EtcMainController {
 
 	@RequestMapping("/animal/etc/main.aw")
 	public String etc_main() throws Exception {
-		return "board/animal/etc/etc_temporarily.tiles";
+		return "board/animal/etc/etc_main.tiles";
 	}////////// etc_main
 	
 	@RequestMapping(value = "/animal/etc/{path}", method = RequestMethod.GET)

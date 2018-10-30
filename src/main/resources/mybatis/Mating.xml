@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.Mating">
+
+	<select id="matingCount" parameterType="java.util.Map" resultType="int">
+		SELECt COUNT(*)
+		FROM (
+			SELCT T.*, ROWNUM R
+			FROM (
+				SELECT *
+				FROM mating m JOIN animal a ON m.ani_no=a.ani_no
+				WHERE ani_species=#{ani_species} AND ani_gender=#{ani_gender}
+				<if test="ani_kind != null">
+					AND ani_kind=#{ani_kind}
+				</if>
+				)
+			)
+	</select>
+	
+	<select id="matingSelectList" parameterType="java.util.Map" resultType="MatingDTO">
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT mt.mating_no, mt.mating_loc, mt.mating_regidate, a.*, mem_nickname
+				FROM mating mt JOIN animal a ON mt.ani_no=a.ani_no
+				JOIN member mb ON a.mem_no=mb.mem_no
+				WHERE ani_species=#{ani_species} AND ani_gender=#{ani_gender}
+				<if test="ani_kind != null">
+					AND ani_kind=#{ani_kind}
+				</if>
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="selectMyMating" parameterType="java.util.Map" resultType="AnimalDTO">
+		SELECT a.*, mem_nickname
+		FROM animal a JOIN member m ON a.mem_no=m.mem_no
+		JOIN mating mt on a.ani_no=mt.ani_no
+		WHERE a.mem_no=#{mem_no}
+	</select>
+	
+	<select id="matingSelectOne" parameterType="java.util.Map" resultType="MatingDTO">
+		SELECT m.mating_no, m.mating_loc, m.mating_regidate, a.*, mem_nickname
+		FROM mating m JOIN animal a ON m.ani_no = a.ani_no
+		JOIN member mb ON a.mem_no = mb.mem_no
+		WHERE mating_no=#{mating_no}
+	</select>
+	
+	<insert id="matingInsert" parameterType="java.util.Map">
+		INSERT INFO mating(mating_no, ani_no, mating,loc)
+		VALUES(seq_mating.nextval, #{ani_no}, #{mating_loc})
+	</insert>
+	
+	<update id="matingUpdate" parameterType="java.util.Map">
+		UPDATE mating
+		SET ani_no=#{ani_no}, mating_loc=#{mating_loc}
+		WHERE mating_no=#{mating_no}
+	</update>
+	
+	<delete id="matingDelete" parameterType="java.util.Map">
+		DELETE FROM mating
+		WHERE mating_no=#{mating_no}
+	</delete>
+	
+	<!-- 보류 -->
+	<!-- <delete id="matingDeleteAll" parameterType="java.util.Map">
+	</delete> -->
+	
+</mapper>

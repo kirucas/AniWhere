@@ -10,7 +10,7 @@ public class RnAMainController {
 
 	@RequestMapping("/animal/rna/main.aw")
 	public String rna_main() throws Exception {
-		return "board/animal/rNa/rNa_temporarily.tiles";
+		return "board/animal/rNa/rNa_main.tiles";
 	}////////// rna_main
 
 	@RequestMapping(value = "/animal/rna/{path}", method = RequestMethod.GET)

@@ -7,12 +7,44 @@
  -->
 <configuration>
 	<!-- 자바빈 별칭:매퍼파일에서 환경설정 파일로 위치됨. -->
-	<!-- <typeAliases>
-		<typeAlias type="com.animal.aniwhere.service.AniWhereDTO" alias="AniWhereDTO"/>
-	</typeAliases> -->
+	<typeAliases>
+		<typeAlias type="com.animal.aniwhere.service.member.MemberDTO" alias="MemberDTO" />
+		<typeAlias type="com.animal.aniwhere.service.AllCommentDTO" alias="CommentDTO" />
+		<typeAlias type="com.animal.aniwhere.service.MatingDTO" alias="MatingDTO" />
+		<typeAlias type="com.animal.aniwhere.service.ReservationDTO" alias="ReservationDTO" />
+		<typeAlias type="com.animal.aniwhere.service.animal.FreeBoardDTO" alias="FreeDTO" />
+		<typeAlias type="com.animal.aniwhere.service.animal.MovieBoardDTO" alias="MovieDTO" />
+		<typeAlias type="com.animal.aniwhere.service.animal.PhotoBoardDTO" alias="PhotoDTO" />
+		<typeAlias type="com.animal.aniwhere.service.animal.QuestBoardDTO" alias="QuestDTO" />
+		<typeAlias type="com.animal.aniwhere.service.animal.TipBoardDTO" alias="TipDTO" />
+		<typeAlias type="com.animal.aniwhere.service.market.BuySellDTO" alias="BSDTO" />
+		<typeAlias type="com.animal.aniwhere.service.market.GroupBuyDTO" alias="GroupDTO" />
+		<typeAlias type="com.animal.aniwhere.service.miss.FindSeeDTO" alias="FSDTO" />
+		<typeAlias type="com.animal.aniwhere.service.member.AnimalDTO" alias="AnimalDTO" />
+		<typeAlias type="com.animal.aniwhere.service.NoticeDTO" alias="NoticeDTO" />
+		<typeAlias type="com.animal.aniwhere.service.StoreLocationDTO" alias="StoreDTO" />
+		<typeAlias type="com.animal.aniwhere.service.market.GroupBuyingListDTO" alias="BuyingDTO" />
+		<typeAlias type="com.animal.aniwhere.service.miss.LostAnimalDTO" alias="LostDTO" />
+	</typeAliases>
 
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑) 정보 설정 -->
 	<mappers>
-		<mapper resource="mybatis/AniWhere.xml" />
+		<mapper resource="mybatis/Member.xml" />
+		<mapper resource="mybatis/AllComment.xml" />
+		<mapper resource="mybatis/Animal.xml" />
+		<mapper resource="mybatis/BuySell.xml" />
+		<mapper resource="mybatis/FindSee.xml" />
+		<mapper resource="mybatis/Free.xml" />
+		<mapper resource="mybatis/GroupBuy.xml" />
+		<mapper resource="mybatis/Mating.xml" />
+		<mapper resource="mybatis/Movie.xml" />
+		<mapper resource="mybatis/Photo.xml" />
+		<mapper resource="mybatis/Quest.xml" />
+		<mapper resource="mybatis/Reservation.xml" />
+		<mapper resource="mybatis/Tip.xml" />
+		<mapper resource="mybatis/Notice.xml" />
+		<mapper resource="mybatis/StoreLocation.xml" />
+		<mapper resource="mybatis/BuyingList.xml" />
+		<mapper resource="mybatis/LostAnimal.xml" />
 	</mappers>
 </configuration>
