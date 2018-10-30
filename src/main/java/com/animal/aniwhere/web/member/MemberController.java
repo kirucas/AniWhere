@@ -79,4 +79,37 @@ public class MemberController {
  		return dto.getMem_id();
        
     }
+ 	
+ 	//안드로이드 googleLogin
+ 	@ResponseBody
+ 	@RequestMapping(value = "/androidsignUpProcess.aw", method = RequestMethod.POST)
+ 	public String androidSignUp(@RequestParam Map map) throws Exception{
+ 		if(service.isMember(map)) {
+ 			System.out.println("isMember===========");
+			return "true";
+		}
+ 		
+ 		System.out.println("map==========="+map.get("mem_id"));
+ 		System.out.println("map==========="+map.get("mem_pw"));
+ 		System.out.println("map==========="+map.get("mem_nickname"));
+ 		System.out.println("map==========="+map.get("mem_gender"));
+ 		System.out.println("map==========="+map.get("mem_name"));
+ 		System.out.println("map==========="+map.get("mem_log"));
+ 		System.out.println("map==========="+map.get("mem_interani"));
+ 		
+ 		map.put("mem_log",Integer.parseInt(map.get("mem_log").toString()));
+ 		
+ 		int signup = service.insert(map);
+ 		
+ 		if(signup==1) {
+ 			System.out.println("signup===========");
+ 	    	return "true";
+ 		}else {
+ 	    	System.out.println("signup===========");
+ 	    	return "false";
+ 	    }	     
+    }
+ 	
+ 	
+ 	
 }//////////////////// MemberController class
