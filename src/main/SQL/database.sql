@@ -229,7 +229,7 @@ CREATE TABLE mating
 CREATE TABLE member
 (
 	mem_no number NOT NULL,
-	mem_id varchar2(20) NOT NULL,
+	mem_id varchar2(30) NOT NULL,
 	mem_pw varchar2(20) NOT NULL,
 	mem_name nvarchar2(20) NOT NULL,
 	mem_nickname nvarchar2(10) NOT NULL UNIQUE,
