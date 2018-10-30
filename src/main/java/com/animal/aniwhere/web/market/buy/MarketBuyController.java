@@ -111,6 +111,7 @@ public class MarketBuyController {
 		//게시글
 		BuySellDTO record = allBoardService.selectOne(map);
 		System.out.printf("record :%s", record);
+		
 		System.out.println(record.getContent()+"====================2");
 		//데이터 저장]
 		model.addAttribute("record", record);
