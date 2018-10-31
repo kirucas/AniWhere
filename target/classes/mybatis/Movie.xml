@@ -63,9 +63,11 @@
 	</update>
 	
 	<update id="addCountMovie" parameterType="java.util.Map">
-		UPDATE movie
-		SET movie_count=movie_count + 1
-		WHERE no=#{no}
+		<if test="view != null">
+			UPDATE movie
+			SET movie_count=movie_count + 1
+			WHERE no=#{no}
+		</if>
 	</update>
 	
 </mapper>

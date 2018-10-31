@@ -87,9 +87,11 @@
 	</update>
 	
 	<update id="addCountPhoto" parameterType="java.util.Map">
-		UPDATE photo
-		SET photo_count=photo_count + 1
-		WHERE no=#{no}
+		<if test="view != null">
+			UPDATE photo
+			SET photo_count=photo_count + 1
+			WHERE no=#{no}
+		</if>
 	</update>
 	
 </mapper>

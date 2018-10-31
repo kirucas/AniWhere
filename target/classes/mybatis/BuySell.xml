@@ -70,9 +70,11 @@
 	</delete>
 	
 	<update id="addCountBS" parameterType="java.util.Map">
-		UPDATE market_${table_name}
-		SET count=count + 1
-		WHERE no=#{no}
+		<if test="view != null">
+			UPDATE market_${table_name}
+			SET count=count + 1
+			WHERE no=#{no}
+		</if>
 	</update>
 	
 </mapper>
