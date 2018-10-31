@@ -7,16 +7,16 @@ DROP TABLE admin_member CASCADE CONSTRAINTS;
 DROP TABLE drafting CASCADE CONSTRAINTS;
 DROP TABLE mating CASCADE CONSTRAINTS;
 DROP TABLE animal CASCADE CONSTRAINTS;
-DROP TABLE market_buy_cmt CASCADE CONSTRAINTS;
+DROP TABLE buy_cmt CASCADE CONSTRAINTS;
 DROP TABLE market_buy CASCADE CONSTRAINTS;
 DROP TABLE group_buy CASCADE CONSTRAINTS;
-DROP TABLE market_group_buy_cmt CASCADE CONSTRAINTS;
+DROP TABLE group_buy_cmt CASCADE CONSTRAINTS;
 DROP TABLE market_group_buy CASCADE CONSTRAINTS;
-DROP TABLE market_sell_cmt CASCADE CONSTRAINTS;
+DROP TABLE sell_cmt CASCADE CONSTRAINTS;
 DROP TABLE market_sell CASCADE CONSTRAINTS;
-DROP TABLE miss_find_cmt CASCADE CONSTRAINTS;
+DROP TABLE find_cmt CASCADE CONSTRAINTS;
 DROP TABLE miss_find CASCADE CONSTRAINTS;
-DROP TABLE miss_see_cmt CASCADE CONSTRAINTS;
+DROP TABLE see_cmt CASCADE CONSTRAINTS;
 DROP TABLE miss_see CASCADE CONSTRAINTS;
 DROP TABLE animal_category CASCADE CONSTRAINTS;
 DROP TABLE freeboard_cmt CASCADE CONSTRAINTS;
@@ -74,6 +74,18 @@ CREATE TABLE animal_category
 );
 
 
+CREATE TABLE buy_cmt
+(
+	cmt_no number NOT NULL,
+	origin_no number NOT NULL,
+	mem_no number,
+	cmt_content nvarchar2(200) NOT NULL,
+	hit number DEFAULT 0,
+	regidate date DEFAULT sysdate,
+	PRIMARY KEY (cmt_no)
+);
+
+
 CREATE TABLE drafting
 (
 	dtf_no number NOT NULL,
@@ -82,6 +94,18 @@ CREATE TABLE drafting
 	apply number(1),
 	dtf_date date DEFAULT SYSDATE,
 	PRIMARY KEY (dtf_no)
+);
+
+
+CREATE TABLE find_cmt
+(
+	cmt_no number NOT NULL,
+	origin_no number NOT NULL,
+	mem_no number,
+	cmt_content nvarchar2(200) NOT NULL,
+	hit number DEFAULT 0,
+	regidate date DEFAULT sysdate,
+	PRIMARY KEY (cmt_no)
 );
 
 
@@ -121,6 +145,18 @@ CREATE TABLE group_buy
 );
 
 
+CREATE TABLE group_buy_cmt
+(
+	cmt_no number NOT NULL,
+	origin_no number NOT NULL,
+	mem_no number,
+	cmt_content nvarchar2(200) NOT NULL,
+	hit number DEFAULT 0,
+	regidate date DEFAULT sysdate,
+	PRIMARY KEY (cmt_no)
+);
+
+
 CREATE TABLE lost_animal
 (
 	no number NOT NULL,
@@ -152,18 +188,6 @@ CREATE TABLE market_buy
 );
 
 
-CREATE TABLE market_buy_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
 CREATE TABLE market_group_buy
 (
 	no number NOT NULL,
@@ -179,18 +203,6 @@ CREATE TABLE market_group_buy
 );
 
 
-CREATE TABLE market_group_buy_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
 CREATE TABLE market_sell
 (
 	no number NOT NULL,
@@ -201,18 +213,6 @@ CREATE TABLE market_sell
 	regidate date DEFAULT sysdate,
 	count number DEFAULT 0,
 	PRIMARY KEY (no)
-);
-
-
-CREATE TABLE market_sell_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
 );
 
 
@@ -253,18 +253,6 @@ CREATE TABLE miss_find
 );
 
 
-CREATE TABLE miss_find_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
-);
-
-
 CREATE TABLE miss_see
 (
 	no number NOT NULL,
@@ -275,18 +263,6 @@ CREATE TABLE miss_see
 	regidate date DEFAULT sysdate,
 	count number DEFAULT 0,
 	PRIMARY KEY (no)
-);
-
-
-CREATE TABLE miss_see_cmt
-(
-	cmt_no number NOT NULL,
-	origin_no number NOT NULL,
-	mem_no number,
-	cmt_content nvarchar2(200) NOT NULL,
-	hit number DEFAULT 0,
-	regidate date DEFAULT sysdate,
-	PRIMARY KEY (cmt_no)
 );
 
 
@@ -416,6 +392,30 @@ CREATE TABLE reservation
 );
 
 
+CREATE TABLE see_cmt
+(
+	cmt_no number NOT NULL,
+	origin_no number NOT NULL,
+	mem_no number,
+	cmt_content nvarchar2(200) NOT NULL,
+	hit number DEFAULT 0,
+	regidate date DEFAULT sysdate,
+	PRIMARY KEY (cmt_no)
+);
+
+
+CREATE TABLE sell_cmt
+(
+	cmt_no number NOT NULL,
+	origin_no number NOT NULL,
+	mem_no number,
+	cmt_content nvarchar2(200) NOT NULL,
+	hit number DEFAULT 0,
+	regidate date DEFAULT sysdate,
+	PRIMARY KEY (cmt_no)
+);
+
+
 CREATE TABLE store_category
 (
 	store_no number NOT NULL,
@@ -531,7 +531,7 @@ ALTER TABLE freeboard_cmt
 ;
 
 
-ALTER TABLE market_buy_cmt
+ALTER TABLE buy_cmt
 	ADD FOREIGN KEY (origin_no)
 	REFERENCES market_buy (no)
 	ON DELETE CASCADE
@@ -545,23 +545,17 @@ ALTER TABLE group_buy
 ;
 
 
-ALTER TABLE market_group_buy_cmt
+ALTER TABLE group_buy_cmt
 	ADD FOREIGN KEY (origin_no)
 	REFERENCES market_group_buy (no)
 	ON DELETE CASCADE
 ;
 
 
-ALTER TABLE market_sell_cmt
+ALTER TABLE sell_cmt
 	ADD FOREIGN KEY (origin_no)
 	REFERENCES market_sell (no)
 	ON DELETE CASCADE
-;
-
-
-ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
-	REFERENCES mating (mating_no)
 ;
 
 
@@ -572,10 +566,30 @@ ALTER TABLE drafting
 ;
 
 
+ALTER TABLE drafting
+	ADD FOREIGN KEY (send_no)
+	REFERENCES mating (mating_no)
+;
+
+
 ALTER TABLE animal
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 	ON DELETE CASCADE
+;
+
+
+ALTER TABLE buy_cmt
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+	ON DELETE SET NULL
+;
+
+
+ALTER TABLE find_cmt
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+	ON DELETE SET NULL
 ;
 
 
@@ -600,14 +614,14 @@ ALTER TABLE group_buy
 ;
 
 
-ALTER TABLE market_buy
+ALTER TABLE group_buy_cmt
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 	ON DELETE SET NULL
 ;
 
 
-ALTER TABLE market_buy_cmt
+ALTER TABLE market_buy
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 	ON DELETE SET NULL
@@ -621,21 +635,7 @@ ALTER TABLE market_group_buy
 ;
 
 
-ALTER TABLE market_group_buy_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-	ON DELETE SET NULL
-;
-
-
 ALTER TABLE market_sell
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-	ON DELETE SET NULL
-;
-
-
-ALTER TABLE market_sell_cmt
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 	ON DELETE SET NULL
@@ -649,21 +649,7 @@ ALTER TABLE miss_find
 ;
 
 
-ALTER TABLE miss_find_cmt
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-	ON DELETE SET NULL
-;
-
-
 ALTER TABLE miss_see
-	ADD FOREIGN KEY (mem_no)
-	REFERENCES member (mem_no)
-	ON DELETE SET NULL
-;
-
-
-ALTER TABLE miss_see_cmt
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 	ON DELETE SET NULL
@@ -726,6 +712,20 @@ ALTER TABLE reservation
 ;
 
 
+ALTER TABLE see_cmt
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+	ON DELETE SET NULL
+;
+
+
+ALTER TABLE sell_cmt
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+	ON DELETE SET NULL
+;
+
+
 ALTER TABLE tip
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
@@ -740,14 +740,14 @@ ALTER TABLE tip_cmt
 ;
 
 
-ALTER TABLE miss_find_cmt
+ALTER TABLE find_cmt
 	ADD FOREIGN KEY (origin_no)
 	REFERENCES miss_find (no)
 	ON DELETE CASCADE
 ;
 
 
-ALTER TABLE miss_see_cmt
+ALTER TABLE see_cmt
 	ADD FOREIGN KEY (origin_no)
 	REFERENCES miss_see (no)
 	ON DELETE CASCADE
