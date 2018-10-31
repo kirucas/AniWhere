@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.animal.aniwhere.service.AllCommentDTO;
 import com.animal.aniwhere.service.animal.MovieBoardDTO;
+import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.animal.MovieBoardServiceImpl;
 
@@ -26,8 +28,8 @@ public class BirdMovieController {
 
 	// 서비스 주입]
 	@Resource(name = "movieService")
-	private MovieBoardServiceImpl service;
-
+	private MovieBoardServiceImpl service; //동영상 서비스
+	private AllCommentServiceImpl cmtservice; //댓글 서비스
 	// 목록처리]
 	// 리소스파일(memo.properties)에서 읽어오기
 	@Value("${BLOCKPAGE}")
@@ -108,12 +110,18 @@ public class BirdMovieController {
 	public String movie_view(@RequestParam Map map, Model model) throws Exception {
 		// 게시글
 		MovieBoardDTO dto = service.selectOne(map);
+		
+		// 댓글
+		List<AllCommentDTO> cmtlist = cmtservice.selectList(map);
+		
 		// 유튜브 iframe소스를 가져와서 섬머노트와 같이 있는 내용과 분리하여 뿌리는 메소드
 		//(데이터 베이스 상에는 관련 컬럼이 없으므로)
 		setIframe(dto);
 		
 		// 데이타 저장]
 		model.addAttribute("dto", dto);
+		model.addAttribute("cmtlist", cmtlist);
+		
 		
 		// 뷰정보 반환]
 		return "board/animal/bird/movie/movie_view.tiles";
@@ -146,7 +154,7 @@ public class BirdMovieController {
 			int successFail =service.delete(map);
 			model.addAttribute("successFail", successFail);
 			return "/board/animal/bird/movie/movieMessage";
-		}////////////////////////////////////////////////
+		}////////////////////////////////////////////////	
 		
 	// content안에 있는 유튜브 소스와 내용을 순서대로 분리하여
 	private void setIframe(MovieBoardDTO dto) {
