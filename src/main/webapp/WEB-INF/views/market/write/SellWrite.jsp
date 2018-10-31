@@ -66,8 +66,8 @@
 <form name="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" 
 				class="form-horizontal">
 				<div class="form-row">
-					<input type="hidden" name="table_name" value="sell"/>
-			<label for="" class="">제목</label> 
+					<input type="hidden" value="sell"/>
+			<label for="" class="" >제목</label> 
 			<input class="form-control" type="text" id="title" name="title" placeholder="제목을 입력하세요" />
 
 			<p style="margin-top: 30px">
@@ -99,11 +99,9 @@
 
 			</p>
 			</div>
-			</form>
+		
 			
-			<div>
-				<div class="row"
-					style="text-align: center; border: 1px silver solid; margin-left: 20px">
+				<div class="row" style="text-align: center; border: 1px silver solid; margin-left: 20px">
 					<div class="my-2">
 						<span style="margin-left: 20px">제품명</span>
 						<input
@@ -138,9 +136,15 @@
 					</div>
 
 				</div>
-				<span>우편번호</span>
-				<jsp:include page="../template/adress.jsp" />
 				
+				
+				<div style="margin-top: 20px">
+				<div style="text-align: center">
+				<span>우편번호 </span>
+				<jsp:include page="../template/adress.jsp" />
+			</div></div>
+		     <br/>
+							
 				<!-- Related Projects Row -->
 				<h3 class="my-4">판매자가 올린 사진 3개이상</h3>
 				
@@ -190,16 +194,14 @@
 
 				</div>
 				<!--사진 로직 끝 -->
-<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" 
-				class="form-horizontal">
+
 				
 				<div class="col-md-12 container">
 					<textarea id="summernote" name="content" class="col-md-12 container" rows=""
 						cols="" style="border: 1px solid blue; height: 500px"
 						maxlength="2048">
-	판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.					
-					
-					
+	 ※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.					
+										
 	제목: 
 					
 	판매물품: 
@@ -229,12 +231,14 @@
 			
 			</form>
 			
+			
+			
 			<div style="margin-bottom: 50px"></div>
 
 		</div>
 	</div>
 
-	</div>
+	
 
 </body>
 
