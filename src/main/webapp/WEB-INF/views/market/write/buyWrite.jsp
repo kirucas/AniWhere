@@ -27,6 +27,7 @@
             }
          }
       });
+      
       function sendFile(file, el, wel) {
          var form_data = new FormData();
          form_data.append('file', file);
@@ -141,7 +142,7 @@
 					<div class="col-md-12 container">
 						<textarea id="summernote" name="content"
 							class="col-md-12 form-control"
-							style="border: 1px solid blue; height: 500px" name="body"
+							style="border: 1px solid blue; height: 500px" 
 							maxlength="2048"></textarea>
 
 					</div>
