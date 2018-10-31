@@ -9,16 +9,16 @@
 		SELECT COUNT(*)
 		FROM (
 			SELECT mgb.*, mem_nickname, animal_name
-			FROM market_group_buy mgb LEFT JOIN member mb ON mbg.mem_no=mb.mem_no
-			JOIN animal_category ac ON mbg.animal_code = ac.animal_code
+			FROM market_group_buy mgb LEFT JOIN member mb ON mgb.mem_no=mb.mem_no
+			JOIN animal_category ac ON mgb.animal_code = ac.animal_code
 			<if test="animal_code != null and title != null">
-				WHERE mbg.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
+				WHERE mgb.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
 			</if>
 			<if test="animal_code != null and content != null">
-				WHERE mbg.animal_code=#{animal_code} AND content like '%'||#{content}||'%'
+				WHERE mgb.animal_code=#{animal_code} AND content like '%'||#{content}||'%'
 			</if>
 			<if test="animal_code != null">
-				WHERE mbg.animal_code=#{animal_code}
+				WHERE mgb.animal_code=#{animal_code}
 			</if>
 			<if test="title != null">
 				WHERE title=#{title}

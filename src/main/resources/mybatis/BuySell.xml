@@ -60,7 +60,7 @@
 	
 	<update id="bsUpdate" parameterType="java.util.Map">
 		UPDATE market_${table_name}
-		SET animal_code=#{animal_code}, title=#{title}, content=#{title}
+		SET animal_code=#{animal_code}, title=#{title}, content=#{content}
 		WHERE no=#{no}
 	</update>
 	
