@@ -249,6 +249,7 @@ CREATE TABLE miss_find
 	content nvarchar2(2000) NOT NULL,
 	regidate date DEFAULT sysdate,
 	count number DEFAULT 0,
+	addr nvarchar2(20),
 	PRIMARY KEY (no)
 );
 
@@ -262,6 +263,7 @@ CREATE TABLE miss_see
 	content nvarchar2(2000) NOT NULL,
 	regidate date DEFAULT sysdate,
 	count number DEFAULT 0,
+	addr nvarchar2(20),
 	PRIMARY KEY (no)
 );
 
@@ -560,15 +562,15 @@ ALTER TABLE sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
-	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
+	ON DELETE CASCADE
 ;
 
 
