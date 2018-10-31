@@ -31,7 +31,7 @@
          $.ajax({
             data: form_data,
             type: "POST",
-            url : "<c:url value='/animal/freeboard/Upload.aw'/>",
+            url : "<c:url value='/market/buy/Upload.aw'/>",
             cache: false,
             contentType: false,
             processData: false,

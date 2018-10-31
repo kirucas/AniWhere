@@ -1,11 +1,100 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <head>
 
 <script>
+
+function check(f) {
+    var isAttached = $('#summernote').summernote('code');
+    if (fr.title.value == "") {
+       alert("제목을 입력해 주세요.");
+       fr.title.focus();
+       return false;
+
+    } 
+    
+    else if (fr.title.value.length > 50) {
+       alert("제목은 50자 이내로 입력해주세요.");
+       fr.title.focus();
+       return false;
+    } 
+        
+    else if (fr.name.value=="") {
+        alert("제품명 을 입력해주세요.");
+        fr.name.focus();
+        return false;
+     } 
+    
+   else if (fr.price.value=="") {
+        alert("희망가 를 입력해주세요.");
+        fr.price.focus();
+        return false;
+     } 
+   else if (fr.time.value=="") {
+        alert("거래기간 을 입력해주세요.");
+        fr.time.focus();
+         return false;
+     } 
+   else if (fr.way.value=="") {
+         alert("거래방법을  입력해주세요.");
+         fr.way.focus();
+         return false;
+
+      } 
+    
+     else if (fr.phone.value=="") {
+         alert("연락처 를 입력해주세요.");
+         fr.phone.focus();
+         return false;
+
+      } 
+    
+     else if (fr.space.value=="") {
+         alert("거래가능 지역 를 입력해주세요.");
+         fr.space.focus();
+         return false;
+
+      }    
+   
+    else if (fr.content.value == "") {
+       alert('내용을 입력하세요.');
+       return false;
+    }	    
+   
+else {
+ f.action="<c:url value='/market/sellinsert.aw'/>"; 
+ return true;
+}
+    
+}
+
+</script>
+
+<script>
    $(function() {
+	   
+	   $('#enterBtn').click(function(){
+	
+		  console.log("title:",$('#title').prop('value'));
+	 	  $('#sell_title').text($('#title'))
+	 	  $('#sell_name').html($('#name')) 
+	 	  $('#sell_price').html($('#price').val())
+	 	  $('#sell_time').html($('#time').val())
+	 	  $('#sell_way').html($('#way').val())
+	 	  $('#sell_phone').html($('#phone').val())
+	 	  
+	 	   alert("i am in!!")
+	   
+	   });
+	   
+	   
+	   
+	   
+	   
+	   
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
@@ -36,7 +125,12 @@
             }
          });
       }
+          
    });
+   
+   
+   
+   
    
 </script>
 
@@ -66,7 +160,10 @@
 <form name="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" 
 				class="form-horizontal">
 				<div class="form-row">
-					<input type="hidden" value="sell"/>
+				<input type="hidden" name="table_name" value="sell"/>
+				 <input type="hidden" name="mem_no" value="${mem_no }">
+			
+					
 			<label for="" class="" >제목</label> 
 			<input class="form-control" type="text" id="title" name="title" placeholder="제목을 입력하세요" />
 
@@ -103,46 +200,44 @@
 			
 				<div class="row" style="text-align: center; border: 1px silver solid; margin-left: 20px">
 					<div class="my-2">
-						<span style="margin-left: 20px">제품명</span>
-						<input
-							placeholder="" style="text-align: right;margin-left: 15px"
-							class="form-control" type="text" id="productname" />
+						<span style="margin-left: 20px" >제품명</span>
+						<input 
+							 style="text-align: right;margin-left: 15px"
+							class="form-control" type="text" id="name" />
 					</div>
 			
 					<div class="my-2">
 						<span style="margin-right: 20px">희망가</span>
 						<input
-							placeholder="       원" style="text-align: right;margin-left: 15px"
-							class="form-control" type="text" id="wishprice" />
+							style="text-align:right;margin-left: 15px"
+							class="form-control" type="text" id="price" />
 					</div>
 
 					<div class="my-2">
 						<span>거래기간</span> 
-						<input type="date" min="2018-10-19" style="text-align: right;margin-left: 15px"
+						<input type="date" min="Today" style="text-align: right;margin-left: 15px"
 							max="2020-01-01"  class="form-control" type="text"
-							id="wishtime" />
+							id="time" />
+							
 							<!--  거래기간 넣어주고 제한 걸어주는 로직 만들어야 함  -->
+							
 					</div>
 
 					<!--  도로명 주소 인증키:	U01TX0FVVEgyMDE4MTAxNTIxMzIwODEwODIzNjM= -->
 
 					<div class="my-2">
 						<span>거래방법</span> <input class="form-control" type="text"
-							placeholder="예)직거래,택배등" style="text-align: right;margin-left: 15px" id="wishcount" />
+							placeholder="예)직거래,택배등" style="text-align: right;margin-left: 15px" id="way" />
 					</div>
 					<div class="my-2">
 						<span>연락처</span> <input class="form-control" type="text"
-							placeholder="집전화,휴대폰번호" style="text-align: right;margin-left: 15px" id="wishcount" />
+							placeholder="집전화,휴대폰번호" style="text-align: right;margin-left: 15px" id="phone" />
 					</div>
 
 				</div>
 				
 				
-				<div style="margin-top: 20px">
-				<div style="text-align: center">
-				<span>우편번호 </span>
-				<jsp:include page="../template/adress.jsp" />
-			</div></div>
+							
 		     <br/>
 							
 				<!-- Related Projects Row -->
@@ -197,37 +292,38 @@
 
 				
 				<div class="col-md-12 container">
-					<textarea id="summernote" name="content" class="col-md-12 container" rows=""
-						cols="" style="border: 1px solid blue; height: 500px"
+					<textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
 						maxlength="2048">
-	 ※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.					
+						
+	 ※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.<br/>					
 										
-	제목: 
+	제목:<span id="sell_title"></span> <br/>
 					
-	판매물품: 
+	판매물품명:<span id="sell_name"></span> <br/>
 					
-	희망가: 원
+	희망가:<span id="sell_price"></span> <br/>
 					
-	거래기간:    까지 
+	거래기간:<span id="sell_time"></span> 일 까지  <br/>
 					
-	거래방법: 
+	거래방법:<span id="sell_way"></span> <br/>
 								
-	연락처:  
+	연락처:<span id="sell_phone"></span>  <br/>
 					
-	===================자세한 설명을 구체적으로 해주세요 =====================
+	===================자세한 설명을 부탁드려요  =====================
 						
 						
 						</textarea>
 
 				</div>
+							
 				<div style="text-align: center">
 					<a href="<c:url value='/market/sell.aw'/>">
-					<input
-						class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
-					<input class="btn btn-danger" type="submit" id="enterBtn"
-						value="확인">
+					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
+					<input class="btn btn-danger" type="submit" id="enterBtn" value="확인">
 
 				</div>
+				
+				
 			
 			</form>
 			

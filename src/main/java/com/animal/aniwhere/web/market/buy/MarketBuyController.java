@@ -229,13 +229,22 @@ public class MarketBuyController {
 	
 	//Summernote 업로드 기능
 	@ResponseBody
-    @RequestMapping(value="/market/Upload.aw")
+    @RequestMapping(value="/market/buy/Upload.aw")
+	
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
+		System.out.println("들어옴");
+		
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("file");
 		
 		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
 		File file = new File(phisicalPath+File.separator+newFilename);
+		
+		if(!file.exists()) {
+			file.mkdirs();
+			
+		}
+		
 		upload.transferTo(file);
         return "/Upload/"+newFilename;
    }

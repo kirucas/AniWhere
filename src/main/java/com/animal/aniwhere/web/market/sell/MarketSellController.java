@@ -1,5 +1,6 @@
 package com.animal.aniwhere.web.market.sell;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,10 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.market.BuySellServiceImpl;
 import com.animal.aniwhere.service.market.BuySellDTO;
+import com.animal.aniwhere.web.board.FileUpDownUtils;
 
 @Controller
 public class MarketSellController {
@@ -221,6 +226,27 @@ public class MarketSellController {
 				return "forward:/market/sell.aw";
 			}//////////////delete()
 			
+			
+			//Summernote 업로드 기능
+			@ResponseBody
+		    @RequestMapping(value="/market/sell/Upload.aw")
+			
+		    public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
+				System.out.println("들어옴");
+				
+				String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+				MultipartFile upload = mhsr.getFile("file");
+				
+				String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+				File file = new File(phisicalPath+File.separator+newFilename);
+				
+				if(!file.exists()) {
+					file.mkdirs();		
+				}
+				
+				upload.transferTo(file);
+		        return "/Upload/"+newFilename;
+		   }
 	
 	
 	

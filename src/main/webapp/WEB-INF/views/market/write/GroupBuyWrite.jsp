@@ -87,6 +87,15 @@
 						</div>
 					</div>
 				</div>
+				
+				<div style="margin-top: 20px">
+				<div style="text-align: center">
+				<span>거래가능 장소 검색 </span>
+				<jsp:include page="../template/adress.jsp" />
+				<input class="postcodify_details" style="width:600px;text-align: right" placeholder="상세주소" /><br />
+			</div></div>
+				
+				
 				<p>
 					<label for="" class="" style="margin-top: 30px">프로그래스바
 						설정:목표수량</label> <input type="text" id="nickname">개 <label for=""
