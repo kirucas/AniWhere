@@ -84,12 +84,9 @@ var isDelete = function(){
 	<!-- row -->
 	<div class="text-right margin-top-10">
 		<div>
-			<a
-				href="<c:url value='/bird/movie/Reply.aw?no=${dto.no}'/>"
-				class="btn btn-success">댓글</a>
-			<c:if test="${sessionScope.mem_no == dto.mem_no}">
-				<a
-					href="<c:url value='/bird/movie/edit.aw?no=${dto.no}'/>"
+			<a href="<c:url value='/bird/movie/Reply.aw?no=${dto.no}'/>" class="btn btn-success">댓글</a>
+			<c:if test="${sessionScope.mem_no == dto.mem_no}"> 
+				<a href="<c:url value='/bird/movie/edit.aw?no=${dto.no}'/>"
 					class="btn btn-success">수정</a>
 				<a href="javascript:isDelete()" class="btn btn-success">삭제</a>
 			</c:if>

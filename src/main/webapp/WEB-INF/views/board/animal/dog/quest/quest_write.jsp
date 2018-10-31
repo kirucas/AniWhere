@@ -56,11 +56,11 @@
 		action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-sm-2 control-label" style="font-size:20px">제목</label>
-			<input class="form-control" type="text" name="quest_title" id="quest_title" autofocus="autofocus" placeholder="제목을 입력해주세요" />
+			<input maxlength="50" class="form-control" type="text" name="quest_title" id="quest_title" autofocus="autofocus" placeholder="제목을 입력해주세요" />
 		</div>
 		<div class="form-row" style="padding-top: 10px;padding-bottom: 20px">
 			<label for="quest_content" class="col-sm-2 control-label" style="font-size:20px">내용</label>
-			<textarea class="form-control" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요"></textarea>
+			<textarea maxlength="2000" class="form-control" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요"></textarea>
 		</div>
 		<div class="form-row">
 			<div class="form-group offset-sm-5 col-sm-1">

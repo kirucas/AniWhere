@@ -1,6 +1,8 @@
-﻿package com.animal.aniwhere.web.board.animal.bird;
 
-public class PagingUtil {
+/* 디자인 바꾸고 싶다 
+package com.animal.aniwhere.service.impl;
+
+public class PagingUtilforMarket {
 
 	public static String pagingText(int totalRecordCount,int pageSize,int blockPage,int nowPage,String page){
 		String pagingStr="";
@@ -77,10 +79,10 @@ public class PagingUtil {
 		while(blockCount <= blockPage && intTemp <= totalPage){  // 페이지 오버 를 체크
 				//현재 페이지를 의미함
 			if(intTemp == nowPage){  
-				pagingStr+="<li><a href='#'><span style='Color:red'>"+intTemp+"</span></a></li>";
+				pagingStr+="<li><a href='#'><span style='Color:red'>"+intTemp+"</span></a></li>&nbsp&nbsp&nbsp";
 			}
 		     else
-		    	 pagingStr+="<li><a href='"+page+"nowPage="+intTemp+"'>"+intTemp+"</a></li>";
+		    	 pagingStr+="<li><a href='"+page+"nowPage="+intTemp+"'>"+intTemp+"</a></li>&nbsp&nbsp&nbsp";
 		       
 			intTemp = intTemp + 1;
 			blockCount = blockCount + 1;
@@ -88,7 +90,29 @@ public class PagingUtil {
 		}
 
 		//다음 및 마지막을 위한 로직
-			
+	
+		/* 디자인에 들어가야 하는 데 적용이 안돼네... 흠...
+		 * 
+		 * 
+		<ul class="pagination justify-content-end mt-3 mr-3">
+
+			<li class="page-item disabled"><span class="page-link">Previous</span>
+			</li>
+			<li class="page-item active"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><span class="page-link" href="#">2</span></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#">4</a></li>
+			<li class="page-item"><a class="page-link" href="#">5</a></li>
+			<li class="page-item"><a class="page-link" href="#">6</a></li>
+			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+		</ul>
+
+
+	*/
+		
+		
+		
+		/*	
 		if(intTemp <= totalPage){
 			pagingStr+="<li>\r\n" + 
 					"<a href='"+page+"nowPage="+intTemp+"'>\r\n" + 
@@ -102,8 +126,9 @@ public class PagingUtil {
 					"</li>";
 							   
 		}
+		
 		pagingStr+="</ul></nav>";
 		return pagingStr;
 	}
 	
-}
+}*/
