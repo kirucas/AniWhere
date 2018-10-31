@@ -3,16 +3,11 @@ package com.animal.aniwhere.web.board.miss;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-<<<<<<< HEAD
-=======
 import java.util.Set;
->>>>>>> refs/remotes/origin/integration_test
 import java.util.Vector;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -22,11 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-<<<<<<< HEAD
-=======
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
->>>>>>> refs/remotes/origin/integration_test
 
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.AllCommentDTO;
@@ -38,11 +30,7 @@ import com.animal.aniwhere.service.impl.miss.FindSeeServiceImpl;
 import com.animal.aniwhere.service.impl.miss.LostAnimalServiceImpl;
 import com.animal.aniwhere.service.miss.FindSeeDTO;
 import com.animal.aniwhere.service.miss.LostAnimalDTO;
-<<<<<<< HEAD
-=======
 import com.animal.aniwhere.web.board.FileUpDownUtils;
-
->>>>>>> refs/remotes/origin/integration_test
 
 @Controller
 public class MissMainController {
@@ -439,7 +427,6 @@ public class MissMainController {
 		
 		//================================================================================================================
 		
-<<<<<<< HEAD
 		//안드로이드
 		@ResponseBody
 		@RequestMapping(value="/miss/AndroidFind.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
@@ -472,11 +459,6 @@ public class MissMainController {
 					
 			return JSONArray.toJSONString(collections);
 		}////////// miss_write
-		
-		
-		
-		
-=======
 		
 		//리스트로 이동
 		@RequestMapping("/miss/shelter.aw")
@@ -596,8 +578,7 @@ public class MissMainController {
 		
 		return map.get("no").toString();
 	}
-	
->>>>>>> refs/remotes/origin/integration_test
+
 }//////////////////// MissMainController class
 
 
