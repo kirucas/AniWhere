@@ -55,7 +55,7 @@
 	
 	<insert id="fsInsert" parameterType="java.util.Map">
 		INSERT INTO miss_${table_name}(no, mem_no, animal_code, title, content, addr)
-		VALUES(seq_${table_name}, #{mem_no}, #{animal_code}, #{title}, #{content}, #{addr})		
+		VALUES(seq_${table_name}.nextval, #{mem_no}, #{animal_code}, #{title}, #{content}, #{addr})		
 	</insert>
 	
 	<update id="fsUpdate" parameterType="java.util.Map">

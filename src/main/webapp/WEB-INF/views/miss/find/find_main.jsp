@@ -73,6 +73,7 @@
 								<span>[양서류]</span>
 							</c:otherwise>
 						</c:choose>
+						<span>[${record.addr}]</span>
 					</span>
 					<a href="<c:url value='/miss/find_view.aw?find_no=${record.no}'/>"	class="article-list-item__info">
 						<div class="article-list-item__title">

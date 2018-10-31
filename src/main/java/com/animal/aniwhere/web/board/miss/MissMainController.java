@@ -1,8 +1,10 @@
 package com.animal.aniwhere.web.board.miss;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -300,6 +302,7 @@ public class MissMainController {
 		public String find_insert(@RequestParam Map map,HttpSession session) throws Exception {
 			
 			map.put("mem_no", session.getAttribute("mem_no"));
+			map.put("addr", map.get("addr"));
 			
 			service.insert(map);
 				
@@ -502,12 +505,28 @@ public class MissMainController {
 	
 	@ResponseBody
 	@RequestMapping(value="/miss/cmt_list.awa",produces="text/html; charset=UTF-8")
-	public String list(@RequestParam Map map) throws Exception{
+	public String list(@RequestParam Map map,Model model) throws Exception{
 		
 		map.put("table_name", "see");
 		map.put("origin_no", map.get("no"));
+		map.put("no", map.get("no"));
 		
-		List<AllCommentDTO> comments = cmtService.selectList(map);
+		List<AllCommentDTO> collections = cmtService.selectList(map);
+		
+		List<Map> comments = new Vector<>();
+		
+		for (AllCommentDTO dto : collections) {
+	         Map record = new HashMap();
+	         record.put("cmt_no", dto.getCmt_no());
+	         record.put("cmt_content", dto.getCmt_content());
+	         record.put("mem_nickname", dto.getMem_nickname());
+	         record.put("regidate", dto.getRegidate().toString());
+	         record.put("origin_no", dto.getOrigin_no());
+	         record.put("mem_no", dto.getMem_no());
+	         
+
+	         comments.add(record);
+	      }
 		
 		return JSONArray.toJSONString(comments);
 	}//////////////////

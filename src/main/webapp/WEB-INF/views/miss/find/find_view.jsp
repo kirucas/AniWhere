@@ -38,6 +38,7 @@
 								<span>[양서류]</span>
 							</c:otherwise>
 						</c:choose>
+						<span>[${record.addr}]</span>
 						${record.title}
 						<div style="float:right;">
 							<!-- 글에 대한 버튼들(자기가 쓴 글이면 수정과 삭제 가능) -->

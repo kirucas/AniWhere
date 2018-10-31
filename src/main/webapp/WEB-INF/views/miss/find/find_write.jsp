@@ -4,6 +4,7 @@
 <%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
    $(function() {
       $('#summernote').summernote({
@@ -38,6 +39,50 @@
       }
    });
 </script>
+
+<script>
+    $(function(){
+        var postcode;//우편번호 변수 설정
+        //주소 API
+        $('.orgBtn').on("click",function(){
+            new daum.Postcode({
+                    oncomplete: function(data) {
+                        var value;
+                        var jusoSangsae="";
+                        var str = data.jibunAddress;   
+                        str = str.split(" ");          
+                     if(data.userSelectedType == "J"){  
+                            for(var i =0;i<str.length;i++){
+                                if(str[i]==data.bname){     
+                                    value=i;               
+                                }
+                            }
+                        }else{
+                            str = data.roadAddress;        
+                            str = str.split(" ");         
+                            for(var i=0;i<str.length;i++){
+                                if(str[i]==data.roadname){
+                                    value=i;               
+                                }
+                            }
+                        }
+                     for(var i=value;i<str.length;i++){  
+                            jusoSangsae = jusoSangsae+str[i];
+                        }
+                     addr = data.sigungu;
+                        postcode = data.postcode;
+                        $("#address").val(postcode);
+                         $("#address").val(addr);
+                         $('#addressError').html("");   
+                         $('#addressError').html("");   
+                  },
+                shorthand : false
+                }).open();
+        });
+        
+     });
+</script>
+
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
 @media (max-width: 575.98px) {
@@ -74,9 +119,14 @@
 					<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요">
 				</div>
 			</div>
-			<script>	
-				
-			</script>
+			<div class="form-inline">
+ 				<div class="form-group">
+ 					<input type="text" class="form-control" style="width: 250px" placeholder="예)금천구 가산동" name="addr" id="address">    							
+  					<button type="button" value="button타입" class="orgBtn article-action__button button" id="lookup" style="margin-left: 15px">조회하기</button>
+  				</div> 					
+   			</div>
+   			<p style="color: orange; margin-top: 5px;font-size: 0.9em">※애완동물을 잃어버린 위치를 간략하게 입력해주세요</p>
+			</br>
 			<div class="form-group form-row">
 				<div style="width:92.75%">
 					<textarea rows="10" class="form-control" id="summernote" name="content"></textarea>
