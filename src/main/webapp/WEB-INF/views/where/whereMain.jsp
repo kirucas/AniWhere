@@ -151,11 +151,11 @@
 		<div id="list-select">
 			<ul class="nav nav-tabs">
 				<li class="nav-item"><a class="nav-link" id="all" href="#">전체보기</a></li>
-				<li class="nav-item"><a class="nav-link" id="" href="#">애견카페</a></li>
-				<li class="nav-item"><a class="nav-link" id="" href="#">애완미용</a></li>
-				<li class="nav-item"><a class="nav-link" id="" href="#">동물병원</a></li>
-				<li class="nav-item"><a class="nav-link" id="" href="#">동물약국</a></li>
-				<li class="nav-item"><a class="nav-link" id="ip" href="#" title="1">동물기타</a>
+				<li class="nav-item"><a class="nav-link" id="cafe" href="#" title="Q12A07">애견카페</a></li>
+				<li class="nav-item"><a class="nav-link" id="hair" href="#" title="D09A02">애완미용</a></li>
+				<li class="nav-item"><a class="nav-link" id="hospital" href="#" title="S04A01 S04A02">동물병원</a></li>
+				<li class="nav-item"><a class="nav-link" id="pharm" href="#" title="D25A16">동물약국</a></li>
+				<li class="nav-item"><a class="nav-link" id="etc" href="#" title="D09A01 S04A03">동물기타</a>
 				</li>
 			</ul>
 		</div>
@@ -194,15 +194,13 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8940a4eb3083abd07d038b8c2839831&libraries=services,clusterer,drawing"></script>
 <script>
 		$(document).ready(function() {
-			
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
 		        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
 		        level: 5 // 지도의 확대 레벨
 	    	};  
-			// 지도를 생성합니다    
+			// 지도와 클러스터러를 생성하는 메소드
 			var map = new daum.maps.Map(mapContainer, mapOption); 
-			
 			var clusterer = new daum.maps.MarkerClusterer({
 		        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
 		        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
@@ -210,51 +208,196 @@
 	    	});
 			//마커들을 담을 배열 
 			var markers=[];
-			//시작하자마자 store_location테이블에 있는 정보 조회 및 지도에 뿌려주고 클러스터링 하기
-			$.ajax({
-	            type: "POST",
-	            dataType : "json",
-	            url : "<c:url value='/where/map/total.awa'/>",
-	            success: function(jsonObj) {
-	            	$.each(jsonObj, function(index, value){
-	            		console.log(value.lat);
-	            		console.log(value.lon);
-	            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-	            		var marker = new daum.maps.Marker({
-                            position : new daum.maps.LatLng(value.lat, value.lon)
-                        });
-	            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
-	                    markers.push(marker);	
-	            	});
-	            	// 클러스터러에 마커들을 추가합니다
-            	    clusterer.addMarkers(markers);
-	            },
-	            error : function() {
-	               console.log("error");
-	            }
-	         });
-			
-         	var space = /\+/g; //" "을 의미하는 값
-         	
-         	
-			var strdata = $("#ip").prop("title");
-			console.log(strdata);
-			$('#ip').click(function(){
-		         $.ajax({
-		        	data : {strdata:strdata},
+			total();
+			function total(){
+				$.ajax({
 		            type: "POST",
-		            url : "<c:url value='/where/map/D09A01.aw'/>",
-		            success: function(str) {
-		            	var space = /\+/g;
-		            	str=decodeURIComponent(str.replace(space," "));
-		            	console.log("성공:"+str);
-		            	infoParsing(str);
+		            dataType : "json",
+		            url : "<c:url value='/where/map/total.awa'/>",
+		            success: function(jsonObj) {
+		            	clusterer.removeMarkers(markers);
+		            	markers=[];
+		            	$.each(jsonObj, function(index, value){
+		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다.
+		            		// 지도와 클러스터러를 생성하는 메소드
+		            		var marker = new daum.maps.Marker({
+	                            position : new daum.maps.LatLng(value.lat, value.lon)
+	                        });
+		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
+		                    markers.push(marker);	
+		            	});
+		            	// 클러스터러에 마커들을 추가합니다
+	            	    clusterer.addMarkers(markers);
 		            },
 		            error : function() {
 		               console.log("error");
 		            }
 		         });
-			})
+			};
+         	var space = /\+/g; //" "을 의미하는 값
+         	
+			$('#all').click(function(){
+		        total();
+			});
+			
+			var cafe = $("#cafe").prop("title");
+			$('#cafe').click(function(){
+		         $.ajax({
+		        	data : {indssclscd:cafe},
+		            type: "POST",
+		            url : "<c:url value='/where/map/select.awa'/>",
+		            dataType : "json",
+		            success: function(jsonObj) {
+		            	clusterer.removeMarkers(markers);
+	            		markers=[];
+		            	$.each(jsonObj, function(index, value){
+		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+		            		var marker = new daum.maps.Marker({
+	                            position : new daum.maps.LatLng(value.lat, value.lon)
+	                        });
+		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
+		                    markers.push(marker);
+		            	});
+		            	// 클러스터러에 마커들을 추가합니다
+	            	    clusterer.addMarkers(markers);
+		            },
+		            error : function() {
+		               console.log("error");
+		            }
+		         });
+			});
+			
+			var hair = $("#hair").prop("title");
+			console.log(hair);
+			$('#hair').click(function(){
+		         $.ajax({
+		        	data : {indssclscd:hair},
+		            type: "POST",
+		            url : "<c:url value='/where/map/select.awa'/>",
+		            dataType : "json",
+		            success: function(jsonObj) {
+		            	clusterer.removeMarkers(markers);
+	            		markers=[];
+		            	$.each(jsonObj, function(index, value){
+		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+		            		var marker = new daum.maps.Marker({
+	                            position : new daum.maps.LatLng(value.lat, value.lon)
+	                        });
+		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
+		                    markers.push(marker);
+		            	});
+		            	// 클러스터러에 마커들을 추가합니다
+	            	    clusterer.addMarkers(markers);
+		            },
+		            error : function() {
+		               console.log("error");
+		            }
+		         });
+			});
+			
+			var hospital = $("#hospital").prop("title");
+			console.log(hospital);
+			$('#hospital').click(function(){
+		         $.ajax({
+		        	data : {indssclscd:hospital},
+		            type: "POST",
+		            url : "<c:url value='/where/map/select.awa'/>",
+		            dataType : "json",
+		            success: function(jsonObj) {
+		            	clusterer.removeMarkers(markers);
+	            		markers=[];
+		            	$.each(jsonObj, function(index, value){
+		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+		            		var marker = new daum.maps.Marker({
+	                            position : new daum.maps.LatLng(value.lat, value.lon)
+	                        });
+		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
+		                    markers.push(marker);
+		            	});
+		            	// 클러스터러에 마커들을 추가합니다
+	            	    clusterer.addMarkers(markers);
+		            },
+		            error : function() {
+		               console.log("error");
+		            }
+		         });
+			});
+			
+			var pharm = $("#pharm").prop("title");
+			console.log(pharm);
+			$('#pharm').click(function(){
+		         $.ajax({
+		        	data : {indssclscd:pharm},
+		            type: "POST",
+		            url : "<c:url value='/where/map/select.awa'/>",
+		            dataType : "json",
+		            success: function(jsonObj) {
+		            	clusterer.removeMarkers(markers);
+	            		markers=[];
+		            	$.each(jsonObj, function(index, value){
+		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+		            		var marker = new daum.maps.Marker({
+	                            position : new daum.maps.LatLng(value.lat, value.lon)
+	                        });
+		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
+		                    markers.push(marker);
+		            	});
+		            	// 클러스터러에 마커들을 추가합니다
+	            	    clusterer.addMarkers(markers);
+		            },
+		            error : function() {
+		               console.log("error");
+		            }
+		         });
+			});
+			
+			var etc = $("#etc").prop("title");
+			console.log(etc);
+			$('#etc').click(function(){
+		         $.ajax({
+		        	data : {indssclscd:etc},
+		            type: "POST",
+		            url : "<c:url value='/where/map/select.awa'/>",
+		            dataType : "json",
+		            success: function(jsonObj) {
+		            	clusterer.removeMarkers(markers);
+	            		markers=[];
+		            	$.each(jsonObj, function(index, value){
+		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+		            		var marker = new daum.maps.Marker({
+	                            position : new daum.maps.LatLng(value.lat, value.lon)
+	                        });
+		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
+		                    markers.push(marker);
+		            	});
+		            	// 클러스터러에 마커들을 추가합니다
+	            	    clusterer.addMarkers(markers);
+		            },
+		            error : function() {
+		               console.log("error");
+		            }
+		         });
+			});
+         	
+// 			var strdata = $("#ip").prop("title");
+// 			console.log(strdata);
+// 			$('#ip').click(function(){
+// 		         $.ajax({
+// 		        	data : {strdata:strdata},
+// 		            type: "POST",
+// 		            url : "<c:url value='/where/map/D09A01.aw'/>",
+// 		            success: function(str) {
+// 		            	var space = /\+/g;
+// 		            	str=decodeURIComponent(str.replace(space," "));
+// 		            	console.log("성공:"+str);
+// 		            	infoParsing(str);
+// 		            },
+// 		            error : function() {
+// 		               console.log("error");
+// 		            }
+// 		         });
+// 			});
+			
 			//Xml파싱 하는 방법
 // 			function infoParsing(result){
 // 				if (window.DOMParser)
@@ -356,8 +499,6 @@
 			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 			var zoomControl = new daum.maps.ZoomControl();
 			map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-			
-			
 
 			function radius(lat1,lon1){
 				$.ajax({

@@ -63,6 +63,37 @@ public class WhereController {
 		  return JSONArray.toJSONString(collections);
 	  }/////////////whole
 	  
+	  //옆에 하나 선택
+	  @RequestMapping(value= "/where/map/select.awa", method= RequestMethod.POST)
+	  @ResponseBody
+	  public String select(Model model,@RequestParam Map map,HttpServletResponse response) throws Exception{
+		  String[] codes = ((String)map.get("indssclscd")).split(" ");
+		  List<Map> collections = new Vector<Map>();
+		  for(String code : codes) {
+			  map.put("indssclscd", code);
+			  List<StoreLocationDTO> lists = (List<StoreLocationDTO>) storelocservice.selectList(map);
+			  for(StoreLocationDTO list:lists) {
+		         Map record = new HashMap();
+		         record.put("bizesId", list.getBizesId());
+		         record.put("bizesNm", list.getBizesNm());
+		         record.put("brchNm", list.getBrchNm());
+		         record.put("indsSclsCd", list.getIndsSclsCd());
+		         record.put("indsSclsNm", list.getIndsSclsNm());
+		         record.put("lnoAdr", list.getLnoAdr());
+		         record.put("rdnmAdr", list.getRdnmAdr());
+		         record.put("lon", list.getLon());
+		         record.put("lat", list.getLat());
+		         record.put("dongNo", list.getDongNo());
+		         record.put("flrNo", list.getFlrNo());
+		         record.put("hoNo", list.getHoNo());
+		         collections.add(record);
+		      }////inner for
+		  }/// outter for
+	      System.out.println(JSONArray.toJSONString(collections));
+		  return JSONArray.toJSONString(collections);
+	  }/////////////select
+	  
+	  
 	  @RequestMapping(value= "/where/map/radius.awa", method= RequestMethod.POST,produces="text/plain; charset=UTF-8")
 	  @ResponseBody
 	  public String  mapdata(@RequestParam Map map,HttpServletResponse response) throws Exception{
