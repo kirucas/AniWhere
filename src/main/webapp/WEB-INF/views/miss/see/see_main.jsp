@@ -102,7 +102,8 @@
 			
 		</section>
 	</div>
-	<div class="row">
-			<div class="col-md-11 ">${pagingString }</div>
-	</div>
+	</br>
+			${pagingString }
+	</br>
+
 <!-- 바디 끝 -->

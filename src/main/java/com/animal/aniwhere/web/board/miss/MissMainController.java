@@ -516,14 +516,14 @@ public class MissMainController {
 		List<Map> comments = new Vector<>();
 		
 		for (AllCommentDTO dto : collections) {
+			
 	         Map record = new HashMap();
 	         record.put("cmt_no", dto.getCmt_no());
 	         record.put("cmt_content", dto.getCmt_content());
 	         record.put("mem_nickname", dto.getMem_nickname());
 	         record.put("regidate", dto.getRegidate().toString());
 	         record.put("origin_no", dto.getOrigin_no());
-	         record.put("mem_no", dto.getMem_no());
-	         
+	         record.put("mem_no", dto.getMem_no());         
 
 	         comments.add(record);
 	      }

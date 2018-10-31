@@ -100,11 +100,12 @@
 				</c:forEach>
 			</c:if>
 			<!-- 페이징 부분 -->
-			<section class="article-list-paging" >
-				<div class="row">
-					<div class="col-md-11 ">${pagingString }</div>
-				</div>
-			</section>
+			
 		</section>
+		
+		</br>
+			${pagingString }
+	</br>
+		
 	</div>
 <!-- 바디 끝 -->
