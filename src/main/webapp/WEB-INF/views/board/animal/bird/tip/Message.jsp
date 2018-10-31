@@ -7,7 +7,7 @@
 	<c:when test="${WHERE eq 'EDT' }">
 		<c:set var="successMessage" value="수정 성공했어요"/>
 		<c:set var="failMessage" value="수정 실패했어요"/>
-		<c:set var="successMoveUrl" value="/animal/bird/tip/tip_view.aw?tip_no=${param.tip_no }"/>
+		<c:set var="successMoveUrl" value="/animal/bird/tip/tip_view.aw?no=${param.no }"/>
 	</c:when>
 	<c:otherwise>
 		<c:set var="successMessage" value="삭제 성공했어요"/>

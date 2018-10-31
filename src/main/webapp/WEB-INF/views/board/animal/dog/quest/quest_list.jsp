@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 <style>
-@import url("https://use.fontawesome.com/releases/v5.4.2/css/all.css"); 
+	@import url("https://use.fontawesome.com/releases/v5.4.2/css/all.css"); 
 </style>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
 <div class="container">

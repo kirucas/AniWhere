@@ -2,6 +2,85 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
+//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
+	var showComments = function(key){		
+		$.ajax({
+			url:"<c:url value='/dog/quest/cmtList.aw'/>",
+			data:{origin_no:key},
+			dataType:'json',
+			type:'post',
+			success:displayComments			
+		});
+	};
+	
+	//해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
+	var displayComments	 = function(data){
+		console.log(JSON.stringify(data));
+		var commentString='<div class="row border-top" style="padding-left:10px;padding-right: 10px">';
+		if(data.length==0){
+			commentString+="<h3>등록된 댓글이 없습니다</h3>";
+		}
+		$.each(data,function(index,cmt){			
+			commentString+='<div class="col-sm-5" style="padding-top: 10px;padding-right: 0px">';
+			commentString+=cmt["mem_nickname"]+'&nbsp;&nbsp; '+cmt["regidate"];
+			commentString+='</div>';
+			commentString+='<div class="offset-sm-5 col-sm-2" style="text-align:right;padding-top: 10px">';
+			if('${sessionScope.mem_no}' == comment["mem_no"])
+				commentString+='<a class="commentDelete text-right" href="#">삭제</a>';
+			else
+				commentString+='';
+			commentString+='</div>';
+			commentString+='<div class="col-sm-12">';
+			commentString+='<h4>'+comment["cmt_content"]+'</h4>';
+			commentString+='</div>';
+		});		
+		commentString+='</div>';
+		
+		$('#comments').html(commentString);
+		
+		//댓글 삭제 처리
+		$('.commentDelete').click(function(){			
+			var cno_value = $(this).attr("title");
+			$.ajax({
+				url:"<c:url value='/dog/quest/cmtDelete.aw'/>",
+				data:{cmt_no:cno_value,no:${record.no} },
+				dataType:'text',
+				type:'post',
+				success:function(key){					
+					showComments(key);					
+				}		
+			});
+		});
+	};
+	
+	$(function(){
+		//페이지 로드시 코멘트 목록 뿌려주기
+		showComments(${record.no});
+		//코멘트 입력처리]
+		$('#submit').click(function(){	
+			if($(this).val()=='등록')
+				var action="<c:url value='/dog/quest/cmtWrite.aw'/>";
+			else
+				var action="<c:url value='/dog/quest/cmtEdit.aw'/>";
+			$.ajax({
+				url:action,
+				data:$('#frm').serialize(),
+				dataType:'text',
+				type:'post',
+				success:function(key){					
+					showComments(key);
+					if($('#submit').val()=='수정'){						
+						$('#submit').val('등록');
+						$('#cmt_content').val('');
+					}
+					
+				}		
+			});		
+			
+		});
+	
+</script>
+<script>
 	$(function(){
 		$(function(){
 			//메모글 삭제처리]
@@ -74,9 +153,11 @@
 		<form name="frm" method="post">
 			<div class="form-row">
 				<div class="form-group col-sm-11" style="padding-left: 20px">
-					<input class="form-control" id="content" name="comment"  type="text" size="200" placeholder="댓글을 입력 하세요" />
+					<input class="form-control" id="cmt_content" name="cmt_content"  type="text" size="200" placeholder="댓글을 입력 하세요" />
 				</div>
 				<div class="form-group col-sm-1" style="padding-left: 15px">
+					<input type="hidden" name="table_name" id="table_name" value="quest" />
+					<input type="hidden" name="no" id="no" value="${record.no}"/>
 					<input type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
 				</div>
 			</div>
@@ -86,7 +167,6 @@
 		<div class="col-sm-5" style="padding-top: 10px;padding-right: 0px">
 			김길동 &nbsp;&nbsp; 2018-01-01
 		</div>
-		<input type="hidden" name="table_name" id="table_name" value="quest" />
 		<div class="offset-sm-5 col-sm-2" style="text-align:right;padding-top: 10px">
 			<a class="text-right" href="#">삭제</a>
 		</div>
