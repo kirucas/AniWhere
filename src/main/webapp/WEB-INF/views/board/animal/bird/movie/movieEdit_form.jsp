@@ -25,17 +25,27 @@
 
 <script>
 
-	function pre_view() {
-		var ntWin;
-		ntWin = window.open('', 'popup', 'width=600,height=500');
-		ntWin.document.getElementsByTagName("body")[0].innerHTML = '';
-		
-		/* 제목 */
-		ntWin.document.write("<br/>" + document.forms[0].movie_title.value + "<br/>");
-		
-		/* 내용 컨텐츠 */
-		ntWin.document.write("<br/>" + document.forms[0].movie_content.value + "<br/>");
-	}
+function pre_view() {
+	var ntWin;
+	ntWin = window.open('', 'popup', 'width=640,height=600');
+	ntWin.document.getElementsByTagName("body")[0].innerHTML = '';
+	ntWin.document.write("<html><body>");
+	 
+	ntWin.document.getElementsByTagName("body")[0].style.fontFamily ="메이플스토리";
+	/* 게시판 명 */
+//	ntWin.document.write("<br/>" + document.forms[0].movie_panel.value + "<br/>");
+	 
+	/* 제목 */
+	ntWin.document.write("<br/>제목 : " + document.forms[0].movie_title.value + "<br/><hr />");
+	
+	/* 닉네임 */
+//	ntWin.document.write("<br/>작성자 : 닉네임" + ${mem_id} + " [작성 후 닉네임으로 변경 됨]<br/>");
+
+	/* 내용 컨텐츠 */
+	ntWin.document.write("<br/>" + document.forms[0].movie_content.value + "<br/>");
+	
+	ntWin.document.write("</body></html>");
+}
 	
 	
 	function check() {
@@ -83,7 +93,7 @@
 </script>
 
 <div class="container">
-	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/animal/bird/movie/edit.aw'/>">
+	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/bird/movie/edit.aw?no=${dto.no}'/>">
 		<input type="hidden" name="mem_no" value="${mem_no }">
 		<input type="hidden" name="ani_category" value="4">
 		<div class="form-group row">
@@ -93,7 +103,7 @@
 			<div class="col-sm-9">
 				<input type="text" class="form-control-planintext"
 					id="validationDefaultUsername" disabled="disabled"
-					placeholder="예:조류게시판">
+					placeholder="조류게시판">
 				<!-- required disabled -->
 			</div>
 		</div>

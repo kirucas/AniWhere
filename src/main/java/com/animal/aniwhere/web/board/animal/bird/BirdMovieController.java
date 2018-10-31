@@ -21,14 +21,14 @@ import com.animal.aniwhere.service.impl.animal.MovieBoardServiceImpl;
 @Controller
 public class BirdMovieController {
 
+	private static final int PAGESIZE = 12;
+
 	// 서비스 주입]
 	@Resource(name = "movieService")
 	private MovieBoardServiceImpl service;
 
 	// 목록처리]
 	// 리소스파일(memo.properties)에서 읽어오기
-	@Value("${PAGESIZE}")
-	private int pageSize;
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
 
@@ -44,8 +44,8 @@ public class BirdMovieController {
 		int totalRecordCount = service.getTotalRecord(map);
 		System.out.println(totalRecordCount);
 		// 시작 및 끝 ROWNUM구하기]
-		int start = (nowPage - 1) * pageSize + 1;
-		int end = nowPage * pageSize;
+		int start = (nowPage - 1) * PAGESIZE + 1;
+		int end = nowPage * PAGESIZE;
 		map.put("start", start);
 		map.put("end", end);
 		// 페이징을 위한 로직 끝]
@@ -73,14 +73,14 @@ public class BirdMovieController {
 			break;
 		}
 		// 페이징 문자열을 위한 로직 호출]
-		String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,
+		String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, PAGESIZE, blockPage, nowPage,
 				req.getContextPath() + "/bird/movie/List.aw?");
 		// 데이타 저장]
 		model.addAttribute("list", list);
 		model.addAttribute("pagingString", pagingString);
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		model.addAttribute("nowPage", nowPage);
-		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageSize", PAGESIZE);
 
 		// 뷰정보반환]
 		return "forward:/animal/bird/movie.aw";
@@ -121,7 +121,8 @@ public class BirdMovieController {
 	//수정폼으로 이동 및 수정 처리]
 		@RequestMapping("/bird/movie/edit.aw")
 		public String movie_edit(Model model, @RequestParam Map map, HttpServletRequest req) throws Exception{
-			if(req.getMethod().equals("GET")) {
+			System.out.println("post방식 : " + req.getMethod().equals("POST"));
+			if(!req.getMethod().equals("POST")) {
 				//서비스 호출]
 				MovieBoardDTO dto = service.selectOne(map);
 				//데이타 저장]
@@ -131,9 +132,9 @@ public class BirdMovieController {
 			}
 			//수정처리후 메시지 뿌려주는 페이지(Message.jsp)로 이동
 			int successFail =service.update(map);
-			System.out.println("successFail" +successFail);
 			model.addAttribute("successFail", successFail);
 			model.addAttribute("WHERE","EDT");
+			model.addAttribute("no",map.get("no"));
 			System.out.println("model" +model);
 			return "/board/animal/bird/movie/movieMessage";
 		}//////////////////
@@ -147,7 +148,6 @@ public class BirdMovieController {
 		}////////////////////////////////////////////////
 		
 	// content안에 있는 유튜브 소스와 내용을 순서대로 분리하여
-	//<div>를 넣어준 뒤 뿌려주는 메소드
 	private void setIframe(MovieBoardDTO dto) {
 		String content = dto.getMovie_content(); //content 얻기
 		System.out.println("content:" + content);
