@@ -30,7 +30,8 @@ public class NoticeDAO implements AllCommonService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public NoticeDTO selectOne(Map map) {
-		template.update("addCountNotice", map);
+		if(map.get("view") == null)
+			template.update("addCountNotice", map);
 		return template.selectOne("noticeSelectOne", map);
 	}////////// selectOne
 
