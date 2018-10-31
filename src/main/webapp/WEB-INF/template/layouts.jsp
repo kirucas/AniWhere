@@ -24,10 +24,16 @@
 *{
 	font-family: 메이플스토리 !important;
 }
-</style>         
+#page-fade{display:none;}
+</style>
+<script>
+	jQuery(document).ready(function () {
+	jQuery('#page-fade').fadeIn(2000);
+	}); 
+</script>
 </head>
 <body>
-	<div class="container">
+	<div class="container" id="page-fade">
 		<!-- navigation bar start -->
 		<tiles:insertAttribute name="Top" />
 		<!-- navigation bar end -->

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
-<%@ include file="/WEB-INF/views/common/loading.jsp" %>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
 #no{
@@ -12,18 +11,15 @@
 .sub-header-info{
 	padding-bottom:0px;
 }
+#pagingDiv{
+	width: 100%;
+	text-align: center;
+}
 .row nav{
-	width: 100%;
+	margin:0 auto;
 }
-.pagination{
-	width: 100%;
-	margin-left: 35%;
-}
-.pagination li{
-	margin-right: 5%;
-}
-.pagination li a{
-	margin-right: 5%;
+#pagingDiv nav ul li {
+	margin-right: 10px;
 }
 </style>
 <!-- 바디 -->
@@ -153,7 +149,7 @@
 		</section>
 	</div>
 	<!-- 아래는 페이징 -->
-    <div class="row">
+    <div class="row" id="pagingDiv">
     		${pagingString}
     </div>	
 <!-- 바디 끝 -->

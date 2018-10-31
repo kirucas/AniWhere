@@ -33,6 +33,7 @@ public class FreeboardController {
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
 	
+	
 	@RequestMapping("/animal/freeboard.aw")
 	public String free_main(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
