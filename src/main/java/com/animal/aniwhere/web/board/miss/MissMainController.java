@@ -320,7 +320,7 @@ public class MissMainController {
 				record.put("no", list.getNo());
 				record.put("mem_no", list.getMem_no());
 				record.put("title", list.getTitle());
-				record.put("content", list.getContent());
+				record.put("content", list.getContent().replaceAll("<br/>", "\r\n"));
 				record.put("regidate", list.getRegidate()+"");
 				record.put("count", list.getCount());
 				record.put("animal_code", list.getAnimal_code());	
