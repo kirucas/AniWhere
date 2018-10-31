@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,6 @@ public class QueCmtController {
 	@RequestMapping(value="/dog/quest/cmtList.aw",produces="text/html; charset=UTF-8")
 	public String list(@RequestParam Map map) throws Exception{
 		List<AllCommentDTO> comment = allCommentService.selectList(map);
-		return "";
+		return JSONArray.toJSONString(comment);
 	}
 }

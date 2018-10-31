@@ -25,13 +25,13 @@
 			commentString+=cmt["mem_nickname"]+'&nbsp;&nbsp; '+cmt["regidate"];
 			commentString+='</div>';
 			commentString+='<div class="offset-sm-5 col-sm-2" style="text-align:right;padding-top: 10px">';
-			if('${sessionScope.mem_no}' == comment["mem_no"])
+			if('${sessionScope.mem_no}' == cmt["mem_no"])
 				commentString+='<a class="commentDelete text-right" href="#">삭제</a>';
 			else
 				commentString+='';
 			commentString+='</div>';
 			commentString+='<div class="col-sm-12">';
-			commentString+='<h4>'+comment["cmt_content"]+'</h4>';
+			commentString+='<h4>'+cmt["cmt_content"]+'</h4>';
 			commentString+='</div>';
 		});		
 		commentString+='</div>';
@@ -163,15 +163,6 @@
 			</div>
 		</form>
 	</div>
-	<div class="row border-top" style="padding-left:10px;padding-right: 10px">
-		<div class="col-sm-5" style="padding-top: 10px;padding-right: 0px">
-			김길동 &nbsp;&nbsp; 2018-01-01
-		</div>
-		<div class="offset-sm-5 col-sm-2" style="text-align:right;padding-top: 10px">
-			<a class="text-right" href="#">삭제</a>
-		</div>
-		<div class="col-sm-12">
-			<h4>ㅎㅇ</h4>
-		</div>
+	<div id="comments">
 	</div>
 </div>
