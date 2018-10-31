@@ -3,7 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
 <!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
-<!-- table_name은 (동물)_movie 의 형식으로 넘어와야 함 -->
 <mapper namespace="mybatis.Movie">
 
 	<select id="movieCount" parameterType="java.util.Map" resultType="int">
@@ -29,7 +28,7 @@
 				<if test="searchColumn != null">
 					AND ${searchColumn} like '%' || #{searchWord} || '%'
 				</if>
-				ORDER BY movie_no DESC
+				ORDER BY no DESC
 				) T
 			)
 		WHERE R BETWEEN #{start} AND #{end}
@@ -38,23 +37,35 @@
 	<select id="movieSelectOne" parameterType="java.util.Map" resultType="MovieDTO">
 		SELECT tn.*, mem_nickname
 		FROM movie tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
-		WHERE movie_no=#{movie_no}
+		WHERE no=#{no}
 	</select>
 	
 	<insert id="movieInsert" parameterType="java.util.Map">
-		INSERT INTO movie(movie_no, mem_no, movie_title, movie_content, ani_category)
+		INSERT INTO movie(no, mem_no, movie_title, movie_content, ani_category)
 		VALUES(seq_movie.nextval, #{mem_no}, #{movie_title}, #{movie_content}, #{ani_category})
 	</insert>
 	
 	<update id="movieUpdate" parameterType="java.util.Map">
 		UPDATE movie
 		SET movie_title=#{movie_title}, movie_content=#{movie_content}
-		WHERE movie_no=#{movie_no}
+		WHERE no=#{no}
 	</update>
 	
 	<delete id="movieDelete" parameterType="java.util.Map">
 		DELETE movie
-		WHERE movie_no=#{movie_no}
+		WHERE no=#{no}
 	</delete>
+	
+	<update id="addHitCountMovie" parameterType="java.util.Map">
+		UPDATE movie
+		SET movie_hit=movie_hit + 1
+		WHERE no=#{no}
+	</update>
+	
+	<update id="addCountMovie" parameterType="java.util.Map">
+		UPDATE movie
+		SET movie_count=movie_count + 1
+		WHERE no=#{no}
+	</update>
 	
 </mapper>

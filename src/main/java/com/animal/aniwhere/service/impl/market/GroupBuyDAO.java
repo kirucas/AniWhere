@@ -8,11 +8,11 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.animal.aniwhere.service.AllBoardService;
+import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.market.GroupBuyDTO;
 
 @Repository
-public class GroupBuyDAO implements AllBoardService {
+public class GroupBuyDAO implements AllCommonService {
 
 	@Resource(name = "template")
 	private SqlSessionTemplate template;
@@ -30,6 +30,8 @@ public class GroupBuyDAO implements AllBoardService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public GroupBuyDTO selectOne(Map map) {
+		if(map.get("view") == null)
+			template.update("addCountGroupBuy", map);
 		return template.selectOne("groupbuySelectOne", map);
 	}////////// selectOne
 
@@ -47,6 +49,9 @@ public class GroupBuyDAO implements AllBoardService {
 	public int delete(Map map) {
 		return template.delete("groupbuyDelete", map);
 	}////////// delete
-
 	
+	public int getTotalSell(Map map) {
+		return template.selectOne("groupbuySum", map);
+	}////////// getTotalSell
+
 }//////////////////// GroupBuyDAO class

@@ -17,5 +17,8 @@ public interface AllCommentService {
 
 	// 댓글 개수
 	int commentCount(Map map);
+	
+	// 댓글 추천수 증가용
+	int addHitCountComment(Map map);
 
 }//////////////////// AllCommentService interface

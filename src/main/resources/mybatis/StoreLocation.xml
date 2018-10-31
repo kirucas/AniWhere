@@ -8,7 +8,7 @@
 	<select id="storeCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM store_location
-		<if test="indssclscd">
+		<if test="indssclscd != null">
 			WHERE indssclscd=#{indssclscd}
 		</if>
 	</select>
@@ -16,7 +16,7 @@
 	<select id="storeSelectList" parameterType="java.util.Map" resultType="StoreDTO">
 		SELECT *
 		FROM store_location
-		<if test="indssclscd">
+		<if test="indssclscd != null">
 			WHERE indssclscd=#{indssclscd}
 		</if>
 		ORDER BY bizesid

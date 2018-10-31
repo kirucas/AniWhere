@@ -54,4 +54,10 @@
 		WHERE no=#{no}
 	</delete>
 	
+	<update id="addCountNotice" parameterType="java.util.Map">
+		UPDATE notice
+		SET count=count + 1
+		WHERE no=#{no}
+	</update>
+	
 </mapper>

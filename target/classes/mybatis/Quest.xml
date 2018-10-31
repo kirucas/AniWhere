@@ -3,7 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
 <!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
-<!-- table_name은 (동물)_quest의 형식으로 넘어와야 함 -->
 <mapper namespace="mybatis.Quest">
 
 	<select id="questCount" parameterType="java.util.Map" resultType="int">
@@ -38,17 +37,17 @@
 	<select id="questSelectOne" parameterType="java.util.Map" resultType="QuestDTO">
 		SELECT tn.*, mem_nickname
 		FROM quest tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
-		WHERE quest_no=#{quest_no}
+		WHERE no=#{no}
 	</select>
 	
 	<insert id="questInsert" parameterType="java.util.Map">
 		INSERT INTO quest
 		<if test="checking == null">
-			(quest_no, mem_no, quest_title, quest_content, origin_no, ani_category)
+			(no, mem_no, quest_title, quest_content, origin_no, ani_category)
 			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, seq_quest.currval, #{ani_category})
 		</if>
 		<if test="checking != null">
-			(quest_no, mem_no, quest_title, quest_content, origin_no, checking)
+			(no, mem_no, quest_title, quest_content, origin_no, checking, ani_category)
 			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, origin_no, 1, #{ani_category})
 		</if>
 	</insert>
@@ -56,12 +55,24 @@
 	<update id="questUpdate" parameterType="java.util.Map">
 		UPDATE quest
 		SET quest_title=#{quest_title}, quest_content=#{quest_content}
-		WHERE quest_no=#{quest_no}
+		WHERE no=#{no}
 	</update>
 	
 	<delete id="questDelete" parameterType="java.util.Map">
 		DELETE quest
-		WHERE quest_no=#{quest_no}
+		WHERE no=#{no}
 	</delete>
+	
+	<update id="addHitCountQuest" parameterType="java.util.Map">
+		UPDATE quest
+		SET quest_hit=quest_hit + 1
+		WHERE no=#{no}
+	</update>
+	
+	<update id="addCountQuest" parameterType="java.util.Map">
+		UPDATE quest
+		SET quest_count=quest_count + 1
+		WHERE no=#{no}
+	</update>
 	
 </mapper>

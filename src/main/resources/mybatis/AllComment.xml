@@ -39,4 +39,10 @@
 		WHERE origin_no=#{no}
 	</select>
 	
+	<update id="addHitCountComment" parameterType="java.util.Map">
+		UPDATE ${table_name}_cmt
+		SET hit=hit + 1
+		WHERE origin_no=#{no}
+	</update>
+	
 </mapper>
