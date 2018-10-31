@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -108,6 +109,7 @@
 			<div class="form-group form-row">
 				<input type="hidden" name="table_name" value="find"/>
 				<input type="hidden" name="mem_no" value="#" />
+				
                  	<select name="animal_code" style="width:53px;height:38px;margin-right:10px;">
                         <option value="1">고양이</option>
                          <option value="2">강아지</option>

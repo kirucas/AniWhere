@@ -59,8 +59,8 @@
 	</select>
 	
 	<select id="groupbuySum" parameterType="java.util.Map" resultType="int">
-		SELECT SUM(*)
-		FROM market_group_buy
+		SELECT SUM(buy_count)
+		FROM group_buy
 		WHERE no=#{no}
 	</select>
 	
@@ -88,11 +88,9 @@
 	</delete>
 	
 	<update id="addCountGroupBuy" parameterType="java.util.Map">
-		<if test="view != null">
 			UPDATE market_group_buy
 			SET count=count + 1
 			WHERE no=#{no}
-		</if>
 	</update>
 	
 </mapper>

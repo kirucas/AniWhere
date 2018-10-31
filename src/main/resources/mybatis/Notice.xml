@@ -24,7 +24,7 @@
 				SELECT nt.*, am_id
 				FROM notice nt LEFT JOIN admin_member am ON nt.am_no=am.am_no
 				<if test="searchColumn != null">
-					WHERE ${searchColumn like '%'||#{searchWord}||'%'
+					WHERE ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>
 				ORDER BY nt.no DESC
 				) T

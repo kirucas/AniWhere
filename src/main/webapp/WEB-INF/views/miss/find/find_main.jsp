@@ -10,6 +10,7 @@
 }
 </style>
 <!-- 바디 -->
+
 <div class="container" style="padding-left:0px;padding-right:0px;">
 		<div class="sub-header">
 			<div class="sub-header-info">
@@ -75,8 +76,11 @@
 						</c:choose>
 						<span>[${record.addr}]</span>
 					</span>
+					
+					
 					<a href="<c:url value='/miss/find_view.aw?find_no=${record.no}'/>"	class="article-list-item__info">
 						<div class="article-list-item__title">
+						
 							<span id="title">${record.title }</span> <em>[21]</em>
 						</div>
 					</a>
@@ -93,7 +97,8 @@
 					</div>
 				</div>
 				<div class="article-list-item__vote">
-					<div><span id="no" style="text-align:center">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</span></div>
+					<div>
+					<span id="no" style="text-align:center">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</span></div>
 				</div>
 			</article>
 

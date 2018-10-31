@@ -77,46 +77,63 @@ html {
 						<th style="width: 50px">등록일</th>
 					</tr>
 				</thead>
-				<tbody>
+				
+					<tbody>
 					<tr class="public">
 
 						<td>1</td>
 						<td>[공지사항]민사상 법률 팁 사기예방 공지사항</td>
 						<td>관리자</td>
 						<td>557</td>
-						<td>20180-08-17</td>
+						<td>2018-08-17</td>
 					</tr>
+					
+					<c:forEach var="record" items="${list}" varStatus="loop">
+				
+						<tr>
+						<td>
+						<span id="no">${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</span></td>
+							
+						<!-- 타이틀 로직 -->
+							
+							<td class="text-left">
+				
+							<span id="animal_code">
+						<c:choose>
+							<c:when test="${record.animal_code eq '1'}">
+								<span>[개]</span>
+							</c:when>
+							<c:when test="${record.animal_code eq '2'}">
+								<span>[고양이]</span>		
+							</c:when>
+							<c:when test="${record.animal_code eq '3'}">
+								<span>[파충류]</span>
+							</c:when>
+							<c:when test="${record.animal_code eq '4'}">
+								<span>[조류]</span>
+							</c:when>
+							<c:otherwise>
+								<span>[기타포유류]</span>
+							</c:otherwise>
+						</c:choose>
+					</span>
+																																						 
+								<a href="<c:url value='/market/sellinside.aw?no=${record.no}'/>">
+								
+								<span id="title">${record.title }</span></a>
+							
+						        </td>
+						        <!--  타이틀 끝 -->
+							
+							<td><span id="mem_no">${record.mem_nickname}</span></td>
+							<td><span id="count">${record.count} </span> </td>
+							<td><span id="regidate">${record.regidate}</span></td>
+						</tr>
+						
+					</c:forEach>
 
-
-					<tr>
-
-						<td>95</td>
-
-						<td><a href="<c:url value='/market/sellinside.aw'/>">[조류][소형][새장]카나리아 넣어서 키울만한 새장 팔아요</a></td>
-						<td>Jan_sina</td>
-						<td>180</td>
-						<td>20180-09-14</td>
-					</tr>
-
-					<tr>
-
-						<td>90</td>
-
-						<td>[파충류][소형][케이지]도마뱀용 유리 케이지 판매합니다 깨끗한걸로</td>
-						<td>Jan_sina</td>
-						<td>180</td>
-						<td>20180-09-14</td>
-					</tr>
-
-					<tr>
-
-						<td>67</td>
-
-						<td>[개][대형][사료]골든리트리버 사료 판매합니다 완전 새거! [2]</td>
-						<td>Jan_sina</td>
-						<td>200</td>
-						<td>20180-09-14</td>
-					</tr>
+					
+			
 				</tbody>
 			</table>
 		</div>
@@ -133,9 +150,9 @@ html {
 
 					<li class="page-item disabled"><span class="page-link">Previous</span>
 					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item active"><span class="page-link">2<span
-							class="sr-only">(current)</span>
+					<li class="page-item active"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><span class="page-link">2<span
+							class="sr-only"></span>
 					</span></li>
 					<li class="page-item"><a class="page-link" href="#">3</a></li>
 					<li class="page-item"><a class="page-link" href="#">4</a></li>
