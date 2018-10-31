@@ -2,72 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
-	//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
-	var showComments = function(key){		
-		$.ajax({
-			url:"<c:url value='/animal/quest/questcmt/list.aw'/>",
-			data:{no:key},
-			dataType:'json',
-			type:'post',
-			success:discmt			
-		});
-	};
-	//해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
-	//data는 아래 형태로 
-	//[{"NO":2,"ONELINECOMMENT":"댓글2","CPOSTDATE":"2018-09-12","CNO":3,"ID":"LEE","NAME":"이길동"},{"NO":2,"ONELINECOMMENT":"댓글1","CPOSTDATE":"2018-09-12","CNO":2,"ID":"PARK","NAME":"박길동"}]
-	var discmt	= function(data){
-		var cmtStr='<div class="row border-top" style="padding-left:10px;padding-right: 10px">';
-		if(data.length==0){
-			cmtStr+='<h3>등록된 댓글이 없습니다</h3>';
-		}
-		$.each(data,function(index,comment){			
-			cmtStr+='<div class="col-sm-5" style="padding-top: 10px;padding-right: 0px">';
-			if('${sessionScope.mem_no}' == comment["mem_no"])
-				cmtStr+='<a class="cmtdelete text-right" title="'+comment["cmt_no"]+'" href="#">삭제</a>';
-			else
-				cmtStr+='';
-			cmtStr+='</div>';
-			cmtStr+='<div class="col-sm-12">';
-			if('${sessionScope.mem_no}' != comment["mem_no"])
-				cmtStr+='<h4>'+comment['cmt_content']+'</h4>';
-			else
-				cmtStr+=''; 		
-			cmtStr+='</div>';
-		});		
-		cmtStr+='</div>';		
-		$('#comments').html(cmtStr);		
-		//댓글 삭제 처리	
-		$('.cmtdelete').click(function(){			
-			var cmt_no = $(this).attr("title");			
-			$.ajax({
-				url:"<c:url value='/animal/quest/questcmt/delete.aw'/>",
-				data:{cno:cmt_no,no:${record.no} },
-				dataType:'text',
-				type:'post',
-				success:function(key){					
-					showComments(key);					
-				}		
-			});							
-		});
-	};
 	$(function(){
-		//페이지 로드시 코멘트 목록 뿌려주기
-		showComments(${record.no});				
-		//코멘트 입력처리]
-		$('#submit').click(function(){	
-			if($(this).val()=='등록')
-				var action="<c:url value='/animal/quest/questcmt/write.aw'/>";
-			$.ajax({
-				url:action,
-				data:$('#frm').serialize(),
-				dataType:'text',
-				type:'post',
-				success:function(key){					
-					showComments(key);
-				}		
-			});		
-		});
-		
 		$(function(){
 			//메모글 삭제처리]
 			$('#delete').on('click',function(){
@@ -134,14 +69,12 @@
 <div class="container border" style="margin-top: 10px;margin-bottom: 10px">
 	<div class="row">
 		<div class="col-sm-12">
-			<strong style="font-size: 3em">댓글</strong> 댓글 0개
+			<strong style="font-size: 3em">댓글</strong> 댓글 <span id="count"></span>개
 		</div>
-		<form id="frm" method="post">
+		<form name="frm" method="post">
 			<div class="form-row">
-				<input type="hidden" name="no" id="no" value="${record.no}" />
 				<div class="form-group col-sm-11" style="padding-left: 20px">
-					<input type="hidden">
-					<input class="form-control" id="content" name="cmt"  type="text" size="200" placeholder="댓글을 입력 하세요" />
+					<input class="form-control" id="content" name="comment"  type="text" size="200" placeholder="댓글을 입력 하세요" />
 				</div>
 				<div class="form-group col-sm-1" style="padding-left: 15px">
 					<input type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
@@ -149,7 +82,16 @@
 			</div>
 		</form>
 	</div>
-	<div class="row" id="comments">
+	<div class="row border-top" style="padding-left:10px;padding-right: 10px">
+		<div class="col-sm-5" style="padding-top: 10px;padding-right: 0px">
+			김길동 &nbsp;&nbsp; 2018-01-01
+		</div>
+		<input type="hidden" name="table_name" id="table_name" value="quest" />
+		<div class="offset-sm-5 col-sm-2" style="text-align:right;padding-top: 10px">
+			<a class="text-right" href="#">삭제</a>
+		</div>
+		<div class="col-sm-12">
+			<h4>ㅎㅇ</h4>
+		</div>
 	</div>
-	
 </div>

@@ -56,7 +56,7 @@
 		action='<c:url value="/animal/dog/quest/quest_reply.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-sm-2 control-label" style="font-size:20px">제목</label>
-			<input class="form-control" type="text" maxlength="50" name="quest_title" disabled="disabled" id="quest_title" value="${record.quest_title }글에 대한 답변 " />
+			<input class="form-control" type="text" maxlength="50" name="quest_title" id="quest_title" value="${record.quest_title }글에 대한 답변 " />
 		</div>
 		<div class="form-row" style="padding-top: 10px;padding-bottom: 20px">
 			<label for="quest_content" class="col-sm-2 control-label" style="font-size:20px">내용</label>
