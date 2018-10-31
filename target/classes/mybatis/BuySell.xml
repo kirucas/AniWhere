@@ -49,7 +49,7 @@
 	<select id="bsSelectOne" parameterType="java.util.Map" resultType="BSDTO">
 		SELECT tn.*, mem_nickname, animal_name
 		FROM market_${table_name} tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
-		JOIN animalCategory ac ON tn.animal_code = ac.animal_code
+		JOIN animal_category ac ON tn.animal_code = ac.animal_code
 		WHERE no=#{no}
 	</select>
 	
@@ -60,7 +60,7 @@
 	
 	<update id="bsUpdate" parameterType="java.util.Map">
 		UPDATE market_${table_name}
-		SET animal_code=#{animal_code}, title=#{title}, content=#{title}
+		SET animal_code=#{animal_code}, title=#{title}, content=#{content}
 		WHERE no=#{no}
 	</update>
 	
@@ -70,11 +70,9 @@
 	</delete>
 	
 	<update id="addCountBS" parameterType="java.util.Map">
-		<if test="view != null">
-			UPDATE market_${table_name}
-			SET count=count + 1
-			WHERE no=#{no}
-		</if>
+		UPDATE market_${table_name}
+		SET count=count + 1
+		WHERE no=#{no}
 	</update>
 	
 </mapper>
