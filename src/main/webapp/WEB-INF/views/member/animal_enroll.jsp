@@ -103,13 +103,13 @@ input[type=date]:not(.browser-default):focus:not([readonly]){
 			        <div class="input-field inline col s2 offset-s4">
 	     			    <label>
 	        				<input name="ani_gender" type="radio" value="M" />
-	        				<span>암</span>
+	        				<span>수</span>
 	     				</label>
 			        </div>
 			        <div class="input-field inline col s2">
 				        <label>
 					        <input name="ani_gender" type="radio" value="F" />
-					        <span>수</span>
+					        <span>암</span>
 					    </label>
 				    </div>  
 			      </div>
