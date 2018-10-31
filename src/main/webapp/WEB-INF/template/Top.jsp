@@ -138,7 +138,7 @@ nav a{
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="<c:url value='/miss/miss_main.aw'/>" id="miss_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">유기동물</a>
+                            <a class="dropdown-toggle" href="#" id="miss_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">유기동물</a>
                             <ul class="dropdown-menu" aria-labelledby="miss_main">
                                 <li><a href="<c:url value='/miss/see.aw'/>">봤어요</a></li>
                                 <li><a href="<c:url value='/miss/find.aw'/>">찾아요</a></li>
