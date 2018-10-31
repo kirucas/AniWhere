@@ -67,11 +67,17 @@
 	</update>
 	
 	<update id="addCountFree" parameterType="java.util.Map">
+<<<<<<< HEAD
 		<if test="view != null">
 			UPDATE freeboard
 			SET free_count=free_count + 1
 			WHERE no=#{no}
 		</if>
+=======
+		UPDATE freeboard
+		SET free_count=free_count + 1
+		WHERE no=#{no}
+>>>>>>> refs/remotes/origin/vagabond
 	</update>
 	
 </mapper>
