@@ -152,18 +152,14 @@ public class MissMainController {
 		return "miss/" + path + "/" + path + "_write.tiles";
 	}////////// miss_write
 	
-	
 	//========================================================================================
-	
 	
 	//입력 후 리스트로 이동
 	@RequestMapping("/miss/see_insert.aw")
 	public String miss_insert(@RequestParam Map map,HttpSession session) throws Exception {
 		
 		map.put("mem_no", session.getAttribute("mem_no"));
-		
 		service.insert(map);
-			
 		return "forward:/miss/see.aw";
 	}////////// miss_write
 	

@@ -16,7 +16,8 @@
             <div>
             <h2 class="sub-header__title" style="display:inline">
                <a href="<c:url value='/miss/see.aw'/>">봤어요</a>
-            </h2>      
+            </h2> 
+                 
             <ul class="sub-header-button">
                <li class="sub-header-button__item sub-header-button__item--search">
                   <button id="search-toggle-button" class="button">
@@ -24,6 +25,7 @@
                   </button>
                </li>
             </ul>
+            
             <div class="sub-header-search">
             <a href="<c:url value='/miss/see_write.aw'/>">
                <img style="float:left;margin-top:5px" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
@@ -98,11 +100,12 @@
 			</article>
 				</c:forEach>
 			</c:if>
+			
 			<!-- 페이징 부분 -->
 			
 		</section>
 	</div>
 	<div class="row">
-			<div class="col-md-11 ">${pagingString }</div>
+			<div class="col-md-11 ">${pagingString}</div>
 	</div>
 <!-- 바디 끝 -->

@@ -88,9 +88,15 @@
 	</delete>
 	
 	<update id="addCountGroupBuy" parameterType="java.util.Map">
+<<<<<<< HEAD
 			UPDATE market_group_buy
 			SET count=count + 1
 			WHERE no=#{no}
+=======
+		UPDATE market_group_buy
+		SET count=count + 1
+		WHERE no=#{no}
+>>>>>>> refs/remotes/origin/kimilho_plz2
 	</update>
 	
 </mapper>

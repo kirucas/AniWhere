@@ -48,9 +48,8 @@
       }
    });
    
-       
-	   	   
-	   function check(f) {
+     	   	   
+	   function check() {
 	      var isAttached = $('#summernote').summernote('code');
 	      if (fr.title.value == "") {
 
@@ -78,7 +77,7 @@
 	      }	    
 	     
    else {
-	   f.action="<c:url value='/market/buyinsert.aw'/>"; 
+	    
        return true;
     }
 }
@@ -94,7 +93,7 @@
 
 		<div class="col-md-12">
 
-			<form name="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
+			<form name="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" action="<c:url value='/market/buyupdate.aw?buy_no=${record.no}'/>" 
 				class="form-horizontal" >				
 				<div class="form-row">
 				
@@ -105,7 +104,7 @@
 					<label for="title" class="col-sm-2 control-label">제목</label> 
 					<input
 						class="form-control" type="text" id="title" name="title"
-						placeholder="제목을 입력하세요">
+						value="${record.title}">
 				</div>
 				
 				<p style="margin-top: 30px">
@@ -115,12 +114,14 @@
 					 <select
 						class="select_filter" 
 						name="animal_code">
-						
-						<option value="1">개</option>
-						<option value="2">고양이</option>
-						<option value="3">파충류</option>
-						<option value="4">조류</option>
-						<option value="5">기타 포유류</option>
+					
+					
+						<option value="1" ${record.animal_code == 1 ? "selected" : "" }>개</option>
+						<option value="2" ${record.animal_code == 2 ? "selected" : "" }>고양이</option>
+						<option value="3" ${record.animal_code == 3 ? "selected" : "" }>파충류</option>
+						<option value="4" ${record.animal_code == 4 ? "selected" : "" }>조류</option>
+						<option value="5" ${record.animal_code == 5 ? "selected" : "" }>기타 포유류</option>
+											
 					</select>
 					 
 					<label for="" class="">용도분류</label> 
@@ -143,7 +144,7 @@
 						<textarea id="summernote" name="content"
 							class="col-md-12 form-control"
 							style="border: 1px solid blue; height: 500px" 
-							maxlength="2048"></textarea>
+							maxlength="2048">${record.content}</textarea>
 
 					</div>
 				</div>
@@ -154,7 +155,7 @@
 					<a href="<c:url value='/market/buy.aw'/>"> 
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
 
-				<button class="btn btn-primary" type="submit" role="button">확인</button>
+				<button class="btn btn-primary" type="submit" role="button">수정</button>
 				
 				</div>
 				
