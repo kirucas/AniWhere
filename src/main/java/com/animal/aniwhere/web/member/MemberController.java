@@ -225,7 +225,7 @@ public class MemberController {
    
    	//안드로이드 용
  	@ResponseBody
- 	@RequestMapping(value="/android.aw", method = RequestMethod.POST)
+ 	@RequestMapping(value="/android.awa", method = RequestMethod.POST)
  	public String androidLogin(@RequestParam Map map) throws Exception{
  		if(!service.isMember(map)) {
  			return "false";
@@ -237,7 +237,7 @@ public class MemberController {
  	
  	//안드로이드 googleLogin
  	@ResponseBody
- 	@RequestMapping(value = "/androidsignUpProcess.aw", method = RequestMethod.POST)
+ 	@RequestMapping(value = "/androidsignUpProcess.awa", method = RequestMethod.POST)
  	public String androidSignUp(@RequestParam Map map) throws Exception{
  		if(service.isMember(map)) {
  			System.out.println("isMember===========");
