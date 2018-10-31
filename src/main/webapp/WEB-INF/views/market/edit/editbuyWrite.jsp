@@ -116,15 +116,12 @@
 						name="animal_code">
 					
 					
-						
-						<option value="1" selected>개${record.animal_code}</option>
-						
-						<option value="2">고양이</option>
-						<option value="3">파충류</option>
-						<option value="4">조류</option>
-						<option value="5">기타 포유류</option>
-					
-						
+						<option value="1" ${record.animal_code == 1 ? "selected" : "" }>개</option>
+						<option value="2" ${record.animal_code == 2 ? "selected" : "" }>고양이</option>
+						<option value="3" ${record.animal_code == 3 ? "selected" : "" }>파충류</option>
+						<option value="4" ${record.animal_code == 4 ? "selected" : "" }>조류</option>
+						<option value="5" ${record.animal_code == 5 ? "selected" : "" }>기타 포유류</option>
+											
 					</select>
 					 
 					<label for="" class="">용도분류</label> 
