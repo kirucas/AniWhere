@@ -72,7 +72,7 @@ nav a{
 	                                </a>
 	                                <ul class="dropdown-menu" aria-labelledby="dog_main">
 		                                <li><a href="<c:url value='/animal/dog/photo.aw'/>">사진 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/dog/movie.aw'/>">동영상 게시판</a></li>
+		                                <li><a href="<c:url value='/dog/movie/List.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/dog/quest/quest_list.aw'/>">질문 게시판</a></li>
 		                                <li><a href="<c:url value='/board/animal/dog/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
@@ -84,7 +84,7 @@ nav a{
                                 	</a>
 	                                <ul class="dropdown-menu" aria-labelledby="cat_main">
 		                                <li><a href="<c:url value='/animal/cat/photo.aw'/>">사진 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/cat/movie.aw'/>">동영상 게시판</a></li>
+		                                <li><a href="<c:url value='/cat/movie/List.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/cat/quest.aw'/>">질문 게시판</a></li>
 		                                <li><a href="<c:url value='/board/animal/cat/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
@@ -96,7 +96,7 @@ nav a{
                                		</a>
 	                                <ul class="dropdown-menu" aria-labelledby="rna_main">
 		                                <li><a href="<c:url value='/animal/rna/photo.aw'/>">사진 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/rna/movie.aw'/>">동영상 게시판</a></li>
+		                                <li><a href="<c:url value='/rNa/movie/List.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/rna/quest.aw'/>">질문 게시판</a></li>
 		                                <li><a href="<c:url value='/board/animal/rNa/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
@@ -120,7 +120,7 @@ nav a{
 	                                </a>
 	                                <ul class="dropdown-menu" aria-labelledby="etc_main">
 		                                <li><a href="<c:url value='/animal/etc/photo.aw'/>">사진 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/etc/movie.aw'/>">동영상 게시판</a></li>
+		                                <li><a href="<c:url value='/etc/movie/List.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/etc/quest.aw'/>">질문 게시판</a></li>
 		                                <li><a href="<c:url value='/board/animal/etc/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>

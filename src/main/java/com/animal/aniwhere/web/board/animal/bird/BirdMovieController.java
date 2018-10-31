@@ -21,6 +21,7 @@ import com.animal.aniwhere.service.impl.animal.MovieBoardServiceImpl;
 @Controller
 public class BirdMovieController {
 
+	private static final int BIRD = 4;
 	private static final int PAGESIZE = 12;
 
 	// 서비스 주입]
@@ -37,7 +38,7 @@ public class BirdMovieController {
 			@RequestParam(required = false, defaultValue = "1") int nowPage, // 페이징용 nowPage파라미터 받기용
 			Model model, HttpServletRequest req// 페이징용 메소드에 전달
 	) throws Exception {
-		map.put("ani_category", 4);
+		map.put("ani_category", BIRD);
 		// 서비스 호출]
 		// 페이징을 위한 로직 시작]
 		// 전체 레코드 수

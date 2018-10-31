@@ -13,7 +13,7 @@ public class EtcMainController {
 		return "board/animal/etc/etc_main.tiles";
 	}////////// etc_main
 	
-	@RequestMapping(value = "/animal/etc/{path}", method = RequestMethod.GET)
+	@RequestMapping(value = "/animal/etc/{path}")
 	public String move_board(@PathVariable String path) throws Exception {
 		return "board/animal/etc/" + path + "/" + path + "_list.tiles";
 	}////////// move_board

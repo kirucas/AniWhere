@@ -20,7 +20,7 @@ import com.animal.aniwhere.service.impl.animal.MovieBoardServiceImpl;
 @Controller
 public class CatMovieController {
 
-
+	private static final int CAT = 2;
 	private static final int PAGESIZE = 12;
 
 	// 서비스 주입]
@@ -37,7 +37,7 @@ public class CatMovieController {
 			@RequestParam(required = false, defaultValue = "1") int nowPage, // 페이징용 nowPage파라미터 받기용
 			Model model, HttpServletRequest req// 페이징용 메소드에 전달
 	) throws Exception {
-		map.put("ani_category", 2);
+		map.put("ani_category", CAT);
 		// 서비스 호출]
 		// 페이징을 위한 로직 시작]
 		// 전체 레코드 수
