@@ -5,7 +5,7 @@
 <script>
 	var isDelete = function(){
 		if(confirm("글을 삭제 하시겠습니까?"))
-			location.replace("<c:url value='/animal/freeboard/delete.aw?free_no=${record.free_no}'/>");
+			location.replace("<c:url value='/animal/freeboard/delete.aw?no=${record.no}'/>");
 	};
 </script>
 <style>
@@ -41,9 +41,9 @@
 						${record.free_title}
 						<div style="float:right;">
 							<!-- 글에 대한 버튼들(자기가 쓴 글이면 수정과 삭제 가능) -->
-							<!-- a href="<c:url value='/ReplyBBS/BBS/Reply.bbs?free_no=${record.free_no}'/>" class="btn btn-success">답변</a> -->
+							<!-- a href="<c:url value='/ReplyBBS/BBS/Reply.bbs?no=${record.no}'/>" class="btn btn-success">답변</a> -->
 							<c:if test="${sessionScope.mem_no==record.mem_no }">
-								<a href="<c:url value='/animal/freeboard/edit.aw?free_no=${record.free_no}'/>" class="article-action__button button">수정</a>
+								<a href="<c:url value='/animal/freeboard/edit.aw?no=${record.no}'/>" class="article-action__button button">수정</a>
 								<a href="javascript:isDelete()" class="article-action__button button button--red button--red--border">삭제</a>
 							</c:if>
 							<a href="<c:url value='/animal/freeboard.aw'/>" class="article-action__button button">목록</a>	
@@ -55,7 +55,7 @@
 							<div class="article-meta__item article-meta__item--name">
 								<a
 									href="https://talk.op.gg/s/lol/free?q=%EB%9F%B0%EB%B9%8C%EB%A1%9C%EA%BE%B8%EA%BA%BC&amp;target=user_name">
-									${record.mem_no} </a>
+									${record.mem_nickname} </a>
 							</div>
 							<div class="article-meta__item">
 								<span data-tooltip data-date="2018-10-14T06:40:37+00:00"
