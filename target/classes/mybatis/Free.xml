@@ -46,7 +46,11 @@
 	
 	<update id="freeUpdate" parameterType="java.util.Map">
 		UPDATE freeboard
+<<<<<<< HEAD
 		SET free_title=#{free_title}, free_content=#{free_content}, free_category=#{free_category}
+=======
+		SET free_title=#{free_title}, free_content=#{free_content}, #{free_category})
+>>>>>>> refs/remotes/origin/integration_test
 		WHERE no=#{no}
 	</update>
 	
@@ -67,9 +71,17 @@
 	</update>
 	
 	<update id="addCountFree" parameterType="java.util.Map">
+<<<<<<< HEAD
 		UPDATE freeboard
 		SET free_count=free_count + 1
 		WHERE no=#{no}
+=======
+		<if test="view != null">
+			UPDATE freeboard
+			SET free_count=free_count + 1
+			WHERE no=#{no}
+		</if>
+>>>>>>> refs/remotes/origin/integration_test
 	</update>
 	
 </mapper>

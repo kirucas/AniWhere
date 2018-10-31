@@ -63,9 +63,17 @@
 	</update>
 	
 	<update id="addCountMovie" parameterType="java.util.Map">
+<<<<<<< HEAD
 		UPDATE movie
 		SET movie_count=movie_count + 1
 		WHERE no=#{no}
+=======
+		<if test="view != null">
+			UPDATE movie
+			SET movie_count=movie_count + 1
+			WHERE no=#{no}
+		</if>
+>>>>>>> refs/remotes/origin/integration_test
 	</update>
 	
 </mapper>

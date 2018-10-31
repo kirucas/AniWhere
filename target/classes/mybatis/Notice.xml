@@ -55,9 +55,17 @@
 	</delete>
 	
 	<update id="addCountNotice" parameterType="java.util.Map">
+<<<<<<< HEAD
 		UPDATE notice
 		SET count=count + 1
 		WHERE no=#{no}
+=======
+		<if test="view != null">
+			UPDATE notice
+			SET count=count + 1
+			WHERE no=#{no}
+		</if>
+>>>>>>> refs/remotes/origin/integration_test
 	</update>
 	
 </mapper>

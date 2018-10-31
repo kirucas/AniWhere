@@ -87,9 +87,17 @@
 	</update>
 	
 	<update id="addCountPhoto" parameterType="java.util.Map">
+<<<<<<< HEAD
 		UPDATE photo
 		SET photo_count=photo_count + 1
 		WHERE no=#{no}
+=======
+		<if test="view != null">
+			UPDATE photo
+			SET photo_count=photo_count + 1
+			WHERE no=#{no}
+		</if>
+>>>>>>> refs/remotes/origin/integration_test
 	</update>
 	
 </mapper>

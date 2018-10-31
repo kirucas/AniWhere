@@ -70,9 +70,17 @@
 	</update>
 	
 	<update id="addCountQuest" parameterType="java.util.Map">
+<<<<<<< HEAD
 		UPDATE quest
 		SET quest_count=quest_count + 1
 		WHERE no=#{no}
+=======
+		<if test="view != null">
+			UPDATE quest
+			SET quest_count=quest_count + 1
+			WHERE no=#{no}
+		</if>
+>>>>>>> refs/remotes/origin/integration_test
 	</update>
 	
 </mapper>
