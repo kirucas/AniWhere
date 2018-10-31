@@ -1,16 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <script>
-	$(function(){
-		  $(".everymodal").on("show.bs.modal",function(event){
-			  var button = $(event.relatedTarget)			  
-			  var recipient = button.data("whatever")
-			  var modal = $(this)
-			  modal.find("#Modalcontent").text(recipient)
-		  });
-	  });
+// 		$('#ModalSpace').on('show.bs.modal', function (event)) {
+// 			  var button = $(event.relatedTarget);
+// 				var wid = button.context.id;
+// 				console.log(wid);
+// 				setModal(wid);
+// 			}
+// 			function setModal(workshopId){
+// 				goAjax("Modal",workshopId);
+// 			}
+
+// 			function goAjax(what,param) {
+
+// 				$.ajax({
+// 					//url: "<c:url />"
+// 					type: "POST",
+// 					dataType: "json",
+// 					contentType:"Application/json;charset=utf-8",
+// 					data: param,
+// 					success:ajaxCallSucceed,
+// 					error:function(request,status,error){
+// 							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 							return; 
+// 							}
+// 				});
+// 			}
+			
+// 		function goModal(products){
+
+// 			var dataRow = "";
+// 				var html = "";
+// 				var status = "";
+// 				var option = "";
+// 				var barType = "";
+// 				var page2 = document.getElementById("ModalSpace");
+
+// 				for (var key in products.Table){
+// 					dataRow = products.Table[key];
+// 					html += '<div class="modal" > Modal <div>123</div> </div>'
+// 				}
+// 				page2.innerHTML = html;
+// 				console.log(page2);
+// 			}
+// 		var code = "<div> ii </div>";
+// 		$("#ModalContent").html(code);
 </script>
 <!-- 내용 시작 -->
 <form>
@@ -24,12 +60,12 @@
 		
 			<div>
 				<c:if test="${empty requestScope.list }" var="isEmpty">
-					<span>등로된 게시물이 없어요</span>
+					<span>등록된 게시물이 없어요</span>
 				</c:if>
 				
 					<c:if test="${not isEmpty }">
-						<c:forEach var="record" items="${list}" varStatus="loop">
-							<a href="#" data-toggle="modal" data-target="#Modal" class="everymodal" id="${loop.index}">
+						<c:forEach var="record" items="${list}">
+							<a href="#" data-toggle="modal" data-target="#Modal" id="ModalSpace">
 								<div>
 									<div>
 										제목 :${record.title}
