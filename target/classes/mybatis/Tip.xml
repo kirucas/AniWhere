@@ -63,10 +63,6 @@
 	</update>
 	
 	<update id="addCountTip" parameterType="java.util.Map">
-<<<<<<< HEAD
-=======
-		<if test="view != null">
->>>>>>> refs/remotes/origin/integration_test
 			UPDATE tip
 			SET tip_count = tip_count + 1
 			WHERE no=#{no}
