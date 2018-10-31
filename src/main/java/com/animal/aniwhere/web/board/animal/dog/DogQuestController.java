@@ -45,9 +45,10 @@ public class DogQuestController {
 	public String list(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
 			@RequestParam Map map,//검색용 파라미터 받기
-			@RequestParam(required=false,defaultValue="1") int nowPage//페이징용 nowPage파라미터 받기용
-			) throws Exception{
+			@RequestParam(required=false,defaultValue="1") int nowPage,//페이징용 nowPage파라미터 받기용
+			HttpSession session) throws Exception{
 		map.put("ani_category", ANI_CATEGORY);
+		
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		//전체 레코드 수
@@ -57,7 +58,7 @@ public class DogQuestController {
 		int end   = nowPage*pageSize;
 		map.put("start",start);
 		map.put("end",end);
-		//페이징을 위한 로직 끝]	
+		//페이징을 위한 로직 끝]
 		List<QuestBoardDTO> list= (List<QuestBoardDTO>) questService.selectList(map);
 		//페이징 문자열을 위한 로직 호출]
 		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/animal/dog/quest/quest_list.aw?");
@@ -67,7 +68,6 @@ public class DogQuestController {
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("pageSize", pageSize);
-		
 		//뷰정보반환]
 		return "board/animal/dog/quest/quest_list.tiles";
 	}////////////////list()
