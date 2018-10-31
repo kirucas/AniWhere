@@ -71,6 +71,25 @@ $(function(){
 	});
 });
 
+history.pushState(null, null, '');
+
+window.onpopstate = function(event) {
+
+  var prevUrl = document.referrer;
+
+  if(prevUrl.indexOf('view.aw?no="+$(this).attr("name")+"&nowPage="+${nowPage}+"') < 0){  //뒤로가기를 한 페이지가 test.do 페이지가 아니면 뒤로가기, test.do 페이지면 새로고침합니다.
+
+    history.back();
+
+  }
+  else{
+
+    location.href= prevUrl;
+
+  }
+
+};
+
 </script>
 
 <div class="row">

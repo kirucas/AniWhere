@@ -50,7 +50,7 @@ public class BirdMovieController {
 		map.put("end", end);
 		// 페이징을 위한 로직 끝]
 		List<MovieBoardDTO> list = service.selectList(map);
-		
+
 		while (true) {
 			for (MovieBoardDTO dto : list) {
 				String content = dto.getMovie_content();
@@ -96,8 +96,8 @@ public class BirdMovieController {
 	@RequestMapping(value = "/animal/bird/movie/Write.aw", method = RequestMethod.POST)
 	public String write(@RequestParam Map map) throws Exception {
 		
-			// 서비스 호출
-			service.insert(map);
+		// 서비스 호출
+		service.insert(map);
 		// 뷰정보 반환
 		return "forward:/bird/movie/List.aw";
 	}
@@ -107,7 +107,6 @@ public class BirdMovieController {
 	public String movie_view(@RequestParam Map map, Model model) throws Exception {
 		// 게시글
 		MovieBoardDTO dto = service.selectOne(map);
-		
 		// 유튜브 iframe소스를 가져와서 섬머노트와 같이 있는 내용과 분리하여 뿌리는 메소드
 		//(데이터 베이스 상에는 관련 컬럼이 없으므로)
 		setIframe(dto);
@@ -119,20 +118,32 @@ public class BirdMovieController {
 		return "board/animal/bird/movie/movie_view.tiles";
 	}/////////////////////
 
-	@RequestMapping("/bird/movie/edit.aw")
-	public String movie_edit() throws Exception {
-		
-		return "/board/animal/bird/movie/movieEdit_form.tiles";
-	}
+	//수정폼으로 이동 및 수정 처리]
+		@RequestMapping("/bird/movie/edit.aw")
+		public String movie_edit(Model model, @RequestParam Map map, HttpServletRequest req) throws Exception{
+			if(req.getMethod().equals("GET")) {
+				//서비스 호출]
+				MovieBoardDTO dto = service.selectOne(map);
+				//데이타 저장]
+				model.addAttribute("dto", dto);
+				//수정 폼으로 이동]
+				return "board/animal/bird/movie/movieEdit_form.tiles";
+			}
+			//수정처리후 메시지 뿌려주는 페이지(Message.jsp)로 이동
+			int successFail =service.update(map);
+			System.out.println("successFail" +successFail);
+			model.addAttribute("successFail", successFail);
+			model.addAttribute("WHERE","EDT");
+			System.out.println("model" +model);
+			return "/board/animal/bird/movie/movieMessage";
+		}//////////////////
 	
 	//삭제 처리]
 		@RequestMapping("/bird/movie/delete.aw")
 		public String delete(@RequestParam Map map,Model model) throws Exception{
-			System.out.println("map"+map);
 			int successFail =service.delete(map);
-			System.out.println("successFail"+successFail);
 			model.addAttribute("successFail", successFail);
-			return "forward:/bird/movie/List.aw";
+			return "/board/animal/bird/movie/movieMessage";
 		}////////////////////////////////////////////////
 		
 	// content안에 있는 유튜브 소스와 내용을 순서대로 분리하여

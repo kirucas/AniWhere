@@ -7,25 +7,9 @@
 </script>
 </c:if>
 <style>
-.content {
-	text-align: left;
-	font-size: 16px;
-}
-
-.margin-top-7 {
-	margin-top: 7px;
-}
-
-.margin-top-8 {
-	margin-top: 8px;
-}
 
 .margin-top-10 {
 	margin-top: 1.0em;
-}
-
-.margin-top-30 {
-	margin-top: 3.0em;
 }
 
 .margin-right-10 {
