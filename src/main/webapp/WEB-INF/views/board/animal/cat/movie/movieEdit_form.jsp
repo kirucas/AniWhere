@@ -93,9 +93,9 @@ function pre_view() {
 </script>
 
 <div class="container">
-	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/bird/movie/edit.aw?no=${dto.no}'/>">
+	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/cat/movie/edit.aw?no=${dto.no}'/>">
 		<input type="hidden" name="mem_no" value="${mem_no }">
-		<input type="hidden" name="ani_category" value="4">
+		<input type="hidden" name="ani_category" value="2">
 		<div class="form-group row">
 			<label for="validationDefaultUsername"
 				class="offset-sm-1 col-sm-1 col-form-label">게시판</label>
@@ -103,7 +103,7 @@ function pre_view() {
 			<div class="col-sm-9">
 				<input type="text" class="form-control-planintext"
 					id="validationDefaultUsername" disabled="disabled"
-					placeholder="조류게시판">
+					placeholder="고양이게시판">
 				<!-- required disabled -->
 			</div>
 		</div>

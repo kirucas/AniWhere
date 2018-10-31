@@ -25,28 +25,25 @@
 
 <script>
 
-function pre_view() {
-	var ntWin;
-	ntWin = window.open('', 'popup', 'width=640,height=600');
-	ntWin.document.getElementsByTagName("body")[0].innerHTML = '';
-	ntWin.document.write("<html><body>");
-	 
-	ntWin.document.getElementsByTagName("body")[0].style.fontFamily ="메이플스토리";
-	/* 게시판 명 */
-//	ntWin.document.write("<br/>" + document.forms[0].movie_panel.value + "<br/>");
-	 
-	/* 제목 */
-	ntWin.document.write("<br/>제목 : " + document.forms[0].movie_title.value + "<br/><hr />");
+	function pre_view() {
+		var ntWin;
+		ntWin = window.open('', 'popup', 'width=640,height=600');
+		ntWin.document.getElementsByTagName("body")[0].innerHTML = '';
+		ntWin.document.write("<html><body>");
+		 
+		ntWin.document.getElementsByTagName("body")[0].style.fontFamily ="메이플스토리";
 	
-	/* 닉네임 */
-//	ntWin.document.write("<br/>작성자 : 닉네임" + ${mem_id} + " [작성 후 닉네임으로 변경 됨]<br/>");
+		/* 제목 */
+		ntWin.document.write("<br/>제목 : " + document.forms[0].movie_title.value + "<br/><hr />");
+		
+		/* 닉네임 */
+//		ntWin.document.write("<br/>작성자 : 닉네임" + ${mem_id} + " [작성 후 닉네임으로 변경 됨]<br/>");
 
-	/* 내용 컨텐츠 */
-	ntWin.document.write("<br/>" + document.forms[0].movie_content.value + "<br/>");
-	
-	ntWin.document.write("</body></html>");
-}
-	
+		/* 내용 컨텐츠 */
+		ntWin.document.write("<br/>" + document.forms[0].movie_content.value + "<br/>");
+		
+		ntWin.document.write("</body></html>");
+	}
 	
 	function check() {
 		var isAttached = $('#summernote').summernote('code');
@@ -93,17 +90,17 @@ function pre_view() {
 </script>
 
 <div class="container">
-	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/bird/movie/edit.aw?no=${dto.no}'/>">
+	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/animal/cat/movie/Write.aw'/>">
 		<input type="hidden" name="mem_no" value="${mem_no }">
-		<input type="hidden" name="ani_category" value="4">
+		<input type="hidden" name="ani_category" value="2">
 		<div class="form-group row">
 			<label for="validationDefaultUsername"
 				class="offset-sm-1 col-sm-1 col-form-label">게시판</label>
 			<!-- 내가 지금 어느 게시판에서 쓰고 있는지를 보여주는 disabled input태그 -->
-			<div class="col-sm-9">
+			<div class="col-sm-9 ">
 				<input type="text" class="form-control-planintext"
-					id="validationDefaultUsername" disabled="disabled"
-					placeholder="조류게시판">
+					id="validationDefaultUsername" value="고양이게시판" disabled="disabled"
+					placeholder="고양이게시판">
 				<!-- required disabled -->
 			</div>
 		</div>
@@ -111,14 +108,14 @@ function pre_view() {
 			<label for="title" class="offset-sm-1 col-sm-1 col-form-label">제목</label>
 			<div class="col-sm-9">
 				<input class="form-control" type="text" id="title"
-					name="movie_title" value="${dto.movie_title}">
+					name="movie_title" placeholder="제목은 50자 이내로 작성해주세요">
 			</div>
 		</div>
 
 		<div class="form-group row">
 			<!-- 섬머노트 부분 -->
 			<div class="offset-sm-1 col-sm-10">
-				<textarea id="summernote" name="movie_content">${dto.movie_content}</textarea>
+				<textarea id="summernote" name="movie_content"></textarea>
 			</div>
 		</div>
 
