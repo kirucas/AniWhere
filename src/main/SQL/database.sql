@@ -22,6 +22,7 @@ DROP TABLE animal_category CASCADE CONSTRAINTS;
 DROP TABLE freeboard_cmt CASCADE CONSTRAINTS;
 DROP TABLE freeboard CASCADE CONSTRAINTS;
 DROP TABLE lost_animal CASCADE CONSTRAINTS;
+DROP TABLE member_security CASCADE CONSTRAINTS;
 DROP TABLE movie_cmt CASCADE CONSTRAINTS;
 DROP TABLE movie CASCADE CONSTRAINTS;
 DROP TABLE photo_cmt CASCADE CONSTRAINTS;
@@ -237,6 +238,14 @@ CREATE TABLE member
 	mem_log number NOT NULL,
 	mem_interani varchar2(6) NOT NULL,
 	PRIMARY KEY (mem_no)
+);
+
+
+CREATE TABLE member_security
+(
+	mem_no number NOT NULL,
+	enabled number(1) DEFAULT 1,
+	authority varchar2(20) DEFAULT 'user'
 );
 
 
@@ -562,15 +571,15 @@ ALTER TABLE sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
-	ON DELETE CASCADE
 ;
 
 
@@ -641,6 +650,13 @@ ALTER TABLE market_sell
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 	ON DELETE SET NULL
+;
+
+
+ALTER TABLE member_security
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+	ON DELETE CASCADE
 ;
 
 
