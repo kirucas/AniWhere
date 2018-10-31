@@ -121,17 +121,19 @@ public class BirdPhotoController {
 		service.linkDelete(map);
 		service.delete(map);
 		AwsS3Utils.deleteFileFromS3(key_names);
+		AwsS3Utils.s3ReadObjects();
 		return "forward:/animal/bird/photo.aw";
 	}/// delete
 	
 	@ResponseBody
-	@RequestMapping(value="/bird/photo/modalView.aw",produces = MediaType.APPLICATION_JSON_VALUE)
-	public String modalView(@RequestParam(value="no") String photoNo) throws Exception {
-		System.out.println(photoNo);
-		Map map=new HashMap<>();
-		map.put("no", photoNo);
+	@RequestMapping(value="/bird/photo/modalView.awa",method=RequestMethod.POST,produces="text/plain;charset=UTF-8")
+	public String modalView(@RequestParam Map map) throws Exception {
+		System.out.println("글번호 " +map.get("no"));
 		List<Map> photoList=service.linkSelectList(map);
-		System.out.println(JSONArray.toJSONString(photoList));
+		for(Map photo:photoList) {
+			photo.put("LINK",AwsS3Utils.LINK_ADDRESS+photo.get("LINK"));
+		}
+		System.out.println("넘어가는녀석들"+JSONArray.toJSONString(photoList));
 		return JSONArray.toJSONString(photoList);
 	}/// modalView
 }//////////////////// PhotoController class

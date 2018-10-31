@@ -134,39 +134,34 @@
 	var photoNo;
 	$(document).ready(function() {
 		$("#delete").click(function(){
-			console.log(document.getElementById("modalNo").innerHTML);
 			var index=document.getElementById("modalNo").innerHTML;
-			
-			location.replace("<c:url value='/bird/photo/delete.aw?no="+url+"'/>");
-// 			location.href="<c:url value='/bird/photo/delete.aw'/>";
+			location.replace("<c:url value='/bird/photo/delete.aw?no="+index+"'/>");
 		});
 		
 		$(".moda").click(function(e){			e.preventDefault();
 			//$("#modal").prop("src", $(this).prop("src"));
 			photoNo=$(this).prop("id");
 			$("#modalNo").html(photoNo);
-			var photoSet=[];
-			<c:forEach items="${photoList}" var="item">
-				photoSet.push("${item}");
-			</c:forEach>
-			console.log("log:",photoNo);
 			
-			var photoPaths=[];
-			for(var i=0;i<(photoSet[photoNo].match(/https/g) || []).length;i++) {
-				photoPaths.push("<c:out value='${photoList[\""+photoNo+"\"][\""+i+"\"][\'LINK\']}'/>");
-			}
-			
-			var imgString="";
-			//$('.swiper-wrapper').innerHTML("");
-			var popup=document.getElementById("popup");
-			for(var photo in photoPaths) {
-				console.log(photo);
-				imgString+='<div class="swiper-slide text-xs-center text-lg-center">';
-				imgString+='<img class="modaru" class="img-thumbnai" id="modal" alt="사진이 없습니다."';
-				imgString+='src="<c:url value="'+photoPaths[photo]+'"/>">';
-				imgString+='</div>';
-			}
-			popup.innerHTML=imgString;
+			$.ajax({
+	        	url:"<c:url value='/bird/photo/modalView.awa'/>",
+	       		type:"POST",
+				data:{no:photoNo},
+	       		dataType:"json", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+	       		success : function(data) {
+	       			var imgString="";
+	        	 	$.each(data, function(index,element){
+	        	 		imgString+='<div class="swiper-slide text-xs-center text-lg-center">';
+	    				imgString+='<img class="modaru" class="img-thumbnai" id="modal" alt="사진이 없습니다."';
+	    				imgString+='src="<c:url value="'+data[index]['LINK']+'"/>">';
+	    				imgString+='</div>';
+	        	   	});
+	        	 	document.getElementById("popup").innerHTML=imgString;
+	           	},
+	           	error : function(error) {
+	                 alert("에러발생");
+		       	}
+		    });
 			
 			$('#photoModal').on('show.bs.modal', function(e) {
 				popupGallery = new Swiper('#popupGallery', {
@@ -208,7 +203,7 @@
 			</c:if>
 				 		<div class="card" id="card-size">
 				       		<a href="#" data-target="#modalIMG" data-toggle="modal">
-				            	<img id="${loop.index}" class="card-img-top moda" src="<c:url value='${photoList[loop.index][0][\'LINK\']}'/>" alt="bird_missile" />
+				            	<img id="${dto.no}" class="card-img-top moda" src="<c:url value='${photoList[loop.index][0][\'LINK\']}'/>" alt="bird_missile" />
 				            </a>
 				            <div class="card-body">
 				            	<h5 class="card-title">

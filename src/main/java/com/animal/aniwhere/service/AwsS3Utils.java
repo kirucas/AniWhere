@@ -78,22 +78,34 @@ public class AwsS3Utils {
 	}///uploadFileToS3
 	///////////////////////////////////////////
 	
-	// AWS s3 업로드 메소드
-	public static String s3PutObject(String file_path, String category) {
-        String key_name = category+"/"+"AniwhereImg"+System.nanoTime()+"seed"+new Random().nextInt(9999);
-
-        System.out.format("Uploading %s to S3 bucket %s...\n", file_path, BUCKET_NAME);
+	// 객체 이름 생성 메소드
+	public static String namingForS3(String category) {
+		return category+"/"+"AniwhereImg"+System.nanoTime()+"seed"+new Random().nextInt(9999);
+	}/// namingForS3
+	
+	// 객체 업로드 부분
+	public static boolean putToS3(String key_name,String file_path) {
+		System.out.format("Uploading %s to S3 bucket %s...\n", file_path, BUCKET_NAME);
         try {
         	// 업로드
-            //s3.putObject(BUCKET_NAME, key_name, new File(file_path));
             PutObjectRequest putObjectRequest = new PutObjectRequest(BUCKET_NAME,key_name, new File(file_path));
 			putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
 			s3Client.putObject(putObjectRequest);
         } catch (AmazonServiceException e) {
             System.err.println(e.getErrorMessage());
-            System.exit(1);
+            return false;
         }
         System.out.println("Done!");
+		return true;
+	}/// putToS3
+	
+	// AWS s3 업로드 메소드
+	public static String s3PutObject(String file_path, String category) {
+        String key_name = namingForS3(category);
+
+        if(!putToS3(key_name,file_path)) {
+        	System.exit(1);
+        }
         return key_name;
 	}/// putObject
 	
