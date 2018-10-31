@@ -87,6 +87,7 @@
          return false;
       }
       
+      
       /* 영상을 두 개 이상 올리는 것을 막는 루트이나 일단 쓰지 않고 넣어만 둠.
       else if (isAttached.match(/<\/iframe>/gi).length >= 2) {
          alert('영상은 하나만 첨부하세요.');

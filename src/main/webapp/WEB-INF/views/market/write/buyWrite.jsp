@@ -47,6 +47,40 @@
       }
    });
    
+       
+	   	   
+	   function check(f) {
+	      var isAttached = $('#summernote').summernote('code');
+	      if (fr.title.value == "") {
+
+	         alert("제목을 입력해 주세요.");
+
+	         fr.title.focus();
+
+	         return false;
+
+	      } 
+	      
+	      else if (fr.title.value.length > 50) {
+
+	         alert("제목은 50자 이내로 입력해주세요.");
+
+	         fr.title.focus();
+
+	         return false;
+
+	      } 
+	      
+	      else if (fr.content.value == "") {
+	         alert('내용을 입력하세요.');
+	         return false;
+	      }	    
+	     
+   else {
+	   f.action="<c:url value='/market/buyinsert.aw'/>"; 
+       return true;
+    }
+}
 </script>
 
 </head>
@@ -59,11 +93,12 @@
 
 		<div class="col-md-12">
 
-			<form action="<c:url value='/market/buyinsert.aw'/>" accept-charset="utf-8" name="buy_info" method="post"
-				class="form-horizontal">				
+			<form name="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
+				class="form-horizontal" >				
 				<div class="form-row">
 				
 				<input type="hidden" name="table_name" value="buy"/>
+				 <input type="hidden" name="mem_no" value="${mem_no }">
 <!-- 				<input type="hidden" name="mem_no" value="#" /> -->
 				
 					<label for="title" class="col-sm-2 control-label">제목</label> 
@@ -118,17 +153,14 @@
 					<a href="<c:url value='/market/buy.aw'/>"> 
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
 
+				<button class="btn btn-primary" type="submit" role="button">확인</button>
 				
-					<input class="btn btn-danger" type="submit" id="enterBtn" value="확인">
 				</div>
-
+				
 			</form>
-
 			<div style="margin-bottom: 50px"></div>
 		</div>
 	</div>
-
-
 
 </body>
 

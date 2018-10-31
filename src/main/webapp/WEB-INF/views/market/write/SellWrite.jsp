@@ -63,7 +63,7 @@
 		<br />
 
 		<div class="col-md-12">
-<form action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" name="sell_info" method="post"
+<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" 
 				class="form-horizontal">
 				<div class="form-row">
 					<input type="hidden" name="table_name" value="sell"/>
@@ -98,6 +98,9 @@
 
 
 			</p>
+			</div>
+			</form>
+			
 			<div>
 				<div class="row"
 					style="text-align: center; border: 1px silver solid; margin-left: 20px">
@@ -118,7 +121,7 @@
 					<div class="my-2">
 						<span>거래기간</span> 
 						<input type="date" min="2018-10-19" style="text-align: right;margin-left: 15px"
-							max="2020-01-01" name="date" class="form-control" type="text"
+							max="2020-01-01"  class="form-control" type="text"
 							id="wishtime" />
 							<!--  거래기간 넣어주고 제한 걸어주는 로직 만들어야 함  -->
 					</div>
@@ -141,10 +144,10 @@
 				<h3 class="my-4">판매자가 올린 사진 3개이상</h3>
 				
 				<!--  사진  3개이상 유효성 검사 항목 추가  -->
-
-				<input multiple="multiple" type="file" name="sellfile"
+                 
+				<input multiple="multiple" type="file"  
 					style="color: slategray; border: 1 solid silver; width: 300; height: 20">(최대 5M)
-				</td>
+				
 
 				<div class="row">
 
@@ -186,11 +189,15 @@
 
 				</div>
 				<!--사진 로직 끝 -->
-
+				
+ <form name="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" 
+				class="form-horizontal">
+				
 				<div class="col-md-12 container">
 					<textarea id="summernote" name="content" class="col-md-12 container" rows=""
 						cols="" style="border: 1px solid blue; height: 500px"
 						maxlength="2048">
+	판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.					
 					
 					
 	제목: 
@@ -206,15 +213,6 @@
 	연락처:  
 					
 	===================자세한 설명을 구체적으로 해주세요 =====================
-	${record.content}
-							
-										
-				
-						
-						
-						
-						
-						
 						
 						
 						</textarea>
@@ -228,15 +226,15 @@
 						value="확인">
 
 				</div>
-			</div>
-			</div>
+			
 			</form>
+			
 			<div style="margin-bottom: 50px"></div>
 
 		</div>
 	</div>
 
-	
+	</div>
 
 </body>
 

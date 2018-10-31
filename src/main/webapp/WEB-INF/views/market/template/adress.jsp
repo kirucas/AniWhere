@@ -31,11 +31,11 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 <body>
 
-<input type="text" name="" class="postcodify_postcode5"  style="text-align: right" />
+<input type="text"  class="postcodify_postcode5"  style="text-align: right" />
 <button id="postcodify_search_button">검색</button><br />
-<input type="text" name="" class="postcodify_address" style="width:300px;text-align: right" placeholder="주소" /><br />
-<input type="text" name="" class="postcodify_details" style="width:300px;text-align: right" placeholder="상세주소" /><br />
-<input type="text" name="" class="postcodify_extra_info" style="width:300px;text-align: right" placeholder="동이름"  /><br />
+<input type="text"  class="postcodify_address" style="width:300px;text-align: right" placeholder="주소" /><br />
+<input type="text"  class="postcodify_details" style="width:300px;text-align: right" placeholder="상세주소" /><br />
+<input type="text"  class="postcodify_extra_info" style="width:300px;text-align: right" placeholder="동이름"  /><br />
 
 <!-- jQuery와 Postcodify를 로딩한다 -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
