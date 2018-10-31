@@ -55,11 +55,9 @@
 	</delete>
 	
 	<update id="addCountNotice" parameterType="java.util.Map">
-		<if test="view != null">
-			UPDATE notice
-			SET count=count + 1
-			WHERE no=#{no}
-		</if>
+		UPDATE notice
+		SET count=count + 1
+		WHERE no=#{no}
 	</update>
 	
 </mapper>
