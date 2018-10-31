@@ -42,7 +42,7 @@ public class FreeboardController {
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		//전체 레코드 수
-		int totalRecordCount= allBoardService.getTotalRecord(map);			
+		int totalRecordCount= allBoardService.getTotalRecord(map);	
 		//시작 및 끝 ROWNUM구하기]
 		int start = (nowPage-1)*pageSize+1;
 		int end   = nowPage*pageSize;
