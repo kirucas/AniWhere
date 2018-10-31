@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -130,10 +131,26 @@ public class BirdPhotoController {
 	public String modalView(@RequestParam Map map) throws Exception {
 		System.out.println("글번호 " +map.get("no"));
 		List<Map> photoList=service.linkSelectList(map);
-		for(Map photo:photoList) {
+		for(Map photo:photoList)
 			photo.put("LINK",AwsS3Utils.LINK_ADDRESS+photo.get("LINK"));
-		}
 		System.out.println("넘어가는녀석들"+JSONArray.toJSONString(photoList));
 		return JSONArray.toJSONString(photoList);
+	}/// modalView
+	
+	@ResponseBody
+	@RequestMapping(value="/bird/photo/modalContent.awa",method=RequestMethod.POST,produces="text/plain;charset=UTF-8")
+	public String modalContent(@RequestParam Map map,HttpSession session) throws Exception {
+		System.out.println("글번호 " +map.get("no"));
+		PhotoBoardDTO dto=service.selectOne(map);
+		JSONObject json=new JSONObject();
+		json.put("user", session.getAttribute("mem_no"));
+		json.put("mem_no",dto.getMem_no());
+		json.put("mem_nickname",dto.getMem_nickname());
+		json.put("photo_title", dto.getPhoto_title());
+		json.put("photo_regidate",dto.getPhoto_regidate().toString());
+		json.put("photo_content", dto.getPhoto_content());
+		json.put("photo_hit",dto.getPhoto_hit());
+		json.put("photo_count",dto.getPhoto_count());
+		return json.toJSONString();
 	}/// modalView
 }//////////////////// PhotoController class

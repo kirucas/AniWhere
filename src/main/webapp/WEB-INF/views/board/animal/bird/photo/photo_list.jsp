@@ -139,7 +139,6 @@
 		});
 		
 		$(".moda").click(function(e){			e.preventDefault();
-			//$("#modal").prop("src", $(this).prop("src"));
 			photoNo=$(this).prop("id");
 			$("#modalNo").html(photoNo);
 			
@@ -157,6 +156,25 @@
 	    				imgString+='</div>';
 	        	   	});
 	        	 	document.getElementById("popup").innerHTML=imgString;
+	           	},
+	           	error : function(error) {
+	                 alert("에러발생");
+		       	}
+		    });
+			$.ajax({
+	        	url:"<c:url value='/bird/photo/modalContent.awa'/>",
+	       		type:"POST",
+				data:{no:photoNo},
+	       		dataType:"json", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+	       		success : function(data) {
+	        	 	document.getElementById("title").innerHTML=data['photo_title'];
+	        	 	document.getElementById("content").innerHTML=data['photo_content'];
+	        	 	if(data['mem_no'] == data['user']) {
+	        	 		document.getElementById("e-d-button").innerHTML='<a href="#" class="btn btn-primary">수정</a>'
+						+'<a id="delete" href="#" class="btn btn-danger">삭제</a>';
+	        	 	}else {
+	        	 		document.getElementById("e-d-button").innerHTML="";
+	        	 	}
 	           	},
 	           	error : function(error) {
 	                 alert("에러발생");
@@ -182,7 +200,7 @@
 		});
 	});
 </script>
-<%-- <c:set var="now" value="<%=new java.util.Date() %>" /> --%>
+<c:set var="now" value="<%=new java.util.Date() %>" />
 
 <div class="container">
 	<div id="uploadButton" style="text-align: right;">
@@ -207,11 +225,16 @@
 				            </a>
 				            <div class="card-body">
 				            	<h5 class="card-title">
-				               	<a href="#" data-target="#modalIMG" data-toggle="modal">
-				                  	${dto.photo_title}
-				               	</a>
-				               	<span title="댓글 수" class="badge badge-secondary">13</span>
-				               	<span title="신규 게시물 표시" class="badge badge-primary">NEW</span></h5>
+					               	<a href="#" data-target="#modalIMG" data-toggle="modal">
+					                  	${dto.photo_title}
+					               	</a>
+					               	<span title="댓글 수" class="badge badge-secondary">0</span>
+					               	<span title="신규 게시물 표시" class="badge badge-primary">
+					               		<c:if test="${dto.photo_regidate eq now}">
+					               			NEW
+					               		</c:if>
+					               	</span>
+				               	</h5>
 				               	<p class="card-text">${dto.mem_nickname}</p>
 				            </div>
 			     			<div class="card-footer">
@@ -256,8 +279,7 @@
 			</div>
 			<div class="modal-footer">
 				<div id="e-d-button">
-					<a href="#" class="btn btn-primary">수정</a> 
-					<a id="delete" href="#" class="btn btn-danger">삭제</a>
+					<!-- 수정 삭제 버튼 -->
 				</div>
 				<div>
 					<a href="#" data-dismiss="modal" class="btn btn-secondary">닫기</a>

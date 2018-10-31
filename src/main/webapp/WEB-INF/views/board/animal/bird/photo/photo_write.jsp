@@ -146,8 +146,8 @@
 				console.log("success");
 				location.href="<c:url value='/animal/bird/photo.aw'/>";
 	        },
-	        error:function(){
-	            console.log("error");
+	        error:function(error){
+	            console.log("error:",error);
 	        }
 		});
 	}/// upload
