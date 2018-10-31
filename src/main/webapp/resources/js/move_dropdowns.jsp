@@ -30,5 +30,9 @@
 				location.href = "<c:url value='/member_bye.aw' />";
 			}
 		});
+		$("#notice").click(function(){
+			location.href = "<c:url value='/notice/List.aw'/>";
+		});
+		
 	});
 </script>

@@ -6,7 +6,6 @@
 <mapper namespace="mybatis.Free">
 
 	<select id="freeCount" parameterType="java.util.Map" resultType="int">
-		
 		SELECT COUNT(*)
 		FROM (
 			SELECT fb.*, mem_nickname
@@ -67,11 +66,9 @@
 	</update>
 	
 	<update id="addCountFree" parameterType="java.util.Map">
-		<if test="view != null">
-			UPDATE freeboard
-			SET free_count=free_count + 1
-			WHERE no=#{no}
-		</if>
+		UPDATE freeboard
+		SET free_count=free_count + 1
+		WHERE no=#{no}
 	</update>
 	
 </mapper>
