@@ -113,14 +113,18 @@
 					<label for="" class="">동물분류</label> 
 					 <select
 						class="select_filter" 
-						name="animal_code"
-					if (value="${record.animal_code}")selected >
+						name="animal_code">
+					
+					
 						
-						<option value="1">개</option>
+						<option value="1" selected>개${record.animal_code}</option>
+						
 						<option value="2">고양이</option>
 						<option value="3">파충류</option>
 						<option value="4">조류</option>
 						<option value="5">기타 포유류</option>
+					
+						
 					</select>
 					 
 					<label for="" class="">용도분류</label> 
