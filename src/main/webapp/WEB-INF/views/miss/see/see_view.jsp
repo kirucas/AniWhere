@@ -42,16 +42,16 @@
     	}  
       
       $.each(data,function(index,comment){
-          commentString+='<tr><td>'+comment['MEM_NICKNAME']+'</td>';
-          if('${sessionScope.mem_no}'!=comment["MEM_NO"])
-             commentString+='<td align="left">'+comment['CMT_CONTENT']+'</td>';
+          commentString+='<tr><td>'+comment['mem_nickname']+'</td>';
+          if('${sessionScope.mem_no}'!=comment["mem_no"])
+             commentString+='<td align="left">'+comment['cmt_content']+'</td>';
           else
-             commentString+='<td align="left"><span style="cursor: pointer" title="'+comment['CMT_NO']+'" class="commentEdit">'+comment['CMT_CONTENT']+'</span></td>';
+             commentString+='<td align="left"><span style="cursor: pointer" title="'+comment['cmt_no']+'" class="commentEdit">'+comment['cmt_content']+'</span></td>';
             
-          commentString+='<td>'+comment['REGIDATE']+'</td>';
+          commentString+='<td>'+comment['regidate']+'</td>';
           commentString+='<td>';
-          if('${sessionScope.mem_no}'==comment["MEM_NO"])
-             commentString+='<td><span class="commentDelete" title="'+comment['CMT_NO']+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
+          if('${sessionScope.mem_no}'==comment["mem_no"])
+             commentString+='<span class="commentDelete" title="'+comment['cmt_no']+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
           else
              commentString+='<span style="color: gray; font-size: 0.7em; font-weight: bold">삭제불가</span>';
              commentString+='</td></tr>'
@@ -91,8 +91,8 @@
       $('#submit').click(function(){
          if($(this).val()=='등록')
             var action = "<c:url value='/miss/cmt_write.awa'/>";
-         //else
-           // var action = "<c:url value='/miss/cmt_edit.awa'/>";
+         else
+            var action = "<c:url value='/miss/cmt_edit.awa'/>";
          
          $.ajax({
             url:action,
@@ -165,7 +165,7 @@
 								<span>조회수 ${record.count}</span>
 							</div>
 							<div class="article-meta__item">
-								<span>댓글 56</span>
+								<span>댓글 </span>
 							</div>
 							<div class="article-meta__item">
 								<span>글번호 ${record.no}</span>

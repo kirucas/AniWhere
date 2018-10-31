@@ -1,5 +1,6 @@
 package com.animal.aniwhere.web.board.miss;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -217,7 +218,6 @@ public class MissMainController {
 		record.setContent(record.getContent().replace("\r\n", "<br/>"));
 		
 		record.setCount(record.getCount());
-			
 		//뷰정보 반환]
 		return "miss/see/see_view.tiles";
 	}////////// miss_view
@@ -522,8 +522,8 @@ public class MissMainController {
 	         record.put("mem_no", dto.getMem_no());         
 
 	         comments.add(record);
-	      }
-		
+	      }	
+		System.out.println(JSONArray.toJSONString(comments));
 		return JSONArray.toJSONString(comments);
 	}//////////////////
 	
