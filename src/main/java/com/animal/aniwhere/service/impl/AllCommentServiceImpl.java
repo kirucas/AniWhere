@@ -41,4 +41,9 @@ public class AllCommentServiceImpl implements AllCommentService {
 		return dao.commentCount(map);
 	}////////// commentCount
 
+	@Override
+	public int addHitCountComment(Map map) {
+		return dao.addHitCountComment(map);
+	}////////// addHitCountComment
+
 }//////////////////// AllCommentServiceImpl class

@@ -2,24 +2,17 @@ package com.animal.aniwhere.service.animal;
 
 public class TipBoardDTO {
 
-	private String tip_no;
+	private String no;
 	private String mem_no;
 	private String tip_title;
 	private String tip_content;
 	private String tip_hit;
 	private java.sql.Date tip_regidate;
 	private String tip_count;
+	private String ani_category;
 	
 	// 작성자 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
-
-	public String getTip_no() {
-		return tip_no;
-	}//////////
-
-	public void setTip_no(String tip_no) {
-		this.tip_no = tip_no;
-	}//////////
 
 	public String getMem_no() {
 		return mem_no;
@@ -75,6 +68,22 @@ public class TipBoardDTO {
 
 	public void setMem_nickname(String mem_nickname) {
 		this.mem_nickname = mem_nickname;
+	}//////////
+
+	public String getAni_category() {
+		return ani_category;
+	}//////////
+
+	public void setAni_category(String ani_category) {
+		this.ani_category = ani_category;
+	}//////////
+
+	public String getNo() {
+		return no;
+	}//////////
+
+	public void setNo(String no) {
+		this.no = no;
 	}//////////
 	
 }//////////////////// TipBoardDTO class

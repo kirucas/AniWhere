@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.animal.QuestBoardDTO;
 
-@Service("questSevice")
+@Service("questService")
 public class QuestBoardServiceImpl implements AllBoardService {
 
 	@Resource(name = "questBoardDAO")
@@ -46,5 +46,10 @@ public class QuestBoardServiceImpl implements AllBoardService {
 	public int delete(Map map) {
 		return dao.delete(map);
 	}////////// delete
+
+	@Override
+	public int addHitCount(Map map) {
+		return dao.addHitCount(map);
+	}////////// addHitCount
 
 }//////////////////// QuestBoardServiceImpl class

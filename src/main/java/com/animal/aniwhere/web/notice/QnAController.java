@@ -22,3 +22,4 @@ public class QnAController {
 	   return "/notice/qnaWrite.tiles";
    }
 }/// class
+

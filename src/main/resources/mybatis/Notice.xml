@@ -3,22 +3,38 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
 <!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
-<mapper namespace="mybatis.Reservation">
+<mapper namespace="mybatis.Notice">
 
 	<select id="noticeCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
-		FROM notice
+		FROM (
+			SELECT nt.*, am_id
+			FROM notice nt LEFT JOIN admin_member am ON nt.am_no=am.am_no
+			<if test="searchColumn != null">
+				WHERE ${searchColumn} like '%'||#{searchWord}||'%'
+			</if>
+			)
 	</select>
 	
 	<select id="noticeSelectList" parameterType="java.util.Map" resultType="NoticeDTO">
-		SELECT nt.*, am_id
-		FROM notice nt JOIN admin_member am ON nt.am_no = am.am_no 
-		ORDER BY no DESC
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT nt.*, am_id
+				FROM notice nt LEFT JOIN admin_member am ON nt.am_no=am.am_no
+				<if test="searchColumn != null">
+					WHERE ${searchColumn like '%'||#{searchWord}||'%'
+				</if>
+				ORDER BY nt.no DESC
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="noticeSelectOne" parameterType="java.util.Map" resultType="NoticeDTO">
 		SELECT nt.*, am_id
-		FROM notice nt JOIN admin_member am ON nt.am_no = am.am_no
+		FROM notice nt LEFT JOIN admin_member am ON nt.am_no = am.am_no
 		WHERE no=#{no}
 	</select>
 	
@@ -37,5 +53,13 @@
 		DELETE FROM notice
 		WHERE no=#{no}
 	</delete>
+	
+	<update id="addCountNotice" parameterType="java.util.Map">
+		<if test="view != null">
+			UPDATE notice
+			SET count=count + 1
+			WHERE no=#{no}
+		</if>
+	</update>
 	
 </mapper>

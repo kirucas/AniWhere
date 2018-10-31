@@ -8,11 +8,12 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.animal.aniwhere.service.AllBoardService;
+import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.MatingDTO;
+import com.animal.aniwhere.service.member.AnimalDTO;
 
 @Repository
-public class MatingDAO implements AllBoardService {
+public class MatingDAO implements AllCommonService {
 
 	@Resource(name = "template")
 	private SqlSessionTemplate template;
@@ -47,5 +48,9 @@ public class MatingDAO implements AllBoardService {
 	public int delete(Map map) {
 		return template.delete("matingDelete", map);
 	}////////// delete
+	
+	public List<AnimalDTO> selectMyMating(Map map){
+		return template.selectList("selectMyMating", map);
+	}////////// selectMyMating
 
 }//////////////////// MatingBoardDAO
