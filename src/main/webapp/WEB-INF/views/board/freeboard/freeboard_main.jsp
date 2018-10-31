@@ -5,7 +5,7 @@
 <%@ include file="/WEB-INF/views/common/loading.jsp" %>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
-#free_no{
+#no{
 	text-align:center;
 	font-size: 1.5em;
 }
@@ -92,7 +92,7 @@
 								<span>[시사]</span>
 							</c:otherwise>
 						</c:choose>
-					<a href="<c:url value='/animal/freeboard_view.aw?free_no=${record.free_no}'/>" class="article-list-item__info">
+					<a href="<c:url value='/animal/freeboard_view.aw?no=${record.no}'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
 							<span id="free_title">${record.free_title}</span> <em>[21]</em>
 						</div>
@@ -110,7 +110,7 @@
 					</div>
 				</div>
 				<div class="article-list-item__vote">
-					<div><span id="free_no" style="text-align:center">${record.free_no}</span></div>
+					<div><span id="no" style="text-align:center">${record.no}</span></div>
 				</div>
 			</article>
 	    		</c:forEach>

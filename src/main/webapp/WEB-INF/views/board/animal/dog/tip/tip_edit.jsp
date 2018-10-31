@@ -68,7 +68,7 @@ $(function() {
 	<div style="width:100%">
 		<form method="post" action="<c:url value='/board/animal/dog/tip/edit.aw'/>">
 			<div class="form-group form-row">
-				<input type="hidden" name="tip_no" value="${param.tip_no}" />
+				<input type="hidden" name="no" value="${param.no}" />
 				<input type="hidden" name="mem_no" value="${mem_no}" />
 				<input type="hidden" name="ani_category" value="1"/>
 				<div class="form-row" style="width:87.5%;"id="titlediv">
