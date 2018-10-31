@@ -54,8 +54,8 @@
 	</select>
 	
 	<insert id="fsInsert" parameterType="java.util.Map">
-		INSERT INTO miss_${table_name}(no, mem_no, animal_code, title, content)
-		VALUES(seq_${table_name}.nextval, #{mem_no}, #{animal_code}, #{title}, #{content})		
+		INSERT INTO miss_${table_name}(no, mem_no, animal_code, title, content, addr)
+		VALUES(seq_${table_name}, #{mem_no}, #{animal_code}, #{title}, #{content}, #{addr})		
 	</insert>
 	
 	<update id="fsUpdate" parameterType="java.util.Map">
@@ -70,11 +70,9 @@
 	</delete>
 	
 	<update id="addCountFS" parameterType="java.util.Map">
-		<if test="view != null">
-			UPDATE miss_${table_name}
-			SET count=count + 1
-			WHERE no=#{no}
-		</if>
+		UPDATE miss_${table_name}
+		SET count=count + 1
+		WHERE no=#{no}
 	</update>
 	
 </mapper>
