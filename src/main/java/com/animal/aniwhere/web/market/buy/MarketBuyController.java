@@ -105,14 +105,13 @@ public class MarketBuyController {
 		map.put("table_name","buy");
 		map.put("no", map.get("buy_no"));
 			
-		//서비스 호출]
-		System.out.println("====================1");
+	
 		System.out.println(map.get("no").toString());
 		//게시글
 		BuySellDTO record = allBoardService.selectOne(map);
 		
 		//테스트용 
-		System.out.println(record.getContent()+"====================2");
+		//System.out.println(record.getContent()+"====================2");
 		//데이터 저장]
 		model.addAttribute("record", record);
 		//줄바꿈처리

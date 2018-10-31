@@ -86,7 +86,7 @@
 					
 					 <label for="" class="">용도분류</label> 
 					 <select id="use_listSelect"
-					class="select_filter"  name="use">
+					class="select_filter" >
 					
 					<option value="food">사료및간식</option>
 					<option value="playtoy">장난감</option>
@@ -140,6 +140,7 @@
 				</div>
 				<span>우편번호</span>
 				<jsp:include page="../template/adress.jsp" />
+				
 				<!-- Related Projects Row -->
 				<h3 class="my-4">판매자가 올린 사진 3개이상</h3>
 				
@@ -189,8 +190,7 @@
 
 				</div>
 				<!--사진 로직 끝 -->
-				
- <form name="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" 
+<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" 
 				class="form-horizontal">
 				
 				<div class="col-md-12 container">

@@ -104,7 +104,8 @@ public class MarketSellController {
 					
 				//서비스 호출]
 				System.out.println("====================1");
-				System.out.println(map.get("no").toString());
+			//	System.out.println(map.get("no").toString());
+				
 				//게시글
 				BuySellDTO record = allBoardService.selectOne(map);
 				
