@@ -2,11 +2,13 @@ package com.animal.aniwhere.web.board.miss;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllBoardService;
+import com.animal.aniwhere.service.AllCommentDTO;
 import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.AwsS3Utils;
+import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.miss.FindSeeServiceImpl;
 import com.animal.aniwhere.service.impl.miss.LostAnimalServiceImpl;
@@ -478,7 +482,57 @@ public class MissMainController {
 	//---------------------------------------------------------------------------------------------------------------------------------
 		
 	
+	//서비스 주입
+	@Resource(name="allCommentService")
+	private AllCommentServiceImpl cmtService;
 	
+	@ResponseBody
+	@RequestMapping(value="/miss/cmt_write.awa",produces="text/html; charset=UTF-8")
+	public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
+		
+		map.put("mem_no", session.getAttribute("mem_no"));
+		map.put("table_name", "see");
+		map.put("no", map.get("no"));
+		
+		cmtService.insert(map);
+		
+		return map.get("no").toString();
+		
+	}///////////////////
+	
+	@ResponseBody
+	@RequestMapping(value="/miss/cmt_list.awa",produces="text/html; charset=UTF-8")
+	public String list(@RequestParam Map map) throws Exception{
+		
+		map.put("table_name", "see");
+		map.put("origin_no", map.get("no"));
+		
+		List<AllCommentDTO> comments = cmtService.selectList(map);
+		
+		return JSONArray.toJSONString(comments);
+	}//////////////////
+	
+	@ResponseBody
+	@RequestMapping(value="/miss/cmt_edit.awa",produces="text/html; charset=UTF-8")
+	public String update(@RequestParam Map map) throws Exception{
+		
+		map.put("table_name", "see");
+		
+		cmtService.update(map);
+		
+		return map.get("no").toString();
+	}////////////
+	
+	@ResponseBody
+	@RequestMapping(value="/miss/cmt_delete.awa",produces="text/html; charset=UTF-8")
+	public String delete(@RequestParam Map map) throws Exception{
+		
+		map.put("table_name", "see");
+		
+		cmtService.delete(map);
+		
+		return map.get("no").toString();
+	}
 	
 }//////////////////// MissMainController class
 
