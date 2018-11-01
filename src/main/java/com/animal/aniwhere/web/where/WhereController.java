@@ -156,7 +156,7 @@ public class WhereController {
 		         
 		         record.put("diskill", String.format("%.1f" , diskill));
 
-		         if(diskill<=5.0) {
+		         if(diskill<=10.0) {
 		        	 collections.add(record);
 		         }
 		      }////inner for

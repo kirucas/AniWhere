@@ -161,10 +161,10 @@
 		</div>
 		<div style="text-align: center;">
 			<div id="span-tag">
-				<span style="font-size: 1.8em; text-align: center;">주변 리스트</span>
+ 				<span id="around" style="font-size: 1.4em; text-align: center;">주변 리스트</span>
 			</div>
 			<div id="list-view">
-				<ul id="near" style="list-style: none;">
+				<ul id="near" style="padding-inline-start:0px;list-style: none;">
 					<!-- 리스트 목록 반복 -->
 					<li>
 						<div style="padding: 10px; float: left;">
@@ -285,10 +285,10 @@
 		            	$.each(jsonObj, function(index, value){
 								nearString += 
 									'<li>'+ 
-										'<div style="padding: 10px;width:100%;">'+
-										'<div style="float: left; width: 10%; height: 100px;">'+
-											'<div style="width: 18px; height: 28px;">'+
-												'<img style="width: 18px; height: 28px;" src="<c:url value='/resources/images/all.png'/>">'+
+										'<div style="width:100%;">'+
+										'<div style="float:left;width: 10%; height: 100px;">'+
+											'<div style="width: 25px; height: 40px;">'+
+												'<img style="width:18px;height:28px;" src="<c:url value='/resources/images/all.png'/>">'+
 											'</div>'+
 										'</div>'+
 										'<dl style="margin-left: 40px; margin-right: 8px;">'+
@@ -325,9 +325,9 @@
 		            	$.each(jsonObj, function(index, value){
 								nearString += 
 									'<li>'+ 
-										'<div style="padding: 10px;width:100%;">'+
-										'<div style="float: left; width: 10%; height: 100px;">'+
-											'<div style="width: 18px; height: 28px;">'+
+										'<div style="width:100%;">'+
+										'<div style="float:left;width:10%;height:100px;">'+
+											'<div style="width: 25px; height: 40px;">'+
 												'<img style="width: 18px; height: 28px;" src="'+curl+'"/>'+
 											'</div>'+
 										'</div>'+
@@ -359,6 +359,12 @@
 		        total();
 		        neartotal();
 			});
+			$("#list-select ul li a").click(function() {
+				var str= $(this).text()+" 리스트";
+				console.log(str);
+				$("#around").html(str);
+			});
+		
 			function indssclscd(code,pic){
 		         $.ajax({
 		        	data : {indssclscd:code},
@@ -428,7 +434,7 @@
 			
 			var hair = $("#hair").prop("title");
 			$('#hair').click(function(){
-				var pic = "pic";
+				var pic = "hair";
 				indssclscd(hair,pic);
 				nearselect(hair,pic);
 			});
