@@ -48,6 +48,100 @@ public class MissMainController {
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
 
+	// miss_main 이동
+	@RequestMapping("/miss/miss_main.aw")
+	public String miss_main(@RequestParam Map map, HttpSession session, Model model, HttpServletRequest req,
+			@RequestParam(required = false, defaultValue = "1") int nowPage) throws Exception {
+
+		map.put("table_name", "see");
+
+		if (map.get("table_name") == "see") {
+			// 전체 레코드 수
+			int totalRecordCount = service.getTotalRecord(map);
+			// 페이지 사이즈
+			// 전체 페이지수]
+			int totalPage = (int) Math.ceil(((double) totalRecordCount / pageSize));
+			// 현재 페이지를 파라미터로 받기]
+			// 시작 및 끝 ROWNUM구하기]
+			int start = (nowPage - 1) * pageSize + 1;
+			int end = nowPage * pageSize - 1;
+			map.put("start", start);
+			map.put("end", end);
+			// 페이징을 위한 로직 끝]
+
+			List<FindSeeDTO> list = (List<FindSeeDTO>) service.selectList(map);
+
+			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,
+					req.getContextPath() + "/miss/miss_main.aw?");
+
+			model.addAttribute("list", list);
+
+			model.addAttribute("pagingString", pagingString);
+			model.addAttribute("totalRecordCount", totalRecordCount);
+			model.addAttribute("nowPage", nowPage);
+			model.addAttribute("pageSize", pageSize);
+
+		} /////////////////////////////////////////////////////////////////// 봤어요 리스트
+
+		map.put("table_name", "find");
+
+		if (map.get("table_name") == "find") {
+			int totalRecordCount = service.getTotalRecord(map);
+			// 페이지 사이즈
+			// 전체 페이지수]
+			int totalPage = (int) Math.ceil(((double) totalRecordCount / pageSize));
+			// 현재 페이지를 파라미터로 받기]
+			// 시작 및 끝 ROWNUM구하기]
+			int start = (nowPage - 1) * pageSize + 1;
+			int end = nowPage * pageSize - 1;
+			map.put("start", start);
+			map.put("end", end);
+			// 페이징을 위한 로직 끝]
+
+			List<FindSeeDTO> list2 = (List<FindSeeDTO>) service.selectList(map);
+
+			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,
+					req.getContextPath() + "/miss/miss_main.aw?");
+
+			model.addAttribute("list2", list2);
+
+			model.addAttribute("pagingString", pagingString);
+			model.addAttribute("totalRecordCount", totalRecordCount);
+			model.addAttribute("nowPage", nowPage);
+			model.addAttribute("pageSize", pageSize);
+
+		} /////////////////////////////////////////////////////////////////// 찾아요 리스트
+
+		// 전체 레코드 수
+		int totalRecordCount = lostservice.getTotalRecord(map);
+		// 페이지 사이즈
+		// 전체 페이지수]
+		int totalPage = (int) Math.ceil(((double) totalRecordCount / pageSize));
+		// 현재 페이지를 파라미터로 받기]
+		// 시작 및 끝 ROWNUM구하기]
+		int start = (nowPage - 1) * pageSize + 1;
+		int end = nowPage * pageSize - 2;
+		map.put("start", start);
+		map.put("end", end);
+		// 페이징을 위한 로직 끝]
+
+		List<LostAnimalDTO> list3 = (List<LostAnimalDTO>) lostservice.selectList(map);
+
+		String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,
+				req.getContextPath() + "/miss/shelter.aw?");
+
+		model.addAttribute("list3", list3);
+
+		model.addAttribute("pagingString", pagingString);
+		model.addAttribute("totalRecordCount", totalRecordCount);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("pageSize", pageSize);
+
+		///////////////////////////////////////////////////////////////////// 보호소 리스트
+
+		return "miss/miss_main.tiles";
+	}////////// miss_main
+
 	// see or find 메인으로 이동
 	@RequestMapping("/miss/{path}")
 	public String move_board(@PathVariable String path) throws Exception {
@@ -153,7 +247,6 @@ public class MissMainController {
 		record.setContent(record.getContent().replace("\r\n", "<br/>"));
 
 		record.setCount(record.getCount());
-
 		// 뷰정보 반환]
 		return "miss/see/see_view.tiles";
 	}////////// miss_view
