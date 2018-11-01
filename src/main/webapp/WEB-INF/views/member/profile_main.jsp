@@ -140,7 +140,7 @@
 			</c:if>
 			<c:if test="${not isEmpty}">
 				<section class="member-settings-layout__content">
-					<div class="member-settings-layout__content-inner" style="height: 500px;">
+					<div class="member-settings-layout__content-inner" style="height: 100%;">
 						<h2 class="member-settings-layout__title">동물 프로필 관리</h2>
 						<div class="container" style="vertical-align:middle;">
 	  						<c:forEach var="record" items="${anirecord}" varStatus="loop">

@@ -44,15 +44,10 @@
 	</select>
 	
 	<insert id="memberInsert">
-		INSERT INTO member
-		VALUES(seq_member.nextval, 
-				#{mem_id},
-				#{mem_pw}, 
-				#{mem_name}, 
-				#{mem_nickname}, 
-				#{mem_gender}, 
-				#{mem_log}, 
-				#{mem_interani})
+		INSERT ALL
+         INTO member VALUES(seq_member.nextval, #{mem_id}, #{mem_pw}, #{mem_name}, #{mem_nickname}, #{mem_gender}, #{mem_log}, #{mem_interani})
+         INTO member_security(mem_no) VALUES(seq_member.currval)
+         SELECT * FROM dual
 	</insert>
 	
 	<update id="memberUpdate">
