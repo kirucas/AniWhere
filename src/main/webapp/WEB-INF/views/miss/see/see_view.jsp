@@ -167,9 +167,6 @@
 								<span>조회수 ${record.count}</span>
 							</div>
 							<div class="article-meta__item">
-								<span>댓글 </span>
-							</div>
-							<div class="article-meta__item">
 								<span>글번호 ${record.no}</span>
 							</div>
 						</div>

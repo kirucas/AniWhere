@@ -23,10 +23,10 @@ public class PagingUtil {
 		if (intTemp != 1) {
 			pagingStr += "<li class='page-item'>\r\n"
 					+ "<a class='page-link' href='" + page + "nowPage=1'>\r\n"
-					+ "<i class='fa fa-angle-double-left'></i></a></li>"
+					+ "<i>◀◀</i></a></li>"
 					+ "<li class='page-item'>\r\n"
 					+ "<a class='page-link' href='" + page + "nowPage=" + (intTemp - blockPage) + "'>\r\n"
-					+ "<i class='fa fa-angle-left'></i></a></li>";
+					+ "<i></i>◀</a></li>";
 		}
 
 		// 페이지 표시 제어를 위한 변수
@@ -50,10 +50,10 @@ public class PagingUtil {
 		if (intTemp <= totalPage) {
 			pagingStr += "<li class='page-item'>\r\n"
 					+ "<a class='page-link' href='" + page + "nowPage=" + intTemp + "'>\r\n"
-					+ "<i class='fa fa-angle-right'></i></a></li>"
+					+ "<i>▶</i></a></li>"
 					+ "<li class='page-item'>\r\n"
 					+ "<a class='page-link' href='" + page + "nowPage=" + totalPage + "'>\r\n"
-					+ "<i class='fa fa-angle-double-right'></i></a></li>";
+					+ "<i>▶▶</i></a></li>";
 
 		}
 		pagingStr += "</ul></nav>";

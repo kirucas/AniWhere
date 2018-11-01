@@ -31,7 +31,7 @@
             contentType: false,
             processData: false,
             success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
+                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
             },
             error : function() {
                console.log("error");
@@ -125,19 +125,20 @@
   					<button type="button" value="button타입" class="orgBtn article-action__button button" id="lookup" style="margin-left: 15px">조회하기</button>
   				</div> 					
    			</div>
-   			<p style="color: orange; margin-top: 5px;font-size: 0.9em">※유기동물을 발견한 위치를 간략하게 입력해주세요</p>
+   			<p style="color: orange; margin-top: 5px;font-size: 0.9em">※유기동물을 발견한 위치를 시,군,구 단위로 간략하게 입력해주세요</p>
 			</br>
 			<div class="form-group form-row">
 				<div style="width:92.75%">
 					<textarea rows="10" class="form-control" id="summernote" name="content"></textarea>
 				</div>
 			</div>
-			<div class="form-group form-row">
+			<div class="form-group form-row" style="float: left;" >
 				<div class="col-sm-offset-2">
-					<button type="submit" class="article-action__button button button--red button--red--border">등록</button>
+					<button type="submit" class="article-action__button button" style="float: left">등록</button>
 				</div>
 			</div>
 		</form>
+		<a href="<c:url value='/miss/see.aw'/>"><button class="article-action__button button button--red button--red--border" style="float: left; margin-left: 15px">취소</button></a>
 	</div>
 </div>
 <!-- 내용 끝 -->

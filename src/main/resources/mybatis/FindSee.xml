@@ -60,7 +60,7 @@
 	
 	<update id="fsUpdate" parameterType="java.util.Map">
 		UPDATE miss_${table_name}
-		SET animal_code=#{animal_code}, title=#{title}, content=#{content}
+		SET animal_code=#{animal_code}, title=#{title}, content=#{content}, addr=#{addr}
 		WHERE no=#{no}
 	</update>
 	

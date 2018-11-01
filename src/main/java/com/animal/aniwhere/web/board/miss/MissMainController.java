@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllCommentDTO;
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.miss.FindSeeServiceImpl;
@@ -112,12 +113,24 @@ public class MissMainController {
 			collect.add(record);
 		}
 		
-		String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount,pageSize,blockPage,nowPage,req.getContextPath()+"/miss/see.aw?");
+		if(map.get("searchWord") != null) {
+			String searchWord = map.get("searchWord").toString();	
+			String searchColumn = map.get("searchColumn").toString();	
+
+			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+					req.getContextPath()+"/miss/see.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+			
+			model.addAttribute("pagingString", pagingString);
+		}
 		
-//		model.addAttribute("see_list", list);
+		else {
+			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+					req.getContextPath()+"/miss/see.aw?");
+			model.addAttribute("pagingString", pagingString);
+		}
+		
+		//model.addAttribute("see_list", list);
 		model.addAttribute("see_list", collect);
-		
-		model.addAttribute("pagingString", pagingString);		
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("pageSize", pageSize);
@@ -182,7 +195,7 @@ public class MissMainController {
 		//게시글
 		service.update(map);
 					
-		return "forward:/miss/see.aw";
+		return "forward:/miss/see_view.aw";
 	}////////// miss_write
 	
 	//삭제
@@ -198,22 +211,20 @@ public class MissMainController {
 		return "forward:/miss/see.aw";
 	}////////// miss_write
 	
-	//Summernote 업로드 기능
 	@ResponseBody
-	@RequestMapping(value="/miss/see_upload/Upload.aw")
-	public String see_upload(MultipartHttpServletRequest mhsr) throws Exception {
+    @RequestMapping(value="/miss/see_upload/Upload.aw")
+    public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
+		//String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+		//MultipartFile upload = mhsr.getFile("file");
+		//String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+		//File file = new File(phisicalPath+File.separator+newFilename);
+		//upload.transferTo(file);
 		
-		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
-	      MultipartFile upload = mhsr.getFile("file");	      
-	      String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-	      File file = new File(phisicalPath+File.separator+newFilename);	      
-	      if(!file.exists()) {
-	         file.mkdirs();	         
-	      }      
-	      upload.transferTo(file);
-	      return "/Upload/"+newFilename;
-
-	}
+		List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "see"); // S3  업로드
+		
+        //return "/Upload/"+newFilename;
+		return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
+   }
 	
 	
 	//================================================================================================================
@@ -258,19 +269,31 @@ public class MissMainController {
 				Map record = new HashMap();
 				record.put("dto", dto);
 				Map temp = new HashMap();
-				temp.put("table_name","see");
+				temp.put("table_name","find");
 				temp.put("no", dto.getNo());
 				record.put("cmtCount", cmtService.commentCount(temp));
 				
 				collect.add(record);
 			}
 			
-			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount,pageSize,blockPage,nowPage,req.getContextPath()+"/miss/find.aw?");
+			if(map.get("searchWord") != null) {
+				String searchWord = map.get("searchWord").toString();	
+				String searchColumn = map.get("searchColumn").toString();	
+
+				String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+						req.getContextPath()+"/miss/find.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+				
+				model.addAttribute("pagingString", pagingString);
+			}
+			
+			else {
+				String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+						req.getContextPath()+"/miss/find.aw?");
+				model.addAttribute("pagingString", pagingString);
+			}
 			
 			//model.addAttribute("find_list", list);
-			model.addAttribute("find_list", collect);
-			
-			model.addAttribute("pagingString", pagingString);		
+			model.addAttribute("find_list", collect);		
 			model.addAttribute("totalRecordCount", totalRecordCount);
 			model.addAttribute("nowPage", nowPage);
 			model.addAttribute("pageSize", pageSize);
@@ -335,7 +358,7 @@ public class MissMainController {
 			//게시글
 			service.update(map);
 						
-			return "forward:/miss/find.aw";
+			return "forward:/miss/find_view.aw";
 		}////////// miss_write
 		
 		//삭제
@@ -351,22 +374,20 @@ public class MissMainController {
 			return "forward:/miss/find.aw";
 		}////////// miss_write
 		
-		//Summernote 업로드 기능
 		@ResponseBody
-		@RequestMapping(value="/miss/find_upload/Upload.aw")
-		public String find_upload(MultipartHttpServletRequest mhsr) throws Exception {
+	    @RequestMapping(value="/miss/find_upload/Upload.aw")
+	    public String find_imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
+			//String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+			//MultipartFile upload = mhsr.getFile("file");
+			//String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+			//File file = new File(phisicalPath+File.separator+newFilename);
+			//upload.transferTo(file);
 			
-			String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
-		      MultipartFile upload = mhsr.getFile("file");	      
-		      String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-		      File file = new File(phisicalPath+File.separator+newFilename);	      
-		      if(!file.exists()) {
-		         file.mkdirs();	         
-		      }      
-		      upload.transferTo(file);
-		      return "/Upload/"+newFilename;
-
-		}
+			List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "find"); // S3  업로드
+			
+	        //return "/Upload/"+newFilename;
+			return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
+	   }
 		
 		//================================================================================================================
 		
