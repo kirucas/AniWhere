@@ -144,6 +144,20 @@
 		text-align: center;
 	}
 }
+.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+.wrap * {padding: 0;margin: 0;}
+.wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+.wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+.info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+.info .close:hover {cursor: pointer;}
+.info .body {position: relative;overflow: hidden;}
+.info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+.info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+.info .link {color: #5085BB;}
 </style>
 
 <div id="where-main" style="margin-top: 30px;">
@@ -194,10 +208,21 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8940a4eb3083abd07d038b8c2839831&libraries=services,clusterer,drawing"></script>
 <script>
 		$(document).ready(function() {
+			$(document).on('click','.movetarget',function(){
+				var lat = $(this).prop('title');
+				var lon = $('.movemove').prop('title');
+				map.setCenter(new daum.maps.LatLng(lat,lon));
+				console.log(lat);
+				console.log(lon);
+				var center = map.getCenter();
+				console.log(center.getLat());
+				console.log(center.getLng());
+			});
+			
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
 		        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-		        level: 5 // 지도의 확대 레벨
+		        level: 14 // 지도의 확대 레벨
 	    	};  
 			var mylat;
 			var mylon;
@@ -210,15 +235,19 @@
 		        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
 		        minLevel: 10 // 클러스터 할 최소 지도 레벨 
 	    	});
+			
 			//마커들을 담을 배열 
 			var markers=[];
 			total();
+			
+			//전체 출력
 			function total(){
 				$.ajax({
 		            type: "POST",
 		            dataType : "json",
 		            url : "<c:url value='/security/where/map/total.awa'/>",
 		            success: function(jsonObj) {
+		            	map.setLevel(14);
 		            	clusterer.removeMarkers(markers);
 		            	markers=[];
 		            	$.each(jsonObj, function(index, value){
@@ -238,35 +267,53 @@
 	                        });
 		            		
 		            		var content = 
-	        			  		'<div style="width:300px;height:100px;">'+
-	        					'<h6><a href="#" title="'+value.bizesNm+'">'+value.bizesNm+'</a></h6>'+
-	        					'<div class="content">'+
-	        						'<span>'+(value.brchNm == null ? '' : value.brchNm)+'</span>'+
-	        						'<p data-id="address" class="address" title="'+value.rdnmAdr+'">'+value.rdnmAdr+'</p>'+
-	        						'<p>'+
-	        						'<span>'+(value.dongNo == null ? '' : value.dongNo+'동</span>')+
-	        						'<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
-	        						'<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
-        							'</p>'+
-	        					'</div>'+
-	        			'</div></div>'+
-	        				'</div>';
-			
-							// 마커에 표시할 인포윈도우를 생성합니다 
-						    var infowindow = new daum.maps.InfoWindow({
-						        content: content // 인포윈도우에 표시할 내용
-						    });
-							
-						    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-						    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-						    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-						    daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-						    daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+		            			'<div class="wrap">' + 
+		                        '    <div class="info">' + 
+		                        '        <div class="title">' + 
+		                        			value.bizesNm + 
+		                        '            <div class="close" title="닫기"></div>' + 
+		                        '        </div>' + 
+		                        '        <div class="body">' + 
+		                        '            <div class="desc">' + 
+		                        '				 <div>'+(value.brchNm == null ? '' : value.brchNm)+'</div>'+
+		                        '                <div class="ellipsis">'+value.rdnmAdr+'</div>' + 
+		                        '                <div class="jibun ellipsis">'+
+        						'					<span>'+(value.dongNo == null ? '' : value.dongNo+'동</span>')+
+        						'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
+        						'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
+		                        '                </div>' + 
+		                        '                <div><a href="#">예약</a></div>' + 
+		                        '            </div>' + 
+		                        '        </div>' + 
+		                        '    </div>' +    
+		                        '</div>';
+			               
+	        				var overlay = new daum.maps.CustomOverlay({
+	        				    content: content,
+	        				    map: map,
+	        				    position: marker.getPosition()       
+	        				});
+	        				$('.close').click(closeOverlay);
+	        				
+	        				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+	        	    		function closeOverlay() {
+	        	    		   overlay.setMap(null);
+	        	    		}
+	        				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+	        				daum.maps.event.addListener(marker, 'click', function() {
+	        				    overlay.setMap(map);
+	        				});
+	        				
+	        				overlay.setMap(null);
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
 		                    markers.push(marker);	
 		            	});
 		            	// 클러스터러에 마커들을 추가합니다
 	            	    clusterer.addMarkers(markers);
+		            	var level = map.getLevel();
+		            	map.setLevel(5);
+		            	var moveLatLon = new daum.maps.LatLng(mylat,mylon);
+		            	map.panTo(moveLatLon);
 		            },
 		            error : function() {
 		               console.log("error");
@@ -274,97 +321,7 @@
 		         });
 			};
 			
-			function neartotal(){
-				$.ajax({
-					data: {'mylat':mylat,'mylon':mylon},
-		            type: "POST",
-		            dataType : "json",
-		            url : "<c:url value='/security/where/map/near.awa'/>",
-		            success: function(jsonObj) {
-		            	var nearString = '';
-		            	$.each(jsonObj, function(index, value){
-								nearString += 
-									'<li>'+ 
-										'<div style="width:100%;">'+
-										'<div style="float:left;width: 10%; height: 100px;">'+
-											'<div style="width: 25px; height: 40px;">'+
-												'<img style="width:18px;height:28px;" src="<c:url value='/resources/images/all.png'/>">'+
-											'</div>'+
-										'</div>'+
-										'<dl style="margin-left: 40px; margin-right: 8px;">'+
-										'<dt>'+
-											'<a class="near" href="#">'+value.bizesNm+'</a>'+
-										'</dt>'+
-												'<dd>'+value.rdnmAdr+
-												(value.dongNo == null ? '' : value.dongNo+'동')+
-												(value.flrNo == null ? '' : value.flrNo+'층')+
-												(value.hoNo == null ? '' : value.hoNo+'호')+
-												'</dd>'+
-												'<dd>'+value.indsSclsNm+'</dd>'+
-												'<dd>'+value.diskill+' KM</dd>'+
-											'</dl>'+
-										'</div>'+
-									'</li>';		
-		            	});
-	            		$('#near').html(nearString);
-		            },
-		            error : function() {
-		               console.log("error");
-		            }
-		         });
-			};
-			function nearselect(code,pic){
-				$.ajax({
-					data: {indssclscd:code,'mylat':mylat,'mylon':mylon},
-		            type: "POST",
-		            dataType : "json",
-		            url : "<c:url value='/security/where/map/nearselect.awa'/>",
-		            success: function(jsonObj) {
-		            	var nearString = '';
-		            	var curl = "<c:url value='/resources/images/"+pic+".png'/>";
-		            	$.each(jsonObj, function(index, value){
-								nearString += 
-									'<li>'+ 
-										'<div style="width:100%;">'+
-										'<div style="float:left;width:10%;height:100px;">'+
-											'<div style="width: 25px; height: 40px;">'+
-												'<img style="width: 18px; height: 28px;" src="'+curl+'"/>'+
-											'</div>'+
-										'</div>'+
-										'<dl style="margin-left: 40px; margin-right: 8px;">'+
-										'<dt>'+
-											'<a class="near" href="#">'+value.bizesNm+'</a>'+
-										'</dt>'+
-												'<dd>'+value.rdnmAdr+
-												(value.dongNo == null ? '' : value.dongNo+'동')+
-												(value.flrNo == null ? '' : value.flrNo+'층')+
-												(value.hoNo == null ? '' : value.hoNo+'호')+
-												'</dd>'+
-												'<dd>'+value.indsSclsNm+'</dd>'+
-												'<dd>'+value.diskill+' KM</dd>'+
-											'</dl>'+
-										'</div>'+
-									'</li>';		
-		            	});
-	            		$('#near').html(nearString);
-		            },
-		            error : function() {
-		               console.log("error");
-		            }
-		         });
-			};
-         	var space = /\+/g; //" "을 의미하는 값
-         	var totalvalue;
-			$('#all').click(function(){
-		        total();
-		        neartotal();
-			});
-			$("#list-select ul li a").click(function() {
-				var str= $(this).text()+" 리스트";
-				console.log(str);
-				$("#around").html(str);
-			});
-		
+			//옆에 메뉴 눌렀을때 해당하는 녀서들
 			function indssclscd(code,pic){
 		         $.ajax({
 		        	data : {indssclscd:code},
@@ -372,6 +329,7 @@
 		            url : "<c:url value='/security/where/map/select.awa'/>",
 		            dataType : "json",
 		            success: function(jsonObj) {
+		            	map.setLevel(14);
 		            	clusterer.removeMarkers(markers);
 	            		markers=[];
 		            	$.each(jsonObj, function(index, value){
@@ -388,43 +346,167 @@
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
 		            		var content = 
-	        			  		'<div style="width:300px;height:100px;">'+
-	        					'<h6><a href="#" title="'+value.bizesNm+'">'+value.bizesNm+'</a></h6>'+
-	        					'<div class="content">'+
-	        						'<span>'+(value.brchNm == null ? '' : value.brchNm)+'</span>'+
-	        						'<p data-id="address" class="address" title="'+value.rdnmAdr+'">'+value.rdnmAdr+'</p>'+
-	        						'<p>'+
-	        						'<span>'+(value.dongNo == null ? '' : value.dongNo+'동</span>')+
-	        						'<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
-	        						'<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
-        							'</p>'+
-	        					'</div>'+
-	        			'</div></div>'+
-	        				'</div>';
+		            			'<div class="wrap">' + 
+		                        '    <div class="info">' + 
+		                        '        <div class="title">' + 
+		                        			value.bizesNm + 
+		                        '            <div class="close" title="닫기"></div>' + 
+		                        '        </div>' + 
+		                        '        <div class="body">' + 
+		                        '            <div class="desc">' + 
+		                        '				 <div>'+(value.brchNm == null ? '' : value.brchNm)+'</div>'+
+		                        '                <div class="ellipsis">'+value.rdnmAdr+'</div>' + 
+		                        '                <div class="jibun ellipsis">'+
+       							'					<span>'+(value.dongNo == null ? '' : value.dongNo+'동</span>')+
+       							'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
+       							'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
+		                        '                </div>' + 
+		                        '                <div><a href="#">예약</a></div>' + 
+		                        '            </div>' + 
+		                        '        </div>' + 
+		                        '    </div>' +    
+		                        '</div>';
+			               
+	        				var overlay = new daum.maps.CustomOverlay({
+	        				    content: content,
+	        				    map: map,
+	        				    position: marker.getPosition()       
+	        				});
 	        				
-							// 마커에 표시할 인포윈도우를 생성합니다 
-						    var infowindow = new daum.maps.InfoWindow({
-						        content: content // 인포윈도우에 표시할 내용
-						    });
-							
-						    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-						    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-						    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-						    daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-						    daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-		            		
+							$('.close').click(closeOverlay);
+	        				
+	        				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+	        	    		function closeOverlay() {
+	        	    		   overlay.setMap(null);
+	        	    		}
+	        				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+	        				daum.maps.event.addListener(marker, 'click', function() {
+	        				    overlay.setMap(map);
+	        				});
+	        				
+	        				overlay.setMap(null);
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
-		                    markers.push(marker);
+		                    markers.push(marker);	
 		            	});
 		            	// 클러스터러에 마커들을 추가합니다
 	            	    clusterer.addMarkers(markers);
+		            	map.setLevel(5);
+		            	var moveLatLon = new daum.maps.LatLng(mylat,mylon);
+		            	map.panTo(moveLatLon);
 		            },
 		            error : function() {
 		               console.log("error");
 		            }
 		         });
 			};
-         	
+
+			//주변 리스트 전체 띄우기 반경 2km
+			function neartotal(){
+				$.ajax({
+					data: {'mylat':mylat,'mylon':mylon},
+		            type: "POST",
+		            dataType : "json",
+		            url : "<c:url value='/security/where/map/near.awa'/>",
+		            success: function(jsonObj) {
+		            	//map.setLevel(14);
+		            	var nearString = '';
+		            	$.each(jsonObj, function(index, value){
+								nearString += 
+									'<li>'+ 
+										'<div style="width:100%;">'+
+										'<div style="float:left;width: 10%; height: 100px;">'+
+											'<div style="width: 25px; height: 40px;">'+
+												'<img style="width:18px;height:28px;" src="<c:url value='/resources/images/all.png'/>">'+
+											'</div>'+
+										'</div>'+
+										'<dl class="movemove" title="'+value.lon+'" style="margin-left: 40px; margin-right: 8px;">'+
+										'<dt>'+
+											'<button class="movetarget" title="'+value.lat+'">'+value.bizesNm+'</button>'+
+										'</dt>'+
+												'<dd>'+value.rdnmAdr+
+												(value.dongNo == null ? '' : value.dongNo+'동')+
+												(value.flrNo == null ? '' : value.flrNo+'층')+
+												(value.hoNo == null ? '' : value.hoNo+'호')+
+												'</dd>'+
+												'<dd>'+value.indsSclsNm+'</dd>'+
+												'<dd>'+value.diskill+' KM</dd>'+
+											'</dl>'+
+										'</div>'+
+									'</li>';	
+									
+		            	});
+						$(document).on('click','.movetarget',function(){
+							var lat = $(this).prop('title');
+							var lon = $('.movemove').prop('title');
+							map.setCenter(new daum.maps.LatLng(lat,lon));
+						});
+	            		$('#near').html(nearString);
+	            		//map.setLevel(5);
+		            },
+		            error : function() {
+		               console.log("error");
+		            }
+		         });
+			};
+			
+			//선택한 메뉴 주변리스트 반경 5km
+			function nearselect(code,pic){
+				$.ajax({
+					data: {indssclscd:code,'mylat':mylat,'mylon':mylon},
+		            type: "POST",
+		            dataType : "json",
+		            url : "<c:url value='/security/where/map/nearselect.awa'/>",
+		            success: function(jsonObj) {
+		            	//map.setLevel(14);
+		            	var nearString = '';
+		            	var curl = "<c:url value='/resources/images/"+pic+".png'/>";
+		            	$.each(jsonObj, function(index, value){
+								nearString += 
+									'<li>'+ 
+										'<div style="width:100%;">'+
+										'<div style="float:left;width:10%;height:100px;">'+
+											'<div style="width: 25px; height: 40px;">'+
+												'<img style="width: 18px; height: 28px;" src="'+curl+'"/>'+
+											'</div>'+
+										'</div>'+
+										'<dl class="movemove" title="'+value.lon+'" style="margin-left: 40px; margin-right: 8px;">'+
+										'<dt>'+
+											'<button class="movetarget" title="'+value.lat+'">'+value.bizesNm+'</button>'+
+										'</dt>'+
+												'<dd>'+value.rdnmAdr+
+												(value.dongNo == null ? '' : value.dongNo+'동')+
+												(value.flrNo == null ? '' : value.flrNo+'층')+
+												(value.hoNo == null ? '' : value.hoNo+'호')+
+												'</dd>'+
+												'<dd>'+value.indsSclsNm+'</dd>'+
+												'<dd>'+value.diskill+' KM</dd>'+
+											'</dl>'+
+										'</div>'+
+									'</li>';
+		            	});
+		            	
+	            		$('#near').html(nearString);
+	            		//map.setLevel(5);
+	            		
+		            },
+		            error : function() {
+		               console.log("error");
+		            }
+		         });
+			};
+			
+         	var space = /\+/g; //" "을 의미하는 값
+         	var totalvalue;
+			$('#all').click(function(){
+		        total();
+		        neartotal();
+			});
+			$("#list-select ul li a").click(function() {
+				var str= $(this).text()+" 리스트";
+				console.log(str);
+				$("#around").html(str);
+			});
+			
 			var cafe = $("#cafe").prop("title");
 			$('#cafe').click(function(){
 				var pic = "cafe";
