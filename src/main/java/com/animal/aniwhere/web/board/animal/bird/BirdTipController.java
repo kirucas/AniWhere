@@ -161,7 +161,6 @@ public class BirdTipController {
 			//한줄 댓글 작성자 아이디 설정
 			map.put("mem_nickname",session.getAttribute("mem_nickname"));
 			//스프링 시큐리티 적용
-			
 			commentservice.insert(map);				
 			return map.get("cmt_no").toString();
 		}///////////////////
