@@ -46,9 +46,9 @@ public class LostAnimalController {
 			record.put("gender", list.getGender());
 			record.put("neuter", list.getNeuter());
 			record.put("addr", list.getAddr());
-			record.put("careNm", list.getCareNm());
-			record.put("careTel", list.getCareTel());
-			record.put("chargeNm", list.getChargeNm());
+			record.put("careNm", list.getCarenm());
+			record.put("careTel", list.getCaretel());
+			record.put("chargeNm", list.getChargenm());
 			collections.add(record);
 		}
 		return JSONArray.toJSONString(collections);     
