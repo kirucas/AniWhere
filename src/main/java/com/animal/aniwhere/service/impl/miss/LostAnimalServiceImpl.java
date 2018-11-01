@@ -46,5 +46,9 @@ public class LostAnimalServiceImpl implements AllCommonService {
 	public int delete(Map map) {
 		return dao.delete(map);
 	}//////////
+	
+	public int passDateOnNotice() {
+		return dao.passDateOnNotice();
+	}////////// passDateOnNotice
 
 }//////////////////// LostAnimalServiceImpl
