@@ -159,6 +159,7 @@ nav a{
                                 <sec:authorize access="isAuthenticated()">
                                 	<li><a href="<c:url value='/member_info.aw'/>">내 프로필</a></li>
 	                            	<li><a href="#" id="logout">로그아웃</a></li>
+	                            	<li><a href="<c:url value='/where/reservation.awa'/>">예약으로 떠나요</a></li>
 								</sec:authorize>
 			                   	<!-- 로그인 안되어있을떄 보여주는 탭 -->
                             	<sec:authorize access="isAnonymous()">
