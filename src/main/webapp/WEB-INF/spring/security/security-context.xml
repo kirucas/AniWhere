@@ -13,11 +13,11 @@
     		    login-page="/login.aw"
                 default-target-url="/signIn/security.aw"
                 always-use-default-target="true" 
-                authentication-failure-url="/login.aw?error=true"
+                authentication-failure-url="/signIn/securityMessage.aw?error=auth"
                 login-processing-url="/signInProcess.aw"
                 username-parameter="mem_id"
                 password-parameter="mem_pw" />
-		<security:logout logout-url="/signout.aw"		            	            
+		<security:logout logout-url="/signout.aw"
 	            delete-cookies="true"
 				invalidate-session="true"
 	            />
@@ -34,10 +34,10 @@
  		-->
 	    <security:csrf disabled="true"/><!--false로 설정한 경우 Top.jsp의 로그아웃 요청을 POST방식으로 변경해야 한다-->
 	
-		<security:session-management invalid-session-url="/" >
+		<security:session-management invalid-session-url="/signIn/securityMessage.aw?error=invalid" >
 		
 		<security:concurrency-control max-sessions="1" 
-		        expired-url="/login.aw" />
+		        expired-url="/signIn/securityMessage.aw?error=expired" />
 		</security:session-management>
 	</security:http>
 	 

@@ -73,18 +73,18 @@
    }
    #popupGallery div div img{
       width: 100%;
-      height: 400px;   
+      height: 600px;   
    }
    @media (max-width : 500px){
          #popupGallery div div img{
          width: 100%;
-         height: 200px;   
+         height: 300px;
       }
    }
    @media (max-width : 800px){
       #popupGallery div div img{
          width: 100%;
-         height: 300px;   
+         height: 450px;   
       }
    }
    
@@ -154,7 +154,7 @@
 .come-left：带倾斜效果的向左翻转。
 .come-right：带倾斜效果的向右翻转。
 */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+html, body, div, span, applet, object, iframe, h1, h3, h4, h5, h6, p,
 	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
 	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
 	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
@@ -489,13 +489,8 @@ a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover i
 	var popupGallery;
 	var photoNo;
 	$(document).ready(function() {
-		$("#delete").click(function(){
-			var index=document.getElementById("modalNo").innerHTML;
-			location.replace("<c:url value='/bird/photo/delete.aw?no="+index+"'/>");
-		});
-		
 		$(".pic-caption").click(function(e){
-						e.preventDefault();
+			e.preventDefault();
 			photoNo=$(this).prop("id");
 			$("#modalNo").html(photoNo);
 			
@@ -529,9 +524,14 @@ a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover i
 	        	 	if(data['mem_no'] == data['user']) {
 	        	 		document.getElementById("e-d-button").innerHTML='<a href="#" class="btn btn-primary">수정</a>'
 						+'<a id="delete" href="#" class="btn btn-danger">삭제</a>';
-	        	 	}else {
+						$("#delete").click(function(){
+	        				var index=document.getElementById("modalNo").innerHTML;
+	        				location.replace("<c:url value='/bird/photo/delete.aw?no="+index+"'/>");
+	        			});
+	        	 	 }else {
 	        	 		document.getElementById("e-d-button").innerHTML="";
-	        	 	}
+	        	 	} 
+        	 		
 	           	},
 	           	error : function(error) {
 	                 alert("에러발생");
@@ -593,13 +593,20 @@ a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover i
 				            	<h5 class="card-title">
 					                  	${dto.photo_title}
 					               	<span title="댓글 수" class="badge badge-secondary">0</span>
-					               	<span title="신규 게시물 표시" class="badge badge-primary">
-					               		<c:if test="${dto.photo_regidate eq now}">
+				               		<c:if test="${dto.photo_regidate eq serverTime}">
+						               	<span title="신규 게시물 표시" class="badge badge-primary">
 					               			NEW
-					               		</c:if>
-					               	</span>
+						               	</span>
+				               		</c:if>
 				               	</h5>
-				               	<p class="card-text">${dto.mem_nickname}</p>
+				               	<p class="card-text">
+				               		<c:if test="${empty dto.mem_no}" var="result">
+				               			탈퇴한 자의 온기가 남아있습니다...
+				               		</c:if>
+				               		<c:if test="${not result}">
+				               			${dto.mem_nickname}
+				               		</c:if>
+				               	</p>
 				            </div>
 			     			<div class="card-footer">
 			           			<small class="text-muted"><fmt:formatDate value="${dto.photo_regidate}" pattern="yyyy-MM-dd" /></small>

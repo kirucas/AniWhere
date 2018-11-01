@@ -214,19 +214,25 @@ public class MemberController {
 	}////////// animal_enroll
 
 	@RequestMapping("/signIn/security.aw")
-	public String security(Authentication auth, HttpSession session) throws Exception {
+	public String security(@RequestParam Map map,Authentication auth, HttpSession session) throws Exception {
 		System.out.println("인증된 사용자:" + auth.getPrincipal());
 		UserDetails authenticatedUser = ((UserDetails) auth.getPrincipal());
 		System.out.println(authenticatedUser.getUsername());
 		System.out.println(authenticatedUser.getAuthorities().toString());
-		Map map = new HashMap<>();
 		map.put("mem_id", authenticatedUser.getUsername());
 		MemberDTO dto = service.selectOne(map);
 		session.setAttribute("mem_id", map.get("mem_id"));
 		session.setAttribute("mem_no", dto.getMem_no());
-
+		
 		return "forward:/";
 	}/// security
+	
+	@RequestMapping("/signIn/securityMessage.aw")
+	public String securityMessage(@RequestParam Map map,Model model) throws Exception {
+		System.out.println(map.get("error"));
+		model.addAttribute("error",map.get("error"));
+		return "member/securityMessage";
+	}/// securityMessage
 	
 	/*
 	 * @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
