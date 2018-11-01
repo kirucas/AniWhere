@@ -8,8 +8,9 @@
 	<select id="reservationCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM (
-			SELECT r.*, mem_name
+			SELECT r.*, mem_name, bizesnm
 			FROM reservation r JOIN member m ON r.mem_no=m.mem_no
+			JOIN store_location sl ON r.store_no = sl.bizesid
 			)
 	</select>
 	
@@ -18,8 +19,9 @@
 		FROM (
 			SELECT T.*, ROWNUM R
 			FROM (
-				SELECT r.*, mem_name
+				SELECT r.*, mem_name, bizesnm
 				FROM reservation r JOIN member m ON r.mem_no=m.mem_no
+				JOIN store_location sl ON r.store_no = sl.bizesid
 				ORDER BY rv_no DESC
 				) T
 			)
@@ -27,8 +29,9 @@
 	</select>
 	
 	<select id="reservationSelectOne" parameterType="java.util.Map" resultType="ReservationDTO">
-		SELECT rv.*, mem_name
+		SELECT rv.*, mem_name, bizesnm
 		FROM reservation rv JOIN member mb ON rv.mem_no = mb.mem_no
+		JOIN store_location sl ON r.store_no = sl.bizesid
 		WHERE rv_no=#{rv_no}
 	</select>
 	
