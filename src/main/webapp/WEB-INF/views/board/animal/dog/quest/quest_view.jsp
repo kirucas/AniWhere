@@ -5,7 +5,7 @@
 //해당 글번호에 대한 코멘트 목록을 가져오는 함수 
 	var showComments = function(key){		
 		$.ajax({
-			url:"<c:url value='/dog/quest/cmtList.awa'/>",
+			url:"<c:url value='/security/dog/quest/cmtList.awa'/>",
 			data:{no:key},
 			dataType:'json',
 			type:'post',
@@ -41,7 +41,7 @@
 		$('.commentDelete').click(function(){			
 			var cno_value = $(this).attr("title");
 			$.ajax({
-				url:"<c:url value='/dog/quest/cmtDelete.awa'/>",
+				url:"<c:url value='/security/dog/quest/cmtDelete.awa'/>",
 				data:{cno:cno_value,no:${record.no}},
 				dataType:'text',
 				type:'post',
@@ -58,7 +58,7 @@
 		//코멘트 입력처리]
 		$('#submit').click(function(){	
 			if($(this).val()=='등록')
-				var action="<c:url value='/dog/quest/cmtWrite.awa'/>";
+				var action="<c:url value='/security/dog/quest/cmtWrite.awa'/>";
 			$.ajax({
 				url:action,
 				data:$('#frm').serialize(),
@@ -81,21 +81,20 @@
 			//메모글 삭제처리]
 			$('#delete').on('click',function(){
 				if(confirm('삭제 하시겠습니까')){
-					location.replace("<c:url value='/animal/dog/quest/quest_delete.aw?no=${record.no}'/>");				
+					location.replace("<c:url value='/security/animal/dog/quest/quest_delete.aw?no=${record.no}'/>");				
 				}
 			});
 		});
 		
-		$(function(){
-			$('i').on('click',function(){
-				$('i').toggle();
-			});
+		
+		$('.img1').on('click',function(){
+			$('.img2').toggle();
+			$('.img1').css('display','none');
 		});
 		
-	});
-	$(function(){
 		$("#comments").removeAttr("href")
-	})
+		
+	});
 </script>
 <div class="container border">
 	<div class="row border-bottom" style="padding-left:23px;padding-top: 10px;margin-bottom: 0px">
@@ -119,11 +118,11 @@
 		</div>
 		<div class="offset-sm-4 col-sm-3" style="text-align:right">
 			<c:if test="${sessionScope.mem_no == record.mem_no}">
-				<a class="text-right" href="<c:url value='/animal/dog/quest/quest_edit.aw?no=${record.no}'/>">수정 &nbsp;</a>
+				<a class="text-right" href="<c:url value='/security/animal/dog/quest/quest_edit.aw?no=${record.no}'/>">수정 &nbsp;</a>
 				<a id="delete" href="#">| &nbsp;삭제 |</a>
 			</c:if>
-			<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>"> &nbsp;&nbsp;목록</a>
-			<a href="<c:url value='/animal/dog/quest/quest_reply.aw?no=${record.no }'/>">|&nbsp;&nbsp;답변</a>
+			<a href="<c:url value='/security/animal/dog/quest/quest_list.aw'/>"> &nbsp;&nbsp;목록</a>
+			<a href="<c:url value='/security/animal/dog/quest/quest_reply.aw?no=${record.no }'/>">|&nbsp;&nbsp;답변</a>
 		</div>
 	</div>
 	<div class="row border-bottom">
@@ -136,9 +135,9 @@
 	</div>
 	<div class="row">
 		<div class="offset-sm-5 col-sm-1" style="padding: 10px">
-			<i id="empty" class="far fa-thumbs-up fa-3x btn" style="color:#1fcfcc"></i>
-			<i id="full" class="fas fa-thumbs-up fa-3x btn" style="color:#1fcfcc;display:none"></i>
-			<p style="text-align:center;"> ${record.quest_hit }</p>
+			<img class="img1" style="text-align:center;padding-left:12px;color:#1fcfcc" src="/aniwhere/resources/images/thumbs.png">
+			<img class="img2" style="text-align:center;padding-left:12px;display:none;color:#1fcfcc" src="/aniwhere/resources/images/thumbsfull.png">
+			<p style="text-align:center;"> ${record.quest_hit}</p>
 		</div><!-- 누른면 색이 꽉차고 빌수도 있게하게 hideen주기 -->
 	</div>
 </div>

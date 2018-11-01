@@ -73,7 +73,7 @@ nav a{
 	                                <ul class="dropdown-menu" aria-labelledby="dog_main">
 		                                <li><a href="<c:url value='/animal/dog/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/dog/movie.aw'/>">동영상 게시판</a></li>
-		                                <li><a href="<c:url value='/animal/dog/quest/quest_list.aw'/>">질문 게시판</a></li>
+		                                <li><a href="<c:url value='/security/animal/dog/quest/quest_list.aw'/>">질문 게시판</a></li>
 		                                <li><a href="<c:url value='/board/animal/dog/tip/list.aw'/>">팁 게시판</a></li>
 	                                </ul>
                             	</li>
