@@ -59,7 +59,7 @@ function check() {
 else {
 	
 	
- 
+	fr.action="<c:url value='/security/market/sellupdate.aw?sell_no=${record.no}'/>"
  return true;
 
 }
@@ -67,14 +67,15 @@ else {
 }
 
 </script>
-
-<script>
-
+<!-- 
 $( "#target" ).submit(function( event ) {
 	  alert( "Handler for .submit() called." );
 	  event.preventDefault();
 	});
+-->
 
+<script>
+	
    $(function() {
 	   
 	   $('#enterBtn').click(function(){
@@ -83,11 +84,14 @@ $( "#target" ).submit(function( event ) {
 		   content+='제목:'+$('#title').val()+'\r\n';
 		   content+='판매물품명:'+$('#name').val()+'\r\n';
  		   content+='희망가:'+$('#price').val()+'원\r\n';
- 		  content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+ 		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
 		   content+='거래방법:'+$('#way').val()+'\r\n'; 
            content+='연락처:'+$('#phone').val()+'\r\n'; 
-           content+='====================================\r\n'; 
+           content+='====================================\r\n';
+           
            $('#summernote').append(content);
+           
+           fr.action="<c:url value='/security/market/sellupdate.aw?sell_no=${record.no}'/>";
            	   
 	   });
 	   	   
@@ -152,7 +156,7 @@ $( "#target" ).submit(function( event ) {
 		<br />
 
 		<div class="col-md-12">
-       <form name="fr" id="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellupdate.aw?sell_no=${record.no}'/>" accept-charset="utf-8" 	class="form-horizontal">                           
+       <form name="fr" id="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 	class="form-horizontal">                           
 				<div class="form-row">
 				<input type="hidden" name="table_name" value="sell"/>
 				 <input type="hidden" name="mem_no" value="${mem_no }">
@@ -250,9 +254,7 @@ $( "#target" ).submit(function( event ) {
 							class="img-fluid shadow scale"
 							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
 							alt="" style="width: 300px; height: 200px;">
-
 					</div>
-
 					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
 
 						<img id="product2" onclick="javascript:changeimage2()"
@@ -261,7 +263,6 @@ $( "#target" ).submit(function( event ) {
 							alt="" style="width: 300px; height: 200px;">
 
 					</div>
-
 					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
 
 						<img id="product3" onclick="javascript:changeimage3()"
@@ -270,14 +271,12 @@ $( "#target" ).submit(function( event ) {
 							alt="" style="width: 300px; height: 200px;">
 
 					</div>
-
 					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
 
 						<img id="product4" onclick="javascript:changeimage4()"
 							class="img-fluid shadow scale"
 							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
 							alt="" style="width: 300px; height: 200px;">
-
 					</div>
 
 				</div>
@@ -295,7 +294,7 @@ $( "#target" ).submit(function( event ) {
 				<div style="text-align: center">
 					<a href="<c:url value='/market/sell.aw'/>">
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>					
-					<input class="btn btn-danger" type="button"  value="확인" id="enterBtn" onclick="check()">
+					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" onclick="return check()">
 
 				</div>
 				  											

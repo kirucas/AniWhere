@@ -60,8 +60,7 @@ function check() {
    
 else {
 	
-	showContent()
- fr.action="<c:url value='/market/sellinsert.aw'/>"; 
+ fr.action="<c:url value='/security/market/sellinsert.aw'/>"; 
  return true;
 }
     
@@ -70,9 +69,6 @@ else {
 </script>
 
 <script>
-
-        
-
 
    $(function() {
 	   
@@ -305,7 +301,7 @@ else {
 					
 					<!-- <input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
 					-->
-					<input class="btn btn-danger" type="button"  value="확인" id="enterBtn" onclick="check()">
+					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
 
 				</div>
 				 										

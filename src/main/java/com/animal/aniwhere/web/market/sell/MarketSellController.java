@@ -45,7 +45,7 @@ public class MarketSellController {
 	}////////// move
 	
 	//입력 후 리스트로 이동 
-			@RequestMapping("/market/sellinsert.aw")
+			@RequestMapping("/security/market/sellinsert.aw")
 			public String miss_insert(@RequestParam Map map,HttpSession session) throws Exception {
 				
 				map.put("table_name","sell");
@@ -135,7 +135,7 @@ public class MarketSellController {
 			}////////////////
 			
 			// 쓰기에서 db에올리고 목록으로 이동 ]
-			@RequestMapping(value="/market/SellWrite.aw",method=RequestMethod.POST)
+			@RequestMapping(value="/security/market/SellWrite.aw",method=RequestMethod.POST)
 			public String writeOk(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 				
 				
@@ -178,7 +178,7 @@ public class MarketSellController {
 			
 			
 			//수정폼 이동 --자기아이디로 자기글 view에서 수정 누르면 이쪽으로 이동 
-			@RequestMapping("/market/selledit.aw")
+			@RequestMapping("/security/market/selledit.aw")
 			public String find_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 					
 				map.put("mem_no",session.getAttribute("mem_no"));
@@ -197,7 +197,7 @@ public class MarketSellController {
 			}////////// miss_write
 			
 			//수정 실행하기
-			@RequestMapping("/market/sellupdate.aw")
+			@RequestMapping("/security/market/sellupdate.aw")
 			public String edit(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 				map.put("mem_no",session.getAttribute("mem_no"));
 				map.put("table_name","sell");
