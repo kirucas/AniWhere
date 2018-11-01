@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+@import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
+</style>
 <script>
 	function goAjax(no) {
 		$.ajax({
@@ -20,37 +23,46 @@
 
 </script>
 <!-- 내용 시작 -->
-<form>
-	<div class="container">
+	<div class="container" style="padding-left:0px;padding-right:0px;margin-bottom:15px">
 		<div>
-			<h1>
+			<h2>
 				공지사항
-			</h1>
+			</h2>
 		</div>
+		<div>
+		<form style="display:inline;" action="">
+            <label style="text-align: right;">
+            	<select name="target" style="margin-left:10px" class="sub-header-search__select">
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                    <option value="title_content">제목+내용</option>
+                </select>
+            </label>
+            <input style="float:right" type="text" name="q" class="sub-header-search__input" placeholder="검색">
+            <button class="sub-header-search__button"><img src="https://talk.op.gg/images/icon-search@2x.png" width="24" alt="검색"></button>
+        </form>
+        </div>
 		<hr/>
-			
 			<div>
 				<c:if test="${empty list}" var="isEmpty">
 					<span>등록된 게시물이 없어요</span>
 				</c:if>
-				
 					<c:if test="${not isEmpty }">
 						<c:forEach var="record" items="${list}">
 							<a href="#" onclick="goAjax(${record.no});" data-toggle="modal" data-target="#Modal" id="ModalSpace">
-							<div>
+							<div style="margin-top: 30px;  margin-bottom: 7px; color:blue">
 									${record.title}
 							</div>
-								<div>
-									${record.regidate}
-								</div>
 							</a>
+							<div style="color: black; font-style: oblique;  margin-bottom: 25px;">
+									${record.regidate}
+							</div>
 							<hr/>
-					</c:forEach>
-				</c:if>
+						</c:forEach>
+					</c:if>
 			</div>
 		<hr/>
 	</div>
-</form>
 <!-- 모달창 첫번째 -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog">
    <div class="modal-dialog" role="document">
