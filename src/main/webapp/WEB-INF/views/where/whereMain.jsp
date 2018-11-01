@@ -164,7 +164,7 @@
 				<span style="font-size: 1.8em; text-align: center;">주변 리스트</span>
 			</div>
 			<div id="list-view">
-				<ul style="list-style: none;">
+				<ul id="near" style="list-style: none;">
 					<!-- 리스트 목록 반복 -->
 					<li>
 						<div style="padding: 10px; float: left;">
@@ -176,11 +176,11 @@
 							</div>
 							<dl style="margin-left: 40px; margin-right: 8px;">
 								<dt>
-									<a href="#">동물병원이름</a>
+									<a href="#">상호 : </a>
 								</dt>
-								<dd>경기도 광명동 오리로 39-2 102호</dd>
-								<dd>010-8191-4693</dd>
-								<dd>건강 , 의료 > 동물병원</dd>
+								<dd>위치 : </dd>
+								<dd>분류 : </dd>
+								<dd>거리 : KM</dd>
 							</dl>
 						</div>
 					</li>
@@ -199,8 +199,12 @@
 		        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
 		        level: 5 // 지도의 확대 레벨
 	    	};  
+			var mylat;
+			var mylon;
 			// 지도와 클러스터러를 생성하는 메소드
 			var map = new daum.maps.Map(mapContainer, mapOption); 
+			// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+			
 			var clusterer = new daum.maps.MarkerClusterer({
 		        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
 		        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
@@ -269,10 +273,91 @@
 		            }
 		         });
 			};
+			
+			function neartotal(){
+				$.ajax({
+					data: {'mylat':mylat,'mylon':mylon},
+		            type: "POST",
+		            dataType : "json",
+		            url : "<c:url value='/security/where/map/near.awa'/>",
+		            success: function(jsonObj) {
+		            	var nearString = '';
+		            	$.each(jsonObj, function(index, value){
+								nearString += 
+									'<li>'+ 
+										'<div style="padding: 10px;width:100%;">'+
+										'<div style="float: left; width: 10%; height: 100px;">'+
+											'<div style="width: 18px; height: 28px;">'+
+												'<img style="width: 18px; height: 28px;" src="<c:url value='/resources/images/all.png'/>">'+
+											'</div>'+
+										'</div>'+
+										'<dl style="margin-left: 40px; margin-right: 8px;">'+
+										'<dt>'+
+											'<a class="near" href="#">'+value.bizesNm+'</a>'+
+										'</dt>'+
+												'<dd>'+value.rdnmAdr+
+												(value.dongNo == null ? '' : value.dongNo+'동')+
+												(value.flrNo == null ? '' : value.flrNo+'층')+
+												(value.hoNo == null ? '' : value.hoNo+'호')+
+												'</dd>'+
+												'<dd>'+value.indsSclsNm+'</dd>'+
+												'<dd>'+value.diskill+' KM</dd>'+
+											'</dl>'+
+										'</div>'+
+									'</li>';		
+		            	});
+	            		$('#near').html(nearString);
+		            },
+		            error : function() {
+		               console.log("error");
+		            }
+		         });
+			};
+			function nearselect(code,pic){
+				$.ajax({
+					data: {indssclscd:code,'mylat':mylat,'mylon':mylon},
+		            type: "POST",
+		            dataType : "json",
+		            url : "<c:url value='/security/where/map/nearselect.awa'/>",
+		            success: function(jsonObj) {
+		            	var nearString = '';
+		            	var curl = "<c:url value='/resources/images/"+pic+".png'/>";
+		            	$.each(jsonObj, function(index, value){
+								nearString += 
+									'<li>'+ 
+										'<div style="padding: 10px;width:100%;">'+
+										'<div style="float: left; width: 10%; height: 100px;">'+
+											'<div style="width: 18px; height: 28px;">'+
+												'<img style="width: 18px; height: 28px;" src="'+curl+'"/>'+
+											'</div>'+
+										'</div>'+
+										'<dl style="margin-left: 40px; margin-right: 8px;">'+
+										'<dt>'+
+											'<a class="near" href="#">'+value.bizesNm+'</a>'+
+										'</dt>'+
+												'<dd>'+value.rdnmAdr+
+												(value.dongNo == null ? '' : value.dongNo+'동')+
+												(value.flrNo == null ? '' : value.flrNo+'층')+
+												(value.hoNo == null ? '' : value.hoNo+'호')+
+												'</dd>'+
+												'<dd>'+value.indsSclsNm+'</dd>'+
+												'<dd>'+value.diskill+' KM</dd>'+
+											'</dl>'+
+										'</div>'+
+									'</li>';		
+		            	});
+	            		$('#near').html(nearString);
+		            },
+		            error : function() {
+		               console.log("error");
+		            }
+		         });
+			};
          	var space = /\+/g; //" "을 의미하는 값
          	var totalvalue;
 			$('#all').click(function(){
 		        total();
+		        neartotal();
 			});
 			function indssclscd(code,pic){
 		         $.ajax({
@@ -338,51 +423,36 @@
 			$('#cafe').click(function(){
 				var pic = "cafe";
 				indssclscd(cafe,pic);
+				nearselect(cafe,pic);
 			});
 			
 			var hair = $("#hair").prop("title");
 			$('#hair').click(function(){
 				var pic = "pic";
 				indssclscd(hair,pic);
+				nearselect(hair,pic);
 			});
 			
 			var hospital = $("#hospital").prop("title");
 			$('#hospital').click(function(){
 				var pic = "hospital";
 				indssclscd(hospital,pic);
+				nearselect(hospital,pic);
 			});
 			
 			var pharm = $("#pharm").prop("title");
 			$('#pharm').click(function(){
 				var pic = "hospital";
-				indssclscd(pharm);
+				indssclscd(pharm,pic);
+				nearselect(pharm,pic);
 			});
 			
 			var etc = $("#etc").prop("title");
 			$('#etc').click(function(){
 				var pic = "etc";
 				indssclscd(etc,pic);
+				nearselect(etc,pic);
 			});
-         	
-// 			var strdata = $("#ip").prop("title");
-// 			console.log(strdata);
-// 			$('#ip').click(function(){
-// 		         $.ajax({
-// 		        	data : {strdata:strdata},
-// 		            type: "POST",
-// 		            url : "<c:url value='/where/map/D09A01.aw'/>",
-// 		            success: function(str) {
-// 		            	var space = /\+/g;
-// 		            	str=decodeURIComponent(str.replace(space," "));
-// 		            	console.log("성공:"+str);
-// 		            	infoParsing(str);
-// 		            },
-// 		            error : function() {
-// 		               console.log("error");
-// 		            }
-// 		         });
-// 			});
-			
 			//Xml파싱 하는 방법
 // 			function infoParsing(result){
 // 				if (window.DOMParser)
@@ -417,7 +487,6 @@
 				marker.setMap(map);
 			};
 			
-			// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 			if (navigator.geolocation) {
 
 				// GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -426,6 +495,9 @@
 
 							lat = position.coords.latitude, // 위도
 							lon = position.coords.longitude; // 경도
+							mylat = lat;
+							mylon = lon;
+							neartotal();
 							var locPosition = new daum.maps.LatLng(
 									lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 							message = ' '; // 인포윈도우에 표시될 내용입니다
@@ -484,7 +556,7 @@
 					roadmapControl.className = 'btn';
 				}
 			}
-
+			
 			// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 			var mapTypeControl = new daum.maps.MapTypeControl();
 
@@ -509,7 +581,7 @@
 			    };
 			}
 			
-			//반경 뽑아오는 소스
+			//api에서 바로 반경 뽑아오는 소스
 // 			function radius(lat1,lon1){
 // 				$.ajax({
 // 		        	data : {code:"D09A01/D09A02/D25A16/Q12A07/S04A03/S04A01/S04A02",'lat':lat1,'lon':lon1},
