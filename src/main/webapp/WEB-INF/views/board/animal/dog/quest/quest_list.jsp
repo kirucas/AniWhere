@@ -9,10 +9,10 @@
 		</h2>
 	</div>
 	<div>
-		<form action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
+		<form action='<c:url value="/security/animal/dog/quest/quest_write.aw"/>'>
 			<div class="offset-sm-9 col-sm-3" style="padding: 5px;padding-right: 0px">	
 				<div align="right">
-					<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>"class="btn btn-success">
+					<a href="<c:url value='/security/animal/dog/quest/quest_write.aw'/>"class="btn btn-success">
 						<i class="fas fa-pen-square" >글쓰기</i><!-- 아이콘 -->
 					</a>
 				</div>

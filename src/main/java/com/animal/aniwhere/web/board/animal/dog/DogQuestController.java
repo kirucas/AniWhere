@@ -41,7 +41,7 @@ public class DogQuestController {
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
 	
-	@RequestMapping("/security/animal/dog/quest/quest_list.aw")
+	@RequestMapping("/animal/dog/quest/quest_list.aw")
 	public String list(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
 			@RequestParam Map map,//검색용 파라미터 받기
@@ -105,7 +105,7 @@ public class DogQuestController {
 		return "forward:/animal/dog/quest/quest_list.aw";
 	}
 	
-	@RequestMapping("/security/animal/dog/quest/quest_view.aw")
+	@RequestMapping("/animal/dog/quest/quest_view.aw")
 	public String quest_view(@RequestParam Map map,Model model) throws Exception{
 		QuestBoardDTO record = questService.selectOne(map);
 		record.setQuest_content(record.getQuest_content().replace("\r\n","<br/>"));
@@ -126,7 +126,7 @@ public class DogQuestController {
 		return "board/animal/dog/quest/quest_message";
 	}
 
-	@RequestMapping("/security/animal/dog/quest/quest_delete.aw")
+	@RequestMapping("/animal/dog/quest/quest_delete.aw")
 	public String delete(@RequestParam Map map,Model model) throws Exception{
 		int successFail = questService.delete(map);
 		model.addAttribute("successFail",successFail);
@@ -134,7 +134,7 @@ public class DogQuestController {
 	}
 	
 	@ResponseBody
-    @RequestMapping(value="/security/animal/dog/quest/Upload.aw")
+    @RequestMapping(value="/animal/dog/quest/Upload.aw")
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("file");

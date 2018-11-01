@@ -34,7 +34,7 @@ $(function(){
         $.ajax({
            data: form_data,
            type: "POST",
-           url : "<c:url value='/security/animal/dog/quest/Upload.aw'/>",
+           url : "<c:url value='/animal/dog/quest/Upload.aw'/>",
            cache: false,
            contentType: false,
            processData: false,

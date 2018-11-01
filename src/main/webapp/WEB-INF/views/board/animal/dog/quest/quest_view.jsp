@@ -5,7 +5,7 @@
 //해당 글번호에 대한 코멘트 목록을 가져오는 함수 
 	var showComments = function(key){		
 		$.ajax({
-			url:"<c:url value='/security/dog/quest/cmtList.awa'/>",
+			url:"<c:url value='/dog/quest/cmtList.awa'/>",
 			data:{no:key},
 			dataType:'json',
 			type:'post',
@@ -41,7 +41,7 @@
 		$('.commentDelete').click(function(){			
 			var cno_value = $(this).attr("title");
 			$.ajax({
-				url:"<c:url value='/security/dog/quest/cmtDelete.awa'/>",
+				url:"<c:url value='/dog/quest/cmtDelete.awa'/>",
 				data:{cno:cno_value,no:${record.no}},
 				dataType:'text',
 				type:'post',
@@ -81,7 +81,7 @@
 			//메모글 삭제처리]
 			$('#delete').on('click',function(){
 				if(confirm('삭제 하시겠습니까')){
-					location.replace("<c:url value='/security/animal/dog/quest/quest_delete.aw?no=${record.no}'/>");				
+					location.replace("<c:url value='/animal/dog/quest/quest_delete.aw?no=${record.no}'/>");				
 				}
 			});
 		});
@@ -121,7 +121,7 @@
 				<a class="text-right" href="<c:url value='/security/animal/dog/quest/quest_edit.aw?no=${record.no}'/>">수정 &nbsp;</a>
 				<a id="delete" href="#">| &nbsp;삭제 |</a>
 			</c:if>
-			<a href="<c:url value='/security/animal/dog/quest/quest_list.aw'/>"> &nbsp;&nbsp;목록</a>
+			<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>"> &nbsp;&nbsp;목록</a>
 			<a href="<c:url value='/security/animal/dog/quest/quest_reply.aw?no=${record.no }'/>">|&nbsp;&nbsp;답변</a>
 		</div>
 	</div>
