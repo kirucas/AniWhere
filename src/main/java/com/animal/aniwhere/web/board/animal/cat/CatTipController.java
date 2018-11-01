@@ -120,6 +120,7 @@ public class CatTipController {
 		model.addAttribute("successFail", successFail);
 		return "board/animal/cat/tip/Message";
 	}//////////////delete()
+	
 		
 	//Summernote 업로드 기능
 	@ResponseBody
