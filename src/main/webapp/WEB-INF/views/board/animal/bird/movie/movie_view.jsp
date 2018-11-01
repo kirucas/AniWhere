@@ -26,8 +26,8 @@
 	//[{"NO":2,"ONELINECOMMENT":"댓글2","CPOSTDATE":"2018-09-12","CNO":3,"ID":"LEE","NAME":"이길동"},{"NO":2,"ONELINECOMMENT":"댓글1","CPOSTDATE":"2018-09-12","CNO":2,"ID":"PARK","NAME":"박길동"}]
 	var displayComments	 = function(data){
 		console.log(JSON.stringify(data));
-		var commentString="<h2>한줄 댓글 목록</h2>";
-		commentString+='<table class="table table-bordered">';
+		var commentString="<h4>댓글</h4><br/>";
+		commentString+='<label for="" class="col-sm-2 control-label">Email</label>';
 		commentString+='<tr><th width="15%">작성자</th><th width="50%">코멘트</th><th width="20%">작성일</th><th>삭제</th></tr>';
 		if(data.length==0){
 			commentString+="<tr><td colspan='4'>등록된 댓글이 없어요</td></tr>";
@@ -41,7 +41,7 @@
 			commentString+='<td>'+comment['cmtdto.regidate']+'</td>';
 			commentString+='<td>';
 			if('${sessionScope.mem_no}' == comment["ID"])
-				commentString+='<span  class="commentDelete" title="'+comment["cmtdto.cmt_no"]+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
+				commentString+='<span class="commentDelete" title="'+comment["cmtdto.cmt_no"]+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
 			else
 				commentString+='<span style="color: gray; font-size: 0.7em; font-weight: bold">삭제불가</span>';
 			commentString+='</td></tr>';
@@ -197,22 +197,31 @@ a:visited { color:white; text-decoration: none;}
 <br/>
 <div class="row">
 		<!-- 한줄 코멘트 입력 폼-->
-		<c:forEach var="cmtdto" items="${cmtlist}" varStatus="loop"> 
-			<h4>댓글 </h4>&nbsp;&nbsp;&nbsp;&nbsp;
 			<form class="form-inline" id="frm" method="post">
-			<%-- 
+
+		<div class="form-group">
+			<label for="input" class="col-sm-2 control-label">${sessionScope.mem_id}</label>
+			<div class="col-sm-10">
+				<input type="comment" class="form-control" id="inputcomment"
+					placeholder="댓글 추가">
+			</div>
+		</div>
+	</form>		
+	<%-- 		
+			<div>${sessionScope.mem_id}</div>&nbsp;&nbsp;&nbsp;&nbsp;
+			
 			<input type="hidden" value="${table_name}"/>
 			<input type="hidden" value="${dto.mem_no}"/>
-			 --%>
+			
 			<input type="hidden" name="no" value="${cmtdto.cmt_no}" />
 				<!-- 수정 및 삭제용 파라미터 -->
 			<input type="hidden" name="cmt_no" />
-			<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />
+			<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />&nbsp;&nbsp;
 			<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>			
-			</form>
-		 </c:forEach>
 			
+			 --%>
 	</div>
+	
 	<div class="row" id="comments">
 		<!-- 한줄 코멘트 목록-->		
 		<!-- ajax로 아래에 코멘트 목록 뿌리기 -->	

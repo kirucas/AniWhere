@@ -18,7 +18,7 @@
 			FROM (
 				SELECT *
 				FROM lost_animal
-				ORDER BY end_notice
+				ORDER BY end_notice, no
 				) T
 			)
 		WHERE R BETWEEN #{start} AND #{end}
