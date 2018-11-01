@@ -314,13 +314,21 @@ public class MemberController {
    	//안드로이드 용
  	@ResponseBody
  	@RequestMapping(value="/android.awa", method = RequestMethod.POST)
- 	public String androidLogin(@RequestParam Map map) throws Exception{
+ 	public String androidLogin(@RequestParam Map map,HttpSession session) throws Exception{
  		if(!service.isMember(map)) {
  			return "false";
  		}		
- 		MemberDTO dto = service.selectOne(map);				
- 		return dto.getMem_id()+","+dto.getMem_no();
-       
+ 		MemberDTO dto = service.selectOne(map);
+ 		session.setAttribute("mem_id", dto.getMem_id());
+ 		session.setAttribute("mem_no", dto.getMem_no());
+ 		return dto.getMem_id()+","+dto.getMem_no();       
+    }
+ 	
+ 	@ResponseBody
+ 	@RequestMapping(value="/androidSignOut.awa", method = RequestMethod.POST)
+ 	public String androidSignOut(@RequestParam Map map,HttpSession session) throws Exception{
+ 		session.invalidate();
+ 		return "";       
     }
  	
  	//안드로이드 googleLogin
