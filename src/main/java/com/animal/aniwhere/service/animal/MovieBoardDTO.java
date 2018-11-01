@@ -3,13 +3,13 @@ package com.animal.aniwhere.service.animal;
 public class MovieBoardDTO {
 
 	private String no; //영상 넘버
-	private String mem_no;
+	private String mem_no; //멤버 넘버
 	private String movie_title; //영상 제목 : value는 50이상 쓸 수 없음
-	private String movie_count;
-	private String movie_content;
-	private String movie_hit;
-	private java.sql.Date movie_regidate;
-	private String ani_category;
+	private String movie_count; //조회 수
+	private String movie_content; //동영상 및 내용
+	private String movie_hit; //추천 수
+	private java.sql.Date movie_regidate; //동영상 등록 날짜
+	private String ani_category; // 동물 카테고리
 
 	// 영상 링크 저장을 위한 속성 추가
 	private String movie_tempsrc;

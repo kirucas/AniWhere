@@ -90,17 +90,17 @@
 </script>
 
 <div class="container">
-	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/security/animal/bird/movie/Write.aw'/>">
+	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/security/animal/dog/movie/Write.aw'/>">
 		<input type="hidden" name="mem_no" value="${mem_no }">
-		<input type="hidden" name="ani_category" value="4">
+		<input type="hidden" name="ani_category" value="1">
 		<div class="form-group row">
 			<label for="validationDefaultUsername"
 				class="offset-sm-1 col-sm-1 col-form-label">게시판</label>
 			<!-- 내가 지금 어느 게시판에서 쓰고 있는지를 보여주는 disabled input태그 -->
 			<div class="col-sm-9 ">
 				<input type="text" class="form-control-planintext"
-					id="validationDefaultUsername" value="조류게시판" disabled="disabled"
-					placeholder="조류게시판">
+					id="validationDefaultUsername" value="강아지게시판" disabled="disabled"
+					placeholder="강아지게시판">
 				<!-- required disabled -->
 			</div>
 		</div>
