@@ -2,10 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
-<%@ include file="/WEB-INF/views/common/loading.jsp" %>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
-#tip_no{
+#no{
 	text-align:center;
 	font-size: 1.5em;
 }
@@ -15,15 +14,15 @@
 .row nav{
 	width: 100%;
 }
-.pagination{
+#pagingDiv{
 	width: 100%;
-	margin-left: 35%;
+	text-align: center;
 }
-.pagination li{
-	margin-right: 5%;
+.row nav{
+	margin:0 auto;
 }
-.pagination li a{
-	margin-right: 5%;
+#pagingDiv nav ul li {
+	margin-right: 10px;
 }
 </style>
 <!-- 바디 -->
@@ -88,7 +87,7 @@
 						<div><span id="tip_hit">${record.tip_hit}</span></div>
 		    		</div>
 				<div class="article-list-item__content">
-					<a href="<c:url value='/animal/etc/tip/tip_view.aw?tip_no=${record.tip_no}'/>" class="article-list-item__info">
+					<a href="<c:url value='/animal/etc/tip/tip_view.aw?no=${record.no}'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
 							<span id="tip_title">${record.tip_title}</span> <em>[21]</em>
 						</div>
@@ -106,7 +105,7 @@
 					</div>
 				</div>
 				<div class="article-list-item__vote">
-					<div><span id="tip_no" style="text-align:center">${record.tip_no}</span></div>
+					<div><span id="no" style="text-align:center">${record.no}</span></div>
 				</div>
 			</article>
 	    		</c:forEach>
@@ -153,7 +152,7 @@
 		</section>
 	</div>
 	<!-- 아래는 페이징 -->
-    <div class="row">
+    <div class="row" id="pagingDiv">
     		${pagingString}
     </div>	
 <!-- 바디 끝 -->

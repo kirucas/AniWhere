@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
+
 <script>
 	var isDelete = function(){
 		if(confirm("글을 삭제 하시겠습니까?"))
@@ -38,6 +39,7 @@
 								<span>[양서류]</span>
 							</c:otherwise>
 						</c:choose>
+						<span>[${record.addr}]</span>
 						${record.title}
 						<div style="float:right;">
 							<!-- 글에 대한 버튼들(자기가 쓴 글이면 수정과 삭제 가능) -->
@@ -53,9 +55,7 @@
 								
 						<div class="article-meta-list">
 							<div class="article-meta__item article-meta__item--name">
-								<a
-									href="https://talk.op.gg/s/lol/free?q=%EB%9F%B0%EB%B9%8C%EB%A1%9C%EA%BE%B8%EA%BA%BC&amp;target=user_name">
-									${record.mem_no} </a>
+									${record.mem_nickname}
 							</div>
 							<div class="article-meta__item">
 								<span data-tooltip data-date="2018-10-14T06:40:37+00:00"
@@ -64,13 +64,13 @@
 						</div>
 						<div class="article-meta-list article-meta-list--right">
 							<div class="article-meta__item">
-								<span>${record.count}</span>
+								<span>조회수 ${record.count}</span>
 							</div>
 							<div class="article-meta__item">
 								<span>댓글 56</span>
 							</div>
 							<div class="article-meta__item">
-								<span>hh</span>
+								<span>글번호 ${record.no}</span>
 							</div>
 						</div>
 					</div>
@@ -213,6 +213,10 @@
 			</div>
 		</div>
 		<!---->
+		<div class="row" id="comments">
+		<!-- 한줄 코멘트 목록-->
+		<!-- ajax로 코멘트 목록뿌리기 -->
+		</div>
 		<!---->
 	</div>
 </div>

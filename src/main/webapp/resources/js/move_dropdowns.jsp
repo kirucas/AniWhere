@@ -7,9 +7,6 @@
 		$("#market_main").click(function(){
 			location.href = "<c:url value='/market/main.aw'/>";
 		});
-		$("#miss_main").click(function(){
-			location.replace("<c:url value='/miss/miss_main.aw' />");
-		});
 		$("#mating_main").click(function(){
 			location.href = "<c:url value='/mating/main.aw' />";
 		});
