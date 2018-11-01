@@ -85,6 +85,7 @@ public class BirdPhotoController {
 			map.put("no", dto.getNo()); // no를 뽑아서
 			System.out.println(map.get("no"));
 			List<Map> linkList=service.linkSelectList(map); // 해당 no의 사진 리스트를 받고
+			dto.setTotalImgCount(linkList.size()-1);
 			for(Map temp:linkList) {
 				System.out.println(temp);
 				Set<String> set=temp.keySet();
@@ -93,6 +94,7 @@ public class BirdPhotoController {
 					System.out.println("key:"+key+", value:"+temp.get(key));
 				}/// for
 			}/// for
+			
 			photoList.add(linkList); // 담는다
 		}/// for
 		model.addAttribute("photoList", photoList);

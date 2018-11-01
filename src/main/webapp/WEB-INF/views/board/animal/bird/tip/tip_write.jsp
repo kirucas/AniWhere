@@ -61,7 +61,7 @@
 		</h2>
 	</div>
 	<div style="width:100%">
-		<form method="post" action="<c:url value='/animal/bird/tip/write.aw'/>">
+		<form method="post" action="<c:url value='/security/animal/bird/tip/write.aw'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="mem_no" value="${mem_no}" />
                 <input type="hidden" name="ani_category" value="4"/>

@@ -80,12 +80,12 @@ public class CatTipController {
 		return "board/animal/cat/tip/tip_view.tiles";
 	}////////// tip_main
 	//등록 폼으로 이동 및 입력처리]
-	@RequestMapping(value="/animal/cat/tip/write.aw",method=RequestMethod.GET)
+	@RequestMapping(value="/security/animal/cat/tip/write.aw",method=RequestMethod.GET)
 	public String write() throws Exception{
 		return "board/animal/cat/tip/tip_write.tiles";
 	}////////////////
 	//입력처리]
-	@RequestMapping(value="/animal/cat/tip/write.aw",method=RequestMethod.POST)
+	@RequestMapping(value="/security/animal/cat/tip/write.aw",method=RequestMethod.POST)
 	public String writeOk(@RequestParam Map map,HttpSession session //,org.springframework.security.core.Authentication auth 아직 적용 안함
 		) throws Exception{
 		
@@ -97,7 +97,7 @@ public class CatTipController {
 	}////////////////
 
 	//수정폼으로 이동 및 수정 처리]
-	@RequestMapping("/board/animal/cat/tip/edit.aw")
+	@RequestMapping("/security/board/animal/cat/tip/edit.aw")
 	public String edit(HttpServletRequest req,@RequestParam Map map,Model model) throws Exception{
 		if(req.getMethod().equals("GET")) {
 			//서비스 호출]

@@ -128,7 +128,7 @@
 							<!-- 글에 대한 버튼들(자기가 쓴 글이면 수정과 삭제 가능) -->
 							<!-- a href="<c:url value='/ReplyBBS/BBS/Reply.bbs?no=${record.no}'/>" class="btn btn-success">답변</a> -->
 							<c:if test="${sessionScope.mem_no==record.mem_no }">
-								<a href="<c:url value='/board/animal/bird/tip/edit.aw?no=${record.no}'/>" class="article-action__button button">수정</a>
+								<a href="<c:url value='/security/board/animal/bird/tip/edit.aw?no=${record.no}'/>" class="article-action__button button">수정</a>
 								<a href="javascript:isDelete()" class="article-action__button button button--red button--red--border">삭제</a>
 							</c:if>
 							<a href="<c:url value='/board/animal/bird/tip/list.aw'/>" class="article-action__button button">목록</a>	

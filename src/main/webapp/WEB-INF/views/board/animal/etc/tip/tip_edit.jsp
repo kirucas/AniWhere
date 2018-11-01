@@ -66,7 +66,7 @@ $(function() {
 		</h2>
 	</div>
 	<div style="width:100%">
-		<form method="post" action="<c:url value='/board/animal/etc/tip/edit.aw'/>">
+		<form method="post" action="<c:url value='/security/board/animal/etc/tip/edit.aw'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="no" value="${param.no}" />
 				<input type="hidden" name="mem_no" value="${mem_no}" />
