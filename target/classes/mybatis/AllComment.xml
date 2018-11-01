@@ -8,7 +8,7 @@
 	<select id="commentSelectList" parameterType="java.util.Map" resultType="CommentDTO">
 		SELECT tn.*, mem_nickname
 		FROM ${table_name}_cmt tn JOIN member mb ON tn.mem_no = mb.mem_no
-		WHERE origin_no = #{origin_no}
+		WHERE origin_no = #{no}
 		ORDER BY cmt_no
 	</select>
 	
@@ -33,7 +33,7 @@
 		WHERE origin_no=#{no}
 	</delete>
 	
-	<select id="commentCount" parameterType="java.util.Map">
+	<select id="commentCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM ${table_name}_cmt
 		WHERE origin_no=#{no}
