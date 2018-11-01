@@ -22,6 +22,7 @@ DROP TABLE animal_category CASCADE CONSTRAINTS;
 DROP TABLE freeboard_cmt CASCADE CONSTRAINTS;
 DROP TABLE freeboard CASCADE CONSTRAINTS;
 DROP TABLE lost_animal CASCADE CONSTRAINTS;
+DROP TABLE member_security CASCADE CONSTRAINTS;
 DROP TABLE movie_cmt CASCADE CONSTRAINTS;
 DROP TABLE movie CASCADE CONSTRAINTS;
 DROP TABLE photo_cmt CASCADE CONSTRAINTS;
@@ -229,14 +230,22 @@ CREATE TABLE mating
 CREATE TABLE member
 (
 	mem_no number NOT NULL,
-	mem_id varchar2(30) NOT NULL,
-	mem_pw varchar2(20) NOT NULL,
+	mem_id varchar2(30) NOT NULL UNIQUE,
+	mem_pw varchar2(80) NOT NULL,
 	mem_name nvarchar2(20) NOT NULL,
 	mem_nickname nvarchar2(40) NOT NULL UNIQUE,
 	mem_gender varchar2(1) NOT NULL CHECK (mem_gender IN ('F', 'M', 'U')),
 	mem_log number NOT NULL,
 	mem_interani varchar2(6) NOT NULL,
 	PRIMARY KEY (mem_no)
+);
+
+
+CREATE TABLE member_security
+(
+	mem_no number NOT NULL,
+	enabled number(1) DEFAULT 1,
+	authority varchar2(20) DEFAULT 'user'
 );
 
 
@@ -249,6 +258,7 @@ CREATE TABLE miss_find
 	content nvarchar2(2000) NOT NULL,
 	regidate date DEFAULT sysdate,
 	count number DEFAULT 0,
+	addr nvarchar2(20),
 	PRIMARY KEY (no)
 );
 
@@ -262,6 +272,7 @@ CREATE TABLE miss_see
 	content nvarchar2(2000) NOT NULL,
 	regidate date DEFAULT sysdate,
 	count number DEFAULT 0,
+	addr nvarchar2(20),
 	PRIMARY KEY (no)
 );
 
@@ -428,19 +439,19 @@ CREATE TABLE store_category
 
 CREATE TABLE store_location
 (
-	bizesId number NOT NULL,
-	bizesNm nvarchar2(150) NOT NULL,
-	brchNm nvarchar2(70),
-	indsSclsCd varchar2(10) NOT NULL,
-	indsSclsNm nvarchar2(50) NOT NULL,
-	lnoAdr nvarchar2(150) NOT NULL,
-	rdnmAdr nvarchar2(150) NOT NULL,
+	bizesid number NOT NULL,
+	bizesnm nvarchar2(150) NOT NULL,
+	brchnm nvarchar2(70),
+	indssclscd varchar2(10) NOT NULL,
+	indssclsnm nvarchar2(50) NOT NULL,
+	lnoadr nvarchar2(150) NOT NULL,
+	rdnmadr nvarchar2(150) NOT NULL,
 	lon number NOT NULL,
 	lat number NOT NULL,
-	dongNo nvarchar2(20),
-	flrNo nvarchar2(20),
-	hoNo nvarchar2(20),
-	PRIMARY KEY (bizesId)
+	dongno nvarchar2(20),
+	flrno nvarchar2(20),
+	hono nvarchar2(20),
+	PRIMARY KEY (bizesid)
 );
 
 
@@ -642,6 +653,13 @@ ALTER TABLE market_sell
 ;
 
 
+ALTER TABLE member_security
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+	ON DELETE CASCADE
+;
+
+
 ALTER TABLE miss_find
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
@@ -784,7 +802,7 @@ ALTER TABLE quest_cmt
 
 ALTER TABLE reservation
 	ADD FOREIGN KEY (store_no)
-	REFERENCES store_location (bizesId)
+	REFERENCES store_location (bizesid)
 	ON DELETE CASCADE
 ;
 
