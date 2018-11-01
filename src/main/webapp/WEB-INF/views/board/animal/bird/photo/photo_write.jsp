@@ -137,7 +137,7 @@
 		var formData=new FormData($("form")[0]);
 		formData.append("files",data);
 		$.ajax({
-			url : "<c:url value='/bird/photo/write.aw'/>",
+			url : "<c:url value='/security/bird/photo/write.aw'/>",
 			processData : false,
 			contentType : false,
 			data : formData,
