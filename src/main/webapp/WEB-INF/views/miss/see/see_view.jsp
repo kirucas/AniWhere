@@ -35,7 +35,6 @@
       console.log(JSON.stringify(data));
     
       var commentString = '<h2 data-v-f39b78c2="" class="comment__title" style="margin-left: 15px;margin-bottom: 15px;">댓글 목록</h2>&nbsp';
-      commentString+='<span data-v-f39b78c2="" class="comment__count" style="margin-top:3px;">총 <em data-v-f39b78c2="">2</em>개</span>';
       commentString+='<table class="table table-bordered" style="width: 95%; margin-left: 25px">';
       commentString+='<tr><th width="15%">작성자</th><th width="50%">내용</th><th width="20%">등록일</th><th>삭제</th></tr>'
       	if(data.length==0){

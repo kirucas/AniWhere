@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
+
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import com.animal.aniwhere.service.AllBoardService;
+
 import com.animal.aniwhere.service.AllCommentDTO;
-import com.animal.aniwhere.service.AllCommonService;
-import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.miss.FindSeeServiceImpl;
@@ -100,9 +99,23 @@ public class MissMainController {
 		
 		List<FindSeeDTO> list = (List<FindSeeDTO>) service.selectList(map);
 		
+		List<Map> collect = new Vector<>();
+		
+		for(FindSeeDTO dto : list) {
+			Map record = new HashMap();
+			record.put("dto", dto);
+			Map temp = new HashMap();
+			temp.put("table_name","see");
+			temp.put("no", dto.getNo());
+			record.put("cmtCount", cmtService.commentCount(temp));
+			
+			collect.add(record);
+		}
+		
 		String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount,pageSize,blockPage,nowPage,req.getContextPath()+"/miss/see.aw?");
 		
-		model.addAttribute("see_list", list);
+//		model.addAttribute("see_list", list);
+		model.addAttribute("see_list", collect);
 		
 		model.addAttribute("pagingString", pagingString);		
 		model.addAttribute("totalRecordCount", totalRecordCount);
@@ -239,9 +252,23 @@ public class MissMainController {
 			
 			List<FindSeeDTO> list = (List<FindSeeDTO>) service.selectList(map);
 			
+			List<Map> collect = new Vector<>();
+			
+			for(FindSeeDTO dto : list) {
+				Map record = new HashMap();
+				record.put("dto", dto);
+				Map temp = new HashMap();
+				temp.put("table_name","see");
+				temp.put("no", dto.getNo());
+				record.put("cmtCount", cmtService.commentCount(temp));
+				
+				collect.add(record);
+			}
+			
 			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount,pageSize,blockPage,nowPage,req.getContextPath()+"/miss/find.aw?");
 			
-			model.addAttribute("find_list", list);
+			//model.addAttribute("find_list", list);
+			model.addAttribute("find_list", collect);
 			
 			model.addAttribute("pagingString", pagingString);		
 			model.addAttribute("totalRecordCount", totalRecordCount);

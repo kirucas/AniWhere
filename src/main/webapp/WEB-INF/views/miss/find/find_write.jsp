@@ -114,8 +114,8 @@
                         <option value="1">고양이</option>
                          <option value="2">강아지</option>
                          <option value="3">조류</option>
-                         <option value="4">파충류</option>
-                         <option value="5">양서류</option>
+                         <option value="4">파충류&양서류</option>
+                         <option value="5">기타 포유류</option>
                   	</select>
 				<div class="form-row" style="width:87.5%;"id="titlediv">
 					<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요">

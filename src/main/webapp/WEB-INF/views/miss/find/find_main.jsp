@@ -58,41 +58,41 @@
 				<div class="article-list-item__content">
 					<span id="animal_code">
 						<c:choose>
-							<c:when test="${record.animal_code eq '1'}">
-								<span>[고양이]</span>
-							</c:when>
-							<c:when test="${record.animal_code eq '2'}">
-								<span>[강아지]</span>		
-							</c:when>
-							<c:when test="${record.animal_code eq '3'}">
-								<span>[조류]</span>
-							</c:when>
-							<c:when test="${record.animal_code eq '4'}">
-								<span>[파충류]</span>
-							</c:when>
-							<c:otherwise>
-								<span>[양서류]</span>
-							</c:otherwise>
-						</c:choose>
-						<span>[${record.addr}]</span>
+								<c:when test="${record.dto.animal_code eq '1'}">
+									<span>[고양이]</span>
+								</c:when>
+								<c:when test="${record.dto.animal_code eq '2'}">
+									<span>[강아지]</span>		
+								</c:when>
+								<c:when test="${record.dto.animal_code eq '3'}">
+									<span>[조류]</span>
+								</c:when>
+								<c:when test="${record.dto.animal_code eq '4'}">
+									<span>[파충류 & 양서류]</span>
+								</c:when>
+								<c:otherwise>
+									<span>[기타 포유류]</span>
+								</c:otherwise>
+							</c:choose>
+						<span>[${record.dto.addr}]</span>
 					</span>
 					
 					
-					<a href="<c:url value='/miss/find_view.aw?find_no=${record.no}'/>"	class="article-list-item__info">
+					<a href="<c:url value='/miss/find_view.aw?find_no=${record.dto.no}'/>"	class="article-list-item__info">
 						<div class="article-list-item__title">
 						
-							<span id="title">${record.title }</span> <em>[21]</em>
+							<span id="title">${record.dto.title }</span> <em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em>
 						</div>
 					</a>
 					<div class="article-list-item-meta">
 						<div class="article-list-item-meta__item">
-							<span data-tooltip data-date="2018-09-27T05:45:00+00:00" title="">${record.regidate }</span>
+							<span data-tooltip data-date="2018-09-27T05:45:00+00:00" title="">${record.dto.regidate }</span>
 						</div>
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
-							<a href="#" id="mem_no">${record.mem_nickname}</a>
+							<a href="#" id="mem_no">${record.dto.mem_nickname}</a>
 						</div>
 						<div class="article-list-item-meta__item">
-							조회수 <span id="count">${record.count}</span>
+							조회수 <span id="count">${record.dto.count}</span>
 						</div>
 					</div>
 				</div>
