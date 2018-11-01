@@ -24,7 +24,7 @@
          $.ajax({
             data: form_data,
             type: "POST",
-            url : "<c:url value='/animal/freeboard/Upload.aw'/>",
+            url : "<c:url value='/miss/see_upload/Upload.aw'/>",
             cache: false,
             contentType: false,
             processData: false,
@@ -55,10 +55,12 @@
 <div class="container">
 	<div class="page-header">
 		<h2>
+		
 			봤어요
 		</h2>
 	</div>
 	<div style="width:100%">
+	
 		<form method="post" action="<c:url value='/miss/see_update.aw?see_no=${record.no}'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="table_name" value="see">

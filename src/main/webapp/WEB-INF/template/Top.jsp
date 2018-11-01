@@ -132,13 +132,13 @@ nav a{
                         <li class="dropdown">
                             <a class="dropdown-toggle" href="/aniwhere/market/main.aw" id="market_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">장터</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a href="/aniwhere/market/sell.aw">팔아요</a></li>
                                 <li><a href="/aniwhere/market/buy.aw">사요</a></li>
+                                <li><a href="/aniwhere/market/sell.aw">팔아요</a></li>                              
                                 <li><a href="/aniwhere/market/groupbuy.aw">같이 싸게 사요</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="<c:url value='/miss/miss_main.aw'/>" id="miss_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">유기동물</a>
+                            <a class="dropdown-toggle" href="#" id="miss_main" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">유기동물</a>
                             <ul class="dropdown-menu" aria-labelledby="miss_main">
                                 <li><a href="<c:url value='/miss/see.aw'/>">봤어요</a></li>
                                 <li><a href="<c:url value='/miss/find.aw'/>">찾아요</a></li>
