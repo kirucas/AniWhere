@@ -33,31 +33,31 @@ import com.animal.aniwhere.service.miss.FindSeeDTO;
 import com.animal.aniwhere.service.miss.LostAnimalDTO;
 import com.animal.aniwhere.web.board.FileUpDownUtils;
 
-
 @Controller
 public class MissMainController {
-	
-	@Resource(name="findSeeService")
-    private FindSeeServiceImpl service;
-	
-	//보호소 컨트롤러
-	@Resource(name="lostAniService")
+
+	@Resource(name = "findSeeService")
+	private FindSeeServiceImpl service;
+
+	// 보호소 컨트롤러
+	@Resource(name = "lostAniService")
 	private LostAnimalServiceImpl lostservice;
-	
+
 	@Value("${PAGESIZE}")
 	private int pageSize;
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
 	
 	//see or find 메인으로 이동
+
 	@RequestMapping("/miss/{path}")
 	public String move_board(@PathVariable String path) throws Exception {
 		return "miss/" + path + "/" + path + "_main.tiles";
 	}////////// move_board/miss/find.aw
-	
-	//_main -> _write로 이동
+
+	// _main -> _write로 이동
 	@RequestMapping("/miss/{path}_write.aw")
-	public String miss_write(@PathVariable String path) throws Exception {		
+	public String miss_write(@PathVariable String path) throws Exception {
 		return "miss/" + path + "/" + path + "_write.tiles";
 	}////////// miss_write
 	
@@ -67,12 +67,13 @@ public class MissMainController {
 	@RequestMapping("/security/miss/see_insert.aw")
 	public String miss_insert(@RequestParam Map map,HttpSession session) throws Exception {
 		
+
 		map.put("mem_no", session.getAttribute("mem_no"));
 		service.insert(map);
 		return "forward:/miss/see.aw";
 	}////////// miss_write
-	
-	//리스트로 이동
+
+	// 리스트로 이동
 	@RequestMapping("/miss/see.aw")
 	public String see_list(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req,@RequestParam(required=false,defaultValue="1") int nowPage) throws Exception {
 		
@@ -134,26 +135,26 @@ public class MissMainController {
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("pageSize", pageSize);
-				
+
 		return "miss/see/see_main.tiles";
 	}////////// miss_write
-	
-	
-	//상세보기
+
+	// 상세보기
 	@RequestMapping("/miss/see_view.aw")
-	public String see_view(@RequestParam Map map,Model model,HttpSession session) throws Exception {	
-		
-		map.put("mem_no",session.getAttribute("mem_no"));
-		map.put("table_name","see");
+	public String see_view(@RequestParam Map map, Model model, HttpSession session) throws Exception {
+
+		map.put("mem_no", session.getAttribute("mem_no"));
+		map.put("table_name", "see");
 		map.put("no", map.get("see_no"));
 		
 		//게시글		
+
 		FindSeeDTO record = service.selectOne(map);
-		//데이터 저장]
+		// 데이터 저장]
 		model.addAttribute("record", record);
-		//줄바꿈처리
+		// 줄바꿈처리
 		record.setContent(record.getContent().replace("\r\n", "<br/>"));
-		
+
 		record.setCount(record.getCount());
 		
 		//뷰정보 반환]
@@ -167,14 +168,14 @@ public class MissMainController {
 		map.put("mem_no",session.getAttribute("mem_no"));
 		map.put("table_name","see");
 		map.put("no", map.get("see_no"));
-		
-		//게시글
+
+		// 게시글
 		FindSeeDTO record = service.selectOne(map);
-		//데이터 저장]
+		// 데이터 저장]
 		model.addAttribute("record", record);
-		//줄바꿈처리
+		// 줄바꿈처리
 		record.setContent(record.getContent().replace("\r\n", "<br/>"));
-		
+
 		return "miss/see/see_edit.tiles";
 	}////////// miss_write
 	
@@ -187,30 +188,26 @@ public class MissMainController {
 		map.put("no",map.get("see_no"));
 		
 		/*
-		Set<String> set = map.keySet();
-		for(String key:set) {
-			System.out.println(key+":"+map.get(key));
-		}
-	    */
-		//게시글
+		 * Set<String> set = map.keySet(); for(String key:set) {
+		 * System.out.println(key+":"+map.get(key)); }
+		 */
+		// 게시글
 		service.update(map);
-					
 		return "forward:/miss/see_view.aw";
 	}////////// miss_write
-	
-	//삭제
+
+	// 삭제
 	@RequestMapping("/miss/see_delete.aw")
-	public String miss_delete(@RequestParam Map map,HttpSession session,Model model) throws Exception {
-			
-		map.put("mem_no",session.getAttribute("mem_no"));
-		map.put("table_name","see");
-		map.put("no",map.get("see_no"));
-			
+	public String miss_delete(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+
+		map.put("mem_no", session.getAttribute("mem_no"));
+		map.put("table_name", "see");
+		map.put("no", map.get("see_no"));
+
 		service.delete(map);
-						
+
 		return "forward:/miss/see.aw";
 	}////////// miss_write
-	
 	@ResponseBody
     @RequestMapping(value="/miss/see_upload/Upload.aw")
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
@@ -454,17 +451,16 @@ public class MissMainController {
 		map.put("mem_no", session.getAttribute("mem_no"));
 		map.put("table_name", "see");
 		map.put("no", map.get("no"));
-		
+
 		cmtService.insert(map);
-		
+
 		return map.get("no").toString();
-		
+
 	}///////////////////
-	
+
 	@ResponseBody
 	@RequestMapping(value="/miss/see/cmt_list.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 	public String list(@RequestParam Map map,HttpSession model) throws Exception{
-		
 		map.put("table_name", "see");
 		map.put("origin_no", map.get("no"));
 		
@@ -485,14 +481,12 @@ public class MissMainController {
 	         
 	         comments.add(record);
 	      }		
-		
 		return JSONArray.toJSONString(comments);
 	}//////////////////
-	
+
 	@ResponseBody
 	@RequestMapping(value="/miss/see/cmt_edit.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 	public String update(@RequestParam Map map,HttpSession session) throws Exception{
-		
 		map.put("table_name", "see");
 		map.put("cmt_content", map.get("cmt_content"));
 		map.put("cmt_no", session.getAttribute("cmt_no"));
@@ -501,12 +495,11 @@ public class MissMainController {
 		for(String key:set) {
 			System.out.println(key+":"+map.get(key));
 		}
-		
 		cmtService.update(map);
-		
+
 		return map.get("no").toString();
 	}////////////
-	
+
 	@ResponseBody
 	@RequestMapping(value="/miss/see/cmt_delete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 	public String delete(@RequestParam Map map,HttpSession session) throws Exception{
@@ -515,12 +508,44 @@ public class MissMainController {
 		map.put("cmt_no", session.getAttribute("cmt_no"));
 		
 		cmtService.delete(map);
-		
+
 		return map.get("no").toString();
 	}
-	
-	
-	
+
+	// 안드로이드=======================================
+	@ResponseBody
+	@RequestMapping(value = "/miss/AndroidFindSeeList.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String find_list(@RequestParam Map map) throws Exception {
+		System.out.println("/miss/AndroidFindSeeList.awa");
+		if(map.get("kind").equals("찾아요")) {
+			map.put("table_name", "find");
+		}else {
+			map.put("table_name", "see");
+		}
+		
+		// 전체 레코드 수
+		int totalRecordCount = service.getTotalRecord(map);
+		map.put("start", 1);
+		map.put("end", totalRecordCount);
+		List<FindSeeDTO> lists = (List<FindSeeDTO>) service.selectList(map);
+		List<Map> collections = new Vector<Map>();
+
+		for (FindSeeDTO list : lists) {
+			Map record = new HashMap();
+			record.put("no", list.getNo());
+			record.put("mem_no", list.getMem_no());
+			record.put("title", list.getTitle());
+			record.put("content", list.getContent().replaceAll("<br/>", "\r\n"));
+			record.put("regidate", list.getRegidate() + "");
+			record.put("count", list.getCount());
+			record.put("animal_code", list.getAnimal_code());
+			record.put("mem_nickname", list.getMem_nickname());
+			record.put("animal_name", list.getAnimal_name());
+			collections.add(record);
+		}
+		System.out.println(JSONArray.toJSONString(collections));
+		return JSONArray.toJSONString(collections);
+	}//////////
 	
 	//find
 		
@@ -597,8 +622,4 @@ public class MissMainController {
 			
 			return map.get("no").toString();
 		}
-	
 }//////////////////// MissMainController class
-
-
-

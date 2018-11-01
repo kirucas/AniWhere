@@ -326,21 +326,35 @@ public class MemberController {
 		return "member/enroll_process";
 	}////////// enrollProcess
 
-	// 네이버 로그인 url 반환
-	@RequestMapping("/Member/Login.bbs")
-	public String login(Model model, HttpSession session) throws Exception {
-
-		return "common/member/Login.tiles";
-	}
-
-	// 안드로이드 용
-	@ResponseBody
-	@RequestMapping(value = "/android.aw", method = RequestMethod.POST)
-	public String androidLogin(@RequestParam Map map) throws Exception {
-		if (!service.isMember(map)) {
-			return "false";
-		}
-		MemberDTO dto = service.selectOne(map);
-		return dto.getMem_id();
-	}//////////////// androidLogin
+	//안드로이드 용
+    @ResponseBody
+    @RequestMapping(value="/android.awa", method = RequestMethod.POST)
+    public String androidLogin(@RequestParam Map map,HttpSession session) throws Exception{
+       if(!service.isMember(map)) {
+          return "false";
+       }      
+       MemberDTO dto = service.selectOne(map);
+       return dto.getMem_id()+","+dto.getMem_no();       
+    }
+    
+    //안드로이드 googleLogin
+    @ResponseBody
+    @RequestMapping(value = "/androidsignUpProcess.awa", method = RequestMethod.POST)
+    public String androidSignUp(@RequestParam Map map) throws Exception{
+       if(service.isMember(map)) {
+          System.out.println("isMember===========");
+          MemberDTO dto = service.selectOne(map);            
+           return dto.getMem_id()+","+dto.getMem_no();
+      }
+       
+       map.put("mem_log",Integer.parseInt(map.get("mem_log").toString()));      
+       int signup = service.insert(map);
+       
+       if(signup==1) {
+          MemberDTO dto = service.selectOne(map);            
+           return dto.getMem_id()+","+dto.getMem_no();
+       }else {
+           return "false";
+        }        
+    }
 }//////////////////// MemberController class

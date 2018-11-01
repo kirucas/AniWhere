@@ -36,7 +36,7 @@ public class WhereController {
 	  public String whole(Model model,@RequestParam Map map,HttpServletResponse response) throws Exception{
 		  List<StoreLocationDTO> lists = storelocservice.selectList(map);
 	      List<Map> collections = new Vector<Map>();
-
+    
 		  for(StoreLocationDTO list:lists) {
 		         Map record = new HashMap();
 		         record.put("bizesId", list.getBizesId());
@@ -115,7 +115,6 @@ public class WhereController {
 //		  	}
 //			return jsonObj.toJSONString();
 //	  }//////////////mapdata
-	  
 
 	  
 	  //임의의 메소드 (사용하지ㅏㄶ음)
@@ -145,12 +144,10 @@ public class WhereController {
 //			return result;
 //	  }//////////////
 	  
+	  //안드로이드용 where
 	  @ResponseBody
 	  @RequestMapping(value= "/android.awa", method= RequestMethod.POST)
 	  public String android() throws Exception{
-		  
-		  
-		  
 		  
 		  return null;
 	  }
