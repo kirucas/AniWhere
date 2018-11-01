@@ -20,7 +20,7 @@ import com.animal.aniwhere.service.impl.animal.MovieBoardServiceImpl;
 @Controller
 public class CatMovieController {
 
-
+	private static final int CAT = 2;
 	private static final int PAGESIZE = 12;
 
 	// 서비스 주입]
@@ -37,7 +37,7 @@ public class CatMovieController {
 			@RequestParam(required = false, defaultValue = "1") int nowPage, // 페이징용 nowPage파라미터 받기용
 			Model model, HttpServletRequest req// 페이징용 메소드에 전달
 	) throws Exception {
-		map.put("ani_category", 2);
+		map.put("ani_category", CAT);
 		// 서비스 호출]
 		// 페이징을 위한 로직 시작]
 		// 전체 레코드 수
@@ -87,13 +87,13 @@ public class CatMovieController {
 	}//////////////// list()
 
 	// 등록 폼으로 이동]
-	@RequestMapping(value = "/animal/cat/movie/Write.aw", method = RequestMethod.GET)
+	@RequestMapping(value = "/security/animal/cat/movie/Write.aw", method = RequestMethod.GET)
 	public String movie_write() throws Exception {
 		return "board/animal/cat/movie/movieWrite_form.tiles";
 	}///////////////////////////
 
 	// 입력처리용]
-	@RequestMapping(value = "/animal/cat/movie/Write.aw", method = RequestMethod.POST)
+	@RequestMapping(value = "/security/animal/cat/movie/Write.aw", method = RequestMethod.POST)
 	public String write(@RequestParam Map map) throws Exception {
 		
 		// 서비스 호출
@@ -119,7 +119,7 @@ public class CatMovieController {
 	}/////////////////////
 
 	//수정폼으로 이동 및 수정 처리]
-		@RequestMapping("/cat/movie/edit.aw")
+		@RequestMapping("/security/animal/cat/movie/edit.aw")
 		public String movie_edit(Model model, @RequestParam Map map, HttpServletRequest req) throws Exception{
 			System.out.println("post방식 : " + req.getMethod().equals("POST"));
 			if(!req.getMethod().equals("POST")) {

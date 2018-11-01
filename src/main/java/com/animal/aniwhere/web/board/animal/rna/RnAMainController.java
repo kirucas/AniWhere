@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class RnAMainController {
 
-	@RequestMapping("/animal/rna/main.aw")
+	@RequestMapping("/animal/rNa/main.aw")
 	public String rna_main() throws Exception {
 		return "board/animal/rNa/rNa_main.tiles";
 	}////////// rna_main
 
-	@RequestMapping(value = "/animal/rna/{path}", method = RequestMethod.GET)
+	@RequestMapping(value = "/animal/rNa/{path}")
 	public String move_board(@PathVariable String path) throws Exception {
 		return "board/animal/rNa/" + path + "/" + path + "_list.tiles";
 	}////////// move_board

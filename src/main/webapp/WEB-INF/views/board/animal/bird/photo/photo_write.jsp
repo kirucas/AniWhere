@@ -15,6 +15,9 @@
    #files{
       opacity: 0;
    }
+   #btnupload{
+   		width: auto;
+   }
 </style>
 
 <!-- 내용 시작 -->
@@ -40,19 +43,20 @@
 					<textarea rows="10" placeholder="내용을 입력해주세요" id="photo_content" name="photo_content" class="form-control" style="height: 300px;"></textarea>
 				</div>
 			</div>
-			<div class="row">
-				<div class="form-group"">
-					<a href="javascript:" onclick="fileUploadAction();"	class="btn btn-primary">사진 업로드</a> 
-					<a href="javascript:" id="imgdelete" class="btn btn-danger">되돌리기</a> 
-					<input id="files" type="file" multiple name="files" style="display:none;"/>
-				</div>
-				<div style="float:right;">
-					<input id="uploadButton" type="button" class="btn btn-primary" value="등록"/>
-<!-- 					<a href="#" class="btn btn-primary">등록</a> -->
+			<div class="container">
+				<div class="row">
+					<div class="form-group" style="width: 100%;">
+						<a href="javascript:" onclick="fileUploadAction();"	class="btn btn-primary">사진 업로드</a> 
+						<a href="javascript:" id="imgdelete" class="btn btn-danger">삶을 되돌아보기</a> 
+						<input id="files" type="file" multiple name="files" style="display:none;"/>
+						<input id="uploadButton" type="button" class="btn btn-primary" value="등록" style="float: right;"/>
+	<!-- 					<a href="#" class="btn btn-primary">등록</a> -->
+					</div>
 				</div>
 			</div>
 			<div id="result">
-				<!-- 사진 업로드 결과가 나오는 div 인듯 -->			
+				<!-- 사진 업로드 결과가 나오는 div 인듯 -->		
+				<!-- 그렇다 -->	
 			</div>
 		</form>
 		<!-- 입력 폼 종료 -->
@@ -137,7 +141,7 @@
 		var formData=new FormData($("form")[0]);
 		formData.append("files",data);
 		$.ajax({
-			url : "<c:url value='/bird/photo/write.aw'/>",
+			url : "<c:url value='/security/bird/photo/write.aw'/>",
 			processData : false,
 			contentType : false,
 			data : formData,

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
-<%@ include file="/WEB-INF/views/common/loading.jsp" %>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
 #no{
@@ -92,7 +91,7 @@
 								<span>[시사]</span>
 							</c:otherwise>
 						</c:choose>
-					<a href="<c:url value='/animal/freeboard_view.aw?no=${record.no}'/>" class="article-list-item__info">
+					<a href="<c:url value='/security/animal/freeboard_view.aw?no=${record.no}'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
 							<span id="free_title">${record.free_title}</span> <em>[21]</em>
 						</div>

@@ -185,7 +185,7 @@
 		          				<img src="<c:url value='/resources/images/icon/videoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;동영상 게시판</a>
 		          			</li>
 		          			<li>
-		          				<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>">
+		          				<a href="<c:url value='/security/animal/dog/quest/quest_list.aw'/>">
 		          				<img src="<c:url value='/resources/images/icon/questicon.jpg'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 게시판</a>
 		          			</li>
 		          			<li>

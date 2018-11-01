@@ -19,7 +19,7 @@
 	
 	<update id="commentUpdate" parameterType="java.util.Map">
 		UPDATE ${table_name}_cmt
-		SET cmt_content=#{cmt_content}_cmt
+		SET cmt_content=#{cmt_content}
 		WHERE cmt_no=#{cmt_no}
 	</update>
 	
@@ -33,7 +33,7 @@
 		WHERE origin_no=#{no}
 	</delete>
 	
-	<select id="commentCount" parameterType="java.util.Map">
+	<select id="commentCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM ${table_name}_cmt
 		WHERE origin_no=#{no}

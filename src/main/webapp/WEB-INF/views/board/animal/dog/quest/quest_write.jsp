@@ -39,7 +39,7 @@
 	           contentType: false,
 	           processData: false,
 	           success: function(url) {
-	                $('#quest_content').summernote('insertImage', "<c:url value='/"+url+"' />");
+	                $('#quest_content').summernote('insertImage', "<c:url value='"+url+"' />");
 	           },
 	           error : function() {
 	              console.log("error");
@@ -53,7 +53,7 @@
 		<h2>강아지 질문 게시판</h2>
 	</div>
 	<form class="form-horizontal" method="post"
-		action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
+		action='<c:url value="/security/animal/dog/quest/quest_write.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-sm-2 control-label" style="font-size:20px">제목</label>
 			<input maxlength="50" class="form-control" type="text" name="quest_title" id="quest_title" autofocus="autofocus" placeholder="제목을 입력해주세요" />

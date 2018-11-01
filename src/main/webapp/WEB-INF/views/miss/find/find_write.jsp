@@ -31,7 +31,7 @@
             contentType: false,
             processData: false,
             success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
+                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
             },
             error : function() {
                console.log("error");
@@ -105,19 +105,19 @@
 		</h2>
 	</div>
 	<div style="width:100%">
-		<form method="post" action="<c:url value='/miss/find_insert.aw'/>">
+		<form method="post" action="<c:url value='/security/miss/find_insert.aw'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="table_name" value="find"/>
 				<input type="hidden" name="mem_no" value="#" />
 				
-                 	<select name="animal_code" style="width:53px;height:38px;margin-right:10px;">
+                 	<select name="animal_code" style="width:100px;height:38px;margin-right:10px;">
                         <option value="1">고양이</option>
                          <option value="2">강아지</option>
                          <option value="3">조류</option>
-                         <option value="4">파충류</option>
-                         <option value="5">양서류</option>
+                         <option value="4">파충류&양서류</option>
+                         <option value="5">기타 포유류</option>
                   	</select>
-				<div class="form-row" style="width:87.5%;"id="titlediv">
+				<div class="form-row" style="width:83%;"id="titlediv">
 					<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요">
 				</div>
 			</div>
@@ -127,19 +127,20 @@
   					<button type="button" value="button타입" class="orgBtn article-action__button button" id="lookup" style="margin-left: 15px">조회하기</button>
   				</div> 					
    			</div>
-   			<p style="color: orange; margin-top: 5px;font-size: 0.9em">※애완동물을 잃어버린 위치를 간략하게 입력해주세요</p>
+   			<p style="color: orange; margin-top: 5px;font-size: 0.9em">※애완동물을 잃어버린 위치를 시,군,구 단위로 간략하게 입력해주세요</p>
 			</br>
 			<div class="form-group form-row">
 				<div style="width:92.75%">
 					<textarea rows="10" class="form-control" id="summernote" name="content"></textarea>
 				</div>
 			</div>
-			<div class="form-group form-row">
+			<div class="form-group form-row" style="float: left;">
 				<div class="col-sm-offset-2">
-					<button type="submit" class="article-action__button button button--red button--red--border">등록</button>
+					<button type="submit" class="article-action__button button">등록</button>
 				</div>
 			</div>
 		</form>
+		<a href="<c:url value='/miss/find.aw'/>"><button class="article-action__button button button--red button--red--border" style="float: left; margin-left: 15px">취소</button></a>
 	</div>
 </div>
 <!-- 내용 끝 -->

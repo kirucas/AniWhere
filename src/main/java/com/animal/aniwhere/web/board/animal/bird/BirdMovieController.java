@@ -14,19 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.animal.aniwhere.service.AllCommentDTO;
 import com.animal.aniwhere.service.animal.MovieBoardDTO;
+import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.animal.MovieBoardServiceImpl;
 
 @Controller
 public class BirdMovieController {
 
+	private static final int BIRD = 4;
 	private static final int PAGESIZE = 12;
 
 	// 서비스 주입]
 	@Resource(name = "movieService")
-	private MovieBoardServiceImpl service;
-
+	private MovieBoardServiceImpl service; //동영상 서비스
+	
+	@Resource(name = "allCommentService")
+	private AllCommentServiceImpl cmtservice; //댓글 서비스
 	// 목록처리]
 	// 리소스파일(memo.properties)에서 읽어오기
 	@Value("${BLOCKPAGE}")
@@ -37,7 +42,7 @@ public class BirdMovieController {
 			@RequestParam(required = false, defaultValue = "1") int nowPage, // 페이징용 nowPage파라미터 받기용
 			Model model, HttpServletRequest req// 페이징용 메소드에 전달
 	) throws Exception {
-		map.put("ani_category", 4);
+		map.put("ani_category", BIRD);
 		// 서비스 호출]
 		// 페이징을 위한 로직 시작]
 		// 전체 레코드 수
@@ -87,13 +92,13 @@ public class BirdMovieController {
 	}//////////////// list()
 
 	// 등록 폼으로 이동]
-	@RequestMapping(value = "/animal/bird/movie/Write.aw", method = RequestMethod.GET)
+	@RequestMapping(value = "/security/animal/bird/movie/Write.aw", method = RequestMethod.GET)
 	public String movie_write() throws Exception {
 		return "board/animal/bird/movie/movieWrite_form.tiles";
 	}///////////////////////////
 
 	// 입력처리용]
-	@RequestMapping(value = "/animal/bird/movie/Write.aw", method = RequestMethod.POST)
+	@RequestMapping(value = "/security/animal/bird/movie/Write.aw", method = RequestMethod.POST)
 	public String write(@RequestParam Map map) throws Exception {
 		
 		// 서비스 호출
@@ -107,19 +112,33 @@ public class BirdMovieController {
 	public String movie_view(@RequestParam Map map, Model model) throws Exception {
 		// 게시글
 		MovieBoardDTO dto = service.selectOne(map);
+		
+		//맵에서 table_name 넣기
+		String movie = "movie";
+		
+		map.put("table_name", movie);
+		System.out.println("map :" +map); //map : {no=no, nowPage=1, table_name=movie}
+		// 댓글
+		
+		List<AllCommentDTO> cmtlist = cmtservice.selectList(map);
+		System.out.println("cmtlist :" +cmtlist);
 		// 유튜브 iframe소스를 가져와서 섬머노트와 같이 있는 내용과 분리하여 뿌리는 메소드
 		//(데이터 베이스 상에는 관련 컬럼이 없으므로)
 		setIframe(dto);
 		
 		// 데이타 저장]
 		model.addAttribute("dto", dto);
+		model.addAttribute("cmtlist", cmtlist);
+		
+		System.out.println("model :" +model);
+		
 		
 		// 뷰정보 반환]
 		return "board/animal/bird/movie/movie_view.tiles";
 	}/////////////////////
 
 	//수정폼으로 이동 및 수정 처리]
-		@RequestMapping("/bird/movie/edit.aw")
+		@RequestMapping("/security/animal/bird/movie/edit.aw")
 		public String movie_edit(Model model, @RequestParam Map map, HttpServletRequest req) throws Exception{
 			System.out.println("post방식 : " + req.getMethod().equals("POST"));
 			if(!req.getMethod().equals("POST")) {
@@ -145,7 +164,7 @@ public class BirdMovieController {
 			int successFail =service.delete(map);
 			model.addAttribute("successFail", successFail);
 			return "/board/animal/bird/movie/movieMessage";
-		}////////////////////////////////////////////////
+		}////////////////////////////////////////////////	
 		
 	// content안에 있는 유튜브 소스와 내용을 순서대로 분리하여
 	private void setIframe(MovieBoardDTO dto) {
