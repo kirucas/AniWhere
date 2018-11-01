@@ -67,17 +67,6 @@ public class QueCmtController {
 	}//////////////////
 	
 	@ResponseBody
-	@RequestMapping(value="/dog/quest/cmtEdit.awa",produces="text/html; charset=UTF-8")
-	public String update(@RequestParam Map map) throws Exception{
-		
-		map.put("table_name", "quest");
-		
-		allCommentService.update(map);
-		
-		return map.get("no").toString();
-	}////////////
-	
-	@ResponseBody
 	@RequestMapping(value="/dog/quest/cmtDelete.awa",produces="text/html; charset=UTF-8")
 	public String delete(@RequestParam Map map) throws Exception{
 		

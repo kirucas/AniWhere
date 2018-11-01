@@ -5,7 +5,6 @@
 <style>
 	@import url("https://use.fontawesome.com/releases/v5.4.2/css/all.css"); 
 </style>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
 <div class="container">
 	<div class="page-header">
 		<h2>

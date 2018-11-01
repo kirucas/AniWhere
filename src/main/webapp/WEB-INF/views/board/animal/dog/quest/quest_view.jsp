@@ -35,10 +35,9 @@
 			commentString+='</div>';
 		});		
 		commentString+='</div>';
-		
 		$('#comments').html(commentString);
 		
-		//코멘트 수정/삭제 처리
+		//댓글 삭제 처리
 		$('.commentDelete').click(function(){			
 			var cno_value = $(this).attr("title");
 			$.ajax({
@@ -60,8 +59,6 @@
 		$('#submit').click(function(){	
 			if($(this).val()=='등록')
 				var action="<c:url value='/dog/quest/cmtWrite.awa'/>";
-			//else
-				//var action="<c:url value='/dog/quest/cmtEdit.awa'/>";
 			$.ajax({
 				url:action,
 				data:$('#frm').serialize(),
@@ -151,16 +148,12 @@
 		<div class="col-sm-12">
 			<strong style="font-size: 3em">댓글</strong> 댓글 <span id="count"></span>개
 		</div>
-		<form name="frm" method="post">
+		<form id="frm" method="post">
 			<input type="hidden" name="cmt_no" />
-			<input type="hidden" name="no" value="${record.no}"/>
-			<div class="form-row">
-				<div class="form-group col-sm-11" style="padding-left: 20px">
-					<input class="form-control" id="cmt_content" name="cmt_content"  type="text" size="200" placeholder="댓글을 입력 하세요" />
-				</div>
-				<div class="form-group col-sm-1" style="padding-left: 15px">
-					<input type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
-				</div>
+			<input type="hidden" id="no" name="no" value="${record.no}"/>
+			<div class="form-row" style="width:100%">
+				<input style="margin-bottom:10px ;width:92%;margin-left: 20px" class="form-control" id="cmt_content" name="cmt_content"  type="text" size="200" placeholder="댓글을 입력 하세요" />
+				<input style="margin-bottom:10px ;margin-left:10px;width:5%" type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
 			</div>
 		</form>
 	</div>
