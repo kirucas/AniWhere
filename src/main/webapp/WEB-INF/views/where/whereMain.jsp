@@ -239,9 +239,7 @@
 			$('#all').click(function(){
 		        total();
 			});
-			
-			var cafe = $("#cafe").prop("title");
-			$('#cafe').click(function(){
+			function indssclscd(){
 		         $.ajax({
 		        	data : {indssclscd:cafe},
 		            type: "POST",
@@ -255,6 +253,26 @@
 		            		var marker = new daum.maps.Marker({
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
+		            		var content = '<div class="wrap">' + 
+	        			 	'<div class="info">' + 
+	        					'<div style="color:black;font-size:1.4em;">주소</div>' + 
+	        					'<div style="width:200px">' +          				
+	        						'<div style="width:100%;color:blue">'+value.address+'</div>' +          
+	        					'</div>' + 
+	        				'</div>' +    
+	        			  '</div>';
+			
+							// 마커에 표시할 인포윈도우를 생성합니다 
+						    var infowindow = new daum.maps.InfoWindow({
+						        content: content // 인포윈도우에 표시할 내용
+						    });
+							
+						    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+						    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+						    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+						    daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+						    daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+		            		
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
 		                    markers.push(marker);
 		            	});
@@ -265,118 +283,35 @@
 		               console.log("error");
 		            }
 		         });
+			};
+         	
+			var cafe = $("#cafe").prop("title");
+			$('#cafe').click(function(){
+				indssclscd();
 			});
 			
 			var hair = $("#hair").prop("title");
 			console.log(hair);
 			$('#hair').click(function(){
-		         $.ajax({
-		        	data : {indssclscd:hair},
-		            type: "POST",
-		            url : "<c:url value='/where/map/select.awa'/>",
-		            dataType : "json",
-		            success: function(jsonObj) {
-		            	clusterer.removeMarkers(markers);
-	            		markers=[];
-		            	$.each(jsonObj, function(index, value){
-		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-		            		var marker = new daum.maps.Marker({
-	                            position : new daum.maps.LatLng(value.lat, value.lon)
-	                        });
-		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
-		                    markers.push(marker);
-		            	});
-		            	// 클러스터러에 마커들을 추가합니다
-	            	    clusterer.addMarkers(markers);
-		            },
-		            error : function() {
-		               console.log("error");
-		            }
-		         });
+				indssclscd();
 			});
 			
 			var hospital = $("#hospital").prop("title");
 			console.log(hospital);
 			$('#hospital').click(function(){
-		         $.ajax({
-		        	data : {indssclscd:hospital},
-		            type: "POST",
-		            url : "<c:url value='/where/map/select.awa'/>",
-		            dataType : "json",
-		            success: function(jsonObj) {
-		            	clusterer.removeMarkers(markers);
-	            		markers=[];
-		            	$.each(jsonObj, function(index, value){
-		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-		            		var marker = new daum.maps.Marker({
-	                            position : new daum.maps.LatLng(value.lat, value.lon)
-	                        });
-		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
-		                    markers.push(marker);
-		            	});
-		            	// 클러스터러에 마커들을 추가합니다
-	            	    clusterer.addMarkers(markers);
-		            },
-		            error : function() {
-		               console.log("error");
-		            }
-		         });
+				indssclscd();
 			});
 			
 			var pharm = $("#pharm").prop("title");
 			console.log(pharm);
 			$('#pharm').click(function(){
-		         $.ajax({
-		        	data : {indssclscd:pharm},
-		            type: "POST",
-		            url : "<c:url value='/where/map/select.awa'/>",
-		            dataType : "json",
-		            success: function(jsonObj) {
-		            	clusterer.removeMarkers(markers);
-	            		markers=[];
-		            	$.each(jsonObj, function(index, value){
-		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-		            		var marker = new daum.maps.Marker({
-	                            position : new daum.maps.LatLng(value.lat, value.lon)
-	                        });
-		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
-		                    markers.push(marker);
-		            	});
-		            	// 클러스터러에 마커들을 추가합니다
-	            	    clusterer.addMarkers(markers);
-		            },
-		            error : function() {
-		               console.log("error");
-		            }
-		         });
+				indssclscd();
 			});
 			
 			var etc = $("#etc").prop("title");
 			console.log(etc);
 			$('#etc').click(function(){
-		         $.ajax({
-		        	data : {indssclscd:etc},
-		            type: "POST",
-		            url : "<c:url value='/where/map/select.awa'/>",
-		            dataType : "json",
-		            success: function(jsonObj) {
-		            	clusterer.removeMarkers(markers);
-	            		markers=[];
-		            	$.each(jsonObj, function(index, value){
-		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-		            		var marker = new daum.maps.Marker({
-	                            position : new daum.maps.LatLng(value.lat, value.lon)
-	                        });
-		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
-		                    markers.push(marker);
-		            	});
-		            	// 클러스터러에 마커들을 추가합니다
-	            	    clusterer.addMarkers(markers);
-		            },
-		            error : function() {
-		               console.log("error");
-		            }
-		         });
+				indssclscd();
 			});
          	
 // 			var strdata = $("#ip").prop("title");
@@ -500,32 +435,46 @@
 			var zoomControl = new daum.maps.ZoomControl();
 			map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 
-			function radius(lat1,lon1){
-				$.ajax({
-		        	data : {code:"D09A01/D09A02/D25A16/Q12A07/S04A03/S04A01/S04A02",'lat':lat1,'lon':lon1},
-		            type: "POST",
-		            dataType : "json",
-		            url : "<c:url value='/where/map/radius.awa'/>",
-		            success: function(jsonObj) {
-						var codes = ["D09A01","D09A02","D25A16","Q12A07","S04A03","S04A01","S04A02"];
-		            	$.each(jsonObj, function(code, co_val){
-		            		$.each(JSON.parse(co_val), function(tag, tag_val){
-		            			if(tag=='body'){
-		            				$.each(tag_val,function(key,val){
-					            		if(key=='items'){
-				            				$.each(val,function(k,v){
-				            					mapMaker(v.lat,v.lon);
-				            				});
-					            		}
-		            				});
-		            			}
-		            		});
-		            	});
-		            },
-		            error : function() {
-		               console.log("error");
-		            }
-		         });
-			};
+			// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+			function makeOverListener(map, marker, infowindow) {
+			    return function() {
+			        infowindow.open(map, marker);
+			    };
+			}
+			// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+			function makeOutListener(infowindow) {
+			    return function() {
+			        infowindow.close();
+			    };
+			}
+			
+			//반경 뽑아오는 소스
+// 			function radius(lat1,lon1){
+// 				$.ajax({
+// 		        	data : {code:"D09A01/D09A02/D25A16/Q12A07/S04A03/S04A01/S04A02",'lat':lat1,'lon':lon1},
+// 		            type: "POST",
+// 		            dataType : "json",
+// 		            url : "<c:url value='/where/map/radius.awa'/>",
+// 		            success: function(jsonObj) {
+// 						var codes = ["D09A01","D09A02","D25A16","Q12A07","S04A03","S04A01","S04A02"];
+// 		            	$.each(jsonObj, function(code, co_val){
+// 		            		$.each(JSON.parse(co_val), function(tag, tag_val){
+// 		            			if(tag=='body'){
+// 		            				$.each(tag_val,function(key,val){
+// 					            		if(key=='items'){
+// 				            				$.each(val,function(k,v){
+// 				            					mapMaker(v.lat,v.lon);
+// 				            				});
+// 					            		}
+// 		            				});
+// 		            			}
+// 		            		});
+// 		            	});
+// 		            },
+// 		            error : function() {
+// 		               console.log("error");
+// 		            }
+// 		         });
+// 			};
 		});
 </script>

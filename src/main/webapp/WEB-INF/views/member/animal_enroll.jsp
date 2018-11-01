@@ -88,9 +88,6 @@ input[type=date]:not(.browser-default):focus:not([readonly]){
 			        </div>
 			      </div>
 			      <div class="row">
-			      	<div class="col s4 offset-s4">
-		      			<span>애완동물 나이</span>
-	      			</div>
 			      	<div class="input-field col s4 offset-s4">
 			      		 <input id="ani_age" name="ani_age" type="text" class="validate">
 			          <label for="ani_age">애완동물 나이</label>

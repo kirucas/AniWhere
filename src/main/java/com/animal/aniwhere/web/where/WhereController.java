@@ -22,14 +22,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.StoreLocationDTO;
+import com.animal.aniwhere.service.impl.StoreLocationServiceImpl;
 
 @Controller
 public class WhereController {
 	 
 	@Resource(name="StoreLocService")
-	private AllCommonService storelocservice;
+	private StoreLocationServiceImpl storelocservice;
 	
 	  @RequestMapping("/where/main.aw")
 	  public String where_main() throws Exception {
@@ -40,7 +40,7 @@ public class WhereController {
 	  @RequestMapping(value= "/where/map/total.awa", method= RequestMethod.POST)
 	  @ResponseBody
 	  public String whole(Model model,@RequestParam Map map,HttpServletResponse response) throws Exception{
-		  List<StoreLocationDTO> lists = (List<StoreLocationDTO>) storelocservice.selectList(map);
+		  List<StoreLocationDTO> lists = storelocservice.selectList(map);
 	      List<Map> collections = new Vector<Map>();
 
 		  for(StoreLocationDTO list:lists) {
@@ -59,7 +59,6 @@ public class WhereController {
 		         record.put("hoNo", list.getHoNo());
 		         collections.add(record);
 		      }////for
-	      System.out.println(JSONArray.toJSONString(collections));
 		  return JSONArray.toJSONString(collections);
 	  }/////////////whole
 	  
@@ -71,7 +70,7 @@ public class WhereController {
 		  List<Map> collections = new Vector<Map>();
 		  for(String code : codes) {
 			  map.put("indssclscd", code);
-			  List<StoreLocationDTO> lists = (List<StoreLocationDTO>) storelocservice.selectList(map);
+			  List<StoreLocationDTO> lists =  storelocservice.selectList(map);
 			  for(StoreLocationDTO list:lists) {
 		         Map record = new HashMap();
 		         record.put("bizesId", list.getBizesId());
@@ -89,7 +88,6 @@ public class WhereController {
 		         collections.add(record);
 		      }////inner for
 		  }/// outter for
-	      System.out.println(JSONArray.toJSONString(collections));
 		  return JSONArray.toJSONString(collections);
 	  }/////////////select
 	  
