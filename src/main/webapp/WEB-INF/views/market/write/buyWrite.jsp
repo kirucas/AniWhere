@@ -39,7 +39,7 @@
             contentType: false,
             processData: false,
             success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
+                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
             },
             error : function() {
                console.log("error");
@@ -50,7 +50,7 @@
    
        
 	   	   
-	   function check(f) {
+	   function check() {
 	      var isAttached = $('#summernote').summernote('code');
 	      if (fr.title.value == "") {
 
@@ -78,7 +78,7 @@
 	      }	    
 	     
    else {
-	   f.action="<c:url value='/market/buyinsert.aw'/>"; 
+	   
        return true;
     }
 }
@@ -95,7 +95,7 @@
 		<div class="col-md-12">
 
 			<form name="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
-				class="form-horizontal" >				
+				class="form-horizontal" action="<c:url value='/security/market/buyinsert.aw'/>">		
 				<div class="form-row">
 				
 				<input type="hidden" name="table_name" value="buy"/>
@@ -159,6 +159,7 @@
 				</div>
 				
 			</form>
+			
 			<div style="margin-bottom: 50px"></div>
 		</div>
 	</div>
