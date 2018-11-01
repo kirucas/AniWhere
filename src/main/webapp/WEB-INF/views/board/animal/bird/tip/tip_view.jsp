@@ -41,30 +41,100 @@
 	    	
 	    });
 	});
+	/* 
   //해당 글번호에 대한 코멘트 목록을 가져오는 함수 
 	var showComments = function(key){		
 		$.ajax({
 			url:"<c:url value='/Comment/List.aw'/>",
-			data:{no:data},
+			data:{no:key},
 			dataType:'json',
 			type:'post',
 			success: displayCommnets
 				
 		});
 	};
-	var displayComments = function(data){
-		console.JSON.stringify(data);
-		var commnetString="asdfsdf";
-	};
-	
-	
-	
-	
-    $('#btnwrite').click(function(){
-    	alert("작동띠");
-    });
+	//해당 글번호에 대한 코멘트 목록을 뿌려주는 함수
+	   //data;
+	   //[{"NO":2,"ONELINECOMMENT":}]
+	   var displayComments = function(data){
+	      console.log(JSON.stringify(data));
 	    
+	      var commentString = '<div data-v-f39b78c2="" data-post="820136">';
+	      if(data.length==0){
+	        	 commentString+="<span style='text-align: center'>등록된글이 없어요</span>";
+	    	}  
+	      commentString+='<div data-v-f39b78c2="" class="comment-vote__count">0</div></div>';
+	      commentString+='<div data-v-f39b78c2="" class="comment-meta">';
+	      commentString+='<span data-v-f39b78c2="" class="comment__name"><a data-v-f39b78c2="">'+comment['mem_nickname']+'</a></span>">';
+	      commentString+='<span data-v-f39b78c2="" data-tooltip="" class="comment__date">'+comment['regidate']+'</span></div>';
+	      commentString+='<div data-v-f39b78c2="" class="comment-content">';
+	      
+	      
+	      $.each(data,function(index,comment){
+	          if('${sessionScope.mem_no}'!=comment["mem_no"]){
+	        	  commentString+='<div data-v-f39b78c2=""><p>'+comment['cmt_content']+'</p></div></div>';
+	    	      
+	          }
+	          else
+	             commentString+='<span style="cursor: pointer" title="'+comment['cmt_no']+'" class="commentEdit">'+comment['cmt_content']+'</span>';
+	          if('${sessionScope.mem_no}'==comment["mem_no"])
+	             commentString+='<span class="commentDelete" title="'+comment['cmt_no']+'" style="cursor: pointer; color: red; font-size: 1.4em; font-weight: bold">삭제</span>';
+	       }); 
+	      commentString+='</div>';
+	      $('#comments').html(commentString);
+	      
+	      //코멘트 수정/삭제 처리
+	      $('.commentEdit').click(function() {
+	         console.log($(this).attr("title"));
+	            $("#title").val($(this).html());
+	            $("#submit").val('수정');
+	            $('input[mem_nickname=cmt_no]').val($(this).attr("title"));
+	      });
+	      $('.commentDelete').click(function() {
+	            var cno_value = $(this).attr("title");
+	            $.ajax({
+	                url:'<c:url value="/comment.delete.aw"/>',
+	                data:{cno:cno_value,no:${record.no}},
+	                dataType:'text',
+	                type:'post',
+	                success:function(key){
+	                   showComments(key);                   
+	                }
+	             });
+	      });
+	      
+	   };
 	    
+	   
+	   $(function(){
+	      //페이지 로드시 코멘트 목록 뿌려주기
+	      showComments(${record.no});
+	      
+	      //코맨트 입력처리
+	      $('#submit').click(function(){
+	         if($(this).val()=='등록')
+	            var action = "<c:url value='/comment.write.aw'/>";
+	         else
+	            var action = "<c:url value='/comment.edit.aw'/>";
+	         
+	         $.ajax({
+	            url:action,
+	            data:$('#frm').serialize(),
+	            dataType:'text',
+	            type:'post',
+	            success:function(key){
+	               showComments(key);
+	               if($('#submit').val()=='등록'){
+	            	   $("#title").val('');
+	               }
+	               if($('#submit').val()=='수정'){
+	                  $("#submit").val('등록');
+	                  $("#title").val('');
+	               }
+	            }
+	         });
+	      });
+	   }); */
 
 </script>
 <style>

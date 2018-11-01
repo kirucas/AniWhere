@@ -227,11 +227,7 @@ public class WhereController {
 	    }
 	    //예약 페이지ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
 	    @RequestMapping("/where/reservation.awa")
-		public String list(Model model,
-				HttpServletRequest req,//페이징용 메소드에 전달
-				@RequestParam Map map,//검색용 파라미터 받기
-				@RequestParam(required=false,defaultValue="1") int nowPage//페이징용 nowPage파라미터 받기용
-				)throws Exception {
+	    public String reservation_write(Model model,@RequestParam Map map,HttpServletResponse response)throws Exception {
 	    	
 			//뷰정보 반환]
 			return "where/reservationMain.tiles";
