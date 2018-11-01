@@ -100,7 +100,6 @@ function changeimage4() {
     } 
 
 }
-
 function changeimage1() {
     var image = document.getElementById('product');
     var changeimage1=document.getElementById('product1');

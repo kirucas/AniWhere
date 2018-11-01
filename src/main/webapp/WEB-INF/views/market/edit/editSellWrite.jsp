@@ -4,8 +4,10 @@
 <%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <head>
-
 <script>
+
+
+
 
 function check() {
     var isAttached = $('#summernote').summernote('code');
@@ -42,26 +44,24 @@ function check() {
          alert("거래방법을  입력해주세요.");
          fr.way.focus();
          return false;
-
       } 
     
-     else if (fr.phone.value=="") {
+    else if (fr.phone.value=="") {
          alert("연락처 를 입력해주세요.");
          fr.phone.focus();
          return false;
-
       } 
-    
-    
-   
+       
     else if (fr.content.value == "") {
        alert('내용을 입력하세요.');
        return false;
-    }	    
-   
+    }	      
 else {
- fr.action="<c:url value='/market/sellinsert.aw'/>"; 
+	
+	
+ 
  return true;
+
 }
     
 }
@@ -70,13 +70,10 @@ else {
 
 <script>
 
-function showContent() {
-	
-	
-    $('.output').html($('#title').val());
-        
-}
-
+$( "#target" ).submit(function( event ) {
+	  alert( "Handler for .submit() called." );
+	  event.preventDefault();
+	});
 
    $(function() {
 	   
@@ -91,15 +88,9 @@ function showContent() {
            content+='연락처:'+$('#phone').val()+'\r\n'; 
            content+='====================================\r\n'; 
            $('#summernote').append(content);
-           
-	   
+           	   
 	   });
-	   
-	   
-	   
-	   
-	   
-	   
+	   	   
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
@@ -112,13 +103,14 @@ function showContent() {
             }
          }
       });
+      
       function sendFile(file, el, wel) {
          var form_data = new FormData();
          form_data.append('file', file);
          $.ajax({
             data: form_data,
             type: "POST",
-            url : "<c:url value='/market/buy/Upload.aw'/>",
+            url : "<c:url value='/market/sell/Upload.aw'/>",
             cache: false,
             contentType: false,
             processData: false,
@@ -155,20 +147,16 @@ function showContent() {
 </head>
 
 <body>
-
 	<div class="container">
-
 		<div style="margin-top: 10px"></div>
 		<br />
 
 		<div class="col-md-12">
-<form name="fr" id="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellupdate.aw?sell_no=${record.no}'/>" accept-charset="utf-8" 
-				class="form-horizontal">
+       <form name="fr" id="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellupdate.aw?sell_no=${record.no}'/>" accept-charset="utf-8" 	class="form-horizontal">                           
 				<div class="form-row">
 				<input type="hidden" name="table_name" value="sell"/>
 				 <input type="hidden" name="mem_no" value="${mem_no }">
-			
-					
+								
 			<label for="" class="" >제목</label> 
 			<input class="form-control" type="text" id="title" name="title" placeholder="제목을 입력하세요" required value="${record.title}"/>
 
@@ -220,7 +208,7 @@ function showContent() {
 
 					<div class="my-2">
 						<span>거래기간</span> 
-						<input type="date" min="Today" style="text-align: right;padding-left: px"
+						<input type="date" min="2018-11-01" style="text-align: right;padding-left: px"
 							max="2020-01-01"  class="form-control" type="date"
 							id="time" required />
 							
@@ -306,16 +294,11 @@ function showContent() {
 							
 				<div style="text-align: center">
 					<a href="<c:url value='/market/sell.aw'/>">
-					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
-					
-					<input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
-					
-					<button class="btn btn-primary" type="submit" role="button">수정</button>
-				
+					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>					
+					<input class="btn btn-danger" type="button"  value="확인" id="enterBtn" onclick="check()">
+
 				</div>
-				  
-  
-											
+				  											
 			</form>
 						
 			<div style="margin-bottom: 50px"></div>
