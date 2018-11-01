@@ -223,6 +223,27 @@
 		            		var marker = new daum.maps.Marker({
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
+		            		
+		            		var content = 
+		            			'<div class="wrap">' + 
+	        			 			'<div class="info">' + 
+	        							'<div style="color:black;font-size:1.4em;">지번주소</div>' + 
+        								'<div style="width:200px">' +          				
+	        								'<div style="width:100%;color:blue">'+value.lnoAdr+'</div>' +          
+	        							'</div>' + 
+	        						'</div>' +    
+	        			  		'</div>';
+			
+							// 마커에 표시할 인포윈도우를 생성합니다 
+						    var infowindow = new daum.maps.InfoWindow({
+						        content: content // 인포윈도우에 표시할 내용
+						    });
+							
+						    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+						    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+						    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+						    daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+						    daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
 		                    markers.push(marker);	
 		            	});
@@ -256,9 +277,9 @@
 		            		var content = 
 		            			'<div class="wrap">' + 
 	        			 			'<div class="info">' + 
-	        							'<div style="color:black;font-size:1.4em;">주소</div>' + 
+	        							'<div style="color:black;font-size:1.4em;">지번주소</div>' + 
         								'<div style="width:200px">' +          				
-	        								'<div style="width:100%;color:blue">'+value.address+'</div>' +          
+	        								'<div style="width:100%;color:blue">'+value.lnoAdr+'</div>' +          
 	        							'</div>' + 
 	        						'</div>' +    
 	        			  		'</div>';
@@ -292,25 +313,21 @@
 			});
 			
 			var hair = $("#hair").prop("title");
-			console.log(hair);
 			$('#hair').click(function(){
 				indssclscd();
 			});
 			
 			var hospital = $("#hospital").prop("title");
-			console.log(hospital);
 			$('#hospital').click(function(){
 				indssclscd();
 			});
 			
 			var pharm = $("#pharm").prop("title");
-			console.log(pharm);
 			$('#pharm').click(function(){
 				indssclscd();
 			});
 			
 			var etc = $("#etc").prop("title");
-			console.log(etc);
 			$('#etc').click(function(){
 				indssclscd();
 			});
@@ -379,9 +396,20 @@
 							var locPosition = new daum.maps.LatLng(
 									lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 							message = ' '; // 인포윈도우에 표시될 내용입니다
+							
+							var imageSrc = '<c:url value="/resources/images/self.jpg"/>', // 마커이미지의 주소입니다    
+						    imageSize = new daum.maps.Size(45, 45), // 마커이미지의 크기입니다
+						    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+						    
+						    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
+						    markerPosition = new daum.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
+							// 마커를 생성합니다
 							// 마커와 인포윈도우를 표시합니다
-							displayMarker(locPosition, message);
-						});
+							displayMarker(locPosition, message,markerImage);
+						},null,{
+							  enableHighAccuracy: true,
+							  maximumAge: 0,
+							  timeout: 10000});
 
 			} 
 			else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
@@ -389,15 +417,14 @@
 				var locPosition = new daum.maps.LatLng(33.450701, 126.570667),
 						 message = 'geolocation을 사용할수 없어요..'
 
-				displayMarker(locPosition, message);
+				displayMarker(locPosition, message,markerImage);
 			}
 
 			// 지도에 마커와 인포윈도우를 표시하는 함수입니다
-			function displayMarker(locPosition, message) {
-
-				// 마커를 생성합니다
+			function displayMarker(locPosition, message,markerImage) {
 				var marker = new daum.maps.Marker({
 					map : map,
+					image : markerImage,
 					position : locPosition
 				});
 

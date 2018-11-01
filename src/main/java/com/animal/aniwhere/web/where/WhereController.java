@@ -37,7 +37,7 @@ public class WhereController {
 	  }////////// mating_main
 	  
 	  //전체 갖고오기 ajax
-	  @RequestMapping(value= "/where/map/total.awa", method= RequestMethod.POST)
+	  @RequestMapping(value= "/where/map/total.awa", method= RequestMethod.POST,produces="text/plain; charset=UTF-8")
 	  @ResponseBody
 	  public String whole(Model model,@RequestParam Map map,HttpServletResponse response) throws Exception{
 		  List<StoreLocationDTO> lists = storelocservice.selectList(map);
@@ -63,7 +63,7 @@ public class WhereController {
 	  }/////////////whole
 	  
 	  //옆에 하나 선택
-	  @RequestMapping(value= "/where/map/select.awa", method= RequestMethod.POST)
+	  @RequestMapping(value= "/where/map/select.awa", method= RequestMethod.POST,produces="text/plain; charset=UTF-8")
 	  @ResponseBody
 	  public String select(Model model,@RequestParam Map map,HttpServletResponse response) throws Exception{
 		  String[] codes = ((String)map.get("indssclscd")).split(" ");

@@ -62,7 +62,7 @@
 		</h2>
 	</div>
 	<div style="width:100%">
-		<form method="post" action="<c:url value='/animal/freeboard/write.aw'/>">
+		<form method="post" action="<c:url value='/security/animal/freeboard/write.aw'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="no"/>
 				<input type="hidden" name="mem_no" value="${mem_no}" />
