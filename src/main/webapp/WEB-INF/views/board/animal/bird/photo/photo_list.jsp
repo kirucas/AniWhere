@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
@@ -11,6 +12,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.esm.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.esm.bundle.js"></script>
 <style>
+	#pagingDiv{
+	width: 100%;
+	text-align: center;
+	}
+	.row nav{
+		margin:0 auto;
+	}
+	#pagingDiv nav ul li {
+		margin-right: 10px;
+	}
+	
    .card-group {
       margin-bottom: 5px;
    }
@@ -124,8 +136,8 @@
    @media (max-width : 436px){
       #e-d-button{
           margin-right: 60%;
-      }
-   } */
+		}
+	} */
    
 </style>
 <script>
@@ -240,14 +252,14 @@
 			           			<small class="text-muted"><fmt:formatDate value="${dto.photo_regidate}" pattern="yyyy-MM-dd" /></small>
 							</div>
 						</div>
-		   	<c:if test="${loop.index mod 4 eq 3}">
+		   	<c:if test="${loop.index mod 4 eq 3 or fn:length(list)-1 eq loop.index}">
 					</div>
 		   		</div>
 		   	</c:if>
 	   	</c:forEach>
    	</c:if>
    	
-   	<div class="row">
+   	<div class="row" id="pagingDiv">
    		${pagingString}
    	</div>
 </div>
