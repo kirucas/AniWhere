@@ -34,14 +34,14 @@
 		}
 		$.each(data,function(index,comment){			
 			commentString+='<tr><td>'+comment['NAME']+'</td>';
-			if('${sessionScope.id}' != comment["ID"])
+			if('${sessionScope.mem_no}' != comment["ID"])
 				commentString+='<td align="left">'+comment['ONELINECOMMENT']+'</td>'; 
 			else
-				commentString+='<td align="left"><span style="cursor:pointer" class="commentEdit" title="'+comment["CNO"]+'">'+comment['ONELINECOMMENT']+'</span></td>'; 		
-			commentString+='<td>'+comment['CPOSTDATE']+'</td>';
+				commentString+='<td align="left"><span style="cursor:pointer" class="commentEdit" title="'+comment["cmtdto.cmt_no"]+'">'+comment['ONELINECOMMENT']+'</span></td>'; 		
+			commentString+='<td>'+comment['cmtdto.regidate']+'</td>';
 			commentString+='<td>';
-			if('${sessionScope.id}' == comment["ID"])
-				commentString+='<span  class="commentDelete" title="'+comment["CNO"]+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
+			if('${sessionScope.mem_no}' == comment["ID"])
+				commentString+='<span  class="commentDelete" title="'+comment["cmtdto.cmt_no"]+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
 			else
 				commentString+='<span style="color: gray; font-size: 0.7em; font-weight: bold">삭제불가</span>';
 			commentString+='</td></tr>';
@@ -59,7 +59,7 @@
 			$('#submit').val('수정');
 			
 			//form의 hidden속성중 name="cno"값 설정
-			$('input[name=cno]').val($(this).attr("title"));
+			$('input[name=cmtdto.cmt_no]').val($(this).attr("title"));
 			
 		});
 		
@@ -68,7 +68,7 @@
 			
 			$.ajax({
 				url:"<c:url value='/Comment/Delete.bbs'/>",
-				data:{cno:cno_value, no:"${no}"},
+				data:{cno:cno_value, no:"${cmtdto.cmt_no}"},
 				dataType:'text',
 				type:'post',
 				success:function(key){					
@@ -80,7 +80,7 @@
 	
 	$(function(){
 		//페이지 로드시 코멘트 목록 뿌려주기
-		showComments("${no}");
+		showComments("${cmtdto.cmt_no}");
 	
 		//코멘트 입력처리]
 		$('#submit').click(function(){	
@@ -107,7 +107,7 @@
 		//메모글 삭제처리]
 		$('#del_memo').on('click',function(){
 			if(confirm('정말로 삭제할래?')){
-				location.replace("<c:url value='/BBS/Delete.bbs?no=${no}'/>");				
+				location.replace("<c:url value='/BBS/Delete.bbs?no=${cmtdto.cmt_no}'/>");				
 			}
 		});
 });
@@ -183,10 +183,10 @@ a:visited { color:white; text-decoration: none;}
 	<!-- row -->
 <div class="text-right margin-top-10">
 	<div> 
-		<a href="<c:url value='/bird/movie/Reply.aw?no=${dto.no}'/>"
+		<a href="<c:url value='/animal/bird/movie/Reply.aw?no=${dto.no}'/>"
 			class="btn btn-success">댓글</a>
 		<c:if test="${sessionScope.mem_no == dto.mem_no}">
-			<a href="<c:url value='/bird/movie/edit.aw?no=${dto.no}'/>"
+			<a href="<c:url value='/security/animal/bird/movie/edit.aw?no=${dto.no}'/>"
 				class="btn btn-success">수정</a>
 			<a href="javascript:isDelete()" class="btn btn-success">삭제</a>
 		</c:if>
@@ -198,17 +198,19 @@ a:visited { color:white; text-decoration: none;}
 <br/>
 <div class="row">
 		<!-- 한줄 코멘트 입력 폼-->
-		
+		<c:forEach var="cmtdto" items="${cmtlist}" varStatus="loop">
 			<h3>댓글</h3>&nbsp;&nbsp;&nbsp;&nbsp;
 			<form class="form-inline" id="frm" method="post">
 			<input type="hidden" value="${table_name}"/>
-			<input type="hidden" value="${mem_no}"/>
-				<input type="hidden" name="no" value="${no}" />
+			<input type="hidden" value="${dto.mem_no}"/>
+				<input type="hidden" name="no" value="${cmtdto.cmt_no}" />
 				<!-- 수정 및 삭제용 파라미터 -->
-				<input type="hidden" name="cno" />
-				<input placeholder="댓글을 입력하세요" id="title" value="${cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />
-				<input class="btn btn-success" id="submit" type="button" value="등록" /></td>			
+				<input type="hidden" name="cmt_no" />
+				<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />
+				<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>			
 			</form>
+		</c:forEach>
+			
 	</div>
 	<div class="row" id="comments">
 		<!-- 한줄 코멘트 목록-->		

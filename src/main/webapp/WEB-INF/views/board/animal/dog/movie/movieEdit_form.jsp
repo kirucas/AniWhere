@@ -93,7 +93,7 @@ function pre_view() {
 </script>
 
 <div class="container">
-	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/dog/movie/edit.aw?no=${dto.no}'/>">
+	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/security/animal/dog/movie/edit.aw?no=${dto.no}'/>">
 		<input type="hidden" name="mem_no" value="${mem_no }">
 		<input type="hidden" name="ani_category" value="1">
 		<div class="form-group row">
