@@ -45,5 +45,10 @@
 		DELETE FROM lost_animal
 		WHERE no=#{no}
 	</delete>
+	
+	<delete id="passDateOnNotice">
+		DELETE FROM lost_animal
+		WHERE sysdate - end_notice >= 1;
+	</delete>
 
 </mapper>
