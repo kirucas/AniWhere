@@ -7,7 +7,7 @@
 
 <script>
 
-function check(f) {
+function check() {
     var isAttached = $('#summernote').summernote('code');
     if (fr.title.value == "") {
        alert("제목을 입력해 주세요.");
@@ -52,12 +52,7 @@ function check(f) {
 
       } 
     
-     else if (fr.space.value=="") {
-         alert("거래가능 지역 를 입력해주세요.");
-         fr.space.focus();
-         return false;
-
-      }    
+    
    
     else if (fr.content.value == "") {
        alert('내용을 입력하세요.');
@@ -65,7 +60,7 @@ function check(f) {
     }	    
    
 else {
- f.action="<c:url value='/market/sellinsert.aw'/>"; 
+ fr.action="<c:url value='/market/sellinsert.aw'/>"; 
  return true;
 }
     
@@ -77,16 +72,15 @@ else {
    $(function() {
 	   
 	   $('#enterBtn').click(function(){
-	
-		  console.log("title:",$('#title').prop('value'));
-	 	  $('#sell_title').text($('#title'))
-	 	  $('#sell_name').html($('#name')) 
-	 	  $('#sell_price').html($('#price').val())
-	 	  $('#sell_time').html($('#time').val())
-	 	  $('#sell_way').html($('#way').val())
-	 	  $('#sell_phone').html($('#phone').val())
-	 	  
-	 	   alert("i am in!!")
+		 
+		   var content="※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.\r\n";
+		   content+='제목:'+$('#title').val()+'\r\n';
+		   content+='판매물품명:'+$('#name').val()+'\r\n';
+ 		   content+='희망가:'+$('#price').val()+'\r\n';
+		   content+='거래기간:'+$('#way').val()+'\r\n'; 
+           content+='연락처:'+$('#phone').val()+'\r\n'; 
+           $('#summernote').append(content);
+           
 	   
 	   });
 	   
@@ -157,7 +151,7 @@ else {
 		<br />
 
 		<div class="col-md-12">
-<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" 
+<form name="fr" id="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" 
 				class="form-horizontal">
 				<div class="form-row">
 				<input type="hidden" name="table_name" value="sell"/>
@@ -198,24 +192,24 @@ else {
 			</div>
 		
 			
-				<div class="row" style="text-align: center; border: 1px silver solid; margin-left: 20px">
-					<div class="my-2">
-						<span style="margin-left: 20px" >제품명</span>
+				<div class="row" style="text-align: center; border: 1px silver solid; margin-left: px">
+					<div class="my-2" style="margin-right:30 px">
+						<span  >제품명</span>
 						<input 
-							 style="text-align: right;margin-left: 15px"
+							 style="text-align: right;margin-left:px"
 							class="form-control" type="text" id="name" />
 					</div>
 			
-					<div class="my-2">
-						<span style="margin-right: 20px">희망가</span>
+					<div class="my-2" style="margin-right:30 px">
+						<span >희망가</span>
 						<input
-							style="text-align:right;margin-left: 15px"
+							style="text-align:right";
 							class="form-control" type="text" id="price" />
 					</div>
 
 					<div class="my-2">
 						<span>거래기간</span> 
-						<input type="date" min="Today" style="text-align: right;margin-left: 15px"
+						<input type="date" min="Today" style="text-align: right;padding-left: px"
 							max="2020-01-01"  class="form-control" type="text"
 							id="time" />
 							
@@ -227,11 +221,11 @@ else {
 
 					<div class="my-2">
 						<span>거래방법</span> <input class="form-control" type="text"
-							placeholder="예)직거래,택배등" style="text-align: right;margin-left: 15px" id="way" />
+							placeholder="예)직거래,택배등" style="text-align: right;padding-left:px" id="way" />
 					</div>
 					<div class="my-2">
 						<span>연락처</span> <input class="form-control" type="text"
-							placeholder="집전화,휴대폰번호" style="text-align: right;margin-left: 15px" id="phone" />
+							placeholder="집전화,휴대폰번호" style="text-align: right;padding-left:px" id="phone" />
 					</div>
 
 				</div>
@@ -292,34 +286,21 @@ else {
 
 				
 				<div class="col-md-12 container">
-					<textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
+<textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
 						maxlength="2048">
-						
-	 ※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.<br/>					
-										
-	제목:<span id="sell_title"></span> <br/>
-					
-	판매물품명:<span id="sell_name"></span> <br/>
-					
-	희망가:<span id="sell_price"></span> <br/>
-					
-	거래기간:<span id="sell_time"></span> 일 까지  <br/>
-					
-	거래방법:<span id="sell_way"></span> <br/>
-								
-	연락처:<span id="sell_phone"></span>  <br/>
-					
-	===================자세한 설명을 부탁드려요  =====================
+※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.											
+	
 						
 						
-						</textarea>
+</textarea>
 
 				</div>
 							
 				<div style="text-align: center">
 					<a href="<c:url value='/market/sell.aw'/>">
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
-					<input class="btn btn-danger" type="submit" id="enterBtn" value="확인">
+					<input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기">
+					<input class="btn btn-danger" type="submit"  value="확인">
 
 				</div>
 				

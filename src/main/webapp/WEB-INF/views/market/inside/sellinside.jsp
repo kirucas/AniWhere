@@ -174,15 +174,15 @@ function changeimage1() {
 					</c:choose>
 
 				</h3>
-         <div class="col-md-4" style="border: 1px solid silver">
+         <div class="col-md-12" style="border: 1px solid silver;width:400px;height:300px">
 				<h3 class="my-3">조회수 :${record.count}</h3>
 				<h3 class="my-3">등록일: ${record.regidate}</h3>
-				<ul>
+				  <ul>
 					<li>거래 횟수</li>
 					<li>만족 불만족 표시</li>
 					<li>회원의 등급</li>
 					<li>연락처 정보공개시에만 공개</li>
-				</ul>
+				</ul> 
 
 			</div>
         </div>
