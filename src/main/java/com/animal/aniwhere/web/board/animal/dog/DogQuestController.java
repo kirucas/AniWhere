@@ -63,7 +63,7 @@ public class DogQuestController {
 		//페이징을 위한 로직 끝]
 		List<QuestBoardDTO> list= (List<QuestBoardDTO>) questService.selectList(map);
 		//페이징 문자열을 위한 로직 호출]
-		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/security/animal/dog/quest/quest_list.aw?");
+		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/animal/dog/quest/quest_list.aw?");
 		//데이타 저장]
 		model.addAttribute("list", list);
 		model.addAttribute("pagingString", pagingString);
