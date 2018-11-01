@@ -326,21 +326,5 @@ public class MemberController {
 		return "member/enroll_process";
 	}////////// enrollProcess
 
-	// 네이버 로그인 url 반환
-	@RequestMapping("/Member/Login.bbs")
-	public String login(Model model, HttpSession session) throws Exception {
 
-		return "common/member/Login.tiles";
-	}
-
-	// 안드로이드 용
-	@ResponseBody
-	@RequestMapping(value = "/android.aw", method = RequestMethod.POST)
-	public String androidLogin(@RequestParam Map map) throws Exception {
-		if (!service.isMember(map)) {
-			return "false";
-		}
-		MemberDTO dto = service.selectOne(map);
-		return dto.getMem_id();
-	}//////////////// androidLogin
 }//////////////////// MemberController class
