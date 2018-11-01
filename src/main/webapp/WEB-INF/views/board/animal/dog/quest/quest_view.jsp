@@ -5,8 +5,8 @@
 //해당 글번호에 대한 코멘트 목록을 가져오는 함수 
 	var showComments = function(key){		
 		$.ajax({
-			url:"<c:url value='/dog/quest/cmtList.aw'/>",
-			data:{origin_no:key},
+			url:"<c:url value='/dog/quest/cmtList.awa'/>",
+			data:{no:key},
 			dataType:'json',
 			type:'post',
 			success:displayComments			
@@ -18,32 +18,32 @@
 		console.log(JSON.stringify(data));
 		var commentString='<div class="row border-top" style="padding-left:10px;padding-right: 10px">';
 		if(data.length==0){
-			commentString+="<h3>등록된 댓글이 없습니다</h3>";
+			commentString+="<h3 class='text-center' style='padding-top:10px;width:100%'>등록된 댓글이 없습니다</h3>";
 		}
 		$.each(data,function(index,cmt){			
 			commentString+='<div class="col-sm-5" style="padding-top: 10px;padding-right: 0px">';
-			commentString+=cmt["mem_nickname"]+'&nbsp;&nbsp; '+cmt["regidate"];
+			commentString+=cmt["MEM_NICKNAME"]+'&nbsp;&nbsp; '+cmt["REGIDATE"];
 			commentString+='</div>';
 			commentString+='<div class="offset-sm-5 col-sm-2" style="text-align:right;padding-top: 10px">';
-			if('${sessionScope.mem_no}' == cmt["mem_no"])
-				commentString+='<a class="commentDelete text-right" href="#">삭제</a>';
+			if('${sessionScope.mem_no}' == cmt["MEM_NO"])
+				commentString+='<a title="'+cmt["CMT_NO"]+'" class="commentDelete text-right" href="#">삭제</a>';
 			else
 				commentString+='';
 			commentString+='</div>';
 			commentString+='<div class="col-sm-12">';
-			commentString+='<h4>'+cmt["cmt_content"]+'</h4>';
+			commentString+='<h4>'+cmt["CMT_CONTENT"]+'</h4>';
 			commentString+='</div>';
 		});		
 		commentString+='</div>';
 		
 		$('#comments').html(commentString);
 		
-		//댓글 삭제 처리
+		//코멘트 수정/삭제 처리
 		$('.commentDelete').click(function(){			
 			var cno_value = $(this).attr("title");
 			$.ajax({
-				url:"<c:url value='/dog/quest/cmtDelete.aw'/>",
-				data:{cmt_no:cno_value,no:${record.no} },
+				url:"<c:url value='/dog/quest/cmtDelete.awa'/>",
+				data:{cno:cno_value,no:${record.no}},
 				dataType:'text',
 				type:'post',
 				success:function(key){					
@@ -59,9 +59,9 @@
 		//코멘트 입력처리]
 		$('#submit').click(function(){	
 			if($(this).val()=='등록')
-				var action="<c:url value='/dog/quest/cmtWrite.aw'/>";
-			else
-				var action="<c:url value='/dog/quest/cmtEdit.aw'/>";
+				var action="<c:url value='/dog/quest/cmtWrite.awa'/>";
+			//else
+				//var action="<c:url value='/dog/quest/cmtEdit.awa'/>";
 			$.ajax({
 				url:action,
 				data:$('#frm').serialize(),
@@ -73,12 +73,10 @@
 						$('#submit').val('등록');
 						$('#cmt_content').val('');
 					}
-					
 				}		
-			});		
-			
+			});			
 		});
-	
+	});
 </script>
 <script>
 	$(function(){
@@ -98,6 +96,9 @@
 		});
 		
 	});
+	$(function(){
+		$("#comments").removeAttr("href")
+	})
 </script>
 <div class="container border">
 	<div class="row border-bottom" style="padding-left:23px;padding-top: 10px;margin-bottom: 0px">
@@ -151,18 +152,18 @@
 			<strong style="font-size: 3em">댓글</strong> 댓글 <span id="count"></span>개
 		</div>
 		<form name="frm" method="post">
+			<input type="hidden" name="cmt_no" />
+			<input type="hidden" name="no" value="${record.no}"/>
 			<div class="form-row">
 				<div class="form-group col-sm-11" style="padding-left: 20px">
 					<input class="form-control" id="cmt_content" name="cmt_content"  type="text" size="200" placeholder="댓글을 입력 하세요" />
 				</div>
 				<div class="form-group col-sm-1" style="padding-left: 15px">
-					<input type="hidden" name="table_name" id="table_name" value="quest" />
-					<input type="hidden" name="no" id="no" value="${record.no}"/>
 					<input type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
 				</div>
 			</div>
 		</form>
 	</div>
-	<div id="comments">
-	</div>
+	<a href="#" id="comments">
+	</a>
 </div>
