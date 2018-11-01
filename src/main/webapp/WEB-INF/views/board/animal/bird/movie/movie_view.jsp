@@ -14,7 +14,7 @@
 	//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
 	var showComments = function(key){		
 		$.ajax({
-			url:"<c:url value='/Comment/List.bbs'/>",
+			url:"<c:url value='/Comment/List.awa'/>",
 			data:{no:key},
 			dataType:'json',
 			type:'post',
@@ -107,7 +107,7 @@
 		//메모글 삭제처리]
 		$('#del_memo').on('click',function(){
 			if(confirm('정말로 삭제할래?')){
-				location.replace("<c:url value='/BBS/Delete.bbs?no=${cmtdto.cmt_no}'/>");				
+				location.replace("<c:url value='/board/animal/bird/movie/delete.aw?no=${cmtdto.cmt_no}'/>");				
 			}
 		});
 });
@@ -161,8 +161,7 @@ a:visited { color:white; text-decoration: none;}
 <!-- 내용 시작 -->
 <div class="container">
 	<div class="col margin-top-30">
-		<div class="col moda" data-toggle="modal" id="popupMovie"
-			data-target="bd-example-modal-lg">
+		<div class="col" id="popupMovie">
 			<div class="col media-header">
 				<div class="title col-xs-12 col-sm-6 col-md-8">${dto.movie_title}</div>
 				<div class="nickname col-xs-6 col-md-4">닉네임 ${dto.mem_nickname}</div>
@@ -198,18 +197,20 @@ a:visited { color:white; text-decoration: none;}
 <br/>
 <div class="row">
 		<!-- 한줄 코멘트 입력 폼-->
-		<c:forEach var="cmtdto" items="${cmtlist}" varStatus="loop">
-			<h3>댓글</h3>&nbsp;&nbsp;&nbsp;&nbsp;
+		<c:forEach var="cmtdto" items="${cmtlist}" varStatus="loop"> 
+			<h4>댓글 </h4>&nbsp;&nbsp;&nbsp;&nbsp;
 			<form class="form-inline" id="frm" method="post">
+			<%-- 
 			<input type="hidden" value="${table_name}"/>
 			<input type="hidden" value="${dto.mem_no}"/>
-				<input type="hidden" name="no" value="${cmtdto.cmt_no}" />
+			 --%>
+			<input type="hidden" name="no" value="${cmtdto.cmt_no}" />
 				<!-- 수정 및 삭제용 파라미터 -->
-				<input type="hidden" name="cmt_no" />
-				<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />
-				<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>			
+			<input type="hidden" name="cmt_no" />
+			<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />
+			<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>			
 			</form>
-		</c:forEach>
+		 </c:forEach>
 			
 	</div>
 	<div class="row" id="comments">

@@ -114,12 +114,14 @@ public class BirdMovieController {
 		MovieBoardDTO dto = service.selectOne(map);
 		
 		//맵에서 table_name 넣기
-		map.put("table_name", "movie");
-		map.put("origin_no", "no");
+		String movie = "movie";
+		
+		map.put("table_name", movie);
 		System.out.println("map :" +map); //map : {no=no, nowPage=1, table_name=movie}
 		// 댓글
-		List<AllCommentDTO> cmtlist = cmtservice.selectList(map);
 		
+		List<AllCommentDTO> cmtlist = cmtservice.selectList(map);
+		System.out.println("cmtlist :" +cmtlist);
 		// 유튜브 iframe소스를 가져와서 섬머노트와 같이 있는 내용과 분리하여 뿌리는 메소드
 		//(데이터 베이스 상에는 관련 컬럼이 없으므로)
 		setIframe(dto);
@@ -129,7 +131,7 @@ public class BirdMovieController {
 		model.addAttribute("cmtlist", cmtlist);
 		
 		System.out.println("model :" +model);
-		System.out.println("cmtlist :" +cmtlist);
+		
 		
 		// 뷰정보 반환]
 		return "board/animal/bird/movie/movie_view.tiles";
