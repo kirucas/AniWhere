@@ -146,7 +146,7 @@ public class BirdTipController {
 		int hitCount= tipservice.addHitCount(map);
 		
 		return "success";
-	}//////////////delete()
+	}//////////////hit()
 	
 	///댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글///
 	

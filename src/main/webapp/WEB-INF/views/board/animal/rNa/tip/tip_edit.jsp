@@ -58,28 +58,30 @@ $(function() {
 		width:468.7px;
 	}
 }
+#tip_edit{
+	width:100%;
+}
+#edit_title{
+	width:100%;
+	margin-left: 1px;
+}
+#edit_content{
+	width:100%;
+}
 </style>
-<div class="container">
-	<div class="page-header">
-		<h2>
-			파충류 & 양서류 팁 게시판
-		</h2>
-	</div>
-	<div style="width:100%">
+<div>
+	<div id="tip_edit">
 		<form method="post" action="<c:url value='/security/board/animal/rNa/tip/edit.aw'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="no" value="${param.no}" />
 				<input type="hidden" name="mem_no" value="${mem_no}" />
 				<input type="hidden" name="ani_category" value="3"/>
-				<div class="form-row" style="width:87.5%;"id="titlediv">
+				<div class="form-row" id="edit_title">
 					<input type="text" class="form-control" id="title" name="tip_title" placeholder="제목을 입력하세요" value="${record.tip_title }"/>
 				</div>
 			</div>
-			<script>	
-				
-			</script>
 			<div class="form-group form-row">
-				<div style="width:92.75%">
+				<div id="edit_content">
 					<textarea rows="10" class="form-control" id="summernote" name="tip_content">${record.tip_content}</textarea>
 				</div>
 			</div>

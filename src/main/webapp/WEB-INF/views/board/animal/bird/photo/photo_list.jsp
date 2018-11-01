@@ -360,7 +360,7 @@ to {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background: rgba(44, 62, 80, 0.92);
+	background: rgba(50, 200, 99, 0.7);
 	padding: 10px;
 	text-align: center;
 	-ms-filter:
@@ -591,9 +591,7 @@ a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover i
 				            </a>
 				            <div class="card-body">
 				            	<h5 class="card-title">
-					               	<a href="#" data-target="#modalIMG" data-toggle="modal">
 					                  	${dto.photo_title}
-					               	</a>
 					               	<span title="댓글 수" class="badge badge-secondary">0</span>
 					               	<span title="신규 게시물 표시" class="badge badge-primary">
 					               		<c:if test="${dto.photo_regidate eq now}">

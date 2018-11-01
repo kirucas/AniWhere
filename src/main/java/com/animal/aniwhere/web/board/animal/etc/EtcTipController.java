@@ -28,7 +28,7 @@ public class EtcTipController {
 	
 	
 	@Resource(name="tipService")
-	private TipBoardServiceImpl allBoardService;
+	private TipBoardServiceImpl tipservice;
 	
 	@Value("${PAGESIZE}")
 	private int pageSize;
@@ -45,14 +45,14 @@ public class EtcTipController {
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		//전체 레코드 수
-		int totalRecordCount= allBoardService.getTotalRecord(map);			
+		int totalRecordCount= tipservice.getTotalRecord(map);			
 		//시작 및 끝 ROWNUM구하기]
 		int start = (nowPage-1)*pageSize+1;
 		int end   = nowPage*pageSize;
 		map.put("start",start);
 		map.put("end",end);
 		//페이징을 위한 로직 끝]
-		List list = allBoardService.selectList(map);
+		List list = tipservice.selectList(map);
 		//페이징 문자열을 위한 로직 호출]
 		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/board/animal/etc/tip/list.aw?");
 		//데이터 저장]
@@ -71,7 +71,7 @@ public class EtcTipController {
 	public String view(@RequestParam Map map,Model model) throws Exception {
 		//서비스 호출]
 		//게시글
-		TipBoardDTO record = allBoardService.selectOne(map);
+		TipBoardDTO record = tipservice.selectOne(map);
 		//데이터 저장]
 		model.addAttribute("record", record);
 		//줄바꿈처리
@@ -91,7 +91,7 @@ public class EtcTipController {
 		
 		map.put("mem_no", session.getAttribute("mem_no"));
 		
-		allBoardService.insert(map);
+		tipservice.insert(map);
 		//뷰정보반환
 		return "forward:/board/animal/etc/tip/list.aw";//접두어 접미어 설정 적용 안되게끔 하려고 forward:를 붙임
 	}////////////////
@@ -101,13 +101,13 @@ public class EtcTipController {
 	public String edit(HttpServletRequest req,@RequestParam Map map,Model model) throws Exception{
 		if(req.getMethod().equals("GET")) {
 			//서비스 호출]
-			TipBoardDTO record = allBoardService.selectOne(map);
+			TipBoardDTO record = tipservice.selectOne(map);
 			//수정 폼으로 이동]
 			model.addAttribute("record", record);
 			return "board/animal/etc/tip/tip_edit.tiles";
 		}
 		//수정처리후 메시지 뿌려주는 페이지(Message.jsp)로 이동
-		int successFail = allBoardService.update(map);
+		int successFail = tipservice.update(map);
 		model.addAttribute("successFail", successFail);
 		model.addAttribute("WHERE", "EDT");
 		return "board/animal/etc/tip/Message";
@@ -116,7 +116,7 @@ public class EtcTipController {
 	//삭제 처리
 	@RequestMapping("/board/animal/etc/tip/delete.aw")
 	public String delete(@RequestParam Map map,Model model) throws Exception{
-		int successFail = allBoardService.delete(map);
+		int successFail = tipservice.delete(map);
 		model.addAttribute("successFail", successFail);
 		return "board/animal/etc/tip/Message";
 	}//////////////delete()
@@ -133,5 +133,14 @@ public class EtcTipController {
 		upload.transferTo(file);
         return "/Upload/"+newFilename;
    }
+	@ResponseBody
+	@RequestMapping(value="/animal/etc/tip/tip_hit.aw",method=RequestMethod.POST)
+	public String hit(@RequestParam Map map) throws Exception{
+	
+		map.put("no", map.get("no").toString());
+		int hitCount= tipservice.addHitCount(map);
+		
+		return "success";
+	}//////////////hit()
 }//////////////////// tipboardController
 
