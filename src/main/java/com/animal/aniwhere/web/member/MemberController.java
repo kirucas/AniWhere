@@ -310,9 +310,9 @@ public class MemberController {
 	@RequestMapping(value = "/enrollProcess.aw", method = RequestMethod.POST)
 	public String enrollProcess(MultipartHttpServletRequest mhsr, @RequestParam Map map, HttpSession session,
 			Model model) throws Exception {
-		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
-		MultipartFile upload = mhsr.getFile("ani_photo");
-		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+		//String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+		//MultipartFile upload = mhsr.getFile("ani_photo");
+		//String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
 		List<String> uploadList = AwsS3Utils.uploadFileToS3(mhsr, "animalprofile"); // S3 업로드
 
 		map.put("mem_no", session.getAttribute("mem_no"));
