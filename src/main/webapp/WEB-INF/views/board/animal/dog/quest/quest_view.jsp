@@ -22,33 +22,34 @@
 		}
 		$.each(data,function(index,cmt){			
 			commentString+='<div class="col-sm-5" style="padding-top: 10px;padding-right: 0px">';
-			commentString+=cmt["MEM_NICKNAME"]+'&nbsp;&nbsp; '+cmt["REGIDATE"];
+			commentString+='<strong style="font-size:20px;color:#1fcfcc">'+cmt["mem_nickname"]+'</strong>&nbsp;&nbsp; '+cmt["regidate"];
 			commentString+='</div>';
 			commentString+='<div class="offset-sm-5 col-sm-2" style="text-align:right;padding-top: 10px">';
-			if('${sessionScope.mem_no}' == cmt["MEM_NO"])
-				commentString+='<a title="'+cmt["CMT_NO"]+'" class="commentDelete text-right" href="#">삭제</a>';
-			else
-				commentString+='';
+			if('${sessionScope.mem_no}' == cmt["mem_no"])
+				commentString+='<span class="commentDelete" title="'+cmt['cmt_no']+'" style="cursor: pointer; color: #1fcfcc; font-size: 1.4em; font-weight: bold">삭제</span>';
 			commentString+='</div>';
-			commentString+='<div class="col-sm-12">';
-			commentString+='<h4>'+cmt["CMT_CONTENT"]+'</h4>';
+			commentString+='<div class="border-bottom" style="width:100%">';
+			commentString+='<h4 title="'+cmt["cmt_no"]+'" style="margin-left:13px">'+cmt["cmt_content"]+'</h4>';
 			commentString+='</div>';
 		});		
 		commentString+='</div>';
 		$('#comments').html(commentString);
 		
-		//댓글 삭제 처리
+		//댓글 삭제 처리	
 		$('.commentDelete').click(function(){			
 			var cno_value = $(this).attr("title");
+			console.log($(this).attr("title"));
 			$.ajax({
 				url:"<c:url value='/dog/quest/cmtDelete.awa'/>",
-				data:{cno:cno_value,no:${record.no}},
+				data:{cmt_no:cno_value,no:${record.no}},
 				dataType:'text',
 				type:'post',
 				success:function(key){					
 					showComments(key);					
 				}		
+				
 			});
+			console.log(cno_value);
 		});
 	};
 	
@@ -66,8 +67,7 @@
 				type:'post',
 				success:function(key){					
 					showComments(key);
-					if($('#submit').val()=='수정'){						
-						$('#submit').val('등록');
+					if($('#submit').val()=='등록'){	
 						$('#cmt_content').val('');
 					}
 				}		
@@ -81,15 +81,29 @@
 			//메모글 삭제처리]
 			$('#delete').on('click',function(){
 				if(confirm('삭제 하시겠습니까')){
-					location.replace("<c:url value='/animal/dog/quest/quest_delete.aw?no=${record.no}'/>");				
+					location.replace("<c:url value='/animal/dog/quest/quest_delete.aw?no=${record.no}&checking=${record.checking}'/>");				
 				}
 			});
 		});
 		
-		
+		var data = <%=request.getParameter("no")%>
+		var hit = ${record.quest_hit};
 		$('.img1').on('click',function(){
-			$('.img2').toggle();
-			$('.img1').css('display','none');
+			$.ajax({
+				data : {no:data},
+				url : "<c:url value='/animal/dog/quest/quest_hit.aw'/>",
+				type : 'post',
+				success: function(){
+					hit = hit+1;
+					document.getElementById("quest_hit").innerHTML = hit;
+					document.getElementById("quest_hit1").innerHTML = hit;
+					$('.img2').css('color','blue').toggle();
+					$('.img1').css('display','none');
+				},
+				error : function(){
+	    			console.log("error");
+	    		}
+			});
 		});
 		
 		$("#comments").removeAttr("href")
@@ -105,20 +119,25 @@
 	</div>	
 	<div class="row" style="padding: 10px;padding-bottom: 0px;text-align:right;padding-right:0px" >
 		<div class="col-sm-1" style="text-align:left;padding-right:0px;" >
-			글쓴이 &nbsp; &nbsp;|
+			 &nbsp; &nbsp;글쓴이 &nbsp;&nbsp;|
 		</div>
-		<div class="col-sm-1" style="text-align:left">
-			${record.mem_nickname}
+		<div class="col-sm-2" style="text-align:left">
+			<c:if test="${session.mem_no != null}">
+				${record.mem_nickname}
+			</c:if>
+			탈퇴한 회원
 		</div>
 		<div class="col-sm-1" style="text-align:left;padding-right:0px;">
-			작성일 &nbsp; |
+			 &nbsp; 작성일 &nbsp; |
 		</div>
 		<div class="col-sm-2"  style="text-align:left;">
 			${record.quest_regidate}
 		</div>
-		<div class="offset-sm-4 col-sm-3" style="text-align:right">
+		<div class="offset-sm-3 col-sm-3" style="text-align:right">
 			<c:if test="${sessionScope.mem_no == record.mem_no}">
 				<a class="text-right" href="<c:url value='/security/animal/dog/quest/quest_edit.aw?no=${record.no}'/>">수정 &nbsp;</a>
+			</c:if>
+			<c:if test="${sessionScope.mem_no == record.mem_no or record.mem_no == null}">
 				<a id="delete" href="#">| &nbsp;삭제 |</a>
 			</c:if>
 			<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>"> &nbsp;&nbsp;목록</a>
@@ -127,7 +146,7 @@
 	</div>
 	<div class="row border-bottom">
 		<div class="offset-sm-8 col-sm-4" style="text-align: right;padding-bottom: 10px">
-			조회수 ${record.quest_count } &nbsp;&nbsp;| &nbsp;&nbsp;댓글수  5&nbsp;&nbsp; |&nbsp;&nbsp; 추천수   ${record.quest_hit}<!-- 스페이스바 주기 -->
+			조회수 ${record.quest_count } &nbsp;&nbsp;| &nbsp;&nbsp; 추천수&nbsp;  <a id="quest_hit">${record.quest_hit}</a><!-- 스페이스바 주기 -->
 		</div>
 	</div>
 	<div class="text-center row" style="padding-left:15px;padding-top:10px">
@@ -137,7 +156,7 @@
 		<div class="offset-sm-5 col-sm-1" style="padding: 10px">
 			<img class="img1" style="text-align:center;padding-left:12px;color:#1fcfcc" src="/aniwhere/resources/images/thumbs.png">
 			<img class="img2" style="text-align:center;padding-left:12px;display:none;color:#1fcfcc" src="/aniwhere/resources/images/thumbsfull.png">
-			<p style="text-align:center;"> ${record.quest_hit}</p>
+			<p style="text-align:center;" id="quest_hit1">${record.quest_hit}</p>
 		</div><!-- 누른면 색이 꽉차고 빌수도 있게하게 hideen주기 -->
 	</div>
 </div>
@@ -145,17 +164,17 @@
 <div class="container border" style="margin-top: 10px;margin-bottom: 10px">
 	<div class="row">
 		<div class="col-sm-12">
-			<strong style="font-size: 3em">댓글</strong> 댓글 <span id="count"></span>개
+			<strong style="font-size: 3em">댓글</strong>
 		</div>
 		<form id="frm" method="post">
-			<input type="hidden" name="cmt_no" />
 			<input type="hidden" id="no" name="no" value="${record.no}"/>
+			<input type="hidden" id="cmt_no" name="cmt_no"/>
 			<div class="form-row" style="width:100%">
 				<input style="margin-bottom:10px ;width:92%;margin-left: 20px" class="form-control" id="cmt_content" name="cmt_content"  type="text" size="200" placeholder="댓글을 입력 하세요" />
 				<input style="margin-bottom:10px ;margin-left:10px;width:5%" type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
 			</div>
 		</form>
 	</div>
-	<a href="#" id="comments">
+	<a id="comments">
 	</a>
 </div>

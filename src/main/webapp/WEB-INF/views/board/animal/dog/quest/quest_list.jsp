@@ -12,16 +12,14 @@
 		<form action='<c:url value="/security/animal/dog/quest/quest_write.aw"/>'>
 			<div class="offset-sm-9 col-sm-3" style="padding: 5px;padding-right: 0px">	
 				<div align="right">
-					<a href="<c:url value='/security/animal/dog/quest/quest_write.aw'/>"class="btn btn-success">
-						<i class="fas fa-pen-square" >글쓰기</i><!-- 아이콘 -->
-					</a>
+					<a href="<c:url value='/security/animal/dog/quest/quest_write.aw'/>"class="btn btn-success">글쓰기</a>
 				</div>
 			</div>
 		</form>
 	</div>
 	<div class="row">
 		<table class="table table-hover table-bordered">
-			<thead id="thead"style="background-color:#1ABC9C">
+			<thead id="thead"style="background-color:#1fcfcc">
 				<tr>
 					<th scope="col" style="width:8%" class="text-center">글번호</th>
 					<th class="text-center" scope="col" >제목<small>(댓글)</small></th>
@@ -40,16 +38,16 @@
 				<c:if test="${not isEmpty }">
 					<c:forEach var="record" items="${list}" varStatus="loop">
 						<tr>
-							<td class="text-center" scope="row">${record.no}</td>
+							<td class="text-center" scope="row">${record.dto.no}</td>
 							<td>
-								<a style="color:black;" href="<c:url value='/animal/dog/quest/quest_view.aw?no=${record.no}'/>">${record.quest_title}
-									<span class="badge badge-info">${record.quest_hit}</span>
+								<a style="color:black;" href="<c:url value='/animal/dog/quest/quest_view.aw?no=${record.dto.no}'/>">${record.dto.quest_title}
+									<span class="badge badge-info">${record.cmtCount != null ? record.cmtCount : 0 }</span>
 								</a>
 							</td>
-							<td class="text-center">${record.mem_nickname}</td>
-							<td class="text-center">${record.quest_count}</td>
-							<td class="text-center">${record.quest_hit}</td>
-							<td class="text-center">${record.quest_regidate}</td>
+							<td class="text-center">${record.dto.mem_nickname}</td>
+							<td class="text-center">${record.dto.quest_count}</td>
+							<td class="text-center">${record.dto.quest_hit}</td>
+							<td class="text-center">${record.dto.quest_regidate}</td>
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -76,9 +74,7 @@
 					<input type="text" class="form-control" name="searchWord" />
 				</div>
 				<div class="form-group" style="padding-left:5px">
-					<button type="submit" class="btn btn-outline-primary btn-sm" style="padding-left:10px;font-size:20px">
-						<i class="fas fa-search"></i>검색
-					</button>
+					<button type="submit" class="btn btn-outline-primary btn-sm" style="padding-left:10px;font-size:20px">검색</button>
 				</div>
 			</form>
 		</div>

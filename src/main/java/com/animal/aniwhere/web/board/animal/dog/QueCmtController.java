@@ -12,6 +12,7 @@ import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,7 +26,7 @@ public class QueCmtController {
 	private AllCommentService allCommentService;
 	
 	@ResponseBody
-	@RequestMapping(value="/security/dog/quest/cmtWrite.awa",produces="text/html; charset=UTF-8")
+	@RequestMapping(value="/security/dog/quest/cmtWrite.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 	public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
 		
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -39,12 +40,11 @@ public class QueCmtController {
 	}///////////////////
 	
 	@ResponseBody
-	@RequestMapping(value="/dog/quest/cmtList.awa",produces="text/html; charset=UTF-8")
-	public String list(@RequestParam Map map,Model model) throws Exception{
+	@RequestMapping(value="/dog/quest/cmtList.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+	public String list(@RequestParam Map map,HttpSession session) throws Exception{
 		
 		map.put("table_name", "quest");
 		map.put("origin_no", map.get("no"));
-		map.put("no", map.get("no"));
 		
 		List<AllCommentDTO> collections = allCommentService.selectList(map);
 		
@@ -53,6 +53,7 @@ public class QueCmtController {
 		for (AllCommentDTO dto : collections) {
 	         Map record = new HashMap();
 	         record.put("cmt_no", dto.getCmt_no());
+	         session.setAttribute("cmt_No",dto.getCmt_no());
 	         record.put("cmt_content", dto.getCmt_content());
 	         record.put("mem_nickname", dto.getMem_nickname());
 	         record.put("regidate", dto.getRegidate().toString());
@@ -67,11 +68,10 @@ public class QueCmtController {
 	}//////////////////
 	
 	@ResponseBody
-	@RequestMapping(value="/dog/quest/cmtDelete.awa",produces="text/html; charset=UTF-8")
-	public String delete(@RequestParam Map map) throws Exception{
-		
+	@RequestMapping(value="/dog/quest/cmtDelete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+	public String delete(@RequestParam Map map,HttpSession session) throws Exception{
 		map.put("table_name", "quest");
-		
+		map.put("cmt_no",map.get("cmt_no"));
 		allCommentService.delete(map);
 		
 		return map.get("no").toString();
