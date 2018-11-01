@@ -37,7 +37,6 @@
 		<security:session-management invalid-session-url="/" >
 		
 		<security:concurrency-control max-sessions="1" 
-		        error-if-maximum-exceeded="true"
 		        expired-url="/login.aw" />
 		</security:session-management>
 	</security:http>
