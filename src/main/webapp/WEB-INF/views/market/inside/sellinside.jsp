@@ -6,8 +6,7 @@
 <script>
 	var isDelete = function() {
 		if (confirm("글을 삭제 하시겠습니까?"))
-			location
-					.replace("<c:url value='/market/sell/delete.aw?sell_no=${record.no}'/>");
+			location.replace("<c:url value='/market/sell/delete.aw?sell_no=${record.no}'/>");
 	};
 </script>
 
@@ -139,6 +138,7 @@ function changeimage1() {
 				</c:choose>
 				<small>${record.title}</small>
       </h1>
+      
 </div>
       <!-- Portfolio Item Row -->
       <div class="row">
@@ -182,7 +182,7 @@ function changeimage1() {
 					<li>만족 불만족 표시</li>
 					<li>회원의 등급</li>
 					<li>연락처 정보공개시에만 공개</li>
-				</ul> 
+				</ul>
 
 			</div>
         </div>
@@ -209,7 +209,6 @@ function changeimage1() {
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">     
             <img  id="product4" onclick="javascript:changeimage4()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product4.png'/>" alt="" style="width: 300px; height: 200px;">
         </div>
-
       </div>
       <!-- /.row -->	
 
@@ -227,17 +226,14 @@ function changeimage1() {
 
 			</table>
 		</div>
-		
+		 <!-- 버튼시작 -->
            <div style="text-align: center">
 			<a href="<c:url value='/market/sell.aw'/>"> 
-			<input name="reset"  class="btn btn-info" type="button" value="목록"></a> 
-			
+			<input name="reset"  class="btn btn-info" type="button" value="목록"></a> 			
 			<c:if test="${sessionScope.mem_no==record.mem_no }">
 			<a href="<c:url value='/market/selledit.aw?sell_no=${record.no}'/>" type="button" class="btn btn-danger">수정</a>
-			</c:if>
-			
-			 <input  class="btn btn-suceess" style="background-color: #4CAF50;" type="button" id="repl"value="답글"> 
-				
+			</c:if>			
+			 <input  class="btn btn-suceess" style="background-color: #4CAF50;" type="button" id="repl"value="답글"> 				
 				<c:if test="${sessionScope.mem_no==record.mem_no }">
 				<a href="javascript:isDelete()" type="button" class="btn">삭제</a>					
 				</c:if>

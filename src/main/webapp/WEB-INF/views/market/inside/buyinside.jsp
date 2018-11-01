@@ -138,17 +138,15 @@
 
 			</table>
 		</div>
-
+ <!-- 버튼시작 -->
 		<div style="text-align: center">
 			<a href="<c:url value='/market/buy.aw'/>"> 
 			<input name="reset" class="btn btn-info" type="button" value="목록"></a> 
 			
 			<c:if test="${sessionScope.mem_no==record.mem_no }">
 			<a href="<c:url value='/security/market/buyedit.aw?buy_no=${record.no}'/>" type="button" class="btn btn-danger">수정</a>
-			</c:if>
-			
-			 <input name="reset" class="btn btn-suceess" style="background-color: #4CAF50;" type="button" id="repl"value="답글"> 
-				
+			</c:if>			
+			 <input name="reset" class="btn btn-suceess" style="background-color: #4CAF50;" type="button" id="repl"value="답글"> 				
 				<c:if test="${sessionScope.mem_no==record.mem_no }">
 				<a href="javascript:isDelete()" type="button" class="btn">삭제</a>					
 				</c:if>

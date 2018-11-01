@@ -13,7 +13,6 @@ function check() {
        alert("제목을 입력해 주세요.");
        fr.title.focus();
        return false;
-
     } 
     
     else if (fr.title.value.length > 50) {
@@ -60,6 +59,8 @@ function check() {
     }	    
    
 else {
+	
+	
  fr.action="<c:url value='/market/sellinsert.aw'/>"; 
  return true;
 }
@@ -82,12 +83,14 @@ function showContent() {
 	   
 	   $('#enterBtn').click(function(){
 		 
-		   var content="※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.\r\n";
+		   var content="========판매현황 정리입니다.============\r\n";
 		   content+='제목:'+$('#title').val()+'\r\n';
 		   content+='판매물품명:'+$('#name').val()+'\r\n';
- 		   content+='희망가:'+$('#price').val()+'\r\n';
-		   content+='거래기간:'+$('#way').val()+'\r\n'; 
+ 		   content+='희망가:'+$('#price').val()+'원\r\n';
+ 		  content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+		   content+='거래방법:'+$('#way').val()+'\r\n'; 
            content+='연락처:'+$('#phone').val()+'\r\n'; 
+           content+='====================================\r\n'; 
            $('#summernote').append(content);
            
 	   
@@ -161,14 +164,14 @@ function showContent() {
 
 		<div class="col-md-12">
 <form name="fr" id="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" 
-				class="form-horizontal">
+				class="form-horizontal" >
 				<div class="form-row">
 				<input type="hidden" name="table_name" value="sell"/>
 				 <input type="hidden" name="mem_no" value="${mem_no }">
 			
 					
 			<label for="" class="" >제목</label> 
-			<input class="form-control" type="text" id="title" name="title" placeholder="제목을 입력하세요" />
+			<input class="form-control" type="text" id="title" name="title" placeholder="제목을 입력하세요" required />
 
 			<p style="margin-top: 30px">
 
@@ -206,21 +209,21 @@ function showContent() {
 						<span  >제품명</span>
 						<input 
 							 style="text-align: right;margin-left:px"
-							class="form-control" type="text" id="name" />
+							class="form-control" type="text" id="name" required />
 					</div>
 			
 					<div class="my-2" style="margin-right:30 px">
 						<span >희망가</span>
 						<input
 							style="text-align:right"
-							class="form-control" type="text" id="price" />
+							class="form-control" type="number" id="price" required />
 					</div>
 
 					<div class="my-2">
 						<span>거래기간</span> 
 						<input type="date" min="Today" style="text-align: right;padding-left: px"
-							max="2020-01-01"  class="form-control" type="text"
-							id="time" />
+							max="2020-01-01"  class="form-control" type="date"
+							id="time" required />
 							
 							<!--  거래기간 넣어주고 제한 걸어주는 로직 만들어야 함  -->
 							
@@ -230,11 +233,11 @@ function showContent() {
 
 					<div class="my-2">
 						<span>거래방법</span> <input class="form-control" type="text"
-							placeholder="예)직거래,택배등" style="text-align: right;padding-left:px" id="way" />
+							placeholder="예)직거래,택배등" style="text-align: right;padding-left:px" id="way" required />
 					</div>
 					<div class="my-2">
-						<span>연락처</span> <input class="form-control" type="text"
-							placeholder="집전화,휴대폰번호" style="text-align: right;padding-left:px" id="phone" />
+						<span>연락처</span> <input class="form-control" type="number"
+							placeholder="집전화,휴대폰번호" style="text-align: right;padding-left:px" id="phone" required/>
 					</div>
 
 				</div>
@@ -248,7 +251,7 @@ function showContent() {
 				
 				<!--  사진  3개이상 유효성 검사 항목 추가  -->
                  
-				<input multiple="multiple" type="file"  
+				<input multiple="multiple" type="file" 
 					style="color: slategray; border: 1 solid silver; width: 300; height: 20">(최대 5M)
 				
 
@@ -296,31 +299,26 @@ function showContent() {
 				
 				<div class="col-md-12 container">
 <textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
-				class="output"		maxlength="2048">
+				class="output"		maxlength="2048" required >
 ※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.											
-	
-						
-						
+					
 </textarea>
-
 				</div>
 							
 				<div style="text-align: center">
 					<a href="<c:url value='/market/sell.aw'/>">
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
-					<input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기" onclick="showContent();">
+					
+					<input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
+					
 					<input class="btn btn-danger" type="submit"  value="확인">
 
 				</div>
 				  
     <div class="output"></div>
-				
-				
-			
+											
 			</form>
-			
-			
-			
+						
 			<div style="margin-bottom: 50px"></div>
 
 		</div>
