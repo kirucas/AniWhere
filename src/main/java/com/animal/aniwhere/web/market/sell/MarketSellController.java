@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.market.BuySellServiceImpl;
 import com.animal.aniwhere.service.market.BuySellDTO;
@@ -226,26 +227,20 @@ public class MarketSellController {
 				return "forward:/market/sell.aw";
 			}//////////////delete()
 			
-			
 			//Summernote 업로드 기능
 			@ResponseBody
 		    @RequestMapping(value="/market/sell/Upload.aw")
-			
 		    public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
-				System.out.println("들어옴");
-				
 				String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 				MultipartFile upload = mhsr.getFile("file");
-				
 				String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-				File file = new File(phisicalPath+File.separator+newFilename);
+				//File file = new File(phisicalPath+File.separator+newFilename);
+				//upload.transferTo(file);
 				
-				if(!file.exists()) {
-					file.mkdirs();		
-				}
+				List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "sell"); // S3  업로드
 				
-				upload.transferTo(file);
-		        return "/Upload/"+newFilename;
+		        //return "/Upload/"+newFilename;
+				return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
 		   }
 	
 	

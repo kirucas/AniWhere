@@ -114,7 +114,7 @@ else {
             contentType: false,
             processData: false,
             success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
+                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
             },
             error : function() {
                console.log("error");
