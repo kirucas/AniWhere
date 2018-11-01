@@ -29,6 +29,8 @@ public class BirdMovieController {
 	// 서비스 주입]
 	@Resource(name = "movieService")
 	private MovieBoardServiceImpl service; //동영상 서비스
+	
+	@Resource(name = "allCommentService")
 	private AllCommentServiceImpl cmtservice; //댓글 서비스
 	// 목록처리]
 	// 리소스파일(memo.properties)에서 읽어오기
@@ -111,6 +113,10 @@ public class BirdMovieController {
 		// 게시글
 		MovieBoardDTO dto = service.selectOne(map);
 		
+		//맵에서 table_name 넣기
+		map.put("table_name", "movie");
+		map.put("origin_no", "no");
+		System.out.println("map :" +map); //map : {no=no, nowPage=1, table_name=movie}
 		// 댓글
 		List<AllCommentDTO> cmtlist = cmtservice.selectList(map);
 		
@@ -122,6 +128,8 @@ public class BirdMovieController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("cmtlist", cmtlist);
 		
+		System.out.println("model :" +model);
+		System.out.println("cmtlist :" +cmtlist);
 		
 		// 뷰정보 반환]
 		return "board/animal/bird/movie/movie_view.tiles";

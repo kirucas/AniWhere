@@ -68,7 +68,7 @@
 			
 			$.ajax({
 				url:"<c:url value='/Comment/Delete.bbs'/>",
-				data:{cno:cno_value, no:"${record.no}"},
+				data:{cno:cno_value, no:"${no}"},
 				dataType:'text',
 				type:'post',
 				success:function(key){					
@@ -80,7 +80,7 @@
 	
 	$(function(){
 		//페이지 로드시 코멘트 목록 뿌려주기
-		showComments("${record.no}");
+		showComments("${no}");
 	
 		//코멘트 입력처리]
 		$('#submit').click(function(){	
@@ -107,7 +107,7 @@
 		//메모글 삭제처리]
 		$('#del_memo').on('click',function(){
 			if(confirm('정말로 삭제할래?')){
-				location.replace("<c:url value='/BBS/Delete.bbs?no=${record.no}'/>");				
+				location.replace("<c:url value='/BBS/Delete.bbs?no=${no}'/>");				
 			}
 		});
 });
@@ -115,8 +115,8 @@
 </script>
 
 <style>
-a:link { color:black; text-decoration: none;}
-a:visited { color:black; text-decoration: none;}
+a:link { color:white; text-decoration: none;}
+a:visited { color:white; text-decoration: none;}
 
 
 .title {
@@ -195,17 +195,18 @@ a:visited { color:black; text-decoration: none;}
 			class="btn btn-success">목록</a>
 	</div>
 </div>
-
+<br/>
 <div class="row">
 		<!-- 한줄 코멘트 입력 폼-->
 		
-			<h2>한줄 댓글 입력 폼</h2>
+			<h3>댓글</h3>&nbsp;&nbsp;&nbsp;&nbsp;
 			<form class="form-inline" id="frm" method="post">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				<input type="hidden" name="no" value="${record.no}" />
+			<input type="hidden" value="${table_name}"/>
+			<input type="hidden" value="${mem_no}"/>
+				<input type="hidden" name="no" value="${no}" />
 				<!-- 수정 및 삭제용 파라미터 -->
 				<input type="hidden" name="cno" />
-				<input placeholder="댓글을 입력하세요" id="title" class="form-control" type="text" size="50" name="onelinecomment" />
+				<input placeholder="댓글을 입력하세요" id="title" value="${cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />
 				<input class="btn btn-success" id="submit" type="button" value="등록" /></td>			
 			</form>
 	</div>
