@@ -19,7 +19,7 @@
 	
 	<update id="commentUpdate" parameterType="java.util.Map">
 		UPDATE ${table_name}_cmt
-		SET cmt_content=#{cmt_content}_cmt
+		SET cmt_content=#{cmt_content}
 		WHERE cmt_no=#{cmt_no}
 	</update>
 	

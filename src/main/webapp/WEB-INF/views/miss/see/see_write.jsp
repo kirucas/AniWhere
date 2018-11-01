@@ -103,7 +103,7 @@
 		</h2>
 	</div>
 	<div style="width:100%">
-		<form method="post" action="<c:url value='/miss/see_insert.aw'/>">
+		<form method="post" action="<c:url value='/security/miss/see_insert.aw'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="table_name" value="see">
 				<input type="hidden" name="mem_no" value="#" />

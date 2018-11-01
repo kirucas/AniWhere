@@ -59,7 +59,7 @@
 		</h2>
 	</div>
 	<div style="width:100%">
-		<form method="post" action="<c:url value='/miss/find_update.aw?find_no=${record.no}'/>">
+		<form method="post" action="<c:url value='/security/miss/find_update.aw?find_no=${record.no}'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="table_name" value="find">
 				<input type="hidden" name="mem_no" value="#" />

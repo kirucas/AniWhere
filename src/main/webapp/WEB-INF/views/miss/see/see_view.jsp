@@ -20,7 +20,7 @@
    //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수
    var showComments = function(key){
       $.ajax({
-         url:"<c:url value='/miss/cmt_list.awa'/>",
+         url:"<c:url value='/miss/see/cmt_list.awa'/>",
          data:{no:key},
          dataType:'json',
          type:'post',
@@ -31,14 +31,15 @@
    //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수
    //data;
    //[{"NO":2,"ONELINECOMMENT":}]
-   var displayComments = function(data){
+    var displayComments = function(data){
       console.log(JSON.stringify(data));
     
-      var commentString = "<h2>댓글 목록</h2>";
-      commentString+='<table class="table table-bordered">';
+      var commentString = '<h2 data-v-f39b78c2="" class="comment__title" style="margin-left: 15px;margin-bottom: 15px;">댓글 목록</h2>&nbsp';
+      commentString+='<span data-v-f39b78c2="" class="comment__count" style="margin-top:3px;">총 <em data-v-f39b78c2="">2</em>개</span>';
+      commentString+='<table class="table table-bordered" style="width: 95%; margin-left: 25px">';
       commentString+='<tr><th width="15%">작성자</th><th width="50%">내용</th><th width="20%">등록일</th><th>삭제</th></tr>'
       	if(data.length==0){
-        	 commentString+="<tr><td colspan='4'>등록된글이 없어요</td></tr>";
+        	 commentString+="<tr><td colspan='4' style='text-align: center'>등록된글이 없어요</td></tr>";
     	}  
       
       $.each(data,function(index,comment){
@@ -52,8 +53,7 @@
           commentString+='<td>';
           if('${sessionScope.mem_no}'==comment["mem_no"])
              commentString+='<span class="commentDelete" title="'+comment['cmt_no']+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
-          else
-             commentString+='<span style="color: gray; font-size: 0.7em; font-weight: bold">삭제불가</span>';
+
              commentString+='</td></tr>'
        }); 
    
@@ -70,7 +70,7 @@
       $('.commentDelete').click(function() {
             var cno_value = $(this).attr("title");
             $.ajax({
-                url:'<c:url value="/miss/cmt_delete.awa"/>',
+                url:'<c:url value="/miss/see/cmt_delete.awa"/>',
                 data:{cno:cno_value,no:${record.no}},
                 dataType:'text',
                 type:'post',
@@ -90,9 +90,9 @@
       //코맨트 입력처리
       $('#submit').click(function(){
          if($(this).val()=='등록')
-            var action = "<c:url value='/miss/cmt_write.awa'/>";
+            var action = "<c:url value='/miss/see/cmt_write.awa'/>";
          else
-            var action = "<c:url value='/miss/cmt_edit.awa'/>";
+            var action = "<c:url value='/miss/see/cmt_edit.awa'/>";
          
          $.ajax({
             url:action,
@@ -101,6 +101,9 @@
             type:'post',
             success:function(key){
                showComments(key);
+               if($('#submit').val()=='등록'){
+            	   $("#title").val('');
+               }
                if($('#submit').val()=='수정'){
                   $("#submit").val('등록');
                   $("#title").val('');
@@ -141,7 +144,7 @@
 							<!-- 글에 대한 버튼들(자기가 쓴 글이면 수정과 삭제 가능) -->
 							<!-- a href="<c:url value='/ReplyBBS/BBS/Reply.bbs?free_no=${record.no}'/>" class="btn btn-success">답변</a> -->
 							<c:if test="${sessionScope.mem_no==record.mem_no }">
-								<a href="<c:url value='/miss/see_edit.aw?see_no=${record.no}'/>"
+								<a href="<c:url value='/security/miss/see_edit.aw?see_no=${record.no}'/>"
 									class="article-action__button button">수정</a>
 								<a href="javascript:isDelete()"
 									class="article-action__button button button--red button--red--border">삭제</a>
@@ -185,21 +188,27 @@
 			</div>
 		</div>
 	</div>
-	<div>
-		<span class="comment__count">총 <em data-v-f39b78c2="">2</em>개</span>
-		<form id="frm" method="post">
-			<input type="hidden" name="no" value="${record.no}" />
-			<input type="hidden" name="cmt_no"/> 
-			<input placeholder="댓글을 입력하세요" cols="20" class="form-control" style="margin-top: 10px;" id="title" name="cmt_content" /> 
-			<input type="button" id="submit" style="float: right; margin-top: 15px" class="btn btn-success" value="등록" /> 
-			</br>
-			</br>
-		</form>
-	</div>
-	<div class="row" id="comments">
-	<!-- 한줄 코멘트 목록-->
-		
-	<!-- ajax로 코멘트 목록뿌리기 -->
+	<div data-v-f39b78c2="" data-post="820136">
+		<div data-v-f39b78c2="" class="comment-wrap">
+			<!---->
+			<div data-v-f39b78c2="" class="comment-header">
+				<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
+				<!---->
+				<form id="frm" method="post">
+					<input type="hidden" name="no" value="${record.no}" />
+					<input type="hidden" name="cmt_no"/> 
+					<input placeholder="댓글을 입력하세요"class="form-control" style="margin-left:10px;margin-top: 10px; width: 900px; float: left;" id="title" name="cmt_content" /> 
+					<input type="button" id="submit" style="float: left; margin-left: 20px; margin-top: 10px" class="btn btn-success" value="등록" /> 
+					</br>
+					</br>
+				</form>
+				</br>
+				<div class="row" id="comments">
+				<!-- 한줄 코멘트 목록-->
+				<!-- ajax로 코멘트 목록뿌리기 -->
+				</div>
+			</div>	
+		</div>
 	</div>
 </div>
 </div>
