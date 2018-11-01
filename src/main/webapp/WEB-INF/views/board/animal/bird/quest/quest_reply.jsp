@@ -34,7 +34,7 @@
 	        $.ajax({
 	           data: form_data,
 	           type: "POST",
-	           url : "<c:url value='/animal/rNa/quest/Upload.aw'/>",
+	           url : "<c:url value='/animal/bird/quest/Upload.aw'/>",
 	           cache: false,
 	           contentType: false,
 	           processData: false,
@@ -47,20 +47,21 @@
 	        });
 	     }
   	});
+	
 </script>
 <div class="container border">
 	<div class="row col-sm-4" >
-		<h3>파충류&양서류 질문 게시판</h3>
+		<h2>조류 질문 게시판</h2>
 	</div>
 	<form class="form-horizontal" method="post"
-		action='<c:url value="/security/animal/rNa/quest/quest_write.aw"/>'>
+		action='<c:url value="/security/animal/bird/quest/quest_reply.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-sm-2 control-label" style="font-size:20px">제목</label>
-			<input maxlength="50" class="form-control" type="text" name="quest_title" id="quest_title" autofocus="autofocus" placeholder="제목을 입력해주세요" />
+			<input readonly="readonly" title="변경이 안됩니다" class="form-control" type="text" maxlength="50" name="quest_title" id="quest_title" value="└───＞${record.quest_title }글에 대한 답변 " />
 		</div>
 		<div class="form-row" style="padding-top: 10px;padding-bottom: 20px">
 			<label for="quest_content" class="col-sm-2 control-label" style="font-size:20px">내용</label>
-			<textarea maxlength="2000" class="form-control" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요"></textarea>
+			<textarea autofocus="autofocus" maxlength="2000" class="form-control" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요"></textarea>
 		</div>
 		<div class="form-row">
 			<div class="form-group offset-sm-5 col-sm-1">
@@ -68,7 +69,10 @@
 					<input type="button" class="btn btn-lg btn-outline-danger" value="취소"/>
 				</a>
 			</div>
-			<input type="hidden" id="ani_category" name="ani_category" value="3" />
+			<input type="hidden" id="ani_category" name="ani_category" value="4" />
+			<input type="hidden" id="checking" name=checking value="1" />
+			<input type="hidden" id="origin_no" name="origin_no" value="${record.no }" />
+			
 			<div class="form-group col-sm-1">
 				<button type="submit" class="btn btn-lg btn-outline-primary">등록</button>
 			</div>

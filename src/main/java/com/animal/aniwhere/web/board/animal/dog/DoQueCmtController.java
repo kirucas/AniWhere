@@ -20,7 +20,7 @@ import com.animal.aniwhere.service.AllCommentDTO;
 import com.animal.aniwhere.service.AllCommentService;
 
 @Controller
-public class QueCmtController {
+public class DoQueCmtController {
 
 	@Resource(name="allCommentService")
 	private AllCommentService allCommentService;

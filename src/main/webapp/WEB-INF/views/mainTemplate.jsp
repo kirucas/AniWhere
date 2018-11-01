@@ -231,7 +231,7 @@
 		          				<a href="<c:url value='/animal/rna/movie.aw'/>"><img src="<c:url value='/resources/images/icon/videoicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;동영상 게시판</a>
 		          			</li>
 		          			<li>
-		          				<a href="<c:url value='/animal/rna/quest.aw'/>"><img src="<c:url value='/resources/images/icon/questicon.jpg'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 게시판</a>
+		          				<a href="<c:url value='/animal/rNa/quest.aw'/>"><img src="<c:url value='/resources/images/icon/questicon.jpg'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;질문 게시판</a>
 		          			</li>
 		          			<li>
 		          				<a href="<c:url value='/board/animal/rNa/tip/list.aw'/>"><img src="<c:url value='/resources/images/icon/tipicon.png'/>" style="width: 35px;height: 35px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팁 게시판</a>

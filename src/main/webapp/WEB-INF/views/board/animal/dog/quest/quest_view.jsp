@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
-//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
+	//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
 	var showComments = function(key){		
 		$.ajax({
 			url:"<c:url value='/dog/quest/cmtList.awa'/>",
@@ -81,7 +81,7 @@
 			//메모글 삭제처리]
 			$('#delete').on('click',function(){
 				if(confirm('삭제 하시겠습니까')){
-					location.replace("<c:url value='/animal/dog/quest/quest_delete.aw?no=${record.no}&checking=${record.checking}'/>");				
+					location.replace("<c:url value='/animal/dog/quest/quest_delete.aw?checking=${record.checking}&no=${record.no}'/>");
 				}
 			});
 		});
@@ -122,10 +122,12 @@
 			 &nbsp; &nbsp;글쓴이 &nbsp;&nbsp;|
 		</div>
 		<div class="col-sm-2" style="text-align:left">
-			<c:if test="${session.mem_no != null}">
+			<c:if test="${record.mem_no != null}">
 				${record.mem_nickname}
 			</c:if>
-			탈퇴한 회원
+			<c:if test="${record.mem_no == null}">
+				탈퇴한 회원
+			</c:if>
 		</div>
 		<div class="col-sm-1" style="text-align:left;padding-right:0px;">
 			 &nbsp; 작성일 &nbsp; |
@@ -135,7 +137,7 @@
 		</div>
 		<div class="offset-sm-3 col-sm-3" style="text-align:right">
 			<c:if test="${sessionScope.mem_no == record.mem_no}">
-				<a class="text-right" href="<c:url value='/security/animal/dog/quest/quest_edit.aw?no=${record.no}'/>">수정 &nbsp;</a>
+				<a class="text-right" href="<c:url value='/security/animal/dog/quest/quest_edit.aw?no=${record.no}&checking=${record.checking}'/>">수정 &nbsp;</a>
 			</c:if>
 			<c:if test="${sessionScope.mem_no == record.mem_no or record.mem_no == null}">
 				<a id="delete" href="#">| &nbsp;삭제 |</a>

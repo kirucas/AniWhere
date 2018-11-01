@@ -21,11 +21,11 @@
 		<table class="table table-hover table-bordered">
 			<thead id="thead"style="background-color:#1fcfcc">
 				<tr>
-					<th scope="col" style="width:8%" class="text-center">글번호</th>
+					<th scope="col" style="width:6%" class="text-center">글번호</th>
 					<th class="text-center" scope="col" >제목<small>(댓글)</small></th>
-					<th class="text-center" scope="col" style="width:8%">작성자</th>
-					<th class="text-center" scope="col" style="width:8%">조회수</th>
-					<th class="text-center" scope="col" style="width:8%">추천수</th>
+					<th class="text-center" scope="col" style="width:10%">작성자</th>
+					<th class="text-center" scope="col" style="width:6%">조회수</th>
+					<th class="text-center" scope="col" style="width:6%">추천수</th>
 					<th class="text-center" scope="col" style="width:12%">작성일</th>
 				</tr>
 			</thead>
@@ -44,10 +44,10 @@
 									<span class="badge badge-info">${record.cmtCount != null ? record.cmtCount : 0 }</span>
 								</a>
 							</td>
-							<c:if test="${record.dto.mem_nickname == null}">
+							<c:if test="${record.dto.mem_no == null }">
 								<td class="text-center">탈퇴한 회원</td>
 							</c:if>
-							<c:if test="${record.dto.mem_nickname != null}">
+							<c:if test="${record.dto.mem_no != null }">
 								<td class="text-center">${record.dto.mem_nickname}</td>
 							</c:if>
 							<td class="text-center">${record.dto.quest_count}</td>

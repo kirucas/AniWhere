@@ -154,9 +154,10 @@ public class DogQuestController {
 	@RequestMapping("/animal/dog/quest/quest_delete.aw")
 	public String delete(@RequestParam Map map,Model model) throws Exception{
 		System.out.println(map.get("checking"));
-		model.addAttribute("checking",map.get("checking"));
+		System.out.println(map.get("no"));
 		int successFail = questService.delete(map);
 		model.addAttribute("successFail",successFail);
+		model.addAttribute("checking",map.get("checking"));
 		return "board/animal/dog/quest/quest_message";
 	}
 	
