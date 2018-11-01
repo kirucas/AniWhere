@@ -227,7 +227,7 @@ public class MemberController {
 
 		return "forward:/";
 	}/// security
-
+	
 	/*
 	 * @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
 	 * public String signInProcess(@RequestParam Map map, HttpSession session, Model
