@@ -48,11 +48,17 @@ public class DogQuestController {
 			@RequestParam(required=false,defaultValue="1") int nowPage,//페이징용 nowPage파라미터 받기용
 			HttpSession session) throws Exception{
 		map.put("ani_category", ANI_CATEGORY);
-		
+		session.setAttribute("searchWord",map.get("searchWord"));
+		session.setAttribute("searchColumn",map.get("searchColumn"));
+		if(session.getAttribute("searchWord") != "") {
+			map.put("searchWord",session.getAttribute("searchWord"));
+			map.put("searchColumn",session.getAttribute("searchColumn"));
+		}
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		//전체 레코드 수
-		int totalRecordCount= questService.getTotalRecord(map);			
+		int totalRecordCount= questService.getTotalRecord(map);
+		
 		//시작 및 끝 ROWNUM구하기]
 		int start = (nowPage-1)*pageSize+1;
 		int end   = nowPage*pageSize;

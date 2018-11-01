@@ -3,8 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 <style>
-	@import url("https://use.fontawesome.com/releases/v5.4.2/css/all.css"); 
+	i{
+		@import url("https://use.fontawesome.com/releases/v5.4.2/css/all.css"); 
+	}
 </style>
+
 <div class="container">
 	<div class="page-header">
 		<h2>
@@ -15,9 +18,7 @@
 		<form action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
 			<div class="offset-sm-9 col-sm-3" style="padding: 5px;padding-right: 0px">	
 				<div align="right">
-					<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>"class="btn btn-success">
-						<i class="fas fa-pen-square" >글쓰기</i><!-- 아이콘 -->
-					</a>
+					<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>"class="btn btn-success">글쓰기</a>
 				</div>
 			</div>
 		</form>
@@ -76,12 +77,10 @@
 					</select>
 				</div>
 				<div class="form-group" style="padding-left:5px">
-					<input type="text" class="form-control" name="searchWord" />
+					<input type="text" class="form-control" name="searchWord"/>
 				</div>
 				<div class="form-group" style="padding-left:5px">
-					<button type="submit" class="btn btn-outline-primary btn-sm" style="padding-left:10px;font-size:20px">
-						<i class="fas fa-search"></i>검색
-					</button>
+					<button type="submit" class="btn btn-outline-primary btn-sm" style="padding-left:10px;font-size:20px">검색</button>
 				</div>
 			</form>
 		</div>
