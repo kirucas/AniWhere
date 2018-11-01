@@ -44,7 +44,12 @@
 									<span class="badge badge-info">${record.cmtCount != null ? record.cmtCount : 0 }</span>
 								</a>
 							</td>
-							<td class="text-center">${record.dto.mem_nickname}</td>
+							<c:if test="${record.dto.mem_nickname == null}">
+								<td class="text-center">탈퇴한 회원</td>
+							</c:if>
+							<c:if test="${record.dto.mem_nickname != null}">
+								<td class="text-center">${record.dto.mem_nickname}</td>
+							</c:if>
 							<td class="text-center">${record.dto.quest_count}</td>
 							<td class="text-center">${record.dto.quest_hit}</td>
 							<td class="text-center">${record.dto.quest_regidate}</td>
