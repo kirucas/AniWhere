@@ -33,7 +33,7 @@
 		WHERE origin_no=#{no}
 	</delete>
 	
-	<select id="commentCount" parameterType="java.util.Map">
+	<select id="commentCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM ${table_name}_cmt
 		WHERE origin_no=#{no}

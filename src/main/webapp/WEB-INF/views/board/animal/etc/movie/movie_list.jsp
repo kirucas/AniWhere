@@ -144,7 +144,7 @@ window.onpopstate = function(event) {
 		<!-- 아래에 동영상 올리기 버튼 -->
 		<div class="text-right">
 			<a class="btn btn-primary movie-write"
-			href="<c:url value='/animal/etc/movie/Write.aw'/>" role="button">동영상
+			href="<c:url value='/security/animal/etc/movie/Write.aw'/>" role="button">동영상
 				올리기 </a>
 		</div>
 	</div>

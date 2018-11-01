@@ -90,7 +90,7 @@
 </script>
 
 <div class="container">
-	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/animal/rNa/movie/Write.aw'/>">
+	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/security/animal/rNa/movie/Write.aw'/>">
 		<input type="hidden" name="mem_no" value="${mem_no }">
 		<input type="hidden" name="ani_category" value="3">
 		<div class="form-group row">

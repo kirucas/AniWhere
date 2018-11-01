@@ -87,13 +87,13 @@ public class RnAMovieController {
 	}//////////////// list()
 
 	// 등록 폼으로 이동]
-	@RequestMapping(value = "/animal/rNa/movie/Write.aw", method = RequestMethod.GET)
+	@RequestMapping(value = "/security/animal/rNa/movie/Write.aw", method = RequestMethod.GET)
 	public String movie_write() throws Exception {
 		return "board/animal/rNa/movie/movieWrite_form.tiles";
 	}///////////////////////////
 
 	// 입력처리용]
-	@RequestMapping(value = "/animal/rNa/movie/Write.aw", method = RequestMethod.POST)
+	@RequestMapping(value = "/security/animal/rNa/movie/Write.aw", method = RequestMethod.POST)
 	public String write(@RequestParam Map map) throws Exception {
 		
 		// 서비스 호출
@@ -119,7 +119,7 @@ public class RnAMovieController {
 	}/////////////////////
 
 	//수정폼으로 이동 및 수정 처리]
-		@RequestMapping("/rNa/movie/edit.aw")
+		@RequestMapping("/security/animal/rNa/movie/edit.aw")
 		public String movie_edit(Model model, @RequestParam Map map, HttpServletRequest req) throws Exception{
 			System.out.println("post방식 : " + req.getMethod().equals("POST"));
 			if(!req.getMethod().equals("POST")) {
