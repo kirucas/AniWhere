@@ -11,8 +11,6 @@ public class MarketGroupbuyController {
 	public String inside(@PathVariable String path) throws Exception {
 		return "market/" + path + "/inside.tiles";
 	
-	
-	
 	}////////// move
 	
 	

@@ -60,6 +60,7 @@ function check() {
    
 else {
 	
+		
  fr.action="<c:url value='/security/market/sellinsert.aw'/>"; 
  return true;
 }
@@ -72,13 +73,13 @@ else {
 
    $(function() {
 	   
-	   $('#enterBtn').click(function(){
+	   $('#enterBtn').submit(function(){
 		 
 		   var content="========판매현황 정리입니다.============\r\n";
 		   content+='제목:'+$('#title').val()+'\r\n';
 		   content+='판매물품명:'+$('#name').val()+'\r\n';
  		   content+='희망가:'+$('#price').val()+'원\r\n';
- 		  content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+ 		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
 		   content+='거래방법:'+$('#way').val()+'\r\n'; 
            content+='연락처:'+$('#phone').val()+'\r\n'; 
            content+='====================================\r\n'; 
@@ -123,18 +124,12 @@ else {
       }
           
    });
-   
-   
-   
-   
-   
+     
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 <title>쓰기게시판 내부</title>
-
-
 
 <!-- include summernote css/js-->
 <link
@@ -150,10 +145,10 @@ else {
 	<div class="container">
 
 		<div style="margin-top: 10px"></div>
-		<br />
+		<br/>
 
 		<div class="col-md-12">
-<form name="fr" id="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
+        <form name="fr" id="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
 				class="form-horizontal">
 				<div class="form-row">
 				<input type="hidden" name="table_name" value="sell"/>
