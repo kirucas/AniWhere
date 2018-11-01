@@ -69,6 +69,15 @@ else {
 </script>
 
 <script>
+
+function showContent() {
+	
+	
+    $('.output').html($('#title').val());
+        
+}
+
+
    $(function() {
 	   
 	   $('#enterBtn').click(function(){
@@ -203,7 +212,7 @@ else {
 					<div class="my-2" style="margin-right:30 px">
 						<span >희망가</span>
 						<input
-							style="text-align:right";
+							style="text-align:right"
 							class="form-control" type="text" id="price" />
 					</div>
 
@@ -287,7 +296,7 @@ else {
 				
 				<div class="col-md-12 container">
 <textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
-						maxlength="2048">
+				class="output"		maxlength="2048">
 ※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.											
 	
 						
@@ -299,10 +308,12 @@ else {
 				<div style="text-align: center">
 					<a href="<c:url value='/market/sell.aw'/>">
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
-					<input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기">
+					<input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기" onclick="showContent();">
 					<input class="btn btn-danger" type="submit"  value="확인">
 
 				</div>
+				  
+    <div class="output"></div>
 				
 				
 			
