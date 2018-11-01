@@ -2,10 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
-<style>
-	@import url("https://use.fontawesome.com/releases/v5.4.2/css/all.css"); 
-</style>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
 <div class="container">
 	<div class="page-header">
 		<h2>
@@ -13,10 +9,10 @@
 		</h2>
 	</div>
 	<div>
-		<form action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
+		<form action='<c:url value="/security/animal/dog/quest/quest_write.aw"/>'>
 			<div class="offset-sm-9 col-sm-3" style="padding: 5px;padding-right: 0px">	
 				<div align="right">
-					<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>"class="btn btn-success">
+					<a href="<c:url value='/security/animal/dog/quest/quest_write.aw'/>"class="btn btn-success">
 						<i class="fas fa-pen-square" >글쓰기</i><!-- 아이콘 -->
 					</a>
 				</div>

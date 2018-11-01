@@ -1,11 +1,96 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <head>
 
 <script>
+
+function check() {
+    var isAttached = $('#summernote').summernote('code');
+    if (fr.title.value == "") {
+       alert("제목을 입력해 주세요.");
+       fr.title.focus();
+       return false;
+    } 
+    
+    else if (fr.title.value.length > 50) {
+       alert("제목은 50자 이내로 입력해주세요.");
+       fr.title.focus();
+       return false;
+    } 
+        
+    else if (fr.name.value=="") {
+        alert("제품명 을 입력해주세요.");
+        fr.name.focus();
+        return false;
+     } 
+    
+   else if (fr.price.value=="") {
+        alert("희망가 를 입력해주세요.");
+        fr.price.focus();
+        return false;
+     } 
+   else if (fr.time.value=="") {
+        alert("거래기간 을 입력해주세요.");
+        fr.time.focus();
+         return false;
+     } 
+   else if (fr.way.value=="") {
+         alert("거래방법을  입력해주세요.");
+         fr.way.focus();
+         return false;
+
+      } 
+    
+     else if (fr.phone.value=="") {
+         alert("연락처 를 입력해주세요.");
+         fr.phone.focus();
+         return false;
+
+      } 
+    
+    
+   
+    else if (fr.content.value == "") {
+       alert('내용을 입력하세요.');
+       return false;
+    }	    
+   
+else {
+	
+ fr.action="<c:url value='/security/market/sellinsert.aw'/>"; 
+ return true;
+}
+    
+}
+
+</script>
+
+<script>
+
    $(function() {
+	   
+	   $('#enterBtn').click(function(){
+		 
+		   var content="========판매현황 정리입니다.============\r\n";
+		   content+='제목:'+$('#title').val()+'\r\n';
+		   content+='판매물품명:'+$('#name').val()+'\r\n';
+ 		   content+='희망가:'+$('#price').val()+'원\r\n';
+ 		  content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+		   content+='거래방법:'+$('#way').val()+'\r\n'; 
+           content+='연락처:'+$('#phone').val()+'\r\n'; 
+           content+='====================================\r\n'; 
+           $('#summernote').append(content);
+           	   
+	   });
+	   
+	   
+	   
+	   
+	   
+	   
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
@@ -24,19 +109,24 @@
          $.ajax({
             data: form_data,
             type: "POST",
-            url : "<c:url value='/market/buy/Upload.aw'/>",
+            url : "<c:url value='/market/sell/Upload.aw'/>",
             cache: false,
             contentType: false,
             processData: false,
             success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
+                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
             },
             error : function() {
                console.log("error");
             }
          });
       }
+          
    });
+   
+   
+   
+   
    
 </script>
 
@@ -63,12 +153,15 @@
 		<br />
 
 		<div class="col-md-12">
-<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/market/sellinsert.aw'/>" accept-charset="utf-8" 
+<form name="fr" id="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
 				class="form-horizontal">
 				<div class="form-row">
-					<input type="hidden" value="sell"/>
-			<label for="" class="" >제목</label> 
-			<input class="form-control" type="text" id="title" name="title" placeholder="제목을 입력하세요" />
+				<input type="hidden" name="table_name" value="sell"/>
+				 <input type="hidden" name="mem_no" value="${mem_no }">
+			
+					
+			<label for="" class="" >제목</label>
+			<input class="form-control" type="text" id="title" name="title" placeholder="제목을 입력하세요" required />
 
 			<p style="margin-top: 30px">
 
@@ -101,48 +194,46 @@
 			</div>
 		
 			
-				<div class="row" style="text-align: center; border: 1px silver solid; margin-left: 20px">
-					<div class="my-2">
-						<span style="margin-left: 20px">제품명</span>
-						<input
-							placeholder="" style="text-align: right;margin-left: 15px"
-							class="form-control" type="text" id="productname" />
+				<div class="row" style="text-align: center; border: 1px silver solid; margin-left: px">
+					<div class="my-2" style="margin-right:30 px">
+						<span  >제품명</span>
+						<input 
+							 style="text-align: right;margin-left:px"
+							class="form-control" type="text" id="name" required />
 					</div>
 			
-					<div class="my-2">
-						<span style="margin-right: 20px">희망가</span>
+					<div class="my-2" style="margin-right:30 px">
+						<span >희망가</span>
 						<input
-							placeholder="       원" style="text-align: right;margin-left: 15px"
-							class="form-control" type="text" id="wishprice" />
+							style="text-align:right"
+							class="form-control" type="number" id="price" required />
 					</div>
 
 					<div class="my-2">
 						<span>거래기간</span> 
-						<input type="date" min="2018-10-19" style="text-align: right;margin-left: 15px"
-							max="2020-01-01"  class="form-control" type="text"
-							id="wishtime" />
+						<input type="date" min="2018-11-01" style="text-align: right;padding-left: px"
+							max="2020-01-01"  class="form-control" type="date"
+							id="time" required />
+							
 							<!--  거래기간 넣어주고 제한 걸어주는 로직 만들어야 함  -->
+							
 					</div>
 
 					<!--  도로명 주소 인증키:	U01TX0FVVEgyMDE4MTAxNTIxMzIwODEwODIzNjM= -->
 
 					<div class="my-2">
 						<span>거래방법</span> <input class="form-control" type="text"
-							placeholder="예)직거래,택배등" style="text-align: right;margin-left: 15px" id="wishcount" />
+							placeholder="예)직거래,택배등" style="text-align: right;padding-left:px" id="way" required />
 					</div>
 					<div class="my-2">
-						<span>연락처</span> <input class="form-control" type="text"
-							placeholder="집전화,휴대폰번호" style="text-align: right;margin-left: 15px" id="wishcount" />
+						<span>연락처</span> <input class="form-control" type="number"
+							placeholder="집전화,휴대폰번호" style="text-align: right;padding-left:px" id="phone" required/>
 					</div>
 
 				</div>
 				
 				
-				<div style="margin-top: 20px">
-				<div style="text-align: center">
-				<span>우편번호 </span>
-				<jsp:include page="../template/adress.jsp" />
-			</div></div>
+							
 		     <br/>
 							
 				<!-- Related Projects Row -->
@@ -150,7 +241,7 @@
 				
 				<!--  사진  3개이상 유효성 검사 항목 추가  -->
                  
-				<input multiple="multiple" type="file"  
+				<input multiple="multiple" type="file" 
 					style="color: slategray; border: 1 solid silver; width: 300; height: 20">(최대 5M)
 				
 
@@ -197,42 +288,25 @@
 
 				
 				<div class="col-md-12 container">
-					<textarea id="summernote" name="content" class="col-md-12 container" rows=""
-						cols="" style="border: 1px solid blue; height: 500px"
-						maxlength="2048">
-	 ※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.					
-										
-	제목: 
+<textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
+				class="output"		maxlength="2048" required >
+※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.											
 					
-	판매물품: 
-					
-	희망가: 원
-					
-	거래기간:    까지 
-					
-	거래방법: 
-								
-	연락처:  
-					
-	===================자세한 설명을 구체적으로 해주세요 =====================
-						
-						
-						</textarea>
-
+</textarea>
 				</div>
+							
 				<div style="text-align: center">
 					<a href="<c:url value='/market/sell.aw'/>">
-					<input
-						class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
-					<input class="btn btn-danger" type="submit" id="enterBtn"
-						value="확인">
+					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
+					
+					<!-- <input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
+					-->
+					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
 
 				</div>
-			
+				 										
 			</form>
-			
-			
-			
+						
 			<div style="margin-bottom: 50px"></div>
 
 		</div>

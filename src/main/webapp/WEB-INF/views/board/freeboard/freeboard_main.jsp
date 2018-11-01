@@ -91,7 +91,7 @@
 								<span>[시사]</span>
 							</c:otherwise>
 						</c:choose>
-					<a href="<c:url value='/animal/freeboard_view.aw?no=${record.no}'/>" class="article-list-item__info">
+					<a href="<c:url value='/security/animal/freeboard_view.aw?no=${record.no}'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
 							<span id="free_title">${record.free_title}</span> <em>[21]</em>
 						</div>

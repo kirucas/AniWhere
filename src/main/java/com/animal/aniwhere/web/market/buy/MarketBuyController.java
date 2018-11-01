@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllCommonService;
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.market.BuySellServiceImpl;
 import com.animal.aniwhere.service.market.BuySellDTO;
@@ -39,7 +40,7 @@ public class MarketBuyController {
 	private int blockPage;
 		
 	//입력 후 리스트로 이동 
-		@RequestMapping("/market/buyinsert.aw")
+		@RequestMapping("/security/market/buyinsert.aw")
 		public String miss_insert(@RequestParam Map map,HttpSession session) throws Exception {
 			
 			map.put("table_name","buy");
@@ -133,7 +134,7 @@ public class MarketBuyController {
 	
 	
 	// 쓰기에서 db에올리고 목록으로 이동 ]
-	@RequestMapping(value="/market/buyWrite.aw",method=RequestMethod.POST)
+	@RequestMapping(value="/security/market/buyWrite.aw",method=RequestMethod.POST)
 	public String writeOk(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 		
 		
@@ -177,7 +178,7 @@ public class MarketBuyController {
 	
 	
 	     //수정폼 이동 --자기아이디로 자기글 view에서 수정 누르면 이쪽으로 이동 
-			@RequestMapping("/market/buyedit.aw")
+			@RequestMapping("/security/market/buyedit.aw")
 			public String find_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 					
 				map.put("mem_no",session.getAttribute("mem_no"));
@@ -196,7 +197,7 @@ public class MarketBuyController {
 			}////////// miss_write
 
 	//수정 실행하기
-	@RequestMapping("/market/buyupdate.aw")
+	@RequestMapping("/security/market/buyupdate.aw")
 	public String edit(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 		map.put("mem_no",session.getAttribute("mem_no"));
 		map.put("table_name","buy");
@@ -226,18 +227,20 @@ public class MarketBuyController {
 		return "forward:/market/buy.aw";
 	}//////////////delete()
 			
-	
-	//Summernote 업로드 기능
+	//업로드 설정
 	@ResponseBody
-    @RequestMapping(value="/market/Upload.aw")
+    @RequestMapping(value="/market/buy/Upload.aw")
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("file");
-		
 		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-		File file = new File(phisicalPath+File.separator+newFilename);
-		upload.transferTo(file);
-        return "/Upload/"+newFilename;
+		//File file = new File(phisicalPath+File.separator+newFilename);
+		//upload.transferTo(file);
+		
+		List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "buy"); // S3  업로드
+		
+        //return "/Upload/"+newFilename;
+		return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
    }
 	
 	

@@ -77,7 +77,7 @@ span .mr-auto{
                                     <button style="width:100%;" class="btn btn-primary submit-btn">로그인</button>
                                 </div>
                            </form>
-                                <div class="row" >
+                                <div class="row">
                                 	<ul style="width:100%;list-style:none;margin:0;padding:0">
                                			<li style="float:left;padding-right:10px">
                                 			<a href="${url}">
@@ -86,11 +86,15 @@ span .mr-auto{
                             			</li>
                                			<li style="float:left">
                             				
-                            				<div id="google_id_login" style="text-align:center"><a href="${google_url}">hh</a></div>
+                            				<div id="google_id_login" style="text-align:center">
+                            					<a href="${google_url}"><img class="glogins" style="width:225px;height:36px;" src="<c:url value='/resources/images/googleicon.png'/>"/></a>
+                            				</div>
                                			</li>
                                		</ul>
                   				</div>
-    			 				<p style="margin-top:1.rem;" class="margin center medium-small sign-up">계정이 없으십니까?<a href="<c:url value='/member/sign_up.aw' />"> Sign Up</a></p>
+    			 				<p style="margin-top:1.rem;" class="margin center medium-small sign-up">계정이 없으십니까?
+    			 					<a href="<c:url value='/member/sign_up.aw' />"> Sign Up</a>
+    			 				</p>
                            <div class="wrapper mt-5 text-gray">
                                <p class="footer-text">Copyright © 2018 Bootstrapdash. All rights reserved.</p>
                                <ul class="auth-footer text-gray">

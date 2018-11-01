@@ -21,50 +21,75 @@
 #pagingDiv nav ul li {
 	margin-right: 10px;
 }
+.prev_next a img {
+	width: 100px;
+	height: 100px;
+}
+#list_container{
+	padding-left:0px;
+	padding-right:0px;
+	margin-bottom:15px;
+}
+#btn_img{
+	float:left;
+	margin-top:5px;
+}
+.sub-header-search{
+	margin-bottom:5px;
+}
+#select_form{
+	display:inline;
+}
+#select_form label select{
+	margin-left:10px;
+}
+#select_form input{
+	float: right;
+}
+#tip_no{
+	text-align: center;
+}
 </style>
 <!-- 바디 -->
-<div class="container" style="padding-left:0px;padding-right:0px;margin-bottom:15px">
+<div class="container" id="list_container">
 		<div class="sub-header">
 			<div class="sub-header-info">
 				<div>
-				<h2 class="sub-header__title" style="display:inline">
-					강아지 팁 게시판
-				</h2>
-				<ul class="sub-link__list">
-					<li class="sub-link__item sub-link__item--active">
-						<a href="#"><img src="https://talk.op.gg/images/icon-hot-on@2x.png" width="24"	alt=""><span>인기</span></a>
-					</li>
-					<li class="sub-link__item ">
-						<a href="#"> <img src="https://talk.op.gg/images/icon-new@2x.png" width="24" alt=""><span>최신</span></a>
-					</li>
-					<li class="sub-link__item ">
-						<a href="#"> <img src="https://talk.op.gg/images/icon-top@2x.png" width="24" alt=""><span>TOP</span></a>
-					</li>
-				</ul>		
-				<ul class="sub-header-button">
-					<li class="sub-header-button__item sub-header-button__item--search">
-						<button id="search-toggle-button" class="button">
-							<img src="https://talk.op.gg/images/icon-search@2x.png" alt="검색하기" width="24">
-						</button>
-					</li>
-				</ul>
-				<div class="sub-header-search" style="margin-bottom:5px">
-				<a href="<c:url value='/animal/dog/tip/write.aw'/>">
-					<img style="float:left;margin-top:5px;" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
-				</a>
-                <form style="display:inline;" action="">
-                    <label>
-                    	<select name="target" style="margin-left:10px" class="sub-header-search__select">
-                            <option value="title">제목</option>
-                            <option value="content">내용</option>
-                            <option value="title_content">제목+내용</option>
-                            <option value="user_name">작성자</option>
-                        </select>
-                    </label>
-                    <input style="float:right" type="text" name="q" class="sub-header-search__input" placeholder="검색">
-                    <button class="sub-header-search__button"><img src="https://talk.op.gg/images/icon-search@2x.png" width="24" alt="검색"></button>
-                </form>
-            </div>
+					<ul class="sub-link__list">
+						<li class="sub-link__item sub-link__item--active">
+							<a href="#"><img src="https://talk.op.gg/images/icon-hot-on@2x.png" width="24"	alt=""><span>인기</span></a>
+						</li>
+						<li class="sub-link__item ">
+							<a href="#"> <img src="https://talk.op.gg/images/icon-new@2x.png" width="24" alt=""><span>최신</span></a>
+						</li>
+						<li class="sub-link__item ">
+							<a href="#"> <img src="https://talk.op.gg/images/icon-top@2x.png" width="24" alt=""><span>TOP</span></a>
+						</li>
+					</ul>		
+					<ul class="sub-header-button">
+						<li class="sub-header-button__item sub-header-button__item--search">
+							<button id="search-toggle-button" class="button">
+								<img src="https://talk.op.gg/images/icon-search@2x.png" alt="검색하기" width="24">
+							</button>
+						</li>
+					</ul>
+					<div class="sub-header-search" >
+						<a href="<c:url value='/security/animal/dog/tip/write.aw'/>">
+							<img id="btn_img" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
+						</a>
+		                <form id="select_form" action="">
+		                    <label>
+		                    	<select name="target" class="sub-header-search__select">
+		                            <option value="title">제목</option>
+		                            <option value="content">내용</option>
+		                            <option value="title_content">제목+내용</option>
+		                            <option value="user_name">작성자</option>
+		                        </select>
+		                    </label>
+		                    <input type="text" name="q" class="sub-header-search__input" placeholder="검색">
+		                    <button class="sub-header-search__button"><img src="https://talk.op.gg/images/icon-search@2x.png" width="24" alt="검색"></button>
+		                </form>
+	            	</div>
 				</div>
 			</div>
 		</div>
@@ -102,7 +127,7 @@
 					</div>
 				</div>
 				<div class="article-list-item__vote">
-					<div><span id="no" style="text-align:center">${record.no}</span></div>
+					<div><span id="tip_no">${record.no}</span></div>
 				</div>
 			</article>
 	    		</c:forEach>
@@ -150,6 +175,6 @@
 	</div>
 	<!-- 아래는 페이징 -->
     <div class="row" id="pagingDiv">
-    		${pagingString}
+    	${pagingString}
     </div>	
 <!-- 바디 끝 -->

@@ -54,13 +54,13 @@
 							<td
 								style="vertical-align: middle; background-color: rgba(80, 80, 80, 0.1);">보호소 이름</td>
 							<td>
-								<div style="vertical-align: middle;">${record.careNm}</div>
+								<div style="vertical-align: middle;">${record.carenm}</div>
 							</td>
 						</tr>
 						<tr>
 							<td style="vertical-align: middle; background-color: rgba(80, 80, 80, 0.1);">보호소 전화번호</td>
 							<td>
-								<div style="vertical-align: middle;">${record.careTel}</div>
+								<div style="vertical-align: middle;">${record.caretel}</div>
 							</td>
 						</tr>
 					</table>

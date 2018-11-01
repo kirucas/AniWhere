@@ -93,7 +93,7 @@
 
 		<div class="col-md-12">
 
-			<form name="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" action="<c:url value='/market/buyupdate.aw?buy_no=${record.no}'/>" 
+			<form name="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" action="<c:url value='/security/market/buyupdate.aw?buy_no=${record.no}'/>" 
 				class="form-horizontal" >				
 				<div class="form-row">
 				
@@ -163,7 +163,6 @@
 			<div style="margin-bottom: 50px"></div>
 		</div>
 	</div>
-
 </body>
 
 
