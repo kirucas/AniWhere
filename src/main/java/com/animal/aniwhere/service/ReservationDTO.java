@@ -10,6 +10,9 @@ public class ReservationDTO {
 
 	// 신청자의 이름 저장을 위한 속성 추가
 	private String mem_name;
+	// 신청한 상가명을 저장하기 위한 속성 추가
+	private String bizesnm;
+	private String brchnm;
 
 	public String getRv_no() {
 		return rv_no;
@@ -57,6 +60,22 @@ public class ReservationDTO {
 
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
+	}//////////
+
+	public String getBizesnm() {
+		return bizesnm;
+	}//////////
+
+	public void setBizesnm(String bizesnm) {
+		this.bizesnm = bizesnm;
+	}//////////
+
+	public String getBrchnm() {
+		return brchnm;
+	}//////////
+
+	public void setBrchnm(String brchnm) {
+		this.brchnm = brchnm;
 	}//////////
 
 }//////////////////// ReservationDTO class
