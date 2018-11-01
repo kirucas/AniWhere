@@ -439,19 +439,19 @@ CREATE TABLE store_category
 
 CREATE TABLE store_location
 (
-	bizesId number NOT NULL,
-	bizesNm nvarchar2(150) NOT NULL,
-	brchNm nvarchar2(70),
-	indsSclsCd varchar2(10) NOT NULL,
-	indsSclsNm nvarchar2(50) NOT NULL,
-	lnoAdr nvarchar2(150) NOT NULL,
-	rdnmAdr nvarchar2(150) NOT NULL,
+	bizesid number NOT NULL,
+	bizesnm nvarchar2(150) NOT NULL,
+	brchnm nvarchar2(70),
+	indssclscd varchar2(10) NOT NULL,
+	indssclsnm nvarchar2(50) NOT NULL,
+	lnoadr nvarchar2(150) NOT NULL,
+	rdnmadr nvarchar2(150) NOT NULL,
 	lon number NOT NULL,
 	lat number NOT NULL,
-	dongNo nvarchar2(20),
-	flrNo nvarchar2(20),
-	hoNo nvarchar2(20),
-	PRIMARY KEY (bizesId)
+	dongno nvarchar2(20),
+	flrno nvarchar2(20),
+	hono nvarchar2(20),
+	PRIMARY KEY (bizesid)
 );
 
 
@@ -571,15 +571,15 @@ ALTER TABLE sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
-	ON DELETE CASCADE
 ;
 
 
@@ -802,7 +802,7 @@ ALTER TABLE quest_cmt
 
 ALTER TABLE reservation
 	ADD FOREIGN KEY (store_no)
-	REFERENCES store_location (bizesId)
+	REFERENCES store_location (bizesid)
 	ON DELETE CASCADE
 ;
 
