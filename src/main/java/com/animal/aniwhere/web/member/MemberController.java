@@ -319,16 +319,7 @@ public class MemberController {
  			return "false";
  		}		
  		MemberDTO dto = service.selectOne(map);
- 		session.setAttribute("mem_id", dto.getMem_id());
- 		session.setAttribute("mem_no", dto.getMem_no());
  		return dto.getMem_id()+","+dto.getMem_no();       
-    }
- 	
- 	@ResponseBody
- 	@RequestMapping(value="/androidSignOut.awa", method = RequestMethod.POST)
- 	public String androidSignOut(@RequestParam Map map,HttpSession session) throws Exception{
- 		session.invalidate();
- 		return "";       
     }
  	
  	//안드로이드 googleLogin

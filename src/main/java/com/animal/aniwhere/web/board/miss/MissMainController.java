@@ -547,11 +547,15 @@ public class MissMainController {
 
 	// 안드로이드=======================================
 	@ResponseBody
-	@RequestMapping(value = "/miss/AndroidFind.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	@RequestMapping(value = "/miss/AndroidFindSeeList.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	public String find_list(@RequestParam Map map) throws Exception {
-
-		map.put("table_name", "find");
-
+		System.out.println("/miss/AndroidFindSeeList.awa");
+		if(map.get("kind").equals("찾아요")) {
+			map.put("table_name", "find");
+		}else {
+			map.put("table_name", "see");
+		}
+		
 		// 전체 레코드 수
 		int totalRecordCount = service.getTotalRecord(map);
 		map.put("start", 1);
@@ -572,44 +576,20 @@ public class MissMainController {
 			record.put("animal_name", list.getAnimal_name());
 			collections.add(record);
 		}
+		System.out.println(JSONArray.toJSONString(collections));
 		return JSONArray.toJSONString(collections);
 	}//////////
 	
-	// 안드로이드=======================================
-		@ResponseBody
-		@RequestMapping(value = "/miss/AndroidSee.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
-		public String see_list(@RequestParam Map map) throws Exception {
-
-			map.put("table_name", "see");
-
-			// 전체 레코드 수
-			int totalRecordCount = service.getTotalRecord(map);
-			map.put("start", 1);
-			map.put("end", totalRecordCount);
-			List<FindSeeDTO> lists = (List<FindSeeDTO>) service.selectList(map);
-			List<Map> collections = new Vector<Map>();
-			System.out.println("#======="+totalRecordCount+"======");
-			for (FindSeeDTO list : lists) {
-				Map record = new HashMap();
-				record.put("no", list.getNo());
-				record.put("mem_no", list.getMem_no());
-				record.put("title", list.getTitle());
-				record.put("content", list.getContent().replaceAll("<br/>", "\r\n"));
-				record.put("regidate", list.getRegidate() + "");
-				record.put("count", list.getCount());
-				record.put("animal_code", list.getAnimal_code());
-				record.put("mem_nickname", list.getMem_nickname());
-				record.put("animal_name", list.getAnimal_name());
-				collections.add(record);
-			}
-			return JSONArray.toJSONString(collections);
-		}//////////
 	
 	@ResponseBody
-	@RequestMapping(value = "/androidFindList.awa", produces = "text/html; charset=UTF-8",method = RequestMethod.POST)
+	@RequestMapping(value = "/miss/AndroidCommentFindSeeList.awa", produces = "text/html; charset=UTF-8",method = RequestMethod.POST)
 	public String androidFindList(@RequestParam Map map) throws Exception {
-
-		map.put("table_name", "find");
+		System.out.println("/miss/AndroidCommentFindSeeList.awa");
+		if(map.get("kind").equals("찾아요")) {
+			map.put("table_name", "find");
+		}else {
+			map.put("table_name", "see");
+		}
 		map.put("origin_no", map.get("no"));
 		 
 		System.out.println("origin_no"+map.get("origin_no"));
@@ -631,39 +611,12 @@ public class MissMainController {
 
 			comments.add(record);
 		}
+		System.out.println(JSONArray.toJSONString(comments));
 		return JSONArray.toJSONString(comments);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/androidSeeList.awa", produces = "text/html; charset=UTF-8",method = RequestMethod.POST)
-	public String androidSeeList(@RequestParam Map map) throws Exception {
-
-		
-		map.put("table_name", "see");
-		map.put("origin_no", map.get("no"));
-
-		List<AllCommentDTO> collections = cmtService.selectList(map);
-
-		List<Map> comments = new Vector<>();
-
-		for (AllCommentDTO dto : collections) {
-
-			Map record = new HashMap();
-			record.put("cmt_no", dto.getCmt_no());
-			record.put("cmt_content", dto.getCmt_content().replaceAll("<br/>", "\r\n"));
-			record.put("mem_nickname", dto.getMem_nickname());
-			record.put("regidate", dto.getRegidate().toString());
-			record.put("origin_no", dto.getOrigin_no());
-			record.put("mem_no", dto.getMem_no());
-			record.put("hit", dto.getHit());
-
-			comments.add(record);
-		}
-		return JSONArray.toJSONString(comments);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/android/FindSee/Write.awa", produces = "text/html; charset=UTF-8")
+	@RequestMapping(value = "/android/FindSee/CommentWrite.awa", produces = "text/html; charset=UTF-8")
 	public String androidWrite(@RequestParam Map map, HttpSession session, Model model) throws Exception {
 		System.out.println("======/android/FindSee/Write.awa=======");
 		
@@ -676,5 +629,6 @@ public class MissMainController {
 		System.out.println("333333333333");
 		return "true";
 	}///////////////////
+	
 
 }//////////////////// MissMainController class
