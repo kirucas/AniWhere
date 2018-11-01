@@ -62,7 +62,7 @@
 		DELETE quest
 		WHERE no=#{no}
 		<if test="checking != null and checking == 0">
-			AND origin_no=#{no}
+			OR origin_no=#{no}
 		</if>
 	</delete>
 	
