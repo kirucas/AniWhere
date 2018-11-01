@@ -11,9 +11,9 @@
 //시간 구하기 표시하기 로직
 function getTime() { 
 now = new Date(); 
-dday = new Date(2018,10,3,18,00,00); 
+dday = new Date(2018,9,19,18,00,00); 
 
-//원하는 날짜, 시간 정확하게 초단위까지 기입.
+// 원하는 날짜, 시간 정확하게 초단위까지 기입.
 days = (dday - now) / 1000 / 60 / 60 / 24; 
 daysRound = Math.floor(days); 
 hours = (dday - now) / 1000 / 60 / 60 - (24 * daysRound); 
@@ -64,11 +64,9 @@ function printClock() {
     if(currentSeconds >= 0){// 50초 이상일 때 색을 변환해 준다.
        currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
     }
-   // clock.innerHTML =now+currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:20px;'>"+ amPm+"</span>"+end; //날짜를 출력해 줌
-   
-    setTimeout("printClock()",1000);
+    clock.innerHTML =now+currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:20px;'>"+ amPm+"</span>"+end; //날짜를 출력해 줌
     
-    // 1초마다 printClock() 함수 호출
+    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
 }
 
 function addZeros(num, digit) { // 자릿수 맞춰주기
@@ -244,12 +242,9 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	</div>
 	<DIV  class="col-ms-12" style="line-height:60px; color:#666;font-size:50px; text-align:center;border:1px solid yellow;	">
 	<FONT >거래시간</FONT>
-	<!-- <c:if>를 사용하여   거래가능시간 종료시 거래 끝을 알리는 로직 추가하기 -->
-	
 	<SPAN  id=counter0></SPAN><FONT style="FONT-FAMILY: '굴림'; ">일</FONT>
 	<SPAN  id=counter1></SPAN><FONT >시간</FONT> <SPAN  id=counter2></SPAN><FONT >분</FONT> <SPAN  id=counter3></SPAN><FONT >초 남았습니다</FONT>
     <SPAN style="text-align:center"></SPAN></div>
-    
     <SCRIPT>getTime()</SCRIPT>
 	
 	
