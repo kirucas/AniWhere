@@ -132,7 +132,7 @@ public class MemberController {
 		session.setAttribute("mem_id", map.get("mem_id"));
 		session.setAttribute("mem_no", dto.getMem_no());
 
-		return "member/sign_process";
+		return "forward:/signInProcess.aw";
 	}
 
 	// 구글 Callback호출 메소드
@@ -227,7 +227,7 @@ public class MemberController {
 
 		return "forward:/";
 	}/// security
-
+	
 	/*
 	 * @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
 	 * public String signInProcess(@RequestParam Map map, HttpSession session, Model

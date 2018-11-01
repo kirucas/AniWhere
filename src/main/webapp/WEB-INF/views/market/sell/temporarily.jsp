@@ -97,7 +97,7 @@ html {
 						</c:choose>
 					</span>
 																																						 
-								<a href="<c:url value='/market/sellinside.aw?buy_no=${record.no}'/>">
+								<a href="<c:url value='/market/sellinside.aw?sell_no=${record.no}'/>">
 																  
 								<span id="title">${record.title}</span></a>
 							
@@ -150,7 +150,7 @@ html {
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
 				style="float: none; margin: 0 auto;">
 				<form class="form-inline" method="post"
-					action="<c:url value='/market/buy/temporarily.aw'/>">
+					action="<c:url value='/market/sell/temporarily.aw'/>">
 					<div class="form-group">
 						<select name="searchColumn" class="form-control">
 							<option value="title">제목</option>

@@ -31,7 +31,7 @@
 								<p style="margin-top: 5px">품종 : ${record.kind }</p>
 								<p style="margin-top: 5px">발견장소 : ${record.place }</p>
 								<p style="margin-top: 5px">성별 : ${record.gender }</p>
-								<p style="margin-top: 5px">보호소 이름 : ${record.careNm }</p>
+								<p style="margin-top: 5px">보호소 이름 : ${record.carenm }</p>
 								<p style="margin-top: 5px">등록일 : ${record.start_notice }</p>
 							</div>
 						</div>
@@ -41,7 +41,7 @@
 				<!-- 페이징 부분 -->
 			</section>
 		</div>
-		<div class="row">
-			<div class="col-md-11 ">${pagingString }</div>
-		</div>
+		</br>
+			${pagingString }
+		</br>
 		<!-- 내용 끝 -->

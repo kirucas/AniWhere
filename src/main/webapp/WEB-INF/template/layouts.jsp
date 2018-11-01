@@ -14,6 +14,11 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<!-- jQuery UI -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <jsp:include page="/resources/js/move_dropdowns.jsp"/>
 <!-- 아이콘 사용을 위한 fontawesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.4/css/all.css">

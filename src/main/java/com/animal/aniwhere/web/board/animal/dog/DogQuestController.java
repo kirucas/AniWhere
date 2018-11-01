@@ -45,19 +45,22 @@ public class DogQuestController {
 	public String list(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
 			@RequestParam Map map,//검색용 파라미터 받기
-			@RequestParam(required=false,defaultValue="1") int nowPage//페이징용 nowPage파라미터 받기용
-			) throws Exception{
+			@RequestParam(required=false,defaultValue="1") int nowPage,//페이징용 nowPage파라미터 받기용
+			HttpSession session) throws Exception{
 		map.put("ani_category", ANI_CATEGORY);
+		System.out.println(map.get("searchWord"));
+		System.out.println(map.get("searchColumn"));
+		
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		//전체 레코드 수
-		int totalRecordCount= questService.getTotalRecord(map);			
+		int totalRecordCount= questService.getTotalRecord(map);
 		//시작 및 끝 ROWNUM구하기]
 		int start = (nowPage-1)*pageSize+1;
 		int end   = nowPage*pageSize;
 		map.put("start",start);
 		map.put("end",end);
-		//페이징을 위한 로직 끝]	
+		//페이징을 위한 로직 끝]
 		List<QuestBoardDTO> list= (List<QuestBoardDTO>) questService.selectList(map);
 		//페이징 문자열을 위한 로직 호출]
 		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/animal/dog/quest/quest_list.aw?");
@@ -67,12 +70,11 @@ public class DogQuestController {
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("pageSize", pageSize);
-		
 		//뷰정보반환]
 		return "board/animal/dog/quest/quest_list.tiles";
 	}////////////////list()
 	
-	@RequestMapping(value="/animal/dog/quest/quest_{path}",method=RequestMethod.GET)
+	@RequestMapping(value="/security/animal/dog/quest/quest_{path}",method=RequestMethod.GET)
 	public String form(@PathVariable String path,Model model,@RequestParam Map map) throws Exception{
 		switch(path) {
 			case "write":
@@ -89,14 +91,14 @@ public class DogQuestController {
 	}
 	
 	
-	@RequestMapping(value="/animal/dog/quest/quest_write.aw",method=RequestMethod.POST)
+	@RequestMapping(value="/security/animal/dog/quest/quest_write.aw",method=RequestMethod.POST)
 	public String quest_write(@RequestParam Map map,HttpSession session) throws Exception{
 		map.put("mem_no",session.getAttribute("mem_no"));
 		questService.insert(map);
 		return "forward:/animal/dog/quest/quest_list.aw";
 	}
 	
-	@RequestMapping(value="/animal/dog/quest/quest_reply.aw",method=RequestMethod.POST)
+	@RequestMapping(value="/security/animal/dog/quest/quest_reply.aw",method=RequestMethod.POST)
 	public String quest_reply(@RequestParam Map map,HttpSession session,Model model) throws Exception {
 		map.put("mem_no",session.getAttribute("mem_no"));
 		questService.insert(map);
@@ -111,7 +113,7 @@ public class DogQuestController {
 		return "board/animal/dog/quest/quest_view.tiles";
 	}
 	
-	@RequestMapping("/animal/dog/quest/quest_edit.aw")
+	@RequestMapping("/security/animal/dog/quest/quest_edit.aw")
 	public String edit(Model model,@RequestParam Map map, HttpServletRequest req) throws Exception{
 		if(req.getMethod().equals("GET")) {
 			QuestBoardDTO record = questService.selectOne(map);

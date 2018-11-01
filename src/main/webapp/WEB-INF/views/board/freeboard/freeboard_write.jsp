@@ -4,8 +4,7 @@
 <%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 <!-- include summernote css/js-->
 <link
-	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
-	rel="stylesheet">
+	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <script>
@@ -62,7 +61,7 @@
 		</h2>
 	</div>
 	<div style="width:100%">
-		<form method="post" action="<c:url value='/animal/freeboard/write.aw'/>">
+		<form method="post" action="<c:url value='/security/animal/freeboard/write.aw'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="no"/>
 				<input type="hidden" name="mem_no" value="${mem_no}" />
