@@ -72,7 +72,7 @@ else {
 <script>
 
    $(function() {
-	   
+	   var count = 0;
 	   $('#enterBtn').submit(function(){
 		 
 		   var content="========판매현황 정리입니다.============\r\n";
@@ -116,6 +116,8 @@ else {
             processData: false,
             success: function(url) {
                  $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
+                 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
+                 count++;
             },
             error : function() {
                console.log("error");
@@ -244,7 +246,7 @@ else {
 
 					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
 
-						<img id="product1" onclick="javascript:changeimage1()"
+						<img name="product"
 							class="img-fluid shadow scale"
 							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
 							alt="" style="width: 300px; height: 200px;">
@@ -253,7 +255,7 @@ else {
 
 					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
 
-						<img id="product2" onclick="javascript:changeimage2()"
+						<img name="product"
 							class="img-fluid shadow scale"
 							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
 							alt="" style="width: 300px; height: 200px;">
@@ -262,7 +264,7 @@ else {
 
 					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
 
-						<img id="product3" onclick="javascript:changeimage3()"
+						<img name="product"
 							class="img-fluid shadow scale"
 							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
 							alt="" style="width: 300px; height: 200px;">
@@ -271,7 +273,7 @@ else {
 
 					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
 
-						<img id="product4" onclick="javascript:changeimage4()"
+						<img name="product"
 							class="img-fluid shadow scale"
 							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
 							alt="" style="width: 300px; height: 200px;">
