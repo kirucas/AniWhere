@@ -213,26 +213,40 @@
 				$.ajax({
 		            type: "POST",
 		            dataType : "json",
-		            url : "<c:url value='/where/map/total.awa'/>",
+		            url : "<c:url value='/security/where/map/total.awa'/>",
 		            success: function(jsonObj) {
 		            	clusterer.removeMarkers(markers);
 		            	markers=[];
 		            	$.each(jsonObj, function(index, value){
+		            		
+		            		var imageSrc = "<c:url value='/resources/images/all.png'/>", // 마커이미지의 주소입니다    
+						    imageSize = new daum.maps.Size(22, 35), // 마커이미지의 크기입니다
+						    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+						    
+						    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
+						    markerPosition = new daum.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
+		            		
 		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다.
 		            		// 지도와 클러스터러를 생성하는 메소드
 		            		var marker = new daum.maps.Marker({
+		            			image : markerImage,
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
 		            		
 		            		var content = 
-		            			'<div class="wrap">' + 
-	        			 			'<div class="info">' + 
-	        							'<div style="color:black;font-size:1.4em;">지번주소</div>' + 
-        								'<div style="width:200px">' +          				
-	        								'<div style="width:100%;color:blue">'+value.lnoAdr+'</div>' +          
-	        							'</div>' + 
-	        						'</div>' +    
-	        			  		'</div>';
+	        			  		'<div style="width:300px;height:100px;">'+
+	        					'<h6><a href="#" title="'+value.bizesNm+'">'+value.bizesNm+'</a></h6>'+
+	        					'<div class="content">'+
+	        						'<span>'+(value.brchNm == null ? '' : value.brchNm)+'</span>'+
+	        						'<p data-id="address" class="address" title="'+value.rdnmAdr+'">'+value.rdnmAdr+'</p>'+
+	        						'<p>'+
+	        						'<span>'+(value.dongNo == null ? '' : value.dongNo+'동</span>')+
+	        						'<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
+	        						'<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
+        							'</p>'+
+	        					'</div>'+
+	        			'</div></div>'+
+	        				'</div>';
 			
 							// 마커에 표시할 인포윈도우를 생성합니다 
 						    var infowindow = new daum.maps.InfoWindow({
@@ -256,34 +270,47 @@
 		         });
 			};
          	var space = /\+/g; //" "을 의미하는 값
-         	
+         	var totalvalue;
 			$('#all').click(function(){
 		        total();
 			});
-			function indssclscd(){
+			function indssclscd(code,pic){
 		         $.ajax({
-		        	data : {indssclscd:cafe},
+		        	data : {indssclscd:code},
 		            type: "POST",
-		            url : "<c:url value='/where/map/select.awa'/>",
+		            url : "<c:url value='/security/where/map/select.awa'/>",
 		            dataType : "json",
 		            success: function(jsonObj) {
 		            	clusterer.removeMarkers(markers);
 	            		markers=[];
 		            	$.each(jsonObj, function(index, value){
-		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+		            		totalvalue = value;
+		            		var imageSrc = "<c:url value='/resources/images/"+pic+".png'/>", // 마커이미지의 주소입니다    
+						    imageSize = new daum.maps.Size(22, 35), // 마커이미지의 크기입니다
+						    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+						    
+						    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
+						    markerPosition = new daum.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
+						 	// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
 		            		var marker = new daum.maps.Marker({
+		            			image : markerImage,
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
 		            		var content = 
-		            			'<div class="wrap">' + 
-	        			 			'<div class="info">' + 
-	        							'<div style="color:black;font-size:1.4em;">지번주소</div>' + 
-        								'<div style="width:200px">' +          				
-	        								'<div style="width:100%;color:blue">'+value.lnoAdr+'</div>' +          
-	        							'</div>' + 
-	        						'</div>' +    
-	        			  		'</div>';
-			
+	        			  		'<div style="width:300px;height:100px;">'+
+	        					'<h6><a href="#" title="'+value.bizesNm+'">'+value.bizesNm+'</a></h6>'+
+	        					'<div class="content">'+
+	        						'<span>'+(value.brchNm == null ? '' : value.brchNm)+'</span>'+
+	        						'<p data-id="address" class="address" title="'+value.rdnmAdr+'">'+value.rdnmAdr+'</p>'+
+	        						'<p>'+
+	        						'<span>'+(value.dongNo == null ? '' : value.dongNo+'동</span>')+
+	        						'<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
+	        						'<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
+        							'</p>'+
+	        					'</div>'+
+	        			'</div></div>'+
+	        				'</div>';
+	        				
 							// 마커에 표시할 인포윈도우를 생성합니다 
 						    var infowindow = new daum.maps.InfoWindow({
 						        content: content // 인포윈도우에 표시할 내용
@@ -309,27 +336,32 @@
          	
 			var cafe = $("#cafe").prop("title");
 			$('#cafe').click(function(){
-				indssclscd();
+				var pic = "cafe";
+				indssclscd(cafe,pic);
 			});
 			
 			var hair = $("#hair").prop("title");
 			$('#hair').click(function(){
-				indssclscd();
+				var pic = "pic";
+				indssclscd(hair,pic);
 			});
 			
 			var hospital = $("#hospital").prop("title");
 			$('#hospital').click(function(){
-				indssclscd();
+				var pic = "hospital";
+				indssclscd(hospital,pic);
 			});
 			
 			var pharm = $("#pharm").prop("title");
 			$('#pharm').click(function(){
-				indssclscd();
+				var pic = "hospital";
+				indssclscd(pharm);
 			});
 			
 			var etc = $("#etc").prop("title");
 			$('#etc').click(function(){
-				indssclscd();
+				var pic = "etc";
+				indssclscd(etc,pic);
 			});
          	
 // 			var strdata = $("#ip").prop("title");
