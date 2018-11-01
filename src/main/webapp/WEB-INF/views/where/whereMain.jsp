@@ -253,14 +253,15 @@
 		            		var marker = new daum.maps.Marker({
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
-		            		var content = '<div class="wrap">' + 
-	        			 	'<div class="info">' + 
-	        					'<div style="color:black;font-size:1.4em;">주소</div>' + 
-	        					'<div style="width:200px">' +          				
-	        						'<div style="width:100%;color:blue">'+value.address+'</div>' +          
-	        					'</div>' + 
-	        				'</div>' +    
-	        			  '</div>';
+		            		var content = 
+		            			'<div class="wrap">' + 
+	        			 			'<div class="info">' + 
+	        							'<div style="color:black;font-size:1.4em;">주소</div>' + 
+        								'<div style="width:200px">' +          				
+	        								'<div style="width:100%;color:blue">'+value.address+'</div>' +          
+	        							'</div>' + 
+	        						'</div>' +    
+	        			  		'</div>';
 			
 							// 마커에 표시할 인포윈도우를 생성합니다 
 						    var infowindow = new daum.maps.InfoWindow({
