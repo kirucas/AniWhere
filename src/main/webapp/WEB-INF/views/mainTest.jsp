@@ -1,242 +1,365 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-$color1: #461467;
-$color2: #ffba57;
-$color3: lighten(#ff7655, 20%);
-$color4: lighten(#00aca0, 10%);
-$color5: #8ed3c9;
-$color6: darken(#fcf5d8, 20%);
-
-* {
-	box-sizing: border-box;
+/*
+* 支持IE10，谷歌，火狐，Safari
+.bottom-to-top：从下到上滑动。
+.top-to-bottom：从上到下滑动。
+.left-to-right：从左向右滑动。
+.right-to-left：从右向左滑动。
+.rotate-in：旋转进入。
+.rotate-out：旋转离开。
+.open-up：向上翻转。
+.open-down：向下翻转。
+.open-left：向左翻转。
+.open-right：向右翻转。
+.come-left：带倾斜效果的向左翻转。
+.come-right：带倾斜效果的向右翻转。
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
+	output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
 }
 
 body {
-	background: #202020;
-	font-size: 62.5%;
+	line-height: 1
 }
 
-// App
-#app {
-	overflow: hidden;
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100vw;
-	height: 100vh;
-	background: rgba(76,76,76,1);
-	background: -moz-linear-gradient(-45deg, rgba(76,76,76,1) 0%, rgba(43,43,43,0.74) 36%, rgba(28,28,28,0.5) 71%, rgba(19,19,19,0.29) 100%);
-	background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(76,76,76,1)), color-stop(36%, rgba(43,43,43,0.74)), color-stop(71%, rgba(28,28,28,0.5)), color-stop(100%, rgba(19,19,19,0.29)));
-	background: -webkit-linear-gradient(-45deg, rgba(76,76,76,1) 0%, rgba(43,43,43,0.74) 36%, rgba(28,28,28,0.5) 71%, rgba(19,19,19,0.29) 100%);
-	background: -o-linear-gradient(-45deg, rgba(76,76,76,1) 0%, rgba(43,43,43,0.74) 36%, rgba(28,28,28,0.5) 71%, rgba(19,19,19,0.29) 100%);
-	background: -ms-linear-gradient(-45deg, rgba(76,76,76,1) 0%, rgba(43,43,43,0.74) 36%, rgba(28,28,28,0.5) 71%, rgba(19,19,19,0.29) 100%);
-	background: linear-gradient(135deg, rgba(76,76,76,1) 0%, rgba(43,43,43,0.74) 36%, rgba(28,28,28,0.5) 71%, rgba(19,19,19,0.29) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313', GradientType=1 );
-	color: #fff;
+ol, ul {
+	list-style: none
 }
 
-// Controls
-.controls {
-	position: absolute;
-	left: 50%;
-	bottom: 40px;
-	transform: translate(-50%, 0);
+blockquote, q {
+	quotes: none
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+html {
+	height: 100%;
 	width: 100%;
+}
+
+body {
+	background: rgba(44, 62, 80, 0.92);
+	color: #fff;
+	font-size: 14px;
+	font-family: 'Open Sans', sans-serif, 'trebuhet ms', HelveticaNeue,
+		arial;
+	height: 100%;
+	line-height: 20px
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+p {
+	line-height: 2.0em
+}
+
+h1 {
+	font-size: 3.0em;
+	line-height: 40px
+}
+
+a {
+	text-decoration: none;
+	color: rgba(74, 92, 110, 0.92)
+}
+
+a:hover {
+	color: #fff
+}
+
+img {
+	max-width: 100%
+}
+
+.pull-right {
+	float: right
+}
+
+.pull-left {
+	float: left
+}
+
+header {
+	padding: 30px 20px;
+	background: rgba(64, 82, 100, 0.92);
+	color: #ffffff;
+	margin-bottom: 20px
+}
+
+.btn-download {
+	background: rgba(24, 42, 60, 0.92);
+	color: rgba(124, 142, 160, 0.92);
+	padding: 20px 50px;
+	display: inline-block;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+	border-radius: 5px
+}
+
+.btn-download:hover {
+	background: rgba(94, 112, 130, 0.92)
+}
+
+.wrapper {
+	max-width: 1000px;
+	margin: 0 auto
+}
+
+.wrapper:before, .wrapper:after {
+	content: '';
+	display: table;
+	clear: both
+}
+
+footer {
 	margin-top: 30px;
+	background: rgba(24, 42, 60, 0.92);
+	color: rgba(124, 142, 160, 0.92);
+	padding: 20px 0;
+	text-align: left;
+	font-size: 0.9em
+}
+
+@
+keyframes anima {from { margin-top:-50px;
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+	filter: alpha(opacity = 0);
+	-moz-opacity: 0;
+	-khtml-opacity: 0;
+	opacity: 0
+}
+
+to {
+	margin: auto;
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+	filter: alpha(opacity = 100);
+	-moz-opacity: 1;
+	-khtml-opacity: 1;
+	opacity: 1
+}
+
+}
+@
+-webkit-keyframes anima {from { margin-left:-20px;
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+	filter: alpha(opacity = 0);
+	-moz-opacity: 0;
+	-khtml-opacity: 0;
+	opacity: 0
+}
+
+to {
+	margin-left: 10px;
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+	filter: alpha(opacity = 100);
+	-moz-opacity: 1;
+	-khtml-opacity: 1;
+	opacity: 1
+}
+
+}
+.pic {
+	max-width: 300px;
+	max-height: 200px;
+	position: relative;
+	overflow: hidden;
+	margin: 10px;
+	display: inline-block;
+	-webkit-animation: anima 2s;
+	-moz-animation: anima 2s;
+	-o-animation: anima 2s;
+	-ms-animation: anima 2s;
+	animation: anima 2s;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.pic-3d {
+	-webkit-perspective: 500;
+	-moz-perspective: 500;
+	-o-perspective: 500;
+	-ms-perspective: 500;
+	perspective: 500;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d
+}
+
+.pic-caption {
+	cursor: default;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(44, 62, 80, 0.92);
+	padding: 10px;
 	text-align: center;
-	padding: 0;
-	
-	li {
-		opacity: 0.6;
-		cursor: pointer;
-		overflow: hidden;
-		display: inline-block;
-		height: 30px;
-		margin: 0 10px;
-		padding: 0 30px;
-		border-radius: 10px;
-		font: .8rem/30px Arial, sans-serif;
-		font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
-		background: #505050;
-		
-		&.active {
-			background: lighten(#505050, 40%);
-		}
-	}
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+	filter: alpha(opacity = 0);
+	-moz-opacity: 0;
+	-khtml-opacity: 0;
+	opacity: 0
 }
 
-// Page
-.page {
-	position: absolute;
-	left: 0;
+.pic-image {
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	transform: scale(1.1)
+}
+
+.pic:hover .pic-image {
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-o-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1)
+}
+
+.pic-title {
+	font-size: 1.8em
+}
+
+a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover img
+	{
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	transition: all 0.5s ease
+}
+
+.pic:hover .bottom-to-top, .pic:hover .top-to-bottom, .pic:hover .left-to-right,
+	.pic:hover .right-to-left, .pic:hover .rotate-in, .pic:hover .rotate-out,
+	.pic:hover .open-up, .pic:hover .open-down, .pic:hover .open-left, .pic:hover .open-right,
+	.pic:hover .come-left, .pic:hover .come-right {
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+	filter: alpha(opacity = 100);
+	-moz-opacity: 1;
+	-khtml-opacity: 1;
+	opacity: 1;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
+	-moz-touch-callout: none;
+	-o-touch-callout: none;
+	-ms-touch-callout: none;
+	touch-callout: none;
+	-webkit-tap-highlight-color: transparent;
+	-moz-tap-highlight-color: transparent;
+	-o-tap-highlight-color: transparent;
+	-ms-tap-highlight-color: transparent;
+	tap-highlight-color: transparent
+}
+
+.bottom-to-top {
+	top: 50%;
+	left: 0
+}
+
+.pic:hover .bottom-to-top {
 	top: 0;
-	width: 100vw;
-	height: 100vh;
-	background: #c0c0c0;
-	
-	.center {
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		width: 100%;
-		font-size: 3rem;
-		text-align: center;
+	left: 0
+}
+
+.top-to-bottom {
+	bottom: 50%;
+	left: 0
+}
+
+.pic:hover .top-to-bottom {
+	left: 0;
+	bottom: 0
+}
+
+
+.open-up {
+	-webkit-transform: rotateX(180deg);
+	-moz-transform: rotateX(180deg);
+	-o-transform: rotateX(180deg);
+	-ms-transform: rotateX(180deg);
+	transform: rotateX(180deg);
+	top: 0;
+	left: 0
+}
+
+.pic:hover .open-up {
+	-webkit-transform: rotateX(0);
+	-moz-transform: rotateX(0);
+	-o-transform: rotateX(0);
+	-ms-transform: rotateX(0);
+	transform: rotateX(0)
+}
+
+
+@media screen and (max-width: 560px) {
+	.pic {
+		max-width: 400px;
+		max-height: 300px;
+		display: block;
+		-webkit-animation: none;
+		-moz-animation: none;
+		-o-animation: none;
+		-ms-animation: none;
+		animation: none;
+		margin: 10px auto
 	}
-	
-	h1 {
-		width: 100%;
-		margin: 0;
-		padding: 0;
-		font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
-		font-size: 2.8rem;
-		text-transform: capitalize;
-	}
-	
-	p {
-		font-family: 'Vollkorn', Georgia, Times, serif;
-		font-size: 1.1rem;
-	}
-	
-	a {
-		transition: color 200ms ease-out;
-		color: darken(rgba(#fff, .8), 40%);
-		
-		&:hover {
-			color: darken(rgba(#fff, .8), 60%);
-		}
-	}
-}
-
-// Active animation
-.active-animation {
-	position: absolute;
-	top: 30px;
-	left: 50%;
-	transform: translate(-50%, 0);
-}
-
-// Page styles
-.fade {
-	background: $color1;
-}
-
-.slide {
-	background: $color2;
-}
-
-.zoom {
-	background: $color3;
-}
-
-.flipX {
-	background: $color4;
-}
-
-.flipY {
-	background: $color5;
-}
-
-.slideUp {
-	background: $color6;
 }
 </style>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-<script>
-//State
-const state = {
-	animations: 'slide',
-	view: 'slide'
-}
-
-// Controls
-const controls = Vue.component('controls', {
-  template: '#controls',
-	data: state,
-	methods: {
-		setView(animation) {
-			state.view = animation
-		}
-	}
-})
-
-// Transitions
-const slide = Vue.component('slide', {
-  template: '#page',
-	methods: {
-		enter(el, done) {
-			const tl = new TimelineMax({
-				onComplete: done
-			})
-			
-			tl.set(el, {
-				x: window.innerWidth * 1.5,
-				scale: 0.8,
-				transformOrigin: '50% 50%'
-			})
-			
-			tl.to(el, 0.5, {
-				x: 0,
-				ease: Power4.easeOut
-			});
-			
-			tl.to(el, 1, {
-				scale: 1,
-				ease: Power4.easeOut
-			});
-		},
-		leave(el, done) {
-			TweenMax.fromTo(el, 1, {
-				autoAlpha: 1
-			}, {
-				autoAlpha: 0,
-				ease: Power4.easeOut,
-				onComplete: done
-			});
-		}	
-	}
-})
-
-// App
-const app = new Vue({
-  el: '#app',
-  data() {
-		return state
-	}
-})
-</script>
 <!-- App -->
-<div id="app">
-	
-	<component :is="state.view">
-		<h1>{{ state.view }}</h1>
-	</component>
-	<controls></controls>
-</div>
-
-<!-- Controls -->
-<template id="controls">
-	<ul class="controls">
-		<li v-for="(animation, index) in state.animations" @click.prevent="setView(animation)" v-bind:class="{ 'active': animation === state.view }">
-			{{ animation }}
-		</li>
-	</ul>
-</template>
-
-<!-- Transitions -->
-<template id="page">
-	<transition 
-		v-on:enter="enter" 
-		v-on:leave="leave"
-		v-bind:css="false"
-		appear
-	>
-		<div class="page" v-bind:class="state.view">
-			<div class="center">
-				<slot></slot>
-			</div>
+<article class="htmleaf-container">
+	<section class="wrapper cl">
+		<!--Effect: Bottom to Top -->
+		<!--Effect: Open Up -->
+		<div class="pic pic-3d">
+			<img src="https://unsplash.it/300/200?image=913" class="pic-image"
+				alt="Pic"> <span class="pic-caption open-up">
+				<h1 class="pic-title">Open Up</h1>
+				<p>Hi, this is a simple example =D</p>
+			</span>
 		</div>
-	</transition>
-</template>
+	</section>
+</article>

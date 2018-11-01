@@ -245,7 +245,7 @@ CREATE TABLE member_security
 (
 	mem_no number NOT NULL,
 	enabled number(1) DEFAULT 1,
-	authority varchar2(20) DEFAULT 'user'
+	authority varchar2(20) DEFAULT 'USER'
 );
 
 
@@ -571,15 +571,15 @@ ALTER TABLE sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
-	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
+	ON DELETE CASCADE
 ;
 
 

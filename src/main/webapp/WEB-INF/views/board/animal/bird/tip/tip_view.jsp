@@ -110,29 +110,26 @@
   0%   { transform: scale(30); }
   100% { transform: scale(1); }
 }
-/* 하트하트하트 */
-
+#btn_e_d_list{
+	float:right;
+}
 </style>
 <div class="container">
-	<div id="fuck">
-		
-	</div>
 	<div id="content">
 		<div id="view">
 			<div class="article">
 				<div class="article-header">
 					<div class="article__title">
 						${record.tip_title}
-						<div style="float:right;">
-							
+						<div id="btn_e_d_list">
 							<!-- 글에 대한 버튼들(자기가 쓴 글이면 수정과 삭제 가능) -->
 							<!-- a href="<c:url value='/ReplyBBS/BBS/Reply.bbs?no=${record.no}'/>" class="btn btn-success">답변</a> -->
 							<c:if test="${sessionScope.mem_no==record.mem_no }">
-								<a href="<c:url value='/board/animal/bird/tip/edit.aw?no=${record.no}'/>" class="article-action__button button">수정</a>
+								<a href="<c:url value='/security/board/animal/bird/tip/edit.aw?no=${record.no}'/>" class="article-action__button button">수정</a>
 								<a href="javascript:isDelete()" class="article-action__button button button--red button--red--border">삭제</a>
 							</c:if>
 							<a href="<c:url value='/board/animal/bird/tip/list.aw'/>" class="article-action__button button">목록</a>	
-							</div>
+						</div>
 					</div>
 					<div class="article-meta">
 						<div class="article-meta-list">

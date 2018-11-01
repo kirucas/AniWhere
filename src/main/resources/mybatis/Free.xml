@@ -59,7 +59,7 @@
 		WHERE mem_no=#{mem_no}
 	</delete>
 	
-	<update id="addHitCountFree" parameterType="java.util.Map">
+	<update id="addHitCountFree" parameterType="java.util.Map">,m 
 		UPDATE freeboard
 		SET free_hit=free_hit + 1
 		WHERE no=#{no}

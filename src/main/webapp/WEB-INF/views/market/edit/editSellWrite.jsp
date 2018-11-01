@@ -1,9 +1,139 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <head>
+<script>
+
+
+
+
+function check() {
+    var isAttached = $('#summernote').summernote('code');
+    if (fr.title.value == "") {
+       alert("제목을 입력해 주세요.");
+       fr.title.focus();
+       return false;
+
+    } 
+    
+    else if (fr.title.value.length > 50) {
+       alert("제목은 50자 이내로 입력해주세요.");
+       fr.title.focus();
+       return false;
+    } 
+        
+    else if (fr.name.value=="") {
+        alert("제품명 을 입력해주세요.");
+        fr.name.focus();
+        return false;
+     } 
+    
+   else if (fr.price.value=="") {
+        alert("희망가 를 입력해주세요.");
+        fr.price.focus();
+        return false;
+     } 
+   else if (fr.time.value=="") {
+        alert("거래기간 을 입력해주세요.");
+        fr.time.focus();
+         return false;
+     } 
+   else if (fr.way.value=="") {
+         alert("거래방법을  입력해주세요.");
+         fr.way.focus();
+         return false;
+      } 
+    
+    else if (fr.phone.value=="") {
+         alert("연락처 를 입력해주세요.");
+         fr.phone.focus();
+         return false;
+      } 
+       
+    else if (fr.content.value == "") {
+       alert('내용을 입력하세요.');
+       return false;
+    }	      
+else {
+	
+	
+	fr.action="<c:url value='/security/market/sellupdate.aw?sell_no=${record.no}'/>"
+ return true;
+
+}
+    
+}
+
+</script>
+<!-- 
+$( "#target" ).submit(function( event ) {
+	  alert( "Handler for .submit() called." );
+	  event.preventDefault();
+	});
+-->
+
+<script>
+	
+   $(function() {
+	   
+	   $('#enterBtn').click(function(){
+		 
+		   var content="========판매현황 정리입니다.============\r\n";
+		   content+='제목:'+$('#title').val()+'\r\n';
+		   content+='판매물품명:'+$('#name').val()+'\r\n';
+ 		   content+='희망가:'+$('#price').val()+'원\r\n';
+ 		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+		   content+='거래방법:'+$('#way').val()+'\r\n'; 
+           content+='연락처:'+$('#phone').val()+'\r\n'; 
+           content+='====================================\r\n';
+           
+           $('#summernote').append(content);
+           
+           fr.action="<c:url value='/security/market/sellupdate.aw?sell_no=${record.no}'/>";
+           	   
+	   });
+	   	   
+      $('#summernote').summernote({
+    	 maxHeight:null,
+    	 minHeight:null,
+    	 height:630,
+         callbacks : {
+            onImageUpload : function(files, editor, welEditable) {
+               for (var i = files.length - 1; i >= 0; i--) {
+                  sendFile(files[i], this);	
+               }
+            }
+         }
+      });
+      
+      function sendFile(file, el, wel) {
+         var form_data = new FormData();
+         form_data.append('file', file);
+         $.ajax({
+            data: form_data,
+            type: "POST",
+            url : "<c:url value='/market/sell/Upload.aw'/>",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(url) {
+                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
+            },
+            error : function() {
+               console.log("error");
+            }
+         });
+      }
+          
+   });
+   
+   
+   
+   
+   
+</script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
@@ -12,165 +142,170 @@
 
 
 <!-- include summernote css/js-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 
 </head>
 
 <body>
-
-
 	<div class="container">
-
 		<div style="margin-top: 10px"></div>
 		<br />
 
 		<div class="col-md-12">
-	
-			<label for="" class="">제목</label> <input class="form-control"
-				type="text" id="title"/>
-
+       <form name="fr" id="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 	class="form-horizontal">                           
+				<div class="form-row">
+				<input type="hidden" name="table_name" value="sell"/>
+				 <input type="hidden" name="mem_no" value="${mem_no }">
+								
+			<label for="" class="" >제목</label> 
+			<input class="form-control" type="text" id="title" name="title" placeholder="제목을 입력하세요" required value="${record.title}"/>
 
 			<p style="margin-top: 30px">
-	
-									<label for="" class="">크기분류</label>
-									<select id="size_listSelect" class="select_filter" onclick="">
-										<option value="">-----</option>
-										<option value="small">소형</option>
-										<option value="middle">중형</option>
-										<option value="large">대형</option>
-									
-									</select>
-								
-								   
-									<label for="" class="">용도분류</label>
-									<select id="use_listSelect" class="select_filter" onclick="">
-									    <option value="">-----</option>
-										<option value="food">사료및간식</option>
-										<option value="playtoy">장난감</option>
-										<option value="home">보금자리</option>
-										<option value="buty">미용용품</option>
-										<option value="medicine">의약품</option>
-									    <option value="other">기타</option>
-									</select>
-							
-								 
-									<label for="" class="">동물분류</label>
-									<select id="animal_listSelect" class="select_filter" onclick="">
-									    <option value="">-----</option>
-										<option value="dog">개</option>
-										<option value="cat">고양이</option>
-										<option value="bird">조류</option>
-										<option value="Reptilia">파충류</option>
-										<option value="amphibia">양서류</option>
-										<option value="fish">어류</option>
-										<option value="insect">곤충류</option>
-									    <option value="otheranimal">기타</option>
-									</select>
-								</p>
-				<div>
-			<div class="row" style="text-align: center;border: 1px silver solid; margin-left: 20px">
-				<div class="my-3">
-					<span style="margin-right: 20px">희망가</span><input placeholder="       원" style="text-align: right"
-						class="form-control" type="text" id="wishprice" />
-				</div>
-				
-				<div class="my-3">
-					<span>거래기간</span> <input type = "date" min = "2018-10-19" max = "2020-01-01" name = "date" class="form-control" type="text"
-						id="wishtime" />
-						  
+
+				<label for="" class="">동물분류</label>
+				 <select
+						class="select_filter" 
+						name="animal_code">
 						
-				</div>
+						<option value="1" ${record.animal_code == 1 ? "selected" : "" }>개</option>
+						<option value="2" ${record.animal_code == 2 ? "selected" : "" }>고양이</option>
+						<option value="3" ${record.animal_code == 3 ? "selected" : "" }>파충류</option>
+						<option value="4" ${record.animal_code == 4 ? "selected" : "" }>조류</option>
+						<option value="5" ${record.animal_code == 5 ? "selected" : "" }>기타 포유류</option>
+					</select>
+					
+					 <label for="" class="">용도분류</label> 
+					 <select id="use_listSelect"
+					class="select_filter" >
+					
+					<option value="food">사료및간식</option>
+					<option value="playtoy">장난감</option>
+					<option value="home">보금자리</option>
+					<option value="buty">미용용품</option>
+					<option value="medicine">의약품</option>
+					<option value="other">기타</option>
+				</select>
+
+
+			</p>
+			</div>
+		
 			
-			<!--  도로명 주소 인증키:	U01TX0FVVEgyMDE4MTAxNTIxMzIwODEwODIzNjM= -->
+				<div class="row" style="text-align: center; border: 1px silver solid; margin-left: px">
+					<div class="my-2" style="margin-right:30 px">
+						<span >제품명</span>
+						<input 
+							 style="text-align: right;margin-left:px"
+							class="form-control" type="text" id="name" required />
+					</div>
+			
+					<div class="my-2" style="margin-right:30 px">
+						<span >희망가</span>
+						<input
+							style="text-align:right"
+							class="form-control" type="number" id="price" required />
+					</div>
+
+					<div class="my-2">
+						<span>거래기간</span> 
+						<input type="date" min="2018-11-01" style="text-align: right;padding-left: px"
+							max="2020-01-01"  class="form-control" type="date"
+							id="time" required />
 							
-				<div class="my-3">
-					<span>거래방법</span> <input class="form-control" type="text" placeholder="예)직거래,택배등" style="text-align: right"
-						id="wishcount" />
-				</div>
-				<div class="my-3">
-					<span>연락처</span> <input class="form-control" type="text" placeholder="집전화,휴대폰번호" style="text-align: right"
-						id="wishcount" />
+							<!--  거래기간 넣어주고 제한 걸어주는 로직 만들어야 함  -->
+							
+					</div>
+
+					<!--  도로명 주소 인증키:	U01TX0FVVEgyMDE4MTAxNTIxMzIwODEwODIzNjM= -->
+
+					<div class="my-2">
+						<span>거래방법</span> <input class="form-control" type="text"
+							placeholder="예)직거래,택배등" style="text-align: right;padding-left:px" id="way" required />
+					</div>
+					<div class="my-2">
+						<span>연락처</span> <input class="form-control" type="number"
+							placeholder="집전화,휴대폰번호" style="text-align: right;padding-left:px" id="phone" required/>
+					</div>
+
 				</div>
 				
-			</div>
-				<span>우편번호</span>
-				<jsp:include page="../template/adress.jsp" />
-			<!-- Related Projects Row -->
-			<h3 class="my-4">판매자가 올린 사진 3개이상</h3>
-			
-             <input multiple="multiple" type="file" name="sellfile" style="color:slategray;border:1 solid silver;width:300; height:20"> (최대 5M)</td>
-                                     
-			<div class="row">
-			
+				
+							
+		     <br/>
+							
+				<!-- Related Projects Row -->
+				<h3 class="my-4">판매자가 올린 사진 3개이상</h3>
+				
+				<!--  사진  3개이상 유효성 검사 항목 추가  -->
+                 
+				<input multiple="multiple" type="file" 
+					style="color: slategray; border: 1 solid silver; width: 300; height: 20">(최대 5M)
+				
 
-				<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+				<div class="row">
 
-					<img id="product1" onclick="javascript:changeimage1()"
-						class="img-fluid shadow scale"
-						src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-						alt="" style="width: 300px; height: 200px;">
+					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+
+						<img id="product1" onclick="javascript:changeimage1()"
+							class="img-fluid shadow scale"
+							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
+							alt="" style="width: 300px; height: 200px;">
+					</div>
+					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+
+						<img id="product2" onclick="javascript:changeimage2()"
+							class="img-fluid shadow scale"
+							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
+							alt="" style="width: 300px; height: 200px;">
+
+					</div>
+					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+
+						<img id="product3" onclick="javascript:changeimage3()"
+							class="img-fluid shadow scale"
+							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
+							alt="" style="width: 300px; height: 200px;">
+
+					</div>
+					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
+
+						<img id="product4" onclick="javascript:changeimage4()"
+							class="img-fluid shadow scale"
+							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
+							alt="" style="width: 300px; height: 200px;">
+					</div>
 
 				</div>
+				<!--사진 로직 끝 -->
 
-				<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-					<img id="product2" onclick="javascript:changeimage2()"
-						class="img-fluid shadow scale"
-						src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-						alt="" style="width: 300px; height: 200px;">
+				
+				<div class="col-md-12 container">
+<textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
+				class="output"		maxlength="2048" required >
+※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.											
+					
+</textarea>
+				</div>
+							
+				<div style="text-align: center">
+					<a href="<c:url value='/market/sell.aw'/>">
+					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>					
+					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" onclick="return check()">
 
 				</div>
+				  											
+			</form>
+						
+			<div style="margin-bottom: 50px"></div>
 
-				<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-					<img id="product3" onclick="javascript:changeimage3()"
-						class="img-fluid shadow scale"
-						src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-						alt="" style="width: 300px; height: 200px;">
-
-				</div>
-
-				<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-					<img id="product4" onclick="javascript:changeimage4()"
-						class="img-fluid shadow scale"
-						src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-						alt="" style="width: 300px; height: 200px;">
-
-				</div>
-
-			</div>
-			<!-- /.row -->
-
-			 <div class="col-md-12 container">
-     <textarea id="summernote" class="col-md-12 container" rows="" cols="" style=" border: 1px solid blue;height: 500px" maxlength="2048"></textarea>
-       
-        </div>
-			<div style="text-align: center">
-		 <a href="<c:url value='/market/sell.aw'/>"><input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
-				<input class="btn btn-danger" type="submit" id="enterBtn" value="확인">
-
-			</div>
 		</div>
-		 <div style="margin-bottom: 50px" ></div>
-
 	</div>
-</div>
 
-	<script>
-
-$(document).ready(function() {
-     $('#summernote').summernote({
-             height: 500,                 // set editor height
-             minHeight: 500,             // set minimum height of editor
-             maxHeight: 500,             // set maximum height of editor         
-             focus: true,// set focus to editable area after initializing summernote
-             lang: 'ko-KR'
-     });
-});
-
-</script>
+	
 
 </body>
 

@@ -9,6 +9,9 @@
 	<select id="lostCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM lost_animal
+		<if test="today != null">
+			WHERE end_notice = TO_CHAR(sysdate)
+		</if>
 	</select>
 	
 	<select id="lostSelectList" parameterType="java.util.Map" resultType="LostDTO">
@@ -18,6 +21,9 @@
 			FROM (
 				SELECT *
 				FROM lost_animal
+				<if test="today != null">
+					WHERE end_notice = TO_CHAR(sysdate)
+				</if>
 				ORDER BY end_notice, no
 				) T
 			)
@@ -46,9 +52,9 @@
 		WHERE no=#{no}
 	</delete>
 	
-	<delete id="passDateOnNotice">
+	<delete id="passDateOnNotice" parameterType="java.util.Map">
 		DELETE FROM lost_animal
-		WHERE sysdate - end_notice >= 1;
+		WHERE sysdate - end_notice >= 1
 	</delete>
 
 </mapper>

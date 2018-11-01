@@ -6,8 +6,7 @@
 <script>
 	var isDelete = function() {
 		if (confirm("글을 삭제 하시겠습니까?"))
-			location
-					.replace("<c:url value='/market/buy/delete.aw?buy_no=${record.no}'/>");
+			location.replace("<c:url value='/market/sell/delete.aw?sell_no=${record.no}'/>");
 	};
 </script>
 
@@ -32,7 +31,7 @@
          $.ajax({
             data: form_data,
             type: "POST",
-            url : "<c:url value='/animal/freeboard/Upload.aw'/>",
+            url : "<c:url value='/market/sell/Upload.aw'/>",
             cache: false,
             contentType: false,
             processData: false,
@@ -47,11 +46,6 @@
    });
 </script>
 
-
-  <head>
- 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
- 
 	
 	<style>
  .scale {
@@ -73,8 +67,9 @@
 
 </style>
 
-<script>
 
+
+<script>
 
 function changeimage2() {
     var image = document.getElementById('product');
@@ -105,7 +100,6 @@ function changeimage4() {
     } 
 
 }
-
 function changeimage1() {
     var image = document.getElementById('product');
     var changeimage1=document.getElementById('product1');
@@ -116,8 +110,6 @@ function changeimage1() {
 }
 </script>
 
-    
-  </head>
   <body>
   
     <!-- Page Content -->
@@ -145,6 +137,7 @@ function changeimage1() {
 				</c:choose>
 				<small>${record.title}</small>
       </h1>
+      
 </div>
       <!-- Portfolio Item Row -->
       <div class="row">
@@ -152,7 +145,7 @@ function changeimage1() {
 
         <div class="col-md-8">
          <!--  <img class="img-fluid" src="http://placehold.it/750x500" alt="" > -->
-           <img name="product" id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" style="width: 700px; height: 500px;">
+           <img  id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" style="width: 700px; height: 500px;">
         
         </div>
 
@@ -180,10 +173,10 @@ function changeimage1() {
 					</c:choose>
 
 				</h3>
-         <div class="col-md-4" style="border: 1px solid silver">
+         <div class="col-md-12" style="border: 1px solid silver;width:400px;height:300px">
 				<h3 class="my-3">조회수 :${record.count}</h3>
 				<h3 class="my-3">등록일: ${record.regidate}</h3>
-				<ul>
+				  <ul>
 					<li>거래 횟수</li>
 					<li>만족 불만족 표시</li>
 					<li>회원의 등급</li>
@@ -204,60 +197,42 @@ function changeimage1() {
       <div class="row">
 
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom" >   
-            <img name="product1" id="product1"  onclick="javascript:changeimage1()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" alt="" style="width: 300px; height: 200px;">      
+            <img  id="product1"  onclick="javascript:changeimage1()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" alt="" style="width: 300px; height: 200px;">      
         </div>
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-            <img name="product2" id="product2" onclick="javascript:changeimage2()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product2.jpg'/>" alt="" style="width: 300px; height: 200px;">    
+            <img  id="product2" onclick="javascript:changeimage2()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product2.jpg'/>" alt="" style="width: 300px; height: 200px;">    
         </div>
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">    
-            <img name="product3" id="product3" onclick="javascript:changeimage3()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product3.jpg'/>" alt="" style="width: 300px; height: 200px;">    
+            <img  id="product3" onclick="javascript:changeimage3()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product3.jpg'/>" alt="" style="width: 300px; height: 200px;">    
         </div>
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">     
-            <img name="product4" id="product4" onclick="javascript:changeimage4()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product4.png'/>" alt="" style="width: 300px; height: 200px;">
+            <img  id="product4" onclick="javascript:changeimage4()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product4.png'/>" alt="" style="width: 300px; height: 200px;">
         </div>
-
       </div>
       <!-- /.row -->	
 
-     <div class="col-md-12 container">
-     <div class="col-md-12 col-ms-4 container">
-     <table class="table table-hover table-striped table-bordered" style="max-width: 100%;"><tr>
-    	<th colspan="2" class="text-center" style="max-width: 100%;">내용</th>
+    <div class="col-md-12 container">
+
+			<table class="table table-hover table-striped table-bordered">
+				<tr>
+					<th colspan="2" class="text-center">내용</th>
 				</tr>
-				<tr style="max-width: 100%;">
-					<td colspan="2">
-					
-					제목: <br/>
-					
-					판매물품: <br/>
-					
-					희망가: 원<br/>
-					
-					거래기간:    까지 <br/>
-					
-					거래방법: <br/>
-								
-					연락처:  <br/>
-					
-					===================자세한 설명을 구체적으로 해주세요 =====================<br/>
-							${record.content}<br/>
-							
-										
+				<tr>
+					<td colspan="2">${record.content}<br />
+
 					</td>
 				</tr>
-       </table>
-        </div>
-        </div>
+
+			</table>
+		</div>
+		 <!-- 버튼시작 -->
            <div style="text-align: center">
 			<a href="<c:url value='/market/sell.aw'/>"> 
-			<input name="reset" class="btn btn-info" type="button" value="목록"></a> 
-			
+			<input name="reset"  class="btn btn-info" type="button" value="목록"></a> 			
 			<c:if test="${sessionScope.mem_no==record.mem_no }">
-			<a href="<c:url value='/market/selledit.aw?sell_no=${record.no}'/>" type="button" class="btn btn-danger">수정</a>
-			</c:if>
-			
-			 <input name="reset" class="btn btn-suceess" style="background-color: #4CAF50;" type="button" id="repl"value="답글"> 
-				
+			<a href="<c:url value='/security/market/selledit.aw?sell_no=${record.no}'/>" type="button" class="btn btn-danger">수정</a>
+			</c:if>			
+			 <input  class="btn btn-suceess" style="background-color: #4CAF50;" type="button" id="repl"value="답글"> 				
 				<c:if test="${sessionScope.mem_no==record.mem_no }">
 				<a href="javascript:isDelete()" type="button" class="btn">삭제</a>					
 				</c:if>
