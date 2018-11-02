@@ -157,6 +157,12 @@
 .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
 .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 .info .link {color: #5085BB;}
+dd{
+	color:#28dbb7;
+}
+button{
+	border-radius: 10px;
+}
 </style>
 
 <div id="where-main" style="margin-top: 30px;">
@@ -173,6 +179,7 @@
          </ul>
       </div>
       <div style="text-align: center;">
+      	 <span style="marigin-bottom:10px;">'클릭' 하시면 해당위치로 이동합니다</span>
          <div id="span-tag">
              <span id="around" style="font-size: 1.4em; text-align: center;">주변 리스트</span>
          </div>
@@ -414,7 +421,7 @@
 										'</div>'+
 										'<dl style="margin-left: 40px; margin-right: 8px;">'+
 										'<dt>'+
-											'<button class="movetarget" title="'+latlng+'">'+value.bizesNm+'</button>'+
+											'<button class="movetarget bttn-fill bttn-md bttn-danger" title="'+latlng+'">'+value.bizesNm+'</button>'+
 										'</dt>'+
 												'<dd>'+value.rdnmAdr+
 												(value.dongNo == null ? '' : value.dongNo+'동')+
@@ -467,7 +474,7 @@
 										'</div>'+
 										'<dl style="margin-left: 40px; margin-right: 8px;">'+
 										'<dt>'+
-											'<button class="movetarget" title="'+latlng+'">'+value.bizesNm+'</button>'+
+											'<button class="movetarget bttn-fill bttn-md bttn-danger" title="'+latlng+'">'+value.bizesNm+'</button>'+
 										'</dt>'+
 												'<dd>'+value.rdnmAdr+
 												(value.dongNo == null ? '' : value.dongNo+'동')+
