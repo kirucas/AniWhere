@@ -127,7 +127,7 @@ nav a{
 	                                </ul>
 	                            </li>
 	                            <li class="dropdown-divider"></li>
-	                            <li><a href="<c:url value='/security/animal/freeboard.aw'/>">&emsp;&emsp;&nbsp;&nbsp;자유 게시판</a></li>
+	                            <li><a href="<c:url value='/animal/freeboard.aw'/>">&emsp;&emsp;&nbsp;&nbsp;자유 게시판</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
