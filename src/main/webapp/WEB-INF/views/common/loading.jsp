@@ -32,12 +32,13 @@
 
 		    $('.loading').show();
 
+		
+			$(window).on('load', function() {
+	
+			    $('.loading').hide();
+	
+			}); 
 		});
-		$(window).on('load', function() {
-
-		    $('.loading').hide();
-
-		}); 
 	</script>
 	<div class="loading" id="content">
 
