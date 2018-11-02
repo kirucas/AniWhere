@@ -74,5 +74,6 @@ public class MemberDTO {
 	public void setMem_interani(String mem_interani) {
 		this.mem_interani = mem_interani;
 	}//////////
+
 	
 }//////////////////// MemberDTO class

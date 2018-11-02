@@ -6,9 +6,9 @@
 <mapper namespace="mybatis.Mating">
 
 	<select id="matingCount" parameterType="java.util.Map" resultType="int">
-		SELECt COUNT(*)
+		SELECT COUNT(*)
 		FROM (
-			SELCT T.*, ROWNUM R
+			SELECT T.*, ROWNUM R
 			FROM (
 				SELECT *
 				FROM mating m JOIN animal a ON m.ani_no=a.ani_no
@@ -52,7 +52,7 @@
 	</select>
 	
 	<insert id="matingInsert" parameterType="java.util.Map">
-		INSERT INFO mating(mating_no, ani_no, mating,loc)
+		INSERT INTO mating(mating_no, ani_no, mating_loc)
 		VALUES(seq_mating.nextval, #{ani_no}, #{mating_loc})
 	</insert>
 	
