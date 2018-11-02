@@ -73,33 +73,27 @@
 					<div class="row" style="text-align: center; margin-left: 20px">
 						<div class="my-4">
 							<span style="margin-right: 20px">희망가</span><input
-								class="form-control" type="text" id="wishprice" />
+								class="form-control" type="text" id="price" />
 						</div>
 						<div class="my-4">
 							<span>거래기간</span> <input type="date" min="2018-10-19"
 								max="2020-01-01" name="date" class="form-control" type="text"
-								id="wishtime" />
+								id="time" />
 						</div>
 
 						<div class="my-4">
 							<span>연락처</span> <input class="form-control" type="text"
-								id="wishcount" />
+								id="phone" />
 						</div>
 					</div>
 				</div>
-				
-				<div style="margin-top: 20px">
-				<div style="text-align: center">
-				<span>거래가능 장소 검색 </span>
-				<jsp:include page="../template/adress.jsp" />
-				<input class="postcodify_details" style="width:600px;text-align: right" placeholder="상세주소" /><br />
-			</div></div>
-				
+		
 				
 				<p>
 					<label for="" class="" style="margin-top: 30px">프로그래스바
-						설정:목표수량</label> <input type="text" id="nickname">개 <label for=""
-						class=""> 해택종류</label> <select id="use_listSelect"
+						설정:목표수량</label> <input type="text" id="nickname">개 
+						<label for=""class=""> 해택종류</label>
+						 <select id="use_listSelect"
 						class="select_filter" onclick="">
 						<option value="nopoint">혜택없음</option>
 						<option value="bonus">사은품추가</option>
@@ -160,15 +154,12 @@
 					<textarea id="summernote" class="col-md-12 container" rows=""
 						cols="" style="border: 1px solid blue; height: 500px"
 						maxlength="2048"></textarea>
-
 				</div>
-
 				<div style="text-align: center">
 					<a href="<c:url value='/market/groupbuy.aw'/>"><input
 						class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
 					<input class="btn btn-danger" type="button" id="enterBtn"
 						value="확인">
-
 
 				</div>
 			</div>

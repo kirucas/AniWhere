@@ -27,24 +27,21 @@
 
     </style>
 
-
-
-
-	<div class="loading" id="content">
-
-		<img alt="loading" src="<c:url value='/resources/images/loading.gif'/>">
-
-	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
 
 		    $('.loading').show();
 
-		});
-
-		$(window).on('load', function() {
-
-		    $('.loading').hide();
-
+		
+			$(window).on('load', function() {
+	
+			    $('.loading').hide();
+	
+			}); 
 		});
 	</script>
+	<div class="loading" id="content">
+
+		<img alt="loading" src="<c:url value='/resources/images/loading.gif'/>">
+
+	</div>
