@@ -51,7 +51,6 @@ var isDelete = function(){
 .btn {
 	background-color: #1ABC9C;
 	border-color: #1ABC9C;
-	text-align: right;
 }
 
 
@@ -65,11 +64,17 @@ var isDelete = function(){
 		<div class="col moda" data-toggle="modal" id="popupMovie"
 			data-target="bd-example-modal-lg">
 			<div class="col media-header">
+				<div class="horizontal" style="text-align: justify;">
 				<div class="title col-xs-12 col-sm-6 col-md-8">${dto.movie_title}</div>
-				<div class="nickname col-xs-6 col-md-4">닉네임 ${dto.mem_nickname}</div>
-				<div class="count col-xs-12 col-sm-6 col-md-8">조회수
-					${dto.movie_count}</div>
 				<div class="postdate col-xs-6 col-md-4">등록일 ${dto.movie_regidate}</div>
+				</div>
+				<c:if test="${empty dto.mem_no}">
+				<div class="nickname col-xs-6 col-md-4">탈퇴한 회원</div>
+				</c:if>
+				<c:if test="${not empty dto.mem_no}">
+				<div class="nickname col-xs-6 col-md-4">닉네임 : ${dto.mem_nickname}</div>
+				</c:if>
+				<div class="count col-xs-12 col-sm-6 col-md-8">조회수 ${dto.movie_count}</div>
 			</div>
 			<hr />
 			<div class="media-body">
@@ -82,20 +87,45 @@ var isDelete = function(){
 <div class="col-xs-12 col-sm-12"
 					style="border: 1px solid gray; margin-top: 10px"></div>
 	<!-- row -->
-	<div class="text-right margin-top-10">
-		<div>
-			<a
-				href="<c:url value='/etc/movie/Reply.aw?no=${dto.no}'/>"
-				class="btn btn-success">댓글</a>
-			<c:if test="${sessionScope.mem_no == dto.mem_no}">
-				<a
-					href="<c:url value='/security/animal/etc/movie/edit.aw?no=${dto.no}'/>"
-					class="btn btn-success">수정</a>
-				<a href="javascript:isDelete()" class="btn btn-success">삭제</a>
-			</c:if>
-			<a href="<c:url value='/etc/movie/List.aw?no=${dto.no}&nowPage=${param.nowPage}'/>"
-				class="btn btn-success">목록</a>
-		</div>
+<div class="horizontal" style="margin-top: 20px; text-align: right;">
+	<c:if test="${sessionScope.mem_no == dto.mem_no}">
+		<a
+			href="<c:url value='/security/animal/etc/movie/edit.aw?no=${dto.no}'/>"
+			class="btn btn-success">수정</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:isDelete()" class="btn btn-success">삭제</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</c:if>
+	<a
+		href="<c:url value='/etc/movie/List.aw?no=${dto.no}&nowPage=${param.nowPage}'/>"
+		class="btn btn-success" style="margin: 0 auto;">목록</a>
+</div>
+<div class="text-right" style="margin-top: 50px;">
+	<div class="horizontal">
+		<!-- 한줄 코멘트 입력 폼-->
+		<form class="form-inline" id="frm" method="post">
+			<label for="inputcomment" class="col-xs-2 col-sm-1 col-md-1 control-label">${sessionScope.mem_id}</label>
+			<input type="email" class="form-control col-xs-11 col-sm-9 col-md-9" id="inputcomment"
+				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="<c:url value='/animal/etc/movie/Reply.aw?no=${dto.no}'/>"
+			class="btn btn-success col-xs-2 col-sm-1 col-md-1">댓글</a>
+		</form>
 	</div>
+</div>
+<br/>
 
+<%-- 		
+			<div>${sessionScope.mem_id}</div>&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<input type="hidden" value="${table_name}"/>
+			<input type="hidden" value="${dto.mem_no}"/>
+			
+			<input type="hidden" name="no" value="${cmtdto.cmt_no}" />
+				<!-- 수정 및 삭제용 파라미터 -->
+			<input type="hidden" name="cmt_no" />
+			<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />&nbsp;&nbsp;
+			<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>
+			 --%>
+	<div class="row" id="comments">
+		<!-- 한줄 코멘트 목록-->		
+		<!-- ajax로 아래에 코멘트 목록 뿌리기 -->	
+	</div>
 <!-- 내용 끝 -->
