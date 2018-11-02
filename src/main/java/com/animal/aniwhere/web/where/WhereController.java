@@ -8,8 +8,10 @@ import java.util.Vector;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.animal.aniwhere.service.ReservationDTO;
 import com.animal.aniwhere.service.StoreLocationDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.ReservationServiceImpl;
@@ -30,6 +33,11 @@ public class WhereController {
 	
 	@Resource(name="reservationService")
 	private ReservationServiceImpl reservationservice;
+	
+	@Value("${PAGESIZE}")
+	private int pageSize;
+	@Value("${BLOCKPAGE}")
+	private int blockPage;
 	
 	  @RequestMapping("/where/main.aw")
 	  public String where_main() throws Exception {
@@ -146,7 +154,7 @@ public class WhereController {
 		         record.put("indsSclsCd", list.getIndssclscd());
 		         record.put("indsSclsNm", list.getIndssclsnm());
 		         record.put("lnoAdr", list.getLnoadr());
-		         record.put("rdnmAdr", list.getLnoadr());
+		         record.put("rdnmAdr", list.getRdnmadr());
 		         record.put("lon", list.getLon());
 		         record.put("lat", list.getLat());
 		         record.put("dongNo", list.getDongno());
@@ -227,12 +235,52 @@ public class WhereController {
 	    }
 	    //예약 페이지ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
 	    @RequestMapping("/where/reservation.awa")
-	    public String reservation_write(Model model,@RequestParam Map map,HttpServletResponse response)throws Exception {
-	    	
+	    public String reservation_write_form(Model model,@RequestParam Map map)throws Exception {
+	    	model.addAttribute("store_no",map.get("store_no"));
+	    	model.addAttribute("bizesNm",map.get("bizesNm"));
+	    	model.addAttribute("booking_date",map.get("booking_date"));
 			//뷰정보 반환]
 			return "where/reservationMain.tiles";
-	    } 
-	   
+	    }//reservation_write_form
+	    @RequestMapping("/where/reservate.awa")
+	    public String reservate(Model model,@RequestParam Map map,HttpSession session)throws Exception {
+	    	map.put("mem_no", session.getAttribute("mem_no"));
+	    	int insert = reservationservice.insert(map);
+	    	if (insert == 1)
+				model.addAttribute("check", 1);
+			else
+				model.addAttribute("check", 0);
+	    	//뷰정보 반환]
+	    	return "where/Message";
+	    } //reservate
+	    @RequestMapping("/where/reservation_check.aw")
+	    public String reservate_check(Model model,
+				HttpServletRequest req,//페이징용 메소드에 전달
+				@RequestParam Map map,//검색용 파라미터 받기
+				@RequestParam(required=false,defaultValue="1") int nowPage//페이징용 nowPage파라미터 받기용
+				)throws Exception {
+			//서비스 호출]
+			//페이징을 위한 로직 시작]
+			//전체 레코드 수
+			int totalRecordCount= reservationservice.getTotalRecord(map);			
+			//시작 및 끝 ROWNUM구하기]
+			int start = (nowPage-1)*pageSize+1;
+			int end   = nowPage*pageSize;
+			map.put("start",start);
+			map.put("end",end);
+			//페이징을 위한 로직 끝]
+	    	List<ReservationDTO> list = reservationservice.selectList(map);
+	    	//페이징 문자열을 위한 로직 호출]
+			String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/animal/freeboard.aw?");
+			//데이터 저장]
+			model.addAttribute("pagingString", pagingString);
+			model.addAttribute("list", list);
+			model.addAttribute("totalRecordCount", totalRecordCount);
+			model.addAttribute("pageSize", pageSize);
+			model.addAttribute("nowPage", nowPage);
+			//뷰정보 반환]
+	    	return "where/reservation_list.tiles";
+	    }//reservate_check
 //	  @RequestMapping(value= "/where/map/radius.awa", method= RequestMethod.POST,produces="text/plain; charset=UTF-8")
 //	  @ResponseBody
 //	  public String  mapdata(@RequestParam Map map,HttpServletResponse response) throws Exception{

@@ -261,7 +261,9 @@ button{
 		            			image : markerImage,
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
-		            		
+						    
+		            		var curl = '<c:url value="/where/reservation.awa?store_no='+value.bizesId+'&bizesNm='+value.bizesNm+'"/>'
+		            				
 		            		var content = 
 		            			'<div class="wrap">' + 
 		                        '    <div class="info">' + 
@@ -278,7 +280,7 @@ button{
         						'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
         						'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
 		                        '                </div>' + 
-		                        '                <div><a href="#">예약</a></div>' + 
+		                        '                <div><a href="'+curl+'">예약</a></div>' + 
 		                        '            </div>' + 
 		                        '        </div>' + 
 		                        '    </div>' +    
@@ -572,6 +574,10 @@ button{
 			function mapMaker(lat,lng){
 				// 마커가 표시될 위치입니다 
 				var markerPosition  = new daum.maps.LatLng(lat, lng); 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/MISS
 
             // 마커를 생성합니다
             var marker = new daum.maps.Marker({
