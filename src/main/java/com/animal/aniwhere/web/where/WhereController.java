@@ -230,6 +230,7 @@ public class WhereController {
 	    public String reservation_write_form(Model model,@RequestParam Map map)throws Exception {
 	    	model.addAttribute("store_no",map.get("store_no"));
 	    	model.addAttribute("bizesNm",map.get("bizesNm"));
+	    	model.addAttribute("booking_date",map.get("booking_date"));
 			//뷰정보 반환]
 			return "where/reservationMain.tiles";
 	    }//reservation_write_form

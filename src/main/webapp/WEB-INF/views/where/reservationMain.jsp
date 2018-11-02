@@ -44,12 +44,12 @@
           <h1>예약 페이지</h1>
         </div>
         <div id="reservation">
-          <form role="form" action="<c:url value='/where/reservate.awa'/>" id="form_span">
+          <form role="form" method="post" action="<c:url value='/where/reservate.awa'/>" id="form_span">
 	          	<div class="form-group">
-	          		<input type="text" name="${store_no}"/> 상가업소 번호 : ${store_no}
+	          		상가업소 번호 : ${store_no}<input type="hidden" name="store_no" value="${store_no}"/> 
 	          	</div>
 	            <div class="form-group">
-	              	<input type="text" name="${bizesNm}"/> 업소명 : ${bizesNm}
+	              	 업소명 : ${bizesNm}<input type="hidden" name="bizesNm" value="${bizesNm}"/>
 	            </div>
 	            <div class="form-group">
 	              	<span>날짜 선택 : </span><input type="text" id="datepicker" name="booking_date">
