@@ -1,22 +1,19 @@
 package com.animal.aniwhere.web.mating;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.MatingDTO;
 import com.animal.aniwhere.service.impl.MatingServiceImpl;
 import com.animal.aniwhere.service.impl.member.AnimalServiceImpl;
@@ -40,7 +37,7 @@ public class MatingController {
 		return "mating/matingProfile.tiles";
 	}
 
-	@RequestMapping("/matingLogin.aw")
+	@RequestMapping("/security/matingLogin.aw")
 	public String mating_login(@RequestParam Map map,HttpSession session,HttpServletResponse response) throws Exception {
 		//System.out.println("session mem_no:"+session.getAttribute("mem_no"));
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -91,19 +88,24 @@ public class MatingController {
 		return "mating/matingMatch.tiles";
 	}/// mating_match
 	
-	@RequestMapping("/matingManage.aw")
-	public String insertDelete(@RequestParam Map map,Model model) throws Exception {
+	@ResponseBody
+	@RequestMapping("/matingManage.awa")
+	public String insertDelete(@RequestParam Map map,HttpSession session,Model model) throws Exception {
 		String temp=map.get("ani_no").toString();
+		System.out.println(temp);
+		System.out.println(map.get("mating_loc"));
 		if(temp.startsWith("insert")) {
 			temp=temp.replace("insert", "");
 			map.put("ani_no", temp);
 			matingService.insert(map);
+			return "insert";
 		} else {
 			temp=temp.replace("delete", "");
 			map.put("ani_no", temp);
+			map.put("mem_no", session.getAttribute("mem_no"));
+			matingService.selectMyMating(map);
 			matingService.delete(map);
+			return "delete";
 		}/// if
-		
-		return "";
 	}/// insertDelete
 }// class
