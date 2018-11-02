@@ -50,7 +50,7 @@
 	$(function(){
 		$(document).on("click",".match",function(){
 			// 등록된 동물의 상대 목록 뿌려주는 페이지로
-			location.href='<c:url value="/matingMatch.aw?ani_no='+$(this).prop('id')+'"/>';
+			location.href='<c:url value="/mating/Match.aw?ani_no='+$(this).prop('id')+'"/>';
 		});
 		
 		$(document).on("click",".mate",function(){
@@ -59,7 +59,7 @@
 			// 주소 API
 			// mating 등록
 			$.ajax({
-	        	url:"<c:url value='/matingManage.awa'/>",
+	        	url:"<c:url value='/mating/Manage.awa'/>",
 	       		type:"POST",
 				data:{"ani_no":$(this).prop("id"),"mating_loc":"임시 지역"},
 	       		dataType: "text",

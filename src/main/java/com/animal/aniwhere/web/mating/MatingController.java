@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,11 +38,9 @@ public class MatingController {
 		return "mating/matingProfile.tiles";
 	}
 
-	@RequestMapping("/security/matingLogin.aw")
+	@RequestMapping("/security/mating/Login.aw")
 	public String mating_login(@RequestParam Map map,HttpSession session,HttpServletResponse response) throws Exception {
-		//System.out.println("session mem_no:"+session.getAttribute("mem_no"));
 		map.put("mem_no", session.getAttribute("mem_no"));
-		//System.out.println("mem_no:"+map.get("mem_no"));
 		// 동물 등록이 되어있는지 확인하기
 		if(animalService.getTotalRecord(map)==0) { // 등록된 동물이 없는 경우
 			System.out.println("동물 등록 페이지로 이동");
@@ -53,11 +52,11 @@ public class MatingController {
 			return "forward:/member_info.aw";
 		} else {
 			// 등록된 동물은 있으니까 
-			return "forward:/matingRegiList.aw";
+			return "forward:/mating/RegiList.aw";
 		}/// if
 	}/// mating_login
 	
-	@RequestMapping("/matingRegiList.aw")
+	@RequestMapping("/mating/RegiList.aw")
 	public String mating_regist(HttpSession session,Map map) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no"));
 		List<AnimalDTO> list=animalService.selectList(map);
@@ -67,11 +66,12 @@ public class MatingController {
 		return "mating/matingRegiList.tiles";
 	}
 
-	@RequestMapping("/matingMatch.aw")
+	@RequestMapping("/mating/Match.aw")
 	public String mating_match(@RequestParam Map map,Model model) throws Exception {
 		map.put("ani_no", map.get("ani_no").toString().replace("matching", ""));
 		AnimalDTO animal=animalService.selectOne(map);
 		map.put("ani_gender", animal.getAni_gender().equals("M")?"F":animal.getAni_gender().equals("F")?"M":"U");
+		System.out.println(map.get("ani_gender"));
 		map.put("ani_species",animal.getAni_species());
 		if(animal.getAni_kind()!=null)
 			map.put("ani_kind", animal.getAni_kind());
@@ -80,14 +80,17 @@ public class MatingController {
 		map.put("end",10);
 		
 		List<MatingDTO> matingList=matingService.selectList(map);	
+		System.out.println("총 "+matingList.size()+"개의 결과");
 		
 		model.addAttribute("animal",animal);
 		model.addAttribute("list",matingList);
 		return "mating/matingMatch.tiles";
 	}/// mating_match
 	
+	
+	// 메이팅 관리 화면에서 버튼 뿌려줄 시 제어할 메소드
 	@ResponseBody
-	@RequestMapping("/matingManage.awa")
+	@RequestMapping("/mating/Manage.awa")
 	public String insertDelete(@RequestParam Map map,HttpSession session,Model model) throws Exception {
 		String temp=map.get("ani_no").toString();
 		if(temp.startsWith("insert")) {
@@ -120,4 +123,30 @@ public class MatingController {
 		}/// if
 		return "error";
 	}/// insertDelete
+	
+	// 매치 화면에서 모달을 띄우기 위한 메소드
+	@ResponseBody
+	@RequestMapping(value="/mating/showProfile.awa",produces="text/plain;charset=UTF-8")
+	public String showProfile(@RequestParam Map map,Model model) throws Exception {
+		System.out.println("matingNo="+map.get("mating_no"));
+		MatingDTO dtoMating=matingService.selectOne(map);
+		map.put("ani_no",dtoMating.getAni_no());
+		AnimalDTO dtoAnimal=animalService.selectOne(map);
+		
+		JSONObject json=new JSONObject();
+		json.put("ani_no",dtoAnimal.getAni_no());
+		json.put("mem_no",dtoAnimal.getMem_no());;
+		json.put("ani_name",dtoAnimal.getAni_name());
+		json.put("ani_age",dtoAnimal.getAni_age());
+		json.put("ani_gender",dtoAnimal.getAni_gender());
+		json.put("ani_species",dtoAnimal.getAni_species());
+		json.put("ani_kind",dtoAnimal.getAni_kind());
+		json.put("ani_pic",dtoAnimal.getAni_pic());
+		
+		// 해당 동물에 대한 주인 정보를 저장 할 속성 추가
+		json.put("mem_name",dtoAnimal.getMem_name());
+		json.put("mem_nickname",dtoAnimal.getMem_nickname());
+		
+		return json.toJSONString();
+	}/// showProfile
 }// class

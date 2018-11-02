@@ -29,10 +29,10 @@
 	padding-top:15px;
 }
 #ani_profile{
-	height: 200px;
+	height: 160px;
 }
 .card-body{
-	height: 200px;
+	height: 160px;
 }
 #plus{
 	border: none;
@@ -54,27 +54,20 @@
 			$("#modalNo").html(photoNo);
 			
 			$.ajax({
-	        	url:"<c:url value='/bird/photo/modalContent.awa'/>",
+	        	url:"<c:url value='/mating/showProfile.awa'/>",
 	       		type:"POST",
-				data:{no:photoNo},
+				data:{'mating_no':photoNo},
 	       		dataType:"json", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
 	       		success : function(data) {
-	        	 	document.getElementById("title").innerHTML=data['photo_title'];
-	        	 	document.getElementById("content").innerHTML=data['photo_content'];
-	        	 	if(data['mem_no'] == data['user']) {
-	        	 		document.getElementById("e-d-button").innerHTML='<a href="#" class="btn btn-primary">수정</a>'
-						+'<a id="delete" href="#" class="btn btn-danger">삭제</a>';
-						$("#delete").click(function(){
-	        				var index=document.getElementById("modalNo").innerHTML;
-	        				location.replace("<c:url value='/bird/photo/delete.aw?no="+index+"'/>");
-	        			});
-	        	 	 }else {
-	        	 		document.getElementById("e-d-button").innerHTML="";
-	        	 	} 
-	    	 		
+        			$('#title').html(data.ani_name+"의 프로필 카드");
+        			var contentString=data.mem_nickname+"님의 "+data.ani_age+"살, "
+        					+"성별 : "+(data.ani_gender=='M'?'수':data.ani_gender=='F'?'암':'기타')
+        					+", "+data.ani_kind;
+        			$('#content').html(contentString);
+        			$('#modalImg').prop('src','<c:url value="'+data.ani_pic+'"/>');
 	           	},
 	           	error : function(error) {
-	                 alert("에러발생");
+	                alert("에러발생");
 		       	}
 		    });
 		});
@@ -100,7 +93,7 @@
 				<img class="card-img-top" src="<c:url value='${dto.ani_pic}'/>" alt="Card image">
 				<div class="card-body">
 					<h2 class="card-title" style="color:#1ABC9C">${dto.ani_name}</h2>
-					<p class="card-text">${ani_species} ${dto.ani_kind}</p>
+					<p class="card-text">${dto.ani_age}살 ${dto.ani_kind}</p>
 					<a href="#" class="btn btn-primary moda" data-target="#modalIMG" data-toggle="modal" id="${dto.mating_no}">프로필 보기</a>
 				</div>
 			</div>
@@ -116,7 +109,7 @@
 			<div class="modal-body mb-0 p-0">
 				<!-- 글번호 저장용 -->
 				<label id="modalNo" hidden="true"></label>
-				<img src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="" style="width:100%">
+				<img id="modalImg" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="동물 사진" style="width:100%">
 				<h2 id="title" style="margin:10px"><!-- 제목 --></h2>
 				<p id="content" style="margin:10px"><!-- 내용 --></p>
 			</div>
