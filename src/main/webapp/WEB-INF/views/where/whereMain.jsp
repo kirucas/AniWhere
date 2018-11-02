@@ -254,7 +254,7 @@
 		            			image : markerImage,
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
-		            		
+		            		var curl = '<c:url value="/views/where/reservationMain.jsp?store_no='+value.bizesid+'"/>'
 		            		var content = 
 		            			'<div class="wrap">' + 
 		                        '    <div class="info">' + 
@@ -271,7 +271,7 @@
         						'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
         						'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
 		                        '                </div>' + 
-		                        '                <div><a href="#">예약</a></div>' + 
+		                        '                <div><a href="'+curl+'">예약</a></div>' + 
 		                        '            </div>' + 
 		                        '        </div>' + 
 		                        '    </div>' +    

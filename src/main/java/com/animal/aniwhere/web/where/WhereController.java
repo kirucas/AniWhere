@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Vector;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.animal.aniwhere.service.StoreLocationDTO;
-import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.ReservationServiceImpl;
 import com.animal.aniwhere.service.impl.StoreLocationServiceImpl;
 
@@ -45,18 +43,18 @@ public class WhereController {
     
 		  for(StoreLocationDTO list:lists) {
 		         Map record = new HashMap();
-		         record.put("bizesId", list.getBizesId());
-		         record.put("bizesNm", list.getBizesNm());
-		         record.put("brchNm", list.getBrchNm());
-		         record.put("indsSclsCd", list.getIndsSclsCd());
-		         record.put("indsSclsNm", list.getIndsSclsNm());
-		         record.put("lnoAdr", list.getLnoAdr());
-		         record.put("rdnmAdr", list.getRdnmAdr());
+		         record.put("bizesId", list.getBizesid());
+		         record.put("bizesNm", list.getBizesnm());
+		         record.put("brchNm", list.getBrchnm());
+		         record.put("indsSclsCd", list.getIndssclscd());
+		         record.put("indsSclsNm", list.getIndssclsnm());
+		         record.put("lnoAdr", list.getLnoadr());
+		         record.put("rdnmAdr", list.getRdnmadr());
 		         record.put("lon", list.getLon());
 		         record.put("lat", list.getLat());
-		         record.put("dongNo", list.getDongNo());
-		         record.put("flrNo", list.getFlrNo());
-		         record.put("hoNo", list.getHoNo());
+		         record.put("dongNo", list.getDongno());
+		         record.put("flrNo", list.getFlrno());
+		         record.put("hoNo", list.getHono());
 		         collections.add(record);
 		      }////for
 		  return JSONArray.toJSONString(collections);
@@ -73,18 +71,18 @@ public class WhereController {
 			  List<StoreLocationDTO> lists =  storelocservice.selectList(map);
 			  for(StoreLocationDTO list:lists) {
 		         Map record = new HashMap();
-		         record.put("bizesId", list.getBizesId());
-		         record.put("bizesNm", list.getBizesNm());
-		         record.put("brchNm", list.getBrchNm());
-		         record.put("indsSclsCd", list.getIndsSclsCd());
-		         record.put("indsSclsNm", list.getIndsSclsNm());
-		         record.put("lnoAdr", list.getLnoAdr());
-		         record.put("rdnmAdr", list.getRdnmAdr());
+		         record.put("bizesId", list.getBizesid());
+		         record.put("bizesNm", list.getBizesnm());
+		         record.put("brchNm", list.getBrchnm());
+		         record.put("indsSclsCd", list.getIndssclscd());
+		         record.put("indsSclsNm", list.getIndssclsnm());
+		         record.put("lnoAdr", list.getLnoadr());
+		         record.put("rdnmAdr", list.getRdnmadr());
 		         record.put("lon", list.getLon());
 		         record.put("lat", list.getLat());
-		         record.put("dongNo", list.getDongNo());
-		         record.put("flrNo", list.getFlrNo());
-		         record.put("hoNo", list.getHoNo());
+		         record.put("dongNo", list.getDongno());
+		         record.put("flrNo", list.getFlrno());
+		         record.put("hoNo", list.getHono());
 		         collections.add(record);
 		      }////inner for
 		  }/// outter for
@@ -100,18 +98,18 @@ public class WhereController {
     
 		  for(StoreLocationDTO list:lists) {
 		         Map record = new HashMap();
-		         record.put("bizesId", list.getBizesId());
-		         record.put("bizesNm", list.getBizesNm());
-		         record.put("brchNm", list.getBrchNm());
-		         record.put("indsSclsCd", list.getIndsSclsCd());
-		         record.put("indsSclsNm", list.getIndsSclsNm());
-		         record.put("lnoAdr", list.getLnoAdr());
-		         record.put("rdnmAdr", list.getRdnmAdr());
+		         record.put("bizesId", list.getBizesid());
+		         record.put("bizesNm", list.getBizesnm());
+		         record.put("brchNm", list.getBrchnm());
+		         record.put("indsSclsCd", list.getIndssclscd());
+		         record.put("indsSclsNm", list.getIndssclsnm());
+		         record.put("lnoAdr", list.getLnoadr());
+		         record.put("rdnmAdr", list.getRdnmadr());
 		         record.put("lon", list.getLon());
 		         record.put("lat", list.getLat());
-		         record.put("dongNo", list.getDongNo());
-		         record.put("flrNo", list.getFlrNo());
-		         record.put("hoNo", list.getHoNo());
+		         record.put("dongNo", list.getDongno());
+		         record.put("flrNo", list.getFlrno());
+		         record.put("hoNo", list.getHono());
 		         
 		         //반경 계산
 		         
@@ -140,18 +138,18 @@ public class WhereController {
 			  List<StoreLocationDTO> lists =  storelocservice.selectList(map);
 			  for(StoreLocationDTO list:lists) {
 		         Map record = new HashMap();
-		         record.put("bizesId", list.getBizesId());
-		         record.put("bizesNm", list.getBizesNm());
-		         record.put("brchNm", list.getBrchNm());
-		         record.put("indsSclsCd", list.getIndsSclsCd());
-		         record.put("indsSclsNm", list.getIndsSclsNm());
-		         record.put("lnoAdr", list.getLnoAdr());
-		         record.put("rdnmAdr", list.getRdnmAdr());
+		         record.put("bizesId", list.getBizesid());
+		         record.put("bizesNm", list.getBizesnm());
+		         record.put("brchNm", list.getBrchnm());
+		         record.put("indsSclsCd", list.getIndssclscd());
+		         record.put("indsSclsNm", list.getIndssclsnm());
+		         record.put("lnoAdr", list.getLnoadr());
+		         record.put("rdnmAdr", list.getRdnmadr());
 		         record.put("lon", list.getLon());
 		         record.put("lat", list.getLat());
-		         record.put("dongNo", list.getDongNo());
-		         record.put("flrNo", list.getFlrNo());
-		         record.put("hoNo", list.getHoNo());
+		         record.put("dongNo", list.getDongno());
+		         record.put("flrNo", list.getFlrno());
+		         record.put("hoNo", list.getHono());
 		         
 		         //반경 계산
 		         

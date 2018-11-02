@@ -49,10 +49,10 @@
         <div id="reservation">
           <form role="form" id="form_span">
           	<div class="form-group">
-          		<span>상가업소 번호 : </span>asdfasdfasdfasdf
+          		<span>상가업소 번호 : ${store_no}</span>
           	</div>
             <div class="form-group">
-              	<span>업소명 : </span>asdfasdfasdfasdf
+              	<span>업소명 : </span>
             </div>
             <div class="form-group">
               	<span>날짜 선택 : </span><input type="text" id="datepicker">
