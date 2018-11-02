@@ -221,6 +221,7 @@ public class MemberController {
 		System.out.println(authenticatedUser.getAuthorities().toString());
 		Map map = new HashMap<>();
 		map.put("mem_id", authenticatedUser.getUsername());
+		System.out.println("증가 햇냐? " + service.visitCountUpdate());
 		MemberDTO dto = service.selectOne(map);
 		session.setAttribute("mem_id", map.get("mem_id"));
 		session.setAttribute("mem_no", dto.getMem_no());

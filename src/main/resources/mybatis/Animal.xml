@@ -24,7 +24,7 @@
 	
 	<select id="animalSelectOne" parameterType="java.util.Map" resultType="AnimalDTO">
 		SELECT ani.*, mem_name, mem_nickname
-		FROM animal ani JOIN member mem ON ani.mem_no = mem_mem_no
+		FROM animal ani JOIN member mem ON ani.mem_no = mem.mem_no
 		WHERE ani_no=#{ani_no}
 	</select>
 	
