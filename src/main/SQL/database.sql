@@ -34,6 +34,7 @@ DROP TABLE reservation CASCADE CONSTRAINTS;
 DROP TABLE tip_cmt CASCADE CONSTRAINTS;
 DROP TABLE tip CASCADE CONSTRAINTS;
 DROP TABLE member CASCADE CONSTRAINTS;
+DROP TABLE member_visit_count CASCADE CONSTRAINTS;
 DROP TABLE store_category CASCADE CONSTRAINTS;
 DROP TABLE store_location CASCADE CONSTRAINTS;
 
@@ -246,6 +247,18 @@ CREATE TABLE member_security
 	mem_no number NOT NULL,
 	enabled number(1) DEFAULT 1,
 	authority varchar2(20) DEFAULT 'USER'
+);
+
+
+CREATE TABLE member_visit_count
+(
+	no number NOT NULL,
+	today date DEFAULT SYSDATE,
+	year number(4) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')),
+	month number(2) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'MM')),
+	day number(2) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'DD')),
+	visit_count number DEFAULT 0,
+	PRIMARY KEY (no)
 );
 
 

@@ -194,7 +194,7 @@ a:visited { color:white; text-decoration: none;}
 		href="<c:url value='/bird/movie/List.aw?no=${dto.no}&nowPage=${param.nowPage}'/>"
 		class="btn btn-success" style="margin: 0 auto;">목록</a>
 </div>
-<div class="text-right" style="margin-top: 50px;">
+<div class="text-right" style="margin-top: 20px;">
 	<div class="horizontal">
 		<!-- 한줄 코멘트 입력 폼-->
 		<form class="form-inline" id="frm" method="post" style="margin: 0px auto;">
@@ -220,18 +220,18 @@ a:visited { color:white; text-decoration: none;}
 			<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />&nbsp;&nbsp;
 			<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>
 			 --%>
-<form>
+<form id="comments">
 	<!-- 한줄 코멘트 목록-->
 	<!-- ajax로 아래에 코멘트 목록 뿌리기 -->
 	<div class="form-group">
-		<label>닉네임 : ${sessionScope.mem_id}</label>
-		<label>댓글 날짜 : </label> <br/>
-		<p>댓글 내용</p>
+		<label>닉네임 : ${dto.mem_nickname }</label>
+		<label>댓글 날짜 : ${cmtdto.regidate}</label> <br/>
+		<p>댓글 내용 ${cmtdto.cmt_content}</p>
 	</div><br/>
 	
 	<div class="form-group">
-		<label>닉네임 : ${sessionScope.mem_id}</label>
-		<label>댓글 날짜+ : $</label> <br/>
+		<label>닉네임 : </label>
+		<label>댓글 날짜 : </label> <br/>
 		<p>댓글 내용</p>
 	</div>
 </form>

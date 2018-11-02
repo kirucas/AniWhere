@@ -115,7 +115,7 @@ public class BirdMovieController {
 		
 		//맵에서 table_name 넣기
 		String movie = "movie";
-		
+
 		map.put("table_name", movie);
 		System.out.println("map :" +map); //map : {no=no, nowPage=1, table_name=movie}
 		// 댓글
@@ -125,6 +125,10 @@ public class BirdMovieController {
 		// 유튜브 iframe소스를 가져와서 섬머노트와 같이 있는 내용과 분리하여 뿌리는 메소드
 		//(데이터 베이스 상에는 관련 컬럼이 없으므로)
 		setIframe(dto);
+		
+		for (AllCommentDTO cmtdto : cmtlist) {
+			 cmtdto.getRegidate();
+		}
 		
 		// 데이타 저장]
 		model.addAttribute("dto", dto);
