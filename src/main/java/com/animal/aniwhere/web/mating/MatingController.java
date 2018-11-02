@@ -1,22 +1,19 @@
 package com.animal.aniwhere.web.mating;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.MatingDTO;
 import com.animal.aniwhere.service.impl.MatingServiceImpl;
 import com.animal.aniwhere.service.impl.member.AnimalServiceImpl;
@@ -40,7 +37,7 @@ public class MatingController {
 		return "mating/matingProfile.tiles";
 	}
 
-	@RequestMapping("/matingLogin.aw")
+	@RequestMapping("/security/matingLogin.aw")
 	public String mating_login(@RequestParam Map map,HttpSession session,HttpServletResponse response) throws Exception {
 		//System.out.println("session mem_no:"+session.getAttribute("mem_no"));
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -72,38 +69,55 @@ public class MatingController {
 
 	@RequestMapping("/matingMatch.aw")
 	public String mating_match(@RequestParam Map map,Model model) throws Exception {
-		System.out.println(map.get("ani_no"));
-		
-		map.put("ani_no", map.get("ani_no").toString().replace("matcing", ""));
+		map.put("ani_no", map.get("ani_no").toString().replace("matching", ""));
 		AnimalDTO animal=animalService.selectOne(map);
-		map.put("ani_gender", animal.getAni_gender()=="M"?"F":animal.getAni_gender()=="F"?"M":"U");
+		map.put("ani_gender", animal.getAni_gender().equals("M")?"F":animal.getAni_gender().equals("F")?"M":"U");
 		map.put("ani_species",animal.getAni_species());
 		if(animal.getAni_kind()!=null)
 			map.put("ani_kind", animal.getAni_kind());
+		// 임시
+		map.put("start",1);
+		map.put("end",10);
 		
-		model.addAttribute("start", 1);
-		model.addAttribute("end", 10);
+		List<MatingDTO> matingList=matingService.selectList(map);	
 		
-		List<MatingDTO> matingList=matingService.selectList(map);		
-		
+		model.addAttribute("animal",animal);
 		model.addAttribute("list",matingList);
-		
 		return "mating/matingMatch.tiles";
 	}/// mating_match
 	
-	@RequestMapping("/matingManage.aw")
-	public String insertDelete(@RequestParam Map map,Model model) throws Exception {
+	@ResponseBody
+	@RequestMapping("/matingManage.awa")
+	public String insertDelete(@RequestParam Map map,HttpSession session,Model model) throws Exception {
 		String temp=map.get("ani_no").toString();
 		if(temp.startsWith("insert")) {
 			temp=temp.replace("insert", "");
 			map.put("ani_no", temp);
 			matingService.insert(map);
+			return "insert"+map.get("ani_no").toString();
 		} else {
-			temp=temp.replace("delete", "");
+			temp=temp.replace("delete", ""); // 들어온 동물번호
 			map.put("ani_no", temp);
-			matingService.delete(map);
+			map.put("mem_no", session.getAttribute("mem_no"));
+			AnimalDTO animal=animalService.selectOne(map); // 현재 누른 동물 정보 얻어오기
+			map.put("ani_species",animal.getAni_species());
+			map.put("ani_gender",animal.getAni_gender());
+			map.put("ani_kind",animal.getAni_kind());
+			map.put("start", 1);
+			map.put("end", matingService.getTotalRecord(map));
+			List<MatingDTO> list=matingService.selectList(map); // 그 동물이 속한 그룹을 메이팅에서 얻어옴
+			String matingNo=null;
+			for(MatingDTO dto:list) {
+				if(dto.getAni_no().equals(animal.getAni_no())) {
+					matingNo=dto.getMating_no(); // 그걸 토대로 같은 동물번호인 메이팅을 얻어옴
+				}
+			}
+			if(matingNo!=null) {
+				map.put("mating_no", matingNo);
+				matingService.delete(map);
+				return "delete"+map.get("ani_no").toString();
+			}
 		}/// if
-		
-		return "";
+		return "error";
 	}/// insertDelete
 }// class

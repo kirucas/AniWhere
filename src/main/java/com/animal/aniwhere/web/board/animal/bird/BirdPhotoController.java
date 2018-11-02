@@ -51,7 +51,7 @@ public class BirdPhotoController {
 	
 	// 등록 완료 후 리스트로 이동
 	@ResponseBody
-	@RequestMapping(value="/security/bird/photo/write.aw",method=RequestMethod.POST)
+	@RequestMapping(value="/security/bird/photo/write.awa",method=RequestMethod.POST,produces="text/html;charset=UTF-8")
 	public void writeComplete(@RequestParam Map map,MultipartHttpServletRequest mhsr,HttpSession session) throws Exception{
 		map.put("ani_category", 4);
 		map.put("mem_no", session.getAttribute("mem_no"));

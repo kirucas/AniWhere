@@ -48,20 +48,39 @@
 
 <script>
 	$(function(){
-		$('.match').click(function(){
+		$(document).on("click",".match",function(){
 			// 등록된 동물의 상대 목록 뿌려주는 페이지로
 			location.href='<c:url value="/matingMatch.aw?ani_no='+$(this).prop('id')+'"/>';
 		});
 		
-		$('.mate').click(function(){
-			
+		$(document).on("click",".mate",function(){
 			// 주소 API
 			
 			// 주소 API
 			// mating 등록
 			$.ajax({
-				
-			});
+	        	url:"<c:url value='/matingManage.awa'/>",
+	       		type:"POST",
+				data:{"ani_no":$(this).prop("id"),"mating_loc":"임시 지역"},
+	       		dataType: "text",
+	       		success : function(data) {
+	       			if(data.indexOf("insert")!=-1) {
+	       				data=data.replace("insert","");
+	       				var tempString=
+	       					'<a href="#" class="btn btn-primary match" id="matching'+data+'">상대 보기</a>'
+    						+'<a href="#" class="btn btn-danger mate" id="delete'+data+'">매칭 취소</a>';
+	       				$('#buttonPlace'+data).html(tempString);
+	       			}else {
+	       				data=data.replace("delete","");
+	       				var tempString=
+	       					'<a href="#" class="btn btn-primary mate" id="insert'+data+'">매칭 시작</a>';
+	       				$('#buttonPlace'+data).html(tempString);
+	       			}
+	           	},
+	           	error : function(error) {
+	           		console.log("에러발생");
+		       	}
+		    });
 		});
 	});
 
@@ -103,10 +122,10 @@
 					    		</span><br>
 				    			<span>중분류 : ${record.ani_kind}</span>
 			    			</div>
-			    			<div style="display: inline;float: left;margin-top: 10px;">
+			    			<!-- <div style="display: inline;float: left;margin-top: 10px;">
 			    				<p class="card-text">검색 위치
-			    			</div>
-			    			<div style="display: inline;float: right;">
+			    			</div> -->
+			    			<div style="display: inline;float: right;" id="buttonPlace${record.ani_no}">
 			    				<c:set var="loop_flag" value="false" />
 			    				<c:forEach var="mateDto" items="${matingrecord}" varStatus="loop">
 			    					<c:if test="${not loop_flag}">
