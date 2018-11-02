@@ -46,6 +46,27 @@
 }
 </style>
 
+<script>
+	$(function(){
+		$('.match').click(function(){
+			// 등록된 동물의 상대 목록 뿌려주는 페이지로
+			location.href='<c:url value="/matingMatch.aw?ani_no='+$(this).prop('id')+'"/>';
+		});
+		
+		$('.mate').click(function(){
+			
+			// 주소 API
+			
+			// 주소 API
+			// mating 등록
+			$.ajax({
+				
+			});
+		});
+	});
+
+</script>
+
 <!-- 내용 시작 -->
 <div class="container">
 	<section class="member-settings-layout__content">
@@ -83,16 +104,21 @@
 				    			<span>중분류 : ${record.ani_kind}</span>
 			    			</div>
 			    			<div style="display: inline;float: left;margin-top: 10px;">
-			    				<p class="card-text">상태(등록중 등)
+			    				<p class="card-text">검색 위치
 			    			</div>
 			    			<div style="display: inline;float: right;">
-			    				<c:forEach var="mateDto" items="${matingrecord}">
-			    					<c:if test="${mateDto.ani_no eq dto.ani_no}" var="result">
-			    						<a href="#" class="btn btn-danger" data-target="#modalIMG" data-toggle="modal">매칭 취소</a>
+			    				<c:set var="loop_flag" value="false" />
+			    				<c:forEach var="mateDto" items="${matingrecord}" varStatus="loop">
+			    					<c:if test="${not loop_flag}">
+				    					<c:if test="${mateDto.ani_no eq record.ani_no}" var="result">
+				    						<a href="#" class="btn btn-primary match" id="matching${record.ani_no}">상대 보기</a>
+				    						<a href="#" class="btn btn-danger mate" id="delete${record.ani_no}">매칭 취소</a>
+				    						<c:set var="loop_flag" value="true" />
+				    					</c:if>
 			    					</c:if>
 			    				</c:forEach>
 			    				<c:if test="${!result}">
-								    <a href="#" class="btn btn-primary" data-target="#modalIMG" data-toggle="modal">매칭 시작</a>
+								    <a href="#" class="btn btn-primary mate" id="insert${record.ani_no}">매칭 시작</a>
 		    					</c:if>
 		    				</div>
 					  	</div>
@@ -101,49 +127,6 @@
 			</div>
 		</div>	
 	</section>
-
-	<!-- 반복 시작 -->
-	<%-- <div class="card col-12 col-md-3 ">
-		  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
-		  <div class="card-body">
-		    <h2 class="card-title" style="color:#1ABC9C">이름</h2>
-		    <p class="card-text">종류</p>
-		    <p class="card-text">상태(등록중 등)
-		    <div>
-			    <a href="#" class="btn btn-primary" data-target="#modalIMG" data-toggle="modal">매칭 시작</a>
-			    <a href="#" class="btn btn-danger" data-target="#modalIMG" data-toggle="modal">매칭 취소</a>
-		    </div>
-		  </div>
-	</div>
-	<!-- 반복 끗 -->
-	<div class="card col-12 col-md-3 ">
-		<img class="card-img-top" src="<c:url value='/resources/images/mating/yeonji.JPG'/>" alt="Card image">
-		<div class="card-body">
-			<h2 class="card-title" style="color:#1ABC9C">이름</h2>
-			<p class="card-text">종류</p>
-		    <p class="card-text">상태(등록중 등)
-		    <div>
-			    <a href="#" class="btn btn-primary" data-target="#modalIMG" data-toggle="modal">매칭 시작</a>
-			    <a href="#" class="btn btn-danger" data-target="#modalIMG" data-toggle="modal">매칭 취소</a>
-		    </div>
-		  </div>
-	</div>
-	<div class="card col-12 col-md-3 ">
-		  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
-		  <div class="card-body">
-		    <h2 class="card-title" style="color:#1ABC9C">이름</h2>
-		    <p class="card-text">종류</p>
-		    <a href="#" class="btn btn-primary" data-target="#modalIMG" data-toggle="modal">매칭 시작</a>
-		  </div>
-	</div>
-	<div class="card col-12 col-md-3 ">
-		  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
-		  <div class="card-body">
-		    <h2 class="card-title" style="color:#1ABC9C">이름</h2>
-		    <p class="card-text">종류</p>
-		    <a href="#" class="btn btn-primary" data-target="#modalIMG" data-toggle="modal">매칭 시작</a>
-		  </div>
-	</div> --%>
 </div>
 <!-- 내용 끝 -->
 

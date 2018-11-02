@@ -71,8 +71,39 @@ public class MatingController {
 	}
 
 	@RequestMapping("/matingMatch.aw")
-	public String mating_match() throws Exception {
+	public String mating_match(@RequestParam Map map,Model model) throws Exception {
+		System.out.println(map.get("ani_no"));
+		
+		map.put("ani_no", map.get("ani_no").toString().replace("matcing", ""));
+		AnimalDTO animal=animalService.selectOne(map);
+		map.put("ani_gender", animal.getAni_gender()=="M"?"F":animal.getAni_gender()=="F"?"M":"U");
+		map.put("ani_species",animal.getAni_species());
+		if(animal.getAni_kind()!=null)
+			map.put("ani_kind", animal.getAni_kind());
+		
+		model.addAttribute("start", 1);
+		model.addAttribute("end", 10);
+		
+		List<MatingDTO> matingList=matingService.selectList(map);		
+		
+		model.addAttribute("list",matingList);
 		
 		return "mating/matingMatch.tiles";
-	}	
+	}/// mating_match
+	
+	@RequestMapping("/matingManage.aw")
+	public String insertDelete(@RequestParam Map map,Model model) throws Exception {
+		String temp=map.get("ani_no").toString();
+		if(temp.startsWith("insert")) {
+			temp=temp.replace("insert", "");
+			map.put("ani_no", temp);
+			matingService.insert(map);
+		} else {
+			temp=temp.replace("delete", "");
+			map.put("ani_no", temp);
+			matingService.delete(map);
+		}/// if
+		
+		return "";
+	}/// insertDelete
 }// class

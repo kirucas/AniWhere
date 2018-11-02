@@ -52,7 +52,7 @@
 	</select>
 	
 	<insert id="matingInsert" parameterType="java.util.Map">
-		INSERT INFO mating(mating_no, ani_no, mating,loc)
+		INSERT INFO mating(mating_no, ani_no, mating_loc)
 		VALUES(seq_mating.nextval, #{ani_no}, #{mating_loc})
 	</insert>
 	
