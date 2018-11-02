@@ -51,7 +51,6 @@ var isDelete = function(){
 .btn {
 	background-color: #1ABC9C;
 	border-color: #1ABC9C;
-	text-align: right;
 }
 
 
@@ -105,7 +104,7 @@ var isDelete = function(){
 		<form class="form-inline" id="frm" method="post">
 			<label for="inputcomment" class="col-xs-2 col-sm-1 col-md-1 control-label">${sessionScope.mem_id}</label>
 			<input type="email" class="form-control col-xs-11 col-sm-9 col-md-9" id="inputcomment"
-				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;
+				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="<c:url value='/animal/rNa/movie/Reply.aw?no=${dto.no}'/>"
 			class="btn btn-success col-xs-2 col-sm-1 col-md-1">댓글</a>
 		</form>

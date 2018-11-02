@@ -197,12 +197,12 @@ a:visited { color:white; text-decoration: none;}
 <div class="text-right" style="margin-top: 50px;">
 	<div class="horizontal">
 		<!-- 한줄 코멘트 입력 폼-->
-		<form class="form-inline" id="frm" method="post">
+		<form class="form-inline" id="frm" method="post" style="margin: 0px auto;">
 			<label for="inputcomment" class="col-xs-2 col-sm-1 col-md-1 control-label">${sessionScope.mem_id}</label>
 			<input type="email" class="form-control col-xs-11 col-sm-9 col-md-9" id="inputcomment"
-				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;
+				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="<c:url value='/animal/bird/movie/Reply.aw?no=${dto.no}'/>"
-			class="btn btn-success col-xs-2 col-sm-1 col-md-1">댓글</a>
+			class="btn btn-success col-xs-2 col-sm-1">댓글</a>
 		</form>
 	</div>
 </div>
@@ -220,8 +220,19 @@ a:visited { color:white; text-decoration: none;}
 			<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />&nbsp;&nbsp;
 			<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>
 			 --%>
-	<div class="row" id="comments">
-		<!-- 한줄 코멘트 목록-->		
-		<!-- ajax로 아래에 코멘트 목록 뿌리기 -->	
+<form>
+	<!-- 한줄 코멘트 목록-->
+	<!-- ajax로 아래에 코멘트 목록 뿌리기 -->
+	<div class="form-group">
+		<label>닉네임 : ${sessionScope.mem_id}</label>
+		<label>댓글 날짜 : </label> <br/>
+		<p>댓글 내용</p>
+	</div><br/>
+	
+	<div class="form-group">
+		<label>닉네임 : ${sessionScope.mem_id}</label>
+		<label>댓글 날짜+ : $</label> <br/>
+		<p>댓글 내용</p>
 	</div>
+</form>
 <!-- 내용 끝 -->
