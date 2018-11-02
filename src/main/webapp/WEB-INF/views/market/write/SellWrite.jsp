@@ -104,6 +104,7 @@ else {
             }
          }
       });
+      
       function sendFile(file, el, wel) {
          var form_data = new FormData();
          form_data.append('file', file);
@@ -118,10 +119,19 @@ else {
                  $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
                  $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
                  count++;
+                
+                                
             },
             error : function() {
                console.log("error");
             }
+            
+          
+         //   if(file.length>=5||file.length<=2){
+         //  	 alert('사진의 최소3장 이상 최대 4장까지 가능합니다')
+         //  	 return;
+          //  }
+            
          });
       }
           
