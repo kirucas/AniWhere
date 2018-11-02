@@ -49,6 +49,7 @@
 		//코멘트 수정/삭제 처리
 	      $('.commentEdit').click(function() {
 	    	  console.log($(this).attr("title"));
+	    	  
 	    	  console.log($('input[name=cmt_no]'));
 	            $("#title").val($(this).html());
 	            $("#submit").val('수정');
