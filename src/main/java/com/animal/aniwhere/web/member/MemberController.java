@@ -332,33 +332,37 @@ public class MemberController {
 
 		return "common/member/Login.tiles";
 	}
-
+	
 	//안드로이드 용
 	 	@ResponseBody
 	 	@RequestMapping(value="/android.awa", method = RequestMethod.POST)
 	 	public String androidLogin(@RequestParam Map map,HttpSession session) throws Exception{
-	 		if(!service.isMember(map)) {
-	 			return "false";
-	 		}		
+	 		
 	 		MemberDTO dto = service.selectOne(map);
+	 		boolean flag = passwordEncoder.matches(map.get("mem_pw").toString(), dto.getMem_pw());		
+	 		if(!flag) {
+	 			return "false";
+	 		}
+	 		
 	 		return dto.getMem_id()+","+dto.getMem_no();       
 	    }
+	 	
 	 	
 	 	//안드로이드 googleLogin
 	 	@ResponseBody
 	 	@RequestMapping(value = "/androidsignUpProcess.awa", method = RequestMethod.POST)
 	 	public String androidSignUp(@RequestParam Map map) throws Exception{
-	 		if(service.isMember(map)) {
-	 			System.out.println("isMember===========");
-	 			MemberDTO dto = service.selectOne(map);				
+	 			 		
+	 		MemberDTO dto = service.selectOne(map);				
+	 	 	if(dto != null) {
 	 	 		return dto.getMem_id()+","+dto.getMem_no();
-			}
-	 		
+	 	 	}
+			 		
 	 		map.put("mem_log",Integer.parseInt(map.get("mem_log").toString()));		
 	 		int signup = service.insert(map);
 	 		
 	 		if(signup==1) {
-	 			MemberDTO dto = service.selectOne(map);				
+	 			dto = service.selectOne(map);				
 	 	 		return dto.getMem_id()+","+dto.getMem_no();
 	 		}else {
 	 	    	return "false";

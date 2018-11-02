@@ -750,10 +750,14 @@ public class MissMainController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/android/FindSee/CommentWrite.awa", produces = "text/html; charset=UTF-8")
+	@RequestMapping(value = "/android/FindSee/CommentWrite.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
 	public String androidWrite(@RequestParam Map map, HttpSession session, Model model) throws Exception {
-		System.out.println("======/android/FindSee/Write.awa=======");
-
+		System.out.println("======/android/FindSee/CommentWrite.awa=======");
+		
+		System.out.println(map.get("cmt_content").toString());
+		System.out.println(map.get("no").toString());
+		System.out.println(map.get("mem_no").toString());
+		
 		if (map.get("kind").equals("봤어요")) {
 			map.put("table_name", "see");
 		} else {
@@ -763,5 +767,37 @@ public class MissMainController {
 		System.out.println("333333333333");
 		return "true";
 	}///////////////////
+	
+	@ResponseBody
+	@RequestMapping(value="/miss/androidFindSeeInsertImage.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+	public String androidinsertImage(MultipartHttpServletRequest mhsr) throws Exception {
+		
+		System.out.println("androidFindSeeInsertImage");
+		List<String> lists = AwsS3Utils.uploadFileToS3(mhsr, "FindSee");//리턴 파일 개수
+		String path = AwsS3Utils.LINK_ADDRESS+lists.get(0);
+		return path;
+	}//////////
+	
+	@ResponseBody
+	@RequestMapping(value="/miss/androidFindSeeInsert.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+	public String androidinsert(@RequestParam Map map) throws Exception {
+		System.out.println("/miss/androidFindSeeInsert.awa");
+		map.put("addr", map.get("addr").toString());
+		
+		System.out.println(map.get("mem_no"));
+		System.out.println(map.get("title"));
+		System.out.println(map.get("content"));
+		System.out.println(map.get("addr"));
+		System.out.println(map.get("animal_code"));
+		
+		
+		if (map.get("kind").equals("봤어요")) {
+			map.put("table_name", "see");
+		} else {
+			map.put("table_name", "find");
+		}
+		service.insert(map);
+		return "true";
+	}//////////
 
 }//////////////////// MissMainController class
