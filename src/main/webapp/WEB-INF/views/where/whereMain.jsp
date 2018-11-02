@@ -235,7 +235,7 @@ button{
 			//마커들을 담을 배열 
 			var markers=[];
 			total();
-			
+			var customoverlays=[];
 			//전체 출력
 			function total(){
 				$.ajax({
@@ -243,7 +243,7 @@ button{
 		            dataType : "json",
 		            url : "<c:url value='/security/where/map/total.awa'/>",
 		            success: function(jsonObj) {
-		            	map.setLevel(14);
+		            	map.setLevel(14);	
 		            	clusterer.removeMarkers(markers);
 		            	markers=[];
 		            	$.each(jsonObj, function(index, value){
@@ -303,13 +303,13 @@ button{
 	        				});
 	        				
 	        				overlay.setMap(null);
+	        				customoverlays.push(overlay);
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
 		                    markers.push(marker);	
 		            	});
 		            	// 클러스터러에 마커들을 추가합니다
 	            	    clusterer.addMarkers(markers);
-		            	var level = map.getLevel();
-		            	map.setLevel(5);
+	            	    map.setLevel(5);	
 		            	var moveLatLon = new daum.maps.LatLng(mylat,mylon);
 		            	map.panTo(moveLatLon);
 		            },
@@ -319,7 +319,6 @@ button{
 		            }
 		         });
 			};
-			
 			//옆에 메뉴 눌렀을때 해당하는 녀서들
 			function indssclscd(code,pic){
 		         $.ajax({
@@ -385,14 +384,13 @@ button{
 	        				});
 	        				
 	        				overlay.setMap(null);
+	        				customoverlays.push(overlay);
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
 		                    markers.push(marker);	
 		            	});
 		            	// 클러스터러에 마커들을 추가합니다
 	            	    clusterer.addMarkers(markers);
 		            	map.setLevel(5);
-		            	var moveLatLon = new daum.maps.LatLng(mylat,mylon);
-		            	map.panTo(moveLatLon);
 		            },
 		            error : function() {
 		               console.log("error");
@@ -408,7 +406,6 @@ button{
 		            dataType : "json",
 		            url : "<c:url value='/security/where/map/near.awa'/>",
 		            success: function(jsonObj) {
-		            	//map.setLevel(14);
 		            	var nearString = '';
 		            	$.each(jsonObj, function(index, value){
 		            		    var latlng=value.lat+':'+value.lon;
@@ -438,13 +435,16 @@ button{
 						$(document).on('click','.movetarget',function(){
 							var latlng = $(this).prop('title');
 						    var laln=latlng.split(':');
-							console.log("c"+laln[0]);
-							console.log("c"+laln[1]);
 							var LatLng = new daum.maps.LatLng(laln[0],laln[1]);
 							map.setCenter(LatLng);
+							for(var i=0; i<customoverlays.length;i++){
+								if(LatLng.equals(customoverlays[i].getPosition())){
+									customoverlays[i].setMap(map);
+								}
+							}
 						});
+						
 	            		$('#near').html(nearString);
-	            		//map.setLevel(5);
 		            },
 		            error : function() {
 		               console.log("error");
@@ -460,7 +460,6 @@ button{
 		            dataType : "json",
 		            url : "<c:url value='/security/where/map/nearselect.awa'/>",
 		            success: function(jsonObj) {
-		            	//map.setLevel(14);
 		            	var nearString = '';
 		            	var curl = "<c:url value='/resources/images/"+pic+".png'/>";
 		            	$.each(jsonObj, function(index, value){
@@ -493,10 +492,13 @@ button{
 						    var laln=latlng.split(':');
 							var LatLng = new daum.maps.LatLng(laln[0],laln[1]);
 							map.setCenter(LatLng);
+							for(var i=0; i<customoverlays.length;i++){
+								if(LatLng.equals(customoverlays[i].getPosition())){
+									customoverlays[i].setMap(map);
+								}
+							}
 						});
 	            		$('#near').html(nearString);
-	            		//map.setLevel(5);
-	            		
 		            },
 		            error : function() {
 		               console.log("error");
@@ -512,7 +514,6 @@ button{
 			});
 			$("#list-select ul li a").click(function() {
 				var str= $(this).text()+" 리스트";
-				console.log(str);
 				$("#around").html(str);
 			});
 			
