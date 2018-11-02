@@ -4,9 +4,7 @@
 <%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <head>
-
 <script>
-
 function check() {
     var isAttached = $('#summernote').summernote('code');
     if (fr.title.value == "") {
@@ -59,8 +57,6 @@ function check() {
     }	    
    
 else {
-	
-		
  fr.action="<c:url value='/security/market/sellinsert.aw'/>"; 
  return true;
 }
@@ -73,6 +69,7 @@ else {
 
    $(function() {
 	   var count = 0;
+	  
 	   $('#enterBtn').submit(function(){
 		 
 		   var content="========판매현황 정리입니다.============\r\n";
@@ -103,6 +100,10 @@ else {
                }
             }
          }
+      
+      
+      
+      
       });
       
       function sendFile(file, el, wel) {
@@ -116,11 +117,13 @@ else {
             contentType: false,
             processData: false,
             success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
-                 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
+            	 //$('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
+            	 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />", function (image) {
+					  image.attr('name', 'sellpic');
+				});
+            	 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
                  count++;
-                
-                                
+                 console.log("success");
             },
             error : function() {
                console.log("error");
@@ -238,70 +241,20 @@ else {
 					</div>
 
 				</div>
-				
-				
-							
+										
 		     <br/>
 							
-				<!-- Related Projects Row -->
-				<h3 class="my-4">판매자가 올린 사진 3개이상</h3>
-				
-				<!--  사진  3개이상 유효성 검사 항목 추가  -->
-                 
-				<input multiple="multiple" type="file" 
-					style="color: slategray; border: 1 solid silver; width: 300; height: 20">(최대 5M)
-				
-
-				<div class="row">
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img name="product"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img name="product"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img name="product"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img name="product"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-				</div>
+								
 				<!--사진 로직 끝 -->
 
 				
 				<div class="col-md-12 container">
 <textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
 				class="output"		maxlength="2048" required >
-※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.											
+										
 					
 </textarea>
 				</div>
-							
 				<div style="text-align: center">
 					<a href="<c:url value='/market/sell.aw'/>">
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
@@ -309,11 +262,8 @@ else {
 					<!-- <input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
 					-->
 					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
-
-				</div>
-				 										
+				</div>	 										
 			</form>
-						
 			<div style="margin-bottom: 50px"></div>
 
 		</div>

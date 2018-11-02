@@ -104,10 +104,6 @@
 
 					<!-- Related Projects Row -->
 				<h3 class="my-4">판매자가 올린 사진 3개이상필요</h3>
-				<input multiple="multiple" type="file" name="sellfile"
-					style="color: slategray; border: 1 solid silver; width: 300; height: 20">
-				(최대 5M)
-
 
 				<div class="row">
 
