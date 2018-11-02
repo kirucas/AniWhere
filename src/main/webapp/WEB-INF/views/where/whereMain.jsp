@@ -344,8 +344,7 @@ button{
 		            			image : markerImage,
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
-						    console.log("m"+value.lat);
-						    console.log("m"+value.lon);
+		            		var curl = '<c:url value="/where/reservation.awa?store_no='+value.bizesId+'&bizesNm='+value.bizesNm+'"/>'
 		            		var content = 
 		            			'<div class="wrap">' + 
 		                        '    <div class="info">' + 
@@ -362,7 +361,7 @@ button{
        							'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
        							'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
 		                        '                </div>' + 
-		                        '                <div><a href="#">예약</a></div>' + 
+		                        '                <div><a href="'+curl+'">예약</a></div>' + 
 		                        '            </div>' + 
 		                        '        </div>' + 
 		                        '    </div>' +    
