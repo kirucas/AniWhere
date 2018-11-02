@@ -208,16 +208,6 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8940a4eb3083abd07d038b8c2839831&libraries=services,clusterer,drawing"></script>
 <script>
 		$(document).ready(function() {
-			$(document).on('click','.movetarget',function(){
-				var lat = $(this).prop('title');
-				var lon = $('.movemove').prop('title');
-				map.setCenter(new daum.maps.LatLng(lat,lon));
-				console.log(lat);
-				console.log(lon);
-				var center = map.getCenter();
-				console.log(center.getLat());
-				console.log(center.getLng());
-			});
 			
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
@@ -315,6 +305,7 @@
 		            	var moveLatLon = new daum.maps.LatLng(mylat,mylon);
 		            	map.panTo(moveLatLon);
 		            },
+		            
 		            error : function() {
 		               console.log("error");
 		            }
@@ -345,6 +336,8 @@
 		            			image : markerImage,
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
+						    console.log("m"+value.lat);
+						    console.log("m"+value.lon);
 		            		var content = 
 		            			'<div class="wrap">' + 
 		                        '    <div class="info">' + 
@@ -411,6 +404,7 @@
 		            	//map.setLevel(14);
 		            	var nearString = '';
 		            	$.each(jsonObj, function(index, value){
+		            		    var latlng=value.lat+':'+value.lon;
 								nearString += 
 									'<li>'+ 
 										'<div style="width:100%;">'+
@@ -419,9 +413,9 @@
 												'<img style="width:18px;height:28px;" src="<c:url value='/resources/images/all.png'/>">'+
 											'</div>'+
 										'</div>'+
-										'<dl class="movemove" title="'+value.lon+'" style="margin-left: 40px; margin-right: 8px;">'+
+										'<dl style="margin-left: 40px; margin-right: 8px;">'+
 										'<dt>'+
-											'<button class="movetarget" title="'+value.lat+'">'+value.bizesNm+'</button>'+
+											'<button class="movetarget" title="'+latlng+'">'+value.bizesNm+'</button>'+
 										'</dt>'+
 												'<dd>'+value.rdnmAdr+
 												(value.dongNo == null ? '' : value.dongNo+'동')+
@@ -433,12 +427,14 @@
 											'</dl>'+
 										'</div>'+
 									'</li>';	
-									
 		            	});
 						$(document).on('click','.movetarget',function(){
-							var lat = $(this).prop('title');
-							var lon = $('.movemove').prop('title');
-							map.setCenter(new daum.maps.LatLng(lat,lon));
+							var latlng = $(this).prop('title');
+						    var laln=latlng.split(':');
+							console.log("c"+laln[0]);
+							console.log("c"+laln[1]);
+							var LatLng = new daum.maps.LatLng(laln[0],laln[1]);
+							map.setCenter(LatLng);
 						});
 	            		$('#near').html(nearString);
 	            		//map.setLevel(5);
@@ -461,6 +457,7 @@
 		            	var nearString = '';
 		            	var curl = "<c:url value='/resources/images/"+pic+".png'/>";
 		            	$.each(jsonObj, function(index, value){
+		            		var latlng=value.lat+':'+value.lon;
 								nearString += 
 									'<li>'+ 
 										'<div style="width:100%;">'+
@@ -469,9 +466,9 @@
 												'<img style="width: 18px; height: 28px;" src="'+curl+'"/>'+
 											'</div>'+
 										'</div>'+
-										'<dl class="movemove" title="'+value.lon+'" style="margin-left: 40px; margin-right: 8px;">'+
+										'<dl style="margin-left: 40px; margin-right: 8px;">'+
 										'<dt>'+
-											'<button class="movetarget" title="'+value.lat+'">'+value.bizesNm+'</button>'+
+											'<button class="movetarget" title="'+latlng+'">'+value.bizesNm+'</button>'+
 										'</dt>'+
 												'<dd>'+value.rdnmAdr+
 												(value.dongNo == null ? '' : value.dongNo+'동')+
@@ -484,7 +481,12 @@
 										'</div>'+
 									'</li>';
 		            	});
-		            	
+		            	$(document).on('click','.movetarget',function(){
+							var latlng = $(this).prop('title');
+						    var laln=latlng.split(':');
+							var LatLng = new daum.maps.LatLng(laln[0],laln[1]);
+							map.setCenter(LatLng);
+						});
 	            		$('#near').html(nearString);
 	            		//map.setLevel(5);
 	            		
