@@ -22,6 +22,7 @@
 <jsp:include page="/resources/js/move_dropdowns.jsp"/>
 <!-- 아이콘 사용을 위한 fontawesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.4/css/all.css">
+<link rel="stylesheet" href="<c:url value='/resources/css/button.css'/>">
 <!-- summernote 사용을 위한 설정 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>

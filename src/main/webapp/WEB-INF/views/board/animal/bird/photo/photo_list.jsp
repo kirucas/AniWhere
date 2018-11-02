@@ -154,11 +154,7 @@
 .come-left：带倾斜效果的向左翻转。
 .come-right：带倾斜效果的向右翻转。
 */
-<<<<<<< HEAD
 html, body, div, span, applet, object, iframe, h1, h3, h4, h6, p,
-=======
-html, body, div, span, applet, object, iframe, h1, h3, h4, h5, h6, p,
->>>>>>> refs/remotes/origin/Mating_after_inte_test_10_31
 	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
 	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
 	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
