@@ -6,7 +6,7 @@
 <mapper namespace="mybatis.Mating">
 
 	<select id="matingCount" parameterType="java.util.Map" resultType="int">
-		SELECt COUNT(*)
+		SELECT COUNT(*)
 		FROM (
 			SELECT T.*, ROWNUM R
 			FROM (
