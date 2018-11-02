@@ -253,7 +253,7 @@ button{
 						    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 						    
 						    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
-						    markerPosition = new daum.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
+						    markerPosition = new daum.maps.LatLng(value.lat, value.lon); // 마커가 표시될 위치입니다
 		            		
 		            		// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다.
 		            		// 지도와 클러스터러를 생성하는 메소드
@@ -574,10 +574,6 @@ button{
 			function mapMaker(lat,lng){
 				// 마커가 표시될 위치입니다 
 				var markerPosition  = new daum.maps.LatLng(lat, lng); 
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/MISS
 
             // 마커를 생성합니다
             var marker = new daum.maps.Marker({
