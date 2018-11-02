@@ -5,7 +5,7 @@
 <script>
 	<c:choose>
 		<c:when test="${check==1}">
-			alert("예약 완료! 로그인페이지로 이동합니다.");
+			alert("예약 완료! 예약확인 페이지로 이동합니다.");
 			location.replace("<c:url value='/where/reservation_check.aw'/>");
 		</c:when>
 		<c:when test="${check==0}">
