@@ -14,9 +14,6 @@
 	#form_span span{
 		font-size: 2em;
 	}
-	#btn{
-		text-align: center;
-	}
 	img{
 		width: 30px;
 		height: 30px;
@@ -47,25 +44,20 @@
           <h1>예약 페이지</h1>
         </div>
         <div id="reservation">
-          <form role="form" id="form_span">
-          	<div class="form-group">
-          		<span>상가업소 번호 : ${store_no}</span>
-          	</div>
-            <div class="form-group">
-              	<span>업소명 : </span>
-            </div>
-            <div class="form-group">
-              	<span>날짜 선택 : </span><input type="text" id="datepicker">
-            </div>
-          </form>
-        </div>
-        <div>
-        	<form role="form" id="form_span">
-	            <div class="form-group text-center" id="btn">
+          <form role="form" action="<c:url value='/where/reservate.awa'/>" id="form_span">
+	          	<div class="form-group">
+	          		<input type="text" name="${store_no}"/> 상가업소 번호 : ${store_no}
+	          	</div>
+	            <div class="form-group">
+	              	<input type="text" name="${bizesNm}"/> 업소명 : ${bizesNm}
+	            </div>
+	            <div class="form-group">
+	              	<span>날짜 선택 : </span><input type="text" id="datepicker" name="booking_date">
+	            </div>
+	            <div class="form-group" id="btn">
 	              <button type="submit" class="btn btn-info">예약하기</button>
-	              <button type="submit" class="btn btn-warning">예약취소</button>
 	            </div>
             </form>
-        </div>
+       	</div>
 	</article>
 </div>	

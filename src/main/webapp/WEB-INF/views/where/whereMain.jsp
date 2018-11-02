@@ -255,7 +255,7 @@
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
 						    
-		            		var curl = '<c:url value="/views/where/reservationMain.jsp?store_no='+value.bizesid+'"/>'
+		            		var curl = '<c:url value="/where/reservation.awa?store_no='+value.bizesId+'&bizesNm='+value.bizesNm+'"/>'
 		            				
 		            		var content = 
 		            			'<div class="wrap">' + 

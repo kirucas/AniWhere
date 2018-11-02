@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.animal.aniwhere.service.ReservationDTO;
 import com.animal.aniwhere.service.StoreLocationDTO;
 import com.animal.aniwhere.service.impl.ReservationServiceImpl;
 import com.animal.aniwhere.service.impl.StoreLocationServiceImpl;
@@ -225,12 +227,30 @@ public class WhereController {
 	    }
 	    //예약 페이지ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
 	    @RequestMapping("/where/reservation.awa")
-	    public String reservation_write(Model model,@RequestParam Map map,HttpServletResponse response)throws Exception {
-	    	
+	    public String reservation_write_form(Model model,@RequestParam Map map)throws Exception {
+	    	model.addAttribute("store_no",map.get("store_no"));
+	    	model.addAttribute("bizesNm",map.get("bizesNm"));
 			//뷰정보 반환]
 			return "where/reservationMain.tiles";
-	    } 
-	   
+	    }//reservation_write_form
+	    @RequestMapping("/where/reservate.awa")
+	    public String reservate(Model model,@RequestParam Map map,HttpSession session)throws Exception {
+	    	map.put("mem_no", session.getAttribute("mem_no"));
+	    	int insert = reservationservice.insert(map);
+	    	if (insert == 1)
+				model.addAttribute("check", 1);
+			else
+				model.addAttribute("check", 0);
+	    	//뷰정보 반환]
+	    	return "where/Message";
+	    } //reservate
+	    @RequestMapping("/where/reservation_check.aw")
+	    public String reservate_check(Model model,@RequestParam Map map,HttpSession session)throws Exception {
+	    	List<ReservationDTO> list = reservationservice.selectList(map);
+	    	model.addAttribute("list",list);
+	    	//뷰정보 반환]
+	    	return "where/reservation_list.tiles";
+	    }//reservate_check
 //	  @RequestMapping(value= "/where/map/radius.awa", method= RequestMethod.POST,produces="text/plain; charset=UTF-8")
 //	  @ResponseBody
 //	  public String  mapdata(@RequestParam Map map,HttpServletResponse response) throws Exception{
