@@ -214,20 +214,26 @@ public class MemberController {
 	}////////// animal_enroll
 
 	@RequestMapping("/signIn/security.aw")
-	public String security(Authentication auth, HttpSession session) throws Exception {
+	public String security(@RequestParam Map map,Authentication auth, HttpSession session) throws Exception {
 		System.out.println("인증된 사용자:" + auth.getPrincipal());
 		UserDetails authenticatedUser = ((UserDetails) auth.getPrincipal());
 		System.out.println(authenticatedUser.getUsername());
 		System.out.println(authenticatedUser.getAuthorities().toString());
-		Map map = new HashMap<>();
 		map.put("mem_id", authenticatedUser.getUsername());
 		System.out.println("증가 햇냐? " + service.visitCountUpdate());
 		MemberDTO dto = service.selectOne(map);
 		session.setAttribute("mem_id", map.get("mem_id"));
 		session.setAttribute("mem_no", dto.getMem_no());
-
+		
 		return "forward:/";
 	}/// security
+	
+	@RequestMapping("/signIn/securityMessage.aw")
+	public String securityMessage(@RequestParam Map map,Model model) throws Exception {
+		System.out.println(map.get("error"));
+		model.addAttribute("error",map.get("error"));
+		return "member/securityMessage";
+	}/// securityMessage
 	
 	/*
 	 * @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
@@ -305,9 +311,9 @@ public class MemberController {
 	@RequestMapping(value = "/enrollProcess.aw", method = RequestMethod.POST)
 	public String enrollProcess(MultipartHttpServletRequest mhsr, @RequestParam Map map, HttpSession session,
 			Model model) throws Exception {
-		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
-		MultipartFile upload = mhsr.getFile("ani_photo");
-		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+		//String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+		//MultipartFile upload = mhsr.getFile("ani_photo");
+		//String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
 		List<String> uploadList = AwsS3Utils.uploadFileToS3(mhsr, "animalprofile"); // S3 업로드
 
 		map.put("mem_no", session.getAttribute("mem_no"));

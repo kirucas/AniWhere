@@ -15,6 +15,18 @@
 		<span>이곳에 스피너 같은걸 넣어서 이미 매칭중인 다른 동물로 바꿀 수 있도록 해둔다</span>
 	</div>
 	<!-- 프로필카드 -->
+	
+	<c:forEach var="dto" items="${list}">
+		<div class="card col-12 col-md-3">
+			<img class="card-img-top" src="<c:url value='${dto.ani_pic}'/>" alt="Card image">
+			<div class="card-body">
+				<h2 class="card-title" style="color:#1ABC9C">곤지</h2>
+				<p class="card-text">고슴도치</p>
+				<a href="#" class="btn btn-primary" data-target="#modalIMG" data-toggle="modal">프로필 보기</a>
+			</div>
+		</div>
+	</c:forEach>
+	
 	<div class="card col-12 col-md-3">
 		  <img class="card-img-top" src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="Card image">
 		  <div class="card-body">

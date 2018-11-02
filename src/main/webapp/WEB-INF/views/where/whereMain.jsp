@@ -254,7 +254,9 @@
 		            			image : markerImage,
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
+						    
 		            		var curl = '<c:url value="/views/where/reservationMain.jsp?store_no='+value.bizesid+'"/>'
+		            				
 		            		var content = 
 		            			'<div class="wrap">' + 
 		                        '    <div class="info">' + 
