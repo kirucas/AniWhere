@@ -118,9 +118,16 @@
 						<div class="article-list-item-meta__item">
 							<span data-tooltip data-date=${record.tip_regidate } title=""></span>
 						</div>
-						<div class="article-list-item-meta__item article-list-item-meta__item--author">
-							<a href="#" id="mem_no">${record.mem_nickname} </a>
-						</div>
+						<c:if test="${record.mem_nickname eq null}" var="result">
+							<div class="article-list-item-meta__item article-list-item-meta__item--author">
+								<span>X 를 눌러 조의를 표하십시오</span>
+							</div>
+						</c:if>
+						<c:if test="${not result}">
+							<div class="article-list-item-meta__item article-list-item-meta__item--author">
+								<span id="mem_no">${record.mem_nickname} </span>
+							</div>
+						</c:if>
 						<div class="article-list-item-meta__item">
 							조회수 <span id="tip_count">${record.tip_count}</span>
 						</div>

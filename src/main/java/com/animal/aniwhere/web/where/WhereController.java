@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.animal.aniwhere.service.StoreLocationDTO;
+import com.animal.aniwhere.service.impl.PagingUtil;
+import com.animal.aniwhere.service.impl.ReservationServiceImpl;
 import com.animal.aniwhere.service.impl.StoreLocationServiceImpl;
 
 @Controller
@@ -24,6 +27,9 @@ public class WhereController {
 	 
 	@Resource(name="StoreLocService")
 	private StoreLocationServiceImpl storelocservice;
+	
+	@Resource(name="reservationService")
+	private ReservationServiceImpl reservationservice;
 	
 	  @RequestMapping("/where/main.aw")
 	  public String where_main() throws Exception {
@@ -219,7 +225,14 @@ public class WhereController {
 	    private double rad2deg(double rad) {
 	        return (rad * 180 / Math.PI);
 	    }
-
+	    //예약 페이지ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
+	    @RequestMapping("/where/reservation.awa")
+	    public String reservation_write(Model model,@RequestParam Map map,HttpServletResponse response)throws Exception {
+	    	
+			//뷰정보 반환]
+			return "where/reservationMain.tiles";
+	    } 
+	   
 //	  @RequestMapping(value= "/where/map/radius.awa", method= RequestMethod.POST,produces="text/plain; charset=UTF-8")
 //	  @ResponseBody
 //	  public String  mapdata(@RequestParam Map map,HttpServletResponse response) throws Exception{
@@ -277,6 +290,5 @@ public class WhereController {
 //			String result = URLEncoder.encode(json.toString() , "UTF-8");
 //			return result;
 //	  }//////////////
-	  
-
+	    
 }

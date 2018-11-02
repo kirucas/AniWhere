@@ -121,9 +121,9 @@
 							<div data-v-f39b78c2="" class="comment-vote">
 								<form data-v-f39b78c2="" method="POST">
 									<input data-v-f39b78c2="" type="hidden" name="comment"
-										value="3731685"> <input data-v-f39b78c2=""
-										type="hidden" name="type" value="popular"> <input
-										data-v-f39b78c2="" type="hidden" name="index" value="0">
+										value="3731685"> 
+										<input data-v-f39b78c2="" type="hidden" name="type" value="popular"> 
+										<input data-v-f39b78c2="" type="hidden" name="index" value="0">
 									<button data-v-f39b78c2="" type="submit"
 										class="comment-vote__up-button">추천</button>
 								</form>

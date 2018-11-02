@@ -153,12 +153,13 @@ nav a{
                             <a href="#" id="where_main">위치</a>
                         </li>
                         <li class="dropdown" style="border:0.1px solid gray;border-radius:10px">
-                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">내 계정 ∨</a>
+                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">내 프로필</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 			                   	<!-- 로그인 되어있을떄 보여주는 탭 -->
                                 <sec:authorize access="isAuthenticated()">
                                 	<li><a href="<c:url value='/member_info.aw'/>">내 프로필</a></li>
 	                            	<li><a href="#" id="logout">로그아웃</a></li>
+	                            	<li><a href="<c:url value='/where/reservation.awa'/>">예약으로 떠나요</a></li>
 								</sec:authorize>
 			                   	<!-- 로그인 안되어있을떄 보여주는 탭 -->
                             	<sec:authorize access="isAnonymous()">

@@ -1,148 +1,147 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
-<%@ include file="/WEB-INF/views/common/loading.jsp" %>
 <style>
 .nav-item {
-	width: 66.6px;
-	text-align: center;
+   width: 66.6px;
+   text-align: center;
 }
 
 #list-view {
-	overflow: scroll;
-	width: 100%;
-	height: 591px;
+   overflow: scroll;
+   width: 100%;
+   height: 591px;
 }
 
 #where-list {
-	float: left;
-	width: 36%;
-	height: 500px;
+   float: left;
+   width: 36%;
+   height: 500px;
 }
 
 #map {
-	height: 700px;
-	overflow: auto;
+   height: 700px;
+   overflow: auto;
 }
 
 @media ( min-width : 992px ) and (max-width : 1199px) {
-	#list-select ul li {
-		width: 111.6px;
-		height: 50px;
-	}
-	#list-view {
-		width: 100%;
-		height: 559px;
-		margin-left: -20px;
-	}
+   #list-select ul li {
+      width: 111.6px;
+      height: 50px;
+   }
+   #list-view {
+      width: 100%;
+      height: 559px;
+      margin-left: -20px;
+   }
 }
 
 @media ( min-width : 768px ) and (max-width : 991px) {
-	#list-select ul li {
-		width: 71.7px;
-		height: 80px;
-		margin-left: 5px;
-	}
-	#list-view {
-		width: 100%;
-		height: 500px;
-	}
+   #list-select ul li {
+      width: 71.7px;
+      height: 80px;
+      margin-left: 5px;
+   }
+   #list-view {
+      width: 100%;
+      height: 500px;
+   }
 }
 
 @media ( min-width : 640px) and(max-width : 767px ) {
-	#where-main {
-		margin-bottom: 30px;
-	}
-	#where-list {
-		float: none;
-	}
-	#list-select ul {
-		width: 510px;
-	}
-	#list-select ul li {
-		width: 66px;
-		margin-left: 16px;
-	}
-	#list-view {
-		width: 510px;
-		height: 350px;
-		margin-left: 66px;
-	}
-	#map {
-		height: 300px;
-	}
-	#where-main {
-		width: 100%
-	}
-	#span-tag {
-		width: 510px;
-		text-align: center;
-	}
+   #where-main {
+      margin-bottom: 30px;
+   }
+   #where-list {
+      float: none;
+   }
+   #list-select ul {
+      width: 510px;
+   }
+   #list-select ul li {
+      width: 66px;
+      margin-left: 16px;
+   }
+   #list-view {
+      width: 510px;
+      height: 350px;
+      margin-left: 66px;
+   }
+   #map {
+      height: 300px;
+   }
+   #where-main {
+      width: 100%
+   }
+   #span-tag {
+      width: 510px;
+      text-align: center;
+   }
 }
 
 @media ( min-width :529px ) and (max-width : 639px ) {
-	#where-main {
-		margin-bottom: 30px;
-	}
-	#where-list {
-		float: none;
-	}
-	#list-select ul {
-		width: 540px;
-	}
-	#list-select ul li {
-		width: 66px;
-		margin-left: 18px;
-	}
-	#list-view {
-		width: 540px;
-		height: 350px;
-		margin-left: 66px;
-	}
-	#map {
-		background-color: blue;
-		height: 300px;
-	}
-	#where-main {
-		width: 100%
-	}
-	#span-tag {
-		width: 540px;
-		text-align: center;
-	}
+   #where-main {
+      margin-bottom: 30px;
+   }
+   #where-list {
+      float: none;
+   }
+   #list-select ul {
+      width: 540px;
+   }
+   #list-select ul li {
+      width: 66px;
+      margin-left: 18px;
+   }
+   #list-view {
+      width: 540px;
+      height: 350px;
+      margin-left: 66px;
+   }
+   #map {
+      background-color: blue;
+      height: 300px;
+   }
+   #where-main {
+      width: 100%
+   }
+   #span-tag {
+      width: 540px;
+      text-align: center;
+   }
 }
 
 @media ( min-width :360px ) and (max-width : 528px ) {
-	#where-main {
-		margin-bottom: 30px;
-	}
-	#where-list {
-		float: none;
-	}
-	#list-select ul {
-		width: 540px;
-	}
-	#list-select ul li {
-		width: 66px;
-		margin-left: 18px;
-	}
-	#list-view {
-		width: 540px;
-		height: 350px;
-		margin-left: 66px;
-	}
-	#map {
-		background-color: blue;
-		height: 300px;
-	}
-	#where-main {
-		width: 100%
-	}
-	#span-tag {
-		width: 540px;
-		text-align: center;
-	}
+   #where-main {
+      margin-bottom: 30px;
+   }
+   #where-list {
+      float: none;
+   }
+   #list-select ul {
+      width: 540px;
+   }
+   #list-select ul li {
+      width: 66px;
+      margin-left: 18px;
+   }
+   #list-view {
+      width: 540px;
+      height: 350px;
+      margin-left: 66px;
+   }
+   #map {
+      background-color: blue;
+      height: 300px;
+   }
+   #where-main {
+      width: 100%
+   }
+   #span-tag {
+      width: 540px;
+      text-align: center;
+   }
 }
 .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
 .wrap * {padding: 0;margin: 0;}
@@ -161,49 +160,49 @@
 </style>
 
 <div id="where-main" style="margin-top: 30px;">
-	<div id="where-list">
-		<div id="list-select">
-			<ul class="nav nav-tabs">
-				<li class="nav-item"><a class="nav-link" id="all" href="#">전체보기</a></li>
-				<li class="nav-item"><a class="nav-link" id="cafe" href="#" title="Q12A07">애견카페</a></li>
-				<li class="nav-item"><a class="nav-link" id="hair" href="#" title="D09A02">애완미용</a></li>
-				<li class="nav-item"><a class="nav-link" id="hospital" href="#" title="S04A01 S04A02">동물병원</a></li>
-				<li class="nav-item"><a class="nav-link" id="pharm" href="#" title="D25A16">동물약국</a></li>
-				<li class="nav-item"><a class="nav-link" id="etc" href="#" title="D09A01 S04A03">동물기타</a>
-				</li>
-			</ul>
-		</div>
-		<div style="text-align: center;">
-			<div id="span-tag">
- 				<span id="around" style="font-size: 1.4em; text-align: center;">주변 리스트</span>
-			</div>
-			<div id="list-view">
-				<ul id="near" style="padding-inline-start:0px;list-style: none;">
-					<!-- 리스트 목록 반복 -->
-					<li>
-						<div style="padding: 10px; float: left;">
-							<div style="float: left; width: 10%; height: 100px;">
-								<div style="width: 18px; height: 28px;">
-									<img
-										src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_a_over.png">
-								</div>
-							</div>
-							<dl style="margin-left: 40px; margin-right: 8px;">
-								<dt>
-									<a href="#">상호 : </a>
-								</dt>
-								<dd>위치 : </dd>
-								<dd>분류 : </dd>
-								<dd>거리 : KM</dd>
-							</dl>
-						</div>
-					</li>
-					<!-- 리스트 목록 반복 끝-->
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div id="map"></div>
+   <div id="where-list">
+      <div id="list-select">
+         <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link" id="all" href="#">전체보기</a></li>
+            <li class="nav-item"><a class="nav-link" id="cafe" href="#" title="Q12A07">애견카페</a></li>
+            <li class="nav-item"><a class="nav-link" id="hair" href="#" title="D09A02">애완미용</a></li>
+            <li class="nav-item"><a class="nav-link" id="hospital" href="#" title="S04A01 S04A02">동물병원</a></li>
+            <li class="nav-item"><a class="nav-link" id="pharm" href="#" title="D25A16">동물약국</a></li>
+            <li class="nav-item"><a class="nav-link" id="etc" href="#" title="D09A01 S04A03">동물기타</a>
+            </li>
+         </ul>
+      </div>
+      <div style="text-align: center;">
+         <div id="span-tag">
+             <span id="around" style="font-size: 1.4em; text-align: center;">주변 리스트</span>
+         </div>
+         <div id="list-view">
+            <ul id="near" style="padding-inline-start:0px;list-style: none;">
+               <!-- 리스트 목록 반복 -->
+               <li>
+                  <div style="padding: 10px; float: left;">
+                     <div style="float: left; width: 10%; height: 100px;">
+                        <div style="width: 18px; height: 28px;">
+                           <img
+                              src="https://ssl.pstatic.net/static/maps/img/icons/pins_n_a_over.png">
+                        </div>
+                     </div>
+                     <dl style="margin-left: 40px; margin-right: 8px;">
+                        <dt>
+                           <a href="#">상호 : </a>
+                        </dt>
+                        <dd>위치 : </dd>
+                        <dd>분류 : </dd>
+                        <dd>거리 : KM</dd>
+                     </dl>
+                  </div>
+               </li>
+               <!-- 리스트 목록 반복 끝-->
+            </ul>
+         </div>
+      </div>
+   </div>
+   <div id="map"></div>
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8940a4eb3083abd07d038b8c2839831&libraries=services,clusterer,drawing"></script>
 <script>
@@ -567,137 +566,138 @@
 				// 마커가 표시될 위치입니다 
 				var markerPosition  = new daum.maps.LatLng(lat, lng); 
 
-				// 마커를 생성합니다
-				var marker = new daum.maps.Marker({
-				    position: markerPosition
-				});
-				
 
-				// 마커가 지도 위에 표시되도록 설정합니다
-				marker.setMap(map);
-			};
-			
-			if (navigator.geolocation) {
+            // 마커를 생성합니다
+            var marker = new daum.maps.Marker({
+                position: markerPosition
+            });
+            
 
-				// GeoLocation을 이용해서 접속 위치를 얻어옵니다
-				navigator.geolocation
-						.getCurrentPosition(function(position) {
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
+         };
+         
+         if (navigator.geolocation) {
 
-							lat = position.coords.latitude, // 위도
-							lon = position.coords.longitude; // 경도
-							mylat = lat;
-							mylon = lon;
-							neartotal();
-							var locPosition = new daum.maps.LatLng(
-									lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-							message = ' '; // 인포윈도우에 표시될 내용입니다
-							
-							var imageSrc = '<c:url value="/resources/images/self.jpg"/>', // 마커이미지의 주소입니다    
-						    imageSize = new daum.maps.Size(45, 45), // 마커이미지의 크기입니다
-						    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-						    
-						    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
-						    markerPosition = new daum.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
-							// 마커를 생성합니다
-							// 마커와 인포윈도우를 표시합니다
-							displayMarker(locPosition, message,markerImage);
-						},null,{
-							  enableHighAccuracy: true,
-							  maximumAge: 0,
-							  timeout: 10000});
+            // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+            navigator.geolocation
+                  .getCurrentPosition(function(position) {
 
-			} 
-			else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+                     lat = position.coords.latitude, // 위도
+                     lon = position.coords.longitude; // 경도
+                     mylat = lat;
+                     mylon = lon;
+                     neartotal();
+                     var locPosition = new daum.maps.LatLng(
+                           lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+                     message = ' '; // 인포윈도우에 표시될 내용입니다
+                     
+                     var imageSrc = '<c:url value="/resources/images/self.jpg"/>', // 마커이미지의 주소입니다    
+                      imageSize = new daum.maps.Size(45, 45), // 마커이미지의 크기입니다
+                      imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                      
+                      var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                      markerPosition = new daum.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
+                     // 마커를 생성합니다
+                     // 마커와 인포윈도우를 표시합니다
+                     displayMarker(locPosition, message,markerImage);
+                  },null,{
+                       enableHighAccuracy: true,
+                       maximumAge: 0,
+                       timeout: 10000});
 
-				var locPosition = new daum.maps.LatLng(33.450701, 126.570667),
-						 message = 'geolocation을 사용할수 없어요..'
+         } 
+         else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
-				displayMarker(locPosition, message,markerImage);
-			}
+            var locPosition = new daum.maps.LatLng(33.450701, 126.570667),
+                   message = 'geolocation을 사용할수 없어요..'
 
-			// 지도에 마커와 인포윈도우를 표시하는 함수입니다
-			function displayMarker(locPosition, message,markerImage) {
-				var marker = new daum.maps.Marker({
-					map : map,
-					image : markerImage,
-					position : locPosition
-				});
+            displayMarker(locPosition, message,markerImage);
+         }
 
-				var iwContent = message, // 인포윈도우에 표시할 내용
-				iwRemoveable = true;
+         // 지도에 마커와 인포윈도우를 표시하는 함수입니다
+         function displayMarker(locPosition, message,markerImage) {
+            var marker = new daum.maps.Marker({
+               map : map,
+               image : markerImage,
+               position : locPosition
+            });
+
+            var iwContent = message, // 인포윈도우에 표시할 내용
+            iwRemoveable = true;
 
 
-				// 지도 중심좌표를 접속위치로 변경합니다
-				map.setCenter(locPosition);
-			}
+            // 지도 중심좌표를 접속위치로 변경합니다
+            map.setCenter(locPosition);
+         }
 
-			function setMapType(maptype) {
-				var roadmapControl = document
-						.getElementById('btnRoadmap');
-				var skyviewControl = document
-						.getElementById('btnSkyview');
-				if (maptype === 'roadmap') {
-					map.setMapTypeId(daum.maps.MapTypeId.ROADMAP);
-					roadmapControl.className = 'selected_btn';
-					skyviewControl.className = 'btn';
-				} else {
-					map.setMapTypeId(daum.maps.MapTypeId.HYBRID);
-					skyviewControl.className = 'selected_btn';
-					roadmapControl.className = 'btn';
-				}
-			}
-			
-			// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-			var mapTypeControl = new daum.maps.MapTypeControl();
+         function setMapType(maptype) {
+            var roadmapControl = document
+                  .getElementById('btnRoadmap');
+            var skyviewControl = document
+                  .getElementById('btnSkyview');
+            if (maptype === 'roadmap') {
+               map.setMapTypeId(daum.maps.MapTypeId.ROADMAP);
+               roadmapControl.className = 'selected_btn';
+               skyviewControl.className = 'btn';
+            } else {
+               map.setMapTypeId(daum.maps.MapTypeId.HYBRID);
+               skyviewControl.className = 'selected_btn';
+               roadmapControl.className = 'btn';
+            }
+         }
+         
+         // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+         var mapTypeControl = new daum.maps.MapTypeControl();
 
-			// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-			// daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-			map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+         // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+         // daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+         map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
 
-			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-			var zoomControl = new daum.maps.ZoomControl();
-			map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+         // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+         var zoomControl = new daum.maps.ZoomControl();
+         map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 
-			// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-			function makeOverListener(map, marker, infowindow) {
-			    return function() {
-			        infowindow.open(map, marker);
-			    };
-			}
-			// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-			function makeOutListener(infowindow) {
-			    return function() {
-			        infowindow.close();
-			    };
-			}
-			
-			//api에서 바로 반경 뽑아오는 소스
-// 			function radius(lat1,lon1){
-// 				$.ajax({
-// 		        	data : {code:"D09A01/D09A02/D25A16/Q12A07/S04A03/S04A01/S04A02",'lat':lat1,'lon':lon1},
-// 		            type: "POST",
-// 		            dataType : "json",
-// 		            url : "<c:url value='/where/map/radius.awa'/>",
-// 		            success: function(jsonObj) {
-// 						var codes = ["D09A01","D09A02","D25A16","Q12A07","S04A03","S04A01","S04A02"];
-// 		            	$.each(jsonObj, function(code, co_val){
-// 		            		$.each(JSON.parse(co_val), function(tag, tag_val){
-// 		            			if(tag=='body'){
-// 		            				$.each(tag_val,function(key,val){
-// 					            		if(key=='items'){
-// 				            				$.each(val,function(k,v){
-// 				            					mapMaker(v.lat,v.lon);
-// 				            				});
-// 					            		}
-// 		            				});
-// 		            			}
-// 		            		});
-// 		            	});
-// 		            },
-// 		            error : function() {
-// 		               console.log("error");
-// 		            }
-// 		         });
-// 			};
-		});
+         // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+         function makeOverListener(map, marker, infowindow) {
+             return function() {
+                 infowindow.open(map, marker);
+             };
+         }
+         // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+         function makeOutListener(infowindow) {
+             return function() {
+                 infowindow.close();
+             };
+         }
+         
+         //api에서 바로 반경 뽑아오는 소스
+//          function radius(lat1,lon1){
+//             $.ajax({
+//                  data : {code:"D09A01/D09A02/D25A16/Q12A07/S04A03/S04A01/S04A02",'lat':lat1,'lon':lon1},
+//                   type: "POST",
+//                   dataType : "json",
+//                   url : "<c:url value='/where/map/radius.awa'/>",
+//                   success: function(jsonObj) {
+//                   var codes = ["D09A01","D09A02","D25A16","Q12A07","S04A03","S04A01","S04A02"];
+//                      $.each(jsonObj, function(code, co_val){
+//                         $.each(JSON.parse(co_val), function(tag, tag_val){
+//                            if(tag=='body'){
+//                               $.each(tag_val,function(key,val){
+//                                  if(key=='items'){
+//                                     $.each(val,function(k,v){
+//                                        mapMaker(v.lat,v.lon);
+//                                     });
+//                                  }
+//                               });
+//                            }
+//                         });
+//                      });
+//                   },
+//                   error : function() {
+//                      console.log("error");
+//                   }
+//                });
+//          };
+      });
 </script>
