@@ -103,9 +103,25 @@ public class MatingController {
 			temp=temp.replace("delete", "");
 			map.put("ani_no", temp);
 			map.put("mem_no", session.getAttribute("mem_no"));
-			matingService.selectMyMating(map);
-			matingService.delete(map);
-			return "delete";
+			AnimalDTO animal=animalService.selectOne(map); // 현재 누른 동물 정보 얻어오기
+			map.put("ani_species",animal.getAni_species());
+			map.put("ani_gender",animal.getAni_gender());
+			map.put("ani_kind",animal.getAni_kind());
+			map.put("start", 1);
+			map.put("end", matingService.getTotalRecord(map));
+			List<MatingDTO> list=matingService.selectList(map); // 그 동물이 속한 그룹을 메이팅에서 얻어옴
+			String matingNo=null;
+			for(MatingDTO dto:list) {
+				if(dto.getAni_no()==animal.getAni_no())
+					matingNo=dto.getMating_no(); // 그걸 토대로 같은 동물번호인 메이팅을 얻어옴
+			}
+			if(matingNo!=null) {
+				map.put("mating_no", matingNo);
+				matingService.delete(map);
+				return "delete";
+			}
+			return "error";
+			
 		}/// if
 	}/// insertDelete
 }// class

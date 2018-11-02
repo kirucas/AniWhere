@@ -62,9 +62,9 @@
 	        	url:"<c:url value='/matingManage.awa'/>",
 	       		type:"POST",
 				data:{"ani_no":$(this).prop("id"),"mating_loc":"임시 지역"},
-	       		dataType:"json", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+	       		dataType: "text", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
 	       		success : function(data) {
-	       			alert("성공");
+	       			alert(data+"성공");
 	           	},
 	           	error : function(error) {
 	                 alert("에러발생");

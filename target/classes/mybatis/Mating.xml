@@ -8,7 +8,7 @@
 	<select id="matingCount" parameterType="java.util.Map" resultType="int">
 		SELECt COUNT(*)
 		FROM (
-			SELCT T.*, ROWNUM R
+			SELECT T.*, ROWNUM R
 			FROM (
 				SELECT *
 				FROM mating m JOIN animal a ON m.ani_no=a.ani_no
@@ -16,7 +16,7 @@
 				<if test="ani_kind != null">
 					AND ani_kind=#{ani_kind}
 				</if>
-				)
+				) T
 			)
 	</select>
 	
