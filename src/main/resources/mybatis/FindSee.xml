@@ -32,10 +32,10 @@
 				FROM miss_${table_name} tn LEFT JOIN member mb ON tn.mem_no=mb.mem_no
 				JOIN animal_category ac ON tn.animal_code=ac.animal_code			
 				<if test="animal_code != null and searchColumn != null">
-					WHERE animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
+					WHERE tn.animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>
 				<if test="animal_code != null">
-					WHERE animal_code=#{animal_code}
+					WHERE tn.animal_code=#{animal_code}
 				</if>
 				<if test="searchColumn != null">
 					WHERE ${searchColumn} like '%'||#{searchWord}||'%'
@@ -54,13 +54,13 @@
 	</select>
 	
 	<insert id="fsInsert" parameterType="java.util.Map">
-		INSERT INTO miss_${table_name}(no, mem_no, animal_code, title, content)
-		VALUES(seq_${table_name}, #{mem_no}, #{animal_code}, #{title}, #{content})		
+		INSERT INTO miss_${table_name}(no, mem_no, animal_code, title, content, addr)
+		VALUES(seq_${table_name}.nextval, #{mem_no}, #{animal_code}, #{title}, #{content}, #{addr})		
 	</insert>
 	
 	<update id="fsUpdate" parameterType="java.util.Map">
 		UPDATE miss_${table_name}
-		SET animal_code=#{animal_code}, title=#{title}, content=#{content}
+		SET animal_code=#{animal_code}, title=#{title}, content=#{content}, addr=#{addr}
 		WHERE no=#{no}
 	</update>
 	
@@ -68,5 +68,11 @@
 		DELETE FROM miss_${table_name}
 		WHERE no=#{no}
 	</delete>
+	
+	<update id="addCountFS" parameterType="java.util.Map">
+		UPDATE miss_${table_name}
+		SET count=count + 1
+		WHERE no=#{no}
+	</update>
 	
 </mapper>

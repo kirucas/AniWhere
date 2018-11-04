@@ -8,15 +8,15 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.animal.aniwhere.service.AllBoardService;
+import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.member.AnimalDTO;
 
 @Repository
-public class AnimalDAO implements AllBoardService {
+public class AnimalDAO implements AllCommonService {
 
 	@Resource(name = "template")
 	private SqlSessionTemplate template;
-	
+
 	@Override
 	public List<AnimalDTO> selectList(Map map) {
 		return template.selectList("animalSelectList", map);
@@ -35,6 +35,7 @@ public class AnimalDAO implements AllBoardService {
 
 	@Override
 	public int insert(Map map) {
+		map.put("today", new java.sql.Date(new java.util.Date().getTime()));
 		return template.insert("animalInsert", map);
 	}////////// insert
 

@@ -8,11 +8,11 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.animal.aniwhere.service.AllBoardService;
+import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.miss.LostAnimalDTO;
 
 @Repository
-public class LostAnimalDAO implements AllBoardService {
+public class LostAnimalDAO implements AllCommonService {
 
 	@Resource(name = "template")
 	private SqlSessionTemplate template;
@@ -47,5 +47,9 @@ public class LostAnimalDAO implements AllBoardService {
 	public int delete(Map map) {
 		return template.delete("lostDelete", map);
 	}////////// delete
+	
+	public int passDateOnNotice() {
+		return template.delete("passDateOnNotice");
+	}////////// passDateOnNotice
 
 }//////////////////// LostAnimalDAO class

@@ -2,36 +2,20 @@ package com.animal.aniwhere.service.animal;
 
 public class MovieBoardDTO {
 
-	private String movie_no;
-	private String mem_no;
-	private String movie_title;
-	private String movie_count;
-	private String movie_content;
-	private String movie_hit;
-	private java.sql.Date movie_regidate;
-	private String ani_category;
-	
-	//임시 선언(동영상 경로 받아 jsp에서 뿌려주기 위한 변수)
+	private String no; //영상 넘버
+	private String mem_no; //멤버 넘버
+	private String movie_title; //영상 제목 : value는 50이상 쓸 수 없음
+	private String movie_count; //조회 수
+	private String movie_content; //동영상 및 내용
+	private String movie_hit; //추천 수
+	private java.sql.Date movie_regidate; //동영상 등록 날짜
+	private String ani_category; // 동물 카테고리
+
+	// 영상 링크 저장을 위한 속성 추가
 	private String movie_tempsrc;
 	
-	public String getMovie_tempsrc() {
-		return movie_tempsrc;
-	}
-
-	public void setMovie_tempsrc(String movie_tempsrc) {
-		this.movie_tempsrc = movie_tempsrc;
-	}
-
 	// 작성자의 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
-
-	public String getMovie_no() {
-		return movie_no;
-	}//////////
-
-	public void setMovie_no(String movie_no) {
-		this.movie_no = movie_no;
-	}//////////
 
 	public String getMem_no() {
 		return mem_no;
@@ -95,6 +79,22 @@ public class MovieBoardDTO {
 
 	public void setAni_category(String ani_category) {
 		this.ani_category = ani_category;
+	}//////////
+
+	public String getMovie_tempsrc() {
+		return movie_tempsrc;
+	}//////////
+
+	public void setMovie_tempsrc(String movie_tempsrc) {
+		this.movie_tempsrc = movie_tempsrc;
+	}//////////
+
+	public String getNo() {
+		return no;
+	}//////////
+
+	public void setNo(String no) {
+		this.no = no;
 	}//////////
 	
 }//////////////////// MovieBoardDTO class

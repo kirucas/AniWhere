@@ -51,7 +51,6 @@
 
 <script>
 
-
 function changeimage2() {
     var image = document.getElementById('product');
     var changeimage2=document.getElementById('product2');
@@ -59,7 +58,6 @@ function changeimage2() {
     if (changeimage2.id.match("product2")) {
         image.src = "<c:url value='/resources/images/maketimages/product2.jpg'/>";
     } 
-
 }
 
 function changeimage3() {
@@ -69,7 +67,6 @@ function changeimage3() {
     if (changeimage3.id.match("product3")) {
         image.src = "<c:url value='/resources/images/maketimages/product3.jpg'/>";
     } 
-
 }
 
 function changeimage4() {
@@ -79,7 +76,6 @@ function changeimage4() {
     if (changeimage4.id.match("product4")) {
         image.src = "<c:url value='/resources/images/maketimages/product4.png'/>";
     } 
-
 }
 
 function changeimage1() {

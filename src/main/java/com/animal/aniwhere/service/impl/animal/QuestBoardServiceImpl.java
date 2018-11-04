@@ -47,4 +47,9 @@ public class QuestBoardServiceImpl implements AllBoardService {
 		return dao.delete(map);
 	}////////// delete
 
+	@Override
+	public int addHitCount(Map map) {
+		return dao.addHitCount(map);
+	}////////// addHitCount
+
 }//////////////////// QuestBoardServiceImpl class

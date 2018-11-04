@@ -1,35 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<c:if test="${not empty mem_no }">
+<script>
+	alert("${mem_no}");
+</script>
+</c:if>
 <style>
-.center_div {
-	margin: 0 auto;
-	width: 80% /* value of your choice which suits your alignment */
-}
-
-.content {
-	text-align: left;
-	font-size: 16px;
-}
-
-.margin-top-7 {
-	margin-top: 7px;
-}
-
-.margin-top-8 {
-	margin-top: 8px;
-}
 
 .margin-top-10 {
 	margin-top: 1.0em;
 }
 
-.margin-top-30 {
-	margin-top: 3.0em;
-}
-
-.margin-right-10{
+.margin-right-10 {
 	margin-right: 1.0em;
 }
 
@@ -39,60 +22,135 @@
 	background-color: #1ABC9C;
 }
 </style>
-	<div class="container">
-		<div class="center_div">
-			<div class="form-row margin-top-30">
-				<div class="id col-md-1 mb-3 margin-top-7">
-					<label for="validationDefault03">게시판</label>
-				</div>
-				<!-- 내가 지금 어느 게시판에서 쓰고 있는지를 보여주는 disabled input태그 -->
-				<div class="col-md-5 mb-3">
-					<div class="input-group">
-						<div class="input-group-prepend"></div>
-						<input type="text" class="form-control"
-							id="validationDefaultUsername" placeholder="예:조류게시판"
-							aria-describedby="inputGroupPrepend2" required disabled>
-					</div>
-				</div>
-				
-			</div>
-			<div class="content-form form-row">
-				<div class="content col-md-1 mb-3 margin-top-7">
-					<label for="validationDefault03">제목</label>
-				</div>
-				<div class="content-text col-md-11 mb-3">
-					<input class="form-control" type="text" placeholder="제목">
-				</div>
-			</div>
 
+<script>
 
-			<!-- 섬머노트 부분 -->
-			<div id="summernote"></div>
+function pre_view() {
+	var ntWin;
+	ntWin = window.open('', 'popup', 'width=640,height=600');
+	ntWin.document.getElementsByTagName("body")[0].innerHTML = '';
+	ntWin.document.write("<html><body>");
+	 
+	ntWin.document.getElementsByTagName("body")[0].style.fontFamily ="메이플스토리";
+	/* 게시판 명 */
+//	ntWin.document.write("<br/>" + document.forms[0].movie_panel.value + "<br/>");
+	 
+	/* 제목 */
+	ntWin.document.write("<br/>제목 : " + document.forms[0].movie_title.value + "<br/><hr />");
+	
+	/* 닉네임 */
+//	ntWin.document.write("<br/>작성자 : 닉네임" + ${mem_id} + " [작성 후 닉네임으로 변경 됨]<br/>");
 
-			<!-- 공개 라디오 버튼 -->
-			<div class="radio text-center">
-				<div class="radio margin-top-10 text-right">
-					<label class="margin-right-10"><input type="radio" class="margin-top-8" name="optionsRadios"
-						id="optionsRadios1" value="option1" checked>전체 공개 </label>
-						<label><input type="radio" class="margin-top-8" name="optionsRadios" 
-						id="optionsRadios2" value="option2">회원 공개 </label>
-				</div>
+	/* 내용 컨텐츠 */
+	ntWin.document.write("<br/>" + document.forms[0].movie_content.value + "<br/>");
+	
+	ntWin.document.write("</body></html>");
+}
+	
+	
+	function check() {
+		var isAttached = $('#summernote').summernote('code');
+		if (fr.movie_title.value == "") {
+
+			alert("제목을 입력해 주세요.");
+
+			fr.movie_title.focus();
+
+			return false;
+
+		} 
+		
+		else if (fr.movie_title.value.length > 50) {
+
+			alert("제목은 50자 이내로 입력해주세요.");
+
+			fr.movie_title.focus();
+
+			return false;
+
+		} 
+		
+		else if (fr.movie_content.value == "") {
+			alert('내용을 입력하세요.');
+			return false;
+		}
+ 	
+		else if (isAttached.indexOf('</iframe>') == -1) {
+			alert('영상을 첨부하세요.');
+			return false;
+		}
+		
+		/* 영상을 두 개 이상 올리는 것을 막는 루트이나 일단 쓰지 않고 넣어만 둠.
+		else if (isAttached.match(/<\/iframe>/gi).length >= 2) {
+			alert('영상은 하나만 첨부하세요.');
+			return false;
+		}
+ */		
+		 else {
+			 return true;
+		 }
+	}
+</script>
+
+<div class="container">
+	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/security/animal/bird/movie/edit.aw?no=${dto.no}'/>">
+		<input type="hidden" name="mem_no" value="${mem_no }">
+		<input type="hidden" name="ani_category" value="4">
+		<div class="form-group row">
+			<label for="validationDefaultUsername"
+				class="offset-sm-1 col-sm-1 col-form-label">게시판</label>
+			<!-- 내가 지금 어느 게시판에서 쓰고 있는지를 보여주는 disabled input태그 -->
+			<div class="col-sm-9">
+				<input type="text" class="form-control-planintext"
+					id="validationDefaultUsername" disabled="disabled"
+					placeholder="조류게시판">
+				<!-- required disabled -->
 			</div>
-			<!-- 임시 저장, 미리보기, 확인 -->
-				<div class="margin-top-10 text-right">
-					<button class="btn btn-primary border-success margin-right-10" type="button1">임시저장</button>
-					<button class="btn btn-primary border-success margin-right-10" type="button2">미리보기</button>
-					<button class="btn btn-primary border-success" type="submit">확인</button>
-				</div>
 		</div>
-	</div>
-	<script>
-		/* 섬머노트 부분  */
-		$('#summernote').summernote({
-			height : 300, // set editor height
-			minHeight : null, // set minimum height of editor
-			maxHeight : null, // set maximum height of editor
-			focus : true
-		// set focus to editable area after initializing summernote
-		});
-	</script>
+		<div class="form-group row">
+			<label for="title" class="offset-sm-1 col-sm-1 col-form-label">제목</label>
+			<div class="col-sm-9">
+				<input class="form-control" type="text" id="title"
+					name="movie_title" value="${dto.movie_title}">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<!-- 섬머노트 부분 -->
+			<div class="offset-sm-1 col-sm-10">
+				<textarea id="summernote" name="movie_content">${dto.movie_content}</textarea>
+			</div>
+		</div>
+
+		<!-- 미리보기, 확인 -->
+		<div class="margin-top-10 text-right">
+			<button class="btn btn-primary border-success margin-right-10"
+				name="view" onclick="pre_view()" type="button">미리보기</button>
+			<button class="btn btn-primary"
+				type="submit" role="button">확인</button>
+		</div>
+	</form>
+</div>
+
+<script>
+	/* 섬머노트 부분  */
+	$('#summernote').summernote(
+			{
+				height : 600, // set editor height
+				width : $('#summernote').parent().css('width'),
+				minHeight : null, // set minimum height of editor
+				maxHeight : null, // set maximum height of editor
+				/* airMode: true, */
+				focus : true,
+				placeholder: '영상을 첨부해주시고 내용을 반드시 작성해주세요.',
+				// set focus to editable area after initializing summernote
+				toolbar : [
+				// [groupName, [list of button]]
+				[ 'style', [ 'bold', 'italic', 'underline', 'clear' ] ],
+						[ 'font', [ 'strikethrough' ] ],
+						[ 'fontsize', [ 'fontsize' ] ],
+						[ 'color', [ 'color' ] ],
+						[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+						[ 'height', [ 'height' ] ], [ 'video', [ 'video' ] ] ]	
+			});
+</script>

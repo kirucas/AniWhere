@@ -29,7 +29,7 @@
 				<if test="searchColumn != null">
 					AND ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>
-				ORDER BY photo_no DESC
+				ORDER BY no DESC
 				) T
 			)
 		WHERE R BETWEEN #{start} AND #{end}
@@ -38,38 +38,38 @@
 	<select id="photoSelectOne" parameterType="java.util.Map" resultType="PhotoDTO">
 		SELECT tn.*, mem_nickname
 		FROM photo tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
-		WHERE photo_no=#{photo_no}
+		WHERE no=#{no}
 	</select>
 	
 	<insert id="photoInsert" parameterType="java.util.Map">
-		<selectKey order="BEFORE" resultType="int" keyProperty="photo_no">
+		<selectKey order="BEFORE" resultType="int" keyProperty="no">
 			SELECT seq_photo.nextval FROM DUAL
 		</selectKey>
-		INSERT INTO photo(photo_no, mem_no, photo_title, photo_content, ani_category)
-		VALUES(#{photo_no}, #{mem_no}, #{photo_title}, #{photo_content}, #{ani_category})
+		INSERT INTO photo(no, mem_no, photo_title, photo_content, ani_category)
+		VALUES(#{no}, #{mem_no}, #{photo_title}, #{photo_content}, #{ani_category})
 	</insert>
 	
 	<update id="photoUpdate" parameterType="java.util.Map">
 		UPDATE photo
 		SET photo_title=#{photo_title}, photo_content=#{photo_content}
-		WHERE photo_no=#{photo_no}
+		WHERE no=#{no}
 	</update>
 	
 	<delete id="photoDelete" parameterType="java.util.Map">
 		DELETE FROM photo
-		WHERE photo_no=#{photo_no}
+		WHERE no=#{no}
 	</delete>
 	
 	<select id="linkSelectList" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT *
 		FROM photo_link
-		WHERE photo_no=#{photo_no}
-		ORDER link_no
+		WHERE no=#{no}
+		ORDER BY link_no
 	</select>
 	
 	<insert id="linkInsert" parameterType="java.util.Map">
 		INSERT INTO photo_link
-		VALUES(seq_photo_link.nextval, #{photo_no}, #{link_url})
+		VALUES(seq_photo_link.nextval, #{no}, #{link_url})
 	</insert>
 	
 	<update id="linkUpate" parameterType="java.util.Map">
@@ -77,7 +77,19 @@
 	
 	<delete id="linkDelete" parameterType="java.util.Map">
 		DELETE FROM photo_link
-		WHERE origin_no=#{photo_no}
+		WHERE no=#{no}
 	</delete>
+	
+	<update id="addHitCountPhoto" parameterType="java.util.Map">
+		UPDATE photo
+		SET photo_hit=photo_hit + 1
+		WHERE no=#{no}
+	</update>
+	
+	<update id="addCountPhoto" parameterType="java.util.Map">
+		UPDATE photo
+		SET photo_count=photo_count + 1
+		WHERE no=#{no}
+	</update>
 	
 </mapper>

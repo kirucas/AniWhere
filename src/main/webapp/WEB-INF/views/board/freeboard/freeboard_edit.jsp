@@ -66,12 +66,12 @@ $(function() {
 		</h2>
 	</div>
 	<div style="width:100%">
-		<form method="post" action="<c:url value='/animal/freeboard/edit.aw'/>">
+		<form method="post" action="<c:url value='/security/animal/freeboard/edit.aw'/>">
 			<div class="form-group form-row">
-				<input type="hidden" name="free_no" value="${record.free_no}"/>
+				<input type="hidden" name="no" value="${record.no}"/>
 				<input type="hidden" name="mem_no" value="${mem_no}" />
                  	<select id="sel" name="free_category"style="width:53px;height:38px;margin-right:10px;">
-                         <option value="1">잡담</option>
+                         <option selected value="1">잡담</option>
                          <option value="2">정보</option>
                          <option value="3">유머</option>
                          <option value="4">이슈</option>

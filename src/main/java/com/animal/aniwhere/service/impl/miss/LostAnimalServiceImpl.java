@@ -7,11 +7,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.animal.aniwhere.service.AllBoardService;
+import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.miss.LostAnimalDTO;
 
 @Service("lostAniService")
-public class LostAnimalServiceImpl implements AllBoardService {
+public class LostAnimalServiceImpl implements AllCommonService {
 
 	@Resource(name="lostAnimalDAO")
 	private LostAnimalDAO dao;
@@ -46,5 +46,9 @@ public class LostAnimalServiceImpl implements AllBoardService {
 	public int delete(Map map) {
 		return dao.delete(map);
 	}//////////
+	
+	public int passDateOnNotice() {
+		return dao.passDateOnNotice();
+	}////////// passDateOnNotice
 
 }//////////////////// LostAnimalServiceImpl

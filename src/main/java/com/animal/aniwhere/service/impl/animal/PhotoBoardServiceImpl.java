@@ -67,4 +67,9 @@ public class PhotoBoardServiceImpl implements PhotoService {
 		dao.linkDelete(map);
 	}////////// linkDelete
 
+	@Override
+	public int addHitCount(Map map) {
+		return dao.addHitCount(map);
+	}////////// addHitCount
+
 }//////////////////// PhotoBoardServiceImpl class

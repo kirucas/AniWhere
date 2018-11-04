@@ -8,7 +8,6 @@ public class NoticeDTO {
 	private String content;
 	private java.sql.Date regidate;
 	private String count;
-	
 	// 작성자 아이디를 저장하기 위한 속성 추가
 	private String am_id;
 
@@ -67,5 +66,4 @@ public class NoticeDTO {
 	public void setAm_id(String am_id) {
 		this.am_id = am_id;
 	}//////////
-	
 }//////////////////// NoticeDTO class

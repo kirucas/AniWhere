@@ -4,10 +4,10 @@ public class MemberDTO {
 
 	private String mem_no;
 	private String mem_id;
+	private String mem_pw;
 	private String mem_name;
 	private String mem_nickname;
 	private String mem_gender;
-	private java.sql.Date mem_birth;
 	private String mem_log;
 	private String mem_interani;
 	
@@ -51,14 +51,6 @@ public class MemberDTO {
 		this.mem_gender = mem_gender;
 	}//////////
 	
-	public java.sql.Date getMem_birth() {
-		return mem_birth;
-	}//////////
-	
-	public void setMem_birth(java.sql.Date mem_birth) {
-		this.mem_birth = mem_birth;
-	}//////////
-	
 	public String getMem_log() {
 		return mem_log;
 	}//////////
@@ -73,6 +65,14 @@ public class MemberDTO {
 	
 	public void setMem_interani(String mem_interani) {
 		this.mem_interani = mem_interani;
+	}//////////
+
+	public String getMem_pw() {
+		return mem_pw;
+	}//////////
+
+	public void setMem_pw(String mem_pw) {
+		this.mem_pw = mem_pw;
 	}//////////
 	
 }//////////////////// MemberDTO class

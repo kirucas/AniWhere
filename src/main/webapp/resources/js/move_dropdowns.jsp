@@ -4,26 +4,8 @@
 
 <script>
 	$(function(){
-		$("#dog_main").click(function(){
-			location.href = "<c:url value='/animal/dog/main.aw'/>";
-		});
-		$("#cat_main").click(function(){
-			location.href = "<c:url value='/animal/cat/main.aw'/>";
-		});
-		$("#rna_main").click(function(){
-			location.href = "<c:url value='/animal/rna/main.aw'/>";
-		});
-		$("#bird_main").click(function(){
-			location.href = "<c:url value='/animal/bird/main.aw'/>";
-		});
-		$("#etc_main").click(function(){
-			location.href = "<c:url value='/animal/etc/main.aw'/>";
-		});
 		$("#market_main").click(function(){
 			location.href = "<c:url value='/market/main.aw'/>";
-		});
-		$("#miss_main").click(function(){
-			location.replace("<c:url value='/miss/miss_main.aw' />");
 		});
 		$("#mating_main").click(function(){
 			location.href = "<c:url value='/mating/main.aw' />";
@@ -36,6 +18,17 @@
 		});
 		$("#logout").click(function(){
 			location.href = "<c:url value='/signout.aw' />";
+		});
+		$("#profile_main").click(function(){
+			location.href = "<c:url value='/member_info.aw' />";
+		});
+		$("#bye").click(function(){
+			if(confirm('탈퇴 하시겠습니까?')){
+				location.href = "<c:url value='/member_bye.aw' />";
+			}
+		});
+		$("#notice").click(function(){
+			location.href = "<c:url value='/notice/List.aw'/>";
 		});
 		
 	});

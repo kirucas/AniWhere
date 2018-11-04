@@ -4,43 +4,42 @@
 <%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 <!-- include summernote css/js-->
 <link
-	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
-	rel="stylesheet">
+	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <script>
-   $(function() {
-      $('#summernote').summernote({
-    	 maxHeight:null,
-    	 minHeight:null,
-    	 height:630,
-         callbacks : {
-            onImageUpload : function(files, editor, welEditable) {
-               for (var i = files.length - 1; i >= 0; i--) {
-                  sendFile(files[i], this);	
-               }
-            }
-         }
-      });
-      function sendFile(file, el, wel) {
-         var form_data = new FormData();
-         form_data.append('file', file);
-         $.ajax({
-            data: form_data,
-            type: "POST",
-            url : "<c:url value='/animal/freeboard/Upload.aw'/>",
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
-            },
-            error : function() {
-               console.log("error");
-            }
-         });
-      }
-   });
+	$(function() {
+		$('#summernote').summernote({
+			maxHeight:null,
+			minHeight:null,
+			height:630,
+			callbacks : {
+				onImageUpload : function(files, editor, welEditable) {
+					for (var i = files.length - 1; i >= 0; i--) {
+						sendFile(files[i], this);	
+               		}
+            	}
+         	}
+      	});
+      	function sendFile(file, el, wel) {
+         	var form_data = new FormData();
+         	form_data.append('file', file);
+         	$.ajax({
+	            data: form_data,
+	            type: "POST",
+	            url : "<c:url value='/animal/freeboard/Upload.aw'/>",
+	            cache: false,
+	            contentType: false,
+	            processData: false,
+	            success: function(url) {
+	                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
+	            },
+	            error : function() {
+	               console.log("error");
+	            }
+         	});
+      	}
+   	});
 </script>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
@@ -62,12 +61,12 @@
 		</h2>
 	</div>
 	<div style="width:100%">
-		<form method="post" action="<c:url value='/animal/freeboard/write.aw'/>">
+		<form method="post" action="<c:url value='/security/animal/freeboard/write.aw'/>">
 			<div class="form-group form-row">
-				<input type="hidden" name="free_no"/>
+				<input type="hidden" name="no"/>
 				<input type="hidden" name="mem_no" value="${mem_no}" />
                  	<select name="free_category" style="width:53px;height:38px;margin-right:10px;">
-                         <option value="1">잡담</option>
+                         <option selected value="1">잡담</option>
                          <option value="2">정보</option>
                          <option value="3">유머</option>
                          <option value="4">이슈</option>

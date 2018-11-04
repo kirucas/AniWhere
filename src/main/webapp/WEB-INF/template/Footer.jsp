@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
 
@@ -75,7 +75,7 @@
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-3">
 					<ul class="footul">
-						<a href="<c:url value='/notice.aw' />"><span>공지사항</span></a>
+						<a href="#" id="notice"><span>공지사항</span></a>
 					</ul>
 					<ul class="footul">
 						<span>주소</span>

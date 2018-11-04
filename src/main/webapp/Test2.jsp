@@ -1,52 +1,136 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
-
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script language="javascript">
-// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
-//document.domain = "abc.go.kr";
-
-function goPopup(){
-	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-    var pop = window.open("/popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-    
-	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
-}
-/** API 서비스 제공항목 확대 (2017.02) **/
- 
- 
-function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
-						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
-	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-	document.form.roadAddrPart1.value = roadAddrPart1;
-	document.form.roadAddrPart2.value = roadAddrPart2;
-	document.form.addrDetail.value = addrDetail;
-	document.form.zipNo.value = zipNo;
-}
+<script>
+	var isDelete = function() {
+		if (confirm("글을 삭제 하시겠습니까?"))
+			location
+					.replace("<c:url value='/market/buy/buydelete.aw?no=${record.no}'/>");
+	};
 </script>
-<title>주소 입력 </title>
+
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
+<title>구매게시판 내부</title>
+
+
+
 </head>
 <body>
 
-<input type="text" name="" class="postcodify_postcode5" value="우편번호" />
-<button id="postcodify_search_button">검색</button><br />
-<input type="text" name="" class="postcodify_address" style="width:300px" value="주소" /><br />
-<input type="text" name="" class="postcodify_details" style="width:300px" value="상세주소" /><br />
-<input type="text" name="" class="postcodify_extra_info" style="width:300px" value="동이름" /><br />
+	<!-- Page Content -->
+	<div class="container">
 
-<!-- jQuery와 Postcodify를 로딩한다 -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+		<!-- Portfolio Item Heading -->
+		<div>
+			<h1 class="my-4">
+				<c:choose>
+					<c:when test="${record.animal_code eq '1'}">
+						<span>[개]</span>
+					</c:when>
+					<c:when test="${record.animal_code eq '2'}">
+						<span>[고양이]</span>
+					</c:when>
+					<c:when test="${record.animal_code eq '3'}">
+						<span>[파충류]</span>
+					</c:when>
+					<c:when test="${record.animal_code eq '4'}">
+						<span>[조류]</span>
+					</c:when>
+					<c:otherwise>
+						<span>[기타포유류]</span>
+					</c:otherwise>
+				</c:choose>
+				<small>${record.title}</small>
+			</h1>
+			
+		</div>
+		<!-- Portfolio Item Row -->
+		<div class="row">
 
-<!-- "검색" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
-<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
+
+			<div class="col-md-8" style="border: 1px solid silver">
+
+				<span id="animal_code"> </span>
+
+				<h3 class="my-3">${record.mem_nickname}구매자 아이디</h3>
+
+				<h3 class="my-3" id="animal_code">
+					<c:choose>
+						<c:when test="${record.animal_code eq '1'}">
+							<span>[개]</span>
+						</c:when>
+						<c:when test="${record.animal_code eq '2'}">
+							<span>[고양이]</span>
+						</c:when>
+						<c:when test="${record.animal_code eq '3'}">
+							<span>[파충류]</span>
+						</c:when>
+						<c:when test="${record.animal_code eq '4'}">
+							<span>[조류]</span>
+						</c:when>
+						<c:otherwise>
+							<span>[기타포유류]</span>
+						</c:otherwise>
+					</c:choose>
+
+				</h3>
+			</div>
+
+			<div class="col-md-4" style="border: 1px solid silver">
+                <h3 class="my-3">조회수 :${record.count}</h3>
+				<h3 class="my-3">등록일:${record.regidate}</h3>
+				<ul>
+					<li>거래 횟수</li>
+					<li>만족 불만족 표시</li>
+					<li>회원의 등급</li>
+					<li>연락처 정보공개시에만 공개</li>
+				</ul>
+				
+			</div>
+
+		</div>
+		<!-- /.row -->
+		<div style="margin-top: 10px"></div>
+		<br />
+
+		<div class="col-md-12 container">
+			
+			<table class="table table-hover table-striped table-bordered">
+				<tr>
+					<th colspan="2" class="text-center">내용</th>
+				</tr>
+				<tr>
+					<td colspan="2">${record.content}<br />
+						==================================================<br />
 
 
+					</td>
+				</tr>
+				
+			</table>
+		</div>
+		
+		<div style="text-align: center">
+			<a href="<c:url value='/market/buy.aw'/>"> 
+			<input name="reset"
+				class="btn btn-info" type="button" value="목록"></a> <input
+				name="submit" class="btn btn-danger" type="button" id="fix"
+				value="수정"> <input name="reset" class="btn btn-suceess"
+				style="background-color: #4CAF50;" type="button" id="repl"
+				value="답글"> <input name="submit" class="btn " type="button"
+				id="del" value="삭제">
+		</div>
+		<div style="margin-bottom: 50px"></div>
+
+
+	</div>
 
 </body>
-</html>
+
+
