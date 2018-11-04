@@ -295,14 +295,10 @@ button{
 	        				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 	        	    		function closeOverlay() {
 	        	    		   overlay.setMap(null);
+	        	    		   count=0;
 	        	    		}
 	        	    		var count=0;
-							daum.maps.event.addListener(map, 'click',function(mouseEvent){
-								if(count==1){
-									overlay.setMap(null);
-								}
-								count=0;
-							});
+							
 	        				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 	        				daum.maps.event.addListener(marker, 'click', function() {
 	        					if(count==0){

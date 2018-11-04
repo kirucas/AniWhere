@@ -1,5 +1,6 @@
 package com.animal.aniwhere.web.where;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -268,13 +269,15 @@ public class WhereController {
 	} // reservate
 
 	@RequestMapping("/where/reservation_check.aw")
-	public String reservate_check(Model model, HttpServletRequest req, // 페이징용 메소드에 전달
+	public String reservate_check(Model model, HttpServletRequest req,// 페이징용 메소드에 전달
+			HttpSession session,
 			@RequestParam Map map, // 검색용 파라미터 받기
 			@RequestParam(required = false, defaultValue = "1") int nowPage// 페이징용 nowPage파라미터 받기용
 	) throws Exception {
 		// 서비스 호출]
 		// 페이징을 위한 로직 시작]
 		// 전체 레코드 수
+		map.put("mem_no", session.getAttribute("mem_no"));
 		int totalRecordCount = reservationservice.getTotalRecord(map);
 		// 시작 및 끝 ROWNUM구하기]
 		int start = (nowPage - 1) * pageSize + 1;
