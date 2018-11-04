@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.animal.TipBoardDTO;
 
+
 @Repository
 public class TipBoardDAO implements AllBoardService {
 
@@ -24,20 +25,20 @@ public class TipBoardDAO implements AllBoardService {
 
 	@Override
 	public int getTotalRecord(Map map) {
-		
 		return template.selectOne("tipCount", map);
 	}////////// getTotalRecord
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public TipBoardDTO selectOne(Map map) {
-		if(map.get("view") == null)
+		if(map.get("view") != null)
 			template.update("addCountTip", map);
 		return template.selectOne("tipSelectOne", map);
 	}////////// getTotalRecord
 
 	@Override
 	public int insert(Map map) {
+		map.put("today", new java.sql.Date(new java.util.Date().getTime()));
 		return template.insert("tipInsert", map);
 	}////////// insert
 
