@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.animal.MovieBoardDTO;
 
+
 @Repository
 public class MovieBoardDAO implements AllBoardService {
 
@@ -30,13 +31,14 @@ public class MovieBoardDAO implements AllBoardService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public MovieBoardDTO selectOne(Map map) {
-		if(map.get("view") == null)
+		if(map.get("view") != null)
 			template.update("addCountMovie", map);
 		return template.selectOne("movieSelectOne", map);
 	}////////// selectOne
 
 	@Override
 	public int insert(Map map) {
+		map.put("today", new java.sql.Date(new java.util.Date().getTime()));
 		return template.insert("movieInsert", map);
 	}////////// insert
 

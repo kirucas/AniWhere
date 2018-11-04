@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.animal.aniwhere.service.AllCommentDTO;
 import com.animal.aniwhere.service.AllCommentService;
 
+
 @Repository
 public class AllCommentDAO implements AllCommentService {
 
@@ -24,6 +25,7 @@ public class AllCommentDAO implements AllCommentService {
 
 	@Override
 	public void insert(Map map) {
+		map.put("today", new java.sql.Date(new java.util.Date().getTime()));
 		template.insert("commentInsert", map);
 	}////////// insert
 
