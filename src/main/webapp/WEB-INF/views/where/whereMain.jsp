@@ -235,7 +235,6 @@ button{
 			//마커들을 담을 배열 
 			var markers=[];
 			total();
-			var customoverlays=[];
 			//전체 출력
 			function total(){
 				$.ajax({
@@ -250,7 +249,7 @@ button{
 		            		
 		            		var imageSrc = "<c:url value='/resources/images/all.png'/>", // 마커이미지의 주소입니다    
 						    imageSize = new daum.maps.Size(22, 35), // 마커이미지의 크기입니다
-						    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+						    imageOption = {offset: new daum.maps.Point(15, 45)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 						    
 						    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
 						    markerPosition = new daum.maps.LatLng(value.lat, value.lon); // 마커가 표시될 위치입니다
@@ -261,7 +260,7 @@ button{
 		            			image : markerImage,
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
-						    
+		            		
 		            		var curl = '<c:url value="/where/reservation.awa?store_no='+value.bizesId+'&bizesNm='+value.bizesNm+'"/>'
 		            				
 		            		var content = 
@@ -297,13 +296,36 @@ button{
 	        	    		function closeOverlay() {
 	        	    		   overlay.setMap(null);
 	        	    		}
+	        	    		var count=0;
+							daum.maps.event.addListener(map, 'click',function(mouseEvent){
+								if(count==1){
+									overlay.setMap(null);
+								}
+								count=0;
+							});
 	        				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 	        				daum.maps.event.addListener(marker, 'click', function() {
-	        				    overlay.setMap(map);
+	        					if(count==0){
+        				    		overlay.setMap(map);
+        				    		count++;
+	        					}
 	        				});
 	        				
+	        				// 마커에 마우스오버 이벤트를 등록합니다
+		            		daum.maps.event.addListener(marker, 'mouseover', function() {
+		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+		            		  	if(count==0)
+		            				overlay.setMap(map);
+		            		});
+	        				
+		            		// 마커에 마우스오버 이벤트를 등록합니다
+		            		daum.maps.event.addListener(marker, 'mouseout', function() {
+		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+		            		  	if(count==0)
+		            				overlay.setMap(null);
+		            		});
+		            		
 	        				overlay.setMap(null);
-	        				customoverlays.push(overlay);
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
 		                    markers.push(marker);	
 		            	});
@@ -334,7 +356,7 @@ button{
 		            		totalvalue = value;
 		            		var imageSrc = "<c:url value='/resources/images/"+pic+".png'/>", // 마커이미지의 주소입니다    
 						    imageSize = new daum.maps.Size(22, 35), // 마커이미지의 크기입니다
-						    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+						    imageOption = {offset: new daum.maps.Point(15, 45)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 						    
 						    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
 						    markerPosition = new daum.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
@@ -373,18 +395,43 @@ button{
 	        				});
 	        				
 							$('.close').click(closeOverlay);
-	        				
-	        				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+							
+							// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 	        	    		function closeOverlay() {
 	        	    		   overlay.setMap(null);
 	        	    		}
+							
+							
+	        				var count=0;
+							daum.maps.event.addListener(map, 'click',function(mouseEvent){
+								if(count==1){
+									overlay.setMap(null);
+								}
+								count=0;
+							});
 	        				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 	        				daum.maps.event.addListener(marker, 'click', function() {
-	        				    overlay.setMap(map);
+	        					if(count==0){
+        				    		overlay.setMap(map);
+        				    		count++;
+	        					}
 	        				});
 	        				
+	        				// 마커에 마우스오버 이벤트를 등록합니다
+		            		daum.maps.event.addListener(marker, 'mouseover', function() {
+		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+		            		  	if(count==0)
+		            				overlay.setMap(map);
+		            		});
+	        				
+		            		// 마커에 마우스오버 이벤트를 등록합니다
+		            		daum.maps.event.addListener(marker, 'mouseout', function() {
+		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+		            		  	if(count==0)
+		            				overlay.setMap(null);
+		            		});
+		            		
 	        				overlay.setMap(null);
-	        				customoverlays.push(overlay);
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
 		                    markers.push(marker);	
 		            	});
@@ -437,11 +484,6 @@ button{
 						    var laln=latlng.split(':');
 							var LatLng = new daum.maps.LatLng(laln[0],laln[1]);
 							map.setCenter(LatLng);
-							for(var i=0; i<customoverlays.length;i++){
-								if(LatLng.equals(customoverlays[i].getPosition())){
-									customoverlays[i].setMap(map);
-								}
-							}
 						});
 						
 	            		$('#near').html(nearString);
@@ -492,11 +534,6 @@ button{
 						    var laln=latlng.split(':');
 							var LatLng = new daum.maps.LatLng(laln[0],laln[1]);
 							map.setCenter(LatLng);
-							for(var i=0; i<customoverlays.length;i++){
-								if(LatLng.equals(customoverlays[i].getPosition())){
-									customoverlays[i].setMap(map);
-								}
-							}
 						});
 	            		$('#near').html(nearString);
 		            },
