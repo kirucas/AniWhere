@@ -2,6 +2,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+
+<!--  
+				<div style="margin-top: 20px">
+				<div style="text-align: center">
+				<span>받으실 곳 </span>
+				<jsp:include page="../template/adress.jsp" />
+				<input class="postcodify_details" style="width:600px;text-align: right" placeholder="상세주소" /><br />
+			</div></div>
+			
+			 -->
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script language="javascript">
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)

@@ -89,7 +89,12 @@
 							<span data-tooltip data-date="2018-09-27T05:45:00+00:00" title="">${record.dto.regidate }</span>
 						</div>
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
-							<a href="#" id="mem_no">${record.dto.mem_nickname}</a>
+							<c:if test="${empty record.dto.mem_nickname}" var="member">
+								<a href="#" id="mem_nickname">탈퇴회원</a>							
+							</c:if>
+							<c:if test="${not member}">
+								<a href="#" id="mem_nickname">${record.dto.mem_nickname}</a>
+							</c:if>
 						</div>
 						<div class="article-list-item-meta__item">
 							조회수 <span id="count">${record.dto.count}</span>
