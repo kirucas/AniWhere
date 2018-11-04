@@ -6,6 +6,7 @@
 <mapper namespace="mybatis.Free">
 
 	<select id="freeCount" parameterType="java.util.Map" resultType="int">
+		
 		SELECT COUNT(*)
 		FROM (
 			SELECT fb.*, mem_nickname
@@ -39,8 +40,8 @@
 	</select>
 	
 	<insert id="freeInsert" parameterType="java.util.Map">
-		INSERT INTO freeboard(no, mem_no, free_title, free_content, free_category)
-		VALUES(seq_freeboard.nextval, #{mem_no}, #{free_title}, #{free_content}, #{free_category})
+		INSERT INTO freeboard(no, mem_no, free_title, free_content, free_category, free_regidate)
+		VALUES(seq_freeboard.nextval, #{mem_no}, #{free_title}, #{free_content}, #{free_category}, #{today})
 	</insert>
 	
 	<update id="freeUpdate" parameterType="java.util.Map">
@@ -59,7 +60,7 @@
 		WHERE mem_no=#{mem_no}
 	</delete>
 	
-	<update id="addHitCountFree" parameterType="java.util.Map">,m 
+	<update id="addHitCountFree" parameterType="java.util.Map">
 		UPDATE freeboard
 		SET free_hit=free_hit + 1
 		WHERE no=#{no}
