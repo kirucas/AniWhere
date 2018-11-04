@@ -1,12 +1,14 @@
 package com.animal.aniwhere.web.mating;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSplitPaneUI;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -27,9 +29,14 @@ public class MatingController {
 	@Resource(name="animalService")
 	private AnimalServiceImpl animalService;
 
-	@RequestMapping("/mating/main.aw")
-	public String mating_main() throws Exception {
-		return "mating/matingMain.tiles";
+	@RequestMapping("/security/mating/main.aw")
+	public String mating_main(HttpSession session) throws Exception {
+		Map map=new HashMap<>();
+		map.put("mem_no", session.getAttribute("mem_no"));
+		if(matingService.selectMyMating(map).size()==0) {
+			return "mating/matingMain.tiles";
+		}
+		return  "forward:/security/mating/Login.aw";
 	}////////// mating_main
 
 	@RequestMapping("/mating/matingProfile.aw")
@@ -67,21 +74,36 @@ public class MatingController {
 	}
 
 	@RequestMapping("/mating/Match.aw")
-	public String mating_match(@RequestParam Map map,Model model) throws Exception {
+	public String mating_match(@RequestParam Map map,Model model,HttpSession session) throws Exception {
 		map.put("ani_no", map.get("ani_no").toString().replace("matching", ""));
 		AnimalDTO animal=animalService.selectOne(map);
+		// 현재 신청중인 동물 메이팅 넘버 얻어오기
+		map.put("mem_no", session.getAttribute("mem_no"));
+		map.put("ani_species",animal.getAni_species());
+		map.put("ani_gender",animal.getAni_gender());
+		map.put("ani_kind",animal.getAni_kind());
+		map.put("start", 1);
+		map.put("end", matingService.getTotalRecord(map));
+		List<MatingDTO> list=matingService.selectList(map); // 그 동물이 속한 그룹을 메이팅에서 얻어옴
+		String matingNo=null;
+		for(MatingDTO dto:list) {
+			if(dto.getAni_no().equals(animal.getAni_no())) {
+				matingNo=dto.getMating_no(); // 그걸 토대로 같은 동물번호인 메이팅을 얻어옴
+				break;
+			}
+		}
+		
 		map.put("ani_gender", animal.getAni_gender().equals("M")?"F":animal.getAni_gender().equals("F")?"M":"U");
-		System.out.println(map.get("ani_gender"));
 		map.put("ani_species",animal.getAni_species());
 		if(animal.getAni_kind()!=null)
 			map.put("ani_kind", animal.getAni_kind());
 		// 임시
 		map.put("start",1);
-		map.put("end",10);
+		map.put("end",matingService.getTotalRecord(map));
 		
-		List<MatingDTO> matingList=matingService.selectList(map);	
-		System.out.println("총 "+matingList.size()+"개의 결과");
+		List<MatingDTO> matingList=matingService.selectList(map);
 		
+		model.addAttribute("matingNo",matingNo);
 		model.addAttribute("animal",animal);
 		model.addAttribute("list",matingList);
 		return "mating/matingMatch.tiles";
@@ -113,6 +135,7 @@ public class MatingController {
 			for(MatingDTO dto:list) {
 				if(dto.getAni_no().equals(animal.getAni_no())) {
 					matingNo=dto.getMating_no(); // 그걸 토대로 같은 동물번호인 메이팅을 얻어옴
+					break;
 				}
 			}
 			if(matingNo!=null) {
@@ -149,4 +172,14 @@ public class MatingController {
 		
 		return json.toJSONString();
 	}/// showProfile
+	
+	@RequestMapping("/securtiy/mating/drafting.aw")
+	public String drafting(@RequestParam Map map) throws Exception {
+		System.out.println(map.get("send_no")+", "+map.get("receive_no"));
+		// 드래프팅 하는 거 하면됨
+		//matingService.drafting(map);
+		
+		// 결과화면으로
+		return "forward:/mating/draftList.aw?ani_no="+map.get("ani_no");
+	}
 }// class

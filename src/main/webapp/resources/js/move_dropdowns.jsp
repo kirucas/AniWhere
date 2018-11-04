@@ -8,7 +8,7 @@
 			location.href = "<c:url value='/market/main.aw'/>";
 		});
 		$("#mating_main").click(function(){
-			location.href = "<c:url value='/mating/main.aw' />";
+			location.href = "<c:url value='/security/mating/main.aw' />";
 		});
 		$("#where_main").click(function(){
 			location.href = "<c:url value='/where/main.aw' />";

@@ -27,13 +27,15 @@
 .card{
 	display:inline-block;
 	margin-right:-4px;
-	padding-top:15px;
+	padding:10px;
+	
 }
-#ani_profile{
+#ani_profile{	
 	height: 200px;
 }
 .card-body{
-	height: 200px;
+	height: 160px;
+	padding:15px;
 }
 #plus{
 	border: none;
@@ -91,9 +93,9 @@
 	<section class="member-settings-layout__content">
 		<div class="member-settings-layout__content-inner" style="height: 100%;">
 			<h2 class="member-settings-layout__title">${anirecord[0].mem_nickname}님의 애완동물 프로필 카드</h2>
-			<div class="container" style="vertical-align:middle;">
+<!-- 			<div class="container" style="vertical-align:middle;"> -->
 				<c:forEach var="record" items="${anirecord}" varStatus="loop">
-				  	<div class="card col-12 col-md-3">
+				  	<div class="card col-12 col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					  	<img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
 					 	<div class="card-body">
 					    	<h2 class="card-title">이름 : ${record.ani_name}</h2>
@@ -125,7 +127,7 @@
 			    			<!-- <div style="display: inline;float: left;margin-top: 10px;">
 			    				<p class="card-text">검색 위치
 			    			</div> -->
-			    			<div style="display: inline;float: right;" id="buttonPlace${record.ani_no}">
+			    			<div style="text-align:right;display: inline;float: right;" id="buttonPlace${record.ani_no}">
 			    				<c:set var="loop_flag" value="false" />
 			    				<c:forEach var="mateDto" items="${matingrecord}" varStatus="loop">
 			    					<c:if test="${not loop_flag}">
@@ -143,7 +145,7 @@
 					  	</div>
 					</div>
 				</c:forEach>
-			</div>
+<!-- 			</div> -->
 		</div>	
 	</section>
 </div>

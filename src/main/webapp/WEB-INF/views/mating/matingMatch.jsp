@@ -71,7 +71,12 @@
 		       	}
 		    });
 		});
-	});
+		
+		
+		$(document).on("click","#drafting",function(){
+			location.href="<c:url value='/securtiy/mating/drafting.aw?send_no="+$("#matingNo").html()+"&receive_no="+photoNo+"'/>";
+		});
+	});	
 </script>
 
 <!-- 내용 시작 -->
@@ -79,7 +84,7 @@
 	<div class="col-lg-12 text-center" style="margin-top:50px;">
 		<h2>${animal.ani_name}의 매칭 카드</h2>
 		<span>이곳에 스피너 같은걸 넣어서 이미 매칭중인 다른 동물로 바꿀 수 있도록 해둔다</span>
-		
+		<label id="matingNo" hidden="true">${matingNo}</label>
 	</div>
 	<c:if test='${empty list}' var='result'>
 		<div class="col-lg-12 text-center" style="margin-top:50px;">
@@ -115,7 +120,7 @@
 			</div>
 
 			<div class="modal-footer">
-				<div><a href="#" class="btn btn-success" target="_blank">메이팅 신청</a></div>
+				<div><a href="#" class="btn btn-success" id="drafting">메이팅 신청</a></div>
 				<div><a href="#" class="btn btn-danger" data-dismiss="modal">닫기</a></div>
 				<!-- 
 				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">닫기</button>
