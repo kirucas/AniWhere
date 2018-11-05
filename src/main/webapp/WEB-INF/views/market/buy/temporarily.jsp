@@ -110,7 +110,7 @@ html {
 																																						 
 								<a href="<c:url value='/market/buyinside.aw?buy_no=${record.no}'/>">
 																  
-								<span id="title">${record.title}</span><em>[]</em></a>
+								<span id="title">${record.title}</span><em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em></a>
 							
 						        </td>
 						        <!--  타이틀 끝 -->

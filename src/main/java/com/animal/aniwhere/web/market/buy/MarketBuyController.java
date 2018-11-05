@@ -60,11 +60,7 @@ public class MarketBuyController {
 	//리스트로 이동하기
 	
 	@RequestMapping("/market/buy/temporarily.aw")
-	public String market_list(Model model,
-			HttpServletRequest req,//페이징용 메소드에 전달
-			@RequestParam Map map,//검색용 파라미터 받기
-			@RequestParam(required=false,defaultValue="1") int nowPage//페이징용 nowPage파라미터 받기용
-			)throws Exception {
+	public String market_list(Model model,HttpServletRequest req,@RequestParam Map map,@RequestParam(required=false,defaultValue="1") int nowPage)throws Exception {
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		map.put("table_name","buy");
@@ -102,23 +98,23 @@ public class MarketBuyController {
 	         String searchColumn = map.get("searchColumn").toString();   
 
 	         String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
-	               req.getContextPath()+"/miss/see.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+	               req.getContextPath()+"/market/buy.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
 	         
 	         model.addAttribute("pagingString", pagingString);
 	      }
 	      
 	      else {
 	         String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
-	               req.getContextPath()+"/miss/see.aw?");
+	               req.getContextPath()+"/market/buy.aw?");
 	         model.addAttribute("pagingString", pagingString);
 	      }
 		 
 		 //데이터 저장]
 		
-		model.addAttribute("list", list);
-		model.addAttribute("totalRecordCount", totalRecordCount);
-		model.addAttribute("pageSize", pageSize);
-		model.addAttribute("nowPage", nowPage);
+		 model.addAttribute("list", collect);
+		 model.addAttribute("totalRecordCount", totalRecordCount);
+		 model.addAttribute("nowPage", nowPage);
+	     model.addAttribute("pageSize", pageSize);
 		//뷰정보 반환]
 	
 		return "market/buy/temporarily.tiles";
@@ -337,8 +333,8 @@ public class MarketBuyController {
 	      public String buy_update(@RequestParam Map map,HttpSession session) throws Exception{
 	         
 	         map.put("table_name", "buy");
-	         map.put("cmt_content", map.get("content"));
-	         map.put("cmt_no", session.getAttribute("no"));
+	         map.put("cmt_content", map.get("cmt_content"));
+	         map.put("cmt_no", session.getAttribute("cmt_no"));
 	         
 	         System.out.println("dddd1");
 	         
