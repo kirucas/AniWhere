@@ -6,6 +6,13 @@
 <head>
 <script>
 function check() {
+	
+	
+	
+	
+	
+	
+	
     var isAttached = $('#summernote').summernote('code');
     if (fr.title.value == "") {
        alert("제목을 입력해 주세요.");
@@ -57,6 +64,7 @@ function check() {
     }	    
    
 else {
+	
  fr.action="<c:url value='/security/market/sellinsert.aw'/>"; 
  return true;
 }
@@ -78,9 +86,10 @@ else {
  		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
 		   content+='거래방법:'+$('#way').val()+'\r\n'; 
            content+='연락처:'+$('#phone').val()+'\r\n'; 
-           content+='====================================\r\n'; 
+           content+='====================================\r\n';
            $('#summernote').append(content);
-           	   
+           console.log("성공");
+           	 
 	   });
 	      
       $('#summernote').summernote({
@@ -247,7 +256,7 @@ else {
 					
 					<!-- <input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
 					-->
-					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
+					<input class="btn btn-danger" type="button"  value="확인" id="enterBtn" >
 				</div>	 										
 			</form>
 			<div style="margin-bottom: 50px"></div>
