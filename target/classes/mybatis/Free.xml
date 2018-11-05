@@ -27,7 +27,17 @@
 				<if test="searchColumn != null">
 					WHERE ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>
-				ORDER BY no DESC
+				<choose>
+					<when test="hit != null"> <!-- 추천수 정렬 -->
+						ORDER BY free_hit DESC
+					</when>
+					<when test="count != null"> <!-- 조회수 정렬 -->
+						ORDER BY free_count DESC
+					</when>
+					<otherwise>
+						ORDER BY no DESC
+					</otherwise>
+				</choose>
 				) T
 			)
 		WHERE R BETWEEN #{start} AND #{end}
