@@ -95,7 +95,7 @@ else {
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
-    	 height:630,
+    	 height:630,    	
          callbacks : {
             onImageUpload : function(files, editor, welEditable) {
                for (var i = files.length - 1; i >= 0; i--) {
@@ -103,7 +103,6 @@ else {
                }
             }
          }
-          
       });
       
       function sendFile(file, el, wel) {
@@ -116,9 +115,11 @@ else {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(url) {
+                       
+                success: function(url) {
             	 //$('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
             	 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />", function (image) {
+            		 width: 100,
 					  image.attr('name', 'sellpic');
 				});
             	 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
@@ -186,11 +187,11 @@ else {
 					 <select id="use_listSelect"
 					class="select_filter" >
 					
-					<option value="food">사료및간식</option>
-					<option value="playtoy">장난감</option>
-					<option value="home">보금자리</option>
-					<option value="buty">미용용품</option>
-					<option value="medicine">의약품</option>
+					<option value="사료및간식">사료및간식</option>
+					<option value="장난감">장난감</option>
+					<option value="보금자리">보금자리</option>
+					<option value="미용용품">미용용품</option>
+					<option value="의약품">의약품</option>
 					<option value="other">기타</option>
 				</select>
 
@@ -256,7 +257,7 @@ else {
 					
 					<!-- <input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
 					-->
-					<input class="btn btn-danger" type="button"  value="확인" id="enterBtn" >
+					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
 				</div>	 										
 			</form>
 			<div style="margin-bottom: 50px"></div>

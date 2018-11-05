@@ -88,7 +88,7 @@ html {
 							
 							<td class="text-left">
 				
-							<span id="animal_code">
+							<span id="animal_code">관련태그:
 						<c:choose>
 							<c:when test="${record.animal_code eq '1'}">
 								<span>[개]</span>

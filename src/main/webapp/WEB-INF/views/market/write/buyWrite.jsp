@@ -15,6 +15,19 @@
 
 <script>
    $(function() {
+	   var count=0;
+	   
+	   $('#enterBtn').onClick(function(){	
+		   title+='['+$('#use_listSelect').val()+']';
+		   $('#title').append(title);
+		   console.log("성공")
+		   
+	   });
+	   
+	   
+	   
+	   
+	   
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
@@ -127,11 +140,11 @@
 					<select id="use_listSelect"
 						class="select_filter"  name="use">
 					
-						<option value="food">사료및간식</option>
-						<option value="playtoy">장난감</option>
-						<option value="home">보금자리</option>
-						<option value="buty">미용용품</option>
-						<option value="medicine">의약품</option>
+						<option value="사료및간식">사료및간식</option>
+						<option value="장난감">장난감</option>
+						<option value="보금자리">보금자리</option>
+						<option value="미용용품">미용용품</option>
+						<option value="의약품">의약품</option>
 						<option value="other">기타</option>
 
 					</select>
@@ -154,7 +167,7 @@
 					<a href="<c:url value='/market/buy.aw'/>"> 
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
 
-				<button class="btn btn-primary" type="submit" role="button">확인</button>
+				<button class="btn btn-primary" type="submit" role="button" id="enterBtn">확인</button>
 				
 				</div>
 				

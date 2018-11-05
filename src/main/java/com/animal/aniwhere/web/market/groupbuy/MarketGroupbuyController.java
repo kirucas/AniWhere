@@ -1,13 +1,16 @@
 package com.animal.aniwhere.web.market.groupbuy;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.animal.aniwhere.service.AllCommentDTO;
 import com.animal.aniwhere.service.AwsS3Utils;
+import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.market.GroupBuyServiceImpl;
 import com.animal.aniwhere.service.impl.market.GroupBuyingListServiceImpl;
@@ -244,6 +249,102 @@ public class MarketGroupbuyController {
 			        //return "/Upload/"+newFilename;
 					return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
 			   }
+				
+				
+				@Resource(name="allCommentService")
+				   private AllCommentServiceImpl cmtService;
+				
+				   @ResponseBody
+				   @RequestMapping(value="/miss/groupbuy/cmt_write.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				   public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
+				      
+				      map.put("mem_no", session.getAttribute("mem_no"));
+				      map.put("table_name", "groupbuy");
+				      map.put("no", map.get("no"));
+				      
+				      cmtService.insert(map);
+				      
+				      return map.get("no").toString();
+				      
+				   }///////////////////
+
+				   
+				   @ResponseBody
+				      @RequestMapping(value="/market/groupbuy/cmt_write.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				      public String buy_write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
+				         
+				         map.put("mem_no", session.getAttribute("mem_no"));
+				         map.put("table_name", "groupbuy");
+				         map.put("no", map.get("no"));
+				         
+				         cmtService.insert(map);
+				         
+				         return map.get("no").toString();
+				         
+				      }///////////////////
+				   
+				   @ResponseBody
+				      @RequestMapping(value="/market/groupbuy/cmt_list.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				      public String buy_list(@RequestParam Map map,HttpSession model) throws Exception{
+				         
+				         map.put("table_name", "groupbuy");
+				         map.put("origin_no", map.get("no"));
+				         
+				         List<AllCommentDTO> collections = cmtService.selectList(map);
+				         
+				         List<Map> comments = new Vector<>();
+				         
+				         for (AllCommentDTO dto : collections) {
+				            
+				               Map record = new HashMap();
+				               record.put("cmt_no", dto.getCmt_no());
+				               model.setAttribute("cmt_no", dto.getCmt_no());
+				               record.put("cmt_content", dto.getCmt_content());
+				               record.put("mem_nickname", dto.getMem_nickname());
+				               record.put("regidate", dto.getRegidate().toString());
+				               record.put("origin_no", dto.getOrigin_no());
+				               record.put("mem_no", dto.getMem_no());         
+
+				               comments.add(record);
+				            }   
+				         return JSONArray.toJSONString(comments);
+				      }//////////////////
+				   
+				   @ResponseBody
+				      @RequestMapping(value="/market/groupbuy/cmt_edit.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				      public String buy_update(@RequestParam Map map,HttpSession session) throws Exception{
+				         
+				         map.put("table_name", "groupbuy");
+				         map.put("cmt_content", map.get("cmt_content"));
+				       
+				         
+				         //System.out.println("dddd1");
+				         /*
+				         Set<String> set = map.keySet();
+				         for(String key:set) {
+				            System.out.println(key+":"+map.get(key));
+				         }
+				         */
+				         //System.out.println("dddd2");
+				         
+				         
+				         cmtService.update(map);
+				         
+				         return map.get("no").toString();
+				      }////////////
+				   
+				   
+				   @ResponseBody
+				   @RequestMapping(value="/market/groupbuy/cmt_delete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				   public String buy_delete(@RequestParam Map map,HttpSession session) throws Exception{
+				         
+				       map.put("table_name", "groupbuy");
+				       map.put("cmt_no", session.getAttribute("cmt_no"));
+				         
+				       cmtService.delete(map);
+				         
+				       return map.get("no").toString();
+				   }
 		
 		
 		
