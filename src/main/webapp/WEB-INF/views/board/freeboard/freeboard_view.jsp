@@ -48,9 +48,6 @@
 		
 		//코멘트 수정/삭제 처리
 	      $('.commentEdit').click(function() {
-	    	  console.log($(this).attr("title"));
-	    	  
-	    	  console.log($('input[name=cmt_no]'));
 	            $("#title").val($(this).html());
 	            $("#submit").val('수정');
 	            $('input[name=cmt_no]').val($(this).attr("title"));
@@ -179,145 +176,11 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
-	<div data-v-f39b78c2="" data-post="820136">
-		<div data-v-f39b78c2="" class="comment-wrap">
-			<!---->
-			<div data-v-f39b78c2="" class="comment-header">
-				<h2 data-v-f39b78c2="" class="comment__title">댓글</h2>
-				<span data-v-f39b78c2="" class="comment__count">총 <em
-					data-v-f39b78c2="">2</em>개
-				</span>
-				<button data-v-f39b78c2="" type="button" class="comment__reflash">
-					<img data-v-f39b78c2="" src="/images/icon-refresh@2x.png"
-						width="16" alt=""> <span data-v-f39b78c2="">새로고침</span>
-				</button>
-				<!---->
-			</div>
-			<!---->
-			<div data-v-f39b78c2="">
-				<div data-v-f39b78c2="" class="comment-sort">
-					<ul data-v-f39b78c2="" class="comment-sort__list">
-						<li data-v-f39b78c2=""
-							class="comment-sort__item comment-sort__item--active"><button
-								data-v-f39b78c2="" type="button">인기순</button></li>
-						<li data-v-f39b78c2="" class="comment-sort__item"><button
-								data-v-f39b78c2="" type="button">최신순</button></li>
-					</ul>
-				</div>
-				<div data-v-f39b78c2="" class="comment-list">
-					<div data-v-f39b78c2="" class="comment-l">
-						<!---->
-						<div data-v-f39b78c2="" class="comment">
-							<div data-v-f39b78c2="" class="comment-vote">
-								<form data-v-f39b78c2="" method="POST">
-									<input data-v-f39b78c2="" type="hidden" name="comment"
-										value="3731685"> 
-										<input data-v-f39b78c2="" type="hidden" name="type" value="popular"> 
-										<input data-v-f39b78c2="" type="hidden" name="index" value="0">
-									<button data-v-f39b78c2="" type="submit"
-										class="comment-vote__up-button">추천</button>
-								</form>
-								<div data-v-f39b78c2="" class="comment-vote__count">0</div>
-								<form data-v-f39b78c2="" method="POST">
-									<input data-v-f39b78c2="" type="hidden" name="comment"
-										value="3731685"> <input data-v-f39b78c2=""
-										type="hidden" name="type" value="popular"> <input
-										data-v-f39b78c2="" type="hidden" name="index" value="0">
-									<button data-v-f39b78c2="" type="submit"
-										class="comment-vote__down-button">비추천</button>
-								</form>
-							</div>
-							<div data-v-f39b78c2="" class="comment-meta">
-								<span data-v-f39b78c2="" class="comment__name"><a
-									data-v-f39b78c2=""
-									href="//talk.op.gg/s/lol/free?target=user_name&amp;q=다이애나">다이애나</a></span>
-								<span data-v-f39b78c2="" data-tooltip=""
-									title="2018년 9월 18일 화요일 오전 10:59" class="comment__date">한
-									달 전</span>
-							</div>
-							<div data-v-f39b78c2="" class="comment-content">
-								<div data-v-f39b78c2="">
-									<p>끄덕</p>
-								</div>
-								<!---->
-							</div>
-							<div data-v-f39b78c2="" class="comment-button">
-								<ul data-v-f39b78c2="">
-									<!---->
-									<li data-v-f39b78c2=""><button data-v-f39b78c2=""
-											class="comment__button">신고</button></li>
-									<li data-v-f39b78c2=""><button data-v-f39b78c2=""
-											class="comment__button">
-											<img data-v-f39b78c2="" src="/images/icon-reply@2x.png"
-												width="16" alt="">답글쓰기
-										</button></li>
-								</ul>
-							</div>
-						</div>
-						<!---->
-					</div>
-					<div data-v-f39b78c2="" class="comment-l">
-						<!---->
-						<div data-v-f39b78c2="" class="comment">
-							<div data-v-f39b78c2="" class="comment-vote">
-								<form data-v-f39b78c2="" method="POST">
-									<input data-v-f39b78c2="" type="hidden" name="comment"
-										value="3731790"> <input data-v-f39b78c2=""
-										type="hidden" name="type" value="popular"> <input
-										data-v-f39b78c2="" type="hidden" name="index" value="1">
-									<button data-v-f39b78c2="" type="submit"
-										class="comment-vote__up-button">추천</button>
-								</form>
-								<div data-v-f39b78c2="" class="comment-vote__count">0</div>
-								<form data-v-f39b78c2="" method="POST">
-									<input data-v-f39b78c2="" type="hidden" name="comment"
-										value="3731790"> <input data-v-f39b78c2=""
-										type="hidden" name="type" value="popular"> <input
-										data-v-f39b78c2="" type="hidden" name="index" value="1">
-									<button data-v-f39b78c2="" type="submit"
-										class="comment-vote__down-button">비추천</button>
-								</form>
-							</div>
-							<div data-v-f39b78c2="" class="comment-meta">
-								<span data-v-f39b78c2="" class="comment__name"><a
-									data-v-f39b78c2=""
-									href="//talk.op.gg/s/lol/free?target=user_name&amp;q=부쉬공포증">부쉬공포증</a></span>
-								<span data-v-f39b78c2="" data-tooltip=""
-									title="2018년 9월 18일 화요일 오전 11:46" class="comment__date">한
-									달 전</span>
-							</div>
-							<div data-v-f39b78c2="" class="comment-content">
-								<div data-v-f39b78c2="">
-									<p>미안해오 ㅠㅠ</p>
-								</div>
-								<!---->
-							</div>
-							<div data-v-f39b78c2="" class="comment-button">
-								<ul data-v-f39b78c2="">
-									<!---->
-									<li data-v-f39b78c2=""><button data-v-f39b78c2=""
-											class="comment__button">신고</button></li>
-									<li data-v-f39b78c2=""><button data-v-f39b78c2=""
-											class="comment__button">
-											<img data-v-f39b78c2="" src="/images/icon-reply@2x.png"
-												width="16" alt="">답글쓰기
-										</button></li>
-								</ul>
-							</div>
-						</div>
-						<!---->
-					</div>
-				</div>
-				<!---->
-			</div>
-=======
 	<!-- 댓글 부분 -->
 <div class="container border" style="margin-top: 15px;margin-bottom: 10px">
 	<div class="row">
 		<div class="col-sm-12" style="margin-top: 15px">
 			<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
->>>>>>> refs/remotes/origin/jiho-miss
 		</div>
 		<form id="frm" method="post">
 			<input type="hidden" id="cmt_no" name="cmt_no" value="${cmt_no}"/>

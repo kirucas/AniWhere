@@ -47,13 +47,13 @@
 		});		
 		commentString+='</div>';
       $('#comments').html(commentString);
-      if(${sessionScope.mem_no==record.mem_no }){
+
       //코멘트 수정/삭제 처리
       $('.commentEdit').click(function() {
          console.log($(this).attr("title"));
             $("#title").val($(this).html());
             $("#submit").val('수정');
-            $('input[mem_nickname=cmt_no]').val($(this).attr("title"));
+            $('input[mem_nickname=mem_no]').val($(this).attr("title"));
       });
       $('.commentDelete').click(function() {
             var cno_value = $(this).attr("title");
@@ -68,7 +68,6 @@
              });
       });
       }
-   };
     
    
    $(function(){
@@ -185,7 +184,7 @@
 			<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
 		</div>
 		<form id="frm" method="post">
-			<input type="hidden" name="cmt_no" />
+			<input type="hidden" name="cmt_no"/>
 			<input type="hidden" id="no" name="no" value="${record.no}"/>
 			<div class="form-row" style="width:100%">
 				<input style="margin-bottom:10px ;width:83%;margin-left: 20px;margin-top: 10px;" class="form-control" id="title" name="cmt_content"  type="text" size="180" placeholder="댓글을 입력 하세요" />

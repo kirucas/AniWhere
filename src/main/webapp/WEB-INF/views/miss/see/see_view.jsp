@@ -63,7 +63,7 @@
           $('.commentDelete').click(function() {
                 var cno_value = $(this).attr("title");
                 $.ajax({
-                    url:'<c:url value="/miss/find/cmt_delete.awa"/>',
+                    url:'<c:url value="/miss/see/cmt_delete.awa"/>',
                     data:{cno:cno_value,no:${record.no}},
                     dataType:'text',
                     type:'post',
