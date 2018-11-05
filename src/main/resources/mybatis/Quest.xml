@@ -43,12 +43,12 @@
 	<insert id="questInsert" parameterType="java.util.Map">
 		INSERT INTO quest
 		<if test="checking == null">
-			(no, mem_no, quest_title, quest_content, origin_no, ani_category)
-			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, seq_quest.currval, #{ani_category})
+			(no, mem_no, quest_title, quest_content, origin_no, ani_category, quest_regidate)
+			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, seq_quest.currval, #{ani_category}, #{today})
 		</if>
 		<if test="checking != null">
 			(no, mem_no, quest_title, quest_content, origin_no, checking, ani_category)
-			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, #{origin_no}, 1, #{ani_category})
+			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, #{origin_no}, 1, #{ani_category}, #{today})
 		</if>
 	</insert>
 	

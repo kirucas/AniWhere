@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.animal.FreeBoardDTO;
 
+
 @Repository
 public class FreeBoardDAO implements AllBoardService {
 
@@ -30,13 +31,14 @@ public class FreeBoardDAO implements AllBoardService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public FreeBoardDTO selectOne(Map map) {
-		if(map.get("view") == null)
+		if(map.get("view") != null)
 			template.update("addCountFree", map);
 		return template.selectOne("freeSelectOne", map);
 	}////////// selectOne
 
 	@Override
 	public int insert(Map map) {
+		map.put("today", new java.sql.Date(new java.util.Date().getTime()));
 		return template.insert("freeInsert", map);
 	}////////// insert
 
