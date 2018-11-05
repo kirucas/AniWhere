@@ -239,7 +239,6 @@ public class FreeboardController {
 			
 			map.put("table_name", "freeboard");
 			map.put("cmt_content", map.get("cmt_content"));
-			map.put("cmt_no", session.getAttribute("cmt_no"));
 			/*
 			Set<String> set = map.keySet();
 			for(String key:set) {
@@ -256,7 +255,7 @@ public class FreeboardController {
 		public String delete(@RequestParam Map map,HttpSession session) throws Exception{
 			
 			map.put("table_name", "freeboard");
-			map.put("cmt_no", session.getAttribute("cmt_no"));
+			//map.put("cmt_no", session.getAttribute("cmt_no"));
 			
 			cmtService.delete(map);
 			

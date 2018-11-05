@@ -58,7 +58,7 @@
 			var cno_value = $(this).attr("title");
 			$.ajax({
 				url:"<c:url value='/animal/freeboard/cmt_delete.awa'/>",
-				data:{cno:cno_value,no:${record.no}},
+				data:{cmt_no:cno_value,no:${record.no}},
 				dataType:'text',
 				type:'post',
 				success:function(key){					

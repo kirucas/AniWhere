@@ -495,13 +495,13 @@ public class MissMainController {
       
       map.put("table_name", "see");
       map.put("cmt_content", map.get("cmt_content"));
-      map.put("cmt_no", session.getAttribute("cmt_no"));
-      
+      //map.put("cmt_no", session.getAttribute("cmt_no"));
+      /*
       Set<String> set = map.keySet();
       for(String key:set) {
          System.out.println(key+":"+map.get(key));
       }
-      
+      */
       cmtService.update(map);
       
       return map.get("no").toString();
@@ -512,7 +512,7 @@ public class MissMainController {
    public String delete(@RequestParam Map map,HttpSession session) throws Exception{
       
       map.put("table_name", "see");
-      map.put("cmt_no", session.getAttribute("cmt_no"));
+      //map.put("cmt_no", session.getAttribute("cmt_no"));
       
       cmtService.delete(map);
       
@@ -574,7 +574,6 @@ public class MissMainController {
          
          map.put("table_name", "find");
          map.put("cmt_content", map.get("cmt_content"));
-         map.put("cmt_no", session.getAttribute("cmt_no"));
          /*
          Set<String> set = map.keySet();
          for(String key:set) {
@@ -591,7 +590,7 @@ public class MissMainController {
       public String find_delete(@RequestParam Map map,HttpSession session) throws Exception{
          
          map.put("table_name", "find");
-         map.put("cmt_no", session.getAttribute("cmt_no"));
+         //map.put("cmt_no", session.getAttribute("cmt_no"));
          
          cmtService.delete(map);
          
@@ -682,7 +681,6 @@ public class MissMainController {
   			map.put("table_name", "find");
   		}
   		cmtService.insert(map);
-  		System.out.println("333333333333");
   		return "true";
   	}///////////////////
   	

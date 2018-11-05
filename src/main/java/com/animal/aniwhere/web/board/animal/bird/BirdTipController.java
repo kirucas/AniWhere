@@ -4,11 +4,13 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.json.simple.JSONArray;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllCommentDTO;
+import com.animal.aniwhere.service.animal.FreeBoardDTO;
 import com.animal.aniwhere.service.animal.TipBoardDTO;
 import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
@@ -61,12 +64,40 @@ public class BirdTipController {
 		map.put("start",start);
 		map.put("end",end);
 		//페이징을 위한 로직 끝]
-		List list = tipservice.selectList(map);
+		List<TipBoardDTO> list = tipservice.selectList(map);
+		
+		List<Map> collect = new Vector<>();
+		
+		for(TipBoardDTO dto : list) {
+			Map record = new HashMap();
+			record.put("dto", dto);
+			Map temp = new HashMap();
+			temp.put("table_name","tip");
+			temp.put("no", dto.getNo());
+			record.put("cmtCount", cmtservice.commentCount(temp));
+			
+			collect.add(record);
+		}	
+		
 		//페이징 문자열을 위한 로직 호출]
-		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/board/animal/bird/tip/list.aw?");
+				if(map.get("searchWord") != null) {
+					String searchWord = map.get("searchWord").toString();	
+					String searchColumn = map.get("searchColumn").toString();	
+
+					String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+							req.getContextPath()+"/animal/freeboard.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+					
+					model.addAttribute("pagingString", pagingString);
+				}
+				
+				else {
+					String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+							req.getContextPath()+"/animal/freeboard.aw?");
+					model.addAttribute("pagingString", pagingString);
+				}
 		//데이터 저장]
-		model.addAttribute("pagingString", pagingString);
-		model.addAttribute("list", list);
+				
+		model.addAttribute("list", collect);
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		model.addAttribute("pageSize", pageSize);
 		model.addAttribute("nowPage", nowPage);
@@ -77,22 +108,30 @@ public class BirdTipController {
 	
 	//상세보기
 	@RequestMapping("/animal/bird/tip/tip_view.aw")
-	public String view(@RequestParam Map map,Model model) throws Exception {
+	public String view(@RequestParam Map map,Model model,HttpSession session) throws Exception {
 		//서비스 호출]
 		//게시글
 		TipBoardDTO record = tipservice.selectOne(map);
 		//데이터 저장]
+		/*
+		Set<String> set = map.keySet();
+		for(String key:set) {
+			System.out.println(key+":"+map.get(key));
+		}
+		*/
 		model.addAttribute("record", record);
 		//줄바꿈처리
 		record.setTip_content(record.getTip_content().replace("\r\n", "<br/>"));
 		//뷰정보 반환]
 		return "board/animal/bird/tip/tip_view.tiles";
 	}////////// tip_main
+	
 	//등록 폼으로 이동 및 입력처리]
 	@RequestMapping(value="/security/animal/bird/tip/write.aw",method=RequestMethod.GET)
 	public String write() throws Exception{
 		return "board/animal/bird/tip/tip_write.tiles";
 	}////////////////
+	
 	//입력처리]
 	@RequestMapping(value="/security/animal/bird/tip/write.aw",method=RequestMethod.POST)
 	public String writeOk(@RequestParam Map map,HttpSession session //,org.springframework.security.core.Authentication auth 아직 적용 안함
@@ -153,75 +192,78 @@ public class BirdTipController {
 	}//////////////hit()
 	
 	///댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글///
-	/*
-	@ResponseBody
-	@RequestMapping(value="/comment.write.aw",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-	public String cmt_write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
-		
-		map.put("mem_no", session.getAttribute("mem_no"));
-		map.put("no", map.get("no"));
-		
-		cmtservice.insert(map);
-		
-		return map.get("no").toString();
-		
-	}///////////////////
 	
+	//tip_birdComment
 	@ResponseBody
-	@RequestMapping(value="/Comment/List.aw",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-	public String cmt_list(@RequestParam Map map,HttpSession model) throws Exception{
-		
-		map.put("origin_no", map.get("no"));
-		
-		List<AllCommentDTO> collections = cmtservice.selectList(map);
-		
-		List<Map> comments = new Vector<>();
-		
-		for (AllCommentDTO dto : collections) {
-			
-	         Map record = new HashMap();
-	         record.put("cmt_no", dto.getCmt_no());
-	         model.setAttribute("cmt_no", dto.getCmt_no());
-	         record.put("cmt_content", dto.getCmt_content());
-	         record.put("mem_nickname", dto.getMem_nickname());
-	         record.put("regidate", dto.getRegidate().toString());
-	         record.put("origin_no", dto.getOrigin_no());
-	         record.put("mem_no", dto.getMem_no());         
+	@RequestMapping(value = "/animal/birdTip/cmt_write.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+	public String write(@RequestParam Map map, HttpSession session, Model model) throws Exception {
 
-	         comments.add(record);
-	      }	
-		
-		
-		
+		map.put("mem_no", session.getAttribute("mem_no"));
+		map.put("table_name", "tip");
+		map.put("no", map.get("no"));
+
+		cmtservice.insert(map);
+
+		return map.get("no").toString();
+
+	}///////////////////
+
+	@ResponseBody
+	@RequestMapping(value = "/animal/birdTip/cmt_list.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+	public String list(@RequestParam Map map, HttpSession model) throws Exception {
+
+		map.put("table_name", "tip");
+		map.put("origin_no", map.get("no"));
+
+		List<AllCommentDTO> collections = cmtservice.selectList(map);
+
+		List<Map> comments = new Vector<>();
+
+		for (AllCommentDTO dto : collections) {
+
+			Map record = new HashMap();
+			record.put("cmt_no", dto.getCmt_no());
+			model.setAttribute("cmt_no", dto.getCmt_no());
+			record.put("cmt_content", dto.getCmt_content());
+			record.put("mem_nickname", dto.getMem_nickname());
+			record.put("regidate", dto.getRegidate().toString());
+			record.put("origin_no", dto.getOrigin_no());
+			record.put("mem_no", dto.getMem_no());
+
+			comments.add(record);
+		}
+
 		return JSONArray.toJSONString(comments);
 	}//////////////////
-	
+
 	@ResponseBody
-	@RequestMapping(value="/comment.edit.aw",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-	public String cmt_update(@RequestParam Map map,HttpSession session) throws Exception{
-		
+	@RequestMapping(value = "/animal/birdTip/cmt_edit.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+	public String update(@RequestParam Map map, HttpSession session) throws Exception {
+
+		map.put("table_name", "tip");
 		map.put("cmt_content", map.get("cmt_content"));
-		map.put("cmt_no", session.getAttribute("cmt_no"));
-		
-		Set<String> set = map.keySet();
-		for(String key:set) {
-			System.out.println(key+":"+map.get(key));
-		}
-		
+		/*
+		 * Set<String> set = map.keySet(); for(String key:set) {
+		 * System.out.println(key+":"+map.get(key)); }
+		 */
 		cmtservice.update(map);
-		
+
 		return map.get("no").toString();
 	}////////////
-	
+
 	@ResponseBody
-	@RequestMapping(value="/comment.delete.aw",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-	public String cmt_delete(@RequestParam Map map,HttpSession session) throws Exception{
+	@RequestMapping(value = "/animal/birdTip/cmt_delete.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+	public String delete(@RequestParam Map map, HttpSession session) throws Exception {
+
+		map.put("table_name", "tip");
 		
-		map.put("cmt_no", session.getAttribute("cmt_no"));
-		
+		//map.put("cmt_no", session.getAttribute("cmt_no"));
+
 		cmtservice.delete(map);
-		
+
 		return map.get("no").toString();
-	}*/
+	}
+			
+	
 }//////////////////// tipboardController
 
