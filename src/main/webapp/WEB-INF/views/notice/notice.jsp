@@ -2,29 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-@import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
+
+	#hover{background:#fff;}                       
+
+	#hover:hover{color:blue;}
+
 
 </style>
 <script>
-$( function() {
-    $( "#ModalSpace" ).modal({
-      autoOpen: false,
-      show: {
-        effect: "blind",
-        duration: 1000
-      },
-      hide: {
-        effect: "explode",
-        duration: 1000
-      }
-    });
- 
-    $( "#Modal" ).on( "click", function() {
-      $( "#ModalSpace" ).modal( "open" );
-    });
-  } );
 
-	
 	function goAjax(no) {
 		$.ajax({
 			url: "<c:url value='/notice/View.awa?no="+no+"'/>",
@@ -44,31 +30,46 @@ $( function() {
 </script>
 <!-- 내용 시작 -->
 	<div class="container" style="padding-left:0px;padding-right:0px;margin-bottom:15px">
-		<div style="margin-top: 50px">
+		<div class="card-header" style="margin-top: 50px; margin-bottom: 50px;">
 			<h2>
 			공지사항
 			</h2>
 		</div>
-		<hr/>
-			<div>
-				<c:if test="${empty list}" var="isEmpty">
+			<c:if test="${empty list}" var="isEmpty">
 					<span>등록된 게시물이 없어요</span>
-				</c:if>
-					<c:if test="${not isEmpty }">
-						<c:forEach var="record" items="${list}">
-							<a href="#" onclick="goAjax(${record.no});" data-toggle="modal" data-target="#Modal" id="ModalSpace">
-							<div style="margin-top: 10px;  margin-bottom: 7px; color:blue">
+			</c:if>
+			<table class="table table-bordered table-sm m-0">
+				<thead class="table-warning">
+					<tr>
+						<th style="width: 100px">게시번호</th>
+						<th style="width: 360px">제목</th>
+						<th style="width: 70px">조회수</th>
+						<th style="width: 70px">등록일</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="record" items="${list}">
+					<tr class="public" onclick="goAjax(${record.no});" data-toggle="modal" data-target="#Modal">
+						<c:if test="${not isEmpty}">
+<%-- 							<a href="#" onclick="goAjax(${record.no});" data-toggle="modal" data-target="#Modal"> --%>
+								<td>
+									${record.no}
+								</td>
+								<td style="margin-top: 10px; cursor:pointer" margin-bottom: 7px;" id="hover">
 									${record.title}
-							</div>
-							</a>
-							<div style="color: black; font-style: oblique;  margin-bottom: 25px;">
-									작성일 : ${record.regidate} | 조회수 : ${record.count}
-							</div>
-							<hr/>
-						</c:forEach>
-					</c:if>
-			</div>
-		<hr/>
+								</td>
+<!-- 							</a> -->
+								<td style="color: black; font-style: oblique;  margin-bottom: 25px;">
+									조회수 : ${record.count}
+								</td>
+								<td style="color: black; font-style: oblique;  margin-bottom: 25px;">
+									작성일 : ${record.regidate}
+								</td>
+						</c:if>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 		<!-- 검색용 -->
 		<div class="row">
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
