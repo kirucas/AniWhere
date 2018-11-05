@@ -31,7 +31,7 @@ public class GroupBuyDAO implements AllCommonService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public GroupBuyDTO selectOne(Map map) {
-		if(map.get("view") != null)
+		if(map.get("view") == null)
 			template.update("addCountGroupBuy", map);
 		return template.selectOne("groupbuySelectOne", map);
 	}////////// selectOne
