@@ -52,11 +52,11 @@
 	top:100px;
 	left: 65px;
 }
-#img_div:hover #button_div{
+.img_div:hover #button_div{
 	display: block;
 	position: absolute;
 	top:100px;
-	left: 65px;
+	left: 90px;
 }
 #ani_checkbox input{
 	margin : 0px 5px 0px 5px;
@@ -64,19 +64,15 @@
 
 </style>
 <script>
-function delete_ani(){
-	var ani_no = ${record.ani_no};
+function delete_ani(ani_no){
 	console.log(ani_no);
 	$.ajax({
 		data: {"ani_no":ani_no},
         type: "POST",
-        dataType : "json",
         url : "<c:url value='/security/member/animal/delete.awa'/>",
-        success: function(jsonObj) {
-        	$.each(jsonObj, function(index, value){
-        		
-        	
-        	});
+        success: function() {
+			$('[id='+ani_no+']').remove();
+			
         },
         error : function() {
            console.log("error");
@@ -187,22 +183,21 @@ function delete_ani(){
 					<div class="member-settings-layout__content-inner" style="height: 100%;">
 						<h2 class="member-settings-layout__title">동물 프로필 관리</h2>
 						<div class="container" style="vertical-align:middle;">
-	  						<c:forEach var="record" items="${anirecord}" varStatus="loop">
-							  <div class="card col-12 col-md-3" id="img_div">
+	  						<c:forEach var="animal" items="${anirecord}" varStatus="loop">
+							  <div class="card col-12 col-md-3 img_div" id="${animal.ani_no}">
 							  	<a href="#">
-								  <img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
+								  <img class="card-img-top" src="<c:url value='${animal.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
 								</a>  
 								<div id="button_div">
-								  <a href="<c:url value='/animal/enroll_edit.aw?ani_no=${record.ani_no }'/>" class="btn btn-primary" id="btn_edit">수 정</a>
-								  <a onclick="delete_ani();" href="#" class="btn btn-danger" id="btn_delete">삭 제</a>
+								  <a onclick="delete_ani(${animal.ani_no});" href="#" class="btn btn-danger">삭 제</a>
 								</div>
 							    <div class="card-body" style="height: 120px;">
-								    <h2 class="card-title">애완동물 이름 : ${record.ani_name}</h2>
+								    <h2 class="card-title">애완동물 이름 : ${animal.ani_name}</h2>
 								    <p class="card-text" id="profile-text">
-								    	<span>나이 : ${record.ani_age}</span><br>
-							    		<span>성별 : ${record.ani_gender}</span><br>
-							    		<span>대분류 : ${record.ani_species}</span><br>
-							    		<span>중분류 : ${record.ani_kind}</span>
+								    	<span>나이 : ${animal.ani_age} 살</span><br>
+							    		<span>성별 : ${animal.ani_gender}</span><br>
+							    		<span>대분류 : ${animal.ani_species}</span><br>
+							    		<span>중분류 : ${animal.ani_kind}</span>
 						    		</p>
 							    </div>
 							  </div>

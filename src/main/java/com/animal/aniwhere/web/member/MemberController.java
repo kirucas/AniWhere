@@ -348,21 +348,14 @@ public class MemberController {
 		return "member/enroll_process";
 	}////////// enrollProcess
 	@ResponseBody
-	@RequestMapping("/security/member/animal/delete.awa")
-	public String delete_ani(@RequestParam Map map, HttpSession session,
+	@RequestMapping(value="/security/member/animal/delete.awa", method= RequestMethod.POST)
+	public void delete_ani(@RequestParam Map map, HttpSession session,
 			Model model) throws Exception {
-
-		
-		int enroll = aniservice.insert(map);
-		if (enroll == 1)
-			model.addAttribute("check", 1);
-		else
-			model.addAttribute("check", 0);
-
-		return "member/enroll_process";
+		map.put("ani_no",map.get("ani_no"));
+		int delete = aniservice.delete(map);
+		List<AnimalDTO> list = aniservice.selectList(map);
+		model.addAttribute("anirecord",list);
 	}////////// enrollProcess
-	
-	
 	
 	//안드로이드 용
  	@ResponseBody
