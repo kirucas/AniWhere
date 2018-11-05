@@ -150,7 +150,7 @@ nav a{
                             <a href="#" id="mating_main">♡만나요</a>
                         </li>
                         <li>
-                            <a href="#" id="where_main">위치</a>
+                            <a href="#" id="where_main">예약</a>
                         </li>
                         <li class="dropdown" style="border:0.1px solid gray;border-radius:10px">
                             <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">내 프로필</a>

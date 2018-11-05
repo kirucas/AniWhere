@@ -11,6 +11,13 @@
 .sub-header-info{
 	padding-bottom:0px;
 }
+#pagingDiv{
+	width: 100%;
+	text-align: center;
+}
+.row nav{
+	margin:0 auto;
+}
 </style>
 <!-- 바디 -->
 <div class="container" style="padding-left:0px;padding-right:0px;margin-bottom:15px">
@@ -74,9 +81,8 @@
    		</c:if>
 	</div>
 	<!-- 아래는 페이징 -->
-    <div class="row" style="text-aling:center">
-    	<div>
-    		${pagingString}
-    	</div>
+    <!-- 아래는 페이징 -->
+    <div class="row" id="pagingDiv">
+    	${pagingString}
     </div>	
 <!-- 바디 끝 -->
