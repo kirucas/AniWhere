@@ -29,30 +29,31 @@
 			}
 		})
 		function sendFile(file, el, wel) {
-	        var form_data = new FormData();
-	        form_data.append('file', file);
-	        $.ajax({
-	           data: form_data,
-	           type: "POST",
-	           url : "<c:url value='/animal/dog/quest/Upload.aw'/>",
-	           cache: false,
-	           contentType: false,
-	           processData: false,
-	           success: function(url) {
-	                $('#quest_content').summernote('insertImage', "<c:url value='"+url+"' />");
-	           },
-	           error : function() {
-	              console.log("error");
-	           }
-	        });
-	     }
-  	});
+			var form_data = new FormData();
+			form_data.append('file', file);
+			$.ajax({
+				data: form_data,
+				type: "POST",
+				url : "<c:url value='/animal/dog/quest/Upload.aw'/>",
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(url) {
+					$('#quest_content').summernote('insertImage', "<c:url value='"+url+"' />");
+				},
+				error : function() {
+					console.log("error");
+				}
+			});
+		}
+		
+	});
 </script>
 <div class="container border">
 	<div class="row col-sm-4" >
 		<h2>강아지 질문 게시판</h2>
 	</div>
-	<form class="form-horizontal" method="post"
+		<form class="form-horizontal" method="post"
 		action='<c:url value="/security/animal/dog/quest/quest_write.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-sm-2 control-label" style="font-size:20px">제목</label>
