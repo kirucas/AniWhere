@@ -37,11 +37,8 @@ html { background: url("<c:url value='/resources/images/signup1.jpg'/>") no-repe
 	width: 120px;
 	height: 36px;
 }
-input[type=submit]:hover {
-    background-color: white;
-    font-size:1.5em;
-    color:black;
-    font-family: 메이플스토리;
+[value="회원가입"]{
+	font-family: 메이플스토리;
 }
 *{
    color:white;
@@ -88,6 +85,9 @@ input[type=password]:not(.browser-default):focus:not([readonly])+label{
 }
 .error{
 	color:#ff7070;
+}
+btn_submit i{
+	padding: 0px 0px 0px 0px;
 }
 </style>
 <script>
@@ -278,7 +278,7 @@ $(function(){
 			      	</div>
 				  </div>
 				  <div class="row">
-				  	<div class="input-field inline col s2 offset-s4">
+				  	<div class="input-field inline col s2 offset-s4" id="btn_submit">
          			 <input type="submit" class="btn waves-effect waves-light col s12" value="회원가입"/>
 				  	</div>
 			  	    <div class="input-field col s12">

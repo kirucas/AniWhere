@@ -37,11 +37,8 @@ html { background: url("<c:url value='/resources/images/signup1.jpg'/>") no-repe
 	width: 120px;
 	height: 36px;
 }
-input[type=submit]:hover {
-    background-color: white;
-    font-size:1.5em;
-    color:black;
-    font-family: 메이플스토리;
+[value="애완동물 등록"]{
+	font-family: 메이플스토리;
 }
 [type="checkbox"]:checked+span:not(.lever):before {
 	border-right: 2px solid #ebc594;

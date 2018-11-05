@@ -10,7 +10,16 @@ public class MemberDTO {
 	private String mem_gender;
 	private String mem_log;
 	private String mem_interani;
+	private String ani_no;
 	
+	public String getAni_no() {
+		return ani_no;
+	}
+
+	public void setAni_no(String ani_no) {
+		this.ani_no = ani_no;
+	}
+
 	public String getMem_no() {
 		return mem_no;
 	}//////////
