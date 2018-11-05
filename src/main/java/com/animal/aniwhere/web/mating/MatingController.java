@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.animal.aniwhere.service.MatingDTO;
+import com.animal.aniwhere.service.impl.DraftingServiceImpl;
 import com.animal.aniwhere.service.impl.MatingServiceImpl;
 import com.animal.aniwhere.service.impl.member.AnimalServiceImpl;
 import com.animal.aniwhere.service.member.AnimalDTO;
@@ -28,6 +29,8 @@ public class MatingController {
 	private MatingServiceImpl matingService;
 	@Resource(name="animalService")
 	private AnimalServiceImpl animalService;
+	@Resource(name="draftingService")
+	private DraftingServiceImpl draftService;
 
 	@RequestMapping("/security/mating/main.aw")
 	public String mating_main(HttpSession session) throws Exception {
@@ -176,23 +179,30 @@ public class MatingController {
 	@RequestMapping("/securtiy/mating/draftInsert.aw")
 	public String drafting(@RequestParam Map map) throws Exception {
 		System.out.println(map.get("send_no")+", "+map.get("receive_no"));
-		// 드래프팅 하는 거 하면됨
-		Map draftMap=new HashMap();
-		//draftMap=matingService.draftInsert(map);
 		
+		// 드래프팅 하는 거 하면됨
+		int draftResult=draftService.insert(map);
+		System.out.println(draftResult);
 		// 결과화면으로
-		return "forward:/mating/draftList.aw?send_no="+draftMap.get("ani_no");
+		return "forward:/mating/draftList.aw?send_no="+map.get("ani_no");
 	}
 	
-	@RequestMapping("/securtiy/mating/draftList.aw")
-	public String draftList(@RequestParam Map map) throws Exception {
+	@RequestMapping("/mating/draftList.aw")
+	public String draftList(@RequestParam Map map,Model model,HttpSession session) throws Exception {
 		System.out.println(map.get("animal"));
-		System.out.println(map.get("send_no"));
+		map.put("mem_no", session.getAttribute("mem_no"));
+		// 신청자 목록 뿌려오기
+		map.put("sending", "true");
+		int totalRecord=draftService.getTotalRecord(map);
+		System.out.println(totalRecord);
 		// 드래프팅 하는 거 하면됨
-		//Map draftMap=matingService.draftSelectList(map);
-		//
+		map.put("start", 1);
+		map.put("end", totalRecord);
+		List<Map> draftList=draftService.selectList(map);
+		
+		model.addAttribute("draftList",draftList);
 		
 		// 결과화면으로
-		return "mating/draftingList";
+		return "mating/draftingList.tiles";
 	}
 }// class

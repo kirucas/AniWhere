@@ -7,9 +7,9 @@
 <div class="container">
 	<section class="member-settings-layout__content">
 		<div class="member-settings-layout__content-inner" style="height: 100%;">
-			<h2 class="member-settings-layout__title">${anirecord[0].mem_nickname}님의 애완동물 프로필 카드</h2>
+<%-- 			<h2 class="member-settings-layout__title">${anirecord[0].mem_nickname}님의 애완동물 프로필 카드</h2> --%>
 <!-- 			<div class="container" style="vertical-align:middle;"> -->
-				<c:forEach var="record" items="${anirecord}" varStatus="loop">
+				<c:forEach var="record" items="${draftList}" varStatus="loop">
 				  	<div class="card col-12 col-lg-6 col-md-12">
 					  	<img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
 					 	<div class="card-body">
@@ -47,14 +47,14 @@
 			    				<c:forEach var="mateDto" items="${matingrecord}" varStatus="loop">
 			    					<c:if test="${not loop_flag}">
 				    					<c:if test="${mateDto.ani_no eq record.ani_no}" var="result">
-				    						<a href="#" class="btn btn-primary match" id="matching${record.ani_no}">상대 보기</a>
-				    						<a href="#" class="btn btn-danger mate" id="delete${record.ani_no}">매칭 취소</a>
+				    						<a href="#" class="btn btn-primary match" id="">상대 보기</a>
+				    						<a href="#" class="btn btn-danger mate" id="">매칭 취소</a>
 				    						<c:set var="loop_flag" value="true" />
 				    					</c:if>
 			    					</c:if>
 			    				</c:forEach>
 			    				<c:if test="${!result}">
-								    <a href="#" class="btn btn-primary mate" id="insert${record.ani_no}">매칭 시작</a>
+								    <a href="#" class="btn btn-primary mate" id="">매칭 시작</a>
 		    					</c:if>
 		    				</div>
 					  	</div>
