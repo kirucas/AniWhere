@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.QRCode_Generator;
 import com.animal.aniwhere.service.ReservationDTO;
 import com.animal.aniwhere.service.StoreLocationDTO;
@@ -324,6 +325,7 @@ public class WhereController {
 	) throws Exception {
 		map.put("rv_no", map.get("rv_no"));
 		ReservationDTO dto = reservationservice.selectOne(map);
+		dto.setQr_link(AwsS3Utils.LINK_ADDRESS + dto.getQr_link());
 		model.addAttribute("dto",dto);
 		return "where/reservation_view.tiles";
 	}
