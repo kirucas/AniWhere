@@ -34,7 +34,7 @@ public class FreeboardController {
 	private int blockPage;
 	
 	
-	@RequestMapping("/security/animal/freeboard.aw")
+	@RequestMapping("/animal/freeboard.aw")
 	public String free_main(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
 			@RequestParam Map map,//검색용 파라미터 받기
@@ -65,7 +65,7 @@ public class FreeboardController {
 	}////////// free_main
 	
 	//상세보기
-	@RequestMapping("/security/animal/freeboard_view.aw")
+	@RequestMapping("/animal/freeboard_view.aw")
 	public String free_view(@RequestParam Map map,Model model) throws Exception {
 		//서비스 호출]
 		//게시글
@@ -78,12 +78,12 @@ public class FreeboardController {
 		return "board/freeboard/freeboard_view.tiles";
 	}////////// free_main
 	//등록 폼으로 이동 및 입력처리]
-	@RequestMapping(value="/security/animal/freeboard/write.aw",method=RequestMethod.GET)
+	@RequestMapping(value="/animal/freeboard/write.aw",method=RequestMethod.GET)
 	public String write() throws Exception{
 		return "board/freeboard/freeboard_write.tiles";
 	}////////////////
 	//입력처리]
-	@RequestMapping(value="/security/animal/freeboard/write.aw",method=RequestMethod.POST)
+	@RequestMapping(value="/animal/freeboard/write.aw",method=RequestMethod.POST)
 	public String writeOk(@RequestParam Map map,HttpSession session //,org.springframework.security.core.Authentication auth 아직 적용 안함
 		) throws Exception{
 		//서비스 호출
@@ -103,7 +103,7 @@ public class FreeboardController {
 	}////////////////
 
 	//수정폼으로 이동 및 수정 처리]
-	@RequestMapping("/security/animal/freeboard/edit.aw")
+	@RequestMapping("/animal/freeboard/edit.aw")
 	public String edit(HttpServletRequest req,@RequestParam Map map,Model model) throws Exception{
 		if(req.getMethod().equals("GET")) {
 			//서비스 호출]

@@ -80,12 +80,9 @@ $( function() {
 							<option value="title">제목</option>
 							<option value="content">내용</option>
 						</select>
-					</div>
-					<div class="form-group">
 						<input type="text" name="searchWord" class="form-control" />
-					</div>
 					<button type="submit" class="btn btn-primary">검색</button>
-
+				</div>
 				</form>
 			</div>
 		</div>
