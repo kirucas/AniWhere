@@ -58,6 +58,10 @@
 	top:100px;
 	left: 65px;
 }
+#ani_checkbox input{
+	margin : 0px 5px 0px 5px;
+}
+
 </style>
 <script>
 function delete_ani(){
@@ -148,8 +152,12 @@ function delete_ani(){
 											<div class="edit__th">
 												관심동물
 											</div>
-											<div class="edit__td">
-												<input class="member-input__box" type="text" autocomplete="off" name="mem_interani" value="${record.mem_interani}">
+											<div class="edit__td" id="ani_checkbox">
+												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="1">강아지 
+												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="2">고양이 
+												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="3">파충류 & 양서류 
+												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="4">조류
+												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="5">기타포유류 
 											</div>
 											
 										</div>
