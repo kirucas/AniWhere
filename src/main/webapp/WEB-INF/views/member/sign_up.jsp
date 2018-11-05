@@ -33,19 +33,19 @@ html { background: url("<c:url value='/resources/images/signup1.jpg'/>") no-repe
 .input-field>label{
 	color:white;
 }
-intput[type=submit]:hover, intput[type=submit]:hover, intput[type=submit]:hover {
+.waves-button-input{
+	width: 120px;
+	height: 36px;
+}
+input[type=submit]:hover {
     background-color: white;
+    font-size:1.5em;
     color:black;
     font-family: 메이플스토리;
 }
 *{
    color:white;
    font-family: 메이플스토리;
-}
-.btn{
-   background-color: #ccd5f0;
-   font-family: 메이플스토리;
-   color:black;
 }
 [type="checkbox"]:checked+span:not(.lever):before {
 	border-right: 2px solid #ebc594;
@@ -285,7 +285,6 @@ $(function(){
          			 	<p class="margin center medium-small sign-up">이미 계정이 있으세요? <a href="<c:url value='/login.aw' />">Login</a></p>
         			</div>
 				  </div>
-				  	
 			    </form>
 		  	</div>
 	    </div>
