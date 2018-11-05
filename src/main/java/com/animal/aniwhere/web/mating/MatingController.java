@@ -177,7 +177,8 @@ public class MatingController {
 	public String drafting(@RequestParam Map map) throws Exception {
 		System.out.println(map.get("send_no")+", "+map.get("receive_no"));
 		// 드래프팅 하는 거 하면됨
-		//matingService.drafting(map);
+		Map draftMap=new HashMap();
+		//draftMap=matingService.drafting(map);
 		
 		// 결과화면으로
 		return "forward:/mating/draftList.aw?ani_no="+map.get("ani_no");

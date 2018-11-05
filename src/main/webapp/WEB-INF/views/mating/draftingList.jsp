@@ -4,9 +4,9 @@
 
 <!-- 내용 시작 -->
 <div class="container">
-	프로필 예시 페이지<br/>
-	프로필 예시 페이지<br/>
+	<div class="col-12 col-md-6">
+		
 	
-	
+	</div>	
 </div>
 <!-- 내용 끝 -->
