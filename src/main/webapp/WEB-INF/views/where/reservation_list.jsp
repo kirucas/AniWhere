@@ -62,7 +62,7 @@
 			            </div>
 			            <div class="article-list-item__content">
 			                <div class="article-list-item__info text-center">
-			                    <a href="<c:url value='/security/where/reservation_view.aw?no=${record.rv_no}'/>" class="article-list-item__info">
+			                    <a href="<c:url value='/security/where/reservation_view.aw?rv_no=${record.rv_no}'/>" class="article-list-item__info">
 									<div class="article-list-item__title">
 										<span>${record.bizesnm}</span>
 									</div>

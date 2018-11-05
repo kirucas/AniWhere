@@ -42,16 +42,16 @@
 	</div>
 	<div id="reservation_view">
 		<div>
-			<span>예약 번호 : </span>
+			<span>예약 번호 : ${dto.rv_no }</span>
 		</div>
 		<div>
-			<span>상가 이름 : </span>
+			<span>상가 이름 : ${dto.besizenm }</span>
 		</div>
 		<div>
-			<span>등록 날짜 : </span>
+			<span>등록 날짜 : ${dto.apply_date }</span>
 		</div>
 		<div>
-			<span>예약 날짜 : </span>
+			<span>예약 날짜 : ${dto.booking_date }</span>
 		</div>
 	</div>
 </div>

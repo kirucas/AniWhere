@@ -267,7 +267,7 @@ public class WhereController {
 		return "where/Message";
 	} // reservate
 
-	@RequestMapping("/where/reservation_check.aw")
+	@RequestMapping("/security/where/reservation_check.aw")
 	public String reservate_check(Model model, HttpServletRequest req,// 페이징용 메소드에 전달
 			HttpSession session,
 			@RequestParam Map map, // 검색용 파라미터 받기
@@ -300,12 +300,14 @@ public class WhereController {
 		
 		
 	}// reservate_check
-	@RequestMapping("/where/reservation_view.aw")
+	@RequestMapping("/security/where/reservation_view.aw")
 	public String reservate_view(Model model, HttpServletRequest req, // 페이징용 메소드에 전달
 			@RequestParam Map map, // 검색용 파라미터 받기
 			@RequestParam(required = false, defaultValue = "1") int nowPage// 페이징용 nowPage파라미터 받기용
 	) throws Exception {
-		
+		map.put("rv_no", map.get("rv_no"));
+		ReservationDTO dto = reservationservice.selectOne(map);
+		model.addAttribute("dto",dto);
 		return "where/reservation_view.tiles";
 	}
 	// @RequestMapping(value= "/where/map/radius.awa", method=
