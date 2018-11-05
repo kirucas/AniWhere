@@ -54,7 +54,7 @@ public class MatingController {
 		map.put("mem_no", session.getAttribute("mem_no"));
 		// 동물 등록이 되어있는지 확인하기
 		if(animalService.getTotalRecord(map)==0) { // 등록된 동물이 없는 경우
-			System.out.println("동물 등록 페이지로 이동");
+			//System.out.println("동물 등록 페이지로 이동");
 			// 동물 등록 페이지로 이동합니다
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -172,35 +172,75 @@ public class MatingController {
 	}/// showProfile
 	
 	@RequestMapping("/securtiy/mating/draftInsert.aw")
-	public String drafting(@RequestParam Map map) throws Exception {
+	public String drafting(@RequestParam Map map,HttpServletResponse response) throws Exception {
 		System.out.println(map.get("send_no")+", "+map.get("receive_no"));
-		//draftService.selectOne(map);
+		
+		map.put("mating_no",map.get("send_no"));
+		map.put("sending", true);
+		map.put("start", 1);
+		map.put("end", draftService.getTotalRecord(map));
+		List<Map> draftList=draftService.selectList(map);
+		for(Map draft:draftList) {
+			if(draft.get("RECEIVE_NO").toString().equals(map.get("receive_no").toString())) {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('원래 뜨면 안되는 것');</script>");
+				out.flush();
+				return "forward:/mating/Match.aw?ani_no=matching"+matingService.selectOne(map).getAni_no();
+			}
+		}
+		
+		map.put("mating_no", map.get("send_no"));
+		MatingDTO one=matingService.selectOne(map);
 		// 드래프팅 하는 거 하면됨
 		int draftResult=draftService.insert(map);
 		System.out.println(draftResult==1?"입력성공":"입력실패");
 		// 결과화면으로
-		return "forward:/mating/draftList.aw?mating_no="+map.get("send_no");
+		return "forward:/mating/draftList.aw?mating_no="+map.get("send_no")+"&ani_no="+one.getAni_no();
 	}
 	
 	@RequestMapping("/mating/draftList.aw")
 	public String draftingList(@RequestParam Map map,Model model,HttpSession session) throws Exception {
+		map.put("ani_no", map.get("ani_no"));
 		map.put("mem_no", session.getAttribute("mem_no"));
 		// 신청한 목록 뿌려오기
-		System.out.println("mating_no:"+map.get("mating_no"));
-		map.put("sending", "true");
+		//System.out.println("mating_no:"+map.get("mating_no"));
+		String matingNo=null;
+		if(map.get("mating_no")==null) {
+			matingNo=getMatingNoToAniNo(map, session);
+			map.put("mating_no", matingNo);
+		}
+		//System.out.println("mating_no:"+map.get("mating_no"));
 		int totalRecord=draftService.getTotalRecord(map);
-		System.out.println(totalRecord);
+		//System.out.println(totalRecord);
 		// 드래프팅 하는 거 하면됨
-		map.put("start", 0);
+		
+		// 신청받은 목록
+		map.put("receive", "true");
+		map.put("start", 1);
 		map.put("end", totalRecord);
 		List<Map> draftList=draftService.selectList(map);
-		List<MatingDTO> matingList=new Vector<>();
-		//System.out.println("draftList:"+draftList.get(0));
+		List<MatingDTO> receiveList=new Vector<>();
 		for(Map draft:draftList) {
 			map.put("mating_no", draft.get("SEND_NO"));
-			matingList.add(matingService.selectOne(map));
+			receiveList.add(matingService.selectOne(map));
 		}
-		model.addAttribute("matingList",matingList);
+		
+		// 신청한 목록
+		map.remove("receiving");
+		map.put("sending", "true");
+		map.put("start", 1);
+		map.put("end", totalRecord);
+		draftList=draftService.selectList(map);
+		List<MatingDTO> sendList=new Vector<>();
+		for(Map draft:draftList) {
+			//System.out.println(draft);
+			map.put("mating_no", draft.get("RECEIVE_NO"));
+			sendList.add(matingService.selectOne(map));
+		}
+		
+		model.addAttribute("sendList",sendList);
+		model.addAttribute("receiveList",receiveList);
 		// 결과화면으로
 		return "mating/draftingList.tiles";
 	}

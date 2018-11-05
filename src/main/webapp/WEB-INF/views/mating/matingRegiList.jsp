@@ -142,7 +142,7 @@
 			    					<c:if test="${not loop_flag}">
 				    					<c:if test="${mateDto.ani_no eq record.ani_no}" var="result">
 				    						<a href="#" class="btn btn-primary match" id="matching${record.ani_no}">찾기</a>
-				    						<a href="#" class="btn btn-primary list" id="list${record.ani_no}">목록</a>
+				    						<a href="#" class="btn btn-primary list" id="${record.ani_no}">목록</a>
 				    						<a href="#" class="btn btn-danger mate" id="delete${record.ani_no}">취소</a>
 				    						<c:set var="loop_flag" value="true" />
 				    					</c:if>
