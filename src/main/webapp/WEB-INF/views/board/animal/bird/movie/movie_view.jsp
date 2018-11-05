@@ -11,10 +11,11 @@
 			location.replace("<c:url value='/bird/movie/delete.aw?no=${dto.no}'/>");
 	}; 
 	
+	
 	//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
 	var showComments = function(key){		
 		$.ajax({
-			url:"<c:url value='/Comment/List.awa'/>",
+			url:"<c:url value='/board/animal/bird/movie/commentList.awa'/>",
 			data:{no:key},
 			dataType:'json',
 			type:'post',
@@ -26,15 +27,16 @@
 	//[{"NO":2,"ONELINECOMMENT":"댓글2","CPOSTDATE":"2018-09-12","CNO":3,"ID":"LEE","NAME":"이길동"},{"NO":2,"ONELINECOMMENT":"댓글1","CPOSTDATE":"2018-09-12","CNO":2,"ID":"PARK","NAME":"박길동"}]
 	var displayComments	 = function(data){
 		console.log(JSON.stringify(data));
-		var commentString="<h4>댓글</h4><br/>";
-		commentString+='<label for="" class="col-sm-2 control-label">Email</label>';
-		commentString+='<tr><th width="15%">작성자</th><th width="50%">코멘트</th><th width="20%">작성일</th><th>삭제</th></tr>';
+		var commentString="<div class='form-group'>";
+		commentString+="<label>닉네임 : ${dto.mem_nickname }</label>";
+		commentString+="<label>댓글 날짜 : ${cmtdto.regidate}</label><br/>";
+		commentString+="<p>댓글 내용 ${cmtdto.cmt_content}</p>";
+		commentString+="</div><br/>";
 		if(data.length==0){
-			commentString+="<tr><td colspan='4'>등록된 댓글이 없어요</td></tr>";
+			commentString+="<label>등록된 댓글이 없어요</label>";
 		}
-		$.each(data,function(index,comment){			
-			commentString+='<tr><td>'+comment['NAME']+'</td>';
-			if('${sessionScope.mem_no}' != comment["ID"])
+		$.each(data,function(index,comment){
+			if('${sessionScope.mem_no}' != comment["${dto.mem_nickname}"])
 				commentString+='<td align="left">'+comment['ONELINECOMMENT']+'</td>'; 
 			else
 				commentString+='<td align="left"><span style="cursor:pointer" class="commentEdit" title="'+comment["cmtdto.cmt_no"]+'">'+comment['ONELINECOMMENT']+'</span></td>'; 		
@@ -67,7 +69,7 @@
 			var cno_value = $(this).attr("title");
 			
 			$.ajax({
-				url:"<c:url value='/Comment/Delete.bbs'/>",
+				url:"<c:url value='/board/animal/bird/movie/commentDelete.awa'/>",
 				data:{cno:cno_value, no:"${cmtdto.cmt_no}"},
 				dataType:'text',
 				type:'post',
@@ -85,9 +87,9 @@
 		//코멘트 입력처리]
 		$('#submit').click(function(){	
 			if($(this).val()=='등록')
-				var action="<c:url value='/Comment/Write.bbs'/>";
+				var action="<c:url value='/security/animal/bird/movie/commentWrite.awa'/>";
 			else
-				var action="<c:url value='/Comment/Edit.bbs'/>";	
+				var action="<c:url value='/security/animal/bird/movie/commentEdit.awa'/>";	
 			
 			$.ajax({
 				url:action,
@@ -199,10 +201,10 @@ a:visited { color:white; text-decoration: none;}
 		<!-- 한줄 코멘트 입력 폼-->
 		<form class="form-inline" id="frm" method="post" style="margin: 0px auto;">
 			<label for="inputcomment" class="col-xs-2 col-sm-1 col-md-1 control-label">${sessionScope.mem_id}</label>
-			<input type="email" class="form-control col-xs-11 col-sm-9 col-md-9" id="inputcomment"
-				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="<c:url value='/animal/bird/movie/Reply.aw?no=${dto.no}'/>"
-			class="btn btn-success col-xs-2 col-sm-1">댓글</a>
+			<input type="text" class="form-control col-xs-11 col-sm-9 col-md-9" id="inputcomment"
+				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="<c:url value='/animal/bird/movie/commentWrite.awa?no=${dto.no}'/>"
+			class="btn btn-success col-xs-1 col-sm-1" id="submit">댓글</a>
 		</form>
 	</div>
 </div>
@@ -223,16 +225,12 @@ a:visited { color:white; text-decoration: none;}
 <form id="comments">
 	<!-- 한줄 코멘트 목록-->
 	<!-- ajax로 아래에 코멘트 목록 뿌리기 -->
+<%-- 	
 	<div class="form-group">
 		<label>닉네임 : ${dto.mem_nickname }</label>
 		<label>댓글 날짜 : ${cmtdto.regidate}</label> <br/>
 		<p>댓글 내용 ${cmtdto.cmt_content}</p>
 	</div><br/>
-	
-	<div class="form-group">
-		<label>닉네임 : </label>
-		<label>댓글 날짜 : </label> <br/>
-		<p>댓글 내용</p>
-	</div>
+ --%>
 </form>
 <!-- 내용 끝 -->
