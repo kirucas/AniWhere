@@ -33,7 +33,7 @@
     		<c:if test="${not isEmpty }">
     			<c:forEach var="record" items="${list}" varStatus="loop">
 				<div class="article-list-item__content">
-					<a href="<c:url value='/security/where/reservation_view.aw?no=${record.no}'/>" class="article-list-item__info">
+					<a href="<c:url value='/security/where/reservation_view.aw?no=${record.rv_no}'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
 							<span id="free_title">${record.store_no}</span>
 						</div>

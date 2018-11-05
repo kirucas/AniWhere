@@ -294,7 +294,18 @@ public class WhereController {
 		model.addAttribute("nowPage", nowPage);
 		// 뷰정보 반환]
 		return "where/reservation_list.tiles";
+		
+		
+		
 	}// reservate_check
+	@RequestMapping("/where/reservation_view.aw")
+	public String reservate_view(Model model, HttpServletRequest req, // 페이징용 메소드에 전달
+			@RequestParam Map map, // 검색용 파라미터 받기
+			@RequestParam(required = false, defaultValue = "1") int nowPage// 페이징용 nowPage파라미터 받기용
+	) throws Exception {
+		
+		return "where/reservation_view.tiles";
+	}
 	// @RequestMapping(value= "/where/map/radius.awa", method=
 	// RequestMethod.POST,produces="text/plain; charset=UTF-8")
 	// @ResponseBody
