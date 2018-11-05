@@ -6,13 +6,7 @@
 <head>
 <script>
 function check() {
-	
-	
-	
-	
-	
-	
-	
+			
     var isAttached = $('#summernote').summernote('code');
     if (fr.title.value == "") {
        alert("제목을 입력해 주세요.");
