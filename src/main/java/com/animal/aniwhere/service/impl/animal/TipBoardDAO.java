@@ -31,7 +31,7 @@ public class TipBoardDAO implements AllBoardService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public TipBoardDTO selectOne(Map map) {
-		if(map.get("view") != null)
+		if(map.get("view") == null)
 			template.update("addCountTip", map);
 		return template.selectOne("tipSelectOne", map);
 	}////////// getTotalRecord
