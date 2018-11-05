@@ -34,9 +34,7 @@ import com.animal.aniwhere.web.board.FileUpDownUtils;
 
 @Controller
 public class MarketGroupbuyController {
-
-		
-	
+			
 		 //buy컨트롤러 
 			@Resource(name="groupBuyService")
 			private GroupBuyServiceImpl allBoardService;
@@ -55,16 +53,19 @@ public class MarketGroupbuyController {
 		
 		//입력 후 리스트로 이동 
 		@RequestMapping("/security/market/groupbuyinsert.aw")
-		public String miss_insert(@RequestParam Map map,HttpSession session) throws Exception {
+		public String groupbuy_insert(@RequestParam Map map,HttpSession session) throws Exception {
+			
 			System.out.println("deadline"+ map.get("deadline"));
 			
 			map.put("table_name","groupbuy");
 			map.put("mem_no", session.getAttribute("mem_no"));			
 			allBoardService.insert(map);
 			
+			System.out.println("끝까지 오는지 확인 ");
+			
 			return "redirect:/market/groupbuy/temporarily.aw";
 			
-		}////////// miss_write
+		}////////// groupbuy_write
 				
 				
 				@RequestMapping("/market/groupbuy/temporarily.aw")
@@ -126,10 +127,6 @@ public class MarketGroupbuyController {
 				         model.addAttribute("pagingString", pagingString);
 				      }
 					 
-					 
-					
-					
-					
 					
 					model.addAttribute("list", collect);
 					model.addAttribute("totalRecordCount", totalRecordCount);
@@ -221,7 +218,7 @@ public class MarketGroupbuyController {
 				
 				//수정폼 이동 --자기아이디로 자기글 view에서 수정 누르면 이쪽으로 이동 
 				@RequestMapping("/security/market/groupbuyedit.aw")
-				public String find_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
+				public String groupbuy_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 						
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("table_name","groupbuy");
@@ -236,7 +233,7 @@ public class MarketGroupbuyController {
 					
 					return "market/edit/editGroupBuyWrite.tiles";
 					
-				}////////// miss_write
+				}////////// groupbuy_write
 				
 				//수정 실행하기
 				@RequestMapping("/security/market/groupbuyupdate.aw")
@@ -289,7 +286,7 @@ public class MarketGroupbuyController {
 				   private AllCommentServiceImpl cmtService;
 				
 				   @ResponseBody
-				   @RequestMapping(value="/miss/groupbuy/cmt_write.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				   @RequestMapping(value="/groupbuy/groupbuy/cmt_write.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 				   public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
 				      
 				      map.put("mem_no", session.getAttribute("mem_no"));

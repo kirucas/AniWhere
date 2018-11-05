@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <head>
 
@@ -130,17 +130,13 @@ else {
      
 </script>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
-	rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-
-
 </head>
+
 <body>
  <form name="fr" id="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
 				class="form-horizontal">
 	
-		<div class="container">
+		<!--   <div class="container"> -->
 
 
                  <input type="hidden" name="table_name" value="groupbuy"/>
@@ -148,13 +144,18 @@ else {
 				 
 				 
 			<div style="margin-top: 10px"></div>
-			<br />
+			
 
-			<div class="col-md-12">
+		<!-- 	<div class="col-md-12">  -->
 				<label for="title" class="col-sm-2 control-label">제목</label> 
+					
+						<!--
 					<input
 						class="form-control" type="text" id="title" name="title"
 						placeholder="제목을 입력하세요">
+						
+						
+				
 
 				<p style="margin-top: 30px;">
 				<label for="" class="">동물분류</label> 
@@ -197,7 +198,7 @@ else {
 							max="2020-01-01"  class="form-control" type="date" name="deadline"
 							 required />
 							
-							<!--  거래기간 넣어주고 제한 걸어주는 로직 만들어야 함  -->
+				
 							
 					</div>
 
@@ -222,7 +223,7 @@ else {
 					<label for="" class="">해택상세설명</label> 
 					<input type="text" id="nickname">
 
-					<!-- Related Projects Row -->
+					
 				<h3 class="my-4">판매자가 올린 사진 3개이상필요</h3>
 
 				<div class="row">
@@ -264,29 +265,35 @@ else {
 					</div>
 
 				</div>
-				<!-- /.row -->
-
+			
+   -->
 				<div class="col-md-12 container">
 					<textarea id="summernote" name="content"
 							class="col-md-12 form-control"
 							style="border: 1px solid blue; height: 500px" 
 							maxlength="2048"></textarea>
 				</div>
-				
+				<!--
 				<div style="text-align: center">
 					<a href="<c:url value='/market/groupbuy.aw'/>">
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
 					
-					<!-- <input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
-					-->
+					 <input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
+					
 					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
 				</div>
 				
-				
-			</div>
-			<div style="margin-bottom: 50px"></div>
+				</div>
+				</div>
+			-->
+			</form>
+			
+			<div style="margin-bottom: 50px"></div> 
+			
+			
+			<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
 
-		</div>
-	</form>
+		
+	
 
 </body>
