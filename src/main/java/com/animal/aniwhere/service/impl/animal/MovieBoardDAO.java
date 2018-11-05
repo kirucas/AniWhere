@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.animal.MovieBoardDTO;
 
+
 @Repository
 public class MovieBoardDAO implements AllBoardService {
 
@@ -37,6 +38,7 @@ public class MovieBoardDAO implements AllBoardService {
 
 	@Override
 	public int insert(Map map) {
+		map.put("today", new java.sql.Date(new java.util.Date().getTime()));
 		return template.insert("movieInsert", map);
 	}////////// insert
 

@@ -41,8 +41,8 @@
 	</select>
 	
 	<insert id="movieInsert" parameterType="java.util.Map">
-		INSERT INTO movie(no, mem_no, movie_title, movie_content, ani_category)
-		VALUES(seq_movie.nextval, #{mem_no}, #{movie_title}, #{movie_content}, #{ani_category})
+		INSERT INTO movie(no, mem_no, movie_title, movie_content, ani_category, movie_regidate)
+		VALUES(seq_movie.nextval, #{mem_no}, #{movie_title}, #{movie_content}, #{ani_category}, #{today})
 	</insert>
 	
 	<update id="movieUpdate" parameterType="java.util.Map">

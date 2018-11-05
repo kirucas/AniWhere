@@ -13,8 +13,8 @@
 	</select>
 	
 	<insert id="commentInsert" parameterType="java.util.Map">
-		INSERT INTO ${table_name}_cmt(cmt_no, origin_no, mem_no, cmt_content)
-		VALUES(seq_${table_name}_cmt.nextval, #{no}, #{mem_no}, #{cmt_content})
+		INSERT INTO ${table_name}_cmt(cmt_no, origin_no, mem_no, cmt_content, regidate)
+		VALUES(seq_${table_name}_cmt.nextval, #{no}, #{mem_no}, #{cmt_content}, #{today})
 	</insert>
 	
 	<update id="commentUpdate" parameterType="java.util.Map">
