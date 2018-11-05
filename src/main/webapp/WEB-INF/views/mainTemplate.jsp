@@ -164,7 +164,7 @@
     <div style="margin-top: 20px;">
        <div style="text-align: center;">
            <h1 class="section-title" style="font-family:메이플스토리;">
-                동물 게시판 메뉴
+                	동물 게시판 메뉴
            </h1>
            <p class="section-subcontent" style="font-size: 1.8em;">아래의 메뉴를 선택하면 해당 동물 페이지로 이동해요.</p>
         </div>
@@ -289,9 +289,9 @@
        <!-- 뉴스 섹션 -->
     <section id="testimonial" class="section">
       <!-- Container Starts -->
-      <div >
+      <div>
         <div class="row">
-          <div class="col-sm-12" style="padding:0px;">
+          <div class="col-sm-12" style="padding:0px;margin-top:30px;">
              <span style="font-weight: bold;margin-left:15%;font-size: 50px;">오늘은 동물들에게 어떤 일이 있었을까요?</span>
              <!--Carousel Wrapper-->
          <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
