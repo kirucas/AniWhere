@@ -46,5 +46,6 @@
 		<mapper resource="mybatis/StoreLocation.xml" />
 		<mapper resource="mybatis/BuyingList.xml" />
 		<mapper resource="mybatis/LostAnimal.xml" />
+		<mapper resource="mybatis/Drafting.xml" />
 	</mappers>
 </configuration>

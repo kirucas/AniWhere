@@ -91,12 +91,13 @@ CREATE TABLE buy_cmt
 
 CREATE TABLE drafting
 (
-	dtf_no number NOT NULL,
-	send_no number NOT NULL,
-	receive_no number NOT NULL,
+	dft_no number NOT NULL,
+	send_no number,
+	receive_no number,
 	apply number(1),
-	dtf_date date DEFAULT SYSDATE,
-	PRIMARY KEY (dtf_no)
+	dft_date date DEFAULT SYSDATE,
+	result_date date,
+	PRIMARY KEY (dft_no)
 );
 
 
@@ -413,6 +414,7 @@ CREATE TABLE reservation
 	store_no number,
 	apply_date date DEFAULT sysdate,
 	booking_date date NOT NULL,
+	qr_link varchar2(300),
 	PRIMARY KEY (rv_no)
 );
 
@@ -585,15 +587,16 @@ ALTER TABLE sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
 	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
+	ON DELETE CASCADE
 ;
 
 
