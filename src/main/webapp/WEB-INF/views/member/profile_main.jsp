@@ -43,6 +43,15 @@
 #profile-text span{
 	margin-bottom: 5px;
 }
+#btn_edit , #btn_delete{
+	display: none;
+}
+#ani_profile:hover{
+	#btn_edit , #btn_delete{
+		display: block;
+	}
+}
+
 </style>
 <!-- 내용 시작 -->
 <div class="container">
@@ -145,8 +154,12 @@
 						<div class="container" style="vertical-align:middle;">
 	  						<c:forEach var="record" items="${anirecord}" varStatus="loop">
 							  <div class="card col-12 col-md-3" style="padding-top:15px;">
+							  	<a href="#">
 								  <img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
-								  <div class="card-body" style="height: 120px;">
+								</a>  
+								  <a href="#" class="btn btn-primary" id="btn_edit">수 정</a>
+								  <a href="#" class="btn btn-danger" id="btn_delete">삭 제</a>
+							    <div class="card-body" style="height: 120px;">
 								    <h2 class="card-title">애완동물 이름 : ${record.ani_name}</h2>
 								    <p class="card-text" id="profile-text">
 								    	<span>나이 : ${record.ani_age}</span><br>
@@ -154,12 +167,12 @@
 							    		<span>대분류 : ${record.ani_species}</span><br>
 							    		<span>중분류 : ${record.ani_kind}</span>
 						    		</p>
-								  </div>
+							    </div>
 							  </div>
 							</c:forEach>
-							  <div class="card col-12 col-md-3" id="plus">
-								  <a href="<c:url value='/animal/enroll.aw'/>"><img style="height: 200px;" class="card-img-top" src="<c:url value='/resources/images/plus.jpg'/>" alt="애완동물 추가"></a>
-							  </div>
+							<div class="card col-12 col-md-3" id="plus">
+								<a href="<c:url value='/animal/enroll.aw'/>"><img style="height: 200px;" class="card-img-top" src="<c:url value='/resources/images/plus.jpg'/>" alt="애완동물 추가"></a>
+							</div>
 						</div>
 					</div>	
 				</section>
