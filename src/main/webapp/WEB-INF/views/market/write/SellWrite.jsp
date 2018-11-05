@@ -128,8 +128,7 @@ else {
             error : function() {
                console.log("error");
             }
-            
-          
+                   
          //   if(file.length>=5||file.length<=2){
          //  	 alert('사진의 최소3장 이상 최대 4장까지 가능합니다')
          //  	 return;
@@ -145,18 +144,14 @@ else {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 <title>쓰기게시판 내부</title>
-
 <!-- include summernote css/js-->
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
 	rel="stylesheet">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-
 </head>
-
 <body>
-
 	<div class="container">
 
 		<div style="margin-top: 10px"></div>

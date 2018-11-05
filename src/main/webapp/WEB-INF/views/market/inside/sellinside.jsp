@@ -98,8 +98,6 @@
 		</div>
 		<!-- Portfolio Item Row -->
 		<div class="row">
-
-
 			<div class="col-md-8" style="border: 1px solid silver">
 
 				<span id="animal_code"> </span>
