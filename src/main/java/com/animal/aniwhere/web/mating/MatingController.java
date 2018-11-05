@@ -173,14 +173,26 @@ public class MatingController {
 		return json.toJSONString();
 	}/// showProfile
 	
-	@RequestMapping("/securtiy/mating/drafting.aw")
+	@RequestMapping("/securtiy/mating/draftInsert.aw")
 	public String drafting(@RequestParam Map map) throws Exception {
 		System.out.println(map.get("send_no")+", "+map.get("receive_no"));
 		// 드래프팅 하는 거 하면됨
 		Map draftMap=new HashMap();
-		//draftMap=matingService.drafting(map);
+		//draftMap=matingService.draftInsert(map);
 		
 		// 결과화면으로
-		return "forward:/mating/draftList.aw?ani_no="+map.get("ani_no");
+		return "forward:/mating/draftList.aw?send_no="+draftMap.get("ani_no");
+	}
+	
+	@RequestMapping("/securtiy/mating/draftList.aw")
+	public String draftList(@RequestParam Map map) throws Exception {
+		System.out.println(map.get("animal"));
+		System.out.println(map.get("send_no"));
+		// 드래프팅 하는 거 하면됨
+		//Map draftMap=matingService.draftSelectList(map);
+		//
+		
+		// 결과화면으로
+		return "mating/draftingList";
 	}
 }// class

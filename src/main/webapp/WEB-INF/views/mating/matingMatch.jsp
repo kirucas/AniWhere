@@ -74,7 +74,7 @@
 		
 		
 		$(document).on("click","#drafting",function(){
-			location.href="<c:url value='/securtiy/mating/drafting.aw?send_no="+$("#matingNo").html()+"&receive_no="+photoNo+"'/>";
+			location.href="<c:url value='/securtiy/mating/draftInsert.aw?send_no="+$("#matingNo").html()+"&receive_no="+photoNo+"'/>";
 		});
 	});	
 </script>
