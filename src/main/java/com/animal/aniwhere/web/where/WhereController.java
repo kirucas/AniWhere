@@ -310,6 +310,18 @@ public class WhereController {
 		model.addAttribute("dto",dto);
 		return "where/reservation_view.tiles";
 	}
+	
+	@RequestMapping("/security/where/reservation/delete.aw")
+	public String reservate_cancel(Model model, HttpServletRequest req,@RequestParam Map map) throws Exception {
+		map.put("rv_no", map.get("rv_no"));
+		int delete = reservationservice.delete(map);
+		if (delete == 1)
+			model.addAttribute("del", 1);
+		else
+			model.addAttribute("del", 0);
+		return "where/Message";
+	}
+	
 	// @RequestMapping(value= "/where/map/radius.awa", method=
 	// RequestMethod.POST,produces="text/plain; charset=UTF-8")
 	// @ResponseBody
