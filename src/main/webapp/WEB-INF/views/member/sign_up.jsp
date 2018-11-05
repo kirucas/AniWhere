@@ -33,7 +33,7 @@ html { background: url("<c:url value='/resources/images/signup1.jpg'/>") no-repe
 .input-field>label{
 	color:white;
 }
-intput[type=submit]:hover, intput[type=submit]:hover, intput[type=submit]:hover {
+intput[type=submit]:hover{
     background-color: white;
     color:black;
     font-family: 메이플스토리;

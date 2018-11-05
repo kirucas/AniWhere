@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AwsS3Utils;
@@ -43,7 +41,6 @@ import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 import com.animal.aniwhere.service.member.AnimalDTO;
 import com.animal.aniwhere.service.member.MemberDTO;
 import com.animal.aniwhere.service.member.NaverLoginBO;
-import com.animal.aniwhere.web.board.FileUpDownUtils;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @Controller
@@ -310,7 +307,16 @@ public class MemberController {
 		List<AnimalDTO> anirecord = new ArrayList<AnimalDTO>();
 		// 사람 조회
 		record = service.selectOne(map);
+		// 동물 조회
 		anirecord = aniservice.selectList(map);
+		
+		String inter = record.getMem_interani();
+		StringBuffer buf = new StringBuffer();
+		String[] arr = {"강아지","고양이","파충류,양서류","조류","기타 포유류"};
+		for(int i=0; i<inter.length();i++) {
+				buf.append(arr[i]);
+		}
+		record.setMem_interani(buf.toString());
 		// 데이터 저장]
 		model.addAttribute("record", record);
 		model.addAttribute("anirecord", anirecord);
@@ -341,6 +347,22 @@ public class MemberController {
 
 		return "member/enroll_process";
 	}////////// enrollProcess
+	@ResponseBody
+	@RequestMapping("/security/member/animal/delete.awa")
+	public String delete_ani(@RequestParam Map map, HttpSession session,
+			Model model) throws Exception {
+
+		
+		int enroll = aniservice.insert(map);
+		if (enroll == 1)
+			model.addAttribute("check", 1);
+		else
+			model.addAttribute("check", 0);
+
+		return "member/enroll_process";
+	}////////// enrollProcess
+	
+	
 	
 	//안드로이드 용
  	@ResponseBody

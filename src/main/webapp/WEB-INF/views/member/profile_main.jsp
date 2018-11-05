@@ -59,18 +59,27 @@
 	left: 65px;
 }
 </style>
-
-<!-- 
 <script>
-	$('#ani_profile').mouseover(function(){
-		if($('#button_div').css("display") == 'none'){
-			$('#button_div').show();
-		}else{
-			$('#button_div').hide();
-		}
-	});
+function delete_ani(){
+	var ani_no = ${record.ani_no};
+	console.log(ani_no);
+	$.ajax({
+		data: {"ani_no":ani_no},
+        type: "POST",
+        dataType : "json",
+        url : "<c:url value='/security/member/animal/delete.awa'/>",
+        success: function(jsonObj) {
+        	$.each(jsonObj, function(index, value){
+        		
+        	
+        	});
+        },
+        error : function() {
+           console.log("error");
+        }
+     });
+}
 </script>
- -->
 <!-- 내용 시작 -->
 <div class="container">
 	<!-- nav부분 -->
@@ -113,27 +122,27 @@
 									<div class="member-input__state">
 										<div class="edit__table">
 											<div class="edit__tr">
-											<div class="edit__th">
-												아이디
-											</div>
+												<div class="edit__th">
+													아이디
+												</div>
 												<div class="edit__td">
 													<input class="member-input__box" type="text" autocomplete="off" name="mem_id" disabled value="${record.mem_id}">
 												</div>
 											</div>
 											<div class="edit__tr">
-											<div class="edit__th">
-												이름
-											</div>
+												<div class="edit__th">
+													이름
+												</div>
 												<div class="edit__td">
-													<input class="member-input__box" type="text" autocomplete="off" name="mem_name" value="${record.mem_name}">
+													<input class="member-input__box" type="text" autocomplete="off" name="mem_name"  style="text-decoration:underline" value="${record.mem_name}">
 												</div>
 											</div>
 											<div class="edit__tr">
-											<div class="edit__th">
-												닉네임
-											</div>
+												<div class="edit__th">
+													닉네임
+												</div>
 												<div class="edit__td">
-													<input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" value="${record.mem_nickname}">
+													<input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" style="text-decoration:underline" value="${record.mem_nickname}">
 												</div>
 											</div>
 											<div class="edit__th">
@@ -177,7 +186,7 @@
 								</a>  
 								<div id="button_div">
 								  <a href="<c:url value='/animal/enroll_edit.aw?ani_no=${record.ani_no }'/>" class="btn btn-primary" id="btn_edit">수 정</a>
-								  <a href="<c:url value='/animal/enroll_delete.aw?ani_no=${record.ani_no }'/>" class="btn btn-danger" id="btn_delete">삭 제</a>
+								  <a onclick="delete_ani();" href="#" class="btn btn-danger" id="btn_delete">삭 제</a>
 								</div>
 							    <div class="card-body" style="height: 120px;">
 								    <h2 class="card-title">애완동물 이름 : ${record.ani_name}</h2>
