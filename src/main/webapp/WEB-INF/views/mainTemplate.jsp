@@ -449,35 +449,27 @@
 
     <!-- 오늘의 동물 섹션 -->
     <section class="split section" style="margin-top:20px;margin-bottom:20px;">
-      <!-- Container Starts -->
-      <div>
-        <div class="row">
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="images">
-              <img src="<c:url value='/resources/images/pictures/gecko2.jpg'/>"/>
-            </div>
-          </div>
-          <div class="col-md-8 col-sm-6 col-xs-12">
-            <div class="content-inner">
-              <h3 class="title">오늘의 동물</h3>
-              <p class="lead">크레스티드 게코를 만나보세요!</p>
-              <div class="details-list">
-                <div class="row">
-                  <div class="col-sm-6 col-xs-12">
-                    <h3>특징</h3>
-                    <p>크레스티드 게코는 속눈썹 도마뱀이라는 뜻으로, 속눈썹을 가지고 있는 것이 특징입니다.</p>
-                  </div>
-                  <div class="col-sm-6 col-xs-12">
-                    <h3>케어시트</h3>
-                    <p>26도의 온도와 60%의 습도를 필요로 합니다.<br/>
-                       곤충과 과일 모두 먹는 잡식성 게코이며, 슈퍼푸드를 급여할 수 있습니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+	      <!-- Container Starts -->
+	      <div class="col-md-12 grid-margin">
+	        <div class="row">
+	            <div class="col-md-12">
+	                <div class="card">
+	                    <div class="card-body">
+	                        <p class="text-gray">${serverTime} 입양해주세요</p>
+	                        <div class="col-md-12">
+	                        	<c:forEach items="${lost_one}" var="lostOne">
+	                        		<img src="${lostOne.img_src}" alt="이미지" style="width:100%">
+	            	                <h4 style="margin-top:20px">품종: ${lostOne.kind}</h4>
+									<h4>기관주소: ${lostOne.addr}</h4>
+									<h4>기관명: ${lostOne.carenm }</h4>
+									<h4>기관전화번호: ${lostOne.caretel }</h4>
+									<h4>공고 종료일: ${lostOne.end_notice }</h4>
+								</c:forEach>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
       <!-- Container Ends -->
     </section>

@@ -37,7 +37,7 @@
 	
 	<insert id="reservationInsert" parameterType="java.util.Map">
 		INSERT INTO reservation(rv_no, mem_no, store_no, booking_date)
-		VALUES(seq_reservation, #{mem_no}, #{store_no}, #{booking_date})
+		VALUES(seq_reservation.nextval, #{mem_no}, #{store_no}, #{booking_date})
 	</insert>
 	
 	<update id="reservationUpdate" parameterType="java.util.Map">

@@ -6,12 +6,11 @@
     <title>프로그레스바 </title>
     
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
 <SCRIPT> 
 //시간 구하기 표시하기 로직
 function getTime() { 
 now = new Date(); 
-dday = new Date(2018,9,19,18,00,00); 
+dday = new Date(2018,10,3,18,00,00); 
 
 // 원하는 날짜, 시간 정확하게 초단위까지 기입.
 days = (dday - now) / 1000 / 60 / 60 / 24; 
@@ -242,9 +241,15 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	</div>
 	<DIV  class="col-ms-12" style="line-height:60px; color:#666;font-size:50px; text-align:center;border:1px solid yellow;	">
 	<FONT >거래시간</FONT>
+	
+
 	<SPAN  id=counter0></SPAN><FONT style="FONT-FAMILY: '굴림'; ">일</FONT>
 	<SPAN  id=counter1></SPAN><FONT >시간</FONT> <SPAN  id=counter2></SPAN><FONT >분</FONT> <SPAN  id=counter3></SPAN><FONT >초 남았습니다</FONT>
-    <SPAN style="text-align:center"></SPAN></div>
+    <SPAN style="text-align:center"></SPAN>
+    
+    
+    
+    </div>
     <SCRIPT>getTime()</SCRIPT>
 	
 	
