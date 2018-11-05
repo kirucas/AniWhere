@@ -115,6 +115,7 @@ public class FreeboardController {
 		return "board/freeboard/freeboard_view.tiles";
 	}////////// free_main
 	//등록 폼으로 이동 및 입력처리]
+	
 	@RequestMapping(value="/security/animal/freeboard/write.aw",method=RequestMethod.GET)
 	public String write() throws Exception{
 		return "board/freeboard/freeboard_write.tiles";
