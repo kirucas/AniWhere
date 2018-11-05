@@ -64,6 +64,7 @@ CREATE TABLE animal
 	ani_species nvarchar2(10) NOT NULL,
 	ani_kind nvarchar2(20) NOT NULL,
 	ani_pic nvarchar2(500) NOT NULL,
+	ani_regidate date DEFAULT SYSDATE,
 	PRIMARY KEY (ani_no)
 );
 
@@ -584,15 +585,15 @@ ALTER TABLE sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
-	ON DELETE CASCADE
 ;
 
 
