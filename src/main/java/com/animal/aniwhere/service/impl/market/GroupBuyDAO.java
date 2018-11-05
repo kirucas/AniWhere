@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.market.GroupBuyDTO;
 
+
 @Repository
 public class GroupBuyDAO implements AllCommonService {
 
@@ -30,13 +31,14 @@ public class GroupBuyDAO implements AllCommonService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public GroupBuyDTO selectOne(Map map) {
-		if(map.get("view") == null)
+		if(map.get("view") != null)
 			template.update("addCountGroupBuy", map);
 		return template.selectOne("groupbuySelectOne", map);
 	}////////// selectOne
 
 	@Override
 	public int insert(Map map) {
+		map.put("today", new java.sql.Date(new java.util.Date().getTime()));
 		return template.insert("groupbuyInsert", map);
 	}////////// insert
 
