@@ -257,7 +257,7 @@ public class WhereController {
 
 	@RequestMapping("/where/reservate.awa")
 	public String reservate(Model model, @RequestParam Map map, HttpSession session) throws Exception {
-		map.put("mem_no", session.getAttribute("mem_no"));
+		map.put("mem_no", session.getAttribute("mem_no").toString());
 		int insert = reservationservice.insert(map);
 		if (insert == 1)
 			model.addAttribute("check", 1);
@@ -276,7 +276,8 @@ public class WhereController {
 		// 서비스 호출]
 		// 페이징을 위한 로직 시작]
 		// 전체 레코드 수
-		map.put("mem_no", session.getAttribute("mem_no"));
+		System.out.println(session.getAttribute("mem_no").toString());
+		map.put("mem_no", session.getAttribute("mem_no").toString());
 		int totalRecordCount = reservationservice.getTotalRecord(map);
 		// 시작 및 끝 ROWNUM구하기]
 		int start = (nowPage - 1) * pageSize + 1;
@@ -287,7 +288,7 @@ public class WhereController {
 		List<ReservationDTO> list = reservationservice.selectList(map);
 		// 페이징 문자열을 위한 로직 호출]
 		String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,
-				req.getContextPath() + "/animal/freeboard.aw?");
+				req.getContextPath() + "/where/reservation_check.aw?");
 		// 데이터 저장]
 		model.addAttribute("pagingString", pagingString);
 		model.addAttribute("list", list);
