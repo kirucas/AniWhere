@@ -31,7 +31,7 @@
 	<select id="reservationSelectOne" parameterType="java.util.Map" resultType="ReservationDTO">
 		SELECT rv.*, mem_name, bizesnm
 		FROM reservation rv JOIN member mb ON rv.mem_no = mb.mem_no
-		JOIN store_location sl ON r.store_no = sl.bizesid
+		JOIN store_location sl ON rv.store_no = sl.bizesid
 		WHERE rv_no=#{rv_no}
 	</select>
 	
