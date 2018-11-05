@@ -49,14 +49,13 @@
 #button_div{
 	display:none;
 	position: absolute;
-	top:100px;
-	left: 65px;
+	top:200px;
 }
 .img_div:hover #button_div{
 	display: block;
 	position: absolute;
-	top:100px;
-	left: 90px;
+	top: 200px;
+	left: 200px;
 }
 #ani_checkbox input{
 	margin : 0px 5px 0px 5px;
@@ -189,7 +188,7 @@ function delete_ani(ani_no){
 								  <img class="card-img-top" src="<c:url value='${animal.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
 								</a>  
 								<div id="button_div">
-								  <a onclick="delete_ani(${animal.ani_no});" href="#" class="btn btn-danger">삭 제</a>
+								  <a onclick="delete_ani(${animal.ani_no});" href="#" class="btn btn-danger">X</a>
 								</div>
 							    <div class="card-body" style="height: 120px;">
 								    <h2 class="card-title">애완동물 이름 : ${animal.ani_name}</h2>
