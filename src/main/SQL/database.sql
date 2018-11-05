@@ -34,6 +34,7 @@ DROP TABLE reservation CASCADE CONSTRAINTS;
 DROP TABLE tip_cmt CASCADE CONSTRAINTS;
 DROP TABLE tip CASCADE CONSTRAINTS;
 DROP TABLE member CASCADE CONSTRAINTS;
+DROP TABLE member_visit_count CASCADE CONSTRAINTS;
 DROP TABLE store_category CASCADE CONSTRAINTS;
 DROP TABLE store_location CASCADE CONSTRAINTS;
 
@@ -63,6 +64,7 @@ CREATE TABLE animal
 	ani_species nvarchar2(10) NOT NULL,
 	ani_kind nvarchar2(20) NOT NULL,
 	ani_pic nvarchar2(500) NOT NULL,
+	ani_regidate date DEFAULT SYSDATE,
 	PRIMARY KEY (ani_no)
 );
 
@@ -89,12 +91,13 @@ CREATE TABLE buy_cmt
 
 CREATE TABLE drafting
 (
-	dtf_no number NOT NULL,
+	dft_no number NOT NULL,
 	send_no number NOT NULL,
 	receive_no number NOT NULL,
 	apply number(1),
-	dtf_date date DEFAULT SYSDATE,
-	PRIMARY KEY (dtf_no)
+	dft_date date DEFAULT SYSDATE,
+	result_date date,
+	PRIMARY KEY (dft_no)
 );
 
 
@@ -246,6 +249,18 @@ CREATE TABLE member_security
 	mem_no number NOT NULL,
 	enabled number(1) DEFAULT 1,
 	authority varchar2(20) DEFAULT 'USER'
+);
+
+
+CREATE TABLE member_visit_count
+(
+	no number NOT NULL,
+	today date DEFAULT SYSDATE,
+	year number(4) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')),
+	month number(2) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'MM')),
+	day number(2) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'DD')),
+	visit_count number DEFAULT 0,
+	PRIMARY KEY (no)
 );
 
 

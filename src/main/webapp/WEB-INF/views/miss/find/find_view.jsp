@@ -23,37 +23,31 @@
       });
    };
    
-   //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수
-   //data;
-   //[{"NO":2,"ONELINECOMMENT":}]
-   var displayComments = function(data){
-      console.log(JSON.stringify(data));
-    
-      var commentString = '<h2 data-v-f39b78c2="" class="comment__title" style="margin-left: 15px;margin-bottom: 15px;">댓글 목록</h2>&nbsp';
-      commentString+='<table class="table table-bordered" style="width: 95%; margin-left: 25px">';
-      commentString+='<tr><th width="15%">작성자</th><th width="50%">내용</th><th width="20%">등록일</th><th>삭제</th></tr>'
-      	if(data.length==0){
-        	 commentString+="<tr><td colspan='4' style='text-align: center'>등록된글이 없어요</td></tr>";
-    	}  
-      
-      $.each(data,function(index,comment){
-          commentString+='<tr><td>'+comment['mem_nickname']+'</td>';
-          if('${sessionScope.mem_no}'!=comment["mem_no"])
-             commentString+='<td align="left">'+comment['cmt_content']+'</td>';
-          else
-             commentString+='<td align="left"><span style="cursor: pointer" title="'+comment['cmt_no']+'" class="commentEdit">'+comment['cmt_content']+'</span></td>';
-            
-          commentString+='<td>'+comment['regidate']+'</td>';
-          commentString+='<td>';
-          if('${sessionScope.mem_no}'==comment["mem_no"])
-             commentString+='<span class="commentDelete" title="'+comment['cmt_no']+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
-
-             commentString+='</td></tr>'
-       }); 
-   
-      commentString+='</table>';
+ //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
+	var displayComments	 = function(data){
+		console.log(JSON.stringify(data));
+		var commentString='<h2 data-v-f39b78c2="" class="comment__title" style="margin-top: 20px;margin-bottom: 15px;">댓글 목록</h2>';
+			commentString+='<div class="row border-top">';
+		if(data.length==0){
+			commentString+="<h3 class='text-center' style='padding-top:10px;width:100%'>등록된 댓글이 없습니다</h3>";
+		}
+		$.each(data,function(index,cmt){			
+			commentString+='<div class="col-sm-5" style="margin-top: 10px">';
+			commentString+=cmt["mem_nickname"]+'&nbsp;&nbsp; '+cmt["regidate"];
+			commentString+='</div>';
+			commentString+='<div class="offset-sm-5 col-sm-2" style="text-align:right;padding-top: 10px">';
+			if('${sessionScope.mem_no}' == cmt["mem_no"])
+				commentString+='<span title="'+cmt["cmt_no"]+'" class="commentDelete" style="cursor: pointer; color: orange; font-weight: bold">삭제</span>';
+			else
+				commentString+='';
+			commentString+='</div>';
+			commentString+='<div class="col-sm-12">';
+			commentString+='<h4 class="commentEdit" style="cursor: pointer;">'+cmt["cmt_content"]+'</h4>';
+			commentString+='</div>';
+		});		
+		commentString+='</div>';
       $('#comments').html(commentString);
-      
+      if(${sessionScope.mem_no==record.mem_no }){
       //코멘트 수정/삭제 처리
       $('.commentEdit').click(function() {
          console.log($(this).attr("title"));
@@ -73,7 +67,7 @@
                 }
              });
       });
-      
+      }
    };
     
    
@@ -185,26 +179,22 @@
 			</div>
 		</div>
 	</div>
-	<div data-v-f39b78c2="" data-post="820136">
-		<div data-v-f39b78c2="" class="comment-wrap">
-			<!---->
-			<div data-v-f39b78c2="" class="comment-header">
-				<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
-				<!---->
-				<form id="frm" method="post">
-					<input type="hidden" name="no" value="${record.no}" />
-					<input type="hidden" name="cmt_no"/> 
-					<input placeholder="댓글을 입력하세요"class="form-control" style="margin-left:10px;margin-top: 10px; width: 900px; float: left;" id="title" name="cmt_content" /> 
-					<input type="button" id="submit" style="float: left; margin-left: 20px; margin-top: 10px" class="btn btn-success" value="등록" /> 
-					</br>
-					</br>
-				</form>
-				</br>
-				<div class="row" id="comments">
-				<!-- 한줄 코멘트 목록-->
-				<!-- ajax로 코멘트 목록뿌리기 -->
-				</div>
-			</div>	
+<div class="container border" style="margin-top: 15px;margin-bottom: 10px">
+	<div class="row">
+		<div class="col-sm-12" style="margin-top: 15px">
+			<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
 		</div>
+		<form id="frm" method="post">
+			<input type="hidden" name="cmt_no" />
+			<input type="hidden" id="no" name="no" value="${record.no}"/>
+			<div class="form-row" style="width:100%">
+				<input style="margin-bottom:10px ;width:83%;margin-left: 20px;margin-top: 10px;" class="form-control" id="title" name="cmt_content"  type="text" size="180" placeholder="댓글을 입력 하세요" />
+				<input style="margin-top:10px;margin-left:10px;width:7%; height: 38px" type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
+			</div>
+		</form>
 	</div>
+	<div id="comments">
+		
+	</div>
+</div>
 </div>
