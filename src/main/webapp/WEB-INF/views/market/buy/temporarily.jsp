@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
+<%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 
   <head>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
   </head>
 
 <div class="container">
@@ -113,7 +110,7 @@ html {
 																																						 
 								<a href="<c:url value='/market/buyinside.aw?buy_no=${record.no}'/>">
 																  
-								<span id="title">${record.title}</span><em>[21]</em></a>
+								<span id="title">${record.title}</span><em>[]</em></a>
 							
 						        </td>
 						        <!--  타이틀 끝 -->
@@ -132,6 +129,9 @@ html {
 
 
 <!-- 검색용  -->
+<div style="margin-top: 20px;">
+	
+	</div>
 
 ${pagingString}
 

@@ -31,7 +31,7 @@ public class MovieBoardDAO implements AllBoardService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public MovieBoardDTO selectOne(Map map) {
-		if(map.get("view") != null)
+		if(map.get("view") == null)
 			template.update("addCountMovie", map);
 		return template.selectOne("movieSelectOne", map);
 	}////////// selectOne

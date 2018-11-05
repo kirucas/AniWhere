@@ -1,12 +1,11 @@
 package com.animal.aniwhere;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 
@@ -53,13 +52,17 @@ public class HomeController {
 	@RequestMapping("/main.aw")
 	public String goMain(@RequestParam Map map,Model model) throws Exception {
 		
-		//종료일 임박한 동물 10마리중 랜덤하게
-		int end = (int) (Math.random() * 10) + 1;
-		map.put("start", end);
+		//종료일이 당일날 짜인 애들 중 랜덤하게 출력
+		java.sql.Date today = new java.sql.Date(new java.util.Date().getTime());
+		map.put("today", today);
+		
+		int end = lostService.getTotalRecord(map);
+		map.put("start", 1);
 		map.put("end", end);
 		List<LostAnimalDTO> list = lostService.selectList(map);
-		model.addAttribute("lost_one", list);
-		model.addAttribute("serverTime",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+		Random random = new Random();
+		model.addAttribute("lost_one", list.get(random.nextInt(end)));
+		model.addAttribute("serverTime", today);
 		return "mainTemplate.tiles";
 	}
 	

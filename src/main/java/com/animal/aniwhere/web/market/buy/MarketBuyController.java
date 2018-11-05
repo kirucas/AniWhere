@@ -89,7 +89,7 @@ public class MarketBuyController {
 	         Map record = new HashMap();
 	         record.put("dto", dto);
 	         Map temp = new HashMap();
-	         temp.put("table_name","see");
+	         temp.put("table_name","buy");
 	         temp.put("no", dto.getNo());
 	         record.put("cmtCount", cmtService.commentCount(temp));
 	         
@@ -153,6 +153,7 @@ public class MarketBuyController {
 		       
 		
 	}////////// buyinside
+	
 	
 	
 	//write 입력처리]
@@ -328,26 +329,27 @@ public class MarketBuyController {
 
 	               comments.add(record);
 	            }   
-	         
-	         
-	         
 	         return JSONArray.toJSONString(comments);
 	      }//////////////////
-	   
 	   
 	   @ResponseBody
 	      @RequestMapping(value="/market/buy/cmt_edit.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 	      public String buy_update(@RequestParam Map map,HttpSession session) throws Exception{
 	         
 	         map.put("table_name", "buy");
-	         map.put("cmt_content", map.get("cmt_content"));
-	         map.put("cmt_no", session.getAttribute("cmt_no"));
-	         /*
+	         map.put("cmt_content", map.get("content"));
+	         map.put("cmt_no", session.getAttribute("no"));
+	         
+	         System.out.println("dddd1");
+	         
 	         Set<String> set = map.keySet();
 	         for(String key:set) {
 	            System.out.println(key+":"+map.get(key));
 	         }
-	         */
+	         
+	         System.out.println("dddd2");
+	         
+	         
 	         cmtService.update(map);
 	         
 	         return map.get("no").toString();
