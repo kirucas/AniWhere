@@ -51,7 +51,7 @@
 	        </article>
         </section>
 		<c:if test="${empty list }" var="isEmpty">
-			   등록된 게시물이 없어요
+			   등록된 예약이 없어요
    		</c:if>
    		<c:if test="${not isEmpty }">
    			<c:forEach var="record" items="${list}" varStatus="loop">

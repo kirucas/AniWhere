@@ -139,7 +139,8 @@
           margin-right: 60%;
 		}
 	} */
-   /*
+	/* 이미지 마우스 오버 효과 */
+/*
 * 支持IE10，谷歌，火狐，Safari
 .bottom-to-top：从下到上滑动。
 .top-to-bottom：从上到下滑动。

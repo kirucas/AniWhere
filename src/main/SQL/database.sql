@@ -414,6 +414,7 @@ CREATE TABLE reservation
 	store_no number,
 	apply_date date DEFAULT sysdate,
 	booking_date date NOT NULL,
+	qr_link varchar2(300),
 	PRIMARY KEY (rv_no)
 );
 
@@ -586,14 +587,14 @@ ALTER TABLE sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
 	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
 	ON DELETE CASCADE
 ;

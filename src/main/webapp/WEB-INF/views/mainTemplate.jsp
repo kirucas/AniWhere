@@ -455,15 +455,19 @@
 	            <div class="col-md-12">
 	                <div class="card">
 	                    <div class="card-body">
-	                        <p class="text-gray">${serverTime} 입양해주세요</p>
-	                        <div class="col-md-12">
-                        		<img src="${lost_one.img_src}" alt="이미지" style="width:100%">
-            	                <h4 style="margin-top:20px">품종: ${lost_one.kind}</h4>
-								<h4>기관주소: ${lost_one.addr}</h4>
-								<h4>기관명: ${lost_one.carenm }</h4>
-								<h4>기관전화번호: ${lost_one.caretel }</h4>
-								<h4>공고 종료일: ${lost_one.end_notice }</h4>
-	                        </div>
+	                        <span style="font-size:2em;">${serverTime} 입양해주세요</span>
+	                        <div style="float: left;width: 50%;height: 400px;">
+                        		<img src="${lost_one.img_src}" alt="이미지" style="width:100%;height: 100%;">
+                        	</div>
+                       		<div style="overflow: auto;">
+                       			<div style="margin-top:100px;">
+	                        		<h4 style="margin-top:20px">품종: ${lost_one.kind}</h4>
+									<h4>기관주소: ${lost_one.addr}</h4>
+									<h4>기관명: ${lost_one.carenm }</h4>
+									<h4>기관전화번호: ${lost_one.caretel }</h4>
+									<h4>공고 종료일: ${lost_one.end_notice }</h4>
+								</div>
+                       		</div>
 	                    </div>
 	                </div>
 	            </div>

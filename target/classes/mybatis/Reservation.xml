@@ -48,7 +48,7 @@
 	
 	<update id="reservationUpdate" parameterType="java.util.Map">
 		UPDATE reservation
-		SET store_no=#{store_no}, booking_date=#{booking_date}
+		SET store_no=#{store_no}, booking_date=#{booking_date}, qr_link=#{qr_link}
 		WHERE rv_no=#{rv_no}
 	</update>
 	
