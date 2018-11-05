@@ -1,35 +1,24 @@
 package com.animal.aniwhere;
 
-import java.io.IOException;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.AutoPopulatingList.ElementInstantiationException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.animal.aniwhere.service.NoticeDTO;
 import com.animal.aniwhere.service.impl.miss.LostAnimalServiceImpl;
 import com.animal.aniwhere.service.miss.LostAnimalDTO;
-
-import junit.framework.Test;
 
 
 /**
@@ -63,13 +52,17 @@ public class HomeController {
 	@RequestMapping("/main.aw")
 	public String goMain(@RequestParam Map map,Model model) throws Exception {
 		
-		//종료일 임박한 동물 10마리중 랜덤하게
-		int end = (int) (Math.random() * 10) + 1;
-		map.put("start", end);
+		//종료일이 당일날 짜인 애들 중 랜덤하게 출력
+		java.sql.Date today = new java.sql.Date(new java.util.Date().getTime());
+		map.put("today", today);
+		
+		int end = lostService.getTotalRecord(map);
+		map.put("start", 1);
 		map.put("end", end);
 		List<LostAnimalDTO> list = lostService.selectList(map);
-		model.addAttribute("lost_one", list);
-		model.addAttribute("serverTime",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+		Random random = new Random();
+		model.addAttribute("lost_one", list.get(random.nextInt(end)));
+		model.addAttribute("serverTime", today);
 		return "mainTemplate.tiles";
 	}
 	/*

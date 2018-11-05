@@ -267,14 +267,16 @@ public class WhereController {
 		return "where/Message";
 	} // reservate
 
-	@RequestMapping("/where/reservation_check.aw")
-	public String reservate_check(Model model, HttpServletRequest req, // 페이징용 메소드에 전달
+	@RequestMapping("/security/where/reservation_check.aw")
+	public String reservate_check(Model model, HttpServletRequest req,// 페이징용 메소드에 전달
+			HttpSession session,
 			@RequestParam Map map, // 검색용 파라미터 받기
 			@RequestParam(required = false, defaultValue = "1") int nowPage// 페이징용 nowPage파라미터 받기용
 	) throws Exception {
 		// 서비스 호출]
 		// 페이징을 위한 로직 시작]
 		// 전체 레코드 수
+		map.put("mem_no", session.getAttribute("mem_no"));
 		int totalRecordCount = reservationservice.getTotalRecord(map);
 		// 시작 및 끝 ROWNUM구하기]
 		int start = (nowPage - 1) * pageSize + 1;
@@ -298,14 +300,28 @@ public class WhereController {
 		
 		
 	}// reservate_check
-	@RequestMapping("/where/reservation_view.aw")
+	@RequestMapping("/security/where/reservation_view.aw")
 	public String reservate_view(Model model, HttpServletRequest req, // 페이징용 메소드에 전달
 			@RequestParam Map map, // 검색용 파라미터 받기
 			@RequestParam(required = false, defaultValue = "1") int nowPage// 페이징용 nowPage파라미터 받기용
 	) throws Exception {
-		
+		map.put("rv_no", map.get("rv_no"));
+		ReservationDTO dto = reservationservice.selectOne(map);
+		model.addAttribute("dto",dto);
 		return "where/reservation_view.tiles";
 	}
+	
+	@RequestMapping("/security/where/reservation/delete.aw")
+	public String reservate_cancel(Model model, HttpServletRequest req,@RequestParam Map map) throws Exception {
+		map.put("rv_no", map.get("rv_no"));
+		int delete = reservationservice.delete(map);
+		if (delete == 1)
+			model.addAttribute("del", 1);
+		else
+			model.addAttribute("del", 0);
+		return "where/Message";
+	}
+	
 	// @RequestMapping(value= "/where/map/radius.awa", method=
 	// RequestMethod.POST,produces="text/plain; charset=UTF-8")
 	// @ResponseBody

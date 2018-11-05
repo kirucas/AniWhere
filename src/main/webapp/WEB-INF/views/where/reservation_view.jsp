@@ -2,6 +2,12 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
+<script>
+	var isDelete = function(){
+		if(confirm("예약을 취소 하시겠습니까?"))
+			location.replace("<c:url value='/security/where/reservation/delete.aw?rv_no=${dto.rv_no}'/>");
+	};
+</script>
 <style>
 	#btn{
 		margin-bottom: 200px;
@@ -42,20 +48,19 @@
 	</div>
 	<div id="reservation_view">
 		<div>
-			<span>예약 번호 : </span>
+			<span>예약 번호 : ${dto.rv_no }</span>
 		</div>
 		<div>
-			<span>상가 이름 : </span>
+			<span>상가 이름 : ${dto.bizesnm }</span>
 		</div>
 		<div>
-			<span>등록 날짜 : </span>
+			<span>등록 날짜 : ${dto.apply_date }</span>
 		</div>
 		<div>
-			<span>예약 날짜 : </span>
+			<span>예약 날짜 : ${dto.booking_date }</span>
 		</div>
 	</div>
 </div>
 <div id="btn">
-	<a class="btn btn-primary">수정</a>
-	<a class="btn btn-danger">삭제</a>
+	<a href="javascript:isDelete()" class="btn btn-danger">예약 취소</a>
 </div>
