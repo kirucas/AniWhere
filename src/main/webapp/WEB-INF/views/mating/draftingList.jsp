@@ -30,10 +30,51 @@
 		<div class="tab-pane fade show active" id="send" role="tabpanel" aria-labelledby="person-tab">
 			<section class="member-settings-layout__content">
 				<div class="member-settings-layout__content-inner">
-					<h2 class="member-settings-layout__title">신청한 목록</h2>
-					<div>
-						
-					</div>
+					<c:if test="${empty draftList}" var="result">
+						<h2 class="member-settings-layout__title">신청한 상대가 없어요</h2>
+					</c:if>
+					<c:if test="${!result}">
+						<c:forEach var="record" items="${draftList}" varStatus="loop">
+						  	<div class="card col-12 col-lg-6 col-md-12">
+							  	<img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
+							 	<div class="card-body">
+							    	<h2 class="card-title">이름 : ${record.ani_name}</h2>
+								    <div style="float:left;width:50%">
+									    <span>나이 : ${record.ani_age}</span>
+									</div>
+									<div style="display:inline;">
+							    		<span>성별 : 
+							    			<c:choose>
+							    				<c:when test="${record.ani_gender eq 'M'}">수</c:when>
+							    				<c:when test="${record.ani_gender eq 'F'}">암</c:when>
+							    				<c:otherwise>기타</c:otherwise>
+							    			</c:choose>
+							    		</span>
+								    </div>
+								    <div>
+							    		<span>
+							    			대분류 : 
+							    			<c:choose>
+							    				<c:when test="${record.ani_species eq 1}">강아지</c:when>
+							    				<c:when test="${record.ani_species eq 2}">고양이</c:when>
+							    				<c:when test="${record.ani_species eq 3}">파충류/양서류</c:when>
+							    				<c:when test="${record.ani_species eq 4}">조류</c:when>
+							    				<c:otherwise>기타 포유류</c:otherwise>
+							    			</c:choose>
+							    		</span><br>
+						    			<span>중분류 : ${record.ani_kind}</span>
+					    			</div>
+					    			<!-- <div style="display: inline;float: left;margin-top: 10px;">
+					    				<p class="card-text">검색 위치
+					    			</div> -->
+					    			<div style="text-align:right;display: inline;float: right;" id="buttonPlace${record.ani_no}">
+									    <a href="#" class="btn btn-primary mate" id="">수락</a>
+									    <a href="#" class="btn btn-primary mate" id="">거절</a>
+				    				</div>
+							  	</div>
+							</div>
+						</c:forEach>
+					</c:if>
 				</div>
 			</section>
 		</div>

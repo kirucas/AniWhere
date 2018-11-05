@@ -76,15 +76,15 @@
 	       				console.log("insert");
 	       				data=data.replace("insert","");
 	       				var tempString=
-	       					'<a href="#" class="btn btn-primary match" id="matching'+data+'">상대 찾기</a>'
+	       					'<a href="#" class="btn btn-primary match" id="matching'+data+'">찾기</a>'
 	       					+'<a href="#" class="btn btn-primary list" id="list'+data+'">목록</a>'
-    						+'<a href="#" class="btn btn-danger mate" id="delete'+data+'">매칭 취소</a>';
+    						+'<a href="#" class="btn btn-danger mate" id="delete'+data+'">취소</a>';
 	       				$('#buttonPlace'+data).html(tempString);
 	       			}else {
 	       				console.log("delete");
 	       				data=data.replace("delete","");
 	       				var tempString=
-	       					'<a href="#" class="btn btn-primary mate" id="insert'+data+'">매칭 시작</a>';
+	       					'<a href="#" class="btn btn-primary mate" id="insert'+data+'">상대 찾기</a>';
 	       				$('#buttonPlace'+data).html(tempString);
 	       			}
 	           	},
@@ -149,7 +149,7 @@
 			    					</c:if>
 			    				</c:forEach>
 			    				<c:if test="${!result}">
-								    <a href="#" class="btn btn-primary mate" id="insert${record.ani_no}">매칭 시작</a>
+								    <a href="#" class="btn btn-primary mate" id="insert${record.ani_no}">상대 찾기</a>
 		    					</c:if>
 		    				</div>
 					  	</div>
@@ -160,25 +160,3 @@
 	</section>
 </div>
 <!-- 내용 끝 -->
-
-<!-- modal 프로필 -->
-<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG" role="dialog" tabindex="-1">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-body mb-0 p-0">
-				<img src="<c:url value='/resources/images/mating/dochiSample.jpg'/>" alt="" style="width:100%">
-				<h2 style="margin:10px">곤지의 프로필</h2>
-				<p style="margin:10px">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
-			</div>
-
-			<div class="modal-footer">
-				<div><a href="#" target="_blank">확인</a></div>
-				<div><a href="#" data-dismiss="modal">취소</a></div>
-				<!-- 
-				<button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">닫기</button>
-				 -->
-			</div>
-		</div>
-	</div>
-</div>
-<!-- modal 프로필 끝 -->
