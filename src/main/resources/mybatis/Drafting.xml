@@ -29,10 +29,10 @@
 				SELECT *
 				FROM drafting
 				<choose>
-					<when test="mem_no != null and sending != null">신청을 한 건
+					<when test="mem_no != null and sending != null"><!-- 신청을 한 건 -->
 						WHERE send_no = #{mem_no}
 					</when>
-					<when test="mem_no != null and receive != null">신청을 받은 건
+					<when test="mem_no != null and receive != null"><!-- 신청을 받은 건 -->
 						WHERE receive_no = #{mem_no}
 					</when>
 					<when test="mem_no != null">
