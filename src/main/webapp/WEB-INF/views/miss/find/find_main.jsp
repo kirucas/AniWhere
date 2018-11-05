@@ -83,6 +83,7 @@
 						
 							<span id="title">${record.dto.title }</span> <em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em>
 						</div>
+						
 					</a>
 					<div class="article-list-item-meta">
 						<div class="article-list-item-meta__item">

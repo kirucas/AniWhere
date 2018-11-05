@@ -7,7 +7,6 @@
   <head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   
     
   </head>
 
@@ -114,7 +113,7 @@ html {
 																																						 
 								<a href="<c:url value='/market/buyinside.aw?buy_no=${record.no}'/>">
 																  
-								<span id="title">${record.title}</span></a>
+								<span id="title">${record.title}</span><em>[21]</em></a>
 							
 						        </td>
 						        <!--  타이틀 끝 -->
@@ -134,30 +133,8 @@ html {
 
 <!-- 검색용  -->
 
-<div class="row" style="text-align: middle">
-	<div>${pagingString}</div>
-</div>
+${pagingString}
 
-		<div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4"
-			style="float: none; margin: 0 auto;">
-
-			<nav aria-label="...">
-				<ul class="pagination justify-content-end mt-3 mr-3">
-
-					<li class="page-item disabled"><span class="page-link">Previous</span>
-					</li>
-					<li class="page-item active"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><span class="page-link" href="#">2</span></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item"><a class="page-link" href="#">5</a></li>
-					<li class="page-item"><a class="page-link" href="#">6</a></li>
-					<li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
-
-
-			</nav>
-		</div>
 
 		<!-- 검색용 UI -->
 

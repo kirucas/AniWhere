@@ -11,8 +11,7 @@
 
 
 <!-- include summernote css/js-->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
 	rel="stylesheet">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
@@ -20,6 +19,7 @@
 <script>
 	$(document).ready(function() {
 		$('#summernote').summernote({
+			placeholder: '등록하실떄에는 사진을 3장이상 올려주시기 바랍니다',
 			height : 500, // set editor height
 			minHeight : 500, // set minimum height of editor
 			maxHeight : 500, // set maximum height of editor         
@@ -41,7 +41,7 @@
 
 			<div class="col-md-12">
 				<label for="" class="">제목</label> <input class="form-control"
-					type="text" id="nickname">
+					type="text" id="nickname" required>
 
 				<p style="margin-top: 30px;">
 				<label for="" class="">동물분류</label> <input type="hidden"
@@ -71,27 +71,33 @@
 
 				<div style="border: 1px silver solid">
 					<div class="row" style="text-align: center; margin-left: 20px">
-						<div class="my-4">
-							<span style="margin-right: 20px">희망가</span><input
-								class="form-control" type="text" id="price" />
-						</div>
-						<div class="my-4">
-							<span>거래기간</span> <input type="date" min="2018-10-19"
-								max="2020-01-01" name="date" class="form-control" type="text"
-								id="time" />
-						</div>
+						<div class="my-4" style="margin-right:30 px">
+						<span >희망가</span>
+						<input
+							style="text-align:right"
+							class="form-control" type="number" id="price" required />
+					</div>
+						<div class="my-2">
+						<span>거래기간</span> 
+						<input type="date" min="2018-11-01" style="text-align: right;padding-left: px"
+							max="2020-01-01"  class="form-control" type="date"
+							id="time" required />
+							
+							<!--  거래기간 넣어주고 제한 걸어주는 로직 만들어야 함  -->
+							
+					</div>
 
-						<div class="my-4">
-							<span>연락처</span> <input class="form-control" type="text"
-								id="phone" />
-						</div>
+						<div class="my-2">
+						<span>연락처</span> <input class="form-control" type="number"
+							placeholder="집전화,휴대폰번호" style="text-align: right;padding-left:px" id="phone" required/>
+					</div>
 					</div>
 				</div>
 		
 				
 				<p>
 					<label for="" class="" style="margin-top: 30px">프로그래스바
-						설정:목표수량</label> <input type="text" id="nickname">개 
+						설정:목표수량</label> <input type="text" id="nickname" required >개 
 						<label for=""class=""> 해택종류</label>
 						 <select id="use_listSelect"
 						class="select_filter" onclick="">
@@ -99,8 +105,10 @@
 						<option value="bonus">사은품추가</option>
 						<option value="point">포인트 추가</option>
 						<option value="other">기타</option>
-					</select> <label for="" class="">해택상세설명</label> <input type="text"
-						id="nickname">
+						
+					</select> 
+					<label for="" class="">해택상세설명</label> 
+					<input type="text" id="nickname">
 
 					<!-- Related Projects Row -->
 				<h3 class="my-4">판매자가 올린 사진 3개이상필요</h3>

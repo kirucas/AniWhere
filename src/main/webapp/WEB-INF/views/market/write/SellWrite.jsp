@@ -70,8 +70,7 @@ else {
    $(function() {
 	   var count = 0;
 	  
-	   $('#enterBtn').submit(function(){
-		 
+	   $('#enterBtn').submit(function(){	 
 		   var content="========판매현황 정리입니다.============\r\n";
 		   content+='제목:'+$('#title').val()+'\r\n';
 		   content+='판매물품명:'+$('#name').val()+'\r\n';
@@ -83,12 +82,7 @@ else {
            $('#summernote').append(content);
            	   
 	   });
-	   
-	   
-	   
-	   
-	   
-	   
+	      
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
@@ -100,10 +94,7 @@ else {
                }
             }
          }
-      
-      
-      
-      
+          
       });
       
       function sendFile(file, el, wel) {

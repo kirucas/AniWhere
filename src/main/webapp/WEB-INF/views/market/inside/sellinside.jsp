@@ -10,7 +10,6 @@
 	};
 </script>
 
-
 <script>
    $(function() {
       $('#summernote').summernote({
@@ -128,12 +127,7 @@
 			<div class="col-md-4" style="border: 1px solid silver">
 				<h3 class="my-3">조회수 :${record.count}</h3>
 				<h3 class="my-3">등록일: ${record.regidate}</h3>
-				<ul>
-					<li>거래 횟수</li>
-					<li>만족 불만족 표시</li>
-					<li>회원의 등급</li>
-					<li>연락처 정보공개시에만 공개</li>
-				</ul>
+				
 
 			</div>
 
