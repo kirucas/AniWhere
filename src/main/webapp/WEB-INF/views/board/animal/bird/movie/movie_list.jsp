@@ -113,7 +113,12 @@ window.onpopstate = function(event) {
 					
 					<div class="media-body">
 						 <h5 class="title">${dto.movie_title}</h5>
+						 <c:if test="${empty dto.mem_no}">
+						<h6 class="nickname">탈퇴한 회원</h6>
+						</c:if>
+						<c:if test="${not empty dto.mem_no}">
 						<h6 class="nickname">${dto.mem_nickname}</h6>
+						</c:if>
 						<small class="count">조회수 ${dto.movie_count}</small>
 						<small class="postdate">${dto.movie_regidate}</small>
 					</div>

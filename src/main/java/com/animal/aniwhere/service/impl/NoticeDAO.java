@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.NoticeDTO;
 
+
 @Repository
 public class NoticeDAO implements AllCommonService {
 
@@ -30,13 +31,14 @@ public class NoticeDAO implements AllCommonService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public NoticeDTO selectOne(Map map) {
-		if(map.get("view") == null)
+		if(map.get("view") != null)
 			template.update("addCountNotice", map);
 		return template.selectOne("noticeSelectOne", map);
 	}////////// selectOne
 
 	@Override
 	public int insert(Map map) {
+		map.put("today", new java.sql.Date(new java.util.Date().getTime()));
 		return template.insert("noticeInsert", map);
 	}////////// insert
 

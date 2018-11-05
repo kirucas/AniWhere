@@ -54,8 +54,8 @@
 	</select>
 	
 	<insert id="bsInsert" parameterType="java.util.Map">
-		INSERT INTO market_${table_name}(no, mem_no, animal_code, title, content)
-		VALUES(seq_${table_name}.nextval, #{mem_no}, #{animal_code}, #{title}, #{content})
+		INSERT INTO market_${table_name}(no, mem_no, animal_code, title, content, regidate)
+		VALUES(seq_${table_name}.nextval, #{mem_no}, #{animal_code}, #{title}, #{content}, #{today})
 	</insert>
 	
 	<update id="bsUpdate" parameterType="java.util.Map">
@@ -70,9 +70,9 @@
 	</delete>
 	
 	<update id="addCountBS" parameterType="java.util.Map">
-			UPDATE market_${table_name}
-			SET count=count + 1
-			WHERE no=#{no}
+		UPDATE market_${table_name}
+		SET count=count + 1
+		WHERE no=#{no}
 	</update>
 	
 </mapper>

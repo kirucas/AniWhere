@@ -18,7 +18,7 @@
 			data:{no:key},
 			dataType:'json',
 			type:'post',
-			success:displayComments			
+			success:displayComments
 		});
 	};
 	//해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
@@ -26,8 +26,8 @@
 	//[{"NO":2,"ONELINECOMMENT":"댓글2","CPOSTDATE":"2018-09-12","CNO":3,"ID":"LEE","NAME":"이길동"},{"NO":2,"ONELINECOMMENT":"댓글1","CPOSTDATE":"2018-09-12","CNO":2,"ID":"PARK","NAME":"박길동"}]
 	var displayComments	 = function(data){
 		console.log(JSON.stringify(data));
-		var commentString="<h2>한줄 댓글 목록</h2>";
-		commentString+='<table class="table table-bordered">';
+		var commentString="<h4>댓글</h4><br/>";
+		commentString+='<label for="" class="col-sm-2 control-label">Email</label>';
 		commentString+='<tr><th width="15%">작성자</th><th width="50%">코멘트</th><th width="20%">작성일</th><th>삭제</th></tr>';
 		if(data.length==0){
 			commentString+="<tr><td colspan='4'>등록된 댓글이 없어요</td></tr>";
@@ -41,7 +41,7 @@
 			commentString+='<td>'+comment['cmtdto.regidate']+'</td>';
 			commentString+='<td>';
 			if('${sessionScope.mem_no}' == comment["ID"])
-				commentString+='<span  class="commentDelete" title="'+comment["cmtdto.cmt_no"]+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
+				commentString+='<span class="commentDelete" title="'+comment["cmtdto.cmt_no"]+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
 			else
 				commentString+='<span style="color: gray; font-size: 0.7em; font-weight: bold">삭제불가</span>';
 			commentString+='</td></tr>';
@@ -150,10 +150,7 @@ a:visited { color:white; text-decoration: none;}
 .btn {
 	background-color: #1ABC9C;
 	border-color: #1ABC9C;
-	text-align: right;
 }
-
-
 
 
 </style>
@@ -163,11 +160,17 @@ a:visited { color:white; text-decoration: none;}
 	<div class="col margin-top-30">
 		<div class="col" id="popupMovie">
 			<div class="col media-header">
+				<div class="horizontal" style="text-align: justify;">
 				<div class="title col-xs-12 col-sm-6 col-md-8">${dto.movie_title}</div>
-				<div class="nickname col-xs-6 col-md-4">닉네임 ${dto.mem_nickname}</div>
-				<div class="count col-xs-12 col-sm-6 col-md-8">조회수
-					${dto.movie_count}</div>
 				<div class="postdate col-xs-6 col-md-4">등록일 ${dto.movie_regidate}</div>
+				</div>
+				<c:if test="${empty dto.mem_no}">
+				<div class="nickname col-xs-6 col-md-4">탈퇴한 회원</div>
+				</c:if>
+				<c:if test="${not empty dto.mem_no}">
+				<div class="nickname col-xs-6 col-md-4">닉네임 : ${dto.mem_nickname}</div>
+				</c:if>
+				<div class="count col-xs-12 col-sm-6 col-md-8">조회수 ${dto.movie_count}</div>
 			</div>
 			<hr />
 			<div class="media-body">
@@ -180,41 +183,56 @@ a:visited { color:white; text-decoration: none;}
 <div class="col-xs-12 col-sm-12"
 					style="border: 1px solid gray; margin-top: 10px"></div>
 	<!-- row -->
-<div class="text-right margin-top-10">
-	<div> 
-		<a href="<c:url value='/animal/bird/movie/Reply.aw?no=${dto.no}'/>"
-			class="btn btn-success">댓글</a>
-		<c:if test="${sessionScope.mem_no == dto.mem_no}">
-			<a href="<c:url value='/security/animal/bird/movie/edit.aw?no=${dto.no}'/>"
-				class="btn btn-success">수정</a>
-			<a href="javascript:isDelete()" class="btn btn-success">삭제</a>
-		</c:if>
+<div class="horizontal" style="margin-top: 20px; text-align: right;">
+	<c:if test="${sessionScope.mem_no == dto.mem_no}">
 		<a
-			href="<c:url value='/bird/movie/List.aw?no=${dto.no}&nowPage=${param.nowPage}'/>"
-			class="btn btn-success">목록</a>
+			href="<c:url value='/security/animal/bird/movie/edit.aw?no=${dto.no}'/>"
+			class="btn btn-success">수정</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:isDelete()" class="btn btn-success">삭제</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</c:if>
+	<a
+		href="<c:url value='/bird/movie/List.aw?no=${dto.no}&nowPage=${param.nowPage}'/>"
+		class="btn btn-success" style="margin: 0 auto;">목록</a>
+</div>
+<div class="text-right" style="margin-top: 50px;">
+	<div class="horizontal">
+		<!-- 한줄 코멘트 입력 폼-->
+		<form class="form-inline" id="frm" method="post" style="margin: 0px auto;">
+			<label for="inputcomment" class="col-xs-2 col-sm-1 col-md-1 control-label">${sessionScope.mem_id}</label>
+			<input type="email" class="form-control col-xs-11 col-sm-9 col-md-9" id="inputcomment"
+				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="<c:url value='/animal/bird/movie/Reply.aw?no=${dto.no}'/>"
+			class="btn btn-success col-xs-2 col-sm-1">댓글</a>
+		</form>
 	</div>
 </div>
 <br/>
-<div class="row">
-		<!-- 한줄 코멘트 입력 폼-->
-		<c:forEach var="cmtdto" items="${cmtlist}" varStatus="loop"> 
-			<h4>댓글 </h4>&nbsp;&nbsp;&nbsp;&nbsp;
-			<form class="form-inline" id="frm" method="post">
-			<%-- 
+
+<%-- 		
+			<div>${sessionScope.mem_id}</div>&nbsp;&nbsp;&nbsp;&nbsp;
+			
 			<input type="hidden" value="${table_name}"/>
 			<input type="hidden" value="${dto.mem_no}"/>
-			 --%>
+			
 			<input type="hidden" name="no" value="${cmtdto.cmt_no}" />
 				<!-- 수정 및 삭제용 파라미터 -->
 			<input type="hidden" name="cmt_no" />
-			<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />
-			<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>			
-			</form>
-		 </c:forEach>
-			
+			<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />&nbsp;&nbsp;
+			<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>
+			 --%>
+<form>
+	<!-- 한줄 코멘트 목록-->
+	<!-- ajax로 아래에 코멘트 목록 뿌리기 -->
+	<div class="form-group">
+		<label>닉네임 : ${sessionScope.mem_id}</label>
+		<label>댓글 날짜 : </label> <br/>
+		<p>댓글 내용</p>
+	</div><br/>
+	
+	<div class="form-group">
+		<label>닉네임 : ${sessionScope.mem_id}</label>
+		<label>댓글 날짜+ : $</label> <br/>
+		<p>댓글 내용</p>
 	</div>
-	<div class="row" id="comments">
-		<!-- 한줄 코멘트 목록-->		
-		<!-- ajax로 아래에 코멘트 목록 뿌리기 -->	
-	</div>
+</form>
 <!-- 내용 끝 -->
