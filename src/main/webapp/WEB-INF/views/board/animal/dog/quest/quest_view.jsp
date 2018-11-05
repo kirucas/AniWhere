@@ -138,8 +138,6 @@
 		<div class="offset-sm-3 col-sm-3" style="text-align:right">
 			<c:if test="${sessionScope.mem_no == record.mem_no}">
 				<a class="text-right" href="<c:url value='/security/animal/dog/quest/quest_edit.aw?no=${record.no}&checking=${record.checking}'/>">수정 &nbsp;</a>
-			</c:if>
-			<c:if test="${sessionScope.mem_no == record.mem_no or record.mem_no == null}">
 				<a id="delete" href="#">| &nbsp;삭제 |</a>
 			</c:if>
 			<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>"> &nbsp;&nbsp;목록</a>

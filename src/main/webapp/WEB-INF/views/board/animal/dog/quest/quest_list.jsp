@@ -60,8 +60,8 @@
 		</table>
 	</div>
 	<!-- 페이징 시작 -->
-	<div class="form-row">
-		<div class="offset-sm-5 col-sm-2">${pagingString}</div>
+	<div class="form-row text-center">
+		<div style="width:100%">${pagingString}</div>
 	</div>
 	<!-- 페이징 끝 -->
 	<div class="row offset-sm-3 col-sm-7">

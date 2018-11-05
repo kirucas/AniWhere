@@ -178,7 +178,6 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
 	<div data-v-f39b78c2="" data-post="820136">
 		<div data-v-f39b78c2="" class="comment-wrap">
 			<!---->
@@ -310,13 +309,11 @@
 				</div>
 				<!---->
 			</div>
-=======
 	<!-- 댓글 부분 -->
 <div class="container border" style="margin-top: 15px;margin-bottom: 10px">
 	<div class="row">
 		<div class="col-sm-12" style="margin-top: 15px">
 			<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
->>>>>>> refs/remotes/origin/jiho-miss
 		</div>
 		<form id="frm" method="post">
 			<input type="hidden" id="cmt_no" name="cmt_no" value="${cmt_no}"/>
