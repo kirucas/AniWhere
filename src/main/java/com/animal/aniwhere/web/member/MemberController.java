@@ -212,6 +212,15 @@ public class MemberController {
 
 		return "member/animal_enroll";
 	}////////// animal_enroll
+	
+	@RequestMapping("/animal/enroll_edit.aw")
+	public String animal_enroll_edit(@RequestParam Map map , Model model) throws Exception {
+		
+		map.put("ani_no", map.get("ani_no"));
+		AnimalDTO record =aniservice.selectOne(map);
+		model.addAttribute("record",record);
+		return "member/animal_enroll_edit";
+	}
 
 	@RequestMapping("/signIn/security.aw")
 	public String security(@RequestParam Map map,Authentication auth, HttpSession session) throws Exception {
@@ -323,7 +332,7 @@ public class MemberController {
 		map.put("ani_species", mhsr.getParameter("ani_species").toString());
 		map.put("ani_kind", mhsr.getParameter("ani_kind").toString());
 		map.put("ani_pic", AwsS3Utils.LINK_ADDRESS + uploadList.get(0));
-
+		
 		int enroll = aniservice.insert(map);
 		if (enroll == 1)
 			model.addAttribute("check", 1);
@@ -368,6 +377,6 @@ public class MemberController {
  	    	return "false";
  	    }	     
     }
-
+ 	
 
 }//////////////////// MemberController class

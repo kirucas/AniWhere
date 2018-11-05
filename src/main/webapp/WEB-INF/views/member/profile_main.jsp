@@ -53,7 +53,6 @@
 	left: 65px;
 }
 #img_div:hover #button_div{
-	opacity:0.5;
 	display: block;
 	position: absolute;
 	top:100px;
@@ -177,8 +176,8 @@
 								  <img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
 								</a>  
 								<div id="button_div">
-								  <a href="#" class="btn btn-primary" id="btn_edit">수 정</a>
-								  <a href="#" class="btn btn-danger" id="btn_delete">삭 제</a>
+								  <a href="<c:url value='/animal/enroll_edit.aw?ani_no=${record.ani_no }'/>" class="btn btn-primary" id="btn_edit">수 정</a>
+								  <a href="<c:url value='/animal/enroll_delete.aw?ani_no=${record.ani_no }'/>" class="btn btn-danger" id="btn_delete">삭 제</a>
 								</div>
 							    <div class="card-body" style="height: 120px;">
 								    <h2 class="card-title">애완동물 이름 : ${record.ani_name}</h2>
