@@ -9,14 +9,14 @@
 		SELECT COUNT(*)
 		FROM drafting
 		<choose>
-			<when test="mem_no != null AND sending != null"><!-- 신청을 한 건 -->
-				WHERE send_no = #{mem_no}
+			<when test="mating_no != null and sending != null"><!-- 신청을 한 건 -->
+				WHERE send_no = #{mating_no}
 			</when>
-			<when test="mem_no != null AND receive != null"><!-- 신청을 받은 건 -->
-				WHERE receive_no = #{mem_no}
+			<when test="mating_no != null and receive != null"><!-- 신청을 받은 건 -->
+				WHERE receive_no = #{mating_no}
 			</when>
-			<when test="mem_no != null">
-				WHERE send_no = #{mem_no} OR receive_no = #{mem_no}
+			<when test="mating_no != null">
+				WHERE send_no = #{mating_no} OR receive_no = #{mating_no}
 			</when>
 		</choose>
 	</select>
@@ -29,15 +29,16 @@
 				SELECT *
 				FROM drafting
 				<choose>
-					<when test="mem_no != null AND sending != null"><!-- 신청을 한 건 -->
-						WHERE send_no = #{mem_no}
+					<when test="mating_no != null and sending != null"><!-- 신청을 한 건 -->
+						WHERE send_no = #{mating_no}
 					</when>
-					<when test="mem_no != null AND receive != null"><!-- 신청을 받은 건 -->
-						WHERE receive_no = #{mem_no}
+					<when test="mating_no != null and receive != null"><!-- 신청을 받은 건 -->
+						WHERE receive_no = #{mating_no}
 					</when>
-					<when test="mem_no != null">
-						WHERE send_no = #{mem_no} OR receive_no = #{mem_no}
+					<when test="mating_no != null">
+						WHERE send_no = #{mating_no} OR receive_no = #{mating_no}
 					</when>
+					<otherwise></otherwise>
 				</choose>
 				) T
 			)
