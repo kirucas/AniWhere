@@ -11,6 +11,9 @@
 			SELECT r.*, mem_name, bizesnm
 			FROM reservation r JOIN member m ON r.mem_no=m.mem_no
 			JOIN store_location sl ON r.store_no = sl.bizesid
+			<if test="mem_no != null">
+				WHERE mem_no = #{mem_no}
+			</if>
 			)
 	</select>
 	
@@ -22,6 +25,9 @@
 				SELECT r.*, mem_name, bizesnm
 				FROM reservation r JOIN member m ON r.mem_no=m.mem_no
 				JOIN store_location sl ON r.store_no = sl.bizesid
+				<if test="mem_no != null">
+					WHERE mem_no = #{mem_no}
+				</if>
 				ORDER BY rv_no DESC
 				) T
 			)
