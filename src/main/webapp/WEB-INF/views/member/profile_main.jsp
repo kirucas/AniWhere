@@ -46,10 +46,8 @@
 #btn_edit , #btn_delete{
 	display: none;
 }
-#ani_profile:hover{
-	#btn_edit , #btn_delete{
-		display: block;
-	}
+#ani_profile:hover #btn_edit,#btn_delete{
+	display: block;
 }
 
 </style>
