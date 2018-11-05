@@ -340,7 +340,7 @@ public class MarketSellController {
 			         
 			         map.put("table_name", "sell");
 			         map.put("cmt_content", map.get("cmt_content"));
-			         map.put("cmt_no", session.getAttribute("cmt_no"));
+
 			         
 			         System.out.println("dddd1");
 			         

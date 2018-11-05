@@ -334,16 +334,16 @@ public class MarketBuyController {
 	         
 	         map.put("table_name", "buy");
 	         map.put("cmt_content", map.get("cmt_content"));
-	         map.put("cmt_no", session.getAttribute("cmt_no"));
+	       
 	         
-	         System.out.println("dddd1");
-	         
+	         //System.out.println("dddd1");
+	         /*
 	         Set<String> set = map.keySet();
 	         for(String key:set) {
 	            System.out.println(key+":"+map.get(key));
 	         }
-	         
-	         System.out.println("dddd2");
+	         */
+	         //System.out.println("dddd2");
 	         
 	         
 	         cmtService.update(map);
@@ -353,16 +353,16 @@ public class MarketBuyController {
 	   
 	   
 	   @ResponseBody
-	      @RequestMapping(value="/market/buy/cmt_delete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-	      public String buy_delete(@RequestParam Map map,HttpSession session) throws Exception{
+	   @RequestMapping(value="/market/buy/cmt_delete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+	   public String buy_delete(@RequestParam Map map,HttpSession session) throws Exception{
 	         
-	         map.put("table_name", "buy");
-	         map.put("cmt_no", session.getAttribute("cmt_no"));
+	       map.put("table_name", "buy");
+	       map.put("cmt_no", session.getAttribute("cmt_no"));
 	         
-	         cmtService.delete(map);
+	       cmtService.delete(map);
 	         
-	         return map.get("no").toString();
-	      }
+	       return map.get("no").toString();
+	   }
 	   
 	
 }//////////////////// MarketMainController

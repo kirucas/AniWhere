@@ -43,7 +43,7 @@
 				commentString+='';
 			commentString+='</div>';
 			commentString+='<div class="col-sm-12">';
-			commentString+='<h4 class="commentEdit" style="cursor: pointer;">'+cmt["cmt_content"]+'</h4>';
+			commentString+='<h4 class="commentEdit" style="cursor: pointer;" title="'+cmt["cmt_no"]+'">'+cmt["cmt_content"]+'</h4>';
 			commentString+='</div>';
 		});		
 		commentString+='</div>';
@@ -54,9 +54,10 @@
          //console.log($(this).attr("title"));
         
          $("#title").val($(this).html());
-            $("#submit").val('수정');
-            $('input[mem_nickname=cmt_no]').val($(this).attr("title"));
+         $("#submit").val('수정');
+         $('input[name=cmt_no]').val($(this).attr("title"));
       });
+      
       $('.commentDelete').click(function() {
             var cno_value = $(this).attr("title");
             $.ajax({
