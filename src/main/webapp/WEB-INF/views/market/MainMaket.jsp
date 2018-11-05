@@ -11,26 +11,20 @@
     <title>부트스트랩  템플릿</title>
 	
 
-    
-
-
+   
 
 </head>
 <body>
 <div class="container">
-
 <!-- top 와야하는 자리 -->
 	
 		<jsp:include page="../market/template/MaketTop.jsp" />
-		
-	
+			
 	<!-- 푸터 와야하는 자리 -->
 	<div style="margin-top: 50px;">
 	
 	</div>
 	
-	
-
 </div>
 </body>
 

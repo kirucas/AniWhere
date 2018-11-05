@@ -55,10 +55,8 @@ public class MarketBuyController {
 			
 		}////////// miss_write
 		
-		
-	
+			
 	//리스트로 이동하기
-	
 	@RequestMapping("/market/buy/temporarily.aw")
 	public String market_list(Model model,HttpServletRequest req,@RequestParam Map map,@RequestParam(required=false,defaultValue="1") int nowPage)throws Exception {
 		//서비스 호출]
@@ -87,9 +85,12 @@ public class MarketBuyController {
 	         Map temp = new HashMap();
 	         temp.put("table_name","buy");
 	         temp.put("no", dto.getNo());
+	         
+	         
 	         record.put("cmtCount", cmtService.commentCount(temp));
 	         
 	         collect.add(record);
+	         
 	      }
 		
 		//페이징 문자열을 위한 로직 호출]
@@ -109,8 +110,7 @@ public class MarketBuyController {
 	         model.addAttribute("pagingString", pagingString);
 	      }
 		 
-		 //데이터 저장]
-		
+		 //데이터 저장]		
 		 model.addAttribute("list", collect);
 		 model.addAttribute("totalRecordCount", totalRecordCount);
 		 model.addAttribute("nowPage", nowPage);

@@ -108,16 +108,17 @@ html {
 						</c:choose>
 					</span>
 																																						 
-								<a href="<c:url value='/market/buyinside.aw?buy_no=${record.no}'/>">
+								<a href="<c:url value='/market/buyinside.aw?buy_no=${record.dto.no}'/>">
 																  
-								<span id="title">${record.title}</span><em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em></a>
+								<span id="title">${record.dto.title}</span><em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em> 
+								</a>
 							
 						        </td>
 						        <!--  타이틀 끝 -->
 							
-							<td><span id="mem_no">${record.mem_nickname}</span></td>
-							<td><span id="count">${record.count} </span> </td>
-							<td><span id="regidate">${record.regidate}</span></td>
+							<td><span id="mem_no">${record.dto.mem_nickname}</span></td>
+							<td><span id="count">${record.dto.count} </span> </td>
+							<td><span id="regidate">${record.dto.regidate}</span></td>
 						</tr>
 						
 					</c:forEach>
