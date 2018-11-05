@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.Administrator">
+
+	<select id="draftingCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM drafting
+		<choose>
+			<when test="mating_no != null and sending != null"><!-- 신청을 한 건 -->
+				WHERE send_no = #{mating_no}
+			</when>
+			<when test="mating_no != null and receive != null"><!-- 신청을 받은 건 -->
+				WHERE receive_no = #{mating_no}
+			</when>
+			<when test="mating_no != null">
+				WHERE send_no = #{mating_no} OR receive_no = #{mating_no}
+			</when>
+		</choose>
+	</select>
+	
+	<select id="draftingList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT *
+				FROM drafting
+				<choose>
+					<when test="mating_no != null and sending != null"><!-- 신청을 한 건 -->
+						WHERE send_no = #{mating_no}
+					</when>
+					<when test="mating_no != null and receive != null"><!-- 신청을 받은 건 -->
+						WHERE receive_no = #{mating_no}
+					</when>
+					<when test="mating_no != null">
+						WHERE send_no = #{mating_no} OR receive_no = #{mating_no}
+					</when>
+					<otherwise></otherwise>
+				</choose>
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="draftingOne" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT *
+		FROM drafting
+		WHERE dft_no = #{dft_no}
+	</select>
+	
+	<insert id="draftingInsert" parameterType="java.util.Map">
+		INSERT INTO drafting(dft_no, send_no, receive_no, dft_date)
+		VALUES(seq_drafting.nextval, #{send_no}, #{receive_no}, #{today})
+	</insert>
+	
+	<update id="draftingUpdate" parameterType="java.util.Map">
+		UPDATE drafting
+		SET apply = #{apply}, result_date = #{today}
+		WHERE dft_no = #{dft_no}
+	</update>
+	
+	<delete id="draftingDelete" parameterType="java.util.Map">
+		DELETE FROM drafting
+		WHERE dft_no = #{dft_no}
+	</delete>
+	
+</mapper>
