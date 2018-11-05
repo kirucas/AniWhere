@@ -179,7 +179,7 @@ public class MatingController {
 	@RequestMapping("/securtiy/mating/draftInsert.aw")
 	public String drafting(@RequestParam Map map) throws Exception {
 		System.out.println(map.get("send_no")+", "+map.get("receive_no"));
-		
+		//draftService.selectOne(map);
 		// 드래프팅 하는 거 하면됨
 		int draftResult=draftService.insert(map);
 		System.out.println(draftResult);
@@ -188,8 +188,7 @@ public class MatingController {
 	}
 	
 	@RequestMapping("/mating/draftList.aw")
-	public String draftList(@RequestParam Map map,Model model,HttpSession session) throws Exception {
-		System.out.println(map.get("animal"));
+	public String draftingList(@RequestParam Map map,Model model,HttpSession session) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no"));
 		// 신청자 목록 뿌려오기
 		map.put("sending", "true");
@@ -199,6 +198,7 @@ public class MatingController {
 		map.put("start", 1);
 		map.put("end", totalRecord);
 		List<Map> draftList=draftService.selectList(map);
+		//System.out.println(draftList.get(0));
 		
 		model.addAttribute("draftList",draftList);
 		

@@ -27,15 +27,17 @@
 .card{
 	display:inline-block;
 	margin-right:-4px;
-	padding:10px;
+	padding-top:15px;
 	
 }
 #ani_profile{	
 	height: 200px;
 }
 .card-body{
-	height: 160px;
-	padding:15px;
+	height: 200px;
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:15px;
 }
 #plus{
 	border: none;
@@ -54,6 +56,10 @@
 			// 등록된 동물의 상대 목록 뿌려주는 페이지로
 			location.href='<c:url value="/mating/Match.aw?ani_no='+$(this).prop('id')+'"/>';
 		});
+		$(document).on("click",".list",function(){
+			// 등록된 동물의 신청 목록 보여주는 페이지
+			location.href='<c:url value="/mating/draftList.aw?ani_no='+$(this).prop('id')+'"/>';
+		});
 		
 		$(document).on("click",".mate",function(){
 			// 주소 API
@@ -67,12 +73,15 @@
 	       		dataType: "text",
 	       		success : function(data) {
 	       			if(data.indexOf("insert")!=-1) {
+	       				console.log("insert");
 	       				data=data.replace("insert","");
 	       				var tempString=
-	       					'<a href="#" class="btn btn-primary match" id="matching'+data+'">상대 보기</a>'
+	       					'<a href="#" class="btn btn-primary match" id="matching'+data+'">상대 찾기</a>'
+	       					+'<a href="#" class="btn btn-primary list" id="list'+data+'">목록</a>'
     						+'<a href="#" class="btn btn-danger mate" id="delete'+data+'">매칭 취소</a>';
 	       				$('#buttonPlace'+data).html(tempString);
 	       			}else {
+	       				console.log("delete");
 	       				data=data.replace("delete","");
 	       				var tempString=
 	       					'<a href="#" class="btn btn-primary mate" id="insert'+data+'">매칭 시작</a>';
@@ -80,7 +89,7 @@
 	       			}
 	           	},
 	           	error : function(error) {
-	           		console.log("에러발생");
+	           		console.log("에러발생",error);
 		       	}
 		    });
 		});
@@ -98,7 +107,7 @@
 				  	<div class="card col-12 col-lg-3 col-md-6 col-sm-6 col-xs-12">
 					  	<img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
 					 	<div class="card-body">
-					    	<h2 class="card-title">이름 : ${record.ani_name}</h2>
+						    <h2 class="card-title">${record.ani_name}</h2>
 						    <div style="float:left;width:50%">
 							    <span>나이 : ${record.ani_age}</span>
 							</div>
@@ -132,8 +141,9 @@
 			    				<c:forEach var="mateDto" items="${matingrecord}" varStatus="loop">
 			    					<c:if test="${not loop_flag}">
 				    					<c:if test="${mateDto.ani_no eq record.ani_no}" var="result">
-				    						<a href="#" class="btn btn-primary match" id="matching${record.ani_no}">상대 보기</a>
-				    						<a href="#" class="btn btn-danger mate" id="delete${record.ani_no}">매칭 취소</a>
+				    						<a href="#" class="btn btn-primary match" id="matching${record.ani_no}">찾기</a>
+				    						<a href="#" class="btn btn-primary list" id="list${record.ani_no}">목록</a>
+				    						<a href="#" class="btn btn-danger mate" id="delete${record.ani_no}">취소</a>
 				    						<c:set var="loop_flag" value="true" />
 				    					</c:if>
 			    					</c:if>
