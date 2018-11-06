@@ -10,7 +10,6 @@
 	};
 </script>
 
-
 <script>
    $(function() {
       $('#summernote').summernote({
@@ -48,10 +47,6 @@
 
   <head>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-    <title>판매게시판 내부</title>
-	
 	<style>	
 
  .scale {
@@ -157,10 +152,11 @@ function changeimage1() {
 
         <div class="col-md-4" style="border:1px solid silver">
         
-          <h3 class="my-3">판매자 아이디</h3>
-          <p>판매자 내부글 1번쨰줄 의 내용</p>
-          <h3 class="my-3">관련태그:
-                   <c:choose>
+         	<h3 class="my-3">판매자 아이디: ${record.mem_nickname}</h3>
+       
+          <h3 class="my-3" id="animal_code">
+					관련태그:
+					<c:choose>
 						<c:when test="${record.animal_code eq '1'}">
 							<span>[개]</span>
 						</c:when>
@@ -177,7 +173,8 @@ function changeimage1() {
 							<span>[기타포유류]</span>
 						</c:otherwise>
 					</c:choose>
-					</h3>
+				</h3>
+				
           <div class="col-md-12" style="border: 1px solid silver;">
 				<h3 class="my-4">조회수 :${record.count}</h3>
 				<h3 class="my-4">등록일: ${record.regidate}</h3>
@@ -227,6 +224,7 @@ function changeimage1() {
   
 	
 
+   
       
   <div style="margin-top:10px">
    </div><br/>
@@ -245,13 +243,14 @@ function changeimage1() {
         </div>
        
         </div>
-         <div style="text-align: center">
+         <!-- 버튼시작 -->
+           <div style="text-align: center">
 			<a href="<c:url value='/market/sell.aw'/>"> 
 			<input name="reset"  class="btn btn-info" type="button" value="목록"></a> 			
 			<c:if test="${sessionScope.mem_no==record.mem_no }">
 			<a href="<c:url value='/security/market/selledit.aw?sell_no=${record.no}'/>" type="button" class="btn btn-danger">수정</a>
 			</c:if>			
-			 <input  class="btn btn-suceess" style="background-color: #4CAF50;" type="button" id="repl"value="답글"> 				
+							
 				<c:if test="${sessionScope.mem_no==record.mem_no }">
 				<a href="javascript:isDelete()" type="button" class="btn">삭제</a>					
 				</c:if>

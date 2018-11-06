@@ -141,12 +141,19 @@ public class MarketGroupbuyController {
 				
 		
 				//상세보기
-				@RequestMapping("/groupbuy/groupbuyinside.aw")
-				public String buyinside(@RequestParam Map map,Model model,HttpSession session) throws Exception {
+				@RequestMapping("/market/groupbuyinside.aw")
+				public String buyinside2(@RequestParam Map map,Model model,HttpSession session) throws Exception {
 					
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("table_name","group_buy");
 					map.put("no", map.get("buy_no"));
+					
+					
+					Set<String> set=map.keySet();
+					for(String key:set) {
+						System.out.println("key:"+key+", value:"+map.get(key));
+					}
+					
 						
 					//서비스 호출]
 				
@@ -162,9 +169,9 @@ public class MarketGroupbuyController {
 					record.setContent(record.getContent().replace("\r\n", "<br/>")); //???
 					//뷰정보 반환]
 					
-					return //"forward:/market/"+path+"/temporarily.aw"
-			   				"market/groupbuy/groupbuyside.tiles";
-					       
+					return "market/inside/groupbuyinside.tiles";
+			   				
+					//"forward:/market/"+path+"/temporarily.aw"
 					
 				}////////// buyinside
 				

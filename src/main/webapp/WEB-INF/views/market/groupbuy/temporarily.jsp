@@ -115,16 +115,16 @@
 					
 				<span id="animal_code">관련태그:
 						<c:choose>
-							<c:when test="${record.animal_code eq '1'}">
+							<c:when test="${record.dto.animal_code eq '1'}">
 								<span>[개]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '2'}">
+							<c:when test="${record.dto.animal_code eq '2'}">
 								<span>[고양이]</span>		
 							</c:when>
-							<c:when test="${record.animal_code eq '3'}">
+							<c:when test="${record.dto.animal_code eq '3'}">
 								<span>[파충류]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '4'}">
+							<c:when test="${record.dto.animal_code eq '4'}">
 								<span>[조류]</span>
 							</c:when>
 							<c:otherwise>
@@ -136,7 +136,7 @@
                  
   		<jsp:include page="../template/ProgressBarsmall2.jsp" />
  
-  <a class="btn btn-outline-dark btn-sm" href="<c:url value='/market/groupbuyinside.aw?groupbuy_no=${record.dto.no}'/>">상세보기</a>
+  <a class="btn btn-outline-dark btn-sm" href="<c:url value='/market/groupbuyinside.aw?buy_no=${record.dto.no}'/>">상세보기</a>
                        														  
 					<span id="mem_no">아이디:${record.dto.mem_nickname}</span>
 					<span id="count">조횟수:${record.dto.count} </span> 
@@ -145,14 +145,8 @@
 					</div>
 									
             </c:forEach>
-            
-            
-         
-      
-      
-      
-      
-      <div class="col-md-4">
+                   
+     <%--  <div class="col-md-4">
          <div class="card mb-4">
             <img class="card-img-top" src="<c:url value='/resources/images/maketimages/pet3.jpg'/>" style="width:300px;height:300px" alt="Card image cap">
             <div class="card-body">
@@ -164,7 +158,7 @@
                
             </div>
          </div>
-      </div>
+      </div> --%>
       
       
          
@@ -203,10 +197,5 @@ ${pagingString}
  
     <div style="margin-top: 50px">
     </div>
-      
-
-    
-    
-
+     
   </body>
-

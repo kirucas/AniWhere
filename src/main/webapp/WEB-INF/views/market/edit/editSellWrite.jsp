@@ -6,9 +6,6 @@
 <head>
 <script>
 
-
-
-
 function check() {
     var isAttached = $('#summernote').summernote('code');
     if (fr.title.value == "") {
@@ -178,18 +175,7 @@ $( "#target" ).submit(function( event ) {
 						<option value="5" ${record.animal_code == 5 ? "selected" : "" }>기타 포유류</option>
 					</select>
 					
-					 <label for="" class="">용도분류</label> 
-					 <select id="use_listSelect"
-					class="select_filter" >
 					
-					<option value="food">사료및간식</option>
-					<option value="playtoy">장난감</option>
-					<option value="home">보금자리</option>
-					<option value="buty">미용용품</option>
-					<option value="medicine">의약품</option>
-					<option value="other">기타</option>
-				</select>
-
 
 			</p>
 			</div>
@@ -242,11 +228,10 @@ $( "#target" ).submit(function( event ) {
 				
 				<!--  사진  3개이상 유효성 검사 항목 추가  -->
                  
-				<input multiple="multiple" type="file" 
-					style="color: slategray; border: 1 solid silver; width: 300; height: 20">(최대 5M)
+			
 				
 
-				<div class="row">
+				<%-- <div class="row">
 
 					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
 
@@ -279,12 +264,12 @@ $( "#target" ).submit(function( event ) {
 							alt="" style="width: 300px; height: 200px;">
 					</div>
 
-				</div>
+				</div> --%>
 				<!--사진 로직 끝 -->
 
 				
 				<div class="col-md-12 container">
-<textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
+          <textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
 				class="output"		maxlength="2048" required >
 ※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.											
 					

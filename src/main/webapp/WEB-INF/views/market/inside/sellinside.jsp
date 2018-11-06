@@ -256,6 +256,7 @@
 				</c:if>
 				
 		</div>
+		
 		<div class="container border" style="margin-top: 15px;margin-bottom: 10px">
 	<div class="row">
 		<div class="col-sm-12" style="margin-top: 15px">
