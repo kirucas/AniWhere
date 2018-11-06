@@ -31,7 +31,6 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -259,13 +258,11 @@ public class MemberController {
 	@RequestMapping("/signout.aw")
 	public String signOut(HttpSession session) throws Exception {
 		session.invalidate();
-
 		return "forward:/main.aw";
 	}////////////// signOut()
 
 	@RequestMapping("/member/sign_up.aw")
 	public String signUp() throws Exception {
-
 		return "member/sign_up";
 	}////////////// signUp()
 	
@@ -278,6 +275,15 @@ public class MemberController {
         resu.put("result", result);
         return JSONObject.toJSONString(resu);
     }
+    
+    @ResponseBody
+	@RequestMapping(value="/member/idchk.aw", method = { RequestMethod.GET, RequestMethod.POST })
+	public String member_idchk(@RequestParam Map map) throws Exception {
+		int result = service.getTotalRecord(map);
+		Map resu = new HashMap<>();
+        resu.put("result", result);
+        return JSONObject.toJSONString(resu);
+	}
 	
 	@RequestMapping("/signUpProcess.aw")
 	public String signUpProcess(@RequestParam Map map,@RequestParam List<String> mem_interani, HttpSession session, Model model) throws Exception {
