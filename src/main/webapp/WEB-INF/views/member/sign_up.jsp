@@ -125,7 +125,8 @@ $(function(){
 		    mem_gender: {
 		      required: true,
 		    }
-		  },messages: {
+		  },
+		  messages: {
 			  mem_id: {
 			    	required: "아이디를 입력해주세요.",
 			    	minlength: "최소 4글자 이상 적어주세요.",
@@ -167,6 +168,9 @@ $(function(){
 	          }
 	        }
 	});
+	$('.btn btn-danger').click(function(){
+		
+	});
 });
 	
 
@@ -184,6 +188,9 @@ $(function(){
 			      <div class="row">
 			        <div class="input-field col s4 offset-s4">
 			          <label for="mem_id">아이디(*)</label>
+			          <div style="margin-left: 80px;">
+			          	<input class="btn btn-danger" type="button" value="중복확인" data-error=".errorTxt8"></input>
+			          </div>
 			          <input id="mem_id" name="mem_id" type="text" data-error=".errorTxt1">
 			          <div class="errorTxt1"></div>
 			        </div>

@@ -6,9 +6,6 @@
 <head>
 <script>
 
-
-
-
 function check() {
     var isAttached = $('#summernote').summernote('code');
     if (fr.title.value == "") {
@@ -77,10 +74,10 @@ $( "#target" ).submit(function( event ) {
 <script>
 	
    $(function() {
-	   
+	   var count = 0;
 	   $('#enterBtn').click(function(){
 		 
-		   var content="========판매현황 정리입니다.============\r\n";
+		   /* var content="========판매현황 정리입니다.============\r\n";
 		   content+='제목:'+$('#title').val()+'\r\n';
 		   content+='판매물품명:'+$('#name').val()+'\r\n';
  		   content+='희망가:'+$('#price').val()+'원\r\n';
@@ -89,11 +86,21 @@ $( "#target" ).submit(function( event ) {
            content+='연락처:'+$('#phone').val()+'\r\n'; 
            content+='====================================\r\n';
            
-           $('#summernote').append(content);
+           $('#summernote').append(content); */
            
-           fr.action="<c:url value='/security/market/sellupdate.aw?sell_no=${record.no}'/>";
-           	   
+           // fr.action="<c:url value='/security/market/sellupdate.aw?sell_no=${record.no}'/>";
+		   if(count<3){
+	        	  alert("사진은 최소 3장 이상 올려야 합니다");
+	        	 
+	          }else{
+	        	  if(check()){
+		        	  console.log("성공");
+		        	  $('#fr').submit();
+	        	  }
+	          }
+	          return false;       
 	   });
+	  
 	   	   
       $('#summernote').summernote({
     	 maxHeight:null,
@@ -107,8 +114,14 @@ $( "#target" ).submit(function( event ) {
             }
          }
       });
-      
+          
       function sendFile(file, el, wel) {
+     	 if(count>3){
+            	 alert('사진은 최대 4장까지 가능합니다')
+            	 return false;
+          }
+      
+  
          var form_data = new FormData();
          form_data.append('file', file);
          $.ajax({
@@ -118,26 +131,29 @@ $( "#target" ).submit(function( event ) {
             cache: false,
             contentType: false,
             processData: false,
+            
             success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
-            },
-            error : function() {
-               console.log("error");
-            }
-         });
-      }
-          
-   });
-   
-   
-   
-   
+           	 //$('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
+           	 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />", function (image) {
+           		  image.css('width',150);
+           		  image.css('height',150);
+					  image.attr('name', 'sellpic');
+				});
+           	 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
+                count++;
+                console.log("success");
+           },
+           error : function() {
+              console.log("error");
+           }
+                        
+        });
+     }
+         
+  });
+     
    
 </script>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-<title>쓰기게시판 내부</title>
 
 
 
@@ -178,18 +194,7 @@ $( "#target" ).submit(function( event ) {
 						<option value="5" ${record.animal_code == 5 ? "selected" : "" }>기타 포유류</option>
 					</select>
 					
-					 <label for="" class="">용도분류</label> 
-					 <select id="use_listSelect"
-					class="select_filter" >
 					
-					<option value="food">사료및간식</option>
-					<option value="playtoy">장난감</option>
-					<option value="home">보금자리</option>
-					<option value="buty">미용용품</option>
-					<option value="medicine">의약품</option>
-					<option value="other">기타</option>
-				</select>
-
 
 			</p>
 			</div>
@@ -242,11 +247,10 @@ $( "#target" ).submit(function( event ) {
 				
 				<!--  사진  3개이상 유효성 검사 항목 추가  -->
                  
-				<input multiple="multiple" type="file" 
-					style="color: slategray; border: 1 solid silver; width: 300; height: 20">(최대 5M)
+			
 				
 
-				<div class="row">
+				<%-- <div class="row">
 
 					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
 
@@ -279,16 +283,16 @@ $( "#target" ).submit(function( event ) {
 							alt="" style="width: 300px; height: 200px;">
 					</div>
 
-				</div>
+				</div> --%>
 				<!--사진 로직 끝 -->
 
 				
 				<div class="col-md-12 container">
-<textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
-				class="output"		maxlength="2048" required >
-※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.											
-					
-</textarea>
+          <textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
+				class="output"		maxlength="2048" required >※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.	
+				${record.content}
+															
+          </textarea>
 				</div>
 							
 				<div style="text-align: center">

@@ -7,13 +7,13 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
 
 import com.animal.aniwhere.service.impl.StoreLocationServiceImpl;
+import com.animal.aniwhere.service.impl.member.AndroidTokenServiceImpl;
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 import com.animal.aniwhere.service.member.MemberDTO;
 import com.google.zxing.BarcodeFormat;
@@ -92,11 +92,11 @@ public class QRCode_Generator {
 		JSONObject json = new JSONObject();
 		
 		json.put("name", memDTO.getMem_name());
-		json.put("store_name", storeDTO.getBizesnm() + (storeDTO.getBrchnm() != null ? (" " + storeDTO.getBrchnm()) : ""));
+		json.put("store_name", storeDTO.getBizesnm() + (storeDTO.getBrchnm() != null ? (" " + storeDTO.getBrchnm()) : "") + (storeDTO.getDongno() != null ? (" " + storeDTO.getDongno()) : "") + (storeDTO.getFlrno() != null ? (" " + storeDTO.getFlrno()) : "") + (storeDTO.getHono() != null ? (" " + storeDTO.getHono()) : ""));
 		json.put("apply_date", new java.sql.Date(new java.util.Date().getTime()));
 		json.put("booking_date", map.get("booking_date"));
 		json.put("location", storeDTO.getRdnmadr());
-		json.put("mem_no", memDTO.getMem_no());
+		json.put("mem_no", memDTO.getMem_no()); 
 		
 		System.out.println("json : " + json.toString());
 		System.out.println("bizesnm : " + storeDTO.getBizesnm());

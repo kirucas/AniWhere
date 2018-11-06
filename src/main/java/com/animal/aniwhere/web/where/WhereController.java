@@ -26,6 +26,7 @@ import com.animal.aniwhere.service.StoreLocationDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.ReservationServiceImpl;
 import com.animal.aniwhere.service.impl.StoreLocationServiceImpl;
+import com.animal.aniwhere.service.impl.member.AndroidTokenServiceImpl;
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 
 @Controller
@@ -261,6 +262,8 @@ public class WhereController {
 		return "where/reservationMain.tiles";
 	}// reservation_write_form
 
+	@Resource(name="tokenService")
+	private AndroidTokenServiceImpl tokenService;
 	
 	@RequestMapping("/where/reservate.awa")
 	public String reservate(Model model, @RequestParam Map map, HttpSession session, HttpServletRequest req) throws Exception {
@@ -325,8 +328,11 @@ public class WhereController {
 	) throws Exception {
 		map.put("rv_no", map.get("rv_no"));
 		ReservationDTO dto = reservationservice.selectOne(map);
+		map.put("bizesid", dto.getStore_no());
+		StoreLocationDTO dtoS = storelocservice.selectOne(map);
 		dto.setQr_link(AwsS3Utils.LINK_ADDRESS + dto.getQr_link());
 		model.addAttribute("dto",dto);
+		model.addAttribute("adr", dtoS.getRdnmadr());
 		return "where/reservation_view.tiles";
 	}
 	
