@@ -110,12 +110,20 @@ public class MatingController {
 		// 임시
 		map.put("start",1);
 		map.put("end",matingService.getTotalRecord(map));
-		
 		List<MatingDTO> matingList=matingService.selectList(map);
+		
+		map.put("mating_no", matingNo);
+		map.put("sending", true);
+		List<Map> draftMap=draftService.selectList(map);
+		String draftString="";
+		for(Map temp:draftMap) {
+			draftString+=temp.get("RECEIVE_NO")+",";
+		}
 		
 		model.addAttribute("matingNo",matingNo);
 		model.addAttribute("animal",animal);
 		model.addAttribute("list",matingList);
+		model.addAttribute("draftString",draftString);
 		return "mating/matingMatch.tiles";
 	}/// mating_match
 	

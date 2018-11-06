@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style>
 .nav-tabs {
     border-bottom: none;
@@ -94,14 +95,17 @@
 	<!-- 프로필카드 -->
 	<c:if test='${!result}'>
 		<c:forEach var="dto" items="${list}">
-			<div class="card col-12 col-md-3">
-				<img class="card-img-top" src="<c:url value='${dto.ani_pic}'/>" alt="Card image">
-				<div class="card-body">
-					<h2 class="card-title" style="color:#1ABC9C">${dto.ani_name}</h2>
-					<p class="card-text">${dto.ani_age}살 ${dto.ani_kind}</p>
-					<a href="#" class="btn btn-primary moda" data-target="#modalIMG" data-toggle="modal" id="${dto.mating_no}">프로필 보기</a>
+			<c:if test="${not fn:contains(draftString,dto.mating_no)}">
+				<div class="card col-12 col-md-3">
+					<img class="card-img-top" src="<c:url value='${dto.ani_pic}'/>" alt="Card image">
+					<div class="card-body">
+						<h2 class="card-title" style="color:#1ABC9C">${dto.ani_name}</h2>
+						<p class="card-text">${dto.ani_age}살 ${dto.ani_kind}</p>
+							
+						<a href="#" class="btn btn-primary moda" data-target="#modalIMG" data-toggle="modal" id="${dto.mating_no}">프로필 보기</a>
+					</div>
 				</div>
-			</div>
+			</c:if>
 		</c:forEach>
 	</c:if>
 </div>
