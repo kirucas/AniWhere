@@ -4,10 +4,9 @@
 <%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <head>
-
 <script>
-
 function check() {
+			
     var isAttached = $('#summernote').summernote('code');
     if (fr.title.value == "") {
        alert("제목을 입력해 주세요.");
@@ -60,7 +59,6 @@ function check() {
    
 else {
 	
-		
  fr.action="<c:url value='/security/market/sellinsert.aw'/>"; 
  return true;
 }
@@ -73,29 +71,36 @@ else {
 
    $(function() {
 	   var count = 0;
-	   $('#enterBtn').submit(function(){
-		 
-		   var content="========판매현황 정리입니다.============\r\n";
-		   content+='제목:'+$('#title').val()+'\r\n';
-		   content+='판매물품명:'+$('#name').val()+'\r\n';
- 		   content+='희망가:'+$('#price').val()+'원\r\n';
- 		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
-		   content+='거래방법:'+$('#way').val()+'\r\n'; 
-           content+='연락처:'+$('#phone').val()+'\r\n'; 
-           content+='====================================\r\n'; 
-           $('#summernote').append(content);
-           	   
+	  
+	   $('#enterBtn').click(function(){	 
+		   
+	 /*   var content="=============상세사항================\r\n";
+	   content+='제목:'+$('#title').val()+'\r\n';
+	   content+='판매물품명:'+$('#name').val()+'\r\n';
+		   content+='희망가:'+$('#price').val()+'원\r\n';
+		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+	   content+='거래방법:'+$('#way').val()+'\r\n'; 
+          content+='연락처:'+$('#phone').val()+'\r\n'; 
+          content+='====================================\r\n';
+          $('#summernote').append(content); */
+          
+          if(count<3){
+        	  alert("사진은 최소 3장 이상 올려야 합니다");
+        	 
+          }else{
+        	  if(check()){
+	        	  console.log("성공");
+	        	  $('#fr').submit();
+        	  }
+          }
+          return false;
+           	 
 	   });
-	   
-	   
-	   
-	   
-	   
-	   
+	      
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
-    	 height:630,
+    	 height:630,    	
          callbacks : {
             onImageUpload : function(files, editor, welEditable) {
                for (var i = files.length - 1; i >= 0; i--) {
@@ -106,6 +111,11 @@ else {
       });
       
       function sendFile(file, el, wel) {
+    	 if(count>3){
+           	 alert('사진은 최대 4장까지 가능합니다')
+           	 return false;
+         }
+             
          var form_data = new FormData();
          form_data.append('file', file);
          $.ajax({
@@ -115,23 +125,23 @@ else {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
-                 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
+                       
+                success: function(url) {
+            	 //$('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
+            	 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />", function (image) {
+            		  image.css('width',150);
+            		  image.css('height',150);
+					  image.attr('name', 'sellpic');
+				});
+            	 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
                  count++;
-                
-                                
+                 console.log("success");
             },
             error : function() {
                console.log("error");
             }
-            
-          
-         //   if(file.length>=5||file.length<=2){
-         //  	 alert('사진의 최소3장 이상 최대 4장까지 가능합니다')
-         //  	 return;
-          //  }
-            
+                   
+         
          });
       }
           
@@ -142,25 +152,22 @@ else {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 <title>쓰기게시판 내부</title>
-
 <!-- include summernote css/js-->
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
 	rel="stylesheet">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-
 </head>
-
 <body>
-
 	<div class="container">
+	
 
 		<div style="margin-top: 10px"></div>
 		<br/>
 
 		<div class="col-md-12">
-        <form name="fr" id="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
+        <form name="fr" id="fr" method="post" accept-charset="utf-8" 
 				class="form-horizontal">
 				<div class="form-row">
 				<input type="hidden" name="table_name" value="sell"/>
@@ -188,11 +195,11 @@ else {
 					 <select id="use_listSelect"
 					class="select_filter" >
 					
-					<option value="food">사료및간식</option>
-					<option value="playtoy">장난감</option>
-					<option value="home">보금자리</option>
-					<option value="buty">미용용품</option>
-					<option value="medicine">의약품</option>
+					<option value="사료및간식">사료및간식</option>
+					<option value="장난감">장난감</option>
+					<option value="보금자리">보금자리</option>
+					<option value="미용용품">미용용품</option>
+					<option value="의약품">의약품</option>
 					<option value="other">기타</option>
 				</select>
 
@@ -238,70 +245,20 @@ else {
 					</div>
 
 				</div>
-				
-				
-							
+										
 		     <br/>
 							
-				<!-- Related Projects Row -->
-				<h3 class="my-4">판매자가 올린 사진 3개이상</h3>
-				
-				<!--  사진  3개이상 유효성 검사 항목 추가  -->
-                 
-				<input multiple="multiple" type="file" 
-					style="color: slategray; border: 1 solid silver; width: 300; height: 20">(최대 5M)
-				
-
-				<div class="row">
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img name="product"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img name="product"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img name="product"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img name="product"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-				</div>
+								
 				<!--사진 로직 끝 -->
 
 				
 				<div class="col-md-12 container">
 <textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
 				class="output"		maxlength="2048" required >
-※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.											
+										
 					
 </textarea>
 				</div>
-							
 				<div style="text-align: center">
 					<a href="<c:url value='/market/sell.aw'/>">
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
@@ -309,11 +266,8 @@ else {
 					<!-- <input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
 					-->
 					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
-
-				</div>
-				 										
+				</div>	 										
 			</form>
-						
 			<div style="margin-bottom: 50px"></div>
 
 		</div>
