@@ -277,41 +277,43 @@ $(function(){
 				</section>
 			</c:if>
 		</div>
-		<div class="tab-pane" id="passchange" role="tabpanel" aria-labelledby="passchange-tab">
-			<section class="member-settings-layout__content">
-				<div class="member-settings-layout__content-inner">
-					<h2 class="member-settings-layout__title">비밀번호 변경</h2>
-					<div class="member-settings-layout__sub">
-						개인정보 보호를 위해 비밀번호를 주기적으로 변경해주세요.
-					</div>
-					<form  action="#" method="post">
-						<div class="change-password">
-							<div class="change-password__inner">
-								<div class="member-input">
-									<div class="member-input__state">
-										<div>현재 비밀번호</div>
-										<input class="member-input__box passwordinput" type="password" autocomplete="off" name="currentPassword" value="">
-									</div>
-								</div>
-								<div class="member-input">
-									<div class="member-input__state">
-										<div>신규 비밀번호</div>
-										<input class="member-input__box passwordinput" type="password" autocomplete="off" name="newPassword" value="">
-									</div>
-								</div>
-								<div class="member-input">
-									<div class="member-input__state">
-										<div>신규 비밀번호 확인</div>
-										<input class="member-input__box passwordinput" type="password" autocomplete="off" name="checkNewPassword" value="">
-									</div>
-								</div>
-								<button type="submit" class="member-button change-password__save-btn">확인</button>
-							</div>
+		<c:if test="${record.mem_log!=1 or record.mem_log!=2 }">
+			<div class="tab-pane" id="passchange" role="tabpanel" aria-labelledby="passchange-tab">
+				<section class="member-settings-layout__content">
+					<div class="member-settings-layout__content-inner">
+						<h2 class="member-settings-layout__title">비밀번호 변경</h2>
+						<div class="member-settings-layout__sub">
+							개인정보 보호를 위해 비밀번호를 주기적으로 변경해주세요.
 						</div>
-					</form>
-				</div>
-			</section>
-		</div>
+						<form  action="#" method="post">
+							<div class="change-password">
+								<div class="change-password__inner">
+									<div class="member-input">
+										<div class="member-input__state">
+											<div>현재 비밀번호</div>
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="currentPassword" value="">
+										</div>
+									</div>
+									<div class="member-input">
+										<div class="member-input__state">
+											<div>신규 비밀번호</div>
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="newPassword" value="">
+										</div>
+									</div>
+									<div class="member-input">
+										<div class="member-input__state">
+											<div>신규 비밀번호 확인</div>
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="checkNewPassword" value="">
+										</div>
+									</div>
+									<button type="submit" class="member-button change-password__save-btn">확인</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</section>
+			</div>
+		</c:if>
 		<div class="tab-pane fade" id="goodbye" role="tabpanel" aria-labelledby="goodbye-tab">
 			<section class="member-settings-layout__content">
 				<div class="member-settings-layout__content-inner">
