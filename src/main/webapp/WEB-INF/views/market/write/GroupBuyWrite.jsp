@@ -156,7 +156,7 @@ else {
 
 </head>
 
-<body>
+<body>                                                      
  <form name="fr" id="fr" method="post" action="<c:url value='/security/market/groupbuyinsert.aw'/>"  accept-charset="utf-8" 
 				class="form-horizontal">
 	
