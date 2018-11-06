@@ -114,7 +114,7 @@
             
                <h5 class="card-title"><span id="no">상품일련번호:${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)+1}</span></h5>
 				<span id="title">제목:${record.dto.title}</span><em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em> 
-					
+					<br/>
 				<span id="animal_code">관련태그:
 						<c:choose>
 							<c:when test="${record.dto.animal_code eq '1'}">

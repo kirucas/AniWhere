@@ -273,6 +273,14 @@ function changeimage1() {
 			
 
 			</div>
+			<div class="col-md-12" style="border: 1px solid silver;margin-top:40px">
+				<h3 class="my-4">구매등록</h3>
+				<input name="reset"  class="btn btn-info" type="button" value="-"><input name="reset"  class="btn btn-info" type="button" value="0"><input name="reset"  class="btn btn-info" type="button" value="+"><br/>
+				<input name="reset"  class="btn btn-danger" type="button" value="구매"  style="margin-top:20px;margin-left:200px;">
+			
+			
+
+			</div>
           
         </div>
 
