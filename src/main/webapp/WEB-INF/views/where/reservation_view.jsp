@@ -44,7 +44,7 @@
 /* 예약취소버튼 위에 margin좀주기 */
 #btn{
 	clear:both;
-	margin-top: 70px;
+	margin-top: 100px;
 }
 #under_line{
 	 text-decoration: underline;
