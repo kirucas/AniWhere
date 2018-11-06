@@ -9,7 +9,6 @@ import java.util.Vector;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSplitPaneUI;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
