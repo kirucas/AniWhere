@@ -2,6 +2,7 @@ package com.animal.aniwhere.web.member;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -44,6 +45,9 @@ import com.animal.aniwhere.service.member.AnimalDTO;
 import com.animal.aniwhere.service.member.MemberDTO;
 import com.animal.aniwhere.service.member.NaverLoginBO;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.google.android.gcm.server.Message;
+import com.google.android.gcm.server.MulticastResult;
+import com.google.android.gcm.server.Sender;
 
 @Controller
 public class MemberController {
@@ -57,7 +61,7 @@ public class MemberController {
 
 	@Resource(name = "animalService")
 	private AnimalServiceImpl aniservice;
-	
+
 	@Resource(name = "tokenService")
 	private AndroidTokenServiceImpl androidservice;
 
@@ -214,18 +218,18 @@ public class MemberController {
 
 		return "member/animal_enroll";
 	}////////// animal_enroll
-	
+
 	@RequestMapping("/animal/enroll_edit.aw")
-	public String animal_enroll_edit(@RequestParam Map map , Model model) throws Exception {
-		
+	public String animal_enroll_edit(@RequestParam Map map, Model model) throws Exception {
+
 		map.put("ani_no", map.get("ani_no"));
-		AnimalDTO record =aniservice.selectOne(map);
-		model.addAttribute("record",record);
+		AnimalDTO record = aniservice.selectOne(map);
+		model.addAttribute("record", record);
 		return "member/animal_enroll_edit";
 	}
 
 	@RequestMapping("/signIn/security.aw")
-	public String security(@RequestParam Map map,Authentication auth, HttpSession session) throws Exception {
+	public String security(@RequestParam Map map, Authentication auth, HttpSession session) throws Exception {
 		System.out.println("인증된 사용자:" + auth.getPrincipal());
 		UserDetails authenticatedUser = ((UserDetails) auth.getPrincipal());
 		System.out.println(authenticatedUser.getUsername());
@@ -234,17 +238,17 @@ public class MemberController {
 		MemberDTO dto = service.selectOne(map);
 		session.setAttribute("mem_id", map.get("mem_id"));
 		session.setAttribute("mem_no", dto.getMem_no());
-		
+
 		return "forward:/";
 	}/// security
-	
+
 	@RequestMapping("/signIn/securityMessage.aw")
-	public String securityMessage(@RequestParam Map map,Model model) throws Exception {
+	public String securityMessage(@RequestParam Map map, Model model) throws Exception {
 		System.out.println(map.get("error"));
-		model.addAttribute("error",map.get("error"));
+		model.addAttribute("error", map.get("error"));
 		return "member/securityMessage";
 	}/// securityMessage
-	
+
 	/*
 	 * @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
 	 * public String signInProcess(@RequestParam Map map, HttpSession session, Model
@@ -313,12 +317,12 @@ public class MemberController {
 		record = service.selectOne(map);
 		// 동물 조회
 		anirecord = aniservice.selectList(map);
-		
+
 		String inter = record.getMem_interani();
 		StringBuffer buf = new StringBuffer();
-		String[] arr = {"강아지","고양이","파충류,양서류","조류","기타 포유류"};
-		for(int i=0; i<inter.length();i++) {
-				buf.append(arr[i]);
+		String[] arr = { "강아지", "고양이", "파충류,양서류", "조류", "기타 포유류" };
+		for (int i = 0; i < inter.length(); i++) {
+			buf.append(arr[i]);
 		}
 		record.setMem_interani(buf.toString());
 		// 데이터 저장]
@@ -330,9 +334,10 @@ public class MemberController {
 	@RequestMapping(value = "/enrollProcess.aw", method = RequestMethod.POST)
 	public String enrollProcess(MultipartHttpServletRequest mhsr, @RequestParam Map map, HttpSession session,
 			Model model) throws Exception {
-		//String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
-		//MultipartFile upload = mhsr.getFile("ani_photo");
-		//String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+		// String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+		// MultipartFile upload = mhsr.getFile("ani_photo");
+		// String newFilename = FileUpDownUtils.getNewFileName(phisicalPath,
+		// upload.getOriginalFilename());
 		List<String> uploadList = AwsS3Utils.uploadFileToS3(mhsr, "animalprofile"); // S3 업로드
 
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -342,7 +347,7 @@ public class MemberController {
 		map.put("ani_species", mhsr.getParameter("ani_species").toString());
 		map.put("ani_kind", mhsr.getParameter("ani_kind").toString());
 		map.put("ani_pic", AwsS3Utils.LINK_ADDRESS + uploadList.get(0));
-		
+
 		int enroll = aniservice.insert(map);
 		if (enroll == 1)
 			model.addAttribute("check", 1);
@@ -351,12 +356,11 @@ public class MemberController {
 
 		return "member/enroll_process";
 	}////////// enrollProcess
+
 	@ResponseBody
 	@RequestMapping("/security/member/animal/delete.awa")
-	public String delete_ani(@RequestParam Map map, HttpSession session,
-			Model model) throws Exception {
+	public String delete_ani(@RequestParam Map map, HttpSession session, Model model) throws Exception {
 
-		
 		int enroll = aniservice.insert(map);
 		if (enroll == 1)
 			model.addAttribute("check", 1);
@@ -365,96 +369,125 @@ public class MemberController {
 
 		return "member/enroll_process";
 	}////////// enrollProcess
-	
-	
-	
-	//안드로이드 용
- 	@ResponseBody
- 	@RequestMapping(value="/android.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
- 	public String androidLogin(@RequestParam Map map,HttpSession session) throws Exception{
- 		
- 		MemberDTO dto = service.selectOne(map);
- 		boolean flag = passwordEncoder.matches(map.get("mem_pw").toString(), dto.getMem_pw());		
- 		if(!flag) {
- 			return "false";
- 		}
- 		
- 		return dto.getMem_id()+","+dto.getMem_no();       
-    }
- 	
- 	
- 	//안드로이드 googleLogin
- 	@ResponseBody
- 	@RequestMapping(value = "/androidsignUpProcess.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
- 	public String androidSignUp(@RequestParam Map map) throws Exception{
- 			 		
- 		MemberDTO dto = service.selectOne(map);				
- 	 	if(dto != null) {
- 	 		return dto.getMem_id()+","+dto.getMem_no();
- 	 	}
-		 		
- 		map.put("mem_log",Integer.parseInt(map.get("mem_log").toString()));		
- 		
- 		int signup = service.insert(map);
- 		
- 		if(signup==2) {
- 			dto = service.selectOne(map);				
- 	 		return dto.getMem_id()+","+dto.getMem_no();
- 		}else {
- 	    	return "false";
- 	    }	     
-    }
- 	
- 	@ResponseBody
- 	@RequestMapping(value="/androidMember.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
- 	public String androidMember(@RequestParam Map map) throws Exception{ 		
- 		MemberDTO dto = service.selectOne(map);
- 		JSONObject json = new JSONObject();
- 		json.put("mem_id", dto.getMem_id());
- 		json.put("mem_name", dto.getMem_name());
- 		json.put("mem_nickname", dto.getMem_nickname());
- 		json.put("mem_interani", dto.getMem_interani());
- 		json.put("mem_gender", dto.getMem_gender()); 	
- 		json.put("mem_pw", dto.getMem_pw());
- 		return json.toJSONString();       
-    }
- 	
- 	@ResponseBody
- 	@RequestMapping(value="/androidUpdate.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
- 	public String androidUpDate(@RequestParam Map map) throws Exception{ 		
- 		
- 		int affect = service.update(map);
- 		if(affect == 0) {
- 			return "false";
- 		}
- 		return "true";       
-    }
- 	@ResponseBody
- 	@RequestMapping(value="/fireBaseInsertToken.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
- 	public String fireBaseInsertToken(@RequestParam Map map) throws Exception{ 		
- 		System.out.println("=======fireBaseInsertToken======="); 	
- 		Object obj=map.get("mtk_token");
- 		System.out.println("obj="+obj.toString());
- 		System.out.println(map.get("mem_no"));
- 
- 		if(!obj.equals("null")) {
- 			System.out.println("널인데 왜 들어오지");
- 			Map result = androidservice.selectOne(map);
- 			if(result == null ) {
- 	 			androidservice.insert(map);
- 	 			System.out.println("========1=======");
- 	 		}else {
- 	 			int affect = androidservice.delete(map);
- 	 			System.out.println("========2=======");
- 	 			System.out.println(affect);
- 	 			if(affect == 1) {
- 	 				System.out.println("========4=======");
- 	 				androidservice.insert(map);
- 	 				System.out.println("========4=======");
- 	 			}
- 	 		}
- 		}
- 				
- 	 	return "입력성공";   
-    }
+
+	// 안드로이드 용
+	@ResponseBody
+	@RequestMapping(value = "/android.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String androidLogin(@RequestParam Map map, HttpSession session) throws Exception {
+
+		MemberDTO dto = service.selectOne(map);
+		boolean flag = passwordEncoder.matches(map.get("mem_pw").toString(), dto.getMem_pw());
+		if (!flag) {
+			return "false";
+		}
+
+		return dto.getMem_id() + "," + dto.getMem_no();
+	}
+
+	// 안드로이드 googleLogin
+	@ResponseBody
+	@RequestMapping(value = "/androidsignUpProcess.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String androidSignUp(@RequestParam Map map) throws Exception {
+
+		MemberDTO dto = service.selectOne(map);
+		if (dto != null) {
+			return dto.getMem_id() + "," + dto.getMem_no();
+		}
+
+		map.put("mem_log", Integer.parseInt(map.get("mem_log").toString()));
+
+		int signup = service.insert(map);
+
+		if (signup == 2) {
+			dto = service.selectOne(map);
+			return dto.getMem_id() + "," + dto.getMem_no();
+		} else {
+			return "false";
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/androidMember.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String androidMember(@RequestParam Map map) throws Exception {
+		MemberDTO dto = service.selectOne(map);
+		JSONObject json = new JSONObject();
+		json.put("mem_id", dto.getMem_id());
+		json.put("mem_name", dto.getMem_name());
+		json.put("mem_nickname", dto.getMem_nickname());
+		json.put("mem_interani", dto.getMem_interani());
+		json.put("mem_gender", dto.getMem_gender());
+		json.put("mem_pw", dto.getMem_pw());
+		return json.toJSONString();
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/androidUpdate.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String androidUpDate(@RequestParam Map map) throws Exception {
+
+		int affect = service.update(map);
+		if (affect == 0) {
+			return "false";
+		}
+		return "true";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/FireBasePushAsyncTask.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String androidGetToken(@RequestParam Map map) throws Exception {
+		Map result = androidservice.selectOne(map);
+		if (!result.get("MTK_TOKEN").equals("null")) {
+			System.out.println("FireBasePushAsyncTask");
+
+			String API_KEY = "AAAAHkvJ_3Y:APA91bG8v0lVhWawMh5bzuUjornLGLrJhlI6SQ1CkjOC82chQHKT2sC79WmlA-eZka6Gwe6sru3GegbZmwK1zv_M_ig9Qv3dgzLf4HrL_XJj42jhY5hhnI-eFB0dE_nkqdZCPmWmDJ5o";
+			String gcmURL = "https://fcm.googleapis.com/fcm/send";
+					
+			Sender sender = new Sender(API_KEY);
+	        Message msg = new Message.Builder() 
+	        		.addData("message","서비스 확인되였습니다")//데이타 메시지
+	                .addData("title","알림서비스")//데이타 타이틀       
+	                .build();
+	        ArrayList<String> token = new ArrayList<String>(); 
+	        token.add(result.get("MTK_TOKEN").toString());
+	        try {
+		        MulticastResult multicast = sender.send(msg,token,3);
+		        if(multicast != null) {
+		        	return "true";
+		        }
+	        }catch(Exception e) {
+	        	System.out.println(e.getMessage());
+	        	return "err";
+	        }
+	        
+		}
+		return "false";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/fireBaseInsertToken.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String fireBaseInsertToken(@RequestParam Map map) throws Exception {
+		System.out.println("=======fireBaseInsertToken=======");
+		Object obj = map.get("mtk_token");
+		System.out.println("obj=" + obj.toString());
+		System.out.println(map.get("mem_no"));
+
+		if (!obj.equals("null")) {
+			System.out.println("널인데 왜 들어오지");
+			Map result = androidservice.selectOne(map);
+			if (result == null) {
+				androidservice.insert(map);
+				System.out.println("========1=======");
+			} else {
+				int affect = androidservice.delete(map);
+				System.out.println("========2=======");
+				System.out.println(affect);
+				if (affect == 1) {
+					System.out.println("========4=======");
+					androidservice.insert(map);
+					System.out.println("========4=======");
+				}
+			}
+		}
+
+		return "입력성공";
+	}
 }//////////////////// MemberController class
