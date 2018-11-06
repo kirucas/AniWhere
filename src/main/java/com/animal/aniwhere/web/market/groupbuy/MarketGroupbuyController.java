@@ -1,13 +1,16 @@
 package com.animal.aniwhere.web.market.groupbuy;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,27 +22,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.animal.aniwhere.service.AllCommentDTO;
 import com.animal.aniwhere.service.AwsS3Utils;
+import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.market.GroupBuyServiceImpl;
 import com.animal.aniwhere.service.impl.market.GroupBuyingListServiceImpl;
+import com.animal.aniwhere.service.market.BuySellDTO;
 import com.animal.aniwhere.service.market.GroupBuyDTO;
 import com.animal.aniwhere.web.board.FileUpDownUtils;
 
 @Controller
 public class MarketGroupbuyController {
-
-		
+			
 	
 		 //buy컨트롤러 
 			@Resource(name="groupBuyService")
 			private GroupBuyServiceImpl allBoardService;
-			
+			        
 			@Value("${PAGESIZE}")
 			private int pageSize;
 			@Value("${BLOCKPAGE}")
 			private int blockPage;
-
+      //
 		@RequestMapping("/market/{path}/groupbuy.aw")
 		public String inside(@PathVariable String path) throws Exception {
 			return "market/" + path + "/inside.tiles";
@@ -48,15 +53,20 @@ public class MarketGroupbuyController {
 		}////////// move
 		
 		//입력 후 리스트로 이동 
-				@RequestMapping("/security/groupbuy/groupbuyinsert.aw")
-				public String miss_insert(@RequestParam Map map,HttpSession session) throws Exception {
-					
-					map.put("table_name","groupbuy");
-					map.put("mem_no", session.getAttribute("mem_no"));			
-					allBoardService.insert(map);				
-					return "redirect:/market/groupbuy/temporarily.aw";
-					
-				}////////// miss_write
+		@RequestMapping("/security/market/groupbuyinsert.aw")
+		public String groupbuy_insert(@RequestParam Map map,HttpSession session) throws Exception {
+			
+			System.out.println("deadline"+ map.get("deadline"));
+			
+			map.put("table_name","group_buy");
+			map.put("mem_no", session.getAttribute("mem_no"));			
+			allBoardService.insert(map);
+			
+			System.out.println("끝까지 오는지 확인 ");
+			
+			return "redirect:/market/groupbuy/temporarily.aw";
+			
+		}////////// groupbuy_write
 				
 				
 				@RequestMapping("/market/groupbuy/temporarily.aw")
@@ -67,7 +77,7 @@ public class MarketGroupbuyController {
 						)throws Exception {
 					//서비스 호출]
 					//페이징을 위한 로직 시작]
-					map.put("table_name","groupbuy");
+					map.put("table_name","group_buy");
 					//전체 레코드 수
 				
 					int totalRecordCount= allBoardService.getTotalRecord(map);
@@ -80,21 +90,49 @@ public class MarketGroupbuyController {
 					map.put("start",start);
 					map.put("end",end);
 					
-					//시험용
-					Set<String> set = map.keySet();
-					for(String key:set) {
-						System.out.println(key+":"+map.get(key));}
-							
+					
+					
 					//페이징을 위한 로직 끝]
 					List<GroupBuyDTO> list = (List<GroupBuyDTO>) allBoardService.selectList(map);
 					//페이징 문자열을 위한 로직 호출]
-					String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/market/sell.aw?");
-					//데이터 저장]
-					model.addAttribute("pagingString", pagingString);
-					model.addAttribute("list", list);
+					 List<Map> collect = new Vector<>();
+					 
+					 for(GroupBuyDTO dto : list) {
+				         Map record = new HashMap();
+				         record.put("dto", dto);
+				         Map temp = new HashMap();
+				         temp.put("table_name","group_buy");
+				         temp.put("no", dto.getNo());
+				         
+				         
+				         record.put("cmtCount", cmtService.commentCount(temp));
+				         
+				         collect.add(record);
+				         
+				      }
+					 
+					//페이징 문자열을 위한 로직 호출]
+					 if(map.get("searchWord") != null) {
+				         String searchWord = map.get("searchWord").toString();   
+				         String searchColumn = map.get("searchColumn").toString();   
+
+				         String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+				               req.getContextPath()+"/market/groupbuy.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+				         
+				         model.addAttribute("pagingString", pagingString);
+				      }
+				      
+				      else {
+				         String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+				               req.getContextPath()+"/market/groupbuy.aw?");
+				         model.addAttribute("pagingString", pagingString);
+				      }
+					 
+					
+					model.addAttribute("list", collect);
 					model.addAttribute("totalRecordCount", totalRecordCount);
-					model.addAttribute("pageSize", pageSize);
-					model.addAttribute("nowPage", nowPage);
+					 model.addAttribute("nowPage", nowPage);
+				     model.addAttribute("pageSize", pageSize);
 					//뷰정보 반환]
 				
 					return "market/groupbuy/temporarily.tiles";
@@ -106,27 +144,32 @@ public class MarketGroupbuyController {
 				@RequestMapping("/groupbuy/groupbuyinside.aw")
 				public String buyinside(@RequestParam Map map,Model model,HttpSession session) throws Exception {
 					
+					
+					System.out.println("끝까지 오는지 확인 1");
+					System.out.println(map.get("buy_no"));
+					
 					map.put("mem_no",session.getAttribute("mem_no"));
-					map.put("table_name","groupbuy");
-					map.put("no", map.get("groupbuy_no"));
+					map.put("table_name","group_buy");
+					map.put("no", map.get("buy_no"));
 						
 					//서비스 호출]
-					System.out.println("====================1");
-				//	System.out.println(map.get("no").toString());
+				
 					
 					//게시글
 					GroupBuyDTO record = allBoardService.selectOne(map);
 					
 					//테스트용 
 					System.out.println("====================2");
-					//데이터 저장]
-					model.addAttribute("record", record);
+					System.out.println(record.getAnimal_name());					
 					//줄바꿈처리
 					record.setContent(record.getContent().replace("\r\n", "<br/>")); //???
+					//데이터 저장]
+					model.addAttribute("record", record);
 					//뷰정보 반환]
 					
 					return //"forward:/market/"+path+"/temporarily.aw"
-			   				"market/groupbuy/groupbuyside.tiles";
+			   				"market/inside/groupbuyinside.tiles";
+					
 					       
 					
 				}////////// buyinside
@@ -144,7 +187,7 @@ public class MarketGroupbuyController {
 					
 					
 					map.put("mem_no", session.getAttribute("mem_no"));
-					map.put("table_name","groupbuy");
+					map.put("table_name","group_buy");
 					//map.put("no", map.get("buy_no"));
 					
 					/*//키값 확인ㅇ
@@ -182,11 +225,11 @@ public class MarketGroupbuyController {
 				
 				//수정폼 이동 --자기아이디로 자기글 view에서 수정 누르면 이쪽으로 이동 
 				@RequestMapping("/security/market/groupbuyedit.aw")
-				public String find_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
+				public String groupbuy_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 						
 					map.put("mem_no",session.getAttribute("mem_no"));
-					map.put("table_name","groupbuy");
-					map.put("no", map.get("groupbuy_no"));
+					map.put("table_name","group_buy");
+					map.put("no", map.get("buy_no"));
 					
 					//게시글
 					GroupBuyDTO record = allBoardService.selectOne(map);
@@ -197,14 +240,14 @@ public class MarketGroupbuyController {
 					
 					return "market/edit/editGroupBuyWrite.tiles";
 					
-				}////////// miss_write
+				}////////// groupbuy_write
 				
 				//수정 실행하기
 				@RequestMapping("/security/market/groupbuyupdate.aw")
 				public String edit(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 					map.put("mem_no",session.getAttribute("mem_no"));
-					map.put("table_name","groupbuy");
-					map.put("no",map.get("groupbuy_no"));
+					map.put("table_name","group_buy");
+					map.put("no",map.get("buy_no"));
 					
 					allBoardService.update(map);
 					
@@ -216,8 +259,8 @@ public class MarketGroupbuyController {
 				@RequestMapping("/market/groupbuy/delete.aw")
 				public String delete(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 					map.put("mem_no",session.getAttribute("mem_no"));
-					map.put("table_name","groupbuy");
-					map.put("no",map.get("groupbuy_no"));
+					map.put("table_name","group_buy");
+					map.put("no",map.get("buy_no"));
 						
 					allBoardService.delete(map);
 					
@@ -244,6 +287,100 @@ public class MarketGroupbuyController {
 			        //return "/Upload/"+newFilename;
 					return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
 			   }
+				
+			////여기서부터는 댓글 controller				
+				@Resource(name="allCommentService")
+				   private AllCommentServiceImpl cmtService;
+				
+				   @ResponseBody
+				   @RequestMapping(value="/groupbuy/groupbuy/cmt_write.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				   public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
+				      
+				      map.put("mem_no", session.getAttribute("mem_no"));
+				      map.put("table_name", "group_buy");
+				      map.put("no", map.get("no"));
+				      
+				      cmtService.insert(map);
+				      
+				      return map.get("no").toString();
+				      
+				   }///////////////////
+
+				   
+				   @ResponseBody
+				      @RequestMapping(value="/market/groupbuy/cmt_write.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				      public String buy_write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
+				         
+				         map.put("mem_no", session.getAttribute("mem_no"));
+				         map.put("table_name", "group_buy");
+				         map.put("no", map.get("no"));
+				         
+				         cmtService.insert(map);
+				         
+				         return map.get("no").toString();
+				         
+				      }///////////////////
+				   
+				   @ResponseBody
+				      @RequestMapping(value="/market/groupbuy/cmt_list.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				      public String buy_list(@RequestParam Map map,HttpSession model) throws Exception{
+				         
+				         map.put("table_name", "group_buy");
+				         map.put("origin_no", map.get("no"));
+				         
+				         List<AllCommentDTO> collections = cmtService.selectList(map);
+				         
+				         List<Map> comments = new Vector<>();
+				         
+				         for (AllCommentDTO dto : collections) {
+				            
+				               Map record = new HashMap();
+				               record.put("cmt_no", dto.getCmt_no());
+				               model.setAttribute("cmt_no", dto.getCmt_no());
+				               record.put("cmt_content", dto.getCmt_content());
+				               record.put("mem_nickname", dto.getMem_nickname());
+				               record.put("regidate", dto.getRegidate().toString());
+				               record.put("origin_no", dto.getOrigin_no());
+				               record.put("mem_no", dto.getMem_no());         
+
+				               comments.add(record);
+				            }   
+				         return JSONArray.toJSONString(comments);
+				      }//////////////////
+				   
+				   @ResponseBody
+				      @RequestMapping(value="/market/groupbuy/cmt_edit.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				      public String buy_update(@RequestParam Map map,HttpSession session) throws Exception{
+				         
+				         map.put("table_name", "group_buy");
+				         map.put("cmt_content", map.get("cmt_content"));
+				       
+				         
+				         //System.out.println("dddd1");
+				         /*
+				         Set<String> set = map.keySet();
+				         for(String key:set) {
+				            System.out.println(key+":"+map.get(key));
+				         }
+				         */
+				         //System.out.println("dddd2");
+				         				         
+				         cmtService.update(map);
+				         
+				         return map.get("no").toString();
+				      }////////////
+				   			   
+				   @ResponseBody
+				   @RequestMapping(value="/market/groupbuy/cmt_delete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				   public String buy_delete(@RequestParam Map map,HttpSession session) throws Exception{
+				         
+				       map.put("table_name", "group_buy");
+				       //map.put("cmt_no", session.getAttribute("cmt_no"));
+				         
+				       cmtService.delete(map);
+				         
+				       return map.get("no").toString();
+				   }
 		
 		
 		

@@ -25,7 +25,32 @@
 					for (var i= files.length -1; i >= 0; i-- ){
 						sendFile(files[i],this);
 					}
-				}
+				},
+				onKeydown: function (e) { 
+                    var t = e.currentTarget.innerText; 
+                    if (t.trim().length >= 2000 ) {
+                        //delete keys, arrow keys, copy, cut
+                        if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey))
+                        e.preventDefault(); 
+                    } 
+                },
+                onKeyup: function (e) {
+                    var t = e.currentTarget.innerText;
+                    $('#maxContentPost').text(2000 - t.trim().length);
+                },
+                onPaste: function (e) {
+                    var t = e.currentTarget.innerText;
+                    var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                    e.preventDefault();
+                    var maxPaste = bufferText.length;
+                    if(t.length + bufferText.length > 2000){
+                        maxPaste = 2000 - t.length;
+                    }
+                    if(maxPaste > 0){
+                        document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
+                    }
+                    $('#maxContentPost').text(2000 - t.length);
+                }
 			}
 		})
 		function sendFile(file, el, wel) {
@@ -57,7 +82,7 @@
 		action='<c:url value="/security/animal/dog/quest/quest_reply.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-sm-2 control-label" style="font-size:20px">제목</label>
-			<input readonly="readonly" title="변경이 안됩니다" class="form-control" type="text" maxlength="50" name="quest_title" id="quest_title" value="${record.quest_title }글에 대한 답변 " />
+			<input readonly="readonly" title="변경이 안됩니다" class="form-control" type="text" maxlength="50" name="quest_title" id="quest_title" value="└───＞${record.quest_title }글에 대한 답변 " />
 		</div>
 		<div class="form-row" style="padding-top: 10px;padding-bottom: 20px">
 			<label for="quest_content" class="col-sm-2 control-label" style="font-size:20px">내용</label>

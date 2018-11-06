@@ -69,11 +69,11 @@ public class BuySellDTO {
 	
 	public void setAnimal_code(String animal_code) {
 		this.animal_code = animal_code;
-	}//////////
+	}/////////
 	
 	public String getMem_nickname() {
 		return mem_nickname;
-	}//////////
+	}/////////
 	
 	public void setMem_nickname(String mem_nickname) {
 		this.mem_nickname = mem_nickname;

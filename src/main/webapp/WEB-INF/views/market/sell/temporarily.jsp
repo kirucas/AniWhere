@@ -34,6 +34,7 @@ html {
 }
 </style>
 
+
 	<div class="card mb-5" style="margin-top: 50px">
 
 		<div class="card-header">판매게시판</div>
@@ -79,16 +80,16 @@ html {
 				
 							<span id="animal_code">
 						<c:choose>
-							<c:when test="${record.animal_code eq '1'}">
+							<c:when test="${record.dto.animal_code eq '1'}">
 								<span>[개]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '2'}">
+							<c:when test="${record.dto.animal_code eq '2'}">
 								<span>[고양이]</span>		
 							</c:when>
-							<c:when test="${record.animal_code eq '3'}">
+							<c:when test="${record.dto.animal_code eq '3'}">
 								<span>[파충류]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '4'}">
+							<c:when test="${record.dto.animal_code eq '4'}">
 								<span>[조류]</span>
 							</c:when>
 							<c:otherwise>
@@ -97,52 +98,30 @@ html {
 						</c:choose>
 					</span>
 																																						 
-								<a href="<c:url value='/market/sellinside.aw?sell_no=${record.no}'/>">
+								<a href="<c:url value='/market/sellinside.aw?sell_no=${record.dto.no}'/>">
 																  
-								<span id="title">${record.title}</span></a>
+								<span id="title">${record.dto.title}</span><em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em> </a>
 							
 						        </td>
 						        <!--  타이틀 끝 -->
 							
-							<td><span id="mem_no">${record.mem_nickname}</span></td>
-							<td><span id="count">${record.count} </span> </td>
-							<td><span id="regidate">${record.regidate}</span></td>
+							<td><span id="mem_no">${record.dto.mem_nickname}</span></td>
+							<td><span id="count">${record.dto.count} </span> </td>
+							<td><span id="regidate">${record.dto.regidate}</span></td>
 						</tr>
 						
 					</c:forEach>
-
 					
 				</tbody>
 			</table>
 		</div>
 
-
 <!-- 검색용  -->
 
-<div class="row" style="text-align: middle">
-	<div>${pagingString}</div>
-</div>
-
-		<div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4"
-			style="float: none; margin: 0 auto;">
-
-			<nav aria-label="...">
-				<ul class="pagination justify-content-end mt-3 mr-3">
-
-					<li class="page-item disabled"><span class="page-link">Previous</span>
-					</li>
-					<li class="page-item active"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><span class="page-link" href="#">2</span></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item"><a class="page-link" href="#">5</a></li>
-					<li class="page-item"><a class="page-link" href="#">6</a></li>
-					<li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
-
-
-			</nav>
-		</div>
+<div style="margin-top: 20px;">
+	
+	</div>
+${pagingString}
 
 		<!-- 검색용 UI -->
 
@@ -162,12 +141,10 @@ html {
 						<input type="text" name="searchWord" class="form-control" />
 					</div>
 					<button type="submit" class="btn btn-primary">검색</button>
-
 				</form>
 			</div>
 		</div>
-		
-		
+				
 		</div>
 
 	<!-- 푸터 와야하는 자리 -->

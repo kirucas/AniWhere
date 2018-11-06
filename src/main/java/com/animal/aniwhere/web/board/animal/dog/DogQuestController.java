@@ -1,8 +1,10 @@
 package com.animal.aniwhere.web.board.animal.dog;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.AllCommentService;
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.animal.QuestBoardDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.web.board.FileUpDownUtils;
@@ -48,9 +51,6 @@ public class DogQuestController {
 			@RequestParam(required=false,defaultValue="1") int nowPage,//페이징용 nowPage파라미터 받기용
 			HttpSession session) throws Exception{
 		map.put("ani_category", ANI_CATEGORY);
-		System.out.println(map.get("searchWord"));
-		System.out.println(map.get("searchColumn"));
-		
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		//전체 레코드 수
@@ -62,11 +62,37 @@ public class DogQuestController {
 		map.put("end",end);
 		//페이징을 위한 로직 끝]
 		List<QuestBoardDTO> list= (List<QuestBoardDTO>) questService.selectList(map);
+		
+		List<Map> collect = new Vector<>();
+		for(QuestBoardDTO dto : list) {
+			Map record = new HashMap();
+			record.put("dto", dto);
+			Map temp = new HashMap();
+			temp.put("table_name","quest");
+			temp.put("no", dto.getNo());
+			record.put("cmtCount", allCommentService.commentCount(temp));
+			
+			collect.add(record);
+		}
 		//페이징 문자열을 위한 로직 호출]
-		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/animal/dog/quest/quest_list.aw?");
+		if(map.get("searchWord") != null) {
+	         String searchWord = map.get("searchWord").toString();   
+	         String searchColumn = map.get("searchColumn").toString();   
+
+	         String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+	               req.getContextPath()+"/animal/dog/quest/quest_list.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+	         
+	         model.addAttribute("pagingString", pagingString);
+	      }
+	      
+	      else {
+	         String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+	               req.getContextPath()+"/animal/dog/quest/quest_list.aw?");
+	         model.addAttribute("pagingString", pagingString);
+	      }
 		//데이타 저장]
-		model.addAttribute("list", list);
-		model.addAttribute("pagingString", pagingString);
+		//model.addAttribute("list", list);
+		model.addAttribute("list", collect);
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("pageSize", pageSize);
@@ -130,18 +156,31 @@ public class DogQuestController {
 	public String delete(@RequestParam Map map,Model model) throws Exception{
 		int successFail = questService.delete(map);
 		model.addAttribute("successFail",successFail);
+		model.addAttribute("checking",map.get("checking"));
 		return "board/animal/dog/quest/quest_message";
 	}
 	
 	@ResponseBody
-    @RequestMapping(value="/animal/dog/quest/Upload.aw")
-    public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
+	@RequestMapping(value="/animal/dog/quest/Upload.aw")
+	public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("file");
-		
 		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-		File file = new File(phisicalPath+File.separator+newFilename);
-		upload.transferTo(file);
-        return "/Upload/"+newFilename;
-   }
+		//File file = new File(phisicalPath+File.separator+newFilename);
+		//upload.transferTo(file);
+		List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "quest"); // S3  업로드
+		//return "/Upload/"+newFilename;
+		return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/animal/dog/quest/quest_hit.aw",method=RequestMethod.POST)
+	public String hit(@RequestParam Map map) throws Exception{
+	
+		map.put("no", map.get("no").toString());
+		int hitCount= questService.addHitCount(map);
+		
+		return "success";
+	}//////////////hit()
+	
 }//////////////////// DogQuestController
