@@ -269,20 +269,26 @@ public class WhereController {
 	public String reservate(Model model, @RequestParam Map map, HttpSession session, HttpServletRequest req) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no").toString());
 		
-		String qr_link = QRCode_Generator.createQRCodeData(map, req, storelocservice, memberService);
-		
-		if(qr_link.equals("")) {
-			model.addAttribute("check", 0);
-			return "where/Message";
-		}
+		String qr_link = AwsS3Utils.namingForS3("QRCodes");
 		
 		map.put("qr_link", qr_link);
 		
 		int insert = reservationservice.insert(map);
-		if (insert == 1)
-			model.addAttribute("check", 1);
-		else
+		if (insert == 0) {
 			model.addAttribute("check", 0);
+			return "where/Message";
+		}
+		
+		boolean result_QRCreate = QRCode_Generator.createQRCodeData(map, req, storelocservice, memberService, reservationservice);
+		
+		if(!result_QRCreate) {
+			reservationservice.delete(map);
+			model.addAttribute("check", 0);
+			return "where/Message";
+		}
+		
+		model.addAttribute("check", 1);
+		
 		// 뷰정보 반환]
 		return "where/Message";
 	} // reservate
@@ -328,11 +334,8 @@ public class WhereController {
 	) throws Exception {
 		map.put("rv_no", map.get("rv_no"));
 		ReservationDTO dto = reservationservice.selectOne(map);
-		map.put("bizesid", dto.getStore_no());
-		StoreLocationDTO dtoS = storelocservice.selectOne(map);
 		dto.setQr_link(AwsS3Utils.LINK_ADDRESS + dto.getQr_link());
 		model.addAttribute("dto",dto);
-		model.addAttribute("adr", dtoS.getRdnmadr());
 		return "where/reservation_view.tiles";
 	}
 	
