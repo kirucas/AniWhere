@@ -441,9 +441,34 @@ public class WhereController {
 			record.put("hoNo", list.getHono());
 			collections.add(record);
 		}
-		System.out.println("=========zz=========");
-		System.out.println(JSONArray.toJSONString(collections));
 		return JSONArray.toJSONString(collections);
 	}
+	@ResponseBody
+	@RequestMapping(value = "/androidMyReservation.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String androidMyAnimal(@RequestParam Map map) throws Exception {
+	
+		int totalRecordCount = reservationservice.getTotalRecord(map);
+		int start = 1;
+		int end = totalRecordCount;
+		map.put("start", start);
+		map.put("end", end);
+		List<ReservationDTO> lists = reservationservice.selectList(map);
+		List<Map> collections = new Vector<Map>();
+		for (ReservationDTO list : lists) {
+			Map record = new HashMap();
+			record.put("rv_no", list.getRv_no());
+			record.put("mem_no", list.getMem_no());
+			record.put("store_no", list.getStore_no());
+			record.put("apply_date", list.getApply_date());
+			record.put("booking_date", list.getBooking_date());
+			record.put("qr_link", AwsS3Utils.LINK_ADDRESS + list.getQr_link());
+			record.put("mem_name", list.getMem_name());
+			record.put("bizesnm", list.getBizesnm());
+			record.put("brchnm", list.getBrchnm());
+			collections.add(record);
+		}
+		System.out.println(JSONArray.toJSONString(collections));
+		return JSONArray.toJSONString(collections);	
+	}// reservate_check
 
 }
