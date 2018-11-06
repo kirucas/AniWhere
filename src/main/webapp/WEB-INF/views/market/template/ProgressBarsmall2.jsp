@@ -163,9 +163,9 @@
 <div style="border:1px solid silver;">
 <p>%%개 달성시<br/> 공동구매 성공입니다!   </p>
     <p style="text-align:center;">현재 몇 60% 달성중 입니다</p>
-    <div class="col-md-4 col-sm-6 ">
+    <div class="col-md-12 col-sm-12 ">
 
-<div class="progress-bar blue stripes">
+<div  style="magin-left:30px;" class="progress-bar blue stripes">
     <span style="width: 60%"></span>
 </div>
 

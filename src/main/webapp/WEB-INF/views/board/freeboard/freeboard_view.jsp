@@ -263,22 +263,19 @@
 				</div>
 			</div>
 		</div>
-<div class="container border" style="margin-top: 15px;margin-bottom: 10px">
-	<div class="row">
-		<div class="col-sm-12" style="margin-top: 15px">
-			<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
-		</div>
-			<form id="frm" method="post">
-				<input type="hidden" id="cmt_no" name="cmt_no" value="${cmt_no}"/>
-				<input type="hidden" id="no" name="no" value="${record.no}"/>
-				<div class="form-row" style="width:100%">
-					<input style="margin-bottom:10px ;width:83%;margin-left: 20px;margin-top: 10px;" class="form-control" id="title" name="cmt_content"  type="text" size="180" placeholder="댓글을 입력 하세요" />
-					<input style="margin-top:10px;margin-left:10px;width:7%; height: 38px" type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
 				</div>
-			</form>
+				<form id="frm" method="post">
+					<input type="hidden" id="cmt_no" name="cmt_no" value="${cmt_no}"/>
+					<input type="hidden" id="no" name="no" value="${record.no}"/>
+					<div class="form-row" style="width:100%">
+						<input style="margin-bottom:10px ;width:83%;margin-left: 20px;margin-top: 10px;" class="form-control" id="title" name="cmt_content"  type="text" size="180" placeholder="댓글을 입력 하세요" />
+						<input style="margin-top:10px;margin-left:10px;width:7%; height: 38px" type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
+						</div>
+					</form>
+				</div>
+			<div id="comments">
+			
+			</div>
 		</div>
-	<div id="comments">
-	
 	</div>
-</div>
 </div>
