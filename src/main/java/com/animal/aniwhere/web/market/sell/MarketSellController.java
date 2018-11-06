@@ -250,10 +250,6 @@ public class MarketSellController {
 					
 				allBoardService.delete(map);
 				
-				/*
-				int successFail = allBoardService.delete(map);
-				model.addAttribute("successFail", successFail);
-				*/
 				
 				return "forward:/market/sell.aw";
 			}//////////////delete()

@@ -27,13 +27,16 @@ function test2() {
 		td.innerHTML=1}
 	} 
 
-function buyaccept(){
-	var td = document.getElementById("test");
-	
-    alert("구입하시겠습니까?")	
+function buyaccept(){	
+	if (confirm("구입하시겠습니까?")){
+		
+    alert("구입해주셔서 감사합니다");
+    action= "<c:url value='/security/market/groupbuyinsert.aw'/>";
+     
+	}
+	else 
+		return false;
 }
-
-
 
 </script> 
 
@@ -162,7 +165,8 @@ function buyaccept(){
          });
       }
    });
-</script>
+
+   </script>
 
   <head>
 
@@ -236,11 +240,11 @@ function buyaccept(){
     var changeimage2=document.getElementById('product2');
     
     if (changeimage2.id.match("product2")) {
-        image.src = "<c:url value='$('img[name=product]').eq(index).prop('src',value)'/>";
-    } 
-
+        image.src = "";
+    } //안먹힘 
 }
 
+   			
 function changeimage3() {
     var image = document.getElementById('product');
     var changeimage3=document.getElementById('product3');
@@ -250,6 +254,7 @@ function changeimage3() {
     } 
 
 }
+
 
 function changeimage4() {
     var image = document.getElementById('product');
@@ -268,12 +273,7 @@ function changeimage1() {
     if (changeimage1.id.match("product1")) {
         image.src = "<c:url value='/resources/images/maketimages/product1.jpg'/>";
     } 
-}
-   		
-   		
-   		
-   		
-   		
+}  		
    		});
    	
    	
@@ -317,12 +317,12 @@ function changeimage1() {
 
 			</div>
 			<div class="col-md-12" style="border: 1px solid silver;margin-top:40px">
-				<h3 class="my-4">구매등록</h3>
-				<input type="button" class="btn btn-info"  value="-" onclick="test2()"><table style="width:30px;height:30px;margin-left:15px" ><tr><td id="test" >1</td></tr></table><input type="button"  class="btn btn-info"  value="+" onclick="test()"><br/>
-				<input   class="btn btn-danger" type="button" value="구매"  style="magin-bottom:10px;margin-top:20px;margin-left:200px;" onclick="buyaccept">
+				<h3 class="my-4">구매 개수 등록</h3>
+				<input type="button" class="btn btn-info"  value="-" onclick="test2()">
+				<table style="width:30px;height:30px;margin-left:15px" ><tr><td id="test" >1</td></tr></table>
+				<input type="button"  class="btn btn-info"  value="+" onclick="test()"><br/>
+				<input   class="btn btn-danger" type="button" value="구매"  style="magin-bottom:10px;margin-top:20px;margin-left:200px;" onclick="buyaccept();">
 		    
-
-
 			</div>
           
         </div>

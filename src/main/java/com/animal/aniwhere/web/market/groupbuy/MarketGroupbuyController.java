@@ -34,6 +34,7 @@ import com.animal.aniwhere.web.board.FileUpDownUtils;
 
 @Controller
 public class MarketGroupbuyController {
+	
 			
 	
 		 //buy컨트롤러 
@@ -252,15 +253,10 @@ public class MarketGroupbuyController {
 				public String delete(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("table_name","group_buy");
-					map.put("no",map.get("buy_no"));
-						
+					map.put("no",map.get("groupbuy_no"));
+					System.out.println("map :"+map);
 					allBoardService.delete(map);
-					
-					/*
-					int successFail = allBoardService.delete(map);
-					model.addAttribute("successFail", successFail);
-					*/
-					
+													
 					return "forward:/market/groupbuy.aw";
 				}//////////////delete()
 				

@@ -29,6 +29,8 @@
 						<th style="width: 50px">작성자</th>
 						<th style="width: 50px">조회수</th>
 						<th style="width: 50px">등록일</th>
+						<th style="width: 50px">목표수 </th>
+						<th style="width: 50px">데드라인</th>
 					</tr>
 				</thead>
 				
@@ -39,6 +41,8 @@
 						<td>관리자</td>
 						<td>557</td>
 						<td>2018-08-17</td>
+						<td>목표수</td>
+						<td>데드라인</td>
 					</tr>					
 					<c:forEach var="record" items="${list}" varStatus="loop">
 				
@@ -82,6 +86,8 @@
 							<td><span id="mem_no">${record.dto.mem_nickname}</span></td>
 							<td><span id="count">${record.dto.count} </span> </td>
 							<td><span id="regidate">${record.dto.regidate}</span></td>
+							<td><span id="regidate">${record.dto.goal}</span></td>
+							<td><span id="regidate">${record.dto.deadline}</span></td>
 						</tr>
 						
 					</c:forEach>
