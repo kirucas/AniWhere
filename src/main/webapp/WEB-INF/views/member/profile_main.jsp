@@ -168,7 +168,12 @@ $(function(){
 													닉네임
 												</div>
 												<div class="edit__td">
-													<input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" style="text-decoration:underline" value="${record.mem_nickname}">
+													<div style="float: left;">
+														<input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" style="text-decoration:underline" value="${record.mem_nickname}">
+													</div>
+													<div>
+														<input class="btn btn-primary" type="button" value="중복확인"></input>
+													</div>
 												</div>
 											</div>
 											<div class="edit__th">

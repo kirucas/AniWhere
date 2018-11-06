@@ -125,7 +125,8 @@ $(function(){
 		    mem_gender: {
 		      required: true,
 		    }
-		  },messages: {
+		  },
+		  messages: {
 			  mem_id: {
 			    	required: "아이디를 입력해주세요.",
 			    	minlength: "최소 4글자 이상 적어주세요.",
