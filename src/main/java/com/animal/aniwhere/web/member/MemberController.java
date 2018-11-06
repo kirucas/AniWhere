@@ -107,29 +107,24 @@ public class MemberController {
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(apiResult);
 		JSONObject jsonResult = (JSONObject) jsonObject.get("response");
 		map.put("mem_id", jsonResult.get("id").toString());
-		map.put("mem_pw", 8124908);
+		map.put("mem_pw",  passwordEncoder.encode("naver"));
 		map.put("mem_nickname", jsonResult.get("nickname").toString());
-		map.put("mem_gender", jsonResult.get("gender").toString());
+		map.put("mem_gender", "U");
 		map.put("mem_name", jsonResult.get("name").toString());
 		map.put("mem_log", 1);
 		map.put("mem_interani", "0");
 		MemberDTO dto = service.selectOne(map);
 		// 네이버로 로그인 한적이 있으면 일로 나감.
-		if (dto != null) {
-			session.setAttribute("mem_id", map.get("mem_id"));
-			session.setAttribute("mem_no", dto.getMem_no());
-			return "forward:/main.aw";
+		if (dto == null) {
+			int signup = service.insert(map);
+			dto = service.selectOne(map);
+			if (signup == 2)
+				model.addAttribute("check", 2);
+			else
+				model.addAttribute("check", 0);
 		}
-		int signup = service.insert(map);
-		dto = service.selectOne(map);
-		if (signup == 2)
-			model.addAttribute("check", 2);
-		else
-			model.addAttribute("check", 0);
-
-		session.setAttribute("mem_id", map.get("mem_id"));
-		session.setAttribute("mem_no", dto.getMem_no());
-
+		model.addAttribute("mem_id", map.get("mem_id"));
+		model.addAttribute("mem_pw", "naver");
 		return "forward:/signInProcess.aw";
 	}
 
@@ -178,8 +173,8 @@ public class MemberController {
 		}
 
 		map.put("mem_id", profile.getId());
-		map.put("mem_pw", 8124908);
-		map.put("mem_nickname", profile.getDisplayName());
+		map.put("mem_pw",  passwordEncoder.encode("google"));
+		map.put("mem_nickname", System.nanoTime());
 		map.put("mem_gender", "U");
 		map.put("mem_name", profile.getDisplayName());
 		map.put("mem_log", 2); // 구글 로그인 연동
@@ -188,8 +183,8 @@ public class MemberController {
 		// 구글로 로그인 한적이 있으면 일로 나감.
 		if (dto != null) {
 			session.setAttribute("mem_id", map.get("mem_id"));
-			session.setAttribute("mem_no", dto.getMem_no());
-			return "forward:/main.aw";
+			session.setAttribute("mem_pw", "google");
+			return "member/sign_process";
 		}
 		int signup = service.insert(map);
 		dto = service.selectOne(map);
@@ -198,8 +193,8 @@ public class MemberController {
 		else
 			model.addAttribute("check", 0);
 
-		session.setAttribute("mem_id", map.get("mem_id"));
-		session.setAttribute("mem_no", dto.getMem_no());
+		model.addAttribute("mem_id", map.get("mem_id"));
+		model.addAttribute("mem_pw", "google");
 
 		return "member/sign_process";
 
@@ -255,18 +250,6 @@ public class MemberController {
 		return "member/securityMessage";
 	}/// securityMessage
 	
-	/*
-	 * @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
-	 * public String signInProcess(@RequestParam Map map, HttpSession session, Model
-	 * model) throws Exception { if(!service.isMember(map)) {
-	 * model.addAttribute("sign_error", "ID 혹은 Password가 틀렸습니다"); return
-	 * "member/sign_in"; } MemberDTO dto = service.selectOne(map);
-	 * 
-	 * session.setAttribute("mem_id", map.get("mem_id"));
-	 * session.setAttribute("mem_no", dto.getMem_no());
-	 * 
-	 * return "forward:/main.aw"; }//////////signInProcess()
-	 */
 	@RequestMapping("/signout.aw")
 	public String signOut(HttpSession session) throws Exception {
 		session.invalidate();
