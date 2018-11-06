@@ -33,19 +33,16 @@ html { background: url("<c:url value='/resources/images/signup1.jpg'/>") no-repe
 .input-field>label{
 	color:white;
 }
-intput[type=submit]:hover{
-    background-color: white;
-    color:black;
-    font-family: 메이플스토리;
+.waves-button-input{
+	width: 120px;
+	height: 36px;
+}
+[value="회원가입"]{
+	font-family: 메이플스토리;
 }
 *{
    color:white;
    font-family: 메이플스토리;
-}
-.btn{
-   background-color: #ccd5f0;
-   font-family: 메이플스토리;
-   color:black;
 }
 [type="checkbox"]:checked+span:not(.lever):before {
 	border-right: 2px solid #ebc594;
@@ -88,6 +85,9 @@ input[type=password]:not(.browser-default):focus:not([readonly])+label{
 }
 .error{
 	color:#ff7070;
+}
+btn_submit i{
+	padding: 0px 0px 0px 0px;
 }
 </style>
 <script>
@@ -278,14 +278,13 @@ $(function(){
 			      	</div>
 				  </div>
 				  <div class="row">
-				  	<div class="input-field inline col s2 offset-s4">
+				  	<div class="input-field inline col s2 offset-s4" id="btn_submit">
          			 <input type="submit" class="btn waves-effect waves-light col s12" value="회원가입"/>
 				  	</div>
 			  	    <div class="input-field col s12">
          			 	<p class="margin center medium-small sign-up">이미 계정이 있으세요? <a href="<c:url value='/login.aw' />">Login</a></p>
         			</div>
 				  </div>
-				  	
 			    </form>
 		  	</div>
 	    </div>
