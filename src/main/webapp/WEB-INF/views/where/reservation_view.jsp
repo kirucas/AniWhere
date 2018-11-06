@@ -46,6 +46,9 @@
 	clear:both;
 	margin-top: 70px;
 }
+#under_line{
+	 text-decoration: underline;
+}
 </style>
 <div id="reservation_qrcord">
 	<div id="qr_cord">
@@ -53,22 +56,22 @@
 	</div>
 	<div id="reservation_view">
 		<div>
-			<span>예약 번호 : ${dto.rv_no }</span>
+			<span>예약 번호 :</span><span id="under_line"> ${dto.rv_no }</span>
 		</div>
 		<div>
-			<span>상가 이름 : ${dto.bizesnm }</span>
+			<span>상가 이름 :</span><span id="under_line"> ${dto.bizesnm }</span>
 		</div>
 		<div>
-			<span>상가 주소 : ${adr }</span>
+			<span>상가 주소 :</span><span id="under_line"></br> ${adr }</span>
 		</div>
 		<div>
-			<span>등록 날짜 : ${dto.apply_date }</span>
+			<span>등록 날짜 :</span><span id="under_line"> ${dto.apply_date }</span>
 		</div>
 		<div>
-			<span>예약 날짜 : ${dto.booking_date }</span>
+			<span>예약 날짜 :</span><span id="under_line"> ${dto.booking_date }</span>
 		</div>
 		<div>
-			<span>방문 시각 : ${dto.booking_date }</span>
+			<span>방문 시각 :</span><span id="under_line"> ${dto.booking_date }</span>
 		</div>
 	</div>
 </div>
