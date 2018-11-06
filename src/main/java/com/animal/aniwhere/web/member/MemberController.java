@@ -272,10 +272,8 @@ public class MemberController {
     @ResponseBody
 	@RequestMapping("/member/nickchk.aw")
     public String idcheck(@RequestParam Map map) {
-        System.out.println(map.get("nick"));
         map.put("mem_nickname", map.get("nick"));
         int result = service.getTotalRecord(map);
-        System.out.println(result);
         Map resu = new HashMap<>();
         resu.put("result", result);
         return JSONObject.toJSONString(resu);
