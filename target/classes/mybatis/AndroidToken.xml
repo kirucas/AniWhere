@@ -58,6 +58,9 @@
 		DELETE FROM member_token
 		WHERE
 		<choose>
+			<when test="mem_no != null">
+				mem_no = #{mem_no}
+			</when>
 			<when test="mtk_no != null">
 				mtk_no = #{mtk_no}
 			</when>
