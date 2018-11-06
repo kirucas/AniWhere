@@ -49,6 +49,7 @@ public class FreeboardController {
 			)throws Exception {
 		
 		map.put("table_name","freeboard");
+		
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		//전체 레코드 수
@@ -182,11 +183,20 @@ public class FreeboardController {
 		return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
    }
 	
+	@ResponseBody
+	@RequestMapping(value="/animal/freeboard/free_hit.aw",method=RequestMethod.POST)
+	public String hit(@RequestParam Map map) throws Exception{
+	
+		map.put("no", map.get("no").toString());
+		int hitCount= freeservice.addHitCount(map);
+		
+		return "success";
+	}//////////////hit()
 	
 	//---------------------------------------------------------------------------------------------------------------------------------
 	
 	
-		//see
+		//free_comment
 		//서비스 주입
 		@Resource(name="allCommentService")
 		private AllCommentServiceImpl cmtService;

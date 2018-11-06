@@ -53,6 +53,9 @@
 <!-- 바디 -->
 <div class="container" id="list_container">
 		<div class="sub-header">
+			<h2 class="sub-header__title" style="display:inline">
+					[조류] 팁 게시판
+			</h2>
 			<div class="sub-header-info">
 				<div>
 					<ul class="sub-link__list">
@@ -79,14 +82,13 @@
 						</a>
 		                <form id="select_form" action="">
 		                    <label>
-		                    	<select name="target" class="sub-header-search__select">
-		                            <option value="title">제목</option>
-		                            <option value="content">내용</option>
-		                            <option value="title_content">제목+내용</option>
-		                            <option value="user_name">작성자</option>
+		                    	<select name="searchColumn" class="sub-header-search__select">
+		                            <option value="tip_title">제목</option>
+		                            <option value="tip_content">내용</option>
+		                            <option value="mem_nickname">작성자</option>
 		                        </select>
 		                    </label>
-		                    <input type="text" name="q" class="sub-header-search__input" placeholder="검색">
+		                    <input type="text" name="searchWord" class="sub-header-search__input" placeholder="검색">
 		                    <button class="sub-header-search__button"><img src="https://talk.op.gg/images/icon-search@2x.png" width="24" alt="검색"></button>
 		                </form>
 		            </div>
@@ -138,49 +140,8 @@
 			</article>
 	    		</c:forEach>
     		</c:if>
-			<!-- 페이징 부분
-			<section class="article-list-paging" >
-				<div class="article-list-paging-content">
-					<ul class="article-list-paging-list">
-						<li class="article-list-paging__item article-list-paging__item--prev">
-                        <a href="https://talk.op.gg/s/lol/all?page=9" class="article-list-paging__button button">
-                            <img src="https://talk.op.gg/images/icon-arrow-left@2x.png" width="24" alt=""><span>이전</span>
-                        </a>
-						<li class="article-list-paging__item article-list-paging__item--current">
-							<span class="article-list-paging__link">1</span></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">2</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">3</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">4</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">5</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">6</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">7</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">8</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">9</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">10</a></li>
-						<li	class="article-list-paging__item article-list-paging__item--next">
-							<a href="#"	class="article-list-paging__button button"> 
-								<span>다음</span>
-								<img src="https://talk.op.gg/images/icon-arrow-right@2x.png" width="24" alt="">
-							</a>
-						</li>
-					</ul>
-				</div>
-			</section>
-			 -->
-			
 		</section>
 	</div>
 	<!-- 아래는 페이징 -->
-    <div class="row" id="pagingDiv">
     	${pagingString}
-    </div>	
 <!-- 바디 끝 -->

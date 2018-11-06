@@ -10,6 +10,42 @@
 </script>
 
 <script>
+	var data = <%=request.getParameter("no")%>;
+	var hit = ${record.free_hit};
+	$(function(){
+	
+		var text = $("#likebtn").html();
+		
+	    $(document).one('click', '.like-review', function(e) {
+	    	$.ajax({
+	    		data : {no : data},
+	    		url : "<c:url value='/animal/freeboard/free_hit.aw'/>",
+	    		type :"POST",
+	    		success : function(){
+	    			if(text == "♡"){
+						hit = hit+1;
+						document.getElementById("free_hit").innerHTML = hit;
+						document.getElementById("likebtn").innerHTML = "♥";
+						console.log(text);
+	    			}
+	    			else if(text == "♥"){
+	    				hit = hit-1;
+	    				document.getElementById("free_hit").innerHTML = hit;
+						document.getElementById("likebtn").innerHTML = "♡";
+	    				
+	    			}
+						
+	    		},
+	    		error : function(){
+	    			console.log("error");
+	    		}
+	    	});
+	    	
+	    });
+	});
+</script>
+
+<script>
 //해당 글번호에 대한 코멘트 목록을 가져오는 함수 
 	var showComments = function(key){		
 		$.ajax({
@@ -104,6 +140,47 @@
 	float:none;
 	width:100%;
 }
+
+.like-content button{
+	text-align: center;
+}
+.like-content .btn-secondary {
+	text-align:center;
+    margin: 40px 0px 0px 0px;
+    background: #ed2553;
+    border-radius: 3px;
+    box-shadow: 0 10px 20px -8px rgb(240, 75, 113);
+    padding: 10px 17px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    text-decoration: none;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+    margin-left: 46%;
+}
+.like-content .btn-secondary:hover {
+      transform: translateY(-3px);
+}
+.like-content .btn-secondary .fa {
+      margin-right: 5px;
+}
+.animate-like {
+    animation-name: likeAnimation;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.65s;
+}
+@keyframes likeAnimation {
+  0%   { transform: scale(30); }
+  100% { transform: scale(1); }
+}
+#btn_e_d_list{
+	float:right;
+}
+
 </style>
 <div class="container">
 	<div id="content">
@@ -159,6 +236,9 @@
 							<div class="article-meta__item">
 								<span>글번호 ${record.no}</span>
 							</div>
+							<div class="article-meta__item">
+								<span id="free_hit">추천수 ${record.free_hit}</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -166,6 +246,14 @@
 					<div class="article-content">
 						${record.free_content}
 					</div>
+				</div>
+				<div class="btnlike">
+						<div class="like-content">					
+							<button class="btn-secondary like-review" style="margin-bottom: 10px">
+							   <span aria-hidden="true" id="likebtn">♡</span>
+							</button>
+							<p style="text-align: center">※게시물이 마음에 들면 <span style="color: blue">추천버튼</span>을 눌러주세요!</p>
+						</div>
 				</div>
 				<post-vote data-my_vote_score="0" data-downvote_score="3"
 					data-upvote_score="71"></post-vote>

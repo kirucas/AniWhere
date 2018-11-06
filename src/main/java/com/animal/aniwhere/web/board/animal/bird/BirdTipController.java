@@ -85,14 +85,14 @@ public class BirdTipController {
 					String searchColumn = map.get("searchColumn").toString();	
 
 					String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
-							req.getContextPath()+"/animal/freeboard.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+							req.getContextPath()+"/board/animal/bird/tip/list.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
 					
 					model.addAttribute("pagingString", pagingString);
 				}
 				
 				else {
 					String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
-							req.getContextPath()+"/animal/freeboard.aw?");
+							req.getContextPath()+"/board/animal/bird/tip/list.aw?");
 					model.addAttribute("pagingString", pagingString);
 				}
 		//데이터 저장]
