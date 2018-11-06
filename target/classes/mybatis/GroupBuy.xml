@@ -72,7 +72,7 @@
 	</select>
 	
 	<insert id="groupbuyInsert" parameterType="java.util.Map">
-		INSERT INFO market_group_buy(no, mem_no, animal_code, title, content, goal, deadline, regidate)
+		INSERT INTO market_group_buy(no, mem_no, animal_code, title, content, goal, deadline, regidate)
 		VALUES(seq_group_buy.nextval, #{mem_no}, #{animal_code}, #{title}, #{content}, #{goal}, #{deadline}, #{today})
 	</insert>
 	

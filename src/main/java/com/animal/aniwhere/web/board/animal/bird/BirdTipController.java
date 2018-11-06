@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.json.simple.JSONArray;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -223,5 +226,6 @@ public class BirdTipController {
 		
 		return map.get("no").toString();
 	}*/
+	
 }//////////////////// tipboardController
 
