@@ -238,7 +238,7 @@ $(function(){
 			</section>
 		</div>
 			
-		<div class="tab-pane fade" id="animal" role="tabpanel" aria-labelledby="animal-tab">
+			<div class="tab-pane fade" id="animal" role="tabpanel" aria-labelledby="animal-tab">
 			<c:if test="${empty anirecord }" var="isEmpty">
 				<div class="container" style="text-align:center">
 					<div style="display:inline-block">
