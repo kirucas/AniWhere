@@ -28,56 +28,47 @@
 	//data는 아래 형태로 
 	//[{"NO":2,"ONELINECOMMENT":"댓글2","CPOSTDATE":"2018-09-12","CNO":3,"ID":"LEE","NAME":"이길동"},{"NO":2,"ONELINECOMMENT":"댓글1","CPOSTDATE":"2018-09-12","CNO":2,"ID":"PARK","NAME":"박길동"}]
 	function displayComments(data){
-		console.log("================")
-		console.log(data);
-		$.each(data, function(index, value){
-			console.log("in"+index+" : val"+value);
-		});
-		/* 
+		console.log("data :"+data);
 		var commentString="<div class='form-group'>";
-		commentString+="<label>${cmtdto.mem_nickname}</label>";
-		console.log(commentString);
-		commentString+="<label>${cmtdto.regidate}</label><br/>";
-		console.log(commentString);
-		commentString+="<p>${cmtdto.cmt_content}</p>";
-		console.log(commentString);
-		commentString+="</div><br/>";
-		console.log(commentString);
-		 */if(data.length==0){
+		 	if(data.length==0){
 			commentString+="<label>등록된 댓글이 없어요</label>";
 		}
-		$.each(data,function(index,comment){
-			if('${sessionScope.mem_no}' != comment["${dto.mem_nickname}"])
-				commentString+='<td align="left">'+comment['ONELINECOMMENT']+'</td>'; 
+	
+		 $.each(data,function(index,comment){
+			 /*로그인한 사용자가 먼저 댓글한 사용자가 아닐 때는 삭제 수정이 불가능함  */
+			//if('${sessionScope.mem_no}' != '${dto.mem_no}')
+				commentString+="<label>"+comment['nickname']+"</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			//else
+				commentString+="<label style='color: gray;'>"+comment['regidate']+"</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			/* 로그인한 사용자가 선댓글한 사용자일 때 삭제 수정이 가능해야 함 */
+			if('${sessionScope.mem_no}' == '${dto.mem_no}')
+				commentString+='<span class="commentDelete" cmt_content="'+comment['nickname']+'" style="cursor: pointer; color: green; font-size: 1.2em; font-weight: bold">삭제</span><br/>';
 			else
-				commentString+='<td align="left"><span style="cursor:pointer" class="commentEdit" title="'+comment["cmtdto.cmt_no"]+'">'+comment['ONELINECOMMENT']+'</span></td>'; 		
-			commentString+='<td>'+comment['cmtdto.regidate']+'</td>';
-			commentString+='<td>';
-			if('${sessionScope.mem_no}' == comment["ID"])
-				commentString+='<span class="commentDelete" title="'+comment["cmtdto.cmt_no"]+'" style="cursor: pointer; color: green; font-size: 1.4em; font-weight: bold">삭제</span>';
-			else
-				commentString+='<span style="color: gray; font-size: 0.7em; font-weight: bold">삭제불가</span>';
-			commentString+='</td></tr>';
-		});		
-		commentString+='</table>';
+				commentString+='<span style="color: gray; font-size: 0.7em; font-weight: bold">삭제불가</span><br/>';
+				commentString+='<label>'+comment['comment_content']+'</label><br/><br/>';
+		
+			});		
+		 		commentString+="</div>";
+		console.log("commentString :"+commentString);
+		
 		
 		$('#comments').html(commentString);
 		
 		//코멘트 수정/삭제 처리
 		$('.commentEdit').click(function(){
 			//cno값 출력
-			console.log($(this).attr("title"));
+			console.log($(this).attr("cmt_content"));
 			
-			$('#title').val($(this).html());
+			$('#cmt_content').val($(this).html());
 			$('#submit').val('수정');
 			
 			//form의 hidden속성중 name="cno"값 설정
-			$('input[name=cmtdto.cmt_no]').val($(this).attr("title"));
+			$('input[name=cmtdto.cmt_no]').val($(this).attr("cmt_content"));
 			
 		});
 		
 		$('.commentDelete').click(function(){			
-			var cno_value = $(this).attr("title");
+			var cno_value = $(this).attr("cmt_content");
 			
 			$.ajax({
 				url:"<c:url value='/board/animal/bird/movie/commentDelete.awa'/>",
@@ -93,8 +84,7 @@
 	
 	$(function(){
 		//페이지 로드시 코멘트 목록 뿌려주기
-		alert('${dto.mem_no}');
-		showComments("${dto.mem_no}");
+		showComments("${dto.no}");
 	
 		//코멘트 입력처리]
 		$('#submit').click(function(){
@@ -116,7 +106,7 @@
 					showComments(key);
 					if($('#submit').val()=='수정'){						
 						$('#submit').val('등록');
-						$('#title').val('');
+						$('#cmt_content').val('');
 					}
 				},		
 				error : function(request, status, error){
@@ -220,7 +210,7 @@ a:visited { color:white; text-decoration: none;}
 		<!-- 한줄 코멘트 입력 폼-->
 		<form class="form-inline" id="frm" method="post" style="margin: 0px auto;">
 			<label for="inputcomment" class="col-xs-2 col-sm-1 col-md-1 control-label">${sessionScope.mem_id}</label>
-			<input type="text" name="cmt_content" class="form-control col-xs-11 col-sm-9 col-md-9" id="inputcomment"
+			<input type="text" id="cmt_content" class="form-control col-xs-11 col-sm-9 col-md-9" name="inputcomment"
 				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" class="btn btn-success col-xs-1 col-sm-1" id="submit">댓글</a>
 		</form>
@@ -237,7 +227,7 @@ a:visited { color:white; text-decoration: none;}
 			<input type="hidden" name="no" value="${cmtdto.cmt_no}" />
 				<!-- 수정 및 삭제용 파라미터 -->
 			<input type="hidden" name="cmt_no" />
-			<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />&nbsp;&nbsp;
+			<input placeholder="댓글을 입력하세요" id="cmt_content" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="inputcomment" />&nbsp;&nbsp;
 			<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>
 			 --%>
 <form id="comments">
