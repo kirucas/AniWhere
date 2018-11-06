@@ -10,6 +10,34 @@
 	};
 </script>
 
+<script type="text/javascript"> 
+function test() { 
+var td = document.getElementById("test"); 
+var n = Number(td.innerHTML); 
+td.innerHTML = n + 1; 
+
+} 
+
+
+function test2() { 
+	var td = document.getElementById("test"); 
+	var n = Number(td.innerHTML); 
+	td.innerHTML = n - 1; 
+	if(n<=2){
+		td.innerHTML=1}
+	} 
+
+function buyaccept(){
+	var td = document.getElementById("test");
+	
+    alert("구입하시겠습니까?")	
+}
+
+
+
+</script> 
+
+
 <script>
    //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수
    var showComments = function(key){
@@ -23,8 +51,7 @@
    };
    
  //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
-	var displayComments	 = function(data){
-		console.log(JSON.stringify(data));
+	var displayComments	= function(data){
 		var commentString='<h2 data-v-f39b78c2="" class="comment__title" style="margin-top: 20px;margin-bottom: 15px;">댓글 목록</h2>';
 			commentString+='<div class="row border-top">';
 		if(data.length==0){
@@ -47,26 +74,26 @@
 		commentString+='</div>';
       $('#comments').html(commentString);
       if(${sessionScope.mem_no==record.mem_no}){
-      //코멘트 수정/삭제 처리
-      $('.commentEdit').click(function() {
-         //console.log($(this).attr("title"));
-        
-         $("#title").val($(this).html());
-            $("#submit").val('수정');
-            $('input[name=cmt_no]').val($(this).attr("title"));
-      });
-      $('.commentDelete').click(function() {
-            var cno_value = $(this).attr("title");
-            $.ajax({
-                url:'<c:url value="/market/groupbuy/cmt_delete.awa"/>',
-                data:{cmt_no:cno_value,no:${record.no}},
-                dataType:'text',
-                type:'post',
-                success:function(key){
-                   showComments(key);                   
-                }
-             });
-      });
+	      //코멘트 수정/삭제 처리
+	      $('.commentEdit').click(function() {
+	         //console.log($(this).attr("title"));
+	        
+	         $("#title").val($(this).html());
+	            $("#submit").val('수정');
+	            $('input[name=cmt_no]').val($(this).attr("title"));
+	      });
+	      $('.commentDelete').click(function() {
+	            var cno_value = $(this).attr("title");
+	            $.ajax({
+	                url:'<c:url value="/market/groupbuy/cmt_delete.awa"/>',
+	                data:{cmt_no:cno_value,no:${record.no}},
+	                dataType:'text',
+	                type:'post',
+	                success:function(key){
+	                   showComments(key);                   
+	                }
+	             });
+	      });
       }
    };
     
@@ -103,7 +130,7 @@
 </script>
 
 <script>
-   $(function() {
+   $(function(){
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
@@ -159,49 +186,7 @@
 
 </style>
 
-<script>
-
-
-function changeimage2() {
-    var image = document.getElementById('product');
-    var changeimage2=document.getElementById('product2');
-    
-    if (changeimage2.id.match("product2")) {
-        image.src = "<c:url value='/resources/images/maketimages/product2.jpg'/>";
-    } 
-
-}
-
-function changeimage3() {
-    var image = document.getElementById('product');
-    var changeimage3=document.getElementById('product3');
-    
-    if (changeimage3.id.match("product3")) {
-        image.src = "<c:url value='/resources/images/maketimages/product3.jpg'/>";
-    } 
-
-}
-
-function changeimage4() {
-    var image = document.getElementById('product');
-    var changeimage4=document.getElementById('product4');
-    
-    if (changeimage4.id.match("product4")) {
-        image.src = "<c:url value='/resources/images/maketimages/product4.png'/>";
-    } 
-
-}
-
-function changeimage1() {
-    var image = document.getElementById('product');
-    var changeimage1=document.getElementById('product1');
-    
-    if (changeimage1.id.match("product1")) {
-        image.src = "<c:url value='/resources/images/maketimages/product1.jpg'/>";
-    } 
-}
-</script>
-   
+ 
   </head>
   <body>
   
@@ -234,11 +219,69 @@ function changeimage1() {
 		</div>
       <!-- Portfolio Item Row -->
       <div class="row">
-   
+   	<script>
+   		$(function(){
+   			var arr = new Array();
+   			$('img[name=sellpic]').each(function(index,value){
+   				arr.push($(value).prop('src'));
+   			});
+   			$('#product').prop("src",arr[0]);
+   			$.each(arr,function(index,value){
+				console.log("들어왔니");
+				$('img[name=product]').eq(index).prop("src",value);
+			})
+   		
+   		function changeimage2() {
+    var image = document.getElementById('product');
+    var changeimage2=document.getElementById('product2');
+    
+    if (changeimage2.id.match("product2")) {
+        image.src = "<c:url value='$('img[name=product]').eq(index).prop('src',value)'/>";
+    } 
 
+}
+
+function changeimage3() {
+    var image = document.getElementById('product');
+    var changeimage3=document.getElementById('product3');
+    
+    if (changeimage3.id.match("product3")) {
+        image.src = "<c:url value='/resources/images/maketimages/product3.jpg'/>";
+    } 
+
+}
+
+function changeimage4() {
+    var image = document.getElementById('product');
+    var changeimage4=document.getElementById('product4');
+    
+    if (changeimage4.id.match("product4")) {
+        image.src = "<c:url value='/resources/images/maketimages/product4.png'/>";
+    } 
+
+}
+
+function changeimage1() {
+    var image = document.getElementById('product');
+    var changeimage1=document.getElementById('product1');
+    
+    if (changeimage1.id.match("product1")) {
+        image.src = "<c:url value='/resources/images/maketimages/product1.jpg'/>";
+    } 
+}
+   		
+   		
+   		
+   		
+   		
+   		});
+   	
+   	
+   	</script>
+		<!-- 메인 사진 -->
         <div class="col-md-8">
          <!--  <img class="img-fluid" src="http://placehold.it/750x500" alt="" > -->
-           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" style="width: 700px; height: 500px;">
+           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="#" style="width: 700px; height: 500px;">
         
         </div>
 
@@ -275,10 +318,10 @@ function changeimage1() {
 			</div>
 			<div class="col-md-12" style="border: 1px solid silver;margin-top:40px">
 				<h3 class="my-4">구매등록</h3>
-				<input name="reset"  class="btn btn-info" type="button" value="-"><input name="reset"  class="btn btn-info" type="button" value="0"><input name="reset"  class="btn btn-info" type="button" value="+"><br/>
-				<input name="reset"  class="btn btn-danger" type="button" value="구매"  style="margin-top:20px;margin-left:200px;">
-			
-			
+				<input type="button" class="btn btn-info"  value="-" onclick="test2()"><table style="width:30px;height:30px;margin-left:15px" ><tr><td id="test" >1</td></tr></table><input type="button"  class="btn btn-info"  value="+" onclick="test()"><br/>
+				<input   class="btn btn-danger" type="button" value="구매"  style="magin-bottom:10px;margin-top:20px;margin-left:200px;" onclick="buyaccept">
+		    
+
 
 			</div>
           
@@ -289,28 +332,28 @@ function changeimage1() {
       <h3 class="my-4">판매자가 올린 사진 3개이상</h3>
 
       <div class="row">
-
+		
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom" >
         
-            <img id="product1"  onclick="javascript:changeimage1()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product1.jpg'/>" alt="" style="width: 300px; height: 200px;">
+            <img name="product" id="product1" onclick="javascript:changeimage1()"  class="img-fluid shadow scale" src="#" alt="" style="width: 300px; height: 200px;">
          
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
          
-            <img id="product2" onclick="javascript:changeimage2()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product2.jpg'/>" alt="" style="width: 300px; height: 200px;">
+            <img name="product" id="product2" onclick="javascript:changeimage2()"  class="img-fluid shadow scale" src="#" alt="" style="width: 300px; height: 200px;">
        
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
         
-            <img id="product3" onclick="javascript:changeimage3()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product3.jpg'/>" alt="" style="width: 300px; height: 200px;">
+            <img name="product" id="product3" onclick="javascript:changeimage3()"  class="img-fluid shadow scale" src="#" alt="" style="width: 300px; height: 200px;">
         
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
       
-            <img id="product4" onclick="javascript:changeimage4()"  class="img-fluid shadow scale" src="<c:url value='/resources/images/maketimages/product4.png'/>" alt="" style="width: 300px; height: 200px;">
+            <img name="product" id="product4" onclick="javascript:changeimage4()"  class="img-fluid shadow scale" src="#" alt="" style="width: 300px; height: 200px;">
 
         </div>
 
