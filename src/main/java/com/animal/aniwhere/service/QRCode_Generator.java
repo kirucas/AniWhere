@@ -29,7 +29,7 @@ public class QRCode_Generator {
 		File qr_code_name = new File(path.getAbsolutePath() + File.separator + AwsS3Utils.namingForS3("QRCodes") + "." + fileType);
 		
 		if(!qr_code_name.getParentFile().exists())
-			qr_code_name.getParentFile().mkdir();
+			qr_code_name.getParentFile().mkdirs();
 		
 		int size = 150;
 		
