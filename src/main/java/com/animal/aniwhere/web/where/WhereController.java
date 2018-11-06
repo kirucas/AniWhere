@@ -461,7 +461,7 @@ public class WhereController {
 			record.put("store_no", list.getStore_no());
 			record.put("apply_date", list.getApply_date());
 			record.put("booking_date", list.getBooking_date());
-			record.put("qr_link", list.getQr_link());
+			record.put("qr_link", AwsS3Utils.LINK_ADDRESS + list.getQr_link());
 			record.put("mem_name", list.getMem_name());
 			record.put("bizesnm", list.getBizesnm());
 			record.put("brchnm", list.getBrchnm());
