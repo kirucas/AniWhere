@@ -196,7 +196,7 @@ public class MemberController {
 		model.addAttribute("mem_id", map.get("mem_id"));
 		model.addAttribute("mem_pw", "google");
 
-		return "member/sign_process";
+		return "forward:/signInProcess.aw";
 
 	}////////////// googleCallback
 
@@ -250,13 +250,13 @@ public class MemberController {
 		return "member/securityMessage";
 	}/// securityMessage
 	
-	@RequestMapping("/signout.aw")
+	/*@RequestMapping("/signout.aw")
 	public String signOut(HttpSession session) throws Exception {
 		session.invalidate();
 
 		return "forward:/main.aw";
 	}////////////// signOut()
-
+*/
 	@RequestMapping("/member/sign_up.aw")
 	public String signUp() throws Exception {
 
