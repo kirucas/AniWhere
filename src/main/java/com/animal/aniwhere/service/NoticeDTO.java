@@ -11,6 +11,10 @@ public class NoticeDTO {
 	// 작성자 아이디를 저장하기 위한 속성 추가
 	private String am_id;
 
+	private String elementTitle;
+	private String elementImg;
+	private String elementContent;
+
 	public String getNo() {
 		return no;
 	}//////////
@@ -66,4 +70,30 @@ public class NoticeDTO {
 	public void setAm_id(String am_id) {
 		this.am_id = am_id;
 	}//////////
+
+	public String getElementTitle() {
+		return elementTitle;
+	}/////////////
+
+	public void setElementTitle(String elementTitle) {
+		this.elementTitle = elementTitle;
+	}/////////////////
+
+	public String getElementImg() {
+		return elementImg;
+	}//////////////
+
+	public void setElementImg(String elementImg) {
+		this.elementImg = elementImg;
+	}////////////////////
+
+	public String getElementContent() {
+		return elementContent;
+	}//////////
+
+	public void setElementContent(String elementContent) {
+		this.elementContent = elementContent;
+	}//////////
+	
+	
 }//////////////////// NoticeDTO class

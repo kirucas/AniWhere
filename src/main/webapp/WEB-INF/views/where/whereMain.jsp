@@ -235,7 +235,6 @@ button{
 			//마커들을 담을 배열 
 			var markers=[];
 			total();
-			
 			//전체 출력
 			function total(){
 				$.ajax({
@@ -243,14 +242,14 @@ button{
 		            dataType : "json",
 		            url : "<c:url value='/security/where/map/total.awa'/>",
 		            success: function(jsonObj) {
-		            	map.setLevel(14);
+		            	map.setLevel(14);	
 		            	clusterer.removeMarkers(markers);
 		            	markers=[];
 		            	$.each(jsonObj, function(index, value){
 		            		
 		            		var imageSrc = "<c:url value='/resources/images/all.png'/>", // 마커이미지의 주소입니다    
 						    imageSize = new daum.maps.Size(22, 35), // 마커이미지의 크기입니다
-						    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+						    imageOption = {offset: new daum.maps.Point(15, 45)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 						    
 						    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
 						    markerPosition = new daum.maps.LatLng(value.lat, value.lon); // 마커가 표시될 위치입니다
@@ -261,7 +260,7 @@ button{
 		            			image : markerImage,
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
-						    
+		            		
 		            		var curl = '<c:url value="/where/reservation.awa?store_no='+value.bizesId+'&bizesNm='+value.bizesNm+'"/>'
 		            				
 		            		var content = 
@@ -296,20 +295,39 @@ button{
 	        				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 	        	    		function closeOverlay() {
 	        	    		   overlay.setMap(null);
+	        	    		   count=0;
 	        	    		}
+	        	    		var count=0;
+							
 	        				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 	        				daum.maps.event.addListener(marker, 'click', function() {
-	        				    overlay.setMap(map);
+	        					if(count==0){
+        				    		overlay.setMap(map);
+        				    		count++;
+	        					}
 	        				});
 	        				
+	        				// 마커에 마우스오버 이벤트를 등록합니다
+		            		daum.maps.event.addListener(marker, 'mouseover', function() {
+		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+		            		  	if(count==0)
+		            				overlay.setMap(map);
+		            		});
+	        				
+		            		// 마커에 마우스오버 이벤트를 등록합니다
+		            		daum.maps.event.addListener(marker, 'mouseout', function() {
+		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+		            		  	if(count==0)
+		            				overlay.setMap(null);
+		            		});
+		            		
 	        				overlay.setMap(null);
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
 		                    markers.push(marker);	
 		            	});
 		            	// 클러스터러에 마커들을 추가합니다
 	            	    clusterer.addMarkers(markers);
-		            	var level = map.getLevel();
-		            	map.setLevel(5);
+	            	    map.setLevel(5);	
 		            	var moveLatLon = new daum.maps.LatLng(mylat,mylon);
 		            	map.panTo(moveLatLon);
 		            },
@@ -319,7 +337,6 @@ button{
 		            }
 		         });
 			};
-			
 			//옆에 메뉴 눌렀을때 해당하는 녀서들
 			function indssclscd(code,pic){
 		         $.ajax({
@@ -335,7 +352,7 @@ button{
 		            		totalvalue = value;
 		            		var imageSrc = "<c:url value='/resources/images/"+pic+".png'/>", // 마커이미지의 주소입니다    
 						    imageSize = new daum.maps.Size(22, 35), // 마커이미지의 크기입니다
-						    imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+						    imageOption = {offset: new daum.maps.Point(15, 45)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 						    
 						    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
 						    markerPosition = new daum.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
@@ -344,8 +361,7 @@ button{
 		            			image : markerImage,
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
-						    console.log("m"+value.lat);
-						    console.log("m"+value.lon);
+		            		var curl = '<c:url value="/where/reservation.awa?store_no='+value.bizesId+'&bizesNm='+value.bizesNm+'"/>'
 		            		var content = 
 		            			'<div class="wrap">' + 
 		                        '    <div class="info">' + 
@@ -362,7 +378,7 @@ button{
        							'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
        							'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
 		                        '                </div>' + 
-		                        '                <div><a href="#">예약</a></div>' + 
+		                        '                <div><a href="'+curl+'">예약</a></div>' + 
 		                        '            </div>' + 
 		                        '        </div>' + 
 		                        '    </div>' +    
@@ -375,16 +391,42 @@ button{
 	        				});
 	        				
 							$('.close').click(closeOverlay);
-	        				
-	        				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+							
+							// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 	        	    		function closeOverlay() {
 	        	    		   overlay.setMap(null);
 	        	    		}
+							
+							
+	        				var count=0;
+							daum.maps.event.addListener(map, 'click',function(mouseEvent){
+								if(count==1){
+									overlay.setMap(null);
+								}
+								count=0;
+							});
 	        				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 	        				daum.maps.event.addListener(marker, 'click', function() {
-	        				    overlay.setMap(map);
+	        					if(count==0){
+        				    		overlay.setMap(map);
+        				    		count++;
+	        					}
 	        				});
 	        				
+	        				// 마커에 마우스오버 이벤트를 등록합니다
+		            		daum.maps.event.addListener(marker, 'mouseover', function() {
+		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+		            		  	if(count==0)
+		            				overlay.setMap(map);
+		            		});
+	        				
+		            		// 마커에 마우스오버 이벤트를 등록합니다
+		            		daum.maps.event.addListener(marker, 'mouseout', function() {
+		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+		            		  	if(count==0)
+		            				overlay.setMap(null);
+		            		});
+		            		
 	        				overlay.setMap(null);
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
 		                    markers.push(marker);	
@@ -392,8 +434,6 @@ button{
 		            	// 클러스터러에 마커들을 추가합니다
 	            	    clusterer.addMarkers(markers);
 		            	map.setLevel(5);
-		            	var moveLatLon = new daum.maps.LatLng(mylat,mylon);
-		            	map.panTo(moveLatLon);
 		            },
 		            error : function() {
 		               console.log("error");
@@ -409,7 +449,6 @@ button{
 		            dataType : "json",
 		            url : "<c:url value='/security/where/map/near.awa'/>",
 		            success: function(jsonObj) {
-		            	//map.setLevel(14);
 		            	var nearString = '';
 		            	$.each(jsonObj, function(index, value){
 		            		    var latlng=value.lat+':'+value.lon;
@@ -439,13 +478,11 @@ button{
 						$(document).on('click','.movetarget',function(){
 							var latlng = $(this).prop('title');
 						    var laln=latlng.split(':');
-							console.log("c"+laln[0]);
-							console.log("c"+laln[1]);
 							var LatLng = new daum.maps.LatLng(laln[0],laln[1]);
 							map.setCenter(LatLng);
 						});
+						
 	            		$('#near').html(nearString);
-	            		//map.setLevel(5);
 		            },
 		            error : function() {
 		               console.log("error");
@@ -461,7 +498,6 @@ button{
 		            dataType : "json",
 		            url : "<c:url value='/security/where/map/nearselect.awa'/>",
 		            success: function(jsonObj) {
-		            	//map.setLevel(14);
 		            	var nearString = '';
 		            	var curl = "<c:url value='/resources/images/"+pic+".png'/>";
 		            	$.each(jsonObj, function(index, value){
@@ -496,8 +532,6 @@ button{
 							map.setCenter(LatLng);
 						});
 	            		$('#near').html(nearString);
-	            		//map.setLevel(5);
-	            		
 		            },
 		            error : function() {
 		               console.log("error");
@@ -513,7 +547,6 @@ button{
 			});
 			$("#list-select ul li a").click(function() {
 				var str= $(this).text()+" 리스트";
-				console.log(str);
 				$("#around").html(str);
 			});
 			

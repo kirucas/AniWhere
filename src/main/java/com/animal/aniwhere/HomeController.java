@@ -65,5 +65,27 @@ public class HomeController {
 		model.addAttribute("serverTime", today);
 		return "mainTemplate.tiles";
 	}
-	
+	/*
+	@RequestMapping("/main.aw")
+	public String parser() {
+		List<NoticeDTO> list = new ArrayList<NoticeDTO>();
+		Document doc;
+		try {
+			doc = Jsoup.connect("http://www.kangsamo.com/news/section_list_all.html?sec_no=61").get();
+			for(int i=0; i<10; i++) {
+				Elements elementTitle = doc.select("h2.clamp").eq(i);
+				String text = elementTitle.text();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		NoticeDTO dto_element = new NoticeDTO();
+		dto_element.getElementTitle();
+		dto_element.getElementImg();
+		dto_element.getElementContent();
+		
+
+		
+		return "mainTemplate.tiles";
+	}*/
 }

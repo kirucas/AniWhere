@@ -8,7 +8,6 @@ DROP TABLE drafting CASCADE CONSTRAINTS;
 DROP TABLE mating CASCADE CONSTRAINTS;
 DROP TABLE animal CASCADE CONSTRAINTS;
 DROP TABLE buy_cmt CASCADE CONSTRAINTS;
-DROP TABLE market_buy CASCADE CONSTRAINTS;
 DROP TABLE group_buy CASCADE CONSTRAINTS;
 DROP TABLE group_buy_cmt CASCADE CONSTRAINTS;
 DROP TABLE market_group_buy CASCADE CONSTRAINTS;
@@ -414,6 +413,7 @@ CREATE TABLE reservation
 	store_no number,
 	apply_date date DEFAULT sysdate,
 	booking_date date NOT NULL,
+	qr_link varchar2(300),
 	PRIMARY KEY (rv_no)
 );
 
@@ -586,14 +586,14 @@ ALTER TABLE sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
 	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
 	ON DELETE CASCADE
 ;

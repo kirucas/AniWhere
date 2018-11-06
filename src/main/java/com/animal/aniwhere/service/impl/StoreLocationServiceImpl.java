@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.StoreLocationDTO;
 
-@Service("StoreLocService")
+@Service("storeLocService")
 public class StoreLocationServiceImpl implements AllCommonService {
 
 	@Resource(name = "storeLocationDAO")
@@ -29,6 +29,7 @@ public class StoreLocationServiceImpl implements AllCommonService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public StoreLocationDTO selectOne(Map map) {
+		System.out.println("store service");
 		return dao.selectOne(map);
 	}////////// selectOne
 

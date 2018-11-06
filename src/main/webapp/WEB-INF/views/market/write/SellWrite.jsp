@@ -72,17 +72,26 @@ else {
    $(function() {
 	   var count = 0;
 	  
-	   $('#enterBtn').submit(function(){	 
-		   var content="=============상세사항================\r\n";
-		   content+='제목:'+$('#title').val()+'\r\n';
-		   content+='판매물품명:'+$('#name').val()+'\r\n';
- 		   content+='희망가:'+$('#price').val()+'원\r\n';
- 		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
-		   content+='거래방법:'+$('#way').val()+'\r\n'; 
-           content+='연락처:'+$('#phone').val()+'\r\n'; 
-           content+='====================================\r\n';
-           $('#summernote').append(content);
-           console.log("성공");
+	   $('#enterBtn').click(function(){	 
+	 /*   var content="=============상세사항================\r\n";
+	   content+='제목:'+$('#title').val()+'\r\n';
+	   content+='판매물품명:'+$('#name').val()+'\r\n';
+		   content+='희망가:'+$('#price').val()+'원\r\n';
+		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+	   content+='거래방법:'+$('#way').val()+'\r\n'; 
+          content+='연락처:'+$('#phone').val()+'\r\n'; 
+          content+='====================================\r\n';
+          $('#summernote').append(content); */
+          if(count<3){
+        	  alert("사진은 최소 3장 이상 올려야 합니다");
+        	 
+          }else{
+        	  if(check()){
+	        	  console.log("성공");
+	        	  $('#fr').submit();
+        	  }
+          }
+          return false;
            	 
 	   });
 	      
@@ -100,6 +109,11 @@ else {
       });
       
       function sendFile(file, el, wel) {
+    	 if(count>3){
+           	 alert('사진은 최대 4장까지 가능합니다')
+           	 return false;
+         }
+             
          var form_data = new FormData();
          form_data.append('file', file);
          $.ajax({
@@ -113,7 +127,8 @@ else {
                 success: function(url) {
             	 //$('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
             	 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />", function (image) {
-            		 width: 100,
+            		  image.css('width',1);
+            		  image.css('height',1);
 					  image.attr('name', 'sellpic');
 				});
             	 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
@@ -124,11 +139,7 @@ else {
                console.log("error");
             }
                    
-         //   if(file.length>=5||file.length<=2){
-         //  	 alert('사진의 최소3장 이상 최대 4장까지 가능합니다')
-         //  	 return;
-          //  }
-            
+         
          });
       }
           
@@ -154,7 +165,7 @@ else {
 		<br/>
 
 		<div class="col-md-12">
-        <form name="fr" id="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
+        <form name="fr" id="fr" method="post" accept-charset="utf-8" 
 				class="form-horizontal">
 				<div class="form-row">
 				<input type="hidden" name="table_name" value="sell"/>

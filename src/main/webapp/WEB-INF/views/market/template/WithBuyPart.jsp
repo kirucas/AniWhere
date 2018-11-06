@@ -13,7 +13,7 @@
    <div class="container">
    
    
-   
+
    	<div class="card-header" style="margin-top: 50px" >공동구매 게시판</div>
    	
    	<div style="text-align:right"> 

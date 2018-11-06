@@ -28,6 +28,9 @@
 	display:inline-block;
 	margin-right:-4px;
 }
+#img_div{
+	 padding-top:15px;
+}
 #ani_profile{
 	height: 200px;
 }
@@ -43,7 +46,40 @@
 #profile-text span{
 	margin-bottom: 5px;
 }
+#button_div{
+	display:none;
+	position: absolute;
+	top:100px;
+	left: 65px;
+}
+#img_div:hover #button_div{
+	display: block;
+	position: absolute;
+	top:100px;
+	left: 65px;
+}
 </style>
+<script>
+function delete_ani(){
+	var ani_no = ${record.ani_no};
+	console.log(ani_no);
+	$.ajax({
+		data: {"ani_no":ani_no},
+        type: "POST",
+        dataType : "json",
+        url : "<c:url value='/security/member/animal/delete.awa'/>",
+        success: function(jsonObj) {
+        	$.each(jsonObj, function(index, value){
+        		
+        	
+        	});
+        },
+        error : function() {
+           console.log("error");
+        }
+     });
+}
+</script>
 <!-- 내용 시작 -->
 <div class="container">
 	<!-- nav부분 -->
@@ -86,27 +122,27 @@
 									<div class="member-input__state">
 										<div class="edit__table">
 											<div class="edit__tr">
-											<div class="edit__th">
-												아이디
-											</div>
+												<div class="edit__th">
+													아이디
+												</div>
 												<div class="edit__td">
 													<input class="member-input__box" type="text" autocomplete="off" name="mem_id" disabled value="${record.mem_id}">
 												</div>
 											</div>
 											<div class="edit__tr">
-											<div class="edit__th">
-												이름
-											</div>
+												<div class="edit__th">
+													이름
+												</div>
 												<div class="edit__td">
-													<input class="member-input__box" type="text" autocomplete="off" name="mem_name" value="${record.mem_name}">
+													<input class="member-input__box" type="text" autocomplete="off" name="mem_name"  style="text-decoration:underline" value="${record.mem_name}">
 												</div>
 											</div>
 											<div class="edit__tr">
-											<div class="edit__th">
-												닉네임
-											</div>
+												<div class="edit__th">
+													닉네임
+												</div>
 												<div class="edit__td">
-													<input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" value="${record.mem_nickname}">
+													<input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" style="text-decoration:underline" value="${record.mem_nickname}">
 												</div>
 											</div>
 											<div class="edit__th">
@@ -144,9 +180,15 @@
 						<h2 class="member-settings-layout__title">동물 프로필 관리</h2>
 						<div class="container" style="vertical-align:middle;">
 	  						<c:forEach var="record" items="${anirecord}" varStatus="loop">
-							  <div class="card col-12 col-md-3" style="padding-top:15px;">
+							  <div class="card col-12 col-md-3" id="img_div">
+							  	<a href="#">
 								  <img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
-								  <div class="card-body" style="height: 120px;">
+								</a>  
+								<div id="button_div">
+								  <a href="<c:url value='/animal/enroll_edit.aw?ani_no=${record.ani_no }'/>" class="btn btn-primary" id="btn_edit">수 정</a>
+								  <a onclick="delete_ani();" href="#" class="btn btn-danger" id="btn_delete">삭 제</a>
+								</div>
+							    <div class="card-body" style="height: 120px;">
 								    <h2 class="card-title">애완동물 이름 : ${record.ani_name}</h2>
 								    <p class="card-text" id="profile-text">
 								    	<span>나이 : ${record.ani_age}</span><br>
@@ -154,12 +196,12 @@
 							    		<span>대분류 : ${record.ani_species}</span><br>
 							    		<span>중분류 : ${record.ani_kind}</span>
 						    		</p>
-								  </div>
+							    </div>
 							  </div>
 							</c:forEach>
-							  <div class="card col-12 col-md-3" id="plus">
-								  <a href="<c:url value='/animal/enroll.aw'/>"><img style="height: 200px;" class="card-img-top" src="<c:url value='/resources/images/plus.jpg'/>" alt="애완동물 추가"></a>
-							  </div>
+							<div class="card col-12 col-md-3" id="plus">
+								<a href="<c:url value='/animal/enroll.aw'/>"><img style="height: 200px;" class="card-img-top" src="<c:url value='/resources/images/plus.jpg'/>" alt="애완동물 추가"></a>
+							</div>
 						</div>
 					</div>	
 				</section>

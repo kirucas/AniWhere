@@ -34,14 +34,12 @@
 				
 				<tbody>
 					<tr class="public">
-
 						<td>1</td>
 						<td>[공지사항]민사상 법률 팁 사기예방 공지사항</td>
 						<td>관리자</td>
 						<td>557</td>
 						<td>2018-08-17</td>
-					</tr>
-					
+					</tr>					
 					<c:forEach var="record" items="${list}" varStatus="loop">
 				
 						<tr>

@@ -58,7 +58,7 @@ public class MarketGroupbuyController {
 			
 			System.out.println("deadline"+ map.get("deadline"));
 			
-			map.put("table_name","groupbuy");
+			map.put("table_name","group_buy");
 			map.put("mem_no", session.getAttribute("mem_no"));			
 			allBoardService.insert(map);
 			
@@ -77,7 +77,7 @@ public class MarketGroupbuyController {
 						)throws Exception {
 					//서비스 호출]
 					//페이징을 위한 로직 시작]
-					map.put("table_name","groupbuy");
+					map.put("table_name","group_buy");
 					//전체 레코드 수
 				
 					int totalRecordCount= allBoardService.getTotalRecord(map);
@@ -101,7 +101,7 @@ public class MarketGroupbuyController {
 				         Map record = new HashMap();
 				         record.put("dto", dto);
 				         Map temp = new HashMap();
-				         temp.put("table_name","groupbuy");
+				         temp.put("table_name","group_buy");
 				         temp.put("no", dto.getNo());
 				         
 				         
@@ -145,8 +145,8 @@ public class MarketGroupbuyController {
 				public String buyinside(@RequestParam Map map,Model model,HttpSession session) throws Exception {
 					
 					map.put("mem_no",session.getAttribute("mem_no"));
-					map.put("table_name","groupbuy");
-					map.put("no", map.get("groupbuy_no"));
+					map.put("table_name","group_buy");
+					map.put("no", map.get("buy_no"));
 						
 					//서비스 호출]
 				
@@ -181,7 +181,7 @@ public class MarketGroupbuyController {
 					
 					
 					map.put("mem_no", session.getAttribute("mem_no"));
-					map.put("table_name","groupbuy");
+					map.put("table_name","group_buy");
 					//map.put("no", map.get("buy_no"));
 					
 					/*//키값 확인ㅇ
@@ -222,8 +222,8 @@ public class MarketGroupbuyController {
 				public String groupbuy_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 						
 					map.put("mem_no",session.getAttribute("mem_no"));
-					map.put("table_name","groupbuy");
-					map.put("no", map.get("groupbuy_no"));
+					map.put("table_name","group_buy");
+					map.put("no", map.get("buy_no"));
 					
 					//게시글
 					GroupBuyDTO record = allBoardService.selectOne(map);
@@ -240,8 +240,8 @@ public class MarketGroupbuyController {
 				@RequestMapping("/security/market/groupbuyupdate.aw")
 				public String edit(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 					map.put("mem_no",session.getAttribute("mem_no"));
-					map.put("table_name","groupbuy");
-					map.put("no",map.get("groupbuy_no"));
+					map.put("table_name","group_buy");
+					map.put("no",map.get("buy_no"));
 					
 					allBoardService.update(map);
 					
@@ -253,8 +253,8 @@ public class MarketGroupbuyController {
 				@RequestMapping("/market/groupbuy/delete.aw")
 				public String delete(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 					map.put("mem_no",session.getAttribute("mem_no"));
-					map.put("table_name","groupbuy");
-					map.put("no",map.get("groupbuy_no"));
+					map.put("table_name","group_buy");
+					map.put("no",map.get("buy_no"));
 						
 					allBoardService.delete(map);
 					
@@ -291,7 +291,7 @@ public class MarketGroupbuyController {
 				   public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
 				      
 				      map.put("mem_no", session.getAttribute("mem_no"));
-				      map.put("table_name", "groupbuy");
+				      map.put("table_name", "group_buy");
 				      map.put("no", map.get("no"));
 				      
 				      cmtService.insert(map);
@@ -306,7 +306,7 @@ public class MarketGroupbuyController {
 				      public String buy_write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
 				         
 				         map.put("mem_no", session.getAttribute("mem_no"));
-				         map.put("table_name", "groupbuy");
+				         map.put("table_name", "group_buy");
 				         map.put("no", map.get("no"));
 				         
 				         cmtService.insert(map);
@@ -319,7 +319,7 @@ public class MarketGroupbuyController {
 				      @RequestMapping(value="/market/groupbuy/cmt_list.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 				      public String buy_list(@RequestParam Map map,HttpSession model) throws Exception{
 				         
-				         map.put("table_name", "groupbuy");
+				         map.put("table_name", "group_buy");
 				         map.put("origin_no", map.get("no"));
 				         
 				         List<AllCommentDTO> collections = cmtService.selectList(map);
@@ -346,7 +346,7 @@ public class MarketGroupbuyController {
 				      @RequestMapping(value="/market/groupbuy/cmt_edit.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 				      public String buy_update(@RequestParam Map map,HttpSession session) throws Exception{
 				         
-				         map.put("table_name", "groupbuy");
+				         map.put("table_name", "group_buy");
 				         map.put("cmt_content", map.get("cmt_content"));
 				       
 				         
@@ -370,7 +370,7 @@ public class MarketGroupbuyController {
 				   @RequestMapping(value="/market/groupbuy/cmt_delete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 				   public String buy_delete(@RequestParam Map map,HttpSession session) throws Exception{
 				         
-				       map.put("table_name", "groupbuy");
+				       map.put("table_name", "group_buy");
 				       map.put("cmt_no", session.getAttribute("cmt_no"));
 				         
 				       cmtService.delete(map);
