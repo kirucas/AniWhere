@@ -31,6 +31,7 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +39,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AwsS3Utils;
+import com.animal.aniwhere.service.impl.member.AndroidTokenServiceImpl;
 import com.animal.aniwhere.service.impl.member.AnimalServiceImpl;
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 import com.animal.aniwhere.service.member.AnimalDTO;
@@ -57,6 +59,9 @@ public class MemberController {
 
 	@Resource(name = "animalService")
 	private AnimalServiceImpl aniservice;
+	
+	@Resource(name = "tokenService")
+	private AndroidTokenServiceImpl androidservice;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -366,7 +371,7 @@ public class MemberController {
 	
 	//안드로이드 용
  	@ResponseBody
- 	@RequestMapping(value="/android.awa", method = RequestMethod.POST)
+ 	@RequestMapping(value="/android.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
  	public String androidLogin(@RequestParam Map map,HttpSession session) throws Exception{
  		
  		MemberDTO dto = service.selectOne(map);
@@ -381,7 +386,7 @@ public class MemberController {
  	
  	//안드로이드 googleLogin
  	@ResponseBody
- 	@RequestMapping(value = "/androidsignUpProcess.awa", method = RequestMethod.POST)
+ 	@RequestMapping(value = "/androidsignUpProcess.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
  	public String androidSignUp(@RequestParam Map map) throws Exception{
  			 		
  		MemberDTO dto = service.selectOne(map);				
@@ -390,9 +395,10 @@ public class MemberController {
  	 	}
 		 		
  		map.put("mem_log",Integer.parseInt(map.get("mem_log").toString()));		
+ 		
  		int signup = service.insert(map);
  		
- 		if(signup==1) {
+ 		if(signup==2) {
  			dto = service.selectOne(map);				
  	 		return dto.getMem_id()+","+dto.getMem_no();
  		}else {
@@ -400,5 +406,56 @@ public class MemberController {
  	    }	     
     }
  	
-
+ 	@ResponseBody
+ 	@RequestMapping(value="/androidMember.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
+ 	public String androidMember(@RequestParam Map map) throws Exception{ 		
+ 		MemberDTO dto = service.selectOne(map);
+ 		JSONObject json = new JSONObject();
+ 		json.put("mem_id", dto.getMem_id());
+ 		json.put("mem_name", dto.getMem_name());
+ 		json.put("mem_nickname", dto.getMem_nickname());
+ 		json.put("mem_interani", dto.getMem_interani());
+ 		json.put("mem_gender", dto.getMem_gender()); 	
+ 		json.put("mem_pw", dto.getMem_pw());
+ 		return json.toJSONString();       
+    }
+ 	
+ 	@ResponseBody
+ 	@RequestMapping(value="/androidUpdate.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
+ 	public String androidUpDate(@RequestParam Map map) throws Exception{ 		
+ 		
+ 		int affect = service.update(map);
+ 		if(affect == 0) {
+ 			return "false";
+ 		}
+ 		return "true";       
+    }
+ 	@ResponseBody
+ 	@RequestMapping(value="/fireBaseInsertToken.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
+ 	public String fireBaseInsertToken(@RequestParam Map map) throws Exception{ 		
+ 		System.out.println("=======fireBaseInsertToken======="); 	
+ 		Object obj=map.get("mtk_token");
+ 		System.out.println("obj="+obj.toString());
+ 		System.out.println(map.get("mem_no"));
+ 
+ 		if(!obj.equals("null")) {
+ 			System.out.println("널인데 왜 들어오지");
+ 			Map result = androidservice.selectOne(map);
+ 			if(result == null ) {
+ 	 			androidservice.insert(map);
+ 	 			System.out.println("========1=======");
+ 	 		}else {
+ 	 			int affect = androidservice.delete(map);
+ 	 			System.out.println("========2=======");
+ 	 			System.out.println(affect);
+ 	 			if(affect == 1) {
+ 	 				System.out.println("========4=======");
+ 	 				androidservice.insert(map);
+ 	 				System.out.println("========4=======");
+ 	 			}
+ 	 		}
+ 		}
+ 				
+ 	 	return "입력성공";   
+    }
 }//////////////////// MemberController class

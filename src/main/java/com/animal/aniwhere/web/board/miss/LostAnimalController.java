@@ -29,8 +29,14 @@ public class LostAnimalController {
  	public String androidLostAnimal(@RequestParam Map map) throws Exception{
 		
 		int count = service.getTotalRecord(null);
-		map.put("start", 1);
-		map.put("end", 10);
+		if(map.get("mian") != null) {
+			int end = (int) (Math.random() * 10) + 1;
+			map.put("start", end);
+			map.put("end", end);
+		}else {
+			map.put("start", 1);
+			map.put("end", 10);
+		}		
 		List<LostAnimalDTO> lists = service.selectList(map);		
 		List<Map> collections = new Vector<Map>();
 		
