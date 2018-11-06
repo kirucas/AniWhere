@@ -92,7 +92,7 @@ public class QRCode_Generator {
 		JSONObject json = new JSONObject();
 		
 		json.put("name", memDTO.getMem_name());
-		json.put("store_name", storeDTO.getBizesnm() + (storeDTO.getBrchnm() != null ? (" " + storeDTO.getBrchnm()) : ""));
+		json.put("store_name", storeDTO.getBizesnm() + (storeDTO.getBrchnm() != null ? (" " + storeDTO.getBrchnm()) : "") + (storeDTO.getDongno() != null ? (" " + storeDTO.getDongno()) : "") + (storeDTO.getFlrno() != null ? (" " + storeDTO.getFlrno()) : "") + (storeDTO.getHono() != null ? (" " + storeDTO.getHono()) : ""));
 		json.put("apply_date", new java.sql.Date(new java.util.Date().getTime()));
 		json.put("booking_date", map.get("booking_date"));
 		json.put("location", storeDTO.getRdnmadr());
