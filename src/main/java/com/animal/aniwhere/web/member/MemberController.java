@@ -29,6 +29,7 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -432,24 +433,28 @@ public class MemberController {
  	@RequestMapping(value="/fireBaseInsertToken.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
  	public String fireBaseInsertToken(@RequestParam Map map) throws Exception{ 		
  		System.out.println("=======fireBaseInsertToken======="); 	
- 		System.out.println(map.get("mtk_token"));
+ 		Object obj=map.get("mtk_token");
+ 		System.out.println("obj="+obj.toString());
  		System.out.println(map.get("mem_no"));
- 		
- 		Map result = androidservice.selectOne(map);
- 		
- 		if(result == null ) {
- 			androidservice.insert(map);
- 			System.out.println("========1=======");
- 		}else {
- 			int affect = androidservice.delete(map);
- 			System.out.println("========2=======");
- 			System.out.println(affect);
- 			/*if(affect == 1) {
- 				System.out.println("========4=======");
- 				androidservice.insert(map);
- 				System.out.println("========4=======");
- 			}*/
+ 
+ 		if(!obj.equals("null")) {
+ 			System.out.println("널인데 왜 들어오지");
+ 			Map result = androidservice.selectOne(map);
+ 			if(result == null ) {
+ 	 			androidservice.insert(map);
+ 	 			System.out.println("========1=======");
+ 	 		}else {
+ 	 			int affect = androidservice.delete(map);
+ 	 			System.out.println("========2=======");
+ 	 			System.out.println(affect);
+ 	 			if(affect == 1) {
+ 	 				System.out.println("========4=======");
+ 	 				androidservice.insert(map);
+ 	 				System.out.println("========4=======");
+ 	 			}
+ 	 		}
  		}
+ 				
  	 	return "입력성공";   
     }
 }//////////////////// MemberController class
