@@ -52,59 +52,61 @@
 		}
 	
 		 $.each(data,function(index,comment){
+
 			 /*로그인한 사용자가 먼저 댓글한 사용자가 아닐 때는 삭제 수정이 불가능함  */
 			//if('${sessionScope.mem_no}' != '${dto.mem_no}')
 				commentString+="<label>"+comment['nickname']+"</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-			//else
-				commentString+="<label style='color: gray;'>"+comment['regidate']+"</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				commentString+="<label style='color: gray;'>"+comment['regidate']+"</label><br/>";
+				commentString+='<label title="' + comment.cmt_no + '">'+comment['comment_content']+'</label>';
 			/* 로그인한 사용자가 선댓글한 사용자일 때 삭제 수정이 가능해야 함 */
-			if('${sessionScope.mem_no}' == '${dto.mem_no}')
-				commentString+='<span class="commentDelete" cmt_content="'+comment['nickname']+'" style="cursor: pointer; color: green; font-size: 1.2em; font-weight: bold">삭제</span><br/>';
-			else
-				commentString+='<span style="color: gray; font-size: 0.7em; font-weight: bold">삭제불가</span><br/>';
-				commentString+='<label>'+comment['comment_content']+'</label><br/><br/>';
-		
-			});		
+			if('${sessionScope.mem_no}' == comment['mem_no']){
+				commentString+='&nbsp;&nbsp;&nbsp;&nbsp;<span class="commentDelete" title="' + comment.cmt_no + '" style="cursor: pointer; color: red; font-size: 1.0em; font-weight: bold">삭제</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+				commentString+='<span class="commentEdit" title="' + comment.cmt_no + '" style="cursor: pointer; color: green; font-size: 1.0em; font-weight: bold">수정</span><br/><br/>';				
+			}
+			else {
+				commentString+="<br/><br/>";
+			}
+			});
 		 		commentString+="</div>";
-		console.log("commentString :"+commentString);
 		
-		
+		$('#comments').html("");
 		$('#comments').html(commentString);
 		
-		//코멘트 수정/삭제 처리
-		$('.commentEdit').click(function(){
-			//cno값 출력
-			console.log($(this).attr("cmt_content"));
-			
-			$('#cmt_content').val($(this).html());
-			$('#submit').html('수정');
-			
-			//form의 hidden속성중 name="cno"값 설정
-			$('input[name=nickname]').val($(this).attr("cmt_content"));
-			
-		});
 		
-		$('.commentDelete').click(function(){			
-			var cno_value = $(this).attr("cmt_content");
-			
-			$.ajax({
-				url:"<c:url value='/board/animal/bird/movie/commentDelete.awa'/>",
-				data:{cno:cno_value, no:"${cmtdto.cmt_no}"},
-				dataType:'json',
-				type:'post',
-				success:function(key){					
-					showComments(key);					
-				}		
-			});		
-		});
 	};
 	
-	$(function(){
-		//페이지 로드시 코멘트 목록 뿌려주기
+	//코멘트 수정/삭제 처리
+	$(document).on('click','.commentEdit',function(){
+		//cno값 출력
+		var cmt_no = $(this).attr("title");
+		
+		$('#cmt_content').val($("label[title="+cmt_no+"]").html());
+		$('#submit').html('수정');
+		
+		//form의 hidden속성중 name="cno"값 설정
+		$('input[name=cmt_no]').val($(this).attr("title"));
+		
+	});
+	$(document).on('click','.commentDelete',function(){
+		var cno_value = $(this).attr("title");
+		
+		$.ajax({
+			url:"<c:url value='/board/animal/bird/movie/commentDelete.awa'/>",
+			data:{cmt_no:cno_value, no:"${dto.no}" },
+			dataType:'json',
+			type:'post',
+			success:function(key){
+				showComments(key);
+			}
+		});	
+	});
+	
+	$(function(){	//페이지 로드시 코멘트 목록 뿌려주기
 		showComments("${dto.no}");
 	
 		//코멘트 입력처리]
 		$('#submit').click(function(){
+			check();
 			if($(this).html()=='댓글')
 				var action="<c:url value='/security/animal/bird/movie/commentWrite.awa'/>";
 			else
@@ -112,16 +114,16 @@
 			
 			$.ajax({
 				url:action,
-				data: {cmt_content: $('#inputcomment').val(), no : '${dto.no}'},
-				dataType:'text',
+				data: {cmt_content: $('#cmt_content').val(), no : '${dto.no}'},
+				dataType:'json',
 				type:'post',
 				success:function(key){
-					console.log('come');
 					showComments(key);
 					if($('#submit').html()=='수정'){						
 						$('#submit').html('등록');
 						$('#cmt_content').val('');
 					}
+					$('#cmt_content').val('');
 				},
 				error : function(request, status, error){
 		            console.log("code : %s\r\nmessage : %s\r\nerror : %s\r\nstatus : %s", request.status, request.responseText, error, status);
@@ -215,11 +217,12 @@ a:visited { color:white; text-decoration: none;}
 <div class="text-right" style="margin-top: 20px;">
 	<div class="horizontal">
 		<!-- 한줄 코멘트 입력 폼-->
-		<form class="form-inline" onsubmit="return check()" id="frm" name="fr" method="post" style="margin: 0px auto;">
+		<form class="form-inline" id="frm" name="fr" method="post" style="margin: 0px auto;">
 			<label for="inputcomment" class="col-xs-2 col-sm-1 col-md-1 control-label">${sessionScope.mem_id}</label>
+			<input type="hidden" name="cmt_no" />
 			<input type="text" id="cmt_content" class="form-control col-xs-11 col-sm-9 col-md-9" name="inputcomment"
 				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" class="btn btn-success col-xs-1 col-sm-1" id="submit">댓글</a>
+			<a href="#" class="btn btn-success col-xs-1 col-sm-1" id="submit" role="button">댓글</a>
 		</form>
 	</div>
 </div>

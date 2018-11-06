@@ -122,17 +122,12 @@ public class BirdMovieController {
 		// 게시글
 		MovieBoardDTO dto = service.selectOne(map);
 		
-		System.out.println("map :" +map); //map : {no=no, nowPage=1, table_name=movie}
-		
 		// 유튜브 iframe소스를 가져와서 섬머노트와 같이 있는 내용과 분리하여 뿌리는 메소드
 		//(데이터 베이스 상에는 관련 컬럼이 없으므로)
 		setIframe(dto);
-		
-		
+
 		// 데이타 저장]
 		model.addAttribute("dto", dto);
-		
-		System.out.println("model :" +model);
 		
 		// 뷰정보 반환]
 		return "board/animal/bird/movie/movie_view.tiles";
@@ -155,7 +150,6 @@ public class BirdMovieController {
 				model.addAttribute("successFail", successFail);
 				model.addAttribute("WHERE","EDT");
 				model.addAttribute("no",map.get("no"));
-				System.out.println("model" +model);
 				return "/board/animal/bird/movie/movieMessage";
 			}//////////////////
 		
@@ -180,7 +174,6 @@ public class BirdMovieController {
 				String idAdded	= new StringBuffer(tempResult).insert(tempResult.lastIndexOf("src"), "id=\"player\" ").toString();
 				String enablejsApi = new StringBuffer(idAdded).insert(idAdded.indexOf("\"", 26), "?enablejsapi=1&rel=0").toString();
 				String grandResult = enablejsApi.replace("note-video-clip","embed-responsive-item");
-				System.out.println("grandResult:" + grandResult);
 				dto.setMovie_tempsrc(grandResult);
 			/*	
 				//<iframe>을 잘라낸 나머지를 내용으로 추출.
@@ -202,13 +195,9 @@ public class BirdMovieController {
 			//한줄 댓글 작성자 아이디 설정
 			//map.put("id",session.getAttribute("id"));
 			//스프링 씨큐러티 적용
-			System.out.println("코멘트 입력1");
 			map.put("mem_no",session.getAttribute("mem_no"));
 		
-			
-			System.out.println("map :" +map);
-			cmtservice.insert(map);		
-			System.out.println("hhhh코멘트 입력2:"+map.get("no").toString());
+			cmtservice.insert(map);	
 			return map.get("no").toString();
 		}///////////////////
 		//특정 글번호에 대한 코멘트 전체 목록 가져오기
@@ -219,9 +208,8 @@ public class BirdMovieController {
 			String movie = "movie";
 			map.put("table_name", movie);
 			//서비스 호출]
-			System.out.println("map.get() :"+map.get("no"));
 			List<AllCommentDTO> comments=cmtservice.selectList(map);
-			System.out.println("comments :" +comments);
+			System.out.println(comments.size());
 			//JSONArray.toJSONString(comments) 시
 			//[{"NO":2,"ONELINECOMMENT":"댓글2","CPOSTDATE":2018-09-12 10:15:38.0,"CNO":3,"ID":"LEE","NAME":"이길동"},{"NO":2,"ONELINECOMMENT":"댓글1","CPOSTDATE":2018-09-12 10:14:44.0,"CNO":2,"ID":"PARK","NAME":"박길동"}]
 			//날짜를 2018-09-12 10:15:38.0에서 " 2018-09-12"형태로 변경
@@ -233,16 +221,15 @@ public class BirdMovieController {
 				record.put("regidate", cmtdto.getRegidate().toString());
 				record.put("nickname", cmtdto.getMem_nickname());
 				record.put("comment_content", cmtdto.getCmt_content());
+				record.put("mem_no", cmtdto.getMem_no());
+				record.put("cmt_no", cmtdto.getCmt_no());
 				collections.add(record);
 			}
-			System.out.println("collections"+ collections);
 			/*
 			for(AllCommentDTO comment:comments) {
 				comment.put("CPOSTDATE",comment.get("CPOSTDATE").toString().substring(0,10));
 			}
 			*/
-			System.out.println("========================");
-			System.out.println("JSONArray.toJSONString(collections): "+JSONArray.toJSONString(collections));
 			return JSONArray.toJSONString(collections);
 		}/////////////////////
 		
@@ -250,17 +237,22 @@ public class BirdMovieController {
 		@ResponseBody
 		@RequestMapping(value="/security/animal/bird/movie/commentEdit.awa",produces="text/html; charset=UTF-8")
 		public String update(@RequestParam Map map) throws Exception{
+			map.put("table_name", "movie");
+			System.out.println("map :"+map);
 			//서비스 호출]
 			cmtservice.update(map);
+			System.out.println(map.get("no").toString());
 			return map.get("no").toString();
 		}/////////////////////////
 		
 		//코멘트 삭제처리]
 		@ResponseBody
-		@RequestMapping(value="/animal/bird/movie/commentDelete.awa",produces="text/html; charset=UTF-8")
+		@RequestMapping(value="/board/animal/bird/movie/commentDelete.awa",produces="text/html; charset=UTF-8")
 		public String delete(@RequestParam Map map) throws Exception{
+			map.put("table_name", "movie");
 			//서비스 호출]
 			cmtservice.delete(map);
+			//return map.get("cmt_no").toString();
 			return map.get("no").toString();
 		}/////////////////////////
 		
