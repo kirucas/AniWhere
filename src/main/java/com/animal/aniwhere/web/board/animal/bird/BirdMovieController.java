@@ -193,34 +193,40 @@ public class BirdMovieController {
 
 	//코멘트 입력처리]
 		@ResponseBody
-		@RequestMapping(value="/security/animal/bird/movie/commentWrite.awa",produces="text/html; charset=UTF-8")
-		public String write(@RequestParam Map map,Authentication auth,  HttpSession session,Model model) throws Exception{
+		@RequestMapping(value="/security/animal/bird/movie/commentWrite.awa",produces="text/plain; charset=UTF-8")
+		public String write(@RequestParam Map map, HttpSession session,Model model) throws Exception{
+			//맵에서 table_name 넣기
+			String movie = "movie";
+			map.put("table_name", movie);
 			//서비스 호출]		
 			//한줄 댓글 작성자 아이디 설정
 			//map.put("id",session.getAttribute("id"));
 			//스프링 씨큐러티 적용
 			System.out.println("코멘트 입력1");
-			map.put("id",((UserDetails)auth.getPrincipal()).getUsername());		
+			map.put("mem_no",session.getAttribute("mem_no"));
+		
+			
+			System.out.println("map :" +map);
 			cmtservice.insert(map);		
-			System.out.println("코멘트 입력2:"+map.get("no").toString());
+			System.out.println("hhhh코멘트 입력2:"+map.get("no").toString());
 			return map.get("no").toString();
 		}///////////////////
 		//특정 글번호에 대한 코멘트 전체 목록 가져오기
 		@ResponseBody
-		@RequestMapping(value="/animal/bird/movie/commentList.awa",produces="text/html; charset=UTF-8")
+		@RequestMapping(value="/board/animal/bird/movie/commentList.awa",produces="text/html; charset=UTF-8")
 		public String list(@RequestParam Map map) throws Exception{
+			//맵에서 table_name 넣기
+			String movie = "movie";
+			map.put("table_name", movie);
 			//서비스 호출]
+			System.out.println("map.get() :"+map.get("no"));
 			List<AllCommentDTO> comments=cmtservice.selectList(map);
 			System.out.println("comments :" +comments);
 			//JSONArray.toJSONString(comments) 시
 			//[{"NO":2,"ONELINECOMMENT":"댓글2","CPOSTDATE":2018-09-12 10:15:38.0,"CNO":3,"ID":"LEE","NAME":"이길동"},{"NO":2,"ONELINECOMMENT":"댓글1","CPOSTDATE":2018-09-12 10:14:44.0,"CNO":2,"ID":"PARK","NAME":"박길동"}]
 			//날짜를 2018-09-12 10:15:38.0에서 " 2018-09-12"형태로 변경
 			
-			//맵에서 table_name 넣기
-			String movie = "movie";
-			map.put("table_name", movie);
 			// 댓글
-			
 			List<Map> collections = new Vector<Map>();
 			for (AllCommentDTO cmtdto : comments) {
 				Map record = new HashMap();
@@ -235,7 +241,8 @@ public class BirdMovieController {
 				comment.put("CPOSTDATE",comment.get("CPOSTDATE").toString().substring(0,10));
 			}
 			*/
-			System.out.println(JSONArray.toJSONString(collections));
+			System.out.println("========================");
+			System.out.println("JSONArray.toJSONString(collections): "+JSONArray.toJSONString(collections));
 			return JSONArray.toJSONString(collections);
 		}/////////////////////
 		
