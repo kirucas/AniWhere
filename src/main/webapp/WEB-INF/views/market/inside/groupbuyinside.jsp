@@ -11,6 +11,98 @@
 </script>
 
 <script>
+   //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수
+   var showComments = function(key){
+      $.ajax({
+          url:"<c:url value='/market/groupbuy/cmt_list.awa'/>",
+         data:{no:key},
+         dataType:'json',
+         type:'post',
+         success:displayComments
+      });
+   };
+   
+ //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
+	var displayComments	 = function(data){
+		console.log(JSON.stringify(data));
+		var commentString='<h2 data-v-f39b78c2="" class="comment__title" style="margin-top: 20px;margin-bottom: 15px;">댓글 목록</h2>';
+			commentString+='<div class="row border-top">';
+		if(data.length==0){
+			commentString+="<h3 class='text-center' style='padding-top:10px;width:100%'>등록된 댓글이 없습니다</h3>";
+		}
+		$.each(data,function(index,cmt){			
+			commentString+='<div class="col-sm-5" style="margin-top: 10px">';
+			commentString+=cmt["mem_nickname"]+'&nbsp;&nbsp; '+cmt["regidate"];
+			commentString+='</div>';
+			commentString+='<div class="offset-sm-5 col-sm-2" style="text-align:right;padding-top: 10px">';
+			if('${sessionScope.mem_no}' == cmt["mem_no"])
+				commentString+='<span title="'+cmt["cmt_no"]+'" class="commentDelete" style="cursor: pointer; color: orange; font-weight: bold">삭제</span>';
+			else
+				commentString+='';
+			commentString+='</div>';
+			commentString+='<div class="col-sm-12">';
+			commentString+='<h4 class="commentEdit" style="cursor: pointer;" title="'+cmt["cmt_no"]+'">'+cmt["cmt_content"]+'</h4>';
+			commentString+='</div>';
+		});		
+		commentString+='</div>';
+      $('#comments').html(commentString);
+      if(${sessionScope.mem_no==record.mem_no}){
+      //코멘트 수정/삭제 처리
+      $('.commentEdit').click(function() {
+         //console.log($(this).attr("title"));
+        
+         $("#title").val($(this).html());
+            $("#submit").val('수정');
+            $('input[name=cmt_no]').val($(this).attr("title"));
+      });
+      $('.commentDelete').click(function() {
+            var cno_value = $(this).attr("title");
+            $.ajax({
+                url:'<c:url value="/market/groupbuy/cmt_delete.awa"/>',
+                data:{cmt_no:cno_value,no:${record.no}},
+                dataType:'text',
+                type:'post',
+                success:function(key){
+                   showComments(key);                   
+                }
+             });
+      });
+      }
+   };
+    
+   
+   $(function(){
+      //페이지 로드시 코멘트 목록 뿌려주기
+      showComments(${record.no});
+      
+      //코맨트 입력처리
+      $('#submit').click(function(){
+         if($(this).val()=='등록')
+            var action = "<c:url value='/market/groupbuy/cmt_write.awa'/>";
+         else
+            var action = "<c:url value='/market/groupbuy/cmt_edit.awa'/>";
+         
+         $.ajax({
+            url:action,
+            data:$('#frm').serialize(),
+            dataType:'text',
+            type:'post',
+            success:function(key){
+               showComments(key);
+               if($('#submit').val()=='등록'){
+            	   $("#title").val('');
+               }
+               if($('#submit').val()=='수정'){
+                  $("#submit").val('등록');
+                  $("#title").val('');
+               }
+            }
+         });
+      });
+   });
+</script>
+
+<script>
    $(function() {
       $('#summernote').summernote({
     	 maxHeight:null,
@@ -256,6 +348,26 @@ function changeimage1() {
 				</c:if>
 				
 		</div>
+		
+		<div class="container border" style="margin-top: 15px;margin-bottom: 10px">
+	<div class="row">
+		<div class="col-sm-12" style="margin-top: 15px">
+			<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
+		</div>
+		<form id="frm" method="post">
+			<input type="hidden" name="cmt_no" />
+			<input type="hidden" id="no" name="no" value="${record.no}"/>
+			<div class="form-row" style="width:100%">
+				<input style="margin-bottom:10px ;width:83%;margin-left: 20px;margin-top: 10px;" class="form-control" id="title" name="cmt_content"  type="text" size="180" placeholder="댓글을 입력 하세요" />
+				<input style="margin-top:10px;margin-left:10px;width:7%; height: 38px" type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
+			</div>
+		</form>
+	</div>
+	
+	<div id="comments">
+		
+	</div>
+</div>
         
          <div style="margin-bottom: 50px" ></div>
         

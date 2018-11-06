@@ -364,20 +364,18 @@ public class MarketGroupbuyController {
 				         }
 				         */
 				         //System.out.println("dddd2");
-				         
-				         
+				         				         
 				         cmtService.update(map);
 				         
 				         return map.get("no").toString();
 				      }////////////
-				   
-				   
+				   			   
 				   @ResponseBody
 				   @RequestMapping(value="/market/groupbuy/cmt_delete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 				   public String buy_delete(@RequestParam Map map,HttpSession session) throws Exception{
 				         
 				       map.put("table_name", "group_buy");
-				       map.put("cmt_no", session.getAttribute("cmt_no"));
+				       //map.put("cmt_no", session.getAttribute("cmt_no"));
 				         
 				       cmtService.delete(map);
 				         

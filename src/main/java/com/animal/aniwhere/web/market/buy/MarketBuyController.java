@@ -357,7 +357,7 @@ public class MarketBuyController {
 	   public String buy_delete(@RequestParam Map map,HttpSession session) throws Exception{
 	         
 	       map.put("table_name", "buy");
-	       map.put("cmt_no", session.getAttribute("cmt_no"));
+	       //map.put("cmt_no", session.getAttribute("cmt_no"));
 	         
 	       cmtService.delete(map);
 	         
