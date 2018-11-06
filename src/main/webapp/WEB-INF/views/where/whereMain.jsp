@@ -284,7 +284,7 @@ button{
         						'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
         						'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
 		                        '                </div>' + 
-		                        '                <div style="text-align:center;margin-top:5px"><button class="btn btn-primary" href="'+curl+'">예약</button></div>' + 
+		                        '                <div style="text-align:center;margin-top:5px"><a class="btn btn-primary" href="'+curl+'">예약</a></div>' + 
 		                        '            </div>' + 
 		                        '        </div>' + 
 		                        '    </div>' +    
@@ -383,7 +383,7 @@ button{
        							'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
        							'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
 		                        '                </div>' + 
-		                        '                <div style="text-align:center;margin-top:5px"><button class="btn btn-primary" href="'+curl+'">예약</button></div>' + 
+		                        '                <div style="text-align:center;margin-top:5px"><a class="btn btn-primary" href="'+curl+'">예약</a></div>' + 
 		                        '            </div>' + 
 		                        '        </div>' + 
 		                        '    </div>' +    
