@@ -58,7 +58,7 @@ function check() {
    
 else {
 	
- fr.action="<c:url value='/security/market/groupbuyinsert.aw'/>"; 
+ fr.action="<c:url value='/security/market/buyupdate.aw?buy_no=${record.no}'/>"; 
  return true;
 }
     
@@ -126,7 +126,7 @@ else {
          $.ajax({
             data: form_data,
             type: "POST",
-            url : "<c:url value='/market/sell/Upload.aw'/>",
+            url : "<c:url value='/market/buy/Upload.aw'/>",
             cache: false,
             contentType: false,
             processData: false,
@@ -145,8 +145,7 @@ else {
             error : function() {
                console.log("error");
             }
-                   
-         
+                            
          });
       }
           
@@ -190,33 +189,9 @@ else {
 						<option value="5" ${record.animal_code == 5 ? "selected" : "" }>기타 포유류</option>
 											
 					</select>
-
 					
 				</p>
-
-				<div style="border: 1px silver solid">
-					<div class="row" style="text-align: center; margin-left: 20px">
-						<div class="my-2" style="margin-right:30 px">
-						<span >희망가</span>
-						<input
-							style="text-align:right"
-							class="form-control" type="number" id="price" required />
-					</div>
 					
-						<div class="my-2">
-						<span>거래기간</span> 
-						<input type="date" min="2018-11-05" style="text-align: right;padding-left: px"
-							max="2020-01-01"  class="form-control" type="date" name="deadline"
-							 required />
-													
-					</div>
-
-						<div class="my-2">
-						<span>연락처</span> <input class="form-control" type="number"
-							placeholder="집전화,휴대폰번호" style="text-align: right;padding-left:px" id="phone" required/>
-					</div>
-					</div>
-				</div>		
 				<p>
 					<label for="" class="" style="margin-top: 30px">프로그래스바
 						설정:목표수량</label> <input type="text" id="nickname" required  name="goal">개 

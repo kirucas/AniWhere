@@ -90,16 +90,16 @@ html {
 				
 							<span id="animal_code">관련태그:
 						<c:choose>
-							<c:when test="${record.animal_code eq '1'}">
+							<c:when test="${record.dao.animal_code eq '1'}">
 								<span>[개]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '2'}">
+							<c:when test="${record.dao.animal_code eq '2'}">
 								<span>[고양이]</span>		
 							</c:when>
-							<c:when test="${record.animal_code eq '3'}">
+							<c:when test="${record.dao.animal_code eq '3'}">
 								<span>[파충류]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '4'}">
+							<c:when test="${record.dao.animal_code eq '4'}">
 								<span>[조류]</span>
 							</c:when>
 							<c:otherwise>

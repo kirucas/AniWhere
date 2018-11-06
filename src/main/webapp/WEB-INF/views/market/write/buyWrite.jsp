@@ -17,7 +17,7 @@
    $(function() {
 	   var count=0;
 	   
-	   $('#enterBtn').onClick(function(){	
+	   $('#enterBtn').click(function(){	
 		   title+='['+$('#use_listSelect').val()+']';
 		   $('#title').append(title);
 		   console.log("성공")
@@ -101,7 +101,7 @@
 
 		<div class="col-md-12">
 
-			<form name="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
+			<form name="fr" method="post"  accept-charset="utf-8" 
 				class="form-horizontal" action="<c:url value='/security/market/buyinsert.aw'/>">		
 				<div class="form-row">
 				
