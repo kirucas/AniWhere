@@ -11,6 +11,7 @@
 </style>
 <script>
 
+
 	function goAjax(no) {
 		$.ajax({
 			url: "<c:url value='/notice/View.awa?no="+no+"'/>",
@@ -90,7 +91,7 @@
 	</div>
 <!-- 모달창 첫번째 -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-   	<div class="modal-dialog bounceInDown animated">
+   	<div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
          	<!-- 헤더 제목부분 -->
