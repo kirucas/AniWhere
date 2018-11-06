@@ -30,6 +30,7 @@ public class StoreLocationDAO implements AllCommonService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public StoreLocationDTO selectOne(Map map) {
+		System.out.println("store dao");
 		return template.selectOne("storeSelectOne", map);
 	}////////// selectOne
 
