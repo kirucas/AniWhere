@@ -92,9 +92,11 @@ span .mr-auto{
                                			</li>
                                		</ul>
                   				</div>
-    			 				<p style="margin-top:1.rem;" class="margin center medium-small sign-up">계정이 없으십니까?
-    			 					<a href="<c:url value='/member/sign_up.aw' />"> Sign Up</a>
-    			 				</p>
+                  				<div class="row" style="margin-top: 20px;">
+	    			 				<p style="margin-top:1.rem;" class="margin center medium-small sign-up">계정이 없으십니까?
+	    			 					<a href="<c:url value='/member/sign_up.aw' />"> Sign Up</a>
+	    			 				</p>
+    			 				</div>
                            <div class="wrapper mt-5 text-gray">
                                <p class="footer-text">Copyright © 2018 Bootstrapdash. All rights reserved.</p>
                                <ul class="auth-footer text-gray">

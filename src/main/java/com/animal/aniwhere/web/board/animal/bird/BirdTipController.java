@@ -1,6 +1,7 @@
 package com.animal.aniwhere.web.board.animal.bird;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.json.simple.JSONArray;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +38,9 @@ public class BirdTipController {
 	
 	@Resource(name="tipService")
 	private TipBoardServiceImpl tipservice;
+	
+	@Resource(name="allCommentService")
+	private AllCommentServiceImpl cmtservice;
 	
 	@Value("${PAGESIZE}")
 	private int pageSize;
@@ -149,60 +156,76 @@ public class BirdTipController {
 	}//////////////hit()
 	
 	///댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글///
+	/*
+	@ResponseBody
+	@RequestMapping(value="/comment.write.aw",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+	public String cmt_write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
+		
+		map.put("mem_no", session.getAttribute("mem_no"));
+		map.put("no", map.get("no"));
+		
+		cmtservice.insert(map);
+		
+		return map.get("no").toString();
+		
+	}///////////////////
 	
-	//코멘트 입력처리]
-	 	@Resource(name="allCommentService")
-		private AllCommentServiceImpl commentservice;
-	  
-		@ResponseBody
-		@RequestMapping(value="/Comment/Write.aw",produces="text/html; charset=UTF-8")
-		public String c_write(@RequestParam Map map,HttpSession session,Model model,Authentication auth) throws Exception{
-			//서비스 호출]		
-			//한줄 댓글 작성자 아이디 설정
-			map.put("mem_nickname",session.getAttribute("mem_nickname"));
-			//스프링 시큐리티 적용
-			
-			commentservice.insert(map);				
-			return map.get("cmt_no").toString();
-		}///////////////////
-		//특정 글번호에 대한 코멘트 전체 목록 가져오기
+	@ResponseBody
+	@RequestMapping(value="/Comment/List.aw",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+	public String cmt_list(@RequestParam Map map,HttpSession model) throws Exception{
 		
-		@ResponseBody
-		@RequestMapping(value="/Comment/List.aw",produces="text/html; charset=UTF-8")
-		public String c_list(@RequestParam Map map) throws Exception{
-			//서비스 호출]
-			List<AllCommentDTO> comments=commentservice.selectList(map);
-			
-			List<Map> collections = new Vector<Map>();	
-			for(AllCommentDTO comment:comments) {
-				Map coll = (Map) new Vector<Map>();
-				coll.put("mem_nickname",comment.getMem_nickname());
-				coll.put("cmt_content",comment.getCmt_content());
-				coll.put("hit",comment.getHit());
-				coll.put("regidate",comment.getRegidate().toString());
-				collections.add(coll);
-			}
-			
-			return JSONArray.toJSONString(comments);
-		}/////////////////////
+		map.put("origin_no", map.get("no"));
 		
-		//코멘트 수정 처리
-		@ResponseBody
-		@RequestMapping(value="/Comment/Edit.aw",produces="text/html; charset=UTF-8")
-		public String c_update(@RequestParam Map map) throws Exception{
-			//서비스 호출]
-			commentservice.update(map);
-			return map.get("cmt_no").toString();
-		}/////////////////////////
+		List<AllCommentDTO> collections = cmtservice.selectList(map);
 		
-		//코멘트 삭제처리]
-		@ResponseBody
-		@RequestMapping(value="/Comment/Delete.aw",produces="text/html; charset=UTF-8")
-		public String c_delete(@RequestParam Map map) throws Exception{
-			//서비스 호출]
-			commentservice.delete(map);
-			return map.get("cmt_no").toString();
-		}/////////////////////////
+		List<Map> comments = new Vector<>();
+		
+		for (AllCommentDTO dto : collections) {
+			
+	         Map record = new HashMap();
+	         record.put("cmt_no", dto.getCmt_no());
+	         model.setAttribute("cmt_no", dto.getCmt_no());
+	         record.put("cmt_content", dto.getCmt_content());
+	         record.put("mem_nickname", dto.getMem_nickname());
+	         record.put("regidate", dto.getRegidate().toString());
+	         record.put("origin_no", dto.getOrigin_no());
+	         record.put("mem_no", dto.getMem_no());         
+
+	         comments.add(record);
+	      }	
+		
+		
+		
+		return JSONArray.toJSONString(comments);
+	}//////////////////
+	
+	@ResponseBody
+	@RequestMapping(value="/comment.edit.aw",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+	public String cmt_update(@RequestParam Map map,HttpSession session) throws Exception{
+		
+		map.put("cmt_content", map.get("cmt_content"));
+		map.put("cmt_no", session.getAttribute("cmt_no"));
+		
+		Set<String> set = map.keySet();
+		for(String key:set) {
+			System.out.println(key+":"+map.get(key));
+		}
+		
+		cmtservice.update(map);
+		
+		return map.get("no").toString();
+	}////////////
+	
+	@ResponseBody
+	@RequestMapping(value="/comment.delete.aw",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+	public String cmt_delete(@RequestParam Map map,HttpSession session) throws Exception{
+		
+		map.put("cmt_no", session.getAttribute("cmt_no"));
+		
+		cmtservice.delete(map);
+		
+		return map.get("no").toString();
+	}*/
 	
 }//////////////////// tipboardController
 

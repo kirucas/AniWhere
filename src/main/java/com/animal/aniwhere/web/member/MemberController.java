@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -34,7 +35,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AwsS3Utils;
@@ -43,7 +43,6 @@ import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 import com.animal.aniwhere.service.member.AnimalDTO;
 import com.animal.aniwhere.service.member.MemberDTO;
 import com.animal.aniwhere.service.member.NaverLoginBO;
-import com.animal.aniwhere.web.board.FileUpDownUtils;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @Controller
@@ -109,29 +108,24 @@ public class MemberController {
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(apiResult);
 		JSONObject jsonResult = (JSONObject) jsonObject.get("response");
 		map.put("mem_id", jsonResult.get("id").toString());
-		map.put("mem_pw", 8124908);
+		map.put("mem_pw",  passwordEncoder.encode("naver"));
 		map.put("mem_nickname", jsonResult.get("nickname").toString());
-		map.put("mem_gender", jsonResult.get("gender").toString());
+		map.put("mem_gender", "U");
 		map.put("mem_name", jsonResult.get("name").toString());
 		map.put("mem_log", 1);
 		map.put("mem_interani", "0");
 		MemberDTO dto = service.selectOne(map);
 		// 네이버로 로그인 한적이 있으면 일로 나감.
-		if (dto != null) {
-			session.setAttribute("mem_id", map.get("mem_id"));
-			session.setAttribute("mem_no", dto.getMem_no());
-			return "forward:/main.aw";
+		if (dto == null) {
+			int signup = service.insert(map);
+			dto = service.selectOne(map);
+			if (signup == 2)
+				model.addAttribute("check", 2);
+			else
+				model.addAttribute("check", 0);
 		}
-		int signup = service.insert(map);
-		dto = service.selectOne(map);
-		if (signup == 2)
-			model.addAttribute("check", 2);
-		else
-			model.addAttribute("check", 0);
-
-		session.setAttribute("mem_id", map.get("mem_id"));
-		session.setAttribute("mem_no", dto.getMem_no());
-
+		model.addAttribute("mem_id", map.get("mem_id"));
+		model.addAttribute("mem_pw", "naver");
 		return "forward:/signInProcess.aw";
 	}
 
@@ -180,8 +174,8 @@ public class MemberController {
 		}
 
 		map.put("mem_id", profile.getId());
-		map.put("mem_pw", 8124908);
-		map.put("mem_nickname", profile.getDisplayName());
+		map.put("mem_pw",  passwordEncoder.encode("google"));
+		map.put("mem_nickname", System.nanoTime());
 		map.put("mem_gender", "U");
 		map.put("mem_name", profile.getDisplayName());
 		map.put("mem_log", 2); // 구글 로그인 연동
@@ -190,8 +184,8 @@ public class MemberController {
 		// 구글로 로그인 한적이 있으면 일로 나감.
 		if (dto != null) {
 			session.setAttribute("mem_id", map.get("mem_id"));
-			session.setAttribute("mem_no", dto.getMem_no());
-			return "forward:/main.aw";
+			session.setAttribute("mem_pw", "google");
+			return "member/sign_process";
 		}
 		int signup = service.insert(map);
 		dto = service.selectOne(map);
@@ -200,8 +194,8 @@ public class MemberController {
 		else
 			model.addAttribute("check", 0);
 
-		session.setAttribute("mem_id", map.get("mem_id"));
-		session.setAttribute("mem_no", dto.getMem_no());
+		model.addAttribute("mem_id", map.get("mem_id"));
+		model.addAttribute("mem_pw", "google");
 
 		return "member/sign_process";
 
@@ -212,34 +206,51 @@ public class MemberController {
 
 		return "member/animal_enroll";
 	}////////// animal_enroll
+	
+	@RequestMapping("/animal/enroll_edit.aw")
+	public String animal_enroll_edit(@RequestParam Map map , Model model) throws Exception {
+		map.put("ani_no", map.get("ani_no"));
+		AnimalDTO record =aniservice.selectOne(map);
+		model.addAttribute("record",record);
+		return "member/animal_enroll_edit";
+	}
+	
+	@RequestMapping("/member/edit.aw")
+	public String member_edit(@RequestParam Map map,@RequestParam List<String> mem_interani, Model model,HttpSession session,HttpServletRequest request) throws Exception {
+		map.put("mem_no", session.getAttribute("mem_no"));
+		String inter="";
+		for(String ani : mem_interani)
+			inter+=ani;
+		map.put("mem_interani", inter);
+		int update = service.update(map);
+		if(update==1)
+			model.addAttribute("edit",1);
+		else
+			model.addAttribute("edit",0);
+		return "member/edit_process";
+	}
 
 	@RequestMapping("/signIn/security.aw")
-	public String security(Authentication auth, HttpSession session) throws Exception {
+	public String security(@RequestParam Map map,Authentication auth, HttpSession session) throws Exception {
 		System.out.println("인증된 사용자:" + auth.getPrincipal());
 		UserDetails authenticatedUser = ((UserDetails) auth.getPrincipal());
 		System.out.println(authenticatedUser.getUsername());
 		System.out.println(authenticatedUser.getAuthorities().toString());
-		Map map = new HashMap<>();
 		map.put("mem_id", authenticatedUser.getUsername());
 		MemberDTO dto = service.selectOne(map);
 		session.setAttribute("mem_id", map.get("mem_id"));
 		session.setAttribute("mem_no", dto.getMem_no());
-
+		
 		return "forward:/";
 	}/// security
 	
-	/*
-	 * @RequestMapping(value = "/signInProcess.aw", method = RequestMethod.POST)
-	 * public String signInProcess(@RequestParam Map map, HttpSession session, Model
-	 * model) throws Exception { if(!service.isMember(map)) {
-	 * model.addAttribute("sign_error", "ID 혹은 Password가 틀렸습니다"); return
-	 * "member/sign_in"; } MemberDTO dto = service.selectOne(map);
-	 * 
-	 * session.setAttribute("mem_id", map.get("mem_id"));
-	 * session.setAttribute("mem_no", dto.getMem_no());
-	 * 
-	 * return "forward:/main.aw"; }//////////signInProcess()
-	 */
+	@RequestMapping("/signIn/securityMessage.aw")
+	public String securityMessage(@RequestParam Map map,Model model) throws Exception {
+		System.out.println(map.get("error"));
+		model.addAttribute("error",map.get("error"));
+		return "member/securityMessage";
+	}/// securityMessage
+	
 	@RequestMapping("/signout.aw")
 	public String signOut(HttpSession session) throws Exception {
 		session.invalidate();
@@ -252,12 +263,28 @@ public class MemberController {
 
 		return "member/sign_up";
 	}////////////// signUp()
-
+	
+    @ResponseBody
+	@RequestMapping("/member/nickchk.aw")
+    public String idcheck(@RequestParam Map map) {
+        System.out.println(map.get("nick"));
+        map.put("mem_nickname", map.get("nick"));
+        int result = service.getTotalRecord(map);
+        System.out.println(result);
+        Map resu = new HashMap<>();
+        resu.put("result", result);
+        return JSONObject.toJSONString(resu);
+    }
+	
 	@RequestMapping("/signUpProcess.aw")
-	public String signUpProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+	public String signUpProcess(@RequestParam Map map,@RequestParam List<String> mem_interani, HttpSession session, Model model) throws Exception {
 		System.out.println(map.get("mem_pw"));
 		map.put("mem_pw", passwordEncoder.encode(map.get("mem_pw").toString()));
 		System.out.println(map.get("mem_pw"));
+		String inter="";
+		for(String ani : mem_interani)
+			inter+=ani;
+		map.put("mem_interani", inter);
 		int signup = service.insert(map);
 		if (signup == 2)
 			model.addAttribute("check", 1);
@@ -294,7 +321,9 @@ public class MemberController {
 		List<AnimalDTO> anirecord = new ArrayList<AnimalDTO>();
 		// 사람 조회
 		record = service.selectOne(map);
+		// 동물 조회
 		anirecord = aniservice.selectList(map);
+		
 		// 데이터 저장]
 		model.addAttribute("record", record);
 		model.addAttribute("anirecord", anirecord);
@@ -304,9 +333,9 @@ public class MemberController {
 	@RequestMapping(value = "/enrollProcess.aw", method = RequestMethod.POST)
 	public String enrollProcess(MultipartHttpServletRequest mhsr, @RequestParam Map map, HttpSession session,
 			Model model) throws Exception {
-		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
-		MultipartFile upload = mhsr.getFile("ani_photo");
-		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+		//String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+		//MultipartFile upload = mhsr.getFile("ani_photo");
+		//String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
 		List<String> uploadList = AwsS3Utils.uploadFileToS3(mhsr, "animalprofile"); // S3 업로드
 
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -316,7 +345,7 @@ public class MemberController {
 		map.put("ani_species", mhsr.getParameter("ani_species").toString());
 		map.put("ani_kind", mhsr.getParameter("ani_kind").toString());
 		map.put("ani_pic", AwsS3Utils.LINK_ADDRESS + uploadList.get(0));
-
+		
 		int enroll = aniservice.insert(map);
 		if (enroll == 1)
 			model.addAttribute("check", 1);
@@ -325,22 +354,51 @@ public class MemberController {
 
 		return "member/enroll_process";
 	}////////// enrollProcess
-
-	// 네이버 로그인 url 반환
-	@RequestMapping("/Member/Login.bbs")
-	public String login(Model model, HttpSession session) throws Exception {
-
-		return "common/member/Login.tiles";
-	}
-
-	// 안드로이드 용
 	@ResponseBody
-	@RequestMapping(value = "/android.aw", method = RequestMethod.POST)
-	public String androidLogin(@RequestParam Map map) throws Exception {
-		if (!service.isMember(map)) {
-			return "false";
-		}
-		MemberDTO dto = service.selectOne(map);
-		return dto.getMem_id();
-	}//////////////// androidLogin
+	@RequestMapping(value="/security/member/animal/delete.awa", method= RequestMethod.POST)
+	public void delete_ani(@RequestParam Map map, HttpSession session,
+			Model model) throws Exception {
+		map.put("ani_no",map.get("ani_no"));
+		int delete = aniservice.delete(map);
+		List<AnimalDTO> list = aniservice.selectList(map);
+		model.addAttribute("anirecord",list);
+	}////////// enrollProcess
+	
+	//안드로이드 용
+ 	@ResponseBody
+ 	@RequestMapping(value="/android.awa", method = RequestMethod.POST)
+ 	public String androidLogin(@RequestParam Map map,HttpSession session) throws Exception{
+ 		
+ 		MemberDTO dto = service.selectOne(map);
+ 		boolean flag = passwordEncoder.matches(map.get("mem_pw").toString(), dto.getMem_pw());		
+ 		if(!flag) {
+ 			return "false";
+ 		}
+ 		
+ 		return dto.getMem_id()+","+dto.getMem_no();       
+    }
+ 	
+ 	
+ 	//안드로이드 googleLogin
+ 	@ResponseBody
+ 	@RequestMapping(value = "/androidsignUpProcess.awa", method = RequestMethod.POST)
+ 	public String androidSignUp(@RequestParam Map map) throws Exception{
+ 			 		
+ 		MemberDTO dto = service.selectOne(map);				
+ 	 	if(dto != null) {
+ 	 		return dto.getMem_id()+","+dto.getMem_no();
+ 	 	}
+		 		
+ 		map.put("mem_log",Integer.parseInt(map.get("mem_log").toString()));		
+ 		int signup = service.insert(map);
+ 		
+ 		if(signup==1) {
+ 			dto = service.selectOne(map);				
+ 	 		return dto.getMem_id()+","+dto.getMem_no();
+ 		}else {
+ 	    	return "false";
+ 	    }	     
+    }
+ 	
+
 }//////////////////// MemberController class

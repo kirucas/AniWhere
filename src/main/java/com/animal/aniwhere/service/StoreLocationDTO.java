@@ -2,73 +2,73 @@ package com.animal.aniwhere.service;
 
 public class StoreLocationDTO {
 
-	private String bizesId;
-	private String bizesNm;
-	private String brchNm;
-	private String indsSclsCd;
-	private String indsSclsNm;
-	private String lnoAdr;
-	private String rdnmAdr;
+	private String bizesid;
+	private String bizesnm;
+	private String brchnm;
+	private String indssclscd;
+	private String indssclsnm;
+	private String lnoadr;
+	private String rdnmadr;
 	private String lon;
 	private String lat;
-	private String dongNo;
-	private String flrNo;
-	private String hoNo;
+	private String dongno;
+	private String flrno;
+	private String hono;
 	
-	public String getBizesId() {
-		return bizesId;
+	public String getBizesid() {
+		return bizesid;
 	}//////////
 	
-	public void setBizesId(String bizesId) {
-		this.bizesId = bizesId;
+	public void setBizesid(String bizesid) {
+		this.bizesid = bizesid;
 	}//////////
 	
-	public String getBizesNm() {
-		return bizesNm;
+	public String getBizesnm() {
+		return bizesnm;
 	}//////////
 	
-	public void setBizesNm(String bizesNm) {
-		this.bizesNm = bizesNm;
+	public void setBizesnm(String bizesnm) {
+		this.bizesnm = bizesnm;
 	}//////////
 	
-	public String getBrchNm() {
-		return brchNm;
+	public String getBrchnm() {
+		return brchnm;
 	}//////////
 	
-	public void setBrchNm(String brchNm) {
-		this.brchNm = brchNm;
+	public void setBrchnm(String brchnm) {
+		this.brchnm = brchnm;
 	}//////////
 	
-	public String getIndsSclsCd() {
-		return indsSclsCd;
+	public String getIndssclscd() {
+		return indssclscd;
 	}//////////
 	
-	public void setIndsSclsCd(String indsSclsCd) {
-		this.indsSclsCd = indsSclsCd;
+	public void setIndssclscd(String indssclscd) {
+		this.indssclscd = indssclscd;
 	}//////////
 	
-	public String getIndsSclsNm() {
-		return indsSclsNm;
+	public String getIndssclsnm() {
+		return indssclsnm;
 	}//////////
 	
-	public void setIndsSclsNm(String indsSclsNm) {
-		this.indsSclsNm = indsSclsNm;
+	public void setIndssclsnm(String indssclsnm) {
+		this.indssclsnm = indssclsnm;
 	}//////////
 	
-	public String getLnoAdr() {
-		return lnoAdr;
+	public String getLnoadr() {
+		return lnoadr;
 	}//////////
 	
-	public void setLnoAdr(String lnoAdr) {
-		this.lnoAdr = lnoAdr;
+	public void setLnoadr(String lnoadr) {
+		this.lnoadr = lnoadr;
 	}//////////
 	
-	public String getRdnmAdr() {
-		return rdnmAdr;
+	public String getRdnmadr() {
+		return rdnmadr;
 	}//////////
 	
-	public void setRdnmAdr(String rdnmAdr) {
-		this.rdnmAdr = rdnmAdr;
+	public void setRdnmadr(String rdnmadr) {
+		this.rdnmadr = rdnmadr;
 	}//////////
 	
 	public String getLon() {
@@ -87,29 +87,28 @@ public class StoreLocationDTO {
 		this.lat = lat;
 	}//////////
 	
-	public String getDongNo() {
-		return dongNo;
+	public String getDongno() {
+		return dongno;
 	}//////////
 	
-	public void setDongNo(String dongNo) {
-		this.dongNo = dongNo;
+	public void setDongno(String dongno) {
+		this.dongno = dongno;
 	}//////////
 	
-	public String getFlrNo() {
-		return flrNo;
+	public String getFlrno() {
+		return flrno;
 	}//////////
 	
-	public void setFlrNo(String flrNo) {
-		this.flrNo = flrNo;
+	public void setFlrno(String flrno) {
+		this.flrno = flrno;
 	}//////////
 	
-	public String getHoNo() {
-		return hoNo;
+	public String getHono() {
+		return hono;
 	}//////////
 	
-	public void setHoNo(String hoNo) {
-		this.hoNo = hoNo;
+	public void setHono(String hono) {
+		this.hono = hono;
 	}//////////
-	
 	
 }//////////////////// StoreLocationDTO class

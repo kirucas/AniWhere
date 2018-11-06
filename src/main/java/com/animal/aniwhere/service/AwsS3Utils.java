@@ -69,7 +69,7 @@ public class AwsS3Utils {
 					upload.transferTo(new File(physicalPath+File.separator+newFilename));
 					String uploadedFileName=s3PutObject(physicalPath+File.separator+newFilename,category);
 					uploadedFileNames.add(uploadedFileName);
-					s3ReadObjects();
+					s3ReadObjects(category);
 				} catch (Exception e) { e.printStackTrace();}
 			}/// for
 		}/// while
@@ -110,9 +110,9 @@ public class AwsS3Utils {
 	}/// putObject
 	
 	// 버킷에서 파일 목록 불러오기
-	public static void s3ReadObjects() {
+	public static void s3ReadObjects(String category) {
 	    System.out.format("Objects in S3 bucket %s:\n", BUCKET_NAME);
-	    ListObjectsV2Result result = s3Client.listObjectsV2(BUCKET_NAME);
+	    ListObjectsV2Result result = s3Client.listObjectsV2(BUCKET_NAME,category);
 	    List<S3ObjectSummary> objects = result.getObjectSummaries();
 	    for (S3ObjectSummary os: objects) {
 	        System.out.println("* " + os.getKey());
@@ -131,7 +131,7 @@ public class AwsS3Utils {
         }
         System.out.println("Delete Done!");
         // 현재 파일 목록 출력
-        s3ReadObjects();
+        s3ReadObjects("");
 		return true;
 	}/// deleteFileFromS3
 	
@@ -151,7 +151,7 @@ public class AwsS3Utils {
         }
         System.out.println("Delete Done!");
         // 현재 파일 목록 출력
-        s3ReadObjects();
+        s3ReadObjects("");
         return true;
 	}/// deleteFileFromS3
 }/// class

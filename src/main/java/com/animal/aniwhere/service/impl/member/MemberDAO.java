@@ -52,5 +52,5 @@ public class MemberDAO implements AllMemberService {
 	public boolean isMember(Map map) {
 		return (Integer) template.selectOne("memberCheck", map) == 1 ? true : false;
 	}////////// isMemeber
-
+	
 }//////////////////// MemberDAO class

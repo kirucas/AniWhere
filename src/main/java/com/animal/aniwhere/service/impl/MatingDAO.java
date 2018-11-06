@@ -12,6 +12,7 @@ import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.MatingDTO;
 import com.animal.aniwhere.service.member.AnimalDTO;
 
+
 @Repository
 public class MatingDAO implements AllCommonService {
 
@@ -36,6 +37,7 @@ public class MatingDAO implements AllCommonService {
 
 	@Override
 	public int insert(Map map) {
+		map.put("today", new java.sql.Date(new java.util.Date().getTime()));
 		return template.insert("matingInsert", map);
 	}////////// insert
 

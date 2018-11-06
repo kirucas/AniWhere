@@ -28,6 +28,9 @@
 	display:inline-block;
 	margin-right:-4px;
 }
+#img_div{
+	 padding-top:15px;
+}
 #ani_profile{
 	height: 200px;
 }
@@ -43,7 +46,102 @@
 #profile-text span{
 	margin-bottom: 5px;
 }
+#button_div{
+	display:none;
+	position: absolute;
+	top:200px;
+}
+.img_div:hover #button_div{
+	display: block;
+	position: absolute;
+	top: 200px;
+	left: 200px;
+}
+#ani_checkbox input{
+	margin : 0px 5px 0px 5px;
+}
+
 </style>
+<script>
+function delete_ani(ani_no){
+	$.ajax({
+		data: {"ani_no":ani_no},
+        type: "POST",
+        url : "<c:url value='/security/member/animal/delete.awa'/>",
+        success: function() {
+			$('[id='+ani_no+']').remove();
+			
+        },
+        error : function() {
+           console.log("error");
+        }
+    });
+}
+var idck = 0;
+$(function(){
+	var ani = '${record.mem_interani}';
+	var arr = ani.split("");
+	for(var i=0;i<=arr.length;i++){
+		switch(arr[i]){
+		case "1":
+			$('.checkbox:eq(0)').prop("checked",true);
+			
+			break;
+		case "2":
+			$('.checkbox:eq(1)').prop("checked",true);	
+			break;			
+		case "3":
+			$('.checkbox:eq(2)').prop("checked",true);	
+			break;
+		case "4":
+			$('.checkbox:eq(3)').prop("checked",true);	
+			break;
+		case "5":
+			$('.checkbox:eq(4)').prop("checked",true);	
+			break;
+		}
+	}
+	$("#mem_nickname").change(function(){
+		idck=0;
+		console.log("변했니");
+		$("#idck").prop("disabled",false);
+	});
+	 //idck 버튼을 클릭했을 때 
+    $("#idck").click(function() {
+        
+        //userid 를 param.
+        var nick =  $("#mem_nickname").val(); 
+        console.log(nick);
+        $.ajax({
+            async: true,
+            type : 'POST',
+            data : {"nick":nick},
+            dataType : "json",
+            url : "<c:url value='/member/nickchk.aw'/>",
+            success : function(data) {
+            	var result = data.result;
+            	console.log(result);
+            	
+                if (result > 0) {
+                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+                    $("#divInputId").addClass("has-error")
+                    $("#divInputId").removeClass("has-success")
+                    $("#mem_nickname").focus();
+                } else {
+                    alert("사용가능한 아이디입니다.");
+                    $("#idck").prop("disabled",true);
+                    //아이디가 중복하지 않으면  idck = 1 
+                    idck = 1;
+                }
+            },
+            error : function(error) {
+                console.log("error : " + error);
+            }
+        });
+    });
+});
+</script>
 <!-- 내용 시작 -->
 <div class="container">
 	<!-- nav부분 -->
@@ -79,43 +177,54 @@
 			<section class="member-settings-layout__content">
 				<div class="member-settings-layout__content-inner">
 					<h2 class="member-settings-layout__title">개인 프로필 관리</h2>
-					<form action="#" method="post">
+					<form action="<c:url value='/member/edit.aw'/>" method="post">
 						<div class="edit">
 							<div class="edit__inner">
 								<div class="member-input">
 									<div class="member-input__state">
 										<div class="edit__table">
 											<div class="edit__tr">
-											<div class="edit__th">
-												아이디
-											</div>
+												<div class="edit__th">
+													아이디
+												</div>
 												<div class="edit__td">
 													<input class="member-input__box" type="text" autocomplete="off" name="mem_id" disabled value="${record.mem_id}">
 												</div>
 											</div>
 											<div class="edit__tr">
-											<div class="edit__th">
-												이름
-											</div>
+												<div class="edit__th">
+													이름
+												</div>
 												<div class="edit__td">
-													<input class="member-input__box" type="text" autocomplete="off" name="mem_name" value="${record.mem_name}">
+													<input class="member-input__box" type="text" autocomplete="off" name="mem_name"  style="text-decoration:underline" value="${record.mem_name}">
 												</div>
 											</div>
 											<div class="edit__tr">
-											<div class="edit__th">
-												닉네임
-											</div>
-												<div class="edit__td">
-													<input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" value="${record.mem_nickname}">
+												<div class="edit__th">
+													닉네임
 												</div>
-											</div>
+												 <div class="edit__td">
+			                                       <div style="float: left;">
+			                                          <input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" id="mem_nickname"style="text-decoration:underline" value="${record.mem_nickname}">
+			                                       </div>
+			                                       <div>
+			                                          <input id="idck" class="btn btn-primary" type="button" value="중복확인"></input>
+			                                       </div>
+			                                    </div>
+			                                 </div>
 											<div class="edit__th">
 												관심동물
 											</div>
-											<div class="edit__td">
-												<input class="member-input__box" type="text" autocomplete="off" name="mem_interani" value="${record.mem_interani}">
+											<div class="edit__td" id="ani_checkbox">
+												<input class="checkbox" type="checkbox" name="mem_interani" value="1">강아지 
+												<input class="checkbox" type="checkbox" name="mem_interani" value="2">고양이 
+												<input class="checkbox" type="checkbox" name="mem_interani" value="3">파충류 & 양서류 
+												<input class="checkbox" type="checkbox" name="mem_interani" value="4">조류
+												<input class="checkbox" type="checkbox" name="mem_interani" value="5">기타포유류 
 											</div>
-											
+											<input type="hidden" name="mem_id" value="${record.mem_id}"/>
+											<input type="hidden" name="mem_pw" value="${record.mem_pw}"/>
+											<input type="hidden" name="mem_gender" value="${record.mem_gender}"/>
 										</div>
 									</div>
 									<div class="text-center">
@@ -143,23 +252,28 @@
 					<div class="member-settings-layout__content-inner" style="height: 100%;">
 						<h2 class="member-settings-layout__title">동물 프로필 관리</h2>
 						<div class="container" style="vertical-align:middle;">
-	  						<c:forEach var="record" items="${anirecord}" varStatus="loop">
-							  <div class="card col-12 col-md-3" style="padding-top:15px;">
-								  <img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
-								  <div class="card-body" style="height: 120px;">
-								    <h2 class="card-title">애완동물 이름 : ${record.ani_name}</h2>
+	  						<c:forEach var="animal" items="${anirecord}" varStatus="loop">
+							  <div class="card col-12 col-md-3 img_div" id="${animal.ani_no}">
+							  	<a href="#">
+								  <img class="card-img-top" src="<c:url value='${animal.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
+								</a>  
+								<div id="button_div">
+								  <a onclick="delete_ani(${animal.ani_no});" href="#" class="btn btn-danger">X</a>
+								</div>
+							    <div class="card-body" style="height: 120px;">
+								    <h2 class="card-title">애완동물 이름 : ${animal.ani_name}</h2>
 								    <p class="card-text" id="profile-text">
-								    	<span>나이 : ${record.ani_age}</span><br>
-							    		<span>성별 : ${record.ani_gender}</span><br>
-							    		<span>대분류 : ${record.ani_species}</span><br>
-							    		<span>중분류 : ${record.ani_kind}</span>
+								    	<span>나이 : ${animal.ani_age} 살</span><br>
+							    		<span>성별 : ${animal.ani_gender}</span><br>
+							    		<span>대분류 : ${animal.ani_species}</span><br>
+							    		<span>중분류 : ${animal.ani_kind}</span>
 						    		</p>
-								  </div>
+							    </div>
 							  </div>
 							</c:forEach>
-							  <div class="card col-12 col-md-3" id="plus">
-								  <a href="<c:url value='/animal/enroll.aw'/>"><img style="height: 200px;" class="card-img-top" src="<c:url value='/resources/images/plus.jpg'/>" alt="애완동물 추가"></a>
-							  </div>
+							<div class="card col-12 col-md-3" id="plus">
+								<a href="<c:url value='/animal/enroll.aw'/>"><img style="height: 200px;" class="card-img-top" src="<c:url value='/resources/images/plus.jpg'/>" alt="애완동물 추가"></a>
+							</div>
 						</div>
 					</div>	
 				</section>

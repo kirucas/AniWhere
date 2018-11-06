@@ -1,5 +1,7 @@
 package com.animal.aniwhere.web.board.animal.bird;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -49,7 +51,7 @@ public class BirdPhotoController {
 	
 	// 등록 완료 후 리스트로 이동
 	@ResponseBody
-	@RequestMapping(value="/security/bird/photo/write.aw",method=RequestMethod.POST)
+	@RequestMapping(value="/security/bird/photo/write.awa",method=RequestMethod.POST,produces="text/html;charset=UTF-8")
 	public void writeComplete(@RequestParam Map map,MultipartHttpServletRequest mhsr,HttpSession session) throws Exception{
 		map.put("ani_category", 4);
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -83,17 +85,17 @@ public class BirdPhotoController {
 		List<List<Map>> photoList=new Vector<>(); // 전체 목록의 사진 리스트를 받을 리스트를 만들고
 		for(PhotoBoardDTO dto:list) {
 			map.put("no", dto.getNo()); // no를 뽑아서
-			System.out.println(map.get("no"));
+			//System.out.println(map.get("no"));
 			List<Map> linkList=service.linkSelectList(map); // 해당 no의 사진 리스트를 받고
 			dto.setTotalImgCount(linkList.size()-1);
 			for(Map temp:linkList) {
-				System.out.println(temp);
+				//System.out.println(temp);
 				Set<String> set=temp.keySet();
 				temp.put("LINK", AwsS3Utils.LINK_ADDRESS+temp.get("LINK"));
-				for(String key:set) {
+				/*for(String key:set) {
 					System.out.println("key:"+key+", value:"+temp.get(key));
 				}/// for
-			}/// for
+*/			}/// for
 			
 			photoList.add(linkList); // 담는다
 		}/// for
@@ -108,12 +110,15 @@ public class BirdPhotoController {
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("pageSize", pageSize);
+		// 서버 시간 담기
+		model.addAttribute("serverTime",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 		
 		return "board/animal/bird/photo/photo_list.tiles";
 	}/// list
 	
 	@RequestMapping("/bird/photo/delete.aw")
 	public String delete(@RequestParam Map map) throws Exception {
+		//System.out.println(map.get("no"));
 		List<Map> linkList=service.linkSelectList(map);
 		String[] key_names=new String[linkList.size()];
 		int i=0;
@@ -124,25 +129,25 @@ public class BirdPhotoController {
 		service.linkDelete(map);
 		service.delete(map);
 		AwsS3Utils.deleteFileFromS3(key_names);
-		AwsS3Utils.s3ReadObjects();
+		AwsS3Utils.s3ReadObjects("bird");
 		return "forward:/animal/bird/photo.aw";
 	}/// delete
 	
 	@ResponseBody
 	@RequestMapping(value="/bird/photo/modalView.awa",method=RequestMethod.POST,produces="text/plain;charset=UTF-8")
 	public String modalView(@RequestParam Map map) throws Exception {
-		System.out.println("글번호 " +map.get("no"));
+		//System.out.println("글번호 " +map.get("no"));
 		List<Map> photoList=service.linkSelectList(map);
 		for(Map photo:photoList)
 			photo.put("LINK",AwsS3Utils.LINK_ADDRESS+photo.get("LINK"));
-		System.out.println("넘어가는녀석들"+JSONArray.toJSONString(photoList));
+		//System.out.println("넘어가는녀석들"+JSONArray.toJSONString(photoList));
 		return JSONArray.toJSONString(photoList);
 	}/// modalView
 	
 	@ResponseBody
 	@RequestMapping(value="/bird/photo/modalContent.awa",method=RequestMethod.POST,produces="text/plain;charset=UTF-8")
 	public String modalContent(@RequestParam Map map,HttpSession session) throws Exception {
-		System.out.println("글번호 " +map.get("no"));
+		//System.out.println("글번호 " +map.get("no"));
 		PhotoBoardDTO dto=service.selectOne(map);
 		JSONObject json=new JSONObject();
 		json.put("user", session.getAttribute("mem_no"));

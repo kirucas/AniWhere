@@ -45,8 +45,8 @@
 		<selectKey order="BEFORE" resultType="int" keyProperty="no">
 			SELECT seq_photo.nextval FROM DUAL
 		</selectKey>
-		INSERT INTO photo(no, mem_no, photo_title, photo_content, ani_category)
-		VALUES(#{no}, #{mem_no}, #{photo_title}, #{photo_content}, #{ani_category})
+		INSERT INTO photo(no, mem_no, photo_title, photo_content, ani_category, photo_regidate)
+		VALUES(#{no}, #{mem_no}, #{photo_title}, #{photo_content}, #{ani_category}, #{today})
 	</insert>
 	
 	<update id="photoUpdate" parameterType="java.util.Map">

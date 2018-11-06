@@ -72,8 +72,8 @@
 	</select>
 	
 	<insert id="groupbuyInsert" parameterType="java.util.Map">
-		INSERT INFO market_group_buy(no, mem_no, animal_code, title, content, goal, deadline)
-		VALUES(seq_group_buy.nextval, #{mem_no}, #{animal_code}, #{title}, #{content}, #{goal}, #{deadline})
+		INSERT INTO market_group_buy(no, mem_no, animal_code, title, content, goal, deadline, regidate)
+		VALUES(seq_group_buy.nextval, #{mem_no}, #{animal_code}, #{title}, #{content}, #{goal}, #{deadline}, #{today})
 	</insert>
 	
 	<update id="groupbuyUpdate" parameterType="java.util.Map">
@@ -88,9 +88,9 @@
 	</delete>
 	
 	<update id="addCountGroupBuy" parameterType="java.util.Map">
-			UPDATE market_group_buy
-			SET count=count + 1
-			WHERE no=#{no}
+		UPDATE market_group_buy
+		SET count=count + 1
+		WHERE no=#{no}
 	</update>
 	
 </mapper>

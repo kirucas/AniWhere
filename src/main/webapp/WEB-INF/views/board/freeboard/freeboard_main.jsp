@@ -39,19 +39,18 @@
 					</li>
 				</ul>
 				<div class="sub-header-search" style="margin-bottom:5px">
-				<a href="<c:url value='/animal/freeboard/write.aw'/>">
+				<a href="<c:url value='/security/animal/freeboard/write.aw'/>">
 					<img style="float:left;margin-top:5px;" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
 				</a>
-                <form style="display:inline;" action="">
+                <form style="display:inline;" action="<c:url value='/animal/freeboard.aw'/>">
                     <label>
-                    	<select name="target" style="margin-left:10px" class="sub-header-search__select">
-                            <option value="title">제목</option>
-                            <option value="content">내용</option>
-                            <option value="title_content">제목+내용</option>
-                            <option value="user_name">작성자</option>
+                    	<select name="searchColumn" style="margin-left:10px" class="sub-header-search__select">
+                            <option value="free_title">제목</option>
+                            <option value="free_content">내용</option>
+                            <option value="mem_nickname">작성자</option>
                         </select>
                     </label>
-                    <input style="float:right" type="text" name="q" class="sub-header-search__input" placeholder="검색">
+                    <input style="float:right" type="text" name="searchWord" class="sub-header-search__input" placeholder="검색">
                     <button class="sub-header-search__button"><img src="https://talk.op.gg/images/icon-search@2x.png" width="24" alt="검색"></button>
                 </form>
             </div>
@@ -70,8 +69,7 @@
     			<c:forEach var="record" items="${list}" varStatus="loop">
 		    		<article class="article-list-item">
 					<div class="article-list-item__vote">
-						<img src="https://talk.op.gg/images/icon-vote-up.png" alt="">
-						<div><span id="free_hit">${record.free_hit}</span></div>
+						<div><span id="free_hit">${record.dto.free_hit}</span></div>
 		    		</div>
 				<div class="article-list-item__content">
 						<c:choose>
@@ -91,74 +89,37 @@
 								<span>[시사]</span>
 							</c:otherwise>
 						</c:choose>
-					<a href="<c:url value='/security/animal/freeboard_view.aw?no=${record.no}'/>" class="article-list-item__info">
+					<a href="<c:url value='/animal/freeboard_view.aw?no=${record.dto.no}'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
-							<span id="free_title">${record.free_title}</span> <em>[21]</em>
+							<span id="free_title">${record.dto.free_title}</span> <em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em>
 						</div>
 					</a>
 					<div class="article-list-item-meta">
 						<div class="article-list-item-meta__item">
-							<span data-tooltip data-date=${record.free_regidate } title=""></span>
+							<span data-tooltip data-date="2018-09-27T05:45:00+00:00" title="">${record.dto.free_regidate}</span>
 						</div>
 						<div class="article-list-item-meta__item article-list-item-meta__item--author">
-							<a href="#" id="mem_no">${record.mem_nickname} </a>
+						<c:if test="${empty record.dto.mem_nickname}" var="member">
+							<a href="#" id="mem_nickname">탈퇴회원</a>							
+						</c:if>
+						<c:if test="${not member}">
+							<a href="#" id="mem_nickname">${record.dto.mem_nickname}</a>
+						</c:if>
 						</div>
 						<div class="article-list-item-meta__item">
-							조회수 <span id="free_count">${record.free_count}</span>
+							조회수 <span id="free_count">${record.dto.free_count}</span>
 						</div>
 					</div>
 				</div>
 				<div class="article-list-item__vote">
-					<div><span id="no" style="text-align:center">${record.no}</span></div>
+					<div><span id="no" style="text-align:center">${record.dto.no}</span></div>
 				</div>
 			</article>
 	    		</c:forEach>
     		</c:if>
-			<!-- 페이징 부분
-			<section class="article-list-paging" >
-				<div class="article-list-paging-content">
-					<ul class="article-list-paging-list">
-						<li class="article-list-paging__item article-list-paging__item--prev">
-                        <a href="https://talk.op.gg/s/lol/all?page=9" class="article-list-paging__button button">
-                            <img src="https://talk.op.gg/images/icon-arrow-left@2x.png" width="24" alt=""><span>이전</span>
-                        </a>
-						<li class="article-list-paging__item article-list-paging__item--current">
-							<span class="article-list-paging__link">1</span></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">2</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">3</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">4</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">5</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">6</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">7</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">8</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">9</a></li>
-						<li class="article-list-paging__item ">
-							<a href="#" class="article-list-paging__link">10</a></li>
-						<li	class="article-list-paging__item article-list-paging__item--next">
-							<a href="#"	class="article-list-paging__button button"> 
-								<span>다음</span>
-								<img src="https://talk.op.gg/images/icon-arrow-right@2x.png" width="24" alt="">
-							</a>
-						</li>
-					</ul>
-				</div>
-			</section>
-			 -->
 			
 		</section>
 	</div>
 	<!-- 아래는 페이징 -->
-    <div class="row" style="text-aling:center">
-    	<div>
     		${pagingString}
-    	</div>
-    </div>	
 <!-- 바디 끝 -->

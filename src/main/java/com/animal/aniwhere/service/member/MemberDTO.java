@@ -4,12 +4,22 @@ public class MemberDTO {
 
 	private String mem_no;
 	private String mem_id;
+	private String mem_pw;
 	private String mem_name;
 	private String mem_nickname;
 	private String mem_gender;
 	private String mem_log;
 	private String mem_interani;
+	private String ani_no;
 	
+	public String getAni_no() {
+		return ani_no;
+	}
+
+	public void setAni_no(String ani_no) {
+		this.ani_no = ani_no;
+	}
+
 	public String getMem_no() {
 		return mem_no;
 	}//////////
@@ -64,6 +74,14 @@ public class MemberDTO {
 	
 	public void setMem_interani(String mem_interani) {
 		this.mem_interani = mem_interani;
+	}//////////
+
+	public String getMem_pw() {
+		return mem_pw;
+	}//////////
+
+	public void setMem_pw(String mem_pw) {
+		this.mem_pw = mem_pw;
 	}//////////
 	
 }//////////////////// MemberDTO class

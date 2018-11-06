@@ -28,10 +28,9 @@ public class LostAnimalController {
  	@RequestMapping(value = "/LostAnimal.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
  	public String androidLostAnimal(@RequestParam Map map) throws Exception{
 		
-		System.out.println("===============");
 		int count = service.getTotalRecord(null);
 		map.put("start", 1);
-		map.put("end", count);
+		map.put("end", 10);
 		List<LostAnimalDTO> lists = service.selectList(map);		
 		List<Map> collections = new Vector<Map>();
 		
@@ -51,6 +50,7 @@ public class LostAnimalController {
 			record.put("chargeNm", list.getChargenm());
 			collections.add(record);
 		}
+		System.out.println(JSONArray.toJSONString(collections));
 		return JSONArray.toJSONString(collections);     
     }
 }
