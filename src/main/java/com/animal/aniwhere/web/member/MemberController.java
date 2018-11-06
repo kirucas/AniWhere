@@ -281,10 +281,14 @@ public class MemberController {
 	}////////////// signUp()
 
 	@RequestMapping("/signUpProcess.aw")
-	public String signUpProcess(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+	public String signUpProcess(@RequestParam Map map,@RequestParam List<String> mem_interani, HttpSession session, Model model) throws Exception {
 		System.out.println(map.get("mem_pw"));
 		map.put("mem_pw", passwordEncoder.encode(map.get("mem_pw").toString()));
 		System.out.println(map.get("mem_pw"));
+		String inter="";
+		for(String ani : mem_interani)
+			inter+=ani;
+		map.put("mem_interani", inter);
 		int signup = service.insert(map);
 		if (signup == 2)
 			model.addAttribute("check", 1);
