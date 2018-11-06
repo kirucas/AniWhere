@@ -150,7 +150,7 @@ nav a{
                             <a href="#" id="mating_main">♡만나요</a>
                         </li>
                         <li>
-                            <a href="#" id="where_main">위치</a>
+                            <a href="#" id="where_main">예약</a>
                         </li>
                         <li class="dropdown" style="border:0.1px solid gray;border-radius:10px">
                             <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">내 프로필</a>
@@ -159,12 +159,13 @@ nav a{
                                 <sec:authorize access="isAuthenticated()">
                                 	<li><a href="<c:url value='/member_info.aw'/>">내 프로필</a></li>
 	                            	<li><a href="#" id="logout">로그아웃</a></li>
-	                            	<li><a href="<c:url value='/where/reservation_check.aw'/>">예약확인</a></li>
+	                            	<li><a href="<c:url value='/security/where/reservation_check.aw'/>">예약확인</a></li>
 								</sec:authorize>
 			                   	<!-- 로그인 안되어있을떄 보여주는 탭 -->
                             	<sec:authorize access="isAnonymous()">
 						        	<li><a href="<c:url value='/login.aw'/>">로그인</a></li>
 	                            	<li><a href="<c:url value='/member/sign_up.aw'/>">회원가입</a></li>
+	                            	<li><a href="<c:url value='/text.aw'/>">테스트용</a></li>
 			                   	</sec:authorize>
                             </ul>
                         </li>

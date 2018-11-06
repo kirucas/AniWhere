@@ -42,13 +42,13 @@
 	</select>
 	
 	<insert id="reservationInsert" parameterType="java.util.Map">
-		INSERT INTO reservation(rv_no, mem_no, store_no, booking_date, apply_date)
-		VALUES(seq_reservation.nextval, #{mem_no}, #{store_no}, #{booking_date}, #{today})
+		INSERT INTO reservation(rv_no, mem_no, store_no, booking_date, apply_date, qr_link)
+		VALUES(seq_reservation.nextval, #{mem_no}, #{store_no}, #{booking_date}, #{today}, #{qr_link})
 	</insert>
 	
 	<update id="reservationUpdate" parameterType="java.util.Map">
 		UPDATE reservation
-		SET store_no=#{store_no}, booking_date=#{booking_date}
+		SET store_no=#{store_no}, booking_date=#{booking_date}, qr_link=#{qr_link}
 		WHERE rv_no=#{rv_no}
 	</update>
 	
