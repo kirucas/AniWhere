@@ -23,11 +23,7 @@
 		   console.log("성공")
 		   
 	   });
-	   
-	   
-	   
-	   
-	   
+	   	   
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
@@ -52,8 +48,7 @@
             contentType: false,
             processData: false,
             success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
-            },
+                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");},
             error : function() {
                console.log("error");
             }
@@ -61,8 +56,7 @@
       }
    });
    
-       
-	   	   
+       	   	   
 	   function check() {
 	      var isAttached = $('#summernote').summernote('code');
 	      if (fr.title.value == "") {
@@ -113,7 +107,7 @@
 				
 				<input type="hidden" name="table_name" value="buy"/>
 				 <input type="hidden" name="mem_no" value="${mem_no }">
-<!-- 				<input type="hidden" name="mem_no" value="#" /> -->
+<!-- 	<input type="hidden" name="mem_no" value="#" /> -->
 				
 					<label for="title" class="col-sm-2 control-label">제목</label> 
 					<input

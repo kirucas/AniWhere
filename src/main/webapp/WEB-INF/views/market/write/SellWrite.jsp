@@ -73,7 +73,7 @@ else {
 	   var count = 0;
 	  
 	   $('#enterBtn').submit(function(){	 
-		   var content="========판매현황 정리입니다.============\r\n";
+		   var content="=============상세사항================\r\n";
 		   content+='제목:'+$('#title').val()+'\r\n';
 		   content+='판매물품명:'+$('#name').val()+'\r\n';
  		   content+='희망가:'+$('#price').val()+'원\r\n';
@@ -148,6 +148,7 @@ else {
 </head>
 <body>
 	<div class="container">
+	
 
 		<div style="margin-top: 10px"></div>
 		<br/>

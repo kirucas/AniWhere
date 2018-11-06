@@ -35,6 +35,7 @@ import com.animal.aniwhere.web.board.FileUpDownUtils;
 @Controller
 public class MarketGroupbuyController {
 			
+	
 		 //buy컨트롤러 
 			@Resource(name="groupBuyService")
 			private GroupBuyServiceImpl allBoardService;
@@ -43,7 +44,7 @@ public class MarketGroupbuyController {
 			private int pageSize;
 			@Value("${BLOCKPAGE}")
 			private int blockPage;
-
+      //
 		@RequestMapping("/market/{path}/groupbuy.aw")
 		public String inside(@PathVariable String path) throws Exception {
 			return "market/" + path + "/inside.tiles";

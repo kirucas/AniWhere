@@ -50,9 +50,7 @@ function check() {
          return false;
 
       } 
-    
-    
-   
+      
     else if (fr.content.value == "") {
        alert('내용을 입력하세요.');
        return false;
@@ -78,6 +76,7 @@ else {
 	
    $(function() {
 	   var count = 0;
+	   c:url:
 	     
       $('#summernote').summernote({
     	 maxHeight:null,
@@ -91,6 +90,7 @@ else {
             }
          }
       });
+     
       
       function sendFile(file, el, wel) {
          var form_data = new FormData();
@@ -117,7 +117,8 @@ else {
             error : function() {
                console.log("error");
             }
-                   
+           
+            
          //   if(file.length>=5||file.length<=2){
          //  	 alert('사진의 최소3장 이상 최대 4장까지 가능합니다')
          //  	 return;
@@ -133,7 +134,7 @@ else {
 </head>
 
 <body>
- <form name="fr" id="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
+ <form name="fr" id="fr" method="post" action="<c:url value='/security/market/groupbuyinsert.aw'/>"  accept-charset="utf-8" 
 				class="form-horizontal">
 	
 		<!--   <div class="container"> -->
@@ -149,7 +150,7 @@ else {
 		<!-- 	<div class="col-md-12">  -->
 				<label for="title" class="col-sm-2 control-label">제목</label> 
 					
-						<!--
+						
 					<input
 						class="form-control" type="text" id="title" name="title"
 						placeholder="제목을 입력하세요">
@@ -197,9 +198,7 @@ else {
 						<input type="date" min="2018-11-05" style="text-align: right;padding-left: px"
 							max="2020-01-01"  class="form-control" type="date" name="deadline"
 							 required />
-							
-				
-							
+													
 					</div>
 
 						<div class="my-2">
@@ -266,33 +265,30 @@ else {
 
 				</div>
 			
-   -->
+   
 				<div class="col-md-12 container">
 					<textarea id="summernote" name="content"
 							class="col-md-12 form-control"
 							style="border: 1px solid blue; height: 500px" 
 							maxlength="2048"></textarea>
 				</div>
-				<!--
+				
 				<div style="text-align: center">
 					<a href="<c:url value='/market/groupbuy.aw'/>">
-					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
-					
-					 <input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
+					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>					
 					
 					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
 				</div>
 				
-				</div>
-				</div>
-			-->
+			
+			
 			</form>
 			
 			<div style="margin-bottom: 50px"></div> 
 			
 			
-			<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
-
+		<!-- 	<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
+-->
 		
 	
 
