@@ -34,9 +34,6 @@
 				<if test="animal_code != null and searchColumn != null">
 					WHERE tn.animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>
-				<if test="animal_code != null">
-					WHERE tn.animal_code=#{animal_code}
-				</if>
 				<if test="searchColumn != null">
 					WHERE ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>

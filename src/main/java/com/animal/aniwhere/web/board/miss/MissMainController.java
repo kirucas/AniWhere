@@ -235,7 +235,6 @@ public class MissMainController {
       public String find_insert(@RequestParam Map map,HttpSession session) throws Exception {
          
          map.put("mem_no", session.getAttribute("mem_no"));
-         map.put("addr", map.get("addr"));
          
          service.insert(map);
             
