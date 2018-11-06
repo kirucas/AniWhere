@@ -304,11 +304,11 @@
          
                <div class="col-md-4" style="float:left" id="card-slider">
                  <div class="card mb-2">
-                   <img class="card-img-top" src="<c:url value='/resources/images/pictures/hamster.jpg'/>"
+                   <img class="card-img-top" src="<c:url value='/resources/images/news1.jpg'/>"
                      alt="Card image cap">
                    <div class="card-body" style="text-align:center">
-                     <h4 class="card-title">고슴도치</h4>
-                     <p class="card-text">고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!<br>고슴도치다!!!
+                     <h4 class="card-title">스타견 전문훈련사 "강성호 교수" 반려동물 행동학 책 출간 예고</h4>
+                     <p class="card-text">반려동물뉴스(CABN) 다가오는 3월 9일(금)에 강성호 교수의 책이 출간된다고 다음강사모는 밝혔다. 이 책은 강사모 최경선 회장이 감수를 진행했으며 그 동안 강성호 교수가 직접 필드에서 뛰면서 체험한 지식과 이론을 기반으로 완성된 책이다. 강성호 교수는 현재 서울호서예술실용전문학교의 전임교수로 재직중이며 반려동물행동학과 반려견 훈련에 대한 체계적인 후진 양성활동에 전념하고 있다. 다음강사모 담당자는 "반려인들의 눈높이를 맞추어 체계적으로 설명해 줄 수 있는 반려동물행동학 책이 나와 기쁘다"고 말했다.
                        </p>
                      
                    </div>
