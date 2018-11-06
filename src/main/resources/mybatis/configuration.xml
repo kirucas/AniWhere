@@ -47,5 +47,6 @@
 		<mapper resource="mybatis/BuyingList.xml" />
 		<mapper resource="mybatis/LostAnimal.xml" />
 		<mapper resource="mybatis/Drafting.xml" />
+		<mapper resource="mybatis/AndroidToken.xml" />
 	</mappers>
 </configuration>

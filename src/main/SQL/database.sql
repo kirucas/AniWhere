@@ -23,6 +23,7 @@ DROP TABLE freeboard_cmt CASCADE CONSTRAINTS;
 DROP TABLE freeboard CASCADE CONSTRAINTS;
 DROP TABLE lost_animal CASCADE CONSTRAINTS;
 DROP TABLE member_security CASCADE CONSTRAINTS;
+DROP TABLE member_token CASCADE CONSTRAINTS;
 DROP TABLE movie_cmt CASCADE CONSTRAINTS;
 DROP TABLE movie CASCADE CONSTRAINTS;
 DROP TABLE photo_cmt CASCADE CONSTRAINTS;
@@ -34,7 +35,6 @@ DROP TABLE reservation CASCADE CONSTRAINTS;
 DROP TABLE tip_cmt CASCADE CONSTRAINTS;
 DROP TABLE tip CASCADE CONSTRAINTS;
 DROP TABLE member CASCADE CONSTRAINTS;
-DROP TABLE member_visit_count CASCADE CONSTRAINTS;
 DROP TABLE store_category CASCADE CONSTRAINTS;
 DROP TABLE store_location CASCADE CONSTRAINTS;
 
@@ -252,15 +252,12 @@ CREATE TABLE member_security
 );
 
 
-CREATE TABLE member_visit_count
+CREATE TABLE member_token
 (
-	no number NOT NULL,
-	today date DEFAULT SYSDATE,
-	year number(4) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')),
-	month number(2) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'MM')),
-	day number(2) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'DD')),
-	visit_count number DEFAULT 0,
-	PRIMARY KEY (no)
+	mtk_no number NOT NULL,
+	mem_no number NOT NULL,
+	mtk_token varchar2(300) NOT NULL,
+	PRIMARY KEY (mtk_no)
 );
 
 
@@ -671,6 +668,13 @@ ALTER TABLE market_sell
 
 
 ALTER TABLE member_security
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+	ON DELETE CASCADE
+;
+
+
+ALTER TABLE member_token
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 	ON DELETE CASCADE

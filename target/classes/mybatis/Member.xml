@@ -61,10 +61,4 @@
 		WHERE mem_no=#{mem_no}
 	</delete>
 	
-	<update id="visitCount">
-		UPDATE member_visit_count
-		SET visit_count = visit_count + 1
-		WHERE TO_CHAR(today) = TO_CHAR(sysdate)
-	</update>
-	
 </mapper>
