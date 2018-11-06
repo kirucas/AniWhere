@@ -335,7 +335,7 @@ public class MemberController {
 	
 	//안드로이드 용
  	@ResponseBody
- 	@RequestMapping(value="/android.awa", method = RequestMethod.POST)
+ 	@RequestMapping(value="/android.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
  	public String androidLogin(@RequestParam Map map,HttpSession session) throws Exception{
  		
  		MemberDTO dto = service.selectOne(map);
@@ -350,7 +350,7 @@ public class MemberController {
  	
  	//안드로이드 googleLogin
  	@ResponseBody
- 	@RequestMapping(value = "/androidsignUpProcess.awa", method = RequestMethod.POST)
+ 	@RequestMapping(value = "/androidsignUpProcess.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
  	public String androidSignUp(@RequestParam Map map) throws Exception{
  			 		
  		MemberDTO dto = service.selectOne(map);				
@@ -359,14 +359,40 @@ public class MemberController {
  	 	}
 		 		
  		map.put("mem_log",Integer.parseInt(map.get("mem_log").toString()));		
+ 		
  		int signup = service.insert(map);
  		
- 		if(signup==1) {
+ 		if(signup==2) {
  			dto = service.selectOne(map);				
  	 		return dto.getMem_id()+","+dto.getMem_no();
  		}else {
  	    	return "false";
  	    }	     
+    }
+ 	
+ 	@ResponseBody
+ 	@RequestMapping(value="/androidMember.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
+ 	public String androidMember(@RequestParam Map map) throws Exception{ 		
+ 		MemberDTO dto = service.selectOne(map);
+ 		JSONObject json = new JSONObject();
+ 		json.put("mem_id", dto.getMem_id());
+ 		json.put("mem_name", dto.getMem_name());
+ 		json.put("mem_nickname", dto.getMem_nickname());
+ 		json.put("mem_interani", dto.getMem_interani());
+ 		json.put("mem_gender", dto.getMem_gender()); 	
+ 		json.put("mem_pw", dto.getMem_pw());
+ 		return json.toJSONString();       
+    }
+ 	
+ 	@ResponseBody
+ 	@RequestMapping(value="/androidUpdate.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
+ 	public String androidUpDate(@RequestParam Map map) throws Exception{ 		
+ 		
+ 		int affect = service.update(map);
+ 		if(affect == 0) {
+ 			return "false";
+ 		}
+ 		return "true";       
     }
 
 
