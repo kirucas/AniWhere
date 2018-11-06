@@ -9,38 +9,40 @@
 	};
 </script>
 <style>
-	#btn{
-		margin-bottom: 200px;
-		float: right;
-	}
-	#btn a{
-		color:white;
-		
-	}
-	#qr_cord{
-		float: left;
-		width: 500px;
-		height: 500px;
-	}
-	#qr_cord img{
-		padding: 40% 10% 0 10%;
-		width: 100%;
-		height: 100%;
-	}
-	#reservation_view{
-		overflow: auto;
-		padding-top: 9%;
-	}
-	#reservation_view div{
-		height: 125px;
-		text-align: left;
-		
-	}
-	#reservation_view div span{
-		font-size: 2em;
-		line-height: 140px;
-		
-	}
+/* QR / 예약정보 왼쪽정렬 */
+#reservation_qrcord{
+	width:50%;
+	height:600px;
+	float: left;
+}
+/* QR코드 크기 맞춰주기 */
+#qr_cord img{
+	text-align: center;
+	width: 300px;
+	height: 300px;
+	
+}
+/* 왼쪽 div 가운데 정렬 */
+#qr_cord , #reservation_view{
+	text-align: center;
+}
+#reservation_view{
+	font-size: 2em;
+}
+/* 나머지공간 지도로채우기 */
+#reservation_map{
+	height:600px;
+	overflow: auto;
+	background-color: black;
+}
+#reservation_view div{
+	margin-top:10px;
+}
+/* 예약취소버튼 위에 margin좀주기 */
+#btn{
+	clear:both;
+	margin-top: 20px;
+}
 </style>
 <div id="reservation_qrcord">
 	<div id="qr_cord">
@@ -60,6 +62,9 @@
 			<span>예약 날짜 : ${dto.booking_date }</span>
 		</div>
 	</div>
+</div>
+<div id="reservation_map">
+	
 </div>
 <div id="btn">
 	<a href="javascript:isDelete()" class="btn btn-danger">예약 취소</a>
