@@ -169,6 +169,7 @@ $(function(){
 												</div>
 												<div class="edit__td">
 													<input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" style="text-decoration:underline" value="${record.mem_nickname}">
+							                        <input class="btn btn-danger" type="button" value="중복확인"></input>
 												</div>
 											</div>
 											<div class="edit__th">
