@@ -64,7 +64,6 @@
 </style>
 <script>
 function delete_ani(ani_no){
-	console.log(ani_no);
 	$.ajax({
 		data: {"ani_no":ani_no},
         type: "POST",
@@ -80,11 +79,8 @@ function delete_ani(ani_no){
 }
 $(function(){
 	var ani = '${record.mem_interani}';
-	console.log("ani "+ani);
 	var arr = ani.split("");
-	console.log("arr "+arr);
 	for(var i=0;i<=arr.length;i++){
-		console.log(arr[i]);
 		switch(arr[i]){
 		case "1":
 			$('.checkbox:eq(0)').prop("checked",true);
