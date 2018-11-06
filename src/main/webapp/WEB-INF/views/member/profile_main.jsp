@@ -156,11 +156,13 @@ $(function(){
 							관리 
 						</a>
 					</li>
+					<c:if test="${record.mem_log!=1 or record.mem_log!=2 }">
 					<li class="nav-item">
 						<a class="nav-link" aria-current="false" id="passchange-tab" data-toggle="tab" href="#passchange" role="tab" aria-controls="passchange">
 							비밀번호 변경 
 						</a>
 					</li>
+					</c:if>
 					<li class="nav-item">
 						<a	class="nav-link" aria-current="false" id="goodbye-tab" data-toggle="tab" href="#goodbye" role="tab"	aria-controls="goodbye"> 
 							회원탈퇴 
