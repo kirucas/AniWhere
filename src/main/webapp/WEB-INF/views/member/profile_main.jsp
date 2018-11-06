@@ -76,8 +76,34 @@ function delete_ani(ani_no){
         error : function() {
            console.log("error");
         }
-     });
+    });
 }
+$(function(){
+	var ani = '${record.mem_interani}';
+	console.log("ani "+ani);
+	var arr = ani.split("");
+	console.log("arr "+arr);
+	for(var i=0;i<=arr.length;i++){
+		switch(arr[i]){
+		case "1":
+			$('.checkbox:eq(0)').prop("checked",true);	
+			console.log("들어왔니");
+			break;
+		case "2":
+			$('.checkbox:eq(1)').prop("checked",true);	
+			break;			
+		case "3":
+			$('.checkbox:eq(2)').prop("checked",true);	
+			break;
+		case "4":
+			$('.checkbox:eq(3)').prop("checked",true);	
+			break;
+		case "5":
+			$('.checkbox:eq(4)').prop("checked",true);	
+			break;
+		}
+	}
+});
 </script>
 <!-- 내용 시작 -->
 <div class="container">
@@ -154,7 +180,6 @@ function delete_ani(ani_no){
 												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="4">조류
 												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="5">기타포유류 
 											</div>
-											
 										</div>
 									</div>
 									<div class="text-center">

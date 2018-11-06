@@ -310,13 +310,6 @@ public class MemberController {
 		// 동물 조회
 		anirecord = aniservice.selectList(map);
 		
-		String inter = record.getMem_interani();
-		StringBuffer buf = new StringBuffer();
-		String[] arr = {"강아지","고양이","파충류,양서류","조류","기타 포유류"};
-		for(int i=0; i<inter.length();i++) {
-				buf.append(arr[i]);
-		}
-		record.setMem_interani(buf.toString());
 		// 데이터 저장]
 		model.addAttribute("record", record);
 		model.addAttribute("anirecord", anirecord);

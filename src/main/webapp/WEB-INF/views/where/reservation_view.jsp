@@ -44,7 +44,7 @@
 </style>
 <div id="reservation_qrcord">
 	<div id="qr_cord">
-		<img alt="QRcord" src="<c:url value='/resources/images/Notice.jpg'/>">
+		<img alt="QRcord" src="${dto.qr_link}">
 	</div>
 	<div id="reservation_view">
 		<div>
