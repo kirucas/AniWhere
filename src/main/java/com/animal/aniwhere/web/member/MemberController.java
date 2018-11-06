@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AwsS3Utils;
+import com.animal.aniwhere.service.impl.member.AndroidTokenServiceImpl;
 import com.animal.aniwhere.service.impl.member.AnimalServiceImpl;
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 import com.animal.aniwhere.service.member.AnimalDTO;
@@ -55,6 +56,9 @@ public class MemberController {
 
 	@Resource(name = "animalService")
 	private AnimalServiceImpl aniservice;
+	
+	@Resource(name = "tokenService")
+	private AndroidTokenServiceImpl androidservice;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -424,4 +428,21 @@ public class MemberController {
  		}
  		return "true";       
     }
+ 	@ResponseBody
+ 	@RequestMapping(value="/fireBaseInsertToken.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
+ 	public String fireBaseInsertToken(@RequestParam Map map) throws Exception{ 		
+ 		System.out.println("=======fireBaseInsertToken======="); 	
+ 		androidservice.insert(map);
+ 		System.out.println(androidservice.insert(map));
+ 	 	return "입력성공";   
+    }
+ 	@ResponseBody
+ 	@RequestMapping(value="/fireBaseDeleteToken.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
+ 	public String fireBaseDeleteToken(@RequestParam Map map) throws Exception{ 		
+ 		System.out.println("=======fireBaseDeleteToken======="); 	
+ 		androidservice.delete(map);
+ 		System.out.println(androidservice.delete(map));
+ 	 	return "삭제성공";   
+    }
+ 
 }//////////////////// MemberController class
