@@ -25,7 +25,7 @@
 					for (var i= files.length -1; i >= 0; i-- ){
 						sendFile(files[i],this);
 					}
-				}
+				},
 			}
 		})
 		function sendFile(file, el, wel) {
@@ -46,22 +46,21 @@
 				}
 			});
 		}
-		
 	});
 </script>
 <div class="container border">
-	<div class="row col-sm-4" >
+	<div class="row col-sm-4">
 		<h2>강아지 질문 게시판</h2>
 	</div>
-		<form class="form-horizontal" method="post"
+		<form id="frm" class="form-horizontal" method="post"
 		action='<c:url value="/security/animal/dog/quest/quest_write.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-sm-2 control-label" style="font-size:20px">제목</label>
-			<input maxlength="50" class="form-control" type="text" name="quest_title" id="quest_title" autofocus="autofocus" placeholder="제목을 입력해주세요" />
+			<input required="required" maxlength="50" class="form-control" type="text" name="quest_title" id="quest_title" autofocus="autofocus" placeholder="제목을 입력해주세요" />
 		</div>
 		<div class="form-row" style="padding-top: 10px;padding-bottom: 20px">
 			<label for="quest_content" class="col-sm-2 control-label" style="font-size:20px">내용</label>
-			<textarea maxlength="2000" class="form-control" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요"></textarea>
+			<textarea class="form-control" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요"></textarea>
 		</div>
 		<div class="form-row">
 			<div class="form-group offset-sm-5 col-sm-1">
