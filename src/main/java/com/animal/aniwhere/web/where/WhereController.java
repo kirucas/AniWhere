@@ -269,7 +269,7 @@ public class WhereController {
 	public String reservate(Model model, @RequestParam Map map, HttpSession session, HttpServletRequest req) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no").toString());
 		
-		String qr_link = QRCode_Generator.createQRCodeData(map, req, storelocservice, memberService, tokenService);
+		String qr_link = QRCode_Generator.createQRCodeData(map, req, storelocservice, memberService);
 		
 		if(qr_link.equals("")) {
 			model.addAttribute("check", 0);

@@ -79,7 +79,7 @@ public class QRCode_Generator {
 		return qr_link;
 	}////////// 
 	
-	public static String createQRCodeData(Map map, HttpServletRequest req, StoreLocationServiceImpl storeService, MemberServiceImpl memberService, AndroidTokenServiceImpl tokenService) {
+	public static String createQRCodeData(Map map, HttpServletRequest req, StoreLocationServiceImpl storeService, MemberServiceImpl memberService) {
 		
 		map.put("bizesid", map.get("store_no"));
 		
@@ -96,7 +96,7 @@ public class QRCode_Generator {
 		json.put("apply_date", new java.sql.Date(new java.util.Date().getTime()));
 		json.put("booking_date", map.get("booking_date"));
 		json.put("location", storeDTO.getRdnmadr());
-		json.put("mem_no", tokenService.selectOne(map).get("MTK_TOKEN"));
+		json.put("mem_no", memDTO.getMem_no()); 
 		
 		System.out.println("json : " + json.toString());
 		System.out.println("bizesnm : " + storeDTO.getBizesnm());
