@@ -34,6 +34,7 @@ html {
 }
 </style>
 
+
 	<div class="card mb-5" style="margin-top: 50px">
 
 		<div class="card-header">판매게시판</div>
@@ -79,16 +80,16 @@ html {
 				
 							<span id="animal_code">
 						<c:choose>
-							<c:when test="${record.animal_code eq '1'}">
+							<c:when test="${record.dto.animal_code eq '1'}">
 								<span>[개]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '2'}">
+							<c:when test="${record.dto.animal_code eq '2'}">
 								<span>[고양이]</span>		
 							</c:when>
-							<c:when test="${record.animal_code eq '3'}">
+							<c:when test="${record.dto.animal_code eq '3'}">
 								<span>[파충류]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '4'}">
+							<c:when test="${record.dto.animal_code eq '4'}">
 								<span>[조류]</span>
 							</c:when>
 							<c:otherwise>
@@ -110,12 +111,10 @@ html {
 						</tr>
 						
 					</c:forEach>
-
 					
 				</tbody>
 			</table>
 		</div>
-
 
 <!-- 검색용  -->
 
