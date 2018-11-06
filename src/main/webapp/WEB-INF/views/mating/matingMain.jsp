@@ -160,7 +160,7 @@
 			nCount : 5, //돌아갈 이미지 개수 
 			isActType : "up", //움직일 방향 (left, right, up, down) 
 			nOrderNo : 1, //초기 이미지 
-			nDelay : 500 //롤링 시간 타임 (1000 = 1초)
+			nDelay : 1000 //롤링 시간 타임 (1000 = 1초)
 		/*isBtnType:"li"*/ //라벨(버튼 타입) - 여기는 안쓰임 
 		});
 		$("#image_list_2").jQBanner({ //롤링을 할 영역의 ID 값 
@@ -169,7 +169,7 @@
 			nCount : 5, //돌아갈 이미지 개수 
 			isActType : "down", //움직일 방향 (left, right, up, down) 
 			nOrderNo : 1, //초기 이미지 
-			nDelay : 500 //롤링 시간 타임 (1000 = 1초)
+			nDelay : 1000 //롤링 시간 타임 (1000 = 1초)
 		/*isBtnType:"li"*/ //라벨(버튼 타입) - 여기는 안쓰임 
 		});
 	});
