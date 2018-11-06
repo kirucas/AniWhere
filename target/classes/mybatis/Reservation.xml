@@ -42,13 +42,16 @@
 	</select>
 	
 	<insert id="reservationInsert" parameterType="java.util.Map">
+		<selectKey keyProperty="rv_no" order="BEFORE" resultType="int">
+			SELECT seq_reservation.nextval FROM DUAL
+		</selectKey>
 		INSERT INTO reservation(rv_no, mem_no, store_no, booking_date, apply_date, qr_link)
-		VALUES(seq_reservation.nextval, #{mem_no}, #{store_no}, #{booking_date}, #{today}, #{qr_link})
+		VALUES(#{rv_no}, #{mem_no}, #{store_no}, #{booking_date}, #{today}, #{qr_link})
 	</insert>
 	
 	<update id="reservationUpdate" parameterType="java.util.Map">
 		UPDATE reservation
-		SET store_no=#{store_no}, booking_date=#{booking_date}, qr_link=#{qr_link}
+		SET qr_link=#{qr_link}, visit_time=#{visit_time}
 		WHERE rv_no=#{rv_no}
 	</update>
 	
