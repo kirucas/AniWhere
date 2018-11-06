@@ -11,6 +11,23 @@
 			location.replace("<c:url value='/bird/movie/delete.aw?no=${dto.no}'/>");
 	}; 
 	
+	
+	/*댓글 입력 시 한 글자 이상 입력하도록.  */
+	function check() {
+		if (fr.inputcomment.value == "") {
+
+			alert("댓글을 한글자 이상 입력해 주세요.");
+
+			fr.inputcomment.focus();
+
+			return false;
+		} 
+		 else {
+			 return true;
+		 }
+	}
+	
+	
 	//댓글
 	//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
 	var showComments = function(key){		
@@ -60,10 +77,10 @@
 			console.log($(this).attr("cmt_content"));
 			
 			$('#cmt_content').val($(this).html());
-			$('#submit').val('수정');
+			$('#submit').html('수정');
 			
 			//form의 hidden속성중 name="cno"값 설정
-			$('input[name=cmtdto.cmt_no]').val($(this).attr("cmt_content"));
+			$('input[name=nickname]').val($(this).attr("cmt_content"));
 			
 		});
 		
@@ -92,9 +109,6 @@
 				var action="<c:url value='/security/animal/bird/movie/commentWrite.awa'/>";
 			else
 				var action="<c:url value='/security/animal/bird/movie/commentEdit.awa'/>";
-				
-			console.log($(this).html());
-			console.log(action);
 			
 			$.ajax({
 				url:action,
@@ -104,22 +118,15 @@
 				success:function(key){
 					console.log('come');
 					showComments(key);
-					if($('#submit').val()=='수정'){						
-						$('#submit').val('등록');
+					if($('#submit').html()=='수정'){						
+						$('#submit').html('등록');
 						$('#cmt_content').val('');
 					}
-				},		
+				},
 				error : function(request, status, error){
 		            console.log("code : %s\r\nmessage : %s\r\nerror : %s\r\nstatus : %s", request.status, request.responseText, error, status);
 		         }
 			});		
-		});
-		
-		//메모글 삭제처리]
-		$('#del_memo').on('click',function(){
-			if(confirm('정말로 삭제할래?')){
-				location.replace("<c:url value='/board/animal/bird/movie/delete.aw?no=${cmtdto.cmt_no}'/>");				
-			}
 		});
 });
 	
@@ -208,7 +215,7 @@ a:visited { color:white; text-decoration: none;}
 <div class="text-right" style="margin-top: 20px;">
 	<div class="horizontal">
 		<!-- 한줄 코멘트 입력 폼-->
-		<form class="form-inline" id="frm" method="post" style="margin: 0px auto;">
+		<form class="form-inline" onsubmit="return check()" id="frm" name="fr" method="post" style="margin: 0px auto;">
 			<label for="inputcomment" class="col-xs-2 col-sm-1 col-md-1 control-label">${sessionScope.mem_id}</label>
 			<input type="text" id="cmt_content" class="form-control col-xs-11 col-sm-9 col-md-9" name="inputcomment"
 				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;
