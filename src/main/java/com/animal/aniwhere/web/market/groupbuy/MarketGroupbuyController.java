@@ -144,6 +144,10 @@ public class MarketGroupbuyController {
 				@RequestMapping("/groupbuy/groupbuyinside.aw")
 				public String buyinside(@RequestParam Map map,Model model,HttpSession session) throws Exception {
 					
+					
+					System.out.println("끝까지 오는지 확인 1");
+					System.out.println(map.get("buy_no"));
+					
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("table_name","group_buy");
 					map.put("no", map.get("buy_no"));
@@ -156,14 +160,16 @@ public class MarketGroupbuyController {
 					
 					//테스트용 
 					System.out.println("====================2");
-					//데이터 저장]
-					model.addAttribute("record", record);
+					System.out.println(record.getAnimal_name());					
 					//줄바꿈처리
 					record.setContent(record.getContent().replace("\r\n", "<br/>")); //???
+					//데이터 저장]
+					model.addAttribute("record", record);
 					//뷰정보 반환]
 					
 					return //"forward:/market/"+path+"/temporarily.aw"
-			   				"market/groupbuy/groupbuyinside.tiles";
+			   				"market/inside/groupbuyinside.tiles";
+					
 					       
 					
 				}////////// buyinside

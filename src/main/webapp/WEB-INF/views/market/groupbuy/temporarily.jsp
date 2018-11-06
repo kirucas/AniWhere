@@ -10,17 +10,17 @@
 		
   </head>
   <body>
-  <h1>입력상황 확인을 위한 표</h1>
+  
+ 
   
   <div class="card-block p-0">
+		 <h1>입력상황 확인을 위한 표</h1>
 		
-		<div style="text-align:right">
 		 
 		<div style="text-align:right"> 
 		<a href="<c:url value='/market/GroupBuyWrite.aw'/>"><button style="width:65px;height:40px" type="submit" class="btn btn-primary"><img src = "<c:url value='/resources/images/maketimages/Write.png'/>" style="width:20px;height:20px"/>등록</button></a>
 		</div>
 		
-		</div>
 			<table class="table table-bordered table-sm m-0">
 				<thead class="table-warning">
 					<tr>
@@ -45,23 +45,24 @@
 						<tr>
 						<td>
 						<span id="no">상품일련번호:${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)+1}</span></td>
-						<span id="title">${record.dto.title}</span><em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em> 	
+					
+						<%-- <em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em>  --%>	
 						<!-- 타이틀 로직 -->
 							
 							<td class="text-left">
 				
 							<span id="animal_code">관련태그:
 						<c:choose>
-							<c:when test="${record.animal_code eq '1'}">
+							<c:when test="${record.dto.animal_code eq '1'}">
 								<span>[개]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '2'}">
+							<c:when test="${record.dto.animal_code eq '2'}">
 								<span>[고양이]</span>		
 							</c:when>
-							<c:when test="${record.animal_code eq '3'}">
+							<c:when test="${record.dto.animal_code eq '3'}">
 								<span>[파충류]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '4'}">
+							<c:when test="${record.dto.animal_code eq '4'}">
 								<span>[조류]</span>
 							</c:when>
 							<c:otherwise>
@@ -69,7 +70,8 @@
 							</c:otherwise>
 						</c:choose>
 					</span>
-																																						 
+					
+						<span id="title">${record.dto.title}</span>																													 
 								<a href="<c:url value='/market/groupbuy.aw?groupbuy_no=${record.dto.no}'/>">
 																  
 								</a>
@@ -136,7 +138,7 @@
                  
   		<jsp:include page="../template/ProgressBarsmall2.jsp" />
  
-  <a class="btn btn-outline-dark btn-sm" href="<c:url value='/market/groupbuyinside.aw?buy_no=${record.dto.no}'/>">상세보기</a>
+  <a class="btn btn-outline-dark btn-sm" href="<c:url value='/groupbuy/groupbuyinside.aw?buy_no=${record.dto.no}'/>">상세보기</a>
                        														  
 					<span id="mem_no">아이디:${record.dto.mem_nickname}</span>
 					<span id="count">조횟수:${record.dto.count} </span> 
