@@ -23,8 +23,11 @@
 	
 }
 /* 왼쪽 div 가운데 정렬 */
-#qr_cord , #reservation_view{
+#qr_cord{
 	text-align: center;
+}
+ #reservation_view{
+	text-align: left;
 }
 #reservation_view{
 	font-size: 2em;
@@ -41,7 +44,7 @@
 /* 예약취소버튼 위에 margin좀주기 */
 #btn{
 	clear:both;
-	margin-top: 20px;
+	margin-top: 50px;
 }
 </style>
 <div id="reservation_qrcord">
@@ -54,6 +57,9 @@
 		</div>
 		<div>
 			<span>상가 이름 : ${dto.bizesnm }</span>
+		</div>
+		<div>
+			<span>상가 주소 : ${adr }</span>
 		</div>
 		<div>
 			<span>등록 날짜 : ${dto.apply_date }</span>
