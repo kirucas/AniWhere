@@ -73,11 +73,35 @@ else {
 	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 
 <script>
-	
+
    $(function() {
 	   var count = 0;
-	   c:url:
-	     
+	  
+	   $('#enterBtn').click(function(){	 
+		   
+	 /*   var content="=============상세사항================\r\n";
+	   content+='제목:'+$('#title').val()+'\r\n';
+	   content+='판매물품명:'+$('#name').val()+'\r\n';
+		   content+='희망가:'+$('#price').val()+'원\r\n';
+		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+	   content+='거래방법:'+$('#way').val()+'\r\n'; 
+          content+='연락처:'+$('#phone').val()+'\r\n'; 
+          content+='====================================\r\n';
+          $('#summernote').append(content); */
+          
+          if(count<3){
+        	  alert("사진은 최소 3장 이상 올려야 합니다");
+        	 
+          }else{
+        	  if(check()){
+	        	  console.log("성공");
+	        	  $('#fr').submit();
+        	  }
+          }
+          return false;
+           	 
+	   });
+	      
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
@@ -90,16 +114,19 @@ else {
             }
          }
       });
-     
       
       function sendFile(file, el, wel) {
+    	 if(count>3){
+           	 alert('사진은 최대 4장까지 가능합니다')
+           	 return false;
+         }
+             
          var form_data = new FormData();
          form_data.append('file', file);
-         
          $.ajax({
             data: form_data,
             type: "POST",
-            url : "<c:url value='/market/groupbuy/Upload.aw'/>",
+            url : "<c:url value='/market/sell/Upload.aw'/>",
             cache: false,
             contentType: false,
             processData: false,
@@ -107,9 +134,9 @@ else {
                 success: function(url) {
             	 //$('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
             	 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />", function (image) {
-            		  image.css('width',200);
-            		  image.css('height',200);
-					  image.attr('name', 'grouppic');
+            		  image.css('width',1);
+            		  image.css('height',1);
+					  image.attr('name', 'sellpic');
 				});
             	 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
                  count++;
@@ -117,8 +144,9 @@ else {
             },
             error : function() {
                console.log("error");
-            }     
-            
+            }
+                   
+         
          });
       }
           

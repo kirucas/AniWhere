@@ -73,6 +73,7 @@ else {
 	   var count = 0;
 	  
 	   $('#enterBtn').click(function(){	 
+		   
 	 /*   var content="=============상세사항================\r\n";
 	   content+='제목:'+$('#title').val()+'\r\n';
 	   content+='판매물품명:'+$('#name').val()+'\r\n';
@@ -82,6 +83,7 @@ else {
           content+='연락처:'+$('#phone').val()+'\r\n'; 
           content+='====================================\r\n';
           $('#summernote').append(content); */
+          
           if(count<3){
         	  alert("사진은 최소 3장 이상 올려야 합니다");
         	 
