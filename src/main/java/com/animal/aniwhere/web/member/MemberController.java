@@ -432,17 +432,24 @@ public class MemberController {
  	@RequestMapping(value="/fireBaseInsertToken.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
  	public String fireBaseInsertToken(@RequestParam Map map) throws Exception{ 		
  		System.out.println("=======fireBaseInsertToken======="); 	
- 		androidservice.insert(map);
- 		System.out.println(androidservice.insert(map));
+ 		System.out.println(map.get("mtk_token"));
+ 		System.out.println(map.get("mem_no"));
+ 		
+ 		Map result = androidservice.selectOne(map);
+ 		
+ 		if(result == null ) {
+ 			androidservice.insert(map);
+ 			System.out.println("========1=======");
+ 		}else {
+ 			int affect = androidservice.delete(map);
+ 			System.out.println("========2=======");
+ 			System.out.println(affect);
+ 			/*if(affect == 1) {
+ 				System.out.println("========4=======");
+ 				androidservice.insert(map);
+ 				System.out.println("========4=======");
+ 			}*/
+ 		}
  	 	return "입력성공";   
     }
- 	@ResponseBody
- 	@RequestMapping(value="/fireBaseDeleteToken.awa", method = RequestMethod.POST,produces = "text/plain; charset=UTF-8")
- 	public String fireBaseDeleteToken(@RequestParam Map map) throws Exception{ 		
- 		System.out.println("=======fireBaseDeleteToken======="); 	
- 		androidservice.delete(map);
- 		System.out.println(androidservice.delete(map));
- 	 	return "삭제성공";   
-    }
- 
 }//////////////////// MemberController class
