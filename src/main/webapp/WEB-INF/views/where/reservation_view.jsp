@@ -39,12 +39,12 @@
 	background-color: black;
 }
 #reservation_view div{
-	margin-top:10px;
+	margin-top:5px;
 }
 /* 예약취소버튼 위에 margin좀주기 */
 #btn{
 	clear:both;
-	margin-top: 50px;
+	margin-top: 70px;
 }
 </style>
 <div id="reservation_qrcord">
@@ -66,6 +66,9 @@
 		</div>
 		<div>
 			<span>예약 날짜 : ${dto.booking_date }</span>
+		</div>
+		<div>
+			<span>방문 시각 : ${dto.booking_date }</span>
 		</div>
 	</div>
 </div>

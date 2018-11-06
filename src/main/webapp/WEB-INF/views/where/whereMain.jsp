@@ -638,8 +638,8 @@ button{
                            lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
                      message = ' '; // 인포윈도우에 표시될 내용입니다
                      
-                     var imageSrc = '<c:url value="/resources/images/self.jpg"/>', // 마커이미지의 주소입니다    
-                      imageSize = new daum.maps.Size(45, 45), // 마커이미지의 크기입니다
+                     var imageSrc = '<c:url value="/resources/images/self.png"/>', // 마커이미지의 주소입니다    
+                      imageSize = new daum.maps.Size(45, 55), // 마커이미지의 크기입니다
                       imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                       
                       var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
