@@ -26,6 +26,7 @@ import com.animal.aniwhere.service.StoreLocationDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.ReservationServiceImpl;
 import com.animal.aniwhere.service.impl.StoreLocationServiceImpl;
+import com.animal.aniwhere.service.impl.member.AndroidTokenServiceImpl;
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 
 @Controller
@@ -261,12 +262,14 @@ public class WhereController {
 		return "where/reservationMain.tiles";
 	}// reservation_write_form
 
+	@Resource(name="tokenService")
+	private AndroidTokenServiceImpl tokenService;
 	
 	@RequestMapping("/where/reservate.awa")
 	public String reservate(Model model, @RequestParam Map map, HttpSession session, HttpServletRequest req) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no").toString());
 		
-		String qr_link = QRCode_Generator.createQRCodeData(map, req, storelocservice, memberService);
+		String qr_link = QRCode_Generator.createQRCodeData(map, req, storelocservice, memberService, tokenService);
 		
 		if(qr_link.equals("")) {
 			model.addAttribute("check", 0);
