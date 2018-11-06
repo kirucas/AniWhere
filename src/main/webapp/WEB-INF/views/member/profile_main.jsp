@@ -84,10 +84,11 @@ $(function(){
 	var arr = ani.split("");
 	console.log("arr "+arr);
 	for(var i=0;i<=arr.length;i++){
+		console.log(arr[i]);
 		switch(arr[i]){
 		case "1":
-			$('.checkbox:eq(0)').prop("checked",true);	
-			console.log("들어왔니");
+			$('.checkbox:eq(0)').prop("checked",true);
+			
 			break;
 		case "2":
 			$('.checkbox:eq(1)').prop("checked",true);	
@@ -140,7 +141,7 @@ $(function(){
 			<section class="member-settings-layout__content">
 				<div class="member-settings-layout__content-inner">
 					<h2 class="member-settings-layout__title">개인 프로필 관리</h2>
-					<form action="#" method="post">
+					<form action="<c:url value='/member/edit.aw'/>" method="post">
 						<div class="edit">
 							<div class="edit__inner">
 								<div class="member-input">
@@ -174,12 +175,15 @@ $(function(){
 												관심동물
 											</div>
 											<div class="edit__td" id="ani_checkbox">
-												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="1">강아지 
-												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="2">고양이 
-												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="3">파충류 & 양서류 
-												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="4">조류
-												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="5">기타포유류 
+												<input class="checkbox" type="checkbox" name="mem_interani" value="1">강아지 
+												<input class="checkbox" type="checkbox" name="mem_interani" value="2">고양이 
+												<input class="checkbox" type="checkbox" name="mem_interani" value="3">파충류 & 양서류 
+												<input class="checkbox" type="checkbox" name="mem_interani" value="4">조류
+												<input class="checkbox" type="checkbox" name="mem_interani" value="5">기타포유류 
 											</div>
+											<input type="hidden" name="mem_id" value="${record.mem_id}"/>
+											<input type="hidden" name="mem_pw" value="${record.mem_pw}"/>
+											<input type="hidden" name="mem_gender" value="${record.mem_gender}"/>
 										</div>
 									</div>
 									<div class="text-center">
