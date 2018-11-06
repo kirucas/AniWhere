@@ -212,11 +212,26 @@ public class MemberController {
 	
 	@RequestMapping("/animal/enroll_edit.aw")
 	public String animal_enroll_edit(@RequestParam Map map , Model model) throws Exception {
-		
 		map.put("ani_no", map.get("ani_no"));
 		AnimalDTO record =aniservice.selectOne(map);
 		model.addAttribute("record",record);
 		return "member/animal_enroll_edit";
+	}
+	
+	@RequestMapping("/member/edit.aw")
+	public String member_edit(@RequestParam Map map, Model model,HttpSession session) throws Exception {
+		map.put("mem_no", session.getAttribute("mem_no"));
+		System.out.println("mem_id1"+map.get("mem_id"));
+		System.out.println("mem_id2"+map.get("mem_name"));
+		System.out.println("mem_id3"+map.get("mem_nickname"));
+		System.out.println("mem_id4"+map.get("mem_pw"));
+		System.out.println("mem_id5"+map.get("mem_interani"));
+		int update = service.update(map);
+		if(update==1)
+			model.addAttribute("edit",1);
+		else
+			model.addAttribute("edit",0);
+		return "member/edit_process";
 	}
 
 	@RequestMapping("/signIn/security.aw")

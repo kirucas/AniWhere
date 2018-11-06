@@ -88,7 +88,6 @@ $(function(){
 		switch(arr[i]){
 		case "1":
 			$('.checkbox:eq(0)').prop("checked",true);	
-			console.log("들어왔니");
 			break;
 		case "2":
 			$('.checkbox:eq(1)').prop("checked",true);	
@@ -141,7 +140,7 @@ $(function(){
 			<section class="member-settings-layout__content">
 				<div class="member-settings-layout__content-inner">
 					<h2 class="member-settings-layout__title">개인 프로필 관리</h2>
-					<form action="#" method="post">
+					<form action="<c:url value='/member/edit.aw'/>" method="post">
 						<div class="edit">
 							<div class="edit__inner">
 								<div class="member-input">
@@ -181,6 +180,10 @@ $(function(){
 												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="4">조류
 												<input class="checkbox" type="checkbox" autocomplete="off" name="mem_interani" value="5">기타포유류 
 											</div>
+											<input type="hidden" name="mem_id" value="${record.mem_id}"/>
+											<input type="hidden" name="mem_pw" value="${record.mem_pw}"/>
+											<input type="hidden" name="mem_gender" value="${record.mem_gender}"/>
+											<input type="hidden" name="mem_interani" value="${record.mem_interani}"/>
 										</div>
 									</div>
 									<div class="text-center">
