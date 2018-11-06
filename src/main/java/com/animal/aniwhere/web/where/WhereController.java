@@ -19,20 +19,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.animal.aniwhere.service.AwsS3Utils;
+import com.animal.aniwhere.service.QRCode_Generator;
 import com.animal.aniwhere.service.ReservationDTO;
 import com.animal.aniwhere.service.StoreLocationDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.ReservationServiceImpl;
 import com.animal.aniwhere.service.impl.StoreLocationServiceImpl;
+import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 
 @Controller
 public class WhereController {
 
-	@Resource(name = "StoreLocService")
+	@Resource(name = "storeLocService")
 	private StoreLocationServiceImpl storelocservice;
 
 	@Resource(name = "reservationService")
 	private ReservationServiceImpl reservationservice;
+	
+	@Resource(name="memberService")
+	private MemberServiceImpl memberService;
 
 	@Value("${PAGESIZE}")
 	private int pageSize;
@@ -255,9 +261,20 @@ public class WhereController {
 		return "where/reservationMain.tiles";
 	}// reservation_write_form
 
+	
 	@RequestMapping("/where/reservate.awa")
-	public String reservate(Model model, @RequestParam Map map, HttpSession session) throws Exception {
-		map.put("mem_no", session.getAttribute("mem_no"));
+	public String reservate(Model model, @RequestParam Map map, HttpSession session, HttpServletRequest req) throws Exception {
+		map.put("mem_no", session.getAttribute("mem_no").toString());
+		
+		String qr_link = QRCode_Generator.createQRCodeData(map, req, storelocservice, memberService);
+		
+		if(qr_link.equals("")) {
+			model.addAttribute("check", 0);
+			return "where/Message";
+		}
+		
+		map.put("qr_link", qr_link);
+		
 		int insert = reservationservice.insert(map);
 		if (insert == 1)
 			model.addAttribute("check", 1);
@@ -267,14 +284,17 @@ public class WhereController {
 		return "where/Message";
 	} // reservate
 
-	@RequestMapping("/where/reservation_check.aw")
-	public String reservate_check(Model model, HttpServletRequest req, // 페이징용 메소드에 전달
+	@RequestMapping("/security/where/reservation_check.aw")
+	public String reservate_check(Model model, HttpServletRequest req,// 페이징용 메소드에 전달
+			HttpSession session,
 			@RequestParam Map map, // 검색용 파라미터 받기
 			@RequestParam(required = false, defaultValue = "1") int nowPage// 페이징용 nowPage파라미터 받기용
 	) throws Exception {
 		// 서비스 호출]
 		// 페이징을 위한 로직 시작]
 		// 전체 레코드 수
+		System.out.println(session.getAttribute("mem_no").toString());
+		map.put("mem_no", session.getAttribute("mem_no").toString());
 		int totalRecordCount = reservationservice.getTotalRecord(map);
 		// 시작 및 끝 ROWNUM구하기]
 		int start = (nowPage - 1) * pageSize + 1;
@@ -285,7 +305,7 @@ public class WhereController {
 		List<ReservationDTO> list = reservationservice.selectList(map);
 		// 페이징 문자열을 위한 로직 호출]
 		String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,
-				req.getContextPath() + "/animal/freeboard.aw?");
+				req.getContextPath() + "/where/reservation_check.aw?");
 		// 데이터 저장]
 		model.addAttribute("pagingString", pagingString);
 		model.addAttribute("list", list);
@@ -294,7 +314,33 @@ public class WhereController {
 		model.addAttribute("nowPage", nowPage);
 		// 뷰정보 반환]
 		return "where/reservation_list.tiles";
+		
+		
+		
 	}// reservate_check
+	@RequestMapping("/security/where/reservation_view.aw")
+	public String reservate_view(Model model, HttpServletRequest req, // 페이징용 메소드에 전달
+			@RequestParam Map map, // 검색용 파라미터 받기
+			@RequestParam(required = false, defaultValue = "1") int nowPage// 페이징용 nowPage파라미터 받기용
+	) throws Exception {
+		map.put("rv_no", map.get("rv_no"));
+		ReservationDTO dto = reservationservice.selectOne(map);
+		dto.setQr_link(AwsS3Utils.LINK_ADDRESS + dto.getQr_link());
+		model.addAttribute("dto",dto);
+		return "where/reservation_view.tiles";
+	}
+	
+	@RequestMapping("/security/where/reservation/delete.aw")
+	public String reservate_cancel(Model model, HttpServletRequest req,@RequestParam Map map) throws Exception {
+		map.put("rv_no", map.get("rv_no"));
+		int delete = reservationservice.delete(map);
+		if (delete == 1)
+			model.addAttribute("del", 1);
+		else
+			model.addAttribute("del", 0);
+		return "where/Message";
+	}
+	
 	// @RequestMapping(value= "/where/map/radius.awa", method=
 	// RequestMethod.POST,produces="text/plain; charset=UTF-8")
 	// @ResponseBody

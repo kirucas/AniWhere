@@ -7,8 +7,8 @@ public class ReservationDTO {
 	private String store_no;
 	private java.sql.Date apply_date; // 신청일
 	private java.sql.Date booking_date; // 예약일
+	
 	private String qr_link; // QR Code 이미지 링크
-
 	// 신청자의 이름 저장을 위한 속성 추가
 	private String mem_name;
 	// 신청한 상가명을 저장하기 위한 속성 추가
