@@ -104,8 +104,8 @@
    	<c:forEach var="record" items="${list}" varStatus="loop">
 				
     
-         <div class="card mb-4">
-            <img class="card-img-top" src="<c:url value='/resources/images/maketimages/pet.jpg'/>" style="width:300px;height:300px" alt="Card image cap">
+         <div class="card mb-4" style="margin-left:90px">
+            <img class="card-img-top" src="<c:url value='/resources/images/maketimages/pet.jpg'/>" style="width:400px;height:400px" alt="Card image cap">
             <div class="card-body">
             
             

@@ -134,8 +134,8 @@ else {
                 success: function(url) {
             	 //$('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
             	 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />", function (image) {
-            		  image.css('width',1);
-            		  image.css('height',1);
+            		  image.css('width',150);
+            		  image.css('height',150);
 					  image.attr('name', 'sellpic');
 				});
             	 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
