@@ -6,11 +6,19 @@
 	<c:choose>
 		<c:when test="${check==1}">
 			alert("예약 완료! 예약확인 페이지로 이동합니다.");
-			location.replace("<c:url value='/where/reservation_check.aw'/>");
+			location.replace("<c:url value='/security/where/reservation_check.aw'/>");
 		</c:when>
 		<c:when test="${check==0}">
 			alert("예약 실패! 예약페이지로 이동합니다.");
 			history.back();
-		</c:when>		
+		</c:when>	
+		<c:when test="${del==1}">
+			alert("예약 취소 완료!!! 예약 확인 페이지로 이동합니다.");
+			location.replace("<c:url value='/security/where/reservation_check.aw'/>");
+		</c:when>
+		<c:when test="${del==0}">
+			alert("예약 취소 실패... 예약 확인 페이지로 이동합니다.");
+			location.replace("<c:url value='/security/where/reservation_check.aw'/>");
+		</c:when>	
 	</c:choose>
 </script>
