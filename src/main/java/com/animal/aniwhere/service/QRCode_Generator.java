@@ -92,11 +92,15 @@ public class QRCode_Generator {
 		JSONObject json = new JSONObject();
 		
 		json.put("name", memDTO.getMem_name());
-		json.put("store_name", storeDTO.getBizesnm() + storeDTO.getBrchnm() != null ? "" + storeDTO.getBrchnm() : "");
+		json.put("store_name", storeDTO.getBizesnm() + (storeDTO.getBrchnm() != null ? (" " + storeDTO.getBrchnm()) : ""));
 		json.put("apply_date", new java.sql.Date(new java.util.Date().getTime()));
 		json.put("booking_date", map.get("booking_date"));
 		json.put("location", storeDTO.getRdnmadr());
 		json.put("mem_no", memDTO.getMem_no());
+		
+		System.out.println("json : " + json.toString());
+		System.out.println("bizesnm : " + storeDTO.getBizesnm());
+		System.out.println("brchnm : " + storeDTO.getBrchnm());
 		
 		File path = new File(req.getServletContext().getRealPath("/Upload"));
 		String fileType = "png";
