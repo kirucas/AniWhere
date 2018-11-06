@@ -39,7 +39,6 @@
 		<security:session-management invalid-session-url="/signIn/securityMessage.aw?error=invalid" >
 		
 		<security:concurrency-control max-sessions="1" 
-				error-if-maximum-exceeded="true"
 		        expired-url="/signIn/securityMessage.aw?error=expired" />
 		</security:session-management>
 	</security:http>
