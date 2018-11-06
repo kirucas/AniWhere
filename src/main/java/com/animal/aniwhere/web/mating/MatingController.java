@@ -120,4 +120,11 @@ public class MatingController {
 		}/// if
 		return "error";
 	}/// insertDelete
+	
+	@RequestMapping("/text.aw")
+	public String text() throws Exception{
+		
+		return "/mainTest.tiles";
+	}
+	
 }// class
