@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -262,7 +263,19 @@ public class MemberController {
 
 		return "member/sign_up";
 	}////////////// signUp()
-
+	
+    @ResponseBody
+	@RequestMapping("/member/nickchk.aw")
+    public String idcheck(@RequestParam Map map) {
+        System.out.println(map.get("nick"));
+        map.put("mem_nickname", map.get("nick"));
+        int result = service.getTotalRecord(map);
+        System.out.println(result);
+        Map resu = new HashMap<>();
+        resu.put("result", result);
+        return JSONObject.toJSONString(resu);
+    }
+	
 	@RequestMapping("/signUpProcess.aw")
 	public String signUpProcess(@RequestParam Map map,@RequestParam List<String> mem_interani, HttpSession session, Model model) throws Exception {
 		System.out.println(map.get("mem_pw"));

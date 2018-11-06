@@ -77,6 +77,7 @@ function delete_ani(ani_no){
         }
     });
 }
+var idck = 0;
 $(function(){
 	var ani = '${record.mem_interani}';
 	var arr = ani.split("");
@@ -100,6 +101,45 @@ $(function(){
 			break;
 		}
 	}
+	$("#mem_nickname").change(function(){
+		idck=0;
+		console.log("변했니");
+		$("#idck").prop("disabled",false);
+	});
+	 //idck 버튼을 클릭했을 때 
+    $("#idck").click(function() {
+        
+        //userid 를 param.
+        var nick =  $("#mem_nickname").val(); 
+        console.log(nick);
+        $.ajax({
+            async: true,
+            type : 'POST',
+            data : {"nick":nick},
+            dataType : "json",
+            url : "<c:url value='/member/nickchk.aw'/>",
+            success : function(data) {
+            	var result = data.result;
+            	console.log(result);
+            	
+                if (result > 0) {
+                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+                    $("#divInputId").addClass("has-error")
+                    $("#divInputId").removeClass("has-success")
+                    $("#mem_nickname").focus();
+                } else {
+                    alert("사용가능한 아이디입니다.");
+                    $("#idck").prop("disabled",true);
+                    //아이디가 중복하지 않으면  idck = 1 
+                    idck = 1;
+                }
+            },
+            error : function(error) {
+                console.log("error : " + error);
+            }
+        });
+    });
 });
 </script>
 <!-- 내용 시작 -->
@@ -163,11 +203,15 @@ $(function(){
 												<div class="edit__th">
 													닉네임
 												</div>
-												<div class="edit__td">
-													<input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" style="text-decoration:underline" value="${record.mem_nickname}">
-							                        <input class="btn btn-danger" type="button" value="중복확인"></input>
-												</div>
-											</div>
+												 <div class="edit__td">
+			                                       <div style="float: left;">
+			                                          <input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" id="mem_nickname"style="text-decoration:underline" value="${record.mem_nickname}">
+			                                       </div>
+			                                       <div>
+			                                          <input id="idck" class="btn btn-primary" type="button" value="중복확인"></input>
+			                                       </div>
+			                                    </div>
+			                                 </div>
 											<div class="edit__th">
 												관심동물
 											</div>
