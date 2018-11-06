@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -219,13 +220,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/edit.aw")
-	public String member_edit(@RequestParam Map map, Model model,HttpSession session) throws Exception {
+	public String member_edit(@RequestParam Map map,@RequestParam List<String> mem_interani, Model model,HttpSession session,HttpServletRequest request) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no"));
-		System.out.println("mem_id1"+map.get("mem_id"));
-		System.out.println("mem_id2"+map.get("mem_name"));
-		System.out.println("mem_id3"+map.get("mem_nickname"));
-		System.out.println("mem_id4"+map.get("mem_pw"));
-		System.out.println("mem_id5"+map.get("mem_interani"));
+		String inter="";
+		for(String ani : mem_interani)
+			inter+=ani;
+		map.put("mem_interani", inter);
 		int update = service.update(map);
 		if(update==1)
 			model.addAttribute("edit",1);
