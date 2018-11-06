@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.AllCommentService;
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.animal.QuestBoardDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.web.board.FileUpDownUtils;
@@ -165,9 +166,11 @@ public class DogQuestController {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("file");
 		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-		File file = new File(phisicalPath+File.separator+newFilename);
-		upload.transferTo(file);
-		return "/Upload/"+newFilename;
+		//File file = new File(phisicalPath+File.separator+newFilename);
+		//upload.transferTo(file);
+		List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "quest"); // S3  업로드
+		//return "/Upload/"+newFilename;
+		return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
 	}
 	
 	@ResponseBody

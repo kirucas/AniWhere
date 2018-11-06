@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+<style>
+	.fa {font-family : 'FontAwesome'! important; } 
+	.fa {font-family : 'FontAwesome'! important; } 
+</style>
 <script>
 	//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
 	var showComments = function(key){		
@@ -15,7 +20,7 @@
 	
 	//해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
 	var displayComments	 = function(data){
-		console.log(JSON.stringify(data));
+		
 		var commentString='<div class="row border-top" style="padding-left:10px;padding-right: 10px">';
 		if(data.length==0){
 			commentString+="<h3 class='text-center' style='padding-top:10px;width:100%'>등록된 댓글이 없습니다</h3>";
@@ -38,7 +43,6 @@
 		//댓글 삭제 처리	
 		$('.commentDelete').click(function(){			
 			var cno_value = $(this).attr("title");
-			console.log($(this).attr("title"));
 			$.ajax({
 				url:"<c:url value='/dog/quest/cmtDelete.awa'/>",
 				data:{cmt_no:cno_value,no:${record.no}},
@@ -49,7 +53,6 @@
 				}		
 				
 			});
-			console.log(cno_value);
 		});
 	};
 	
@@ -88,7 +91,7 @@
 		
 		var data = <%=request.getParameter("no")%>
 		var hit = ${record.quest_hit};
-		$('.img1').on('click',function(){
+		$('#fa1').on('click',function(){
 			$.ajax({
 				data : {no:data},
 				url : "<c:url value='/animal/dog/quest/quest_hit.aw'/>",
@@ -97,8 +100,8 @@
 					hit = hit+1;
 					document.getElementById("quest_hit").innerHTML = hit;
 					document.getElementById("quest_hit1").innerHTML = hit;
-					$('.img2').css('color','blue').toggle();
-					$('.img1').css('display','none');
+					$('#fa2').css('display','inline');
+					$('#fa1').css('display','none');
 				},
 				error : function(){
 	    			console.log("error");
@@ -154,8 +157,8 @@
 	</div>
 	<div class="row">
 		<div class="offset-sm-5 col-sm-1" style="padding: 10px">
-			<img class="img1" style="text-align:center;padding-left:12px;color:#1fcfcc" src="/aniwhere/resources/images/thumbs.png">
-			<img class="img2" style="text-align:center;padding-left:12px;display:none;color:#1fcfcc" src="/aniwhere/resources/images/thumbsfull.png">
+			<i id="fa1" class="fa fa-thumbs-o-up fa-3x btn" style="color:#1fcfcc;text-align:center;"></i>
+			<i id="fa2" class="fa fa-thumbs-up fa-3x btn" style="display:none;color: #1fcfcc;text-align:center;"></i>
 			<p style="text-align:center;" id="quest_hit1">${record.quest_hit}</p>
 		</div><!-- 누른면 색이 꽉차고 빌수도 있게하게 hideen주기 -->
 	</div>

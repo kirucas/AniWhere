@@ -15,7 +15,6 @@
 	
 	//해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
 	var displayComments	 = function(data){
-		console.log(JSON.stringify(data));
 		var commentString='<div class="row border-top" style="padding-left:10px;padding-right: 10px">';
 		if(data.length==0){
 			commentString+="<h3 class='text-center' style='padding-top:10px;width:100%'>등록된 댓글이 없습니다</h3>";
@@ -38,7 +37,6 @@
 		//댓글 삭제 처리	
 		$('.commentDelete').click(function(){			
 			var cno_value = $(this).attr("title");
-			console.log($(this).attr("title"));
 			$.ajax({
 				url:"<c:url value='/cat/quest/cmtDelete.awa'/>",
 				data:{cmt_no:cno_value,no:${record.no}},
@@ -49,7 +47,6 @@
 				}		
 				
 			});
-			console.log(cno_value);
 		});
 	};
 	

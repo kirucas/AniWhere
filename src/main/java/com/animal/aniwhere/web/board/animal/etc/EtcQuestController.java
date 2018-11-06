@@ -152,8 +152,6 @@ public static final int ANI_CATEGORY = 5;
 
 	@RequestMapping("/animal/etc/quest/quest_delete.aw")
 	public String delete(@RequestParam Map map,Model model) throws Exception{
-		System.out.println(map.get("checking"));
-		System.out.println(map.get("no"));
 		int successFail = questService.delete(map);
 		model.addAttribute("successFail",successFail);
 		model.addAttribute("checking",map.get("checking"));

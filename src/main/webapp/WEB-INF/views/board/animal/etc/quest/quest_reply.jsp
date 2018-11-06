@@ -25,7 +25,32 @@
 					for (var i= files.length -1; i >= 0; i-- ){
 						sendFile(files[i],this);
 					}
-				}
+				},
+				onKeydown: function (e) { 
+                    var t = e.currentTarget.innerText; 
+                    if (t.trim().length >= 2000 ) {
+                        //delete keys, arrow keys, copy, cut
+                        if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey))
+                        e.preventDefault(); 
+                    } 
+                },
+                onKeyup: function (e) {
+                    var t = e.currentTarget.innerText;
+                    $('#maxContentPost').text(2000 - t.trim().length);
+                },
+                onPaste: function (e) {
+                    var t = e.currentTarget.innerText;
+                    var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                    e.preventDefault();
+                    var maxPaste = bufferText.length;
+                    if(t.length + bufferText.length > 2000){
+                        maxPaste = 2000 - t.length;
+                    }
+                    if(maxPaste > 0){
+                        document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
+                    }
+                    $('#maxContentPost').text(2000 - t.length);
+                }
 			}
 		})
 		function sendFile(file, el, wel) {

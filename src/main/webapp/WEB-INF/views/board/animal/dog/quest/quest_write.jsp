@@ -26,6 +26,31 @@
 						sendFile(files[i],this);
 					}
 				},
+				onKeydown: function (e) { 
+                    var t = e.currentTarget.innerText; 
+                    if (t.trim().length >= 2000 ) {
+                        //delete keys, arrow keys, copy, cut
+                        if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey))
+                        e.preventDefault(); 
+                    } 
+                },
+                onKeyup: function (e) {
+                    var t = e.currentTarget.innerText;
+                    $('#maxContentPost').text(2000 - t.trim().length);
+                },
+                onPaste: function (e) {
+                    var t = e.currentTarget.innerText;
+                    var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                    e.preventDefault();
+                    var maxPaste = bufferText.length;
+                    if(t.length + bufferText.length > 2000){
+                        maxPaste = 2000 - t.length;
+                    }
+                    if(maxPaste > 0){
+                        document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
+                    }
+                    $('#maxContentPost').text(2000 - t.length);
+                }
 			}
 		})
 		function sendFile(file, el, wel) {
@@ -59,7 +84,7 @@
 			<input required="required" maxlength="50" class="form-control" type="text" name="quest_title" id="quest_title" autofocus="autofocus" placeholder="제목을 입력해주세요" />
 		</div>
 		<div class="form-row" style="padding-top: 10px;padding-bottom: 20px">
-			<label for="quest_content" class="col-sm-2 control-label" style="font-size:20px">내용</label>
+			<label for="quest_content" class="col-sm-2 control-label" style="font-size:20px">내용</label><h5 class="col-sm-10 text-right" id="maxContentPost"></h5>
 			<textarea class="form-control" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요"></textarea>
 		</div>
 		<div class="form-row">
