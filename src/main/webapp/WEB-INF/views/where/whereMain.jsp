@@ -291,6 +291,7 @@ button{
 		                        '</div>';
 			               
 	        				var overlay = new daum.maps.CustomOverlay({
+	        					clickable: true,
 	        				    content: content,
 	        				    map: map,
 	        				    position: marker.getPosition()       
@@ -395,6 +396,7 @@ button{
 		                        '</div>';
 			               
 	        				var overlay = new daum.maps.CustomOverlay({
+	        					clickable: true,
 	        				    content: content,
 	        				    map: map,
 	        				    position: marker.getPosition()       
