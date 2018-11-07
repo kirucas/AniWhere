@@ -1,31 +1,31 @@
 $(function() {
-    var f_nBnrCnt = 0; // jQBanner¸¦ »ç¿ëÇØ¼­ È­¸é¿¡ Ãâ·ÂµÇ´Â º£³Ê¼ö
+    var f_nBnrCnt = 0; // jQBannerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ÂµÇ´ï¿½ ï¿½ï¿½ï¿½Ê¼ï¿½
 
     $.f_varBanner = {
         defaults: {
-            /* ³»ºÎÀûÀ¸·Î ¾²ÀÌ´Â º¯¼ö */
-            objScr: null,   // ½ºÅ©¸° ¿µ¿ª
-            objBtn: null, // ¹öÆ° ¿µ¿ª
-            objTimer: null, // Å¸ÀÌ¸Ó
-            nOrderNo: 999, // ÇöÀç ¼±ÅÃµÈ ·¹ÀÌ¾î
-            nOrderNoBtn: -1, // ¹öÆ° ¼±ÅÃ½Ã ·¹ÀÌ¾î
+            /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+            objScr: null,   // ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            objBtn: null, // ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
+            objTimer: null, // Å¸ï¿½Ì¸ï¿½
+            nOrderNo: 999, // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½
+            nOrderNoBtn: -1, // ï¿½ï¿½Æ° ï¿½ï¿½ï¿½Ã½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½
 
-            /* ÃÊ±â¼¼ÆÃÀÌ °¡´ÉÇÑ  ÇÊ¼ö º¯¼ö */
-            nWidth: 0, // º£³Ê ½ºÅ©¸° ¿µ¿ª Æø
-            nHeight: 0, // º£³Ê ½ºÅ©¸° ¿µ¿ª ³ôÀÌ
-            nCount: 0, // º£³Ê ½ºÅ©¸° ¿µ¿ª¿¡ ¼ÓÇØÀÖ´Â ·¹ÀÌ¾îÀÇ ¼ö
-            isActType: "none",  // º£³Ê ¾×¼Ç Å¸ÀÔ none,left,right,up,down,fade,page
+            /* ï¿½Ê±â¼¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½Ê¼ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+            nWidth: 0, // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+            nHeight: 0, // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            nCount: 0, // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½
+            isActType: "none",  // ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ Å¸ï¿½ï¿½ none,left,right,up,down,fade,page
 
-            /* ÃÊ±â¼¼ÆÃÀÌ °¡´ÉÇÑ  ¿É¼Ç º¯¼ö */
-            isShuffle: "N", // º£³Ê ·¹ÀÌ¾îµéÀÇ ¼ÅÇÃ ¿©ºÎ Y:¼ÅÇÃ,N:¼øÂ÷Àû
-            isBtnAct: "mouseover",  // ¹öÆ° ÀÛµ¿¹æ½Ä mouseover,click
-            isBtnType: "img", // ¹öÆ° Å¸ÀÔ img,li           
-            nStartUp: 300, // ½ºÅ¸Æ® ½Ã Ã¹ ·¹ÀÌ¾îÀÇ FadeIn ¼Óµµ
-            nDelay: 5000, // µô·¹ÀÌ
-            nSpeed: 500, // ¾×¼Ç½ÃÀÇ ¼Óµµ
-            nSpeedFade: 300, // ÆäÀÌµå °ü·Ã ¾×¼Ç¿¡¼­ ¹öÆ° ÀÛµ¿½Ã ¼ÓµµÀÇ ±³Á¤°ª [µÇµµ·Ï °íÁ¤]
-            isStartFade:"Y", // ½ºÅ¸Æ® FadeIn È¿°ú ¿©ºÎ [ÇÁ·Î±×·¥À¸·Î ½ºÅ©¸°À» Display:block Ã³¸®ÇÒ °æ¿ì »ç¿ë]
-            isStartDelay:"N" // ½ºÅ¸Æ®½Ã µô·¹ÀÌ¸¦ °¡Áö°í ½ÇÇà [¹«°Å¿î ÆäÀÌÁöÀÇ °æ¿ì µô·¹ÀÌ¸¦ °¡Áö°í ÃÊ±âÈ­]
+            /* ï¿½Ê±â¼¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½É¼ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+            isShuffle: "N", // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Y:ï¿½ï¿½ï¿½ï¿½,N:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            isBtnAct: "mouseover",  // ï¿½ï¿½Æ° ï¿½Ûµï¿½ï¿½ï¿½ï¿½ mouseover,click
+            isBtnType: "img", // ï¿½ï¿½Æ° Å¸ï¿½ï¿½ img,li           
+            nStartUp: 300, // ï¿½ï¿½Å¸Æ® ï¿½ï¿½ Ã¹ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ FadeIn ï¿½Óµï¿½
+            nDelay: 5000, // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            nSpeed: 500, // ï¿½×¼Ç½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
+            nSpeedFade: 300, // ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¼Ç¿ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½Ûµï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ [ï¿½Çµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½]
+            isStartFade:"Y", // ï¿½ï¿½Å¸Æ® FadeIn È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ [ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ Display:block Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½]
+            isStartDelay:"N" // ï¿½ï¿½Å¸Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ [ï¿½ï¿½ï¿½Å¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­]
         }
     };
 
@@ -37,7 +37,7 @@ $(function() {
         config.objBtn = "#"+this.attr("id")+" .clsBannerButton";
         
         if (config.isStartDelay=="Y" && isIEChk==true) {
-            /* ½ºÅ¸Æ® µô·¹ÀÌ Ã³¸® */
+            /* ï¿½ï¿½Å¸Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ */
             if (f_nBnrCnt>=0 && f_nBnrCnt<=3) {
                 setTimeout( function(){jsBanInit(config)}, f_nBnrCnt*100);
             } else if (f_nBnrCnt>3 && f_nBnrCnt<=6) {
@@ -58,13 +58,13 @@ $(function() {
     function jsBanInit(config) {
         var nPosFix;
 
-        /* º£³Ê ½ºÅ©¸° CSS ¼³Á¤ */
+        /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ CSS ï¿½ï¿½ï¿½ï¿½ */
         $(config.objScr).css({'position':'relative','height':config.nHeight+'px','width':config.nWidth+'px','overflow':'hidden'});
         
-        /* Ã¹ ·¹ÀÌ¾î ¼±ÅÃ */
+        /* Ã¹ ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ */
         config.nOrderNo = (config.nOrderNo==999) ? Math.floor(Math.random() * config.nCount):config.nOrderNo-1;
 
-        /* ¾×¼Ç Å¸ÀÔ¿¡ µû¸¥ ÃÊ±â ¼¼ÆÃ */
+        /* ï¿½×¼ï¿½ Å¸ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ */
         if (config.isActType == "left") {
             $(config.objScr+" div").each(function(i){
                 nPosFix = (config.nOrderNo==i)?0:config.nWidth;
@@ -138,38 +138,38 @@ $(function() {
             });
         }
 
-        /* ¹öÆ° ¼ø¹ø ¼³Á¤ */
+        /* ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
         $(config.objBtn+" "+config.isBtnType).each(function(i){ $(this).attr("btnno",i); $(this).css("cursor","hand") });
 
-        /* ¹öÆ° ¹ÙÀÎµå */
+        /* ï¿½ï¿½Æ° ï¿½ï¿½ï¿½Îµï¿½ */
         jsBanBtnBind(config);
         
-        /* ½ºÅ©¸° pause ¹ÙÀÎµå */
+        /* ï¿½ï¿½Å©ï¿½ï¿½ pause ï¿½ï¿½ï¿½Îµï¿½ */
         jsScrPauseBind(config);
 
-        /* º£³Ê Å¸ÀÌ¸Ó µî·Ï ¹× ¾×¼Ç ½ÃÀÛ!!!! */
+        /* ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ï¿½!!!! */
         if (config.isActType != "none" && config.isActType != "page") {
             config.objTimer = setTimeout( function(){jsBanTimer(config)}, config.nDelay);
         }
     };
 
-    /* ¹è³Ê Å¸ÀÌ¸Ó */
+    /* ï¿½ï¿½ï¿½ Å¸ï¿½Ì¸ï¿½ */
     function jsBanTimer(config) {
-        /* ¹öÆ° ¾×¼Ç ¼ø¹øÀÇ ÃÊ±âÈ­ */
+        /* ï¿½ï¿½Æ° ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ */
         config.nOrderNoBtn = -1;
 
         jsBanAction(config);
         config.objTimer = setTimeout( function(){jsBanTimer(config)}, config.nDelay);
     };
 
-    /* ¹è³Ê ¾×¼Ç Ã³¸® */
+    /* ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ Ã³ï¿½ï¿½ */
     function jsBanAction(config) {
         var nPageSel;
         var nSpeed = config.nSpeed;
         var nDivNoSel = config.nOrderNo;
         var nOrderNext = (config.nOrderNo+1)%(config.nCount);
 
-        /* 'page' ¾×¼ÇÀÏ °æ¿ì ¼±ÅÃÆäÀÌÁö ÃßÃâ */
+        /* 'page' ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
         if (config.isActType == "page") {
             var nOrderMinus = config.nOrderNoBtn-config.nOrderNo;
             nPageSel = (nOrderMinus==1 || (nOrderMinus==(config.nCount-1)*-1)) ? 1 : 0;
@@ -188,12 +188,12 @@ $(function() {
         var objSelObj = $(config.objScr+" div[divno='"+nDivNoSel+"']");
         var objNextObj = $(config.objScr+" div[divno='"+nDivNoNext+"']");
 
-        /* ¾×¼Ç¿¡ ÀÇÇÑ ¹öÆ° ¼±ÅÃ */
+        /* ï¿½×¼Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ */
         if (config.isActType != "page") {
             jsBanBtnRO(config,nOrderNext);
         }
 
-        /* ½ÇÁ¦ ½ºÅ©¸° ·¹ÀÌ¾îµéÀÇ µ¿ÀÛ Ã³¸® */
+        /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ */
         if (config.isActType == "left") {
             objNextObj.css('left',(config.nWidth)+'px');
             objSelObj.animate({'left':(-1*config.nWidth)+'px'},nSpeed);
@@ -231,9 +231,9 @@ $(function() {
         }
     }
 
-    /* ½ºÅ©¸° pause ¹ÙÀÎµå */
+    /* ï¿½ï¿½Å©ï¿½ï¿½ pause ï¿½ï¿½ï¿½Îµï¿½ */
     function jsScrPauseBind(config) {
-        /* ½ºÅ©¸°¿¡ ´ëÇÑ Ã³¸® */
+        /* ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ */
         $(config.objScr).mouseover(function(){
             clearTimeout(config.objTimer);
         });
@@ -244,16 +244,16 @@ $(function() {
         });     
     }
     
-    /* ¹öÆ° ¹ÙÀÎµå */
+    /* ï¿½ï¿½Æ° ï¿½ï¿½ï¿½Îµï¿½ */
     function jsBanBtnBind(config) {
-        /* ÃÊ±â ¹öÆ° ¼³Á¤ */
+        /* ï¿½Ê±ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ */
         if (config.isActType != "page") {
             jsBanBtnRO(config,config.nOrderNo);
         }
         
-        /* ¹öÆ°¿¡ ´ëÇØ ¸¶¿ì½º ¿À¹öÀÏ °æ¿ì Ã³¸® */
+        /* ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ */
         if (config.isBtnAct=="mouseover") {
-            /* ¹öÆ°¿¡ ´ëÇÑ Ã³¸® */
+            /* ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ */
             $(config.objBtn+" "+config.isBtnType).mouseover(function(){
                 var nImgNo = $(this).attr("btnno");
 
@@ -280,7 +280,7 @@ $(function() {
                 }
             });
 
-        /* ¹öÆ°¿¡ ´ëÇØ Å¬¸¯ÀÏ °æ¿ì Ã³¸® */
+        /* ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ */
         } else if (config.isBtnAct=="click") {
             $(config.objBtn+" "+config.isBtnType).click(function(){
                 var nImgNo = $(this).attr("btnno");
@@ -309,7 +309,7 @@ $(function() {
         }
     };
 
-    /* ¹öÆ° ·Ñ¿À¹ö Ã³¸® */
+    /* ï¿½ï¿½Æ° ï¿½Ñ¿ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ */
     function jsBanBtnRO (config,nSel) {
         if (config.isBtnType=="img") {
             $(config.objBtn+" img").each(function(i){
@@ -338,10 +338,10 @@ $(function() {
         useragent = navigator.userAgent;
     
         if(appname == "Microsoft Internet Explorer") appname = "IE";
-        IE55 = (useragent.indexOf('MSIE 5.5')>0);  //5.5 ¹öÀü
-        IE6 = (useragent.indexOf('MSIE 6')>0);     //6.0 ¹öÀü
-        IE7 = (useragent.indexOf('MSIE 7')>0);     //7.0 ¹öÀü
-        IE8 = (useragent.indexOf('MSIE 8')>0);     //8.0 ¹öÀü
+        IE55 = (useragent.indexOf('MSIE 5.5')>0);  //5.5 ï¿½ï¿½ï¿½ï¿½
+        IE6 = (useragent.indexOf('MSIE 6')>0);     //6.0 ï¿½ï¿½ï¿½ï¿½
+        IE7 = (useragent.indexOf('MSIE 7')>0);     //7.0 ï¿½ï¿½ï¿½ï¿½
+        IE8 = (useragent.indexOf('MSIE 8')>0);     //8.0 ï¿½ï¿½ï¿½ï¿½
     
         if(appname=="IE" && IE55 || IE6 || IE7 || IE8){
             return true
