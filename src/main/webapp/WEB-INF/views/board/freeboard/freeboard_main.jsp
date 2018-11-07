@@ -14,7 +14,6 @@
 </style>
 
 
-
 <!-- 바디 -->
 <div class="container" style="padding-left:0px;padding-right:0px;margin-bottom:15px">
 		<div class="sub-header">
@@ -28,7 +27,7 @@
 						<a href="<c:url value='/animal/freeboard.aw'/>"> <img src="https://talk.op.gg/images/icon-new@2x.png" width="24" alt=""><span>최신</span></a>
 					</li>
 					<li class="sub-link__item" id="countlist">
-						<a href="<c:url value='/animal/freeboard_count.aw'/>"><img src="https://talk.op.gg/images/icon-hot@2x.png" width="24" alt="" ><span>인기</span></a>
+						<a href ="<c:url value="/animal/freeboard_count.aw"/>"><img src="https://talk.op.gg/images/icon-hot@2x.png" width="24" alt="" ><span>인기</span></a>
 					</li>
 					<li class="sub-link__item" id="hitlist">
 						<a href="<c:url value='/animal/freeboard_hit.aw'/>"> <img src="https://talk.op.gg/images/icon-top@2x.png" width="24" alt=""><span>TOP</span></a>
@@ -125,11 +124,11 @@
 					</div>
 				</article>
 			</c:forEach>
-    		</c:if>
-			
+    		</c:if>			
 		</section>
-		
-	</div>
+		</div>
+		</br>
 	<!-- 아래는 페이징 -->
     		${pagingString}
-<!-- 바디 끝 -->
+	<!-- 바디 끝 -->
+	</br>
