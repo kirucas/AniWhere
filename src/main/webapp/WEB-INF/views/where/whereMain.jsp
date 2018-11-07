@@ -280,9 +280,9 @@ button{
 		                        '				 <div>'+(value.brchNm == null ? '' : value.brchNm)+'</div>'+
 		                        '                <div class="ellipsis">'+value.rdnmAdr+'</div>' + 
 		                        '                <div class="jibun ellipsis">'+
-        						'					<span>'+(value.dongNo == null ? '' : value.dongNo+'동</span>')+
-        						'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
-        						'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
+        						'					<span>'+(value.dongNo == null ? ' ' : value.dongNo+' 동</span>')+
+        						'					<span>'+(value.flrNo == null ? ' ' : value.flrNo+' 층</span>')+
+        						'					<span>'+(value.hoNo == null ? ' ' : value.hoNo+' 호</span>')+
 		                        '                </div>' + 
 		                        '                <div><a href="'+curl+'">예약</a></div>' + 
 		                        '            </div>' + 
@@ -384,9 +384,9 @@ button{
 		                        '				 <div>'+(value.brchNm == null ? '' : value.brchNm)+'</div>'+
 		                        '                <div class="ellipsis">'+value.rdnmAdr+'</div>' + 
 		                        '                <div class="jibun ellipsis">'+
-        						'					<span>'+(value.dongNo == null ? '' : value.dongNo+'동</span>')+
-        						'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
-        						'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
+        						'					<span>'+(value.dongNo == null ? ' ' : value.dongNo+' 동</span>')+
+        						'					<span>'+(value.flrNo == null ? ' ' : value.flrNo+' 층</span>')+
+        						'					<span>'+(value.hoNo == null ? ' ' : value.hoNo+' 호</span>')+
 		                        '                </div>' + 
 		                        '                <div><a href="'+curl+'">예약</a></div>' + 
 		                        '            </div>' + 
