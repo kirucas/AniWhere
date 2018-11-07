@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +16,8 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.google.api.Google;
@@ -40,7 +35,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AwsS3Utils;
@@ -272,27 +266,32 @@ public class MemberController {
 	@RequestMapping("/signout.aw")
 	public String signOut(HttpSession session) throws Exception {
 		session.invalidate();
-
 		return "forward:/main.aw";
 	}////////////// signOut()
 
 	@RequestMapping("/member/sign_up.aw")
 	public String signUp() throws Exception {
-
 		return "member/sign_up";
 	}////////////// signUp()
 	
     @ResponseBody
 	@RequestMapping("/member/nickchk.aw")
     public String idcheck(@RequestParam Map map) {
-        System.out.println(map.get("nick"));
         map.put("mem_nickname", map.get("nick"));
         int result = service.getTotalRecord(map);
-        System.out.println(result);
         Map resu = new HashMap<>();
         resu.put("result", result);
         return JSONObject.toJSONString(resu);
     }
+    
+    @ResponseBody
+	@RequestMapping(value="/member/idchk.aw", method = { RequestMethod.GET, RequestMethod.POST })
+	public String member_idchk(@RequestParam Map map) throws Exception {
+		int result = service.getTotalRecord(map);
+		Map resu = new HashMap<>();
+        resu.put("result", result);
+        return JSONObject.toJSONString(resu);
+	}
 	
 	@RequestMapping("/signUpProcess.aw")
 	public String signUpProcess(@RequestParam Map map,@RequestParam List<String> mem_interani, HttpSession session, Model model) throws Exception {

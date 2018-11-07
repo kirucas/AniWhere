@@ -39,12 +39,15 @@
 	background-color: black;
 }
 #reservation_view div{
-	margin-top:10px;
+	margin-top:5px;
 }
 /* 예약취소버튼 위에 margin좀주기 */
 #btn{
 	clear:both;
-	margin-top: 50px;
+	margin-top: 130px;
+}
+#under_line{
+	 text-decoration: underline;
 }
 </style>
 <div id="reservation_qrcord">
@@ -53,19 +56,22 @@
 	</div>
 	<div id="reservation_view">
 		<div>
-			<span>예약 번호 : ${dto.rv_no }</span>
+			<span>예약 번호 :</span><span id="under_line"> ${dto.rv_no }</span>
 		</div>
 		<div>
-			<span>상가 이름 : ${dto.bizesnm }</span>
+			<span>상가 이름 :</span><span id="under_line"> ${dto.bizesnm }</span>
 		</div>
 		<div>
-			<span>상가 주소 : ${dto.rdnmadr }</span>
+			<span>상가 주소 :</span><span id="under_line"></br> ${dto.rdnmadr }</span>
 		</div>
 		<div>
-			<span>등록 날짜 : ${dto.apply_date }</span>
+			<span>등록 날짜 :</span><span id="under_line"> ${dto.apply_date }</span>
 		</div>
 		<div>
-			<span>예약 날짜 : ${dto.booking_date }</span>
+			<span>예약 날짜 :</span><span id="under_line"> ${dto.booking_date }</span>
+		</div>
+		<div>
+			<span>방문 시각 :</span><span id="under_line"> ${dto.booking_date }</span>
 		</div>
 	</div>
 </div>
