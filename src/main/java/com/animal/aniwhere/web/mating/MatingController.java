@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.annotation.Resource;
@@ -227,7 +228,6 @@ public class MatingController {
 		//System.out.println("mating_no:"+map.get("mating_no"));
 		int totalRecord=draftService.getTotalRecord(map);
 		//System.out.println(totalRecord);
-		// 드래프팅 하는 거 하면됨
 		
 		// 신청받은 목록
 		map.put("receive", "true");
@@ -235,10 +235,12 @@ public class MatingController {
 		map.put("end", totalRecord);
 		List<Map> draftList=draftService.selectList(map);
 		List<MatingDTO> receiveList=new Vector<>();
+		List<String> dftNoList=new Vector<>();
 		for(Map draft:draftList) {
-			if(!draft.get("APPLY").equals("0"))
+			if(!draft.get("APPLY").toString().equals("0"))
 				continue;
 			map.put("mating_no", draft.get("SEND_NO"));
+			dftNoList.add(draft.get("DFT_NO").toString());
 			receiveList.add(matingService.selectOne(map));
 		}
 		
@@ -250,14 +252,17 @@ public class MatingController {
 		draftList=draftService.selectList(map);
 		List<MatingDTO> sendList=new Vector<>();
 		for(Map draft:draftList) {
-			if(!draft.get("APPLY").equals("0"))
+			System.out.println(draft);
+			System.out.println(draft.get("APPLY"));
+			if(!draft.get("APPLY").toString().equals("0"))
 				continue;
 			map.put("mating_no", draft.get("RECEIVE_NO"));
 			MatingDTO dto=matingService.selectOne(map);
-			if(!dto.getMem_no().equals(map.get("mem_no")))
+			if(!dto.getMem_no().equals(map.get("mem_no"))) {
 				sendList.add(dto);
+			}
 		}
-		
+		model.addAttribute("dftNoList",dftNoList);
 		model.addAttribute("sendList",sendList);
 		model.addAttribute("receiveList",receiveList);
 		// 결과화면으로
@@ -267,14 +272,21 @@ public class MatingController {
 	@ResponseBody
 	@RequestMapping(value="/mating/draftApply.awa",produces="text/plain;charset=UTF-8")
 	public String draftApply(@RequestParam Map map,Model model) throws Exception {
-		map.put("mating_no",map.get("mating_no").toString().replace("ok", ""));
-		return "";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/mating/draftAbort.awa",produces="text/plain;charset=UTF-8")
-	public String draftAbort(@RequestParam Map map,Model model) throws Exception {
-		map.put("mating_no",map.get("mating_no").toString().replace("no", ""));
-		return "";
-	}
+		Set<String> set=map.keySet();
+		for(String key:set)
+			System.out.println(key+" : "+map.get(key));
+		String param=map.get("dft_no").toString();
+		int affected=0;
+		if(param.contains("ok")) {
+			map.put("dft_no",map.get("dft_no").toString().replace("ok", ""));
+			map.put("apply", "1");
+			affected=draftService.update(map);
+			return "ok"+affected;
+		} else {
+			map.put("dft_no",map.get("dft_no").toString().replace("no", ""));
+			map.put("apply", "2");
+			affected=draftService.update(map);
+			return "no"+affected;
+		}/// if
+	}/// draftApply
 }// class

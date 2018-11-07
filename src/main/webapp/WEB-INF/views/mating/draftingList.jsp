@@ -50,28 +50,15 @@
 
 <script>
 	$(function(){
-		$(document).on('click','.ok',function(){
+		$(document).on('click','.permit',function(){
+			var dft_no=$(this).prop("id");
 			$.ajax({
 				url:"<c:url value='/mating/draftApply.awa'/>",
 	       		type:"POST",
-				data:{mating_no:$(this).prop("id")},
+				data:{"dft_no":dft_no},
 	       		dataType: "text",
 	       		success : function(data) {
-	       			
-	           	},
-	           	error : function(error) {
-	           		console.log("에러발생",error);
-		       	}
-			});
-		});
-		$(document).on('click','.no',function(){
-			$.ajax({
-				url:"<c:url value='/mating/draftAbort.awa'/>",
-	       		type:"POST",
-				data:{mating_no:$(this).prop("id")},
-	       		dataType: "text",
-	       		success : function(data) {
-	       			
+	       			$('#'+dft_no).closest('.card').remove();
 	           	},
 	           	error : function(error) {
 	           		console.log("에러발생",error);
@@ -182,8 +169,8 @@
 						    				<p class="card-text">검색 위치
 						    			</div> -->
 						    			<div style="text-align:right;display: inline;float: right;" id="buttonPlace${record.ani_no}">
-										    <a href="#" class="btn btn-primary ok" id="ok${record.mating_no}">수락</a>
-										    <a href="#" class="btn btn-primary no" id="no${record.mating_no}">거절</a>
+										    <a href="#" class="btn btn-primary permit" id="ok${dftNoList[loop.index]}">수락</a>
+										    <a href="#" class="btn btn-primary permit" id="no${dftNoList[loop.index]}">거절</a>
 					    				</div>
 								  	</div>
 								</div>
