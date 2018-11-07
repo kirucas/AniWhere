@@ -28,12 +28,16 @@
 	display:inline-block;
 	margin-right:-4px;
 	padding-top:15px;
+	
 }
-#ani_profile{
-	height: 160px;
+.card-img-top{	
+	height: 200px;
 }
 .card-body{
 	height: 160px;
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:15px;
 }
 #plus{
 	border: none;
@@ -94,19 +98,23 @@
 	</c:if>
 	<!-- 프로필카드 -->
 	<c:if test='${!result}'>
-		<c:forEach var="dto" items="${list}">
-			<c:if test="${not fn:contains(draftString,dto.mating_no)}">
-				<div class="card col-12 col-md-3">
-					<img class="card-img-top" src="<c:url value='${dto.ani_pic}'/>" alt="Card image">
-					<div class="card-body">
-						<h2 class="card-title" style="color:#1ABC9C">${dto.ani_name}</h2>
-						<p class="card-text">${dto.ani_age}살 ${dto.ani_kind}</p>
-							
-						<a href="#" class="btn btn-primary moda" data-target="#modalIMG" data-toggle="modal" id="${dto.mating_no}">프로필 보기</a>
-					</div>
-				</div>
-			</c:if>
-		</c:forEach>
+		<section class="member-settings-layout__content">
+			<div class="member-settings-layout__content-inner" style="height: 100%;">
+				<c:forEach var="dto" items="${list}">
+					<c:if test="${not fn:contains(draftString,dto.mating_no)}">
+						<div class="card col-12 col-md-3">
+							<img class="card-img-top" src="<c:url value='${dto.ani_pic}'/>" alt="Card image">
+							<div class="card-body">
+								<h2 class="card-title" style="color:#1ABC9C">${dto.ani_name}</h2>
+								<p class="card-text">${dto.ani_age}살 ${dto.ani_kind}</p>
+									
+								<a href="#" class="btn btn-primary moda" data-target="#modalIMG" data-toggle="modal" id="${dto.mating_no}">프로필 보기</a>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
+		</section>
 	</c:if>
 </div>
 <!-- div container 프로필카드끝 -->

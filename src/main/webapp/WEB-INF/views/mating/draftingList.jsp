@@ -48,6 +48,40 @@
 }
 </style>
 
+<script>
+	$(function(){
+		$(document).on('click','.ok',function(){
+			$.ajax({
+				url:"<c:url value='/mating/draftApply.awa'/>",
+	       		type:"POST",
+				data:{mating_no:$(this).prop("id")},
+	       		dataType: "text",
+	       		success : function(data) {
+	       			
+	           	},
+	           	error : function(error) {
+	           		console.log("에러발생",error);
+		       	}
+			});
+		});
+		$(document).on('click','.no',function(){
+			$.ajax({
+				url:"<c:url value='/mating/draftAbort.awa'/>",
+	       		type:"POST",
+				data:{mating_no:$(this).prop("id")},
+	       		dataType: "text",
+	       		success : function(data) {
+	       			
+	           	},
+	           	error : function(error) {
+	           		console.log("에러발생",error);
+		       	}
+			});
+		});
+	});
+
+</script>
+
 <!-- 내용 시작 -->
 <div class="container">
 	<div>
@@ -148,8 +182,8 @@
 						    				<p class="card-text">검색 위치
 						    			</div> -->
 						    			<div style="text-align:right;display: inline;float: right;" id="buttonPlace${record.ani_no}">
-										    <a href="#" class="btn btn-primary mate" id="">수락</a>
-										    <a href="#" class="btn btn-primary mate" id="">거절</a>
+										    <a href="#" class="btn btn-primary ok" id="ok${record.mating_no}">수락</a>
+										    <a href="#" class="btn btn-primary no" id="no${record.mating_no}">거절</a>
 					    				</div>
 								  	</div>
 								</div>

@@ -106,12 +106,18 @@ public class MatingController {
 		String matingNo=getMatingNoToAniNo(map,session);
 		map.put("ani_gender", animal.getAni_gender().equals("M")?"F":animal.getAni_gender().equals("F")?"M":"U");
 		map.put("ani_species",animal.getAni_species());
-		if(animal.getAni_kind()!=null)
-			map.put("ani_kind", animal.getAni_kind());
+		System.out.println("map.get(\"ani_kind\"):"+map.get("ani_kind"));
+		if(!(animal.getAni_species().equals("3") || animal.getAni_species().equals("5")))
+			map.remove("ani_kind");
 		// 임시
 		map.put("start",1);
 		map.put("end",matingService.getTotalRecord(map));
 		List<MatingDTO> matingList=matingService.selectList(map);
+		for(int i=0;i<matingList.size();i++) {
+			if(matingList.get(i).getMem_no().equals(session.getAttribute("mem_no"))){
+				matingList.remove(i);
+			}
+		}/// for
 		
 		map.put("mating_no", matingNo);
 		map.put("sending", true);
@@ -119,7 +125,7 @@ public class MatingController {
 		String draftString="";
 		for(Map temp:draftMap) {
 			draftString+=temp.get("RECEIVE_NO")+",";
-		}
+		}/// for
 		
 		model.addAttribute("matingNo",matingNo);
 		model.addAttribute("animal",animal);
@@ -230,26 +236,45 @@ public class MatingController {
 		List<Map> draftList=draftService.selectList(map);
 		List<MatingDTO> receiveList=new Vector<>();
 		for(Map draft:draftList) {
+			if(!draft.get("APPLY").equals("0"))
+				continue;
 			map.put("mating_no", draft.get("SEND_NO"));
 			receiveList.add(matingService.selectOne(map));
 		}
 		
 		// 신청한 목록
-		map.remove("receiving");
+		map.remove("receive");
 		map.put("sending", "true");
 		map.put("start", 1);
 		map.put("end", totalRecord);
 		draftList=draftService.selectList(map);
 		List<MatingDTO> sendList=new Vector<>();
 		for(Map draft:draftList) {
-			//System.out.println(draft);
+			if(!draft.get("APPLY").equals("0"))
+				continue;
 			map.put("mating_no", draft.get("RECEIVE_NO"));
-			sendList.add(matingService.selectOne(map));
+			MatingDTO dto=matingService.selectOne(map);
+			if(!dto.getMem_no().equals(map.get("mem_no")))
+				sendList.add(dto);
 		}
 		
 		model.addAttribute("sendList",sendList);
 		model.addAttribute("receiveList",receiveList);
 		// 결과화면으로
 		return "mating/draftingList.tiles";
+	}///draftingList
+	
+	@ResponseBody
+	@RequestMapping(value="/mating/draftApply.awa",produces="text/plain;charset=UTF-8")
+	public String draftApply(@RequestParam Map map,Model model) throws Exception {
+		map.put("mating_no",map.get("mating_no").toString().replace("ok", ""));
+		return "";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/mating/draftAbort.awa",produces="text/plain;charset=UTF-8")
+	public String draftAbort(@RequestParam Map map,Model model) throws Exception {
+		map.put("mating_no",map.get("mating_no").toString().replace("no", ""));
+		return "";
 	}
 }// class
