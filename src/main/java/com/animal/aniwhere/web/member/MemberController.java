@@ -275,9 +275,8 @@ public class MemberController {
 	}////////////// signUp()
 	
     @ResponseBody
-	@RequestMapping("/member/nickchk.aw")
+	@RequestMapping(value="/member/nickchk.aw",method = { RequestMethod.GET, RequestMethod.POST })
     public String idcheck(@RequestParam Map map) {
-        map.put("mem_nickname", map.get("nick"));
         int result = service.getTotalRecord(map);
         Map resu = new HashMap<>();
         resu.put("result", result);
