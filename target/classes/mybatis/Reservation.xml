@@ -8,7 +8,7 @@
 	<select id="reservationCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM (
-			SELECT r.*, mem_name, bizesnm
+			SELECT r.*, mem_name, bizesnm, rdnmadr, brchnm
 			FROM reservation r JOIN member m ON r.mem_no=m.mem_no
 			JOIN store_location sl ON r.store_no = sl.bizesid
 			<if test="mem_no != null">
@@ -22,7 +22,7 @@
 		FROM (
 			SELECT T.*, ROWNUM R
 			FROM (
-				SELECT r.*, mem_name, bizesnm
+				SELECT r.*, mem_name, bizesnm, rdnmadr, brchnm
 				FROM reservation r JOIN member m ON r.mem_no=m.mem_no
 				JOIN store_location sl ON r.store_no = sl.bizesid
 				<if test="mem_no != null">
@@ -35,20 +35,23 @@
 	</select>
 	
 	<select id="reservationSelectOne" parameterType="java.util.Map" resultType="ReservationDTO">
-		SELECT rv.*, mem_name, bizesnm
+		SELECT rv.*, mem_name, bizesnm, rdnmadr, brchnm
 		FROM reservation rv JOIN member mb ON rv.mem_no = mb.mem_no
 		JOIN store_location sl ON rv.store_no = sl.bizesid
 		WHERE rv_no=#{rv_no}
 	</select>
 	
 	<insert id="reservationInsert" parameterType="java.util.Map">
+		<selectKey keyProperty="rv_no" order="BEFORE" resultType="int">
+			SELECT seq_reservation.nextval FROM DUAL
+		</selectKey>
 		INSERT INTO reservation(rv_no, mem_no, store_no, booking_date, apply_date, qr_link)
-		VALUES(seq_reservation.nextval, #{mem_no}, #{store_no}, #{booking_date}, #{today}, #{qr_link})
+		VALUES(#{rv_no}, #{mem_no}, #{store_no}, #{booking_date}, #{today}, #{qr_link})
 	</insert>
 	
 	<update id="reservationUpdate" parameterType="java.util.Map">
 		UPDATE reservation
-		SET store_no=#{store_no}, booking_date=#{booking_date}, qr_link=#{qr_link}
+		SET qr_link=#{qr_link}, visit_time=#{visit_time}
 		WHERE rv_no=#{rv_no}
 	</update>
 	
