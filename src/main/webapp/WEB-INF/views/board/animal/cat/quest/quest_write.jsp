@@ -100,7 +100,7 @@
 	<div class="row col-md-4" >
 		<h2>고양이 질문 게시판</h2>
 	</div>
-	<form class="form-horizontal" method="post"
+	<form id="frm" class="form-horizontal" method="post"
 		action='<c:url value="/security/animal/cat/quest/quest_write.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-md-2 control-label" style="font-size:20px">제목</label>

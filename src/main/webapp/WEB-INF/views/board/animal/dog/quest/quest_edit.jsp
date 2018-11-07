@@ -100,7 +100,7 @@
 	<div class="row col-md-4">
 		<h2>강아지 질문 게시판</h2>
 	</div>
-	<form class="form-horizontal" method="post"
+	<form id="frm" class="form-horizontal" method="post"
 		action='<c:url value="/security/animal/dog/quest/quest_edit.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-md-2 control-label" style="font-size:20px">제목</label>
@@ -113,7 +113,7 @@
 		</div>
 		<div class="form-row" style="padding-top: 10px;padding-bottom: 20px">
 			<label for="quest_content" class="col-md-2 control-label" style="font-size:20px">내용</label>
-			<textarea data-msg="내용을 입력하세요" required="required" class="form-control  summer" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요">${record.quest_content}</textarea>
+			<textarea data-msg="내용을 입력하세요" required="required" class="form-control summer" name="quest_content" id="quest_content" rows="30">${record.quest_content}</textarea>
 		</div>
 		<div class="form-row">
 			<div class="form-group offset-md-5 col-md-1">

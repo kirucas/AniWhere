@@ -108,7 +108,7 @@
 		</div>
 		<div class="form-row" style="padding-top: 10px;padding-bottom: 20px">
 			<label for="quest_content" class="col-md-2 control-label" style="font-size:20px">내용</label><h5 class="col-md-10 text-right" id="maxContentPost"></h5>
-			<textarea data-msg="내용을 입력하세요" required="required" class="form-control summer" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요"></textarea>
+			<textarea data-msg="내용을 입력하세요" required="required" class="form-control summer" name="quest_content" id="quest_content" rows="30"></textarea>
 		</div>
 		<div class="form-row">
 			<div class="form-group offset-md-5 col-md-1">

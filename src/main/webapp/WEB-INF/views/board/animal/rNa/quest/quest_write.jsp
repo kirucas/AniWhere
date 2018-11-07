@@ -100,7 +100,7 @@
 	<div class="row col-md-4" >
 		<h3>파충류&양서류 질문 게시판</h3>
 	</div>
-	<form class="form-horizontal" method="post"
+	<form id="frm" class="form-horizontal" method="post"
 		action='<c:url value="/security/animal/rNa/quest/quest_write.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-md-2 control-label" style="font-size:20px">제목</label>
