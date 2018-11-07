@@ -75,18 +75,21 @@ $( "#target" ).submit(function( event ) {
 	
    $(function() {
 	   var count = 0;
-	   $('#enterBtn').click(function(){
-		 
-		   /* var content="========판매현황 정리입니다.============\r\n";
-		   content+='제목:'+$('#title').val()+'\r\n';
-		   content+='판매물품명:'+$('#name').val()+'\r\n';
- 		   content+='희망가:'+$('#price').val()+'원\r\n';
- 		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
-		   content+='거래방법:'+$('#way').val()+'\r\n'; 
-           content+='연락처:'+$('#phone').val()+'\r\n'; 
-           content+='====================================\r\n';
-           
-           $('#summernote').append(content); */
+	 
+		   
+		   
+		   $('#enterBtn').click(function(){	 
+			   
+			    var content="\r\n=============상세사항================\r\n";
+			        content+='제목:'+$('#title').val()+'\r\n';
+			        content+='판매물품명:'+$('#name').val()+'\r\n';
+				    content+='희망가:'+$('#price').val()+'원\r\n';
+				    content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+				    content+='거래방법:'+$('#way').val()+'\r\n'; 
+		            content+='연락처:'+$('#phone').val()+'\r\n'; 
+		            content+='====================================\r\n';
+		          
+		            $('#summernote').summernote('editor.insertText', content);
            
            // fr.action="<c:url value='/security/market/sellupdate.aw?sell_no=${record.no}'/>";
 		   if(count<3){
@@ -100,8 +103,7 @@ $( "#target" ).submit(function( event ) {
 	          }
 	          return false;       
 	   });
-	  
-	   	   
+	  	   	   
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
@@ -154,8 +156,6 @@ $( "#target" ).submit(function( event ) {
      
    
 </script>
-
-
 
 <!-- include summernote css/js-->
 <link
