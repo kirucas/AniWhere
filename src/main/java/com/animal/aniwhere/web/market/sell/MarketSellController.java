@@ -125,7 +125,7 @@ public class MarketSellController {
 				model.addAttribute("pageSize", pageSize);
 				model.addAttribute("nowPage", nowPage);
 				//뷰정보 반환]
-			
+				  System.out.println("map3 :"+map);
 				return "market/sell/temporarily.tiles";
 				
 			}////////// market_main
