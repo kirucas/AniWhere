@@ -14,9 +14,14 @@
 	<select id="memberCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM member
-		<if test="mem_nickname != null">
-			WHERE mem_nickname = #{mem_nickname}
-		</if>
+		<choose>
+			<when test="mem_nickname != null">
+				WHERE mem_nickname = #{mem_nickname}
+			</when>
+			<when test="mem_id != null">
+				WHERE mem_id = #{mem_id}
+			</when>
+		</choose>
 	</select>
 	
 	<select id="memberSelectList" parameterType="java.util.Map" resultType="MemberDTO">
@@ -60,5 +65,5 @@
 		DELETE member
 		WHERE mem_no=#{mem_no}
 	</delete>
-	
+
 </mapper>

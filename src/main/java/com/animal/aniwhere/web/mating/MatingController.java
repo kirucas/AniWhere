@@ -66,6 +66,7 @@ public class MatingController {
 		}/// if
 	}/// mating_login
 	
+	
 	@RequestMapping("/mating/RegiList.aw")
 	public String mating_regist(HttpSession session,Map map) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no"));
