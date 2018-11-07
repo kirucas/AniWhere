@@ -18,6 +18,9 @@
        		text-align: center;
        		overflow: scroll;
        }
+       .card-body {
+       		text-align: center;
+       }
        .card-body span{
        		font-size : 1.5em;
        }
