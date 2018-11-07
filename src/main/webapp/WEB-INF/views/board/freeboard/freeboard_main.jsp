@@ -12,6 +12,9 @@
 	padding-bottom:0px;
 }
 </style>
+
+
+
 <!-- 바디 -->
 <div class="container" style="padding-left:0px;padding-right:0px;margin-bottom:15px">
 		<div class="sub-header">
@@ -21,14 +24,14 @@
 					자유 게시판
 				</h2>
 				<ul class="sub-link__list">
-					<li class="sub-link__item sub-link__item--active">
-						<a href="#"><img src="https://talk.op.gg/images/icon-hot-on@2x.png" width="24"	alt=""><span>인기</span></a>
+					<li class="sub-link__item" id="defeaultlist">
+						<a href="<c:url value='/animal/freeboard.aw'/>"> <img src="https://talk.op.gg/images/icon-new@2x.png" width="24" alt=""><span>최신</span></a>
 					</li>
-					<li class="sub-link__item ">
-						<a href="#"> <img src="https://talk.op.gg/images/icon-new@2x.png" width="24" alt=""><span>최신</span></a>
+					<li class="sub-link__item" id="countlist">
+						<a href="<c:url value='/animal/freeboard_count.aw'/>"><img src="https://talk.op.gg/images/icon-hot@2x.png" width="24" alt="" ><span>인기</span></a>
 					</li>
-					<li class="sub-link__item ">
-						<a href="#"> <img src="https://talk.op.gg/images/icon-top@2x.png" width="24" alt=""><span>TOP</span></a>
+					<li class="sub-link__item" id="hitlist">
+						<a href="<c:url value='/animal/freeboard_hit.aw'/>"> <img src="https://talk.op.gg/images/icon-top@2x.png" width="24" alt=""><span>TOP</span></a>
 					</li>
 				</ul>		
 				<ul class="sub-header-button">
@@ -91,9 +94,7 @@
 								<span>[시사]</span>
 							</c:otherwise>
 						</c:choose>
-						<a
-							href="<c:url value='/animal/freeboard_view.aw?no=${record.dto.no}'/>"
-							class="article-list-item__info">
+						<a href="<c:url value='/animal/freeboard_view.aw?no=${record.dto.no}'/>" class="article-list-item__info">
 							<div class="article-list-item__title">
 								<span id="free_title">${record.dto.free_title}</span> <em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em>
 							</div>

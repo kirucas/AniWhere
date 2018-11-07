@@ -22,7 +22,7 @@
 	    		success : function(){
 	    			if(text == "♡"){
 						hit = hit+1;
-						document.getElementById("tip_hit").innerHTML = hit;
+						document.getElementById("tip_hit").innerHTML = "추천수 "+hit;
 						document.getElementById("likebtn").innerHTML = "♥";
 						console.log(text);
 	    			}
