@@ -29,7 +29,7 @@
 				<a href="<c:url value='/miss/find_write.aw'/>">
 					<img style="float:left;margin-top:5px;" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
 				</a>
-                <form style="display:inline;" action="">
+                <form style="display:inline;" action="<c:url value='/miss/find.aw'/>">
                     <label>
                     	<select name="searchColumn" style="margin-left:10px" class="sub-header-search__select">
                             <option value="title" >제목</option>
