@@ -49,9 +49,6 @@ function check() {
          return false;
 
       } 
-    
-    
-   
     else if (fr.content.value == "") {
        alert('내용을 입력하세요.');
        return false;

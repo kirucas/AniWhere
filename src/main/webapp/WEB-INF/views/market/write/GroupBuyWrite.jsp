@@ -79,15 +79,16 @@ else {
 	  
 	   $('#enterBtn').click(function(){	 
 		   
-	 /*   var content="=============상세사항================\r\n";
-	   content+='제목:'+$('#title').val()+'\r\n';
-	   content+='판매물품명:'+$('#name').val()+'\r\n';
-		   content+='희망가:'+$('#price').val()+'원\r\n';
-		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
-	   content+='거래방법:'+$('#way').val()+'\r\n'; 
-          content+='연락처:'+$('#phone').val()+'\r\n'; 
-          content+='====================================\r\n';
-          $('#summernote').append(content); */
+	    var content="\r\n=============상세사항================\r\n";
+	        content+='제목:'+$('#title').val()+'\r\n';
+	        content+='판매물품명:'+$('#name').val()+'\r\n';
+		    content+='희망가:'+$('#price').val()+'원\r\n';
+		    content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+	        content+='거래방법:'+$('#way').val()+'\r\n'; 
+            content+='연락처:'+$('#phone').val()+'\r\n'; 
+            content+='====================================\r\n';
+          
+            $('#summernote').summernote('editor.insertText', content);
           
           if(count<3){
         	  alert("사진은 최소 3장 이상 올려야 합니다");
@@ -208,7 +209,7 @@ else {
 						<div class="my-2">
 						<span>거래기간</span> 
 						<input type="date" min="2018-11-05" style="text-align: right;padding-left: px"
-							max="2020-01-01"  class="form-control" type="date" name="deadline"
+							max="2020-01-01"  class="form-control" type="date" name="deadline" id="time"
 							 required />
 													
 					</div>

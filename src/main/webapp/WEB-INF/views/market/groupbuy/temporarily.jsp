@@ -9,7 +9,6 @@
     <title>공동구매 게시판</title>
 		<!--  작은 프로그래스바 로직 시작-->
 		<style>
-       
         .progress-bar {
             background-color: White;
             height: 15px;
@@ -132,12 +131,8 @@
             -webkit-animation: animate-glow 1s ease-out infinite;
             -moz-animation: animate-glow 1s ease-out infinite; 			
 		}
-
-	
 		 
-    </style>
-		
-		
+    </style>		
 	<!-- 	프로그래스바 로직끝 -->
   </head>
   <body>
@@ -201,21 +196,18 @@
 								<span>[기타포유류]</span>
 							</c:otherwise>
 						</c:choose>
-					</span>
-					
+					</span>					
 						<span id="title">${record.dto.title}</span>																													 
-								<a href="<c:url value='/market/groupbuy.aw?groupbuy_no=${record.dto.no}'/>">
-																  
+								<a href="<c:url value='/market/groupbuy.aw?groupbuy_no=${record.dto.no}'/>">															  
 								</a>
-							
 						        </td>
 						        <!--  타이틀 끝 -->
 							
 							<td><span id="mem_no">${record.dto.mem_nickname}</span></td>
 							<td><span id="count">${record.dto.count} </span> </td>
 							<td><span id="regidate">${record.dto.regidate}</span></td>
-							<td><span id="regidate">${record.dto.goal}</span></td>
-							<td><span id="regidate">${record.dto.deadline}</span></td>
+							<td><span id="goal">${record.dto.goal}</span></td>
+							<td><span id="deadline">${record.dto.deadline}</span></td>
 						</tr>
 						
 					</c:forEach>

@@ -222,11 +222,11 @@ public class MarketGroupbuyController {
 				//수정폼 이동 --자기아이디로 자기글 view에서 수정 누르면 이쪽으로 이동 
 				@RequestMapping("/security/market/groupbuyedit.aw")
 				public String groupbuy_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
-						
+						System.out.println("map1:"+map);
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("table_name","group_buy");
-					map.put("no", map.get("buy_no"));
-					
+					map.put("no", map.get("groupbuy_no"));
+					System.out.println("map2:"+map);
 					//게시글
 					GroupBuyDTO record = allBoardService.selectOne(map);
 					//데이터 저장]
