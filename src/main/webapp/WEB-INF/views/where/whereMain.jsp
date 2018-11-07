@@ -482,7 +482,7 @@ button{
 										'<dt>'+
 											'<button class="movetarget bttn-fill bttn-md bttn-danger" title="'+latlng+'">'+value.bizesNm+'</button>'+
 										'</dt>'+
-												'<dd> '+value.rdnmAdr+
+												'<dd> '+value.rdnmAdr+' '+
 												(value.dongNo == null ? '' : value.dongNo+'동 ')+'</br>'+
 												(value.flrNo == null ? '' : value.flrNo+'층 ')+
 												(value.hoNo == null ? '' : value.hoNo+'호')+
@@ -532,7 +532,7 @@ button{
 										'<dt>'+
 											'<button class="movetarget bttn-fill bttn-md bttn-danger" title="'+latlng+'">'+value.bizesNm+'</button>'+
 										'</dt>'+
-												'<dd> '+value.rdnmAdr+
+												'<dd> '+value.rdnmAdr+' '+
 												(value.dongNo == null ? '' : value.dongNo+'동 ')+'</br>'+
 												(value.flrNo == null ? '' : value.flrNo+'층 ')+
 												(value.hoNo == null ? '' : value.hoNo+'호')+
