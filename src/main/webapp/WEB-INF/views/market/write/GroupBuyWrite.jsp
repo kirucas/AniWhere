@@ -193,18 +193,7 @@ else {
 						<option value="4">조류</option>
 						<option value="5">기타 포유류</option>
 					</select>
-
-					<label for="" class="">용도분류</label> 
-					<select id="use_listSelect"
-						class="select_filter" >
-						<option value="0">-----</option>
-						<option value="food">사료및간식</option>
-						<option value="playtoy">장난감</option>
-						<option value="home">보금자리</option>
-						<option value="buty">미용용품</option>
-						<option value="medicine">의약품</option>
-						<option value="other">기타</option>
-					</select> 
+	
 				</p>
 
 				<div style="border: 1px silver solid">

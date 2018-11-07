@@ -64,25 +64,25 @@ else {
 }
     
 }
-
 </script>
 
 <script>
-
+   /* content안에 뿌려줄 내용 로직 */
    $(function() {
 	   var count = 0;
-	  
-	   $('#enterBtn').click(function(){	 
+	   $(document).on("click","#enterBtn",function(){
+	 //  $('#enterBtn').click(function(){	 
 		   
-	 /*   var content="=============상세사항================\r\n";
-	   content+='제목:'+$('#title').val()+'\r\n';
-	   content+='판매물품명:'+$('#name').val()+'\r\n';
-		   content+='희망가:'+$('#price').val()+'원\r\n';
-		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
-	   content+='거래방법:'+$('#way').val()+'\r\n'; 
-          content+='연락처:'+$('#phone').val()+'\r\n'; 
-          content+='====================================\r\n';
-          $('#summernote').append(content); */
+	    var content="=============상세사항================\r\n";
+	        content+='제목:'+$('#title').val()+'\r\n';
+	        content+='판매물품명:'+$('#name').val()+'\r\n';
+		    content+='희망가:'+$('#price').val()+'원\r\n';
+		    content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+	        content+='거래방법:'+$('#way').val()+'\r\n'; 
+            content+='연락처:'+$('#phone').val()+'\r\n'; 
+            content+='====================================\r\n';
+          $('#summernote').append(content); 
+          
           
           if(count<3){
         	  alert("사진은 최소 3장 이상 올려야 합니다");
@@ -132,6 +132,7 @@ else {
             		  image.css('width',150);
             		  image.css('height',150);
 					  image.attr('name', 'sellpic');
+					  
 				});
             	 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
                  count++;
@@ -190,24 +191,10 @@ else {
 						<option value="4">조류</option>
 						<option value="5">기타 포유류</option>
 					</select>
-					
-					 <label for="" class="">용도분류</label> 
-					 <select id="use_listSelect"
-					class="select_filter" >
-					
-					<option value="사료및간식">사료및간식</option>
-					<option value="장난감">장난감</option>
-					<option value="보금자리">보금자리</option>
-					<option value="미용용품">미용용품</option>
-					<option value="의약품">의약품</option>
-					<option value="other">기타</option>
-				</select>
-
-
+										
 			</p>
 			</div>
-		
-			
+					
 				<div class="row" style="text-align: center; border: 1px silver solid; margin-left: px">
 					<div class="my-2" style="margin-right:30 px">
 						<span  >제품명</span>
@@ -243,28 +230,35 @@ else {
 						<span>연락처</span> <input class="form-control" type="number"
 							placeholder="집전화,휴대폰번호" style="text-align: right;padding-left:px" id="phone" required/>
 					</div>
-
-				</div>
-										
-		     <br/>
-							
-								
+				</div>										
+		     <br/>															
 				<!--사진 로직 끝 -->
-
 				
 				<div class="col-md-12 container">
-<textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
+              <textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
 				class="output"		maxlength="2048" required >
-										
-					
-</textarea>
+*판매글 등록시에는 최소 3장이상 4장 이하의 이미지를 올려주세요<br/>
+=============상세사항입력===============<br/>
+
+제목: 판매물품명:<br/>
+
+희망가:<br/>
+
+거래기간:<br/>
+
+거래방법:<br/>
+
+연락처:<br/>
+
+======================================<br/>															
+              </textarea>
 				</div>
 				<div style="text-align: center">
 					<a href="<c:url value='/market/sell.aw'/>">
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
 					
-					<!-- <input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
-					-->
+					 <!-- <input class="btn btn-information" type="button" id="enterBtn" value="선택한 내용적용하기"  onclick="showContent(); this.disabled=true;this.value='내용적용완료....';">
+					 -->
 					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
 				</div>	 										
 			</form>

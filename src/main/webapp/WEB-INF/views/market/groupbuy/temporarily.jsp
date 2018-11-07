@@ -10,7 +10,6 @@
 		<!--  작은 프로그래스바 로직 시작-->
 		<style>
        
-
         .progress-bar {
             background-color: White;
             height: 15px;

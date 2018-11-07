@@ -25,15 +25,17 @@ function test2() {
 	td.innerHTML = n - 1; 
 	if(n<=2){
 		td.innerHTML=1}
-	} 
+	}
+
 <!-- 구매시 허가구하는 로직 -->
+
 function buyaccept(){	
 	if (confirm("구입하시겠습니까?")){
 		
     alert("구입해주셔서 감사합니다");
     
     
-    action="/market/groupbuy.aw";
+    action="redirect:/market/groupbuy.aw";
          
 	}
 	else 
@@ -462,7 +464,7 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
    			
    			$('#product').prop("src",arr[0]);
    			$.each(arr,function(index,value){
-				console.log("들어왔니");
+				console.log("이미지들어올떄마다 출력 됌");
 				$('img[name=product]').eq(index).prop("src",value);
 			})
    	
@@ -476,6 +478,7 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
     if (changeimage2.id.match("product2")) {
         image.src = "";
     } //안먹힘 
+    
 }
 
    			
@@ -509,16 +512,12 @@ function changeimage1() {
     } 
 }  		
    		});
-   	
-   	
    	</script>
 		<!-- 메인 사진 -->
         <div class="col-md-8">
          <!--  <img class="img-fluid" src="http://placehold.it/750x500" alt="" > -->
-           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="#" style="width: 700px; height: 500px;">
-        
+           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="" style="width: 700px; height: 500px;">
         </div>
-
         <div class="col-md-4" style="border:1px solid silver">
         
          	<h3 class="my-3">판매자 아이디: ${record.mem_nickname}</h3>

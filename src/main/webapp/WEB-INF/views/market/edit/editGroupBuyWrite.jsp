@@ -41,28 +41,7 @@ $(document).ready(function() {
      	<label for="" class="">제목</label> <input class="form-control" type="text" id="nickname">
      
                               <p style="margin-top: 30px;">
-	
-									<label for="" class="">크기분류</label>
-									<select id="size_listSelect" class="select_filter" onclick="">
-										<option value="">-----</option>
-										<option value="small">소형</option>
-										<option value="middle">중형</option>
-										<option value="large">대형</option>
 									
-									</select>
-								
-								   
-									<label for="" class="">용도분류</label>
-									<select id="use_listSelect" class="select_filter" onclick="">
-									    <option value="">-----</option>
-										<option value="food">사료및간식</option>
-										<option value="playtoy">장난감</option>
-										<option value="home">보금자리</option>
-										<option value="buty">미용용품</option>
-										<option value="medicine">의약품</option>
-									    <option value="other">기타</option>
-									</select>
-							
 								 
 									<label for="" class="">동물분류</label>
 									<select id="animal_listSelect" class="select_filter" onclick="">
