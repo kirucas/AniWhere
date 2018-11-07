@@ -59,7 +59,7 @@
 			<span>상가 이름 : ${dto.bizesnm }</span>
 		</div>
 		<div>
-			<span>상가 주소 : ${adr }</span>
+			<span>상가 주소 : ${dto.rdnmadr }</span>
 		</div>
 		<div>
 			<span>등록 날짜 : ${dto.apply_date }</span>
