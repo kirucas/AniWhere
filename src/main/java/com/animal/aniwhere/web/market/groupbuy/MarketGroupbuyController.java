@@ -34,6 +34,7 @@ import com.animal.aniwhere.web.board.FileUpDownUtils;
 
 @Controller
 public class MarketGroupbuyController {
+	
 			
 	
 		 //buy컨트롤러 
@@ -68,18 +69,19 @@ public class MarketGroupbuyController {
 			
 		}////////// groupbuy_write
 				
-				
+				//검색 관련 로직
 				@RequestMapping("/market/groupbuy/temporarily.aw")
 				public String market_list(Model model,
 						HttpServletRequest req,//페이징용 메소드에 전달
 						@RequestParam Map map,//검색용 파라미터 받기
+						
 						@RequestParam(required=false,defaultValue="1") int nowPage//페이징용 nowPage파라미터 받기용
 						)throws Exception {
 					//서비스 호출]
 					//페이징을 위한 로직 시작]
 					map.put("table_name","group_buy");
 					//전체 레코드 수
-				
+					System.out.println("map1 :"+map);
 					int totalRecordCount= allBoardService.getTotalRecord(map);
 					//전체 페이지수]
 					int totalPage = (int)Math.ceil(((double)totalRecordCount/pageSize));
@@ -91,7 +93,7 @@ public class MarketGroupbuyController {
 					map.put("end",end);
 					
 					
-					
+					System.out.println("map2 :"+map);
 					//페이징을 위한 로직 끝]
 					List<GroupBuyDTO> list = (List<GroupBuyDTO>) allBoardService.selectList(map);
 					//페이징 문자열을 위한 로직 호출]
@@ -117,36 +119,34 @@ public class MarketGroupbuyController {
 				         String searchColumn = map.get("searchColumn").toString();   
 
 				         String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
-				               req.getContextPath()+"/market/groupbuy.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+				               req.getContextPath()+"/market/groupbuy/temporarily.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
 				         
 				         model.addAttribute("pagingString", pagingString);
 				      }
 				      
 				      else {
 				         String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
-				               req.getContextPath()+"/market/groupbuy.aw?");
+				               req.getContextPath()+"/market/groupbuy/temporarily.aw?");
 				         model.addAttribute("pagingString", pagingString);
 				      }
 					 
 					
-					model.addAttribute("list", collect);
-					model.addAttribute("totalRecordCount", totalRecordCount);
+					 model.addAttribute("list", collect);
+					 model.addAttribute("totalRecordCount", totalRecordCount);
 					 model.addAttribute("nowPage", nowPage);
 				     model.addAttribute("pageSize", pageSize);
 					//뷰정보 반환]
-				
+				     System.out.println("map3 :"+map);
+				     
+				     //map3 :{searchColumn=title, searchWord=111, table_name=group_buy, start=1, end=10}
+				     //map3 :{searchColumn=title, searchWord=마지막, table_name=sell, start=1, end=10}
 					return "market/groupbuy/temporarily.tiles";
 					
 				}////////// market_main
-				
-		
+						
 				//상세보기
 				@RequestMapping("/groupbuy/groupbuyinside.aw")
 				public String buyinside(@RequestParam Map map,Model model,HttpSession session) throws Exception {
-					
-					
-					System.out.println("끝까지 오는지 확인 1");
-					System.out.println(map.get("buy_no"));
 					
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("table_name","group_buy");
@@ -158,19 +158,15 @@ public class MarketGroupbuyController {
 					//게시글
 					GroupBuyDTO record = allBoardService.selectOne(map);
 					
-					//테스트용 
-					System.out.println("====================2");
-					System.out.println(record.getAnimal_name());					
 					//줄바꿈처리
 					record.setContent(record.getContent().replace("\r\n", "<br/>")); //???
 					//데이터 저장]
 					model.addAttribute("record", record);
+					System.out.println("content"+record.getContent());
 					//뷰정보 반환]
 					
 					return //"forward:/market/"+path+"/temporarily.aw"
 			   				"market/inside/groupbuyinside.tiles";
-					
-					       
 					
 				}////////// buyinside
 				
@@ -260,15 +256,10 @@ public class MarketGroupbuyController {
 				public String delete(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("table_name","group_buy");
-					map.put("no",map.get("buy_no"));
-						
+					map.put("no",map.get("groupbuy_no"));
+					System.out.println("map :"+map);
 					allBoardService.delete(map);
-					
-					/*
-					int successFail = allBoardService.delete(map);
-					model.addAttribute("successFail", successFail);
-					*/
-					
+													
 					return "forward:/market/groupbuy.aw";
 				}//////////////delete()
 				

@@ -9,3 +9,5 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <a href="<c:url value="/animal/bird/tip/write.aw" />">mainTemplate</a>
+
+

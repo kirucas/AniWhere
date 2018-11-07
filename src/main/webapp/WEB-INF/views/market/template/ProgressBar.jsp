@@ -7,12 +7,13 @@
     
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <SCRIPT> 
+
 //시간 구하기 표시하기 로직
 function getTime() { 
 now = new Date(); 
-dday = new Date(2018,10,3,18,00,00); 
+dday = new Date(2018,10,10,18,00,00); 
 
-// 원하는 날짜, 시간 정확하게 초단위까지 기입.
+//원하는 날짜, 시간 정확하게 초단위까지 기입.
 days = (dday - now) / 1000 / 60 / 60 / 24; 
 daysRound = Math.floor(days); 
 hours = (dday - now) / 1000 / 60 / 60 - (24 * daysRound); 
@@ -236,7 +237,6 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 <div style="border:1px solid silver;">
 
 <div onload="printClock()" class="col-ms-12" style="line-height:50px; color:#666;font-size:30px; text-align:center;" id="clock">
-
 	
 	</div>
 	<DIV  class="col-ms-12" style="line-height:60px; color:#666;font-size:50px; text-align:center;border:1px solid yellow;	">
@@ -246,23 +246,18 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	<SPAN  id=counter0></SPAN><FONT style="FONT-FAMILY: '굴림'; ">일</FONT>
 	<SPAN  id=counter1></SPAN><FONT >시간</FONT> <SPAN  id=counter2></SPAN><FONT >분</FONT> <SPAN  id=counter3></SPAN><FONT >초 남았습니다</FONT>
     <SPAN style="text-align:center"></SPAN>
-    
-    
-    
+      
     </div>
     <SCRIPT>getTime()</SCRIPT>
 	
-	
-
-
-
-
-<p style="text-align:center;">%%개 달성시 %% 해택을 드립니다   </p>
+<p style="text-align:center;">%%개 달성시 공동구매성공입니다  </p>
     <p style="text-align:center;">현재 몇% 달성중 입니다</p>
    
 
 <div class="progress-bar blue stripes col-ms-12">
-    <span style="width: 80%"></span> <!-- 안쪽에 % 숫자 로직으로 조절 -->
+    <span style="width: 80%"></span> 
+    
+    <!-- 안쪽에 % 숫자 로직으로 조절 -->
 </div>
 
 
