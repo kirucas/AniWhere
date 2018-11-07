@@ -2,8 +2,29 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/lang/summernote-ko-KR.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
 <script>
 	$(function(){
+		
+		var summernoteForm = $('#frm');
+	    var summernoteElement = $('#quest_content');
+	    var summernoteValidator = summernoteForm.validate({
+	        errorElement: "div",
+	        errorClass: 'is-invalid',
+	        validClass: 'is-valid',
+	        ignore: ':hidden:not(#quest_content),.note-editable.card-block',
+	        errorPlacement: function (error, element) {
+	            // Add the `help-block` class to the error element
+	            error.addClass("invalid-feedback");
+	            console.log(element);
+	            if (element.hasClass("summer")) {
+	                error.insertAfter(element.siblings(".note-editor"));
+	            } else {
+	                error.insertAfter(element);
+	            }
+	        }
+	    });
+		
 		$("#quest_content").summernote({
 			placeholder: "내용을 입력하세요",
 			height: 300,
@@ -36,7 +57,6 @@
                 },
                 onKeyup: function (e) {
                     var t = e.currentTarget.innerText;
-                    $('#maxContentPost').text(2000 - t.trim().length);
                 },
                 onPaste: function (e) {
                     var t = e.currentTarget.innerText;
@@ -49,8 +69,11 @@
                     if(maxPaste > 0){
                         document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
                     }
-                    $('#maxContentPost').text(2000 - t.length);
-                }
+                },
+                onChange: function (contents, $editable) {
+                	summernoteElement.val(summernoteElement.summernote('isEmpty') ? "" : contents);
+	                summernoteValidator.element(summernoteElement);
+	            }
 			}
 		})
 		function sendFile(file, el, wel) {
@@ -74,27 +97,27 @@
 	});
 </script>
 <div class="container border">
-	<div class="row col-sm-4">
+	<div class="row col-md-4">
 		<h2>강아지 질문 게시판</h2>
 	</div>
 		<form id="frm" class="form-horizontal" method="post"
 		action='<c:url value="/security/animal/dog/quest/quest_write.aw"/>'>
 		<div class="form-row">
-			<label for="quest_title" class="col-sm-2 control-label" style="font-size:20px">제목</label>
-			<input required="required" maxlength="50" class="form-control" type="text" name="quest_title" id="quest_title" autofocus="autofocus" placeholder="제목을 입력해주세요" />
+			<label for="quest_title" class="col-md-2 control-label" style="font-size:20px">제목</label>
+			<input data-msg="제목을 입력하세요" required="required" maxlength="50" class="form-control" type="text" name="quest_title" id="quest_title" autofocus="autofocus" placeholder="제목을 입력해주세요" />
 		</div>
 		<div class="form-row" style="padding-top: 10px;padding-bottom: 20px">
-			<label for="quest_content" class="col-sm-2 control-label" style="font-size:20px">내용</label><h5 class="col-sm-10 text-right" id="maxContentPost"></h5>
-			<textarea class="form-control" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요"></textarea>
+			<label for="quest_content" class="col-md-2 control-label" style="font-size:20px">내용</label><h5 class="col-md-10 text-right" id="maxContentPost"></h5>
+			<textarea data-msg="내용을 입력하세요" required="required" class="form-control summer" name="quest_content" id="quest_content" rows="30" placeholder="내용을 입력해주세요"></textarea>
 		</div>
 		<div class="form-row">
-			<div class="form-group offset-sm-5 col-sm-1">
+			<div class="form-group offset-md-5 col-md-1">
 				<a href="javascript:history.back()">
 					<input type="button" class="btn btn-lg btn-outline-danger" value="취소"/>
 				</a>
 			</div>
 			<input type="hidden" id="ani_category" name="ani_category" value="1" />
-			<div class="form-group col-sm-1">
+			<div class="form-group col-md-1">
 				<button type="submit" class="btn btn-lg btn-outline-primary">등록</button>
 			</div>
 		</div>

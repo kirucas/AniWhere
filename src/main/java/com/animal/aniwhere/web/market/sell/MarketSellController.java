@@ -125,7 +125,7 @@ public class MarketSellController {
 				model.addAttribute("pageSize", pageSize);
 				model.addAttribute("nowPage", nowPage);
 				//뷰정보 반환]
-			
+				  System.out.println("map3 :"+map);
 				return "market/sell/temporarily.tiles";
 				
 			}////////// market_main
@@ -250,10 +250,6 @@ public class MarketSellController {
 					
 				allBoardService.delete(map);
 				
-				/*
-				int successFail = allBoardService.delete(map);
-				model.addAttribute("successFail", successFail);
-				*/
 				
 				return "forward:/market/sell.aw";
 			}//////////////delete()
