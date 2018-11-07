@@ -71,10 +71,31 @@ public class MatingController {
 	@RequestMapping("/mating/RegiList.aw")
 	public String mating_regist(HttpSession session,Map map) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no"));
-		List<AnimalDTO> list=animalService.selectList(map);
-		List<AnimalDTO> matingList=matingService.selectMyMating(map);
+		List<AnimalDTO> list=animalService.selectList(map); // 유저의 전체 애완동물 리스트
+		List<AnimalDTO> matingList=matingService.selectMyMating(map); // 유저의 전체 메이팅 등록 리스트
+		List<AnimalDTO> matingListToModel=new Vector<>(); /// 위의 리스트에서 일부를 담아 Model에 담기위한 리스트
+		for(AnimalDTO dto:matingList) {
+			map.put("ani_no",dto.getAni_no());
+			String mating_no=getMatingNoToAniNo(map, session); // 각 메이팅된 동물의 메이팅 번호를 알아낸다
+			System.out.println("mating_no:"+mating_no);
+			map.put("mating_no", mating_no);
+			List<Map> draftMapList=draftService.selectList(map); // 위에서 알아낸 메이팅 번호로 드래프트 리스트를 구해낸다
+			if(matingListToModel.contains(dto))
+				continue;
+			else if(draftMapList.size()==0) {
+				matingListToModel.add(dto);
+				System.out.println("드래프트가 없음");
+				continue;
+			} else System.out.println("드래프트가 있다"+draftMapList.size());
+			for(Map draft:draftMapList) {
+				if(!draft.get("APPLY").toString().equals("1")) { // 만남 신청중인게 단 하나라도 있으면
+					matingListToModel.add(dto); // 리스트에 담아서 날린다. 출력해야 하기 때문
+					break;
+				}/// if
+			}/// for
+		}/// for
 		map.put("anirecord",list);
-		map.put("matingrecord",matingList);
+		map.put("matingrecord",matingListToModel); // 본의아니게 Map에 담아날림
 		return "mating/matingRegiList.tiles";
 	}
 	
@@ -90,10 +111,13 @@ public class MatingController {
 		map.put("end", matingService.getTotalRecord(map));
 		List<MatingDTO> list=matingService.selectList(map); // 그 동물이 속한 그룹을 메이팅에서 얻어옴
 		String matingNo=null;
+		int max=0;
 		for(MatingDTO dto:list) {
 			if(dto.getAni_no().equals(animal.getAni_no())) {
-				matingNo=dto.getMating_no(); // 그걸 토대로 같은 동물번호인 메이팅을 얻어옴
-				break;
+				// 그걸 토대로 같은 동물번호인 메이팅을 얻어옴
+				int current=Integer.parseInt(dto.getMating_no()); 
+				max=current>max?current:max;
+				matingNo=String.valueOf(max);
 			}
 		}
 		return matingNo;
@@ -114,9 +138,10 @@ public class MatingController {
 		map.put("start",1);
 		map.put("end",matingService.getTotalRecord(map));
 		List<MatingDTO> matingList=matingService.selectList(map);
-		for(int i=0;i<matingList.size();i++) {
-			if(matingList.get(i).getMem_no().equals(session.getAttribute("mem_no"))){
-				matingList.remove(i);
+		List<MatingDTO> matingListToModel=new Vector<>();
+		for(MatingDTO dto:matingList) {
+			if(!(dto.getMem_no().equals(session.getAttribute("mem_no")))){
+				matingListToModel.add(dto);
 			}
 		}/// for
 		
@@ -130,7 +155,7 @@ public class MatingController {
 		
 		model.addAttribute("matingNo",matingNo);
 		model.addAttribute("animal",animal);
-		model.addAttribute("list",matingList);
+		model.addAttribute("list",matingListToModel);
 		model.addAttribute("draftString",draftString);
 		return "mating/matingMatch.tiles";
 	}/// mating_match
@@ -186,6 +211,7 @@ public class MatingController {
 		return json.toJSONString();
 	}/// showProfile
 	
+	// 메이팅 등록된 애완동물이 만남을 신청했을때
 	@RequestMapping("/securtiy/mating/draftInsert.aw")
 	public String drafting(@RequestParam Map map,HttpServletResponse response) throws Exception {
 		System.out.println(map.get("send_no")+", "+map.get("receive_no"));
@@ -214,6 +240,7 @@ public class MatingController {
 		return "forward:/mating/draftList.aw?mating_no="+map.get("send_no")+"&ani_no="+one.getAni_no();
 	}
 	
+	// 만남을 신청하거나 신청받은 내용 리스트
 	@RequestMapping("/mating/draftList.aw")
 	public String draftingList(@RequestParam Map map,Model model,HttpSession session) throws Exception {
 		map.put("ani_no", map.get("ani_no"));
@@ -269,6 +296,7 @@ public class MatingController {
 		return "mating/draftingList.tiles";
 	}///draftingList
 	
+	// 신청받은 만남을 수락하거나 거절
 	@ResponseBody
 	@RequestMapping(value="/mating/draftApply.awa",produces="text/plain;charset=UTF-8")
 	public String draftApply(@RequestParam Map map,Model model) throws Exception {
@@ -279,12 +307,14 @@ public class MatingController {
 		int affected=0;
 		if(param.contains("ok")) {
 			map.put("dft_no",map.get("dft_no").toString().replace("ok", ""));
-			map.put("apply", "1");
+			map.put("apply", "1"); // 수락
 			affected=draftService.update(map);
+			// 수락을 하는 순간 리시버가 
+			
 			return "ok"+affected;
 		} else {
 			map.put("dft_no",map.get("dft_no").toString().replace("no", ""));
-			map.put("apply", "2");
+			map.put("apply", "2"); // 거절
 			affected=draftService.update(map);
 			return "no"+affected;
 		}/// if
