@@ -9,14 +9,14 @@
 <div class="container">
 	<div class="page-header">
 		<h2>
-			기타 포유류&nbsp;<small>질문 게시판</small>
+			기타 포유류&nbsp;<all>질문 게시판</all>
 		</h2>
 	</div>
 	<div>
 		<form action='<c:url value="/security/animal/etc/quest/quest_write.aw"/>'>
-			<div class="offset-sm-9 col-sm-3" style="padding: 5px;padding-right: 0px">	
+			<div class="offset-md-9 col-md-3" style="padding: 5px;padding-right: 0px">	
 				<div align="right">
-					<a href="<c:url value='/security/animal/etc/quest/quest_write.aw'/>"class="btn btn-sm btn-outline-success" style="font-size:15px"><i class="fas fa-edit fa-lg"></i> 글쓰기</a>
+					<a href="<c:url value='/security/animal/etc/quest/quest_write.aw'/>"class="btn btn- btn-outline-success" style="font-size:15px"><i class="fas fa-edit fa-lg"></i> 글쓰기</a>
 				</div>
 			</div>
 		</form>
@@ -26,7 +26,7 @@
 			<thead id="thead"style="background-color:#1fcfcc">
 				<tr>
 					<th scope="col" style="width:6%" class="text-center">글번호</th>
-					<th class="text-center" scope="col" >제목<small>(댓글)</small></th>
+					<th class="text-center" scope="col" >제목<all>(댓글)</all></th>
 					<th class="text-center" scope="col" style="width:10%">작성자</th>
 					<th class="text-center" scope="col" style="width:6%">조회수</th>
 					<th class="text-center" scope="col" style="width:6%">추천수</th>
@@ -65,10 +65,10 @@
 	</div>
 	<!-- 페이징 시작 -->
 	<div class="form-row">
-		<div class="offset-sm-5 col-sm-2">${pagingString}</div>
+		<div class="offset-md-5 col-md-2">${pagingString}</div>
 	</div>
 	<!-- 페이징 끝 -->
-	<div class="row offset-sm-3 col-sm-7">
+	<div class="row offset-md-3 col-md-7">
 		<div class="form-row">
 			<form class="form-inline" style="padding-bottom: 10px" method="post"
 				action="<c:url value='/animal/etc/quest/quest_list.aw'/>">
@@ -83,7 +83,7 @@
 					<input type="text" class="form-control" name="searchWord" />
 				</div>
 				<div class="form-group" style="padding-left:5px">
-					<button type="submit" class="btn btn-outline-primary btn-sm" style="padding-left:10px;font-size:20px"><i class="fas fa-search"></i>검색</button>
+					<button type="submit" class="btn btn-outline-primary btn-" style="padding-left:10px;font-size:20px"><i class="fas fa-search"></i>검색</button>
 				</div>
 			</form>
 		</div>

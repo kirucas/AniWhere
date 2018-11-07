@@ -14,7 +14,7 @@
 	</div>
 	<div>
 		<form action='<c:url value="/security/animal/bird/quest/quest_write.aw"/>'>
-			<div class="offset-sm-9 col-sm-3" style="padding: 5px;padding-right: 0px">	
+			<div class="offset-sm-9 col-md-3" style="padding: 5px;padding-right: 0px">	
 				<div align="right">
 					<a href="<c:url value='/security/animal/bird/quest/quest_write.aw'/>"class="btn btn-sm btn-outline-success" style="font-size:15px"><i class="fas fa-edit fa-lg"></i> 글쓰기</a>
 				</div>
@@ -65,10 +65,10 @@
 	</div>
 	<!-- 페이징 시작 -->
 	<div class="form-row">
-		<div class="offset-sm-5 col-sm-2">${pagingString}</div>
+		<div class="offset-md-5 col-md-2">${pagingString}</div>
 	</div>
 	<!-- 페이징 끝 -->
-	<div class="row offset-sm-3 col-sm-7">
+	<div class="row offset-md-3 col-md-7">
 		<div class="form-row">
 			<form class="form-inline" style="padding-bottom: 10px" method="post"
 				action="<c:url value='/animal/bird/quest/quest_list.aw'/>">
