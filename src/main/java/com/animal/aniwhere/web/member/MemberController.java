@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,12 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.google.api.Google;
@@ -36,6 +41,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AwsS3Utils;
@@ -120,18 +126,18 @@ public class MemberController {
 		map.put("mem_log", 1);
 		map.put("mem_interani", "0");
 		MemberDTO dto = service.selectOne(map);
-		// 네이버로 로그인 한적이 있으면 일로 나감.
+		// 네이버로 로그인 한적이 없으면 일로 드감.
 		if (dto == null) {
 			int signup = service.insert(map);
 			dto = service.selectOne(map);
 			if (signup == 2)
-				model.addAttribute("check", 2);
+				session.setAttribute("check", 2);
 			else
-				model.addAttribute("check", 0);
+				session.setAttribute("check", 0);
 		}
-		model.addAttribute("mem_id", map.get("mem_id"));
-		model.addAttribute("mem_pw", "naver");
-		return "forward:/signInProcess.aw";
+		session.setAttribute("mem_id", map.get("mem_id"));
+		session.setAttribute("mem_pw", "naver");
+		return "member/socialLogin";
 	}
 
 	// 구글 Callback호출 메소드
@@ -186,24 +192,18 @@ public class MemberController {
 		map.put("mem_log", 2); // 구글 로그인 연동
 		map.put("mem_interani", "0");
 		MemberDTO dto = service.selectOne(map);
-		// 구글로 로그인 한적이 있으면 일로 나감.
-		if (dto != null) {
-			session.setAttribute("mem_id", map.get("mem_id"));
-			session.setAttribute("mem_pw", "google");
-			return "member/sign_process";
+		// 구글로 로그인 한적이 없으면 일로 드감.
+		if (dto == null) {
+			int signup = service.insert(map);
+			dto = service.selectOne(map);
+			if (signup == 2)
+				session.setAttribute("check", 3);
+			else
+				session.setAttribute("check", 0);
 		}
-		int signup = service.insert(map);
-		dto = service.selectOne(map);
-		if (signup == 2)
-			model.addAttribute("check", 3);
-		else
-			model.addAttribute("check", 0);
-
-		model.addAttribute("mem_id", map.get("mem_id"));
-		model.addAttribute("mem_pw", "google");
-
-		return "member/sign_process";
-
+		session.setAttribute("mem_id", map.get("mem_id"));
+		session.setAttribute("mem_pw", "google");
+		return "member/socialLogin";
 	}////////////// googleCallback
 
 	@RequestMapping("/animal/enroll.aw")
@@ -237,21 +237,30 @@ public class MemberController {
 
 	@RequestMapping("/signIn/security.aw")
 	public String security(@RequestParam Map map,Authentication auth, HttpSession session) throws Exception {
-		System.out.println("인증된 사용자:" + auth.getPrincipal());
+		//System.out.println("인증된 사용자:" + auth.getPrincipal());
 		UserDetails authenticatedUser = ((UserDetails) auth.getPrincipal());
-		System.out.println(authenticatedUser.getUsername());
-		System.out.println(authenticatedUser.getAuthorities().toString());
+		//System.out.println(authenticatedUser.getUsername());
+		//System.out.println(authenticatedUser.getAuthorities().toString());
 		map.put("mem_id", authenticatedUser.getUsername());
 		MemberDTO dto = service.selectOne(map);
 		session.setAttribute("mem_id", map.get("mem_id"));
 		session.setAttribute("mem_no", dto.getMem_no());
 		
-		return "forward:/";
+		return "redirect:/";
 	}/// security
+	
+	// 소셜 로그인에 대한 로그인 처리
+	@RequestMapping("/signInProcess.aw")
+	public String signInProcess(HttpSession session,Map map) throws Exception {
+		map.put("mem_id", session.getAttribute("mem_id"));
+		System.out.println("map.get(\"mem_id\"):"+map.get("mem_id"));
+		session.setAttribute("mem_no", service.selectOne(map).getMem_no());
+		return "redirect:/";
+	}////////// animal_enroll
 	
 	@RequestMapping("/signIn/securityMessage.aw")
 	public String securityMessage(@RequestParam Map map,Model model) throws Exception {
-		System.out.println(map.get("error"));
+		//System.out.println(map.get("error"));
 		model.addAttribute("error",map.get("error"));
 		return "member/securityMessage";
 	}/// securityMessage
