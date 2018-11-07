@@ -75,9 +75,7 @@ $( "#target" ).submit(function( event ) {
 	
    $(function() {
 	   var count = 0;
-	 
-		   
-		   
+	    
 		   $('#enterBtn').click(function(){	 
 			   
 			    var content="\r\n=============상세사항================\r\n";
@@ -289,8 +287,8 @@ $( "#target" ).submit(function( event ) {
 				
 				<div class="col-md-12 container">
           <textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
-				class="output"		maxlength="2048" required >※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.	
-				${record.content}
+				class="output"		maxlength="2048" required >
+				
 															
           </textarea>
 				</div>

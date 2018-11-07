@@ -79,15 +79,15 @@ else {
 	  
 	   $('#enterBtn').click(function(){	 
 		   
-	 /*   var content="=============상세사항================\r\n";
-	   content+='제목:'+$('#title').val()+'\r\n';
-	   content+='판매물품명:'+$('#name').val()+'\r\n';
-		   content+='희망가:'+$('#price').val()+'원\r\n';
-		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
-	   content+='거래방법:'+$('#way').val()+'\r\n'; 
-          content+='연락처:'+$('#phone').val()+'\r\n'; 
-          content+='====================================\r\n';
-          $('#summernote').append(content); */
+		   var content="\r\n=============상세사항================\r\n";
+	        content+='제목:'+$('#title').val()+'\r\n';
+	        content+='판매물품명:'+$('#name').val()+'\r\n';
+		    content+='희망가:'+$('#price').val()+'원\r\n';
+		    content+='거래기간:'+$('#time').val()+'일 까지\r\n';	       
+           content+='연락처:'+$('#phone').val()+'\r\n'; 
+           content+='====================================\r\n';
+         
+           $('#summernote').summernote('editor.insertText', content);
           
           if(count<3){
         	  alert("사진은 최소 3장 이상 올려야 합니다");
@@ -157,7 +157,7 @@ else {
 </head>
 
 <body>                                                      
- <form name="fr" id="fr" method="post" action="<c:url value='/security/market/groupbuydate.aw?groupbuy_no=${record.no}'/>"  accept-charset="utf-8" 
+ <form name="fr" id="fr" method="post" action="<c:url value='/security/market/groupbuyupdate.aw?groupbuy_no=${record.no}'/>"  accept-charset="utf-8" 
 				class="form-horizontal">
 	
 		<!--   <div class="container"> -->
@@ -223,18 +223,7 @@ else {
 				<p>
 					<label for="" class="" style="margin-top: 30px">프로그래스바
 						설정:목표수량</label> <input type="text" id="nickname" required  name="goal">개 
-						<label for=""class=""> 해택종류</label>
-						 <select id="use_listSelect"
-						class="select_filter" onclick="">
-						<option value="nopoint">혜택없음</option>
-						<option value="bonus">사은품추가</option>
-						<option value="point">포인트 추가</option>
-						<option value="other">기타</option>
 						
-					</select> 
-					<label for="" class="">해택상세설명</label> 
-					<input type="text" id="nickname">
-
 					
 				<h3 class="my-4">판매자가 올린 사진 3개이상필요</h3> 
 				<div class="col-md-12 container">
@@ -248,7 +237,7 @@ else {
 					<a href="<c:url value='/market/groupbuy.aw'/>">
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>					
 					
-					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
+					<input class="btn btn-danger" type="submit"  value="수정" id="enterBtn" >
 				</div>
 				
 			

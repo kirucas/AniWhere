@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 
   <head>
@@ -233,12 +234,12 @@
 				
     
          <div class="card mb-4" style="margin-left:90px">
-            <img class="card-img-top" src="<c:url value='/resources/images/maketimages/pet.jpg'/>" style="width:400px;height:400px" alt="Card image cap">
+            <img class="card-img-top" src="${fn:substring(record.dto.content,fn:indexOf(record.dto.content,'img src=\"')+9,fn:indexOf(record.dto.content,'\" name='))}" style="width:400px;height:400px" alt="Card image cap">
             <div class="card-body">
-            
-            
-            
-               <h5 class="card-title"><span id="no">상품일련번호:${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)+1}</span></h5>
+            <script>
+            	console.log('${record.dto.content}');
+            </script>
+               <h5 class="card-title"><span id="no">상품일련번호:${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</span></h5>
 				<span id="title">제목:${record.dto.title}</span><em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em> 
 					<br/>
 				<span id="animal_code">관련태그:

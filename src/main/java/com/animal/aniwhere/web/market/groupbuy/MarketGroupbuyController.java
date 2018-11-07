@@ -70,8 +70,8 @@ public class MarketGroupbuyController {
 		}////////// groupbuy_write
 				
 				//검색 관련 로직
-				@RequestMapping("/market/groupbuy/temporarily.aw")
-				public String market_list(Model model,
+		@RequestMapping("/market/groupbuy/temporarily.aw")
+		public String market_list(Model model,
 						HttpServletRequest req,//페이징용 메소드에 전달
 						@RequestParam Map map,//검색용 파라미터 받기
 						
@@ -243,7 +243,7 @@ public class MarketGroupbuyController {
 				public String edit(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("table_name","group_buy");
-					map.put("no",map.get("buy_no"));
+					map.put("no",map.get("groupbuy_no"));
 					
 					allBoardService.update(map);
 					
