@@ -253,7 +253,7 @@ public class WhereController {
 	}
 
 	// 예약 페이지ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
-	@RequestMapping("/where/reservation.awa")
+	@RequestMapping("/security/where/reservation.awa")
 	public String reservation_write_form(Model model, @RequestParam Map map) throws Exception {
 		model.addAttribute("store_no", map.get("store_no"));
 		model.addAttribute("bizesNm", map.get("bizesNm"));

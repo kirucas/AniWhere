@@ -234,9 +234,13 @@ button{
 			
 			//마커들을 담을 배열 
 			var markers=[];
+			var overlays = [];
 			total();
 			//전체 출력
 			function total(){
+				$.each(overlays,function(index,value){
+					value.setMap(null);
+				});
 				$.ajax({
 		            type: "POST",
 		            dataType : "json",
@@ -245,6 +249,7 @@ button{
 		            	map.setLevel(14);	
 		            	clusterer.removeMarkers(markers);
 		            	markers=[];
+		            	var curl;
 		            	$.each(jsonObj, function(index, value){
 		            		
 		            		var imageSrc = "<c:url value='/resources/images/all.png'/>", // 마커이미지의 주소입니다    
@@ -261,7 +266,7 @@ button{
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
 		            		
-		            		var curl = '<c:url value="/where/reservation.awa?store_no='+value.bizesId+'&bizesNm='+value.bizesNm+'"/>'
+		            		curl = '<c:url value="/security/where/reservation.awa?store_no='+value.bizesId+'&bizesNm='+value.bizesNm+'"/>'
 		            				
 		            		var content = 
 		            			'<div class="wrap">' + 
@@ -294,7 +299,7 @@ button{
 	        				
 	        				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 	        	    		function closeOverlay() {
-	        	    		   overlay.setMap(null);
+	        	    			overlay.setVisible(false);
 	        	    		   count=0;
 	        	    		}
 	        	    		var count=0;
@@ -302,7 +307,7 @@ button{
 	        				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 	        				daum.maps.event.addListener(marker, 'click', function() {
 	        					if(count==0){
-        				    		overlay.setMap(map);
+	        						overlay.setVisible(true);
         				    		count++;
 	        					}
 	        				});
@@ -311,17 +316,18 @@ button{
 		            		daum.maps.event.addListener(marker, 'mouseover', function() {
 		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
 		            		  	if(count==0)
-		            				overlay.setMap(map);
+		            		  		overlay.setVisible(true);
 		            		});
 	        				
 		            		// 마커에 마우스오버 이벤트를 등록합니다
 		            		daum.maps.event.addListener(marker, 'mouseout', function() {
 		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
 		            		  	if(count==0)
-		            				overlay.setMap(null);
+		            		  		overlay.setVisible(false);
 		            		});
 		            		
-	        				overlay.setMap(null);
+	        				overlay.setVisible(false);
+	        				overlays.push(overlay);
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
 		                    markers.push(marker);	
 		            	});
@@ -339,6 +345,9 @@ button{
 			};
 			//옆에 메뉴 눌렀을때 해당하는 녀서들
 			function indssclscd(code,pic){
+				$.each(overlays,function(index,value){
+					value.setMap(null);
+				});
 		         $.ajax({
 		        	data : {indssclscd:code},
 		            type: "POST",
@@ -348,6 +357,7 @@ button{
 		            	map.setLevel(14);
 		            	clusterer.removeMarkers(markers);
 	            		markers=[];
+	            		var curl;
 		            	$.each(jsonObj, function(index, value){
 		            		totalvalue = value;
 		            		var imageSrc = "<c:url value='/resources/images/"+pic+".png'/>", // 마커이미지의 주소입니다    
@@ -361,7 +371,7 @@ button{
 		            			image : markerImage,
 	                            position : new daum.maps.LatLng(value.lat, value.lon)
 	                        });
-		            		var curl = '<c:url value="/where/reservation.awa?store_no='+value.bizesId+'&bizesNm='+value.bizesNm+'"/>'
+		            		curl = '<c:url value="/security/where/reservation.awa?store_no='+value.bizesId+'&bizesNm='+value.bizesNm+'"/>'
 		            		var content = 
 		            			'<div class="wrap">' + 
 		                        '    <div class="info">' + 
@@ -374,9 +384,9 @@ button{
 		                        '				 <div>'+(value.brchNm == null ? '' : value.brchNm)+'</div>'+
 		                        '                <div class="ellipsis">'+value.rdnmAdr+'</div>' + 
 		                        '                <div class="jibun ellipsis">'+
-       							'					<span>'+(value.dongNo == null ? '' : value.dongNo+'동</span>')+
-       							'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
-       							'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
+        						'					<span>'+(value.dongNo == null ? '' : value.dongNo+'동</span>')+
+        						'					<span>'+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
+        						'					<span>'+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
 		                        '                </div>' + 
 		                        '                <div><a href="'+curl+'">예약</a></div>' + 
 		                        '            </div>' + 
@@ -394,21 +404,21 @@ button{
 							
 							// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 	        	    		function closeOverlay() {
-	        	    		   overlay.setMap(null);
+	        	    			overlay.setVisible(false);
 	        	    		}
 							
 							
 	        				var count=0;
 							daum.maps.event.addListener(map, 'click',function(mouseEvent){
 								if(count==1){
-									overlay.setMap(null);
+									overlay.setVisible(false);
 								}
 								count=0;
 							});
 	        				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 	        				daum.maps.event.addListener(marker, 'click', function() {
 	        					if(count==0){
-        				    		overlay.setMap(map);
+	        						overlay.setVisible(true);
         				    		count++;
 	        					}
 	        				});
@@ -417,17 +427,18 @@ button{
 		            		daum.maps.event.addListener(marker, 'mouseover', function() {
 		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
 		            		  	if(count==0)
-		            				overlay.setMap(map);
+		            		  		overlay.setVisible(true);
 		            		});
 	        				
 		            		// 마커에 마우스오버 이벤트를 등록합니다
 		            		daum.maps.event.addListener(marker, 'mouseout', function() {
 		            		  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
 		            		  	if(count==0)
-		            				overlay.setMap(null);
+		            		  		overlay.setVisible(false);
 		            		});
 		            		
-	        				overlay.setMap(null);
+		            		overlays.push(overlay);
+		            		overlay.setVisible(false);
 		            		//지도 마크 클러스터화 해주기 위한 객체에 마크를 담기
 		                    markers.push(marker);	
 		            	});
