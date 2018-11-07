@@ -253,7 +253,7 @@ public class WhereController {
 	}
 
 	// 예약 페이지ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
-	@RequestMapping("/where/reservation.awa")
+	@RequestMapping("/security/where/reservation.awa")
 	public String reservation_write_form(Model model, @RequestParam Map map) throws Exception {
 		model.addAttribute("store_no", map.get("store_no"));
 		model.addAttribute("bizesNm", map.get("bizesNm"));
@@ -465,6 +465,7 @@ public class WhereController {
 			record.put("mem_name", list.getMem_name());
 			record.put("bizesnm", list.getBizesnm());
 			record.put("brchnm", list.getBrchnm());
+			record.put("rdnmadr", list.getRdnmadr());
 			collections.add(record);
 		}
 		System.out.println(JSONArray.toJSONString(collections));

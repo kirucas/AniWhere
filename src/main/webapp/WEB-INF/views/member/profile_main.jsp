@@ -70,7 +70,6 @@ function delete_ani(ani_no){
         url : "<c:url value='/security/member/animal/delete.awa'/>",
         success: function() {
 			$('[id='+ani_no+']').remove();
-			
         },
         error : function() {
            console.log("error");
@@ -85,7 +84,6 @@ $(function(){
 		switch(arr[i]){
 		case "1":
 			$('.checkbox:eq(0)').prop("checked",true);
-			
 			break;
 		case "2":
 			$('.checkbox:eq(1)').prop("checked",true);	
@@ -103,13 +101,19 @@ $(function(){
 	}
 	$("#mem_nickname").change(function(){
 		idck=0;
-		console.log("변했니");
 		$("#idck").prop("disabled",false);
+	});
+	$("#edit").click(function() {
+	    if(idck==0){
+	        alert('닉네임 중복체크를 해주세요');
+	        return false;
+	    }
+	    else{
+	    	$("#frm").submit();
+	    }
 	});
 	 //idck 버튼을 클릭했을 때 
     $("#idck").click(function() {
-        
-        //userid 를 param.
         var nick =  $("#mem_nickname").val(); 
         console.log(nick);
         $.ajax({
@@ -120,18 +124,12 @@ $(function(){
             url : "<c:url value='/member/nickchk.aw'/>",
             success : function(data) {
             	var result = data.result;
-            	console.log(result);
-            	
                 if (result > 0) {
-                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-                    $("#divInputId").addClass("has-error")
-                    $("#divInputId").removeClass("has-success")
+                    alert("닉네임이 존재합니다. 다른 닉네임을 입력해주세요.");
                     $("#mem_nickname").focus();
                 } else {
-                    alert("사용가능한 아이디입니다.");
+                    alert("사용가능한 닉네임입니다.");
                     $("#idck").prop("disabled",true);
-                    //아이디가 중복하지 않으면  idck = 1 
                     idck = 1;
                 }
             },
@@ -158,11 +156,13 @@ $(function(){
 							관리 
 						</a>
 					</li>
+					<c:if test="${record.mem_log!=1 or record.mem_log!=2 }">
 					<li class="nav-item">
 						<a class="nav-link" aria-current="false" id="passchange-tab" data-toggle="tab" href="#passchange" role="tab" aria-controls="passchange">
 							비밀번호 변경 
 						</a>
 					</li>
+					</c:if>
 					<li class="nav-item">
 						<a	class="nav-link" aria-current="false" id="goodbye-tab" data-toggle="tab" href="#goodbye" role="tab"	aria-controls="goodbye"> 
 							회원탈퇴 
@@ -177,7 +177,7 @@ $(function(){
 			<section class="member-settings-layout__content">
 				<div class="member-settings-layout__content-inner">
 					<h2 class="member-settings-layout__title">개인 프로필 관리</h2>
-					<form action="<c:url value='/member/edit.aw'/>" method="post">
+					<form id="frm" action="<c:url value='/member/edit.aw'/>" method="post">
 						<div class="edit">
 							<div class="edit__inner">
 								<div class="member-input">
@@ -228,7 +228,7 @@ $(function(){
 										</div>
 									</div>
 									<div class="text-center">
-										<input type="submit" class="member-button" value="수정">
+										<input id="edit" type="submit" class="member-button" value="수정">
 									</div>
 								</div>
 							</div>
@@ -279,41 +279,43 @@ $(function(){
 				</section>
 			</c:if>
 		</div>
-		<div class="tab-pane" id="passchange" role="tabpanel" aria-labelledby="passchange-tab">
-			<section class="member-settings-layout__content">
-				<div class="member-settings-layout__content-inner">
-					<h2 class="member-settings-layout__title">비밀번호 변경</h2>
-					<div class="member-settings-layout__sub">
-						개인정보 보호를 위해 비밀번호를 주기적으로 변경해주세요.
-					</div>
-					<form  action="#" method="post">
-						<div class="change-password">
-							<div class="change-password__inner">
-								<div class="member-input">
-									<div class="member-input__state">
-										<div>현재 비밀번호</div>
-										<input class="member-input__box passwordinput" type="password" autocomplete="off" name="currentPassword" value="">
-									</div>
-								</div>
-								<div class="member-input">
-									<div class="member-input__state">
-										<div>신규 비밀번호</div>
-										<input class="member-input__box passwordinput" type="password" autocomplete="off" name="newPassword" value="">
-									</div>
-								</div>
-								<div class="member-input">
-									<div class="member-input__state">
-										<div>신규 비밀번호 확인</div>
-										<input class="member-input__box passwordinput" type="password" autocomplete="off" name="checkNewPassword" value="">
-									</div>
-								</div>
-								<button type="submit" class="member-button change-password__save-btn">확인</button>
-							</div>
+		<c:if test="${record.mem_log!=1 or record.mem_log!=2 }">
+			<div class="tab-pane" id="passchange" role="tabpanel" aria-labelledby="passchange-tab">
+				<section class="member-settings-layout__content">
+					<div class="member-settings-layout__content-inner">
+						<h2 class="member-settings-layout__title">비밀번호 변경</h2>
+						<div class="member-settings-layout__sub">
+							개인정보 보호를 위해 비밀번호를 주기적으로 변경해주세요.
 						</div>
-					</form>
-				</div>
-			</section>
-		</div>
+						<form  action="#" method="post">
+							<div class="change-password">
+								<div class="change-password__inner">
+									<div class="member-input">
+										<div class="member-input__state">
+											<div>현재 비밀번호</div>
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="currentPassword" value="">
+										</div>
+									</div>
+									<div class="member-input">
+										<div class="member-input__state">
+											<div>신규 비밀번호</div>
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="newPassword" value="">
+										</div>
+									</div>
+									<div class="member-input">
+										<div class="member-input__state">
+											<div>신규 비밀번호 확인</div>
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="checkNewPassword" value="">
+										</div>
+									</div>
+									<button type="submit" class="member-button change-password__save-btn">확인</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</section>
+			</div>
+		</c:if>
 		<div class="tab-pane fade" id="goodbye" role="tabpanel" aria-labelledby="goodbye-tab">
 			<section class="member-settings-layout__content">
 				<div class="member-settings-layout__content-inner">

@@ -16,9 +16,132 @@ var isDelete = function(){
 			location.replace("<c:url value='/etc/movie/delete.aw?no=${dto.no}'/>");
 	}; 
 	
+	
+	/*댓글 입력 시 한 글자 이상 입력하도록.  */
+	function check() {
+		if (fr.inputcomment.value == "") {
+
+			alert("댓글을 한글자 이상 입력해 주세요.");
+
+			fr.inputcomment.focus();
+
+			return false;
+		} 
+		 else {
+			 alert("댓글이 정상적으로 등록되었습니다.");
+			 return true;
+		 }
+	}
+	
+	
+	//댓글
+	//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
+	var showComments = function(key){		
+		$.ajax({
+			url:"<c:url value='/board/animal/etc/movie/commentList.awa'/>",
+			data:{no:key},
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				displayComments(data);
+			}
+		});
+	};
+	//해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
+	//data는 아래 형태로 
+	//[{"NO":2,"ONELINECOMMENT":"댓글2","CPOSTDATE":"2018-09-12","CNO":3,"ID":"LEE","NAME":"이길동"},{"NO":2,"ONELINECOMMENT":"댓글1","CPOSTDATE":"2018-09-12","CNO":2,"ID":"PARK","NAME":"박길동"}]
+	function displayComments(data){
+		console.log("data :"+data);
+		var commentString="<div class='form-group'>";
+		 	if(data.length==0){
+			commentString+="<label>등록된 댓글이 없어요</label>";
+		}
+	
+		 $.each(data,function(index,comment){
+
+			 /*로그인한 사용자가 먼저 댓글한 사용자가 아닐 때는 삭제 수정이 불가능함  */
+			//if('${sessionScope.mem_no}' != '${dto.mem_no}')
+				commentString+="<label>"+comment['nickname']+"</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				commentString+="<label style='color: gray;'>"+comment['regidate']+"</label><br/>";
+				commentString+='<label title="' + comment.cmt_no + '">'+comment['comment_content']+'</label>';
+			/* 로그인한 사용자가 선댓글한 사용자일 때 삭제 수정이 가능해야 함 */
+			if('${sessionScope.mem_no}' == comment['mem_no']){
+				commentString+='&nbsp;&nbsp;&nbsp;&nbsp;<span class="commentDelete" title="' + comment.cmt_no + '" style="cursor: pointer; color: red; font-size: 1.0em; font-weight: bold">삭제</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+				commentString+='<span class="commentEdit" title="' + comment.cmt_no + '" style="cursor: pointer; color: green; font-size: 1.0em; font-weight: bold">수정</span><br/><br/>';				
+			}
+			else {
+				commentString+="<br/><br/>";
+			}
+			});
+		 		commentString+="</div>";
+		
+		$('#comments').html("");
+		$('#comments').html(commentString);
+		
+		
+	};
+	
+	//코멘트 수정/삭제 처리
+	$(document).on('click','.commentEdit',function(){
+		//cno값 출력
+		var cmt_no = $(this).attr("title");
+		
+		$('#cmt_content').val($("label[title="+cmt_no+"]").html());
+		$('#submit').html('수정');
+		
+		//form의 hidden속성중 name="cno"값 설정
+		$('input[name=cmt_no]').val(cmt_no);
+	});
+	$(document).on('click','.commentDelete',function(){
+		var cno_value = $(this).attr("title");
+		
+		$.ajax({
+			url:"<c:url value='/board/animal/etc/movie/commentDelete.awa'/>",
+			data:{cmt_no:cno_value, no:"${dto.no}" },
+			dataType:'json',
+			type:'post',
+			success:function(key){
+				showComments(key);
+			}
+		});	
+	});
+	
+	$(function(){	//페이지 로드시 코멘트 목록 뿌려주기
+		showComments("${dto.no}");
+	
+		//코멘트 입력처리]
+		$('#submit').click(function(){
+			check();
+			if($(this).html()=='댓글')
+				var action="<c:url value='/security/animal/etc/movie/commentWrite.awa'/>";
+			else
+				var action="<c:url value='/security/animal/etc/movie/commentEdit.awa'/>";
+			
+			$.ajax({
+				url:action,
+				data: {cmt_content: $('#cmt_content').val(), no : '${dto.no}',cmt_no:$('#cmt_no').val()},
+				dataType:'json',
+				type:'post',
+				success:function(key){
+					showComments(key);
+					if($('#submit').html()=='수정'){						
+						$('#submit').html('댓글');
+						$('#cmt_content').val('');
+					}
+					$('#cmt_content').val('');
+				},
+				error : function(request, status, error){
+		            console.log("code : %s\r\nmessage : %s\r\nerror : %s\r\nstatus : %s", request.status, request.responseText, error, status);
+		         }
+			});		
+		});
+});
+	
 </script>
 
 <style>
+a:link { color:white; text-decoration: none;}
+a:visited { color:white; text-decoration: none;}
 
 .title {
 	/* 일정 글자 수 이상은 안보이게 하는 효과 */
@@ -52,9 +175,6 @@ var isDelete = function(){
 	background-color: #1ABC9C;
 	border-color: #1ABC9C;
 }
-
-
-
 
 </style>
 
@@ -98,34 +218,29 @@ var isDelete = function(){
 		href="<c:url value='/etc/movie/List.aw?no=${dto.no}&nowPage=${param.nowPage}'/>"
 		class="btn btn-success" style="margin: 0 auto;">목록</a>
 </div>
-<div class="text-right" style="margin-top: 50px;">
+<div class="text-right" style="margin-top: 20px;">
 	<div class="horizontal">
 		<!-- 한줄 코멘트 입력 폼-->
-		<form class="form-inline" id="frm" method="post">
+		<form class="form-inline" id="frm" name="fr" method="post" style="margin: 0px auto;">
 			<label for="inputcomment" class="col-xs-2 col-sm-1 col-md-1 control-label">${sessionScope.mem_id}</label>
-			<input type="email" class="form-control col-xs-11 col-sm-9 col-md-9" id="inputcomment"
-				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="<c:url value='/animal/etc/movie/Reply.aw?no=${dto.no}'/>"
-			class="btn btn-success col-xs-2 col-sm-1 col-md-1">댓글</a>
+			<input type="hidden" name="cmt_no" id="cmt_no"/>
+			<input type="text" id="cmt_content" class="form-control col-xs-11 col-sm-9 col-md-9" name="inputcomment"
+				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" class="btn btn-success col-xs-1 col-sm-1" id="submit" role="button">댓글</a>
 		</form>
 	</div>
 </div>
 <br/>
 
-<%-- 		
-			<div>${sessionScope.mem_id}</div>&nbsp;&nbsp;&nbsp;&nbsp;
-			
-			<input type="hidden" value="${table_name}"/>
-			<input type="hidden" value="${dto.mem_no}"/>
-			
-			<input type="hidden" name="no" value="${cmtdto.cmt_no}" />
-				<!-- 수정 및 삭제용 파라미터 -->
-			<input type="hidden" name="cmt_no" />
-			<input placeholder="댓글을 입력하세요" id="title" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="onelinecomment" />&nbsp;&nbsp;
-			<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>
-			 --%>
-	<div class="row" id="comments">
-		<!-- 한줄 코멘트 목록-->		
-		<!-- ajax로 아래에 코멘트 목록 뿌리기 -->	
-	</div>
+<form id="comments">
+	<!-- 한줄 코멘트 목록-->
+	<!-- ajax로 아래에 코멘트 목록 뿌리기 -->
+<%-- 	
+	<div class="form-group">
+		<label>닉네임 : ${dto.mem_nickname }</label>
+		<label>댓글 날짜 : ${cmtdto.regidate}</label> <br/>
+		<p>댓글 내용 ${cmtdto.cmt_content}</p>
+	</div><br/>
+ --%>
+</form>
 <!-- 내용 끝 -->
