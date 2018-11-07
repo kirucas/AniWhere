@@ -45,12 +45,7 @@
 		
         .blue span {
             background-color:RED;   
-        }
-
-        
-
-      	
-		
+        }		
 		/*---------------------------*/		
 		
 		.stripes span {

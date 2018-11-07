@@ -5,25 +5,27 @@
   <html>
     <head>
     <!-- jQuery UI -->
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
-    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
      <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+	
 <style>
 html { background: url("<c:url value='/resources/images/signup1.jpg'/>") no-repeat center center fixed; 
 -webkit-background-size: cover;
@@ -33,19 +35,16 @@ html { background: url("<c:url value='/resources/images/signup1.jpg'/>") no-repe
 .input-field>label{
 	color:white;
 }
-intput[type=submit]:hover{
-    background-color: white;
-    color:black;
-    font-family: 메이플스토리;
+.waves-button-input{
+	width: 120px;
+	height: 36px;
+}
+[value="회원가입"]{
+	font-family: 메이플스토리;
 }
 *{
    color:white;
    font-family: 메이플스토리;
-}
-.btn{
-   background-color: #ccd5f0;
-   font-family: 메이플스토리;
-   color:black;
 }
 [type="checkbox"]:checked+span:not(.lever):before {
 	border-right: 2px solid #ebc594;
@@ -86,19 +85,42 @@ input[type=text]:not(.browser-default):focus.valid ~ label{
 input[type=password]:not(.browser-default):focus:not([readonly])+label{
 	color:white;
 }
-.error{
+.error, .errorTxt1{
 	color:#ff7070;
 }
+.errorTxt1{
+	font-family: 메이플스토리;
+}
+btn_submit i{
+	padding: 0px 0px 0px 0px;
+}
+
 </style>
 <script>
 
 $(function(){
+	var id;
 	$( "#frm" ).validate({
 		  rules: {
 		    mem_id: {
 		    	required: true,
-		    	minlength: 4,
-		    	maxlength: 30
+		    	maxlength: 30,
+		    	remote:{
+		    		data:{ 
+		    			"mem_id" : function(){return $('input[name=mem_id]').val()}
+	    			},
+		    		type: 'POST',
+		    		cache: false,
+	                url: "<c:url value='/member/idchk.aw'/>",
+	                dataType: 'json',
+	                async: true,
+	                success: function(data) {
+	                	if(data.result==0)
+	                		$('.errorTxt1').text('');
+	                	else if(data.result==1)
+	                		$('.errorTxt1').text('사용할 수 없는 아이디입니다.');		                		
+	                }
+		    	}
 		    },
 		    mem_name:{
 		    	required: true,
@@ -125,10 +147,10 @@ $(function(){
 		    mem_gender: {
 		      required: true,
 		    }
-		  },messages: {
+		  },
+		  messages: {
 			  mem_id: {
 			    	required: "아이디를 입력해주세요.",
-			    	minlength: "최소 4글자 이상 적어주세요.",
 			    	maxlength: "최대 30글자까지 가능합니다."
 			    },
 			    mem_name:{
@@ -168,10 +190,6 @@ $(function(){
 	        }
 	});
 });
-	
-
-
-
 </script>
     <body>
 		<div class="container" id="signup">
@@ -278,18 +296,15 @@ $(function(){
 			      	</div>
 				  </div>
 				  <div class="row">
-				  	<div class="input-field inline col s2 offset-s4">
+				  	<div class="input-field inline col s2 offset-s4" id="btn_submit">
          			 <input type="submit" class="btn waves-effect waves-light col s12" value="회원가입"/>
 				  	</div>
 			  	    <div class="input-field col s12">
          			 	<p class="margin center medium-small sign-up">이미 계정이 있으세요? <a href="<c:url value='/login.aw' />">Login</a></p>
         			</div>
 				  </div>
-				  	
 			    </form>
 		  	</div>
 	    </div>
-        <!--JavaScript at end of body for optimized loading-->
-        <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
   </html>
