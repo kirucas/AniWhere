@@ -23,6 +23,7 @@
 			return false;
 		} 
 		 else {
+			 alert("댓글이 정상적으로 등록되었습니다.");
 			 return true;
 		 }
 	}
@@ -84,8 +85,7 @@
 		$('#submit').html('수정');
 		
 		//form의 hidden속성중 name="cno"값 설정
-		$('input[name=cmt_no]').val($(this).attr("title"));
-		
+		$('input[name=cmt_no]').val(cmt_no);
 	});
 	$(document).on('click','.commentDelete',function(){
 		var cno_value = $(this).attr("title");
@@ -114,13 +114,13 @@
 			
 			$.ajax({
 				url:action,
-				data: {cmt_content: $('#cmt_content').val(), no : '${dto.no}'},
+				data: {cmt_content: $('#cmt_content').val(), no : '${dto.no}',cmt_no:$('#cmt_no').val()},
 				dataType:'json',
 				type:'post',
 				success:function(key){
 					showComments(key);
 					if($('#submit').html()=='수정'){						
-						$('#submit').html('등록');
+						$('#submit').html('댓글');
 						$('#cmt_content').val('');
 					}
 					$('#cmt_content').val('');
@@ -219,7 +219,7 @@ a:visited { color:white; text-decoration: none;}
 		<!-- 한줄 코멘트 입력 폼-->
 		<form class="form-inline" id="frm" name="fr" method="post" style="margin: 0px auto;">
 			<label for="inputcomment" class="col-xs-2 col-sm-1 col-md-1 control-label">${sessionScope.mem_id}</label>
-			<input type="hidden" name="cmt_no" />
+			<input type="hidden" name="cmt_no" id="cmt_no"/>
 			<input type="text" id="cmt_content" class="form-control col-xs-11 col-sm-9 col-md-9" name="inputcomment"
 				placeholder="댓글 추가">&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" class="btn btn-success col-xs-1 col-sm-1" id="submit" role="button">댓글</a>
@@ -228,18 +228,7 @@ a:visited { color:white; text-decoration: none;}
 </div>
 <br/>
 
-<%-- 		
-			<div>${sessionScope.mem_id}</div>&nbsp;&nbsp;&nbsp;&nbsp;
-			
-			<input type="hidden" value="${table_name}"/>
-			<input type="hidden" value="${dto.mem_no}"/>
-			
-			<input type="hidden" name="no" value="${cmtdto.cmt_no}" />
-				<!-- 수정 및 삭제용 파라미터 -->
-			<input type="hidden" name="cmt_no" />
-			<input placeholder="댓글을 입력하세요" id="cmt_content" value="${cmtdto.cmt_content}" class="form-control" type="text" size="50" name="inputcomment" />&nbsp;&nbsp;
-			<input class="btn btn-success" id="submit" type="button" value="등록" /><hr/>
-			 --%>
+
 <form id="comments">
 	<!-- 한줄 코멘트 목록-->
 	<!-- ajax로 아래에 코멘트 목록 뿌리기 -->

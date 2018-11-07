@@ -209,7 +209,7 @@ public class BirdMovieController {
 			map.put("table_name", movie);
 			//서비스 호출]
 			List<AllCommentDTO> comments=cmtservice.selectList(map);
-			System.out.println(comments.size());
+			System.out.println("comments.size() :"+comments.size());
 			//JSONArray.toJSONString(comments) 시
 			//[{"NO":2,"ONELINECOMMENT":"댓글2","CPOSTDATE":2018-09-12 10:15:38.0,"CNO":3,"ID":"LEE","NAME":"이길동"},{"NO":2,"ONELINECOMMENT":"댓글1","CPOSTDATE":2018-09-12 10:14:44.0,"CNO":2,"ID":"PARK","NAME":"박길동"}]
 			//날짜를 2018-09-12 10:15:38.0에서 " 2018-09-12"형태로 변경
@@ -241,7 +241,6 @@ public class BirdMovieController {
 			System.out.println("map :"+map);
 			//서비스 호출]
 			cmtservice.update(map);
-			System.out.println(map.get("no").toString());
 			return map.get("no").toString();
 		}/////////////////////////
 		
