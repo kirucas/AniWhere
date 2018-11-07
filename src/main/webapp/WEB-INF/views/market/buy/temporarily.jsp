@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
+<%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 
   <head>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   
-    
   </head>
 
 <div class="container">
@@ -92,18 +88,18 @@ html {
 							
 							<td class="text-left">
 				
-							<span id="animal_code">
+							<span id="animal_code">관련태그:
 						<c:choose>
-							<c:when test="${record.animal_code eq '1'}">
+							<c:when test="${record.dto.animal_code eq '1'}">
 								<span>[개]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '2'}">
+							<c:when test="${record.dto.animal_code eq '2'}">
 								<span>[고양이]</span>		
 							</c:when>
-							<c:when test="${record.animal_code eq '3'}">
+							<c:when test="${record.dto.animal_code eq '3'}">
 								<span>[파충류]</span>
 							</c:when>
-							<c:when test="${record.animal_code eq '4'}">
+							<c:when test="${record.dto.animal_code eq '4'}">
 								<span>[조류]</span>
 							</c:when>
 							<c:otherwise>
@@ -112,16 +108,17 @@ html {
 						</c:choose>
 					</span>
 																																						 
-								<a href="<c:url value='/market/buyinside.aw?buy_no=${record.no}'/>">
+								<a href="<c:url value='/market/buyinside.aw?buy_no=${record.dto.no}'/>">
 																  
-								<span id="title">${record.title}</span></a>
+								<span id="title">${record.dto.title}</span><em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em> 
+								</a>
 							
 						        </td>
 						        <!--  타이틀 끝 -->
 							
-							<td><span id="mem_no">${record.mem_nickname}</span></td>
-							<td><span id="count">${record.count} </span> </td>
-							<td><span id="regidate">${record.regidate}</span></td>
+							<td><span id="mem_no">${record.dto.mem_nickname}</span></td>
+							<td><span id="count">${record.dto.count} </span> </td>
+							<td><span id="regidate">${record.dto.regidate}</span></td>
 						</tr>
 						
 					</c:forEach>
@@ -133,31 +130,12 @@ html {
 
 
 <!-- 검색용  -->
+<div style="margin-top: 20px;">
+	
+	</div>
 
-<div class="row" style="text-align: middle">
-	<div>${pagingString}</div>
-</div>
+${pagingString}
 
-		<div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4"
-			style="float: none; margin: 0 auto;">
-
-			<nav aria-label="...">
-				<ul class="pagination justify-content-end mt-3 mr-3">
-
-					<li class="page-item disabled"><span class="page-link">Previous</span>
-					</li>
-					<li class="page-item active"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><span class="page-link" href="#">2</span></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item"><a class="page-link" href="#">5</a></li>
-					<li class="page-item"><a class="page-link" href="#">6</a></li>
-					<li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
-
-
-			</nav>
-		</div>
 
 		<!-- 검색용 UI -->
 

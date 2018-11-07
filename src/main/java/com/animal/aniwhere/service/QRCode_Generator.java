@@ -7,12 +7,12 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
 
+import com.animal.aniwhere.service.impl.ReservationServiceImpl;
 import com.animal.aniwhere.service.impl.StoreLocationServiceImpl;
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 import com.animal.aniwhere.service.member.MemberDTO;
@@ -24,16 +24,18 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class QRCode_Generator {
 
-	public static String createQRCodeImage(String codeDataString, File path, String fileType) {
+	public static final String AFTER_LINK = "QRCodes/After_Visiting";
+	
+	public static boolean createQRCodeImage(String codeDataString, File path, String fileType, String fileName) {
 
-		File qr_code_name = new File(path.getAbsolutePath() + File.separator + AwsS3Utils.namingForS3("QRCodes") + "." + fileType);
+		File qr_code_name = new File(path.getAbsolutePath() + File.separator + fileName + "." + fileType);
 		
 		if(!qr_code_name.getParentFile().exists())
 			qr_code_name.getParentFile().mkdirs();
 		
 		int size = 150;
 		
-		String qr_link = "";
+		boolean resultB = false;
 
 		try {
 
@@ -67,19 +69,19 @@ public class QRCode_Generator {
 			
 			ImageIO.write(image, fileType, qr_code_name);
 			
-			qr_link = AwsS3Utils.s3PutObject(qr_code_name.getAbsolutePath(), "QRCodes");
+			resultB = AwsS3Utils.putToS3(fileName, qr_code_name.getAbsolutePath());
 			
-			System.out.println("qr_link : " + qr_link);
+			System.out.println("resultB : " + resultB);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return qr_link;
+			return resultB;
 		}
 
-		return qr_link;
+		return resultB;
 	}////////// 
 	
-	public static String createQRCodeData(Map map, HttpServletRequest req, StoreLocationServiceImpl storeService, MemberServiceImpl memberService) {
+	public static boolean createQRCodeData(Map map, HttpServletRequest req, StoreLocationServiceImpl storeService, MemberServiceImpl memberService, ReservationServiceImpl reservationService) {
 		
 		map.put("bizesid", map.get("store_no"));
 		
@@ -88,15 +90,17 @@ public class QRCode_Generator {
 		
 		StoreLocationDTO storeDTO = storeService.selectOne(map);
 		MemberDTO memDTO = memberService.selectOne(map);
+		ReservationDTO reserDTO = reservationService.selectOne(map);
 		
 		JSONObject json = new JSONObject();
 		
 		json.put("name", memDTO.getMem_name());
-		json.put("store_name", storeDTO.getBizesnm() + (storeDTO.getBrchnm() != null ? (" " + storeDTO.getBrchnm()) : ""));
+		json.put("store_name", storeDTO.getBizesnm() + (storeDTO.getBrchnm() != null ? (" " + storeDTO.getBrchnm()) : "") + (storeDTO.getDongno() != null ? (" " + storeDTO.getDongno()) : "") + (storeDTO.getFlrno() != null ? (" " + storeDTO.getFlrno()) : "") + (storeDTO.getHono() != null ? (" " + storeDTO.getHono()) : ""));
 		json.put("apply_date", new java.sql.Date(new java.util.Date().getTime()));
 		json.put("booking_date", map.get("booking_date"));
 		json.put("location", storeDTO.getRdnmadr());
-		json.put("mem_no", memDTO.getMem_no());
+		json.put("mem_no", memDTO.getMem_no()); 
+		json.put("rv_no", reserDTO.getRv_no());
 		
 		System.out.println("json : " + json.toString());
 		System.out.println("bizesnm : " + storeDTO.getBizesnm());
@@ -105,7 +109,23 @@ public class QRCode_Generator {
 		File path = new File(req.getServletContext().getRealPath("/Upload"));
 		String fileType = "png";
 		
-		return createQRCodeImage(json.toJSONString(), path, fileType);
+		return createQRCodeImage(json.toJSONString(), path, fileType, map.get("qr_link").toString());
 	}//////////
 
+	public static boolean changeQRLink(ReservationServiceImpl service, Map map) {
+		
+		ReservationDTO dto = service.selectOne(map);
+		
+		String old_link = dto.getQr_link();
+		
+		AwsS3Utils.deleteFileFromS3(old_link);
+		
+		map.put("qr_link", AFTER_LINK);
+		
+		if(service.update(map) != 1)
+			return false;
+		
+		return true;
+	}
+	
 }//////////////////// QRCode_Generator class

@@ -26,6 +26,7 @@ import com.animal.aniwhere.service.StoreLocationDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.ReservationServiceImpl;
 import com.animal.aniwhere.service.impl.StoreLocationServiceImpl;
+import com.animal.aniwhere.service.impl.member.AndroidTokenServiceImpl;
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 
 @Controller
@@ -261,25 +262,33 @@ public class WhereController {
 		return "where/reservationMain.tiles";
 	}// reservation_write_form
 
+	@Resource(name="tokenService")
+	private AndroidTokenServiceImpl tokenService;
 	
 	@RequestMapping("/where/reservate.awa")
 	public String reservate(Model model, @RequestParam Map map, HttpSession session, HttpServletRequest req) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no").toString());
 		
-		String qr_link = QRCode_Generator.createQRCodeData(map, req, storelocservice, memberService);
-		
-		if(qr_link.equals("")) {
-			model.addAttribute("check", 0);
-			return "where/Message";
-		}
+		String qr_link = AwsS3Utils.namingForS3("QRCodes");
 		
 		map.put("qr_link", qr_link);
 		
 		int insert = reservationservice.insert(map);
-		if (insert == 1)
-			model.addAttribute("check", 1);
-		else
+		if (insert == 0) {
 			model.addAttribute("check", 0);
+			return "where/Message";
+		}
+		
+		boolean result_QRCreate = QRCode_Generator.createQRCodeData(map, req, storelocservice, memberService, reservationservice);
+		
+		if(!result_QRCreate) {
+			reservationservice.delete(map);
+			model.addAttribute("check", 0);
+			return "where/Message";
+		}
+		
+		model.addAttribute("check", 1);
+		
 		// 뷰정보 반환]
 		return "where/Message";
 	} // reservate
@@ -432,9 +441,34 @@ public class WhereController {
 			record.put("hoNo", list.getHono());
 			collections.add(record);
 		}
-		System.out.println("=========zz=========");
-		System.out.println(JSONArray.toJSONString(collections));
 		return JSONArray.toJSONString(collections);
 	}
+	@ResponseBody
+	@RequestMapping(value = "/androidMyReservation.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String androidMyAnimal(@RequestParam Map map) throws Exception {
+	
+		int totalRecordCount = reservationservice.getTotalRecord(map);
+		int start = 1;
+		int end = totalRecordCount;
+		map.put("start", start);
+		map.put("end", end);
+		List<ReservationDTO> lists = reservationservice.selectList(map);
+		List<Map> collections = new Vector<Map>();
+		for (ReservationDTO list : lists) {
+			Map record = new HashMap();
+			record.put("rv_no", list.getRv_no());
+			record.put("mem_no", list.getMem_no());
+			record.put("store_no", list.getStore_no());
+			record.put("apply_date", list.getApply_date());
+			record.put("booking_date", list.getBooking_date());
+			record.put("qr_link", AwsS3Utils.LINK_ADDRESS + list.getQr_link());
+			record.put("mem_name", list.getMem_name());
+			record.put("bizesnm", list.getBizesnm());
+			record.put("brchnm", list.getBrchnm());
+			collections.add(record);
+		}
+		System.out.println(JSONArray.toJSONString(collections));
+		return JSONArray.toJSONString(collections);	
+	}// reservate_check
 
 }

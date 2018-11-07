@@ -16,7 +16,7 @@
 				<if test="ani_kind != null">
 					AND ani_kind=#{ani_kind}
 				</if>
-				)
+				) T
 			)
 	</select>
 	

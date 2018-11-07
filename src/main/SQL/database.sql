@@ -94,7 +94,7 @@ CREATE TABLE drafting
 	dft_no number NOT NULL,
 	send_no number,
 	receive_no number,
-	apply number(1),
+	apply number(1) DEFAULT 0,
 	dft_date date DEFAULT SYSDATE,
 	result_date date,
 	PRIMARY KEY (dft_no)
@@ -412,6 +412,7 @@ CREATE TABLE reservation
 	apply_date date DEFAULT sysdate,
 	booking_date date NOT NULL,
 	qr_link varchar2(300),
+	visit_time nvarchar2(30) DEFAULT '(아직 방문하지 않았습니다)',
 	PRIMARY KEY (rv_no)
 );
 
