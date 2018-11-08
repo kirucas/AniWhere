@@ -489,14 +489,16 @@ a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover i
 <script>
 	var popupGallery;
 	var photoNo;
+	var category;
 	$(document).ready(function() {
+		category="${category}";
 		$(".pic-caption").click(function(e){
 			e.preventDefault();
 			photoNo=$(this).prop("id");
 			$("#modalNo").html(photoNo);
 			
 			$.ajax({
-	        	url:"<c:url value='/bird/photo/modalView.awa'/>",
+	        	url:"<c:url value='/"+category+"/photo/modalView.awa'/>",
 	       		type:"POST",
 				data:{no:photoNo},
 	       		dataType:"json", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
@@ -515,7 +517,7 @@ a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover i
 		       	}
 		    });
 			$.ajax({
-	        	url:"<c:url value='/bird/photo/modalContent.awa'/>",
+	        	url:"<c:url value='/"+category+"/photo/modalContent.awa'/>",
 	       		type:"POST",
 				data:{no:photoNo},
 	       		dataType:"json", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
@@ -527,7 +529,7 @@ a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover i
 						+'<a id="delete" href="#" class="btn btn-danger">삭제</a>';
 						$("#delete").click(function(){
 	        				var index=document.getElementById("modalNo").innerHTML;
-	        				location.replace("<c:url value='/bird/photo/delete.aw?no="+index+"'/>");
+	        				location.replace("<c:url value='/"+category+"/photo/delete.aw?no="+index+"'/>");
 	        			});
 	        	 	 }else {
 	        	 		document.getElementById("e-d-button").innerHTML="";
@@ -562,7 +564,7 @@ a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover i
 
 <div class="container">
 	<div id="uploadButton" style="text-align: right;">
-		<a href="<c:url value='/security/bird/photo/write.aw'/>" class="btn btn-primary" style="margin-bottom: 20px;">사진 올리기</a>
+		<a href="<c:url value='/security/${category}/photo/write.aw'/>" class="btn btn-primary" style="margin-bottom: 20px;">사진 올리기</a>
 	</div>
 	<c:if test="${empty list}" var="result">
    		<div class="row">
@@ -582,7 +584,7 @@ a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover i
 				       		<article class="htmleaf-container">
 								<section class="wrapper cl">
 									<div class="pic pic-3d">
-				            			<img class="card-img-top moda" src="<c:url value='${photoList[loop.index][0][\'LINK\']}'/>" alt="bird_missile" />
+				            			<img class="card-img-top moda" src="<c:url value='${photoList[loop.index][0][\'LINK\']}'/>" alt="missile" />
 				            			<span id="${dto.no}" class="pic-caption open-up">
 											+${dto.totalImgCount}
 										</span>
