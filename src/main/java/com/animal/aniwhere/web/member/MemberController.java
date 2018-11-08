@@ -346,7 +346,6 @@ public class MemberController {
 		record = service.selectOne(map);
 		// 동물 조회
 		anirecord = aniservice.selectList(map);
-
 		// 데이터 저장]
 		model.addAttribute("record", record);
 		model.addAttribute("anirecord", anirecord);

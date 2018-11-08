@@ -36,6 +36,7 @@
 #map{
 	height:600px;
 	overflow: auto;
+	margin-top:100px;
 }
 #reservation_view div{
 	margin-top:5px;

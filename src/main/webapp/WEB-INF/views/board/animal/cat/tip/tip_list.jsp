@@ -49,6 +49,13 @@
 #tip_no{
 	text-align: center;
 }
+#tip_hit_text{
+	font-size: 1.5em;
+}
+#tip_hit{
+	font-size: 1.5em;
+	color:#30e0a0;
+}
 </style>
 <!-- 바디 -->
 <div class="container" id="list_container">
@@ -107,9 +114,8 @@
     			<c:forEach var="record" items="${list}" varStatus="loop">
 		    		<article class="article-list-item">
 					<div class="article-list-item__vote">
-						<img src="https://talk.op.gg/images/icon-vote-up.png" alt="">
-						<div><span id="tip_hit">${record.dto.tip_hit}</span></div>
-		    		</div>
+						<div><span id="tip_no">${record.no}</span></div>
+					</div>
 				<div class="article-list-item__content">
 					<a href="<c:url value='/animal/cat/tip/tip_view.aw?no=${record.dto.no}'/>" class="article-list-item__info">
 						<div class="article-list-item__title">
@@ -136,8 +142,15 @@
 					</div>
 				</div>
 				<div class="article-list-item__vote">
-					<div><span id="tip_no">${record.dto.no}</span></div>
-				</div>
+					<div>
+						<div style="margin-bottom: 10px;">
+							<span id="tip_hit_text">추천수</span></br>
+						</div>
+						<div>
+							<span id="tip_hit">${record.tip_hit}</span>
+						</div>
+					</div>
+	    		</div>
 			</article>
 	    		</c:forEach>
     		</c:if>		
