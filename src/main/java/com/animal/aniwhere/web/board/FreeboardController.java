@@ -267,7 +267,7 @@ public class FreeboardController {
 	}// writeOk
 
 	//수정폼으로 이동 및 수정 처리]
-	@RequestMapping("/security/animal/freeboard/edit.aw")
+	@RequestMapping("/animal/freeboard/edit.aw")
 	public String edit(HttpServletRequest req,@RequestParam Map map,Model model) throws Exception{
 		if(req.getMethod().equals("GET")) {
 			//서비스 호출]
