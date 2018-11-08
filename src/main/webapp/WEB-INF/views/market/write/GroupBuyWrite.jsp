@@ -145,8 +145,7 @@ $(function() {
             error : function() {
                console.log("error");
             }
-                   
-         
+                            
          });
       }
           
