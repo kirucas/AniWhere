@@ -291,7 +291,7 @@ public class MemberController {
     }/////////////idcheck
     
     @ResponseBody
-	@RequestMapping(value="/member/idchk.aw", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value="/member/idchk.aw", method = RequestMethod.POST)
 	public String member_idchk(@RequestParam Map map) throws Exception {
 		int result = service.getTotalRecord(map);
 		Map resu = new HashMap<>();
@@ -346,7 +346,6 @@ public class MemberController {
 		record = service.selectOne(map);
 		// 동물 조회
 		anirecord = aniservice.selectList(map);
-
 		// 데이터 저장]
 		model.addAttribute("record", record);
 		model.addAttribute("anirecord", anirecord);
