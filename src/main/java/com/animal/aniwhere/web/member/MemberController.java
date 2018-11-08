@@ -82,6 +82,7 @@ public class MemberController {
 
 	private OAuth2Operations oauthOperations;
 
+	//전체적인 login 메인 url
 	@RequestMapping(value = "/login.aw", method = { RequestMethod.GET, RequestMethod.POST })
 	public String go_login(Model model, HttpSession session) throws Exception {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
@@ -161,7 +162,6 @@ public class MemberController {
 
 		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
 		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
-		System.out.println(connection);
 
 		PlusOperations plusOperations = google.plusOperations();
 		Person profile = plusOperations.getGoogleProfile();
@@ -186,6 +186,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 
+		//구글 회원 정보를 이용하여 우리 페이지에 회원가입 시키기
 		map.put("mem_id", profile.getId());
 		map.put("mem_pw",  passwordEncoder.encode("google"));
 		map.put("mem_nickname", System.nanoTime());
@@ -208,21 +209,7 @@ public class MemberController {
 		return "member/socialLogin";
 	}////////////// googleCallback
 
-	@RequestMapping("/animal/enroll.aw")
-	public String animal_enroll() throws Exception {
-
-		return "member/animal_enroll";
-	}////////// animal_enroll
-
-	@RequestMapping("/animal/enroll_edit.aw")
-	public String animal_enroll_edit(@RequestParam Map map, Model model) throws Exception {
-
-		map.put("ani_no", map.get("ani_no"));
-		AnimalDTO record = aniservice.selectOne(map);
-		model.addAttribute("record", record);
-		return "member/animal_enroll_edit";
-	}
-	
+	//회원 정보 수정
 	@RequestMapping("/member/edit.aw")
 	public String member_edit(@RequestParam Map map,@RequestParam List<String> mem_interani, Model model,HttpSession session,HttpServletRequest request) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -238,6 +225,7 @@ public class MemberController {
 		return "member/edit_process";
 	}
 
+	
 	@RequestMapping("/signIn/security.aw")
 	public String security(@RequestParam Map map,Authentication auth, HttpSession session) throws Exception {
 		//System.out.println("인증된 사용자:" + auth.getPrincipal());
@@ -267,17 +255,21 @@ public class MemberController {
 		model.addAttribute("error",map.get("error"));
 		return "member/securityMessage";
 	}/// securityMessage
+	
+	//로그아웃
 	@RequestMapping("/signout.aw")
 	public String signOut(HttpSession session) throws Exception {
 		session.invalidate();
 		return "forward:/main.aw";
 	}////////////// signOut()
 
+	//회원 가입 페이지로 이동
 	@RequestMapping("/member/sign_up.aw")
 	public String signUp() throws Exception {
 		return "member/sign_up";
 	}////////////// signUp()
 	
+	//아이디 중복체크
     @ResponseBody
 	@RequestMapping(value="/member/idchk.aw", method = RequestMethod.POST)
 	public void idcheck(@RequestParam Map map,HttpServletResponse  response) throws Exception {
@@ -289,6 +281,7 @@ public class MemberController {
         	out.print(false);
 	}/////////////idcheck
     
+    //닉네임 중복체크
     @ResponseBody
 	@RequestMapping(value="/member/nickchk.aw",method=RequestMethod.POST)
     public void nickcheck(@RequestParam Map map,HttpServletResponse  response) throws Exception {
@@ -300,6 +293,7 @@ public class MemberController {
         	out.print(false);
     }/////////////nickcheck
 	
+    //비밀번호 중복체크
     @ResponseBody
 	@RequestMapping(value="/member/pwdchk.aw",method=RequestMethod.POST)
     public void pwdcheck(@RequestParam Map map,HttpServletResponse  response) throws Exception {
@@ -308,29 +302,17 @@ public class MemberController {
         out.print(passwordEncoder.matches(map.get("mem_pw").toString(),dto.getMem_pw()));
     }/////////////pwdcheck
 	
-	
+    //비밀번호 변경
 	@RequestMapping(value="/member/passwordchange.aw",method=RequestMethod.POST)
-    public String pwdchange(@RequestParam Map map,HttpServletResponse  response,HttpSession session) throws Exception {
-		map.put("mem_pw", map.get("newPassword"));
-		System.out.println(map.get("mem_no"));
-		System.out.println(map.get("mem_id"));
-		System.out.println(map.get("mem_pw"));
+    public String pwdchange(@RequestParam Map map,Model model) throws Exception {
+		map.put("mem_pw", passwordEncoder.encode(map.get("newPassword").toString()));
 	
 		int change = service.changePassword(map);
-		System.out.println(change);
-		PrintWriter out = response.getWriter();
-		if(change==1) {
-			out.print("<script>console.log('비밀번호 변경이 완료되었습니다. 다시 로그인 해주시기 바랍니다.')</script>");
-			session.invalidate();
-			return "/main.aw";
-		}
-		else {
-			out.print("<script>history.back();</script>");
-			return "/";
-		}
-		
+		model.addAttribute("change",change);
+		return "member/message";
     }/////////////pwdchange
 	
+	//회원가입 처리
 	@RequestMapping("/signUpProcess.aw")
 	public String signUpProcess(@RequestParam Map map,@RequestParam List<String> mem_interani, HttpSession session, Model model) throws Exception {
 		System.out.println(map.get("mem_pw"));
@@ -349,12 +331,14 @@ public class MemberController {
 		return "member/sign_process";
 	}////////// signUpProcess
 
+	//내 프로필 페이지로 이동
 	@RequestMapping("/profile_main.aw")
 	public String profileMain(@RequestParam Map map, HttpSession session, Model model) throws Exception {
 
 		return "member/profile_main.tiles";
 	}////////////////// profileMain
 
+	//회원탈퇴 처리
 	@RequestMapping("/member_bye.aw")
 	public String member_bye(@RequestParam Map map, HttpSession session, Model model) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -369,6 +353,7 @@ public class MemberController {
 		return "member/bye_process";
 	}/////////////// member_bye
 
+	//회원프로필 정보들 얻기
 	@RequestMapping("/member_info.aw")
 	public String member_info(@RequestParam Map map, HttpSession session, Model model) throws Exception {
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -384,13 +369,10 @@ public class MemberController {
 		return "forward:profile_main.aw";
 	}/////////////// member_info
 
+	//동물 등록 처리
 	@RequestMapping(value = "/enrollProcess.aw", method = RequestMethod.POST)
 	public String enrollProcess(MultipartHttpServletRequest mhsr, @RequestParam Map map, HttpSession session,
 			Model model) throws Exception {
-		// String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
-		// MultipartFile upload = mhsr.getFile("ani_photo");
-		// String newFilename = FileUpDownUtils.getNewFileName(phisicalPath,
-		// upload.getOriginalFilename());
 		List<String> uploadList = AwsS3Utils.uploadFileToS3(mhsr, "animalprofile"); // S3 업로드
 
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -410,6 +392,14 @@ public class MemberController {
 		return "member/enroll_process";
 	}////////// enrollProcess
 
+	//동물 등록페이지
+	@RequestMapping("/animal/enroll.aw")
+	public String animal_enroll() throws Exception {
+
+		return "member/animal_enroll";
+	}////////// animal_enroll
+	
+	//동물 삭제 처리
 	@ResponseBody
 	@RequestMapping(value="/security/member/animal/delete.awa", method= RequestMethod.POST)
 	public void delete_ani(@RequestParam Map map, HttpSession session,
