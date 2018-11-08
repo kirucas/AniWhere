@@ -6,14 +6,17 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -435,7 +438,7 @@ public class MemberController {
 		}
 
 		map.put("mem_log", Integer.parseInt(map.get("mem_log").toString()));
-
+		map.put("mem_pw",passwordEncoder.encode("google"));
 		int signup = service.insert(map);
 
 		if (signup == 2) {
@@ -486,6 +489,7 @@ public class MemberController {
 	        		.addData("message","서비스 확인되였습니다")//데이타 메시지
 	                .addData("title","알림서비스")//데이타 타이틀       
 	                .build();
+	        //토큰 저장용
 	        ArrayList<String> token = new ArrayList<String>(); 
 	        token.add(result.get("MTK_TOKEN").toString());
 	        try {
@@ -532,4 +536,39 @@ public class MemberController {
 
 		return "입력성공";
 	}
+	@ResponseBody
+	@RequestMapping(value = "/androidMyAnimal.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String androidMyAnimal(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+	
+		List<AnimalDTO> lists =  aniservice.selectList(map);
+		List<Map> collections = new Vector<Map>();
+		for (AnimalDTO list : lists) {
+			Map record = new HashMap();
+			record.put("ani_no", list.getAni_no());
+			record.put("mem_no", list.getMem_no());
+			record.put("ani_name", list.getAni_name());
+			record.put("ani_age", list.getAni_age());
+			record.put("ani_gender", list.getAni_age());
+			record.put("ani_species", list.getAni_species());
+			record.put("mem_name", list.getMem_name());
+			record.put("ani_kind", list.getAni_kind());
+			record.put("ani_pic", list.getAni_pic());
+			record.put("mem_name", list.getMem_name());
+			record.put("mem_nickname", list.getMem_nickname());
+			collections.add(record);
+		}
+		System.out.println("myanimal=============");
+		System.out.println(JSONArray.toJSONString(collections));
+		return JSONArray.toJSONString(collections);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/androidInMyAnimal.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String androidInMyAnimal(@RequestParam Map map) throws Exception {
+		System.out.println("androidInsertMyAnimal");
+		int affect = aniservice.insert(map);		
+		System.out.println(affect);
+		return "true";
+	}
+	
 }//////////////////// MemberController class

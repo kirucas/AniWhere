@@ -478,6 +478,28 @@ public class WhereController {
 		}
 		System.out.println(JSONArray.toJSONString(collections));
 		return JSONArray.toJSONString(collections);	
-	}// reservate_check
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/androidReservate.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String androidReservate(Model model, @RequestParam Map map, HttpSession session, HttpServletRequest req) throws Exception {
+		
+		String qr_link = AwsS3Utils.namingForS3("QRCodes");		
+		map.put("qr_link", qr_link);
+		
+		int insert = reservationservice.insert(map);
+		if (insert == 0) {
+			return "0";
+		}
+		
+		boolean result_QRCreate = QRCode_Generator.createQRCodeData(map, req, storelocservice, memberService, reservationservice);
+		
+		if(!result_QRCreate) {
+			reservationservice.delete(map);
+			return "QR";
+		}
+		
+		return "true";
+	}
 
 }
