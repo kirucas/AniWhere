@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <script>
 	var isDelete = function(){
@@ -108,47 +107,51 @@
 	width:100%;
 }
 </style>
+
+<!-- 내용 시작 -->
 <div class="container">
 	<div id="content">
 		<div id="view">
 			<div class="article">
 				<div class="article-header">
-					<div class="article__title" >
-					<c:choose>
-								<c:when test="${record.animal_code eq '1'}">
+					<div class="article__title">
+						<c:choose>
+							<c:when test="${record.animal_code eq '1'}">
 									z<span>[고양이]</span>
-								</c:when>
-								<c:when test="${record.animal_code eq '2'}">
-									<span>[강아지]</span>		
-								</c:when>
-								<c:when test="${record.animal_code eq '3'}">
-									<span>[조류]</span>
-								</c:when>
-								<c:when test="${record.animal_code eq '4'}">
-									<span>[파충류 & 양서류]</span>
-								</c:when>
-								<c:otherwise>
-									<span>[기타 포유류]</span>
-								</c:otherwise>
-							</c:choose>
-						<span>[${record.addr}]</span>
-						${record.title}
-						<div style="float:right;">
+							</c:when>
+							<c:when test="${record.animal_code eq '2'}">
+								<span>[강아지]</span>
+							</c:when>
+							<c:when test="${record.animal_code eq '3'}">
+								<span>[조류]</span>
+							</c:when>
+							<c:when test="${record.animal_code eq '4'}">
+								<span>[파충류 & 양서류]</span>
+							</c:when>
+							<c:otherwise>
+								<span>[기타 포유류]</span>
+							</c:otherwise>
+						</c:choose>
+						<span>[${record.addr}]</span> ${record.title}
+						<div style="float: right;">
 							<!-- 글에 대한 버튼들(자기가 쓴 글이면 수정과 삭제 가능) -->
 							<!-- a href="<c:url value='/ReplyBBS/BBS/Reply.bbs?find_no=${record.no}'/>" class="btn btn-success">답변</a> -->
 							<c:if test="${sessionScope.mem_no==record.mem_no }">
-								<a href="<c:url value='/security/miss/find_edit.aw?find_no=${record.no}'/>" class="article-action__button button">수정</a>
-								<a href="javascript:isDelete()" class="article-action__button button button--red button--red--border">삭제</a>
+								<a
+									href="<c:url value='/security/miss/find_edit.aw?find_no=${record.no}'/>"
+									class="article-action__button button">수정</a>
+								<a href="javascript:isDelete()"
+									class="article-action__button button button--red button--red--border">삭제</a>
 							</c:if>
-							<a href="<c:url value='/miss/find.aw'/>" class="article-action__button button">목록</a>	
-							</div>
+							<a href="<c:url value='/miss/find.aw'/>"
+								class="article-action__button button">목록</a>
+						</div>
 					</div>
 					<div class="article-meta">
-								
+
 						<div class="article-meta-list">
 							<div class="article-meta__item article-meta__item--name">
-									${record.mem_nickname}
-							</div>
+								${record.mem_nickname}</div>
 							<div class="article-meta__item">
 								<span data-tooltip data-date="2018-10-14T06:40:37+00:00"
 									title="">${record.regidate}</span>
@@ -165,9 +168,7 @@
 					</div>
 				</div>
 				<div class="article-content-wrap">
-					<div class="article-content">
-						${record.content}
-					</div>
+					<div class="article-content">${record.content}</div>
 				</div>
 				<post-vote data-my_vote_score="0" data-downvote_score="3"
 					data-upvote_score="71"></post-vote>
@@ -178,22 +179,26 @@
 			</div>
 		</div>
 	</div>
-<div class="container border" style="margin-top: 15px;margin-bottom: 10px">
-	<div class="row">
-		<div class="col-sm-12" style="margin-top: 15px">
-			<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
-		</div>
-		<form id="frm" method="post">
-			<div class="form-row" style="width:100%">
-				<input type="hidden" name="cmt_no"/>
-				<input type="hidden" id="no" name="no" value="${record.no}"/>
-				<input style="margin-bottom:10px ;width:83%;margin-left: 20px;margin-top: 10px;" class="form-control" id="title" name="cmt_content"  type="text" size="180" placeholder="댓글을 입력 하세요" />
-				<input style="margin-top:10px;margin-left:10px;width:7%; height: 38px" type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
+	<div class="container border"
+		style="margin-top: 15px; margin-bottom: 10px">
+		<div class="row">
+			<div class="col-sm-12" style="margin-top: 15px">
+				<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
 			</div>
-		</form>
-	</div>
-	<div id="comments">
-		
+			<form id="frm" method="post">
+				<div class="form-row" style="width: 100%">
+					<input type="hidden" name="cmt_no" /> <input type="hidden" id="no"
+						name="no" value="${record.no}" /> <input
+						style="margin-bottom: 10px; width: 83%; margin-left: 20px; margin-top: 10px;"
+						class="form-control" id="title" name="cmt_content" type="text"
+						size="180" placeholder="댓글을 입력 하세요" /> <input
+						style="margin-top: 10px; margin-left: 10px; width: 7%; height: 38px"
+						type="button" id="submit" class="btn btn-outline-primary"
+						value="등록" />
+				</div>
+			</form>
+		</div>
+		<div id="comments"></div>
 	</div>
 </div>
-</div>
+<!-- 내용 끝 -->

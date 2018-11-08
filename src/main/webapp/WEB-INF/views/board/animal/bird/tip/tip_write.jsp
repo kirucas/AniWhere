@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 <!-- include summernote css/js-->
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css"
@@ -33,7 +32,7 @@
             contentType: false,
             processData: false,
             success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
+                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
             },
             error : function() {
                console.log("error");
@@ -68,7 +67,7 @@
 	<div id="tip_write">
 		<form method="post" action="<c:url value='/security/animal/bird/tip/write.aw'/>">
 			<div class="form-group form-row">
-				<input type="hidden" name="mem_no" value="${mem_no}" />
+				<input type="hidden" name="mem_no" value="${record.dto.mem_no}" />
                 <input type="hidden" name="ani_category" value="4"/>
 				<div class="form-row" id="write_title">
 					<input type="text" class="form-control" id="title" name="tip_title" placeholder="제목을 입력하세요">

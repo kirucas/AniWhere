@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 <style>
 	.fa {font-family : 'FontAwesome'! important; } 
-	.fa {font-family : 'FontAwesome'! important; } 
 </style>
 <script>
 	//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
@@ -80,15 +79,13 @@
 </script>
 <script>
 	$(function(){
-		$(function(){
-			//메모글 삭제처리]
-			$('#delete').on('click',function(){
-				if(confirm('삭제 하시겠습니까')){
-					location.replace("<c:url value='/animal/dog/quest/quest_delete.aw?checking=${record.checking}&no=${record.no}'/>");
-				}
-			});
+		//게시글 삭제
+		$('#delete').on('click',function(){
+			if(confirm('삭제 하시겠습니까')){
+				location.replace("<c:url value='/animal/dog/quest/quest_delete.aw?checking=${record.checking}&no=${record.no}'/>");
+			}
 		});
-		
+		//추천 수 ajax
 		var data = <%=request.getParameter("no")%>
 		var hit = ${record.quest_hit};
 		$('#fa1').on('click',function(){
@@ -109,8 +106,6 @@
 			});
 		});
 		
-		$("#comments").removeAttr("href")
-		
 	});
 </script>
 <div class="container border">
@@ -125,10 +120,10 @@
 			 &nbsp; &nbsp;글쓴이 &nbsp;&nbsp;|
 		</div>
 		<div class="col-md-2" style="text-align:left">
-			<c:if test="${record.mem_no != null}">
+			<c:if test="${record.mem_no != null}"><!-- mem.no가 null이 아닐 시 nickname출력 -->
 				${record.mem_nickname}
 			</c:if>
-			<c:if test="${record.mem_no == null}">
+			<c:if test="${record.mem_no == null}"><!-- mem.no가 null일 시 탈퇴한 회원 출력 -->
 				탈퇴한 회원
 			</c:if>
 		</div>
@@ -139,12 +134,14 @@
 			${record.quest_regidate}
 		</div>
 		<div class="offset-md-3 col-md-3" style="text-align:right">
-			<c:if test="${sessionScope.mem_no == record.mem_no}">
+			<c:if test="${sessionScope.mem_no == record.mem_no}"><!-- 로그인 한 mem.no와 게시글의 mem.no가 같을 시 수정, 삭제 보임 -->
 				<a class="text-right" href="<c:url value='/security/animal/dog/quest/quest_edit.aw?no=${record.no}&checking=${record.checking}'/>">수정 &nbsp;</a>
 				<a id="delete" href="#">| &nbsp;삭제 |</a>
 			</c:if>
 			<a href="<c:url value='/animal/dog/quest/quest_list.aw'/>"> &nbsp;&nbsp;목록</a>
-			<a href="<c:url value='/security/animal/dog/quest/quest_reply.aw?no=${record.no }'/>">|&nbsp;&nbsp;답변</a>
+			<c:if test="${record.checking == 0}">
+				<a href="<c:url value='/security/animal/dog/quest/quest_reply.aw?no=${record.no }'/>">|&nbsp;&nbsp;답변</a>
+			</c:if>
 		</div>
 	</div>
 	<div class="row border-bottom">
@@ -157,10 +154,10 @@
 	</div>
 	<div class="row">
 		<div class="offset-md-5 col-md-1" style="padding: 10px">
-			<i id="fa1" class="fa fa-thumbs-o-up fa-3x btn" style="color:#1fcfcc;text-align:center;"></i>
+			<i id="fa1" class="fa fa-thumbs-o-up fa-3x btn" style="color:#1fcfcc;text-align:center;"></i><!-- 추천 아이콘  -->
 			<i id="fa2" class="fa fa-thumbs-up fa-3x btn" style="display:none;color: #1fcfcc;text-align:center;"></i>
 			<p style="text-align:center;" id="quest_hit1">${record.quest_hit}</p>
-		</div><!-- 누른면 색이 꽉차고 빌수도 있게하게 hideen주기 -->
+		</div>
 	</div>
 </div>
 <!-- 댓글 부분 -->
@@ -178,6 +175,7 @@
 			</div>
 		</form>
 	</div>
+	<!-- 댓글 목록 부분 -->
 	<a id="comments">
 	</a>
 </div>

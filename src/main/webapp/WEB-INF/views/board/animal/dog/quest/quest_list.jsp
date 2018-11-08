@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 <style>
 	.fas {font-family : 'FontAwesome'! important; } 
@@ -68,6 +67,7 @@
 		<div style="width:100%">${pagingString}</div>
 	</div>
 	<!-- 페이징 끝 -->
+	<!-- 검색 부분 -->
 	<div class="row offset-md-3 col-md-7">
 		<div class="form-row">
 			<form class="form-inline" style="padding-bottom: 10px" method="post"
@@ -88,4 +88,5 @@
 			</form>
 		</div>
 	</div>
+	<!-- 검색 부분 -->
 </div>

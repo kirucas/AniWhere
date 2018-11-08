@@ -22,9 +22,11 @@ import com.animal.aniwhere.service.AllCommentService;
 @Controller
 public class RnQueCmtController {
 
+	//서비스 주입
 	@Resource(name="allCommentService")
 	private AllCommentService allCommentService;
 	
+	//댓글 입력
 	@ResponseBody
 	@RequestMapping(value="/security/rNa/quest/cmtWrite.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 	public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
@@ -39,6 +41,7 @@ public class RnQueCmtController {
 		
 	}///////////////////
 	
+	//댓글 목록
 	@ResponseBody
 	@RequestMapping(value="/rNa/quest/cmtList.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 	public String list(@RequestParam Map map,HttpSession session) throws Exception{
@@ -67,6 +70,7 @@ public class RnQueCmtController {
 		return JSONArray.toJSONString(comments);
 	}//////////////////
 	
+	//댓글삭제
 	@ResponseBody
 	@RequestMapping(value="/rNa/quest/cmtDelete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
 	public String delete(@RequestParam Map map,HttpSession session) throws Exception{
@@ -76,4 +80,4 @@ public class RnQueCmtController {
 		
 		return map.get("no").toString();
 	}
-}
+}/////////////////////RnQueCmtController

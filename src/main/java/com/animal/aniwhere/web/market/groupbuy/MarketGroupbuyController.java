@@ -70,8 +70,8 @@ public class MarketGroupbuyController {
 		}////////// groupbuy_write
 				
 				//검색 관련 로직
-				@RequestMapping("/market/groupbuy/temporarily.aw")
-				public String market_list(Model model,
+		@RequestMapping("/market/groupbuy/temporarily.aw")
+		public String market_list(Model model,
 						HttpServletRequest req,//페이징용 메소드에 전달
 						@RequestParam Map map,//검색용 파라미터 받기
 						
@@ -222,11 +222,11 @@ public class MarketGroupbuyController {
 				//수정폼 이동 --자기아이디로 자기글 view에서 수정 누르면 이쪽으로 이동 
 				@RequestMapping("/security/market/groupbuyedit.aw")
 				public String groupbuy_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
-						
+						System.out.println("map1:"+map);
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("table_name","group_buy");
-					map.put("no", map.get("buy_no"));
-					
+					map.put("no", map.get("groupbuy_no"));
+					System.out.println("map2:"+map);
 					//게시글
 					GroupBuyDTO record = allBoardService.selectOne(map);
 					//데이터 저장]
@@ -243,11 +243,11 @@ public class MarketGroupbuyController {
 				public String edit(@RequestParam Map map,Model model,HttpSession session) throws Exception{
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("table_name","group_buy");
-					map.put("no",map.get("buy_no"));
+					map.put("no",map.get("groupbuy_no"));
 					
 					allBoardService.update(map);
 					
-					return "redirect:/market/groupbuy.aw";//buy목록으로 이동
+					return "forward:/market/groupbuy.aw";//buy목록으로 이동
 				}//////////////edit()
 				
 				
@@ -341,21 +341,11 @@ public class MarketGroupbuyController {
 				   
 				   @ResponseBody
 				      @RequestMapping(value="/market/groupbuy/cmt_edit.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-				      public String buy_update(@RequestParam Map map,HttpSession session) throws Exception{
+				      public String group_buy_update(@RequestParam Map map,HttpSession session) throws Exception{
 				         
 				         map.put("table_name", "group_buy");
 				         map.put("cmt_content", map.get("cmt_content"));
-				       
-				         
-				         //System.out.println("dddd1");
-				         /*
-				         Set<String> set = map.keySet();
-				         for(String key:set) {
-				            System.out.println(key+":"+map.get(key));
-				         }
-				         */
-				         //System.out.println("dddd2");
-				         				         
+				       				         							         				         
 				         cmtService.update(map);
 				         
 				         return map.get("no").toString();
@@ -363,7 +353,7 @@ public class MarketGroupbuyController {
 				   			   
 				   @ResponseBody
 				   @RequestMapping(value="/market/groupbuy/cmt_delete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-				   public String buy_delete(@RequestParam Map map,HttpSession session) throws Exception{
+				   public String group_buy_delete(@RequestParam Map map,HttpSession session) throws Exception{
 				         
 				       map.put("table_name", "group_buy");
 				       //map.put("cmt_no", session.getAttribute("cmt_no"));

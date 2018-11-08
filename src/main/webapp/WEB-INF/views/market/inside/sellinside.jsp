@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <script>
 	var isDelete = function() {
@@ -24,8 +23,7 @@
    };
    
  //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
-	var displayComments	 = function(data){
-		console.log(JSON.stringify(data));
+	var displayComments	= function(data){
 		var commentString='<h2 data-v-f39b78c2="" class="comment__title" style="margin-top: 20px;margin-bottom: 15px;">댓글 목록</h2>';
 			commentString+='<div class="row border-top">';
 		if(data.length==0){
@@ -42,32 +40,33 @@
 				commentString+='';
 			commentString+='</div>';
 			commentString+='<div class="col-sm-12">';
-			commentString+='<h4 class="commentEdit" style="cursor: pointer;">'+cmt["cmt_content"]+'</h4>';
+			commentString+='<h4 class="commentEdit" style="cursor: pointer;" title="'+cmt["cmt_no"]+'">'+cmt["cmt_content"]+'</h4>';
 			commentString+='</div>';
 		});		
 		commentString+='</div>';
       $('#comments').html(commentString);
       if(${sessionScope.mem_no==record.mem_no}){
-      //코멘트 수정/삭제 처리
-      $('.commentEdit').click(function() {
-         //console.log($(this).attr("title"));
-        
-         $("#title").val($(this).html());
-            $("#submit").val('수정');
-            $('input[name=cmt_no]').val($(this).attr("title"));
-      });
-      $('.commentDelete').click(function() {
-            var cno_value = $(this).attr("title");
-            $.ajax({
-                url:'<c:url value="/market/sell/cmt_delete.awa"/>',
-                data:{cmt_no:cno_value,no:${record.no}},
-                dataType:'text',
-                type:'post',
-                success:function(key){
-                   showComments(key);                   
-                }
-             });
-      });
+    	  
+	      //코멘트 수정/삭제 처리
+	      $('.commentEdit').click(function() {
+	         //console.log($(this).attr("title"));
+	        
+	         $("#title").val($(this).html());
+	            $("#submit").val('수정');
+	            $('input[name=cmt_no]').val($(this).attr("title"));
+	      });
+	      $('.commentDelete').click(function() {
+	            var cno_value = $(this).attr("title");
+	            $.ajax({
+	                url:'<c:url value="/market/sell/cmt_delete.awa"/>',
+	                data:{cmt_no:cno_value,no:${record.no}},
+	                dataType:'text',
+	                type:'post',
+	                success:function(key){
+	                   showComments(key);                   
+	                }
+	             });
+	      });
       }
    };
     
