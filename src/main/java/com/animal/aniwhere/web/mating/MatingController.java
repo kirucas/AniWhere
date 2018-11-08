@@ -298,6 +298,7 @@ public class MatingController {
 				sendList.add(dto);
 			}
 		}
+		model.addAttribute("animal",animalService.selectOne(map));
 		model.addAttribute("dftNoList",dftNoList);
 		model.addAttribute("sendList",sendList);
 		model.addAttribute("receiveList",receiveList);
