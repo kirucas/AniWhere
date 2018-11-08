@@ -341,21 +341,11 @@ public class MarketGroupbuyController {
 				   
 				   @ResponseBody
 				      @RequestMapping(value="/market/groupbuy/cmt_edit.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-				      public String buy_update(@RequestParam Map map,HttpSession session) throws Exception{
+				      public String group_buy_update(@RequestParam Map map,HttpSession session) throws Exception{
 				         
 				         map.put("table_name", "group_buy");
 				         map.put("cmt_content", map.get("cmt_content"));
-				       
-				         
-				         //System.out.println("dddd1");
-				         /*
-				         Set<String> set = map.keySet();
-				         for(String key:set) {
-				            System.out.println(key+":"+map.get(key));
-				         }
-				         */
-				         //System.out.println("dddd2");
-				         				         
+				       				         							         				         
 				         cmtService.update(map);
 				         
 				         return map.get("no").toString();
@@ -363,7 +353,7 @@ public class MarketGroupbuyController {
 				   			   
 				   @ResponseBody
 				   @RequestMapping(value="/market/groupbuy/cmt_delete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-				   public String buy_delete(@RequestParam Map map,HttpSession session) throws Exception{
+				   public String group_buy_delete(@RequestParam Map map,HttpSession session) throws Exception{
 				         
 				       map.put("table_name", "group_buy");
 				       //map.put("cmt_no", session.getAttribute("cmt_no"));
