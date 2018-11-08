@@ -32,6 +32,7 @@ import com.animal.aniwhere.service.miss.FindSeeDTO;
 @Controller
 public class FreeboardController {
 
+	//service 주입
 	@Resource(name="freeService")
 	private FreeBoardServiceImpl freeservice;
 	
@@ -39,8 +40,8 @@ public class FreeboardController {
 	private int pageSize;
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
-	
-	
+
+	//자유게시판 메인
 	@RequestMapping("/animal/freeboard.aw")
 	public String free_main(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
@@ -100,7 +101,7 @@ public class FreeboardController {
 		//뷰정보 반환]
 		return "board/freeboard/freeboard_main.tiles";
 		
-	}////////// free_main
+	}// free_main
 	
 	
 	@RequestMapping("/animal/freeboard_count.aw")
@@ -162,8 +163,7 @@ public class FreeboardController {
 		model.addAttribute("nowPage", nowPage);
 		//뷰정보 반환]
 		return "board/freeboard/freeboard_main.tiles";
-		
-	}////////// free_main_count
+	}// free_main_count
 	
 	@RequestMapping("/animal/freeboard_hit.aw")
 	public String free_main_hit(Model model,
@@ -225,7 +225,7 @@ public class FreeboardController {
 		//뷰정보 반환]
 		return "board/freeboard/freeboard_main.tiles";
 		
-	}////////// free_main
+	}// free_main_hit
 	
 	
 	//상세보기
@@ -240,14 +240,14 @@ public class FreeboardController {
 		record.setFree_content(record.getFree_content().replace("\r\n", "<br/>"));
 		//뷰정보 반환]
 		return "board/freeboard/freeboard_view.tiles";
-	}////////// free_main
-	//등록 폼으로 이동 및 입력처리]
+	}// free_view
 	
+	//게시판 등록 폼으로 이동]
 	@RequestMapping(value="/security/animal/freeboard/write.aw",method=RequestMethod.GET)
 	public String write() throws Exception{
 		return "board/freeboard/freeboard_write.tiles";
-	}////////////////
-	//입력처리]
+	}// write()
+	//게시판 입력처리]
 	@RequestMapping(value="/security/animal/freeboard/write.aw",method=RequestMethod.POST)
 	public String writeOk(@RequestParam Map map,HttpSession session //,org.springframework.security.core.Authentication auth 아직 적용 안함
 		) throws Exception{
@@ -265,7 +265,7 @@ public class FreeboardController {
 		freeservice.insert(map);
 		//뷰정보반환:목록으로 이동
 		return "forward:/animal/freeboard.aw";//접두어 접미어 설정 적용 안되게끔 하려고 forward:를 붙임
-	}////////////////
+	}// writeOk
 
 	//수정폼으로 이동 및 수정 처리]
 	@RequestMapping("/security/animal/freeboard/edit.aw")
@@ -283,7 +283,7 @@ public class FreeboardController {
 		model.addAttribute("successFail", successFail);
 		model.addAttribute("WHERE", "EDT");
 		return "board/freeboard/Message";
-	}//////////////edit()
+	}// edit
 	
 	//삭제 처리
 	@RequestMapping("/animal/freeboard/delete.aw")
@@ -291,9 +291,9 @@ public class FreeboardController {
 		int successFail = freeservice.delete(map);
 		model.addAttribute("successFail", successFail);
 		return "board/freeboard/Message";
-	}//////////////delete()
+	}// delete
 		
-	//Summernote 업로드 기능
+	//Summernote s3 업로드 기능
 	@ResponseBody
     @RequestMapping(value="/animal/freeboard/Upload.aw")
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
@@ -307,7 +307,7 @@ public class FreeboardController {
 		
         //return "/Upload/"+newFilename;
 		return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
-   }
+    }// imageUpload
 	
 	@ResponseBody
 	@RequestMapping(value="/animal/freeboard/free_hit.aw",method=RequestMethod.POST)
@@ -317,86 +317,84 @@ public class FreeboardController {
 		int hitCount= freeservice.addHitCount(map);
 		
 		return "success";
-	}//////////////hit()
+	}// hit
 	
 	//---------------------------------------------------------------------------------------------------------------------------------
+	//free_comment
+	//서비스 주입
+	@Resource(name="allCommentService")
+	private AllCommentServiceImpl cmtService;
 	
+	@ResponseBody
+	@RequestMapping(value="/animal/freeboard/cmt_write.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+	public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
+		
+		map.put("mem_no", session.getAttribute("mem_no"));
+		map.put("table_name", "freeboard");
+		map.put("no", map.get("no"));
+		
+		cmtService.insert(map);
+		
+		return map.get("no").toString();
+		
+	}// write
 	
-		//free_comment
-		//서비스 주입
-		@Resource(name="allCommentService")
-		private AllCommentServiceImpl cmtService;
+	@ResponseBody
+	@RequestMapping(value="/animal/freeboard/cmt_list.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+	public String list(@RequestParam Map map,HttpSession model) throws Exception{
 		
-		@ResponseBody
-		@RequestMapping(value="/animal/freeboard/cmt_write.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-		public String write(@RequestParam Map map,HttpSession session,Model model) throws Exception{
-			
-			map.put("mem_no", session.getAttribute("mem_no"));
-			map.put("table_name", "freeboard");
-			map.put("no", map.get("no"));
-			
-			cmtService.insert(map);
-			
-			return map.get("no").toString();
-			
-		}///////////////////
+		map.put("table_name", "freeboard");
+		map.put("origin_no", map.get("no"));
 		
-		@ResponseBody
-		@RequestMapping(value="/animal/freeboard/cmt_list.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-		public String list(@RequestParam Map map,HttpSession model) throws Exception{
-			
-			map.put("table_name", "freeboard");
-			map.put("origin_no", map.get("no"));
-			
-			List<AllCommentDTO> collections = cmtService.selectList(map);
-			
-			List<Map> comments = new Vector<>();
-			
-			for (AllCommentDTO dto : collections) {
-				
-		         Map record = new HashMap();
-		         record.put("cmt_no", dto.getCmt_no());
-		         model.setAttribute("cmt_no", dto.getCmt_no());
-		         record.put("cmt_content", dto.getCmt_content());
-		         record.put("mem_nickname", dto.getMem_nickname());
-		         record.put("regidate", dto.getRegidate().toString());
-		         record.put("origin_no", dto.getOrigin_no());
-		         record.put("mem_no", dto.getMem_no());      
-		         
-		         comments.add(record);
-		      }		
-			
-			return JSONArray.toJSONString(comments);
-		}//////////////////
+		List<AllCommentDTO> collections = cmtService.selectList(map);
 		
-		@ResponseBody
-		@RequestMapping(value="/animal/freeboard/cmt_edit.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-		public String update(@RequestParam Map map,HttpSession session) throws Exception{
-			
-			map.put("table_name", "freeboard");
-			map.put("cmt_content", map.get("cmt_content"));
-			/*
-			Set<String> set = map.keySet();
-			for(String key:set) {
-				System.out.println(key+":"+map.get(key));
-			}
-			*/
-			cmtService.update(map);
-			
-			return map.get("no").toString();
-		}////////////
+		List<Map> comments = new Vector<>();
 		
-		@ResponseBody
-		@RequestMapping(value="/animal/freeboard/cmt_delete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-		public String delete(@RequestParam Map map,HttpSession session) throws Exception{
+		for (AllCommentDTO dto : collections) {
 			
-			map.put("table_name", "freeboard");
-			//map.put("cmt_no", session.getAttribute("cmt_no"));
-			
-			cmtService.delete(map);
-			
-			return map.get("no").toString();
+	         Map record = new HashMap();
+	         record.put("cmt_no", dto.getCmt_no());
+	         model.setAttribute("cmt_no", dto.getCmt_no());
+	         record.put("cmt_content", dto.getCmt_content());
+	         record.put("mem_nickname", dto.getMem_nickname());
+	         record.put("regidate", dto.getRegidate().toString());
+	         record.put("origin_no", dto.getOrigin_no());
+	         record.put("mem_no", dto.getMem_no());      
+	         
+	         comments.add(record);
+	      }		
+		
+		return JSONArray.toJSONString(comments);
+	}// list
+	
+	@ResponseBody
+	@RequestMapping(value="/animal/freeboard/cmt_edit.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+	public String update(@RequestParam Map map,HttpSession session) throws Exception{
+		
+		map.put("table_name", "freeboard");
+		map.put("cmt_content", map.get("cmt_content"));
+		/*
+		Set<String> set = map.keySet();
+		for(String key:set) {
+			System.out.println(key+":"+map.get(key));
 		}
+		*/
+		cmtService.update(map);
+		
+		return map.get("no").toString();
+	}// update
+	
+	@ResponseBody
+	@RequestMapping(value="/animal/freeboard/cmt_delete.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+	public String delete(@RequestParam Map map,HttpSession session) throws Exception{
+		
+		map.put("table_name", "freeboard");
+		//map.put("cmt_no", session.getAttribute("cmt_no"));
+		
+		cmtService.delete(map);
+		
+		return map.get("no").toString();
+	}// delete
 		
 }//////////////////// FreeboardController
 
