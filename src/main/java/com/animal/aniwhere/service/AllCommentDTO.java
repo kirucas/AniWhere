@@ -2,7 +2,7 @@ package com.animal.aniwhere.service;
 
 public class AllCommentDTO {
 
-	private String cmt_no;
+	private String cmt_no; //코멘트 넘버
 	private String origin_no;
 	private String mem_no;
 	private String cmt_content;

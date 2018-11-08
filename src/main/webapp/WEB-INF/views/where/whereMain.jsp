@@ -143,15 +143,15 @@
       text-align: center;
    }
 }
-.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+.wrap {position: absolute;left: 0;bottom: 40px;width: 280px;height: 150px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 14px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
 .wrap * {padding: 0;margin: 0;}
-.wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+.wrap .info {width: 280px;height: 150px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
 .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-.info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+.info .title {padding: 5px 0 0 0;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
 .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
 .info .close:hover {cursor: pointer;}
 .info .body {position: relative;overflow: hidden;}
-.info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+.info .desc {position: relative;margin: 13px 0 0 0;height: 75px;}
 .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
 .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
@@ -162,6 +162,11 @@ dd{
 }
 button{
 	border-radius: 10px;
+}
+.btn-primary{
+	width: 100px;
+	height: 40px;
+	font-size: 20px;
 }
 </style>
 
@@ -278,13 +283,13 @@ button{
 		                        '        <div class="body">' + 
 		                        '            <div class="desc">' + 
 		                        '				 <div>'+(value.brchNm == null ? '' : value.brchNm)+'</div>'+
-		                        '                <div class="ellipsis">'+value.rdnmAdr+'</div>' + 
-		                        '                <div class="jibun ellipsis">'+
-        						'					<span>&nbsp'+(value.dongNo == null ? '&nbsp' : value.dongNo+'동</span>')+
-        						'					<span>&nbsp '+(value.flrNo == null ? '&nbsp' : value.flrNo+'층</span>')+
-        						'					<span>&nbsp'+(value.hoNo == null ? '&nbsp' : value.hoNo+'호</span>')+
+		                        '                <div class="ellipsis" style="text-align:center;">'+value.rdnmAdr+'</div>' + 
+		                        '                <div class="jibun ellipsis" style="text-align:center;">'+
+        						'					<span> '+(value.dongNo == null ? '' : value.dongNo+'동</span>')+
+        						'					<span> '+(value.flrNo == null ? '' : value.flrNo+'층</span>')+
+        						'					<span> '+(value.hoNo == null ? '' : value.hoNo+'호</span>')+
 		                        '                </div>' + 
-		                        '                <div><a href="'+curl+'">예약</a></div>' + 
+		                        '                <div style="text-align:center;margin-top:5px"><a class="btn btn-primary" href="'+curl+'">예약</a></div>' + 
 		                        '            </div>' + 
 		                        '        </div>' + 
 		                        '    </div>' +    
@@ -383,13 +388,13 @@ button{
 		                        '        <div class="body">' + 
 		                        '            <div class="desc">' + 
 		                        '				 <div>'+(value.brchNm == null ? '' : value.brchNm)+'</div>'+
-		                        '                <div class="ellipsis">'+value.rdnmAdr+'&nbsp</div>' + 
-		                        '                <div class="jibun ellipsis">'+
-        						'					<span>&nbsp'+(value.dongNo == null ? '&nbsp' : value.dongNo+'동</span>')+
-        						'					<span>&nbsp'+(value.flrNo == null ? '&nbsp' : value.flrNo+'층</span>')+
-        						'					<span>&nbsp'+(value.hoNo == null ? '&nbsp' : value.hoNo+'호</span>')+
+		                        '                <div class="ellipsis" style="text-align:center;">'+value.rdnmAdr+'</div>' + 
+		                        '                <div class="jibun ellipsis" style="text-align:center;">'+
+       							'					<span> '+(value.dongNo == null ? ' ' : value.dongNo+'동</span>')+
+       							'					<span> '+(value.flrNo == null ? ' ' : value.flrNo+'층</span>')+
+       							'					<span> '+(value.hoNo == null ? ' ' : value.hoNo+'호</span>')+
 		                        '                </div>' + 
-		                        '                <div><a href="'+curl+'">예약</a></div>' + 
+		                        '                <div style="text-align:center;margin-top:5px"><a class="btn btn-primary" href="'+curl+'">예약</a></div>' + 
 		                        '            </div>' + 
 		                        '        </div>' + 
 		                        '    </div>' +    
@@ -477,10 +482,10 @@ button{
 										'<dt>'+
 											'<button class="movetarget bttn-fill bttn-md bttn-danger" title="'+latlng+'">'+value.bizesNm+'</button>'+
 										'</dt>'+
-												'<dd>&nbsp'+value.rdnmAdr+'&nbsp'+
-												(value.dongNo == null ? '&nbsp' : value.dongNo+'동')+
-												(value.flrNo == null ? '&nbsp' : value.flrNo+'층')+
-												(value.hoNo == null ? '&nbsp' : value.hoNo+'호')+
+												'<dd> '+value.rdnmAdr+' '+
+												(value.dongNo == null ? '' : value.dongNo+'동 ')+'</br>'+
+												(value.flrNo == null ? '' : value.flrNo+'층 ')+
+												(value.hoNo == null ? '' : value.hoNo+'호')+
 												'</dd>'+
 												'<dd>'+value.indsSclsNm+'</dd>'+
 												'<dd>'+value.diskill+' KM</dd>'+
@@ -527,10 +532,10 @@ button{
 										'<dt>'+
 											'<button class="movetarget bttn-fill bttn-md bttn-danger" title="'+latlng+'">'+value.bizesNm+'</button>'+
 										'</dt>'+
-												'<dd>&nbsp'+value.rdnmAdr+'&nbsp'+
-												(value.dongNo == null ? '&nbsp' : value.dongNo+'동')+
-												(value.flrNo == null ? '&nbsp' : value.flrNo+'층')+
-												(value.hoNo == null ? '&nbsp' : value.hoNo+'호')+
+												'<dd> '+value.rdnmAdr+' '+
+												(value.dongNo == null ? '' : value.dongNo+'동 ')+'</br>'+
+												(value.flrNo == null ? '' : value.flrNo+'층 ')+
+												(value.hoNo == null ? '' : value.hoNo+'호')+
 												'</dd>'+
 												'<dd>'+value.indsSclsNm+'</dd>'+
 												'<dd>'+value.diskill+' KM</dd>'+
@@ -646,8 +651,8 @@ button{
                            lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
                      message = ' '; // 인포윈도우에 표시될 내용입니다
                      
-                     var imageSrc = '<c:url value="/resources/images/self.jpg"/>', // 마커이미지의 주소입니다    
-                      imageSize = new daum.maps.Size(45, 45), // 마커이미지의 크기입니다
+                     var imageSrc = '<c:url value="/resources/images/self.png"/>', // 마커이미지의 주소입니다    
+                      imageSize = new daum.maps.Size(45, 55), // 마커이미지의 크기입니다
                       imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                       
                       var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),

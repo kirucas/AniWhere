@@ -66,7 +66,7 @@
 				<input type="hidden" name="no"/>
 				<input type="hidden" name="mem_no" value="${mem_no}" />
                  	<select name="free_category" style="width:53px;height:38px;margin-right:10px;">
-                         <option selected value="1">잡담</option>
+                         <option value="1">잡담</option>
                          <option value="2">정보</option>
                          <option value="3">유머</option>
                          <option value="4">이슈</option>

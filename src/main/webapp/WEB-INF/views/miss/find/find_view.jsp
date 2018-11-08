@@ -42,24 +42,24 @@
 				commentString+='';
 			commentString+='</div>';
 			commentString+='<div class="col-sm-12">';
-			commentString+='<h4 class="commentEdit" style="cursor: pointer;">'+cmt["cmt_content"]+'</h4>';
+			commentString+='<h4 class="commentEdit" style="cursor: pointer;" title="'+cmt["cmt_no"]+'">'+cmt["cmt_content"]+'</h4>';
 			commentString+='</div>';
 		});		
 		commentString+='</div>';
       $('#comments').html(commentString);
-      if(${sessionScope.mem_no==record.mem_no }){
+
       //코멘트 수정/삭제 처리
       $('.commentEdit').click(function() {
          console.log($(this).attr("title"));
             $("#title").val($(this).html());
             $("#submit").val('수정');
-            $('input[mem_nickname=cmt_no]').val($(this).attr("title"));
+            $('input[name=cmt_no]').val($(this).attr("title"));
       });
       $('.commentDelete').click(function() {
             var cno_value = $(this).attr("title");
             $.ajax({
                 url:'<c:url value="/miss/find/cmt_delete.awa"/>',
-                data:{cno:cno_value,no:${record.no}},
+                data:{cmt_no:cno_value,no:${record.no}},
                 dataType:'text',
                 type:'post',
                 success:function(key){
@@ -68,7 +68,6 @@
              });
       });
       }
-   };
     
    
    $(function(){
@@ -185,9 +184,9 @@
 			<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
 		</div>
 		<form id="frm" method="post">
-			<input type="hidden" name="cmt_no" />
-			<input type="hidden" id="no" name="no" value="${record.no}"/>
 			<div class="form-row" style="width:100%">
+				<input type="hidden" name="cmt_no"/>
+				<input type="hidden" id="no" name="no" value="${record.no}"/>
 				<input style="margin-bottom:10px ;width:83%;margin-left: 20px;margin-top: 10px;" class="form-control" id="title" name="cmt_content"  type="text" size="180" placeholder="댓글을 입력 하세요" />
 				<input style="margin-top:10px;margin-left:10px;width:7%; height: 38px" type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
 			</div>

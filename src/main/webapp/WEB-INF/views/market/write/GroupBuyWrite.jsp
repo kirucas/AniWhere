@@ -246,49 +246,7 @@ else {
 					<input type="text" id="nickname">
 
 					
-				<h3 class="my-4">판매자가 올린 사진 3개이상필요</h3>
-
-				<div class="row">
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img id="product1" onclick="javascript:changeimage1()"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img id="product2" onclick="javascript:changeimage2()"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img id="product3" onclick="javascript:changeimage3()"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
-
-						<img id="product4" onclick="javascript:changeimage4()"
-							class="img-fluid shadow scale"
-							src="<c:url value='/resources/images/maketimages/requestphoto.jpg'/>"
-							alt="" style="width: 300px; height: 200px;">
-
-					</div>
-
-				</div>
-			
-   
+				<h3 class="my-4">판매자가 올린 사진 3개이상필요</h3> 
 				<div class="col-md-12 container">
 					<textarea id="summernote" name="content"
 							class="col-md-12 form-control"

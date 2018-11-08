@@ -49,6 +49,7 @@ public class FreeboardController {
 			)throws Exception {
 		
 		map.put("table_name","freeboard");
+		
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		//전체 레코드 수
@@ -101,6 +102,132 @@ public class FreeboardController {
 		
 	}////////// free_main
 	
+	
+	@RequestMapping("/animal/freeboard_count.aw")
+	public String free_main_count(Model model,
+			HttpServletRequest req,//페이징용 메소드에 전달
+			@RequestParam Map map,//검색용 파라미터 받기
+			@RequestParam(required=false,defaultValue="1") int nowPage//페이징용 nowPage파라미터 받기용
+			)throws Exception {
+		
+		map.put("table_name","freeboard");
+		map.put("count", "test");
+		
+		//서비스 호출]
+		//페이징을 위한 로직 시작]
+		//전체 레코드 수
+		int totalRecordCount= freeservice.getTotalRecord(map);			
+		//시작 및 끝 ROWNUM구하기]
+		int start = (nowPage-1)*pageSize+1;
+		int end   = nowPage*pageSize;
+		map.put("start",start);
+		map.put("end",end);
+		//페이징을 위한 로직 끝]
+		List<FreeBoardDTO> list = freeservice.selectList(map);
+		
+		List<Map> collect = new Vector<>();
+		
+		for(FreeBoardDTO dto : list) {
+			Map record = new HashMap();
+			record.put("dto", dto);
+			Map temp = new HashMap();
+			temp.put("table_name","freeboard");
+			temp.put("no", dto.getNo());
+			record.put("cmtCount", cmtService.commentCount(temp));
+			
+			collect.add(record);
+		}	
+		
+		//페이징 문자열을 위한 로직 호출]
+		if(map.get("searchWord") != null) {
+			String searchWord = map.get("searchWord").toString();	
+			String searchColumn = map.get("searchColumn").toString();	
+
+			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+					req.getContextPath()+"/animal/freeboard.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+			
+			model.addAttribute("pagingString", pagingString);
+		}
+		
+		else {
+			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+					req.getContextPath()+"/animal/freeboard.aw?");
+			model.addAttribute("pagingString", pagingString);
+		}
+		
+		//데이터 저장]
+		model.addAttribute("list", collect);
+		model.addAttribute("totalRecordCount", totalRecordCount);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("nowPage", nowPage);
+		//뷰정보 반환]
+		return "board/freeboard/freeboard_main.tiles";
+		
+	}////////// free_main_count
+	
+	@RequestMapping("/animal/freeboard_hit.aw")
+	public String free_main_hit(Model model,
+			HttpServletRequest req,//페이징용 메소드에 전달
+			@RequestParam Map map,//검색용 파라미터 받기
+			@RequestParam(required=false,defaultValue="1") int nowPage//페이징용 nowPage파라미터 받기용
+			)throws Exception {
+		
+		map.put("table_name","freeboard");
+		map.put("hit", "test");
+		
+		//서비스 호출]
+		//페이징을 위한 로직 시작]
+		//전체 레코드 수
+		int totalRecordCount= freeservice.getTotalRecord(map);			
+		//시작 및 끝 ROWNUM구하기]
+		int start = (nowPage-1)*pageSize+1;
+		int end   = nowPage*pageSize;
+		map.put("start",start);
+		map.put("end",end);
+		//페이징을 위한 로직 끝]
+		List<FreeBoardDTO> list = freeservice.selectList(map);
+		
+		List<Map> collect = new Vector<>();
+		
+		for(FreeBoardDTO dto : list) {
+			Map record = new HashMap();
+			record.put("dto", dto);
+			Map temp = new HashMap();
+			temp.put("table_name","freeboard");
+			temp.put("no", dto.getNo());
+			record.put("cmtCount", cmtService.commentCount(temp));
+			
+			collect.add(record);
+		}	
+		
+		//페이징 문자열을 위한 로직 호출]
+		if(map.get("searchWord") != null) {
+			String searchWord = map.get("searchWord").toString();	
+			String searchColumn = map.get("searchColumn").toString();	
+
+			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+					req.getContextPath()+"/animal/freeboard.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+			
+			model.addAttribute("pagingString", pagingString);
+		}
+		
+		else {
+			String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+					req.getContextPath()+"/animal/freeboard.aw?");
+			model.addAttribute("pagingString", pagingString);
+		}
+		
+		//데이터 저장]
+		model.addAttribute("list", collect);
+		model.addAttribute("totalRecordCount", totalRecordCount);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("nowPage", nowPage);
+		//뷰정보 반환]
+		return "board/freeboard/freeboard_main.tiles";
+		
+	}////////// free_main
+	
+	
 	//상세보기
 	@RequestMapping("animal/freeboard_view.aw")
 	public String free_view(@RequestParam Map map,Model model) throws Exception {
@@ -115,6 +242,7 @@ public class FreeboardController {
 		return "board/freeboard/freeboard_view.tiles";
 	}////////// free_main
 	//등록 폼으로 이동 및 입력처리]
+	
 	@RequestMapping(value="/security/animal/freeboard/write.aw",method=RequestMethod.GET)
 	public String write() throws Exception{
 		return "board/freeboard/freeboard_write.tiles";
@@ -181,11 +309,20 @@ public class FreeboardController {
 		return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
    }
 	
+	@ResponseBody
+	@RequestMapping(value="/animal/freeboard/free_hit.aw",method=RequestMethod.POST)
+	public String hit(@RequestParam Map map) throws Exception{
+	
+		map.put("no", map.get("no").toString());
+		int hitCount= freeservice.addHitCount(map);
+		
+		return "success";
+	}//////////////hit()
 	
 	//---------------------------------------------------------------------------------------------------------------------------------
 	
 	
-		//see
+		//free_comment
 		//서비스 주입
 		@Resource(name="allCommentService")
 		private AllCommentServiceImpl cmtService;
@@ -238,7 +375,6 @@ public class FreeboardController {
 			
 			map.put("table_name", "freeboard");
 			map.put("cmt_content", map.get("cmt_content"));
-			map.put("cmt_no", session.getAttribute("cmt_no"));
 			/*
 			Set<String> set = map.keySet();
 			for(String key:set) {
@@ -255,7 +391,7 @@ public class FreeboardController {
 		public String delete(@RequestParam Map map,HttpSession session) throws Exception{
 			
 			map.put("table_name", "freeboard");
-			map.put("cmt_no", session.getAttribute("cmt_no"));
+			//map.put("cmt_no", session.getAttribute("cmt_no"));
 			
 			cmtService.delete(map);
 			

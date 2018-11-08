@@ -30,7 +30,7 @@
 	
 	<insert id="animalInsert" parameterType="java.util.Map">
 		INSERT INTO animal
-		VALUES(seq_animal.nextval, #{mem_no}, #{ani_name}, #{ani_age}, #{ani_gender}, #{ani_species}, #{ani_kind}, #{ani_pic}, #{today})
+		VALUES(seq_animal.nextval, #{mem_no}, #{ani_name}, #{ani_age}, #{ani_gender}, #{ani_kind}, #{ani_pic}, #{today}, #{ani_species})
 	</insert>
 	
 	<update id="animalUpdate" parameterType="java.util.Map">

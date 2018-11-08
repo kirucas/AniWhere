@@ -468,6 +468,7 @@ public class WhereController {
 			record.put("mem_name", list.getMem_name());
 			record.put("bizesnm", list.getBizesnm());
 			record.put("brchnm", list.getBrchnm());
+			record.put("rdnmadr", list.getRdnmadr());
 			collections.add(record);
 		}
 		System.out.println(JSONArray.toJSONString(collections));
