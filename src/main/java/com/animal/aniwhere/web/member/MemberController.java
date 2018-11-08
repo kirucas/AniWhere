@@ -300,6 +300,13 @@ public class MemberController {
         else
         	out.print(false);
     }/////////////nickcheck
+	
+	@RequestMapping(value="/member/pwdchk.aw",method=RequestMethod.POST)
+    public void pwdcheck(@RequestParam Map map,HttpServletResponse  response) throws Exception {
+		
+		PrintWriter out = response.getWriter();
+        out.print(true);
+    }/////////////pwdcheck
     
 	@RequestMapping("/signUpProcess.aw")
 	public String signUpProcess(@RequestParam Map map,@RequestParam List<String> mem_interani, HttpSession session, Model model) throws Exception {

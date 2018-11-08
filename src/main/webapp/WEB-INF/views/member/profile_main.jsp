@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 <link rel="stylesheet" href="https://member.op.gg/src.45ea0fc1.css">
 <style>
 .nav-tabs {
@@ -121,6 +120,63 @@ $(function(){
 	    else{
 	    	$("#frm").submit();
 	    }
+	});
+	//pwdchange 버튼을 클릭했을떄 비밀번호 변경
+	$( "#pwdchange" ).validate({
+		  rules: {
+			currentPassword: {
+		    	required: true,
+		    	minlength: 8,
+		    	maxlength: 80,
+		    	remote : {
+		    		type : "POST",
+		    		data : {
+		    			"mem_no": function(){ return ${record.mem_no}},
+		    			"mem_pw": function(){ return $('#currentPassword').val()},
+		    			"mem_newpassword": function(){ return $('#newPassowrd').valu()}
+		    		},
+		    		url : "<c:url value='/member/pwdchk.aw'/>"
+		    	}
+		    },
+		    newPassword: {
+		      required: true,
+		      minlength: 8,
+		      maxlength: 80
+		    },
+		    checkNewPassword: {
+		      required: true,
+		      minlength: 8,
+		      maxlength: 80,
+		      equalTo: "#newPassword"
+		    },
+		  },
+		  messages: {
+			  	mem_pw: {
+			    	required: "기존 비밀번호를 입력해주세요.",
+			    	maxlength: "최대 30글자까지 가능합니다.",
+			    	remote: "중복된 아이디입니다. 다른 아이디를 입력해주세요."
+			    },
+			    newPassword: {
+			      required: "비밀번호를 입력해주세요.",
+			      minlength: "최소 8글자 이상 적어주세요.",
+			      maxlength: "최대 80글자까지 가능합니다."
+			    },
+			    checkNewPassword: {
+			      required: "비밀번호확인을 입력해주세요.",
+			      minlength: "최소 8글자 이상 적어주세요.",
+			      maxlength: "최대 80글자까지 가능합니다.",
+			      equalTo: "비밀번호와 일치하지 않습니다."
+			    }
+			},
+			errorElement : 'div',
+	        errorPlacement: function(error, element) {
+	          var placement = $(element).data('error');
+	          if (placement) {
+	            $(placement).append(error);
+	          } else {
+	            error.insertAfter(element);
+	          }
+	        }
 	});
 	 //idck 버튼을 클릭했을 때 
     $("#idck").click(function() {
@@ -298,28 +354,31 @@ $(function(){
 						<div class="member-settings-layout__sub">
 							개인정보 보호를 위해 비밀번호를 주기적으로 변경해주세요.
 						</div>
-						<form  action="#" method="post">
+						<form id="" action="#" method="post">
 							<div class="change-password">
 								<div class="change-password__inner">
 									<div class="member-input">
 										<div class="member-input__state">
 											<div>현재 비밀번호</div>
-											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="currentPassword" value="">
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" id="currentPassword" name="currentPassword" value=""  data-error=".errorTxt1">
+											<div class="errorTxt1"></div>
 										</div>
 									</div>
 									<div class="member-input">
 										<div class="member-input__state">
 											<div>신규 비밀번호</div>
-											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="newPassword" value="">
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" id="newPassword" name="newPassword" value="" data-error=".errorTxt2">
+											<div class="errorTxt2"></div>
 										</div>
 									</div>
 									<div class="member-input">
 										<div class="member-input__state">
 											<div>신규 비밀번호 확인</div>
-											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="checkNewPassword" value="">
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" id="checkNewPassword" name="checkNewPassword" value="" data-error=".errorTxt3">
+											<div class="errorTxt3"></div>
 										</div>
 									</div>
-									<button type="submit" class="member-button change-password__save-btn">확인</button>
+									<button id="pwdchange" type="submit" class="member-button change-password__save-btn">확인</button>
 								</div>
 							</div>
 						</form>
