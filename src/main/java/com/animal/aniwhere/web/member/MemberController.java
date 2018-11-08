@@ -248,9 +248,7 @@ public class MemberController {
 		MemberDTO dto = service.selectOne(map);
 		session.setAttribute("mem_id", map.get("mem_id"));
 		session.setAttribute("mem_no", dto.getMem_no());
-	
 		return "redirect:/";
-
 	}/// security
 	
 	// 소셜 로그인에 대한 로그인 처리
@@ -291,6 +289,7 @@ public class MemberController {
         	out.print(false);
 	}/////////////idcheck
     
+    @ResponseBody
 	@RequestMapping(value="/member/nickchk.aw",method=RequestMethod.POST)
     public void nickcheck(@RequestParam Map map,HttpServletResponse  response) throws Exception {
         int result = service.getTotalRecord(map);
@@ -301,13 +300,37 @@ public class MemberController {
         	out.print(false);
     }/////////////nickcheck
 	
+    @ResponseBody
 	@RequestMapping(value="/member/pwdchk.aw",method=RequestMethod.POST)
     public void pwdcheck(@RequestParam Map map,HttpServletResponse  response) throws Exception {
-		
 		PrintWriter out = response.getWriter();
-        out.print(true);
+		MemberDTO dto = service.selectOne(map);
+        out.print(passwordEncoder.matches(map.get("mem_pw").toString(),dto.getMem_pw()));
     }/////////////pwdcheck
-    
+	
+	
+	@RequestMapping(value="/member/passwordchange.aw",method=RequestMethod.POST)
+    public String pwdchange(@RequestParam Map map,HttpServletResponse  response,HttpSession session) throws Exception {
+		map.put("mem_pw", map.get("newPassword"));
+		System.out.println(map.get("mem_no"));
+		System.out.println(map.get("mem_id"));
+		System.out.println(map.get("mem_pw"));
+	
+		int change = service.changePassword(map);
+		System.out.println(change);
+		PrintWriter out = response.getWriter();
+		if(change==1) {
+			out.print("<script>console.log('비밀번호 변경이 완료되었습니다. 다시 로그인 해주시기 바랍니다.')</script>");
+			session.invalidate();
+			return "/main.aw";
+		}
+		else {
+			out.print("<script>history.back();</script>");
+			return "/";
+		}
+		
+    }/////////////pwdchange
+	
 	@RequestMapping("/signUpProcess.aw")
 	public String signUpProcess(@RequestParam Map map,@RequestParam List<String> mem_interani, HttpSession session, Model model) throws Exception {
 		System.out.println(map.get("mem_pw"));

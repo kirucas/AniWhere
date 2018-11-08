@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="https://member.op.gg/src.45ea0fc1.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 <style>
 .nav-tabs {
     border-bottom: none;
@@ -65,7 +67,10 @@
 #ani_checkbox input{
 	margin : 0px 5px 0px 5px;
 }
-
+.error{
+	font-family: 메이플스토리;
+	color:#ff7070;
+}
 </style>
 <script>
 function delete_ani(ani_no){
@@ -87,7 +92,6 @@ function delete_ani(ani_no){
 var idck = 0;
 $(function(){
 	var ani = '${record.mem_interani}';
-	console.log(ani);
 	var arr = ani.split("");
 	for(var i=0;i<=arr.length;i++){
 		switch(arr[i]){
@@ -126,14 +130,12 @@ $(function(){
 		  rules: {
 			currentPassword: {
 		    	required: true,
-		    	minlength: 8,
 		    	maxlength: 80,
 		    	remote : {
 		    		type : "POST",
 		    		data : {
-		    			"mem_no": function(){ return ${record.mem_no}},
-		    			"mem_pw": function(){ return $('#currentPassword').val()},
-		    			"mem_newpassword": function(){ return $('#newPassowrd').valu()}
+		    			"mem_id": '${record.mem_id}',
+		    			"mem_pw": function(){ return $('#currentPassword').val()}
 		    		},
 		    		url : "<c:url value='/member/pwdchk.aw'/>"
 		    	}
@@ -151,10 +153,10 @@ $(function(){
 		    },
 		  },
 		  messages: {
-			  	mem_pw: {
+			  currentPassword: {
 			    	required: "기존 비밀번호를 입력해주세요.",
 			    	maxlength: "최대 30글자까지 가능합니다.",
-			    	remote: "중복된 아이디입니다. 다른 아이디를 입력해주세요."
+			    	remote: "잘못된 비밀번호입니다. 현재 비밀번호를 제대로 입력 해주세요."
 			    },
 			    newPassword: {
 			      required: "비밀번호를 입력해주세요.",
@@ -354,7 +356,7 @@ $(function(){
 						<div class="member-settings-layout__sub">
 							개인정보 보호를 위해 비밀번호를 주기적으로 변경해주세요.
 						</div>
-						<form id="" action="#" method="post">
+						<form id="pwdchange" class="formValidate" action="<c:url value='/member/passwordchange.aw'/>" method="post">
 							<div class="change-password">
 								<div class="change-password__inner">
 									<div class="member-input">
@@ -378,7 +380,9 @@ $(function(){
 											<div class="errorTxt3"></div>
 										</div>
 									</div>
-									<button id="pwdchange" type="submit" class="member-button change-password__save-btn">확인</button>
+									<input type="hidden" name="mem_id" value="${record.mem_id}"/>
+									<input type="hidden" name="mem_no" value="${record.mem_no}"/>
+									<input id="pwdchan" type="submit" class="member-button change-password__save-btn" value="확인"/>
 								</div>
 							</div>
 						</form>

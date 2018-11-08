@@ -85,11 +85,9 @@ input[type=text]:not(.browser-default):focus.valid ~ label{
 input[type=password]:not(.browser-default):focus:not([readonly])+label{
 	color:white;
 }
-.error, .errorTxt1, .errorTxt5{
-	color:#ff7070;
-}
-.errorTxt1, .errorTxt5{
+.error{
 	font-family: 메이플스토리;
+	color:#ff7070;
 }
 btn_submit i{
 	padding: 0px 0px 0px 0px;
