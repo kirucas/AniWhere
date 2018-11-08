@@ -98,7 +98,7 @@
 		                    <input type="text" name="searchWord" class="sub-header-search__input" placeholder="검색">
 		                    <button class="sub-header-search__button"><img src="https://talk.op.gg/images/icon-search@2x.png" width="24" alt="검색"></button>
 		                </form>
-	           		</div>
+	            	</div>
 				</div>
 			</div>
 		</div>
@@ -128,7 +128,7 @@
 						</div>
 						<c:if test="${record.dto.mem_nickname eq null}" var="result">
 							<div class="article-list-item-meta__item article-list-item-meta__item--author">
-								<span>회원 탈퇴</span>
+								<span>탈퇴 회원</span>
 							</div>
 						</c:if>
 						<c:if test="${not result}">
@@ -153,7 +153,7 @@
 	    		</div>
 			</article>
 	    		</c:forEach>
-    		</c:if>		
+    		</c:if>
 		</section>
 	</div>
 	<!-- 아래는 페이징 -->

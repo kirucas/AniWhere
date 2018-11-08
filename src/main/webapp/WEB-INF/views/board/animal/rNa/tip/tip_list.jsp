@@ -61,7 +61,7 @@
 <div class="container" id="list_container">
 		<div class="sub-header">
 			<h2 class="sub-header__title" style="display:inline">
-					[파충류  & 양서류] 팁 게시판
+					[기타 포유류] 팁 게시판
 			</h2>
 			<div class="sub-header-info">
 				<div>

@@ -176,7 +176,6 @@
            </h1>
            <p class="section-subcontent" style="font-size: 1.8em;">아래의 메뉴를 선택하면 해당 동물 페이지로 이동해요.</p>
         </div>
-    
       <div class="mainDiv" id="icon">
 	      <div class="card" style="width: 13.6rem;">
 	        <img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_dog.jpg'/>" alt="Card image cap">
