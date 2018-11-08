@@ -39,8 +39,7 @@ public class MarketGroupbuyController {
 	
 		 //buy컨트롤러 
 			@Resource(name="groupBuyService")
-			private GroupBuyServiceImpl allBoardService;
-			        
+			private GroupBuyServiceImpl allBoardService;			        
 			@Value("${PAGESIZE}")
 			private int pageSize;
 			@Value("${BLOCKPAGE}")
@@ -68,6 +67,10 @@ public class MarketGroupbuyController {
 			return "redirect:/market/groupbuy/temporarily.aw";
 			
 		}////////// groupbuy_write
+		
+	//	@RequestMapping("/")
+		
+		
 				
 				//검색 관련 로직
 		@RequestMapping("/market/groupbuy/temporarily.aw")
@@ -136,7 +139,7 @@ public class MarketGroupbuyController {
 					 model.addAttribute("nowPage", nowPage);
 				     model.addAttribute("pageSize", pageSize);
 					//뷰정보 반환]
-				     System.out.println("map3 :"+map);
+				     //System.out.println("map3 :"+map);
 				     
 				     //map3 :{searchColumn=title, searchWord=111, table_name=group_buy, start=1, end=10}
 				     //map3 :{searchColumn=title, searchWord=마지막, table_name=sell, start=1, end=10}
@@ -162,7 +165,7 @@ public class MarketGroupbuyController {
 					record.setContent(record.getContent().replace("\r\n", "<br/>")); //???
 					//데이터 저장]
 					model.addAttribute("record", record);
-					System.out.println("content"+record.getContent());
+					//System.out.println("content"+record.getContent());
 					//뷰정보 반환]
 					
 					return //"forward:/market/"+path+"/temporarily.aw"
@@ -222,11 +225,11 @@ public class MarketGroupbuyController {
 				//수정폼 이동 --자기아이디로 자기글 view에서 수정 누르면 이쪽으로 이동 
 				@RequestMapping("/security/market/groupbuyedit.aw")
 				public String groupbuy_edit(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
-						System.out.println("map1:"+map);
+						//System.out.println("map1:"+map);
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("table_name","group_buy");
 					map.put("no", map.get("groupbuy_no"));
-					System.out.println("map2:"+map);
+					//System.out.println("map2:"+map);
 					//게시글
 					GroupBuyDTO record = allBoardService.selectOne(map);
 					//데이터 저장]
