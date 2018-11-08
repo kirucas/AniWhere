@@ -76,8 +76,8 @@
 	       				console.log("insert");
 	       				data=data.replace("insert","");
 	       				var tempString=
-	       					'<a href="#" class="btn btn-primary match" id="matching'+data+'">찾기</a>'
-	       					+'<a href="#" class="btn btn-primary list" id="'+data+'">목록</a>'
+	       					'<a href="#" class="btn btn-primary match" id="matching'+data+'" style="margin-right:2px;">찾기</a>'
+	       					+'<a href="#" class="btn btn-primary list" id="'+data+'"style="margin-right:2px;">목록</a>'
     						+'<a href="#" class="btn btn-danger mate" id="delete'+data+'">취소</a>';
 	       				$('#buttonPlace'+data).html(tempString);
 	       			}else {
