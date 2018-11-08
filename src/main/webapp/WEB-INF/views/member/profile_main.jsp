@@ -166,12 +166,13 @@ $(function(){
 							관리 
 						</a>
 					</li>
-					<c:if test="${record.mem_log!=1 or record.mem_log!=2 }">
-					<li class="nav-item">
-						<a class="nav-link" aria-current="false" id="passchange-tab" data-toggle="tab" href="#passchange" role="tab" aria-controls="passchange">
-							비밀번호 변경 
-						</a>
-					</li>
+					<c:set var="log" value="${record.mem_log }"/>
+					<c:if test="${log.equals('0')}">
+						<li class="nav-item">
+							<a class="nav-link" aria-current="false" id="passchange-tab" data-toggle="tab" href="#passchange" role="tab" aria-controls="passchange">
+								비밀번호 변경 
+							</a>
+						</li>
 					</c:if>
 					<li class="nav-item">
 						<a	class="nav-link" aria-current="false" id="goodbye-tab" data-toggle="tab" href="#goodbye" role="tab"	aria-controls="goodbye"> 
@@ -266,7 +267,7 @@ $(function(){
 							  <div class="card col-12 col-md-3 img_div" id="${animal.ani_no}">
 							  	<a href="#">
 								  <img class="card-img-top" src="<c:url value='${animal.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
-								</a>  
+								</a>  	
 								<div id="button_div">
 								  <a onclick="delete_ani(${animal.ani_no});" href="#" class="btn btn-danger">X</a>
 								</div>
@@ -289,7 +290,7 @@ $(function(){
 				</section>
 			</c:if>
 		</div>
-		<c:if test="${record.mem_log!=1 or record.mem_log!=2 }">
+		<c:if test="${log.equals('0')}">
 			<div class="tab-pane" id="passchange" role="tabpanel" aria-labelledby="passchange-tab">
 				<section class="member-settings-layout__content">
 					<div class="member-settings-layout__content-inner">
