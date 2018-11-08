@@ -53,7 +53,7 @@ public class MissMainController {
    @RequestMapping("/miss/{path}")
    public String move_board(@PathVariable String path) throws Exception {
       return "miss/" + path + "/" + path + "_main.tiles";
-   }////////// move_board/miss/find.aw
+   }////////// move_board/miss/main.aw
    
    //_main -> _write로 이동
    @RequestMapping("/miss/{path}_write.aw")
@@ -63,7 +63,7 @@ public class MissMainController {
    
    //========================================================================================
    
-   //입력 후 리스트로 이동
+   //입력
    @RequestMapping("/security/miss/see_insert.aw")
    public String miss_insert(@RequestParam Map map,HttpSession session) throws Exception {
       
@@ -186,12 +186,6 @@ public class MissMainController {
       map.put("table_name","see");
       map.put("no",map.get("see_no"));
       
-      /*
-      Set<String> set = map.keySet();
-      for(String key:set) {
-         System.out.println(key+":"+map.get(key));
-      }
-       */
       //게시글
       service.update(map);
                
@@ -209,22 +203,24 @@ public class MissMainController {
       service.delete(map);
                   
       return "forward:/miss/see.aw";
-   }////////// miss_write
+   }////////// miss_delete
    
    @ResponseBody
     @RequestMapping(value="/miss/see_upload/Upload.aw")
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
-      //String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
-      //MultipartFile upload = mhsr.getFile("file");
-      //String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-      //File file = new File(phisicalPath+File.separator+newFilename);
-      //upload.transferTo(file);
-      
+	   /*
+      String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+      MultipartFile upload = mhsr.getFile("file");
+      String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+      File file = new File(phisicalPath+File.separator+newFilename);
+      upload.transferTo(file);
+      */
+	   
       List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "see"); // S3  업로드
       
         //return "/Upload/"+newFilename;
       return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
-   }
+   }////////upload
    
    
    //================================================================================================================
@@ -348,12 +344,6 @@ public class MissMainController {
          map.put("table_name","find");
          map.put("no",map.get("find_no"));
          
-         /*
-         Set<String> set = map.keySet();
-         for(String key:set) {
-            System.out.println(key+":"+map.get(key));
-         }
-          */
          //게시글
          service.update(map);
                   
@@ -373,18 +363,20 @@ public class MissMainController {
          return "forward:/miss/find.aw";
       }////////// miss_write
       
-      @ResponseBody
+       @ResponseBody
        @RequestMapping(value="/miss/find_upload/Upload.aw")
        public String find_imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
-         //String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
-         //MultipartFile upload = mhsr.getFile("file");
-         //String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-         //File file = new File(phisicalPath+File.separator+newFilename);
-         //upload.transferTo(file);
-         
+    	 /*
+         String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
+         MultipartFile upload = mhsr.getFile("file");
+         String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+         File file = new File(phisicalPath+File.separator+newFilename);
+         upload.transferTo(file);
+         */
+    	 
          List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "find"); // S3  업로드
          
-           //return "/Upload/"+newFilename;
+         //return "/Upload/"+newFilename;
          return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
       }
       
@@ -494,13 +486,7 @@ public class MissMainController {
       
       map.put("table_name", "see");
       map.put("cmt_content", map.get("cmt_content"));
-      //map.put("cmt_no", session.getAttribute("cmt_no"));
-      /*
-      Set<String> set = map.keySet();
-      for(String key:set) {
-         System.out.println(key+":"+map.get(key));
-      }
-      */
+      
       cmtService.update(map);
       
       return map.get("no").toString();
@@ -511,7 +497,6 @@ public class MissMainController {
    public String delete(@RequestParam Map map,HttpSession session) throws Exception{
       
       map.put("table_name", "see");
-      //map.put("cmt_no", session.getAttribute("cmt_no"));
       
       cmtService.delete(map);
       
@@ -573,12 +558,7 @@ public class MissMainController {
          
          map.put("table_name", "find");
          map.put("cmt_content", map.get("cmt_content"));
-         /*
-         Set<String> set = map.keySet();
-         for(String key:set) {
-            System.out.println(key+":"+map.get(key));
-         }
-         */
+
          cmtService.update(map);
          
          return map.get("no").toString();
@@ -589,7 +569,6 @@ public class MissMainController {
       public String find_delete(@RequestParam Map map,HttpSession session) throws Exception{
          
          map.put("table_name", "find");
-         //map.put("cmt_no", session.getAttribute("cmt_no"));
          
          cmtService.delete(map);
          
@@ -663,7 +642,7 @@ public class MissMainController {
   		}
   		System.out.println(JSONArray.toJSONString(comments));
   		return JSONArray.toJSONString(comments);
-  	}
+  	}///////////////////////
 
   	@ResponseBody
   	@RequestMapping(value = "/android/FindSee/CommentWrite.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)

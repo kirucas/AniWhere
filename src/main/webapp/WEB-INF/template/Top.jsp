@@ -96,7 +96,7 @@ nav a{
 	                                		&nbsp;파충류 & 양서류
                                		</a>
 	                                <ul class="dropdown-menu" aria-labelledby="rna_main">
-		                                <li><a href="<c:url value='/animal/rna/photo.aw'/>">사진 게시판</a></li>
+		                                <li><a href="<c:url value='/animal/rNa/photo.aw'/>">사진 게시판</a></li>
 		                                <li><a href="<c:url value='/rNa/movie/List.aw'/>">동영상 게시판</a></li>
 		                                <li><a href="<c:url value='/animal/rNa/quest/quest_list.aw'/>">질문 게시판</a></li>
 		                                <li><a href="<c:url value='/board/animal/rNa/tip/list.aw'/>">팁 게시판</a></li>
@@ -165,7 +165,6 @@ nav a{
                             	<sec:authorize access="isAnonymous()">
 						        	<li><a href="<c:url value='/login.aw'/>">로그인</a></li>
 	                            	<li><a href="<c:url value='/member/sign_up.aw'/>">회원가입</a></li>
-	                            	<li><a href="<c:url value='/text.aw'/>">테스트용</a></li>
 			                   	</sec:authorize>
                             </ul>
                         </li>

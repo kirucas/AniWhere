@@ -128,7 +128,7 @@ $(function(){
 			    	required:"사진을 첨부해주세요"
 			    }
 			},
-			errorElement : 'div',
+		  errorElement : 'div',
 	      errorPlacement: function(error, element) {
 	        var placement = $(element).data('error');
 	        if (placement) {

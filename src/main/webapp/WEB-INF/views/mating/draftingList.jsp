@@ -48,10 +48,31 @@
 }
 </style>
 
+<script>
+	$(function(){
+		$(document).on('click','.permit',function(){
+			var dft_no=$(this).prop("id");
+			$.ajax({
+				url:"<c:url value='/mating/draftApply.awa'/>",
+	       		type:"POST",
+				data:{"dft_no":dft_no},
+	       		dataType: "text",
+	       		success : function(data) {
+	       			$('#'+dft_no).closest('.card').remove();
+	           	},
+	           	error : function(error) {
+	           		console.log("에러발생",error);
+		       	}
+			});
+		});
+	});
+
+</script>
+
 <!-- 내용 시작 -->
 <div class="container">
 	<div>
-		<h2 class="member-settings-layout__title">여기에 제목이 들어간다</h2>
+		<h2 class="member-settings-layout__title">${animal.ani_name}의 신청 페이지</h2>
 	</div>
 	<!-- nav부분 -->
 		<div class="settings-navigator">
@@ -148,8 +169,8 @@
 						    				<p class="card-text">검색 위치
 						    			</div> -->
 						    			<div style="text-align:right;display: inline;float: right;" id="buttonPlace${record.ani_no}">
-										    <a href="#" class="btn btn-primary mate" id="">수락</a>
-										    <a href="#" class="btn btn-primary mate" id="">거절</a>
+										    <a href="#" class="btn btn-primary permit" id="ok${dftNoList[loop.index]}">수락</a>
+										    <a href="#" class="btn btn-primary permit" id="no${dftNoList[loop.index]}">거절</a>
 					    				</div>
 								  	</div>
 								</div>

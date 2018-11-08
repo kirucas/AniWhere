@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 <%@ include file="/WEB-INF/views/common/loading.jsp" %>
 <style>
 
@@ -10,8 +9,7 @@ a:visited { color:black; text-decoration: none;}
 
  .movie-write {
 	text-align: right;
-	color:white!important;
-	
+	color:white!important;	
 }
 
 .title {
@@ -105,10 +103,6 @@ window.onpopstate = function(event) {
 				<div class="col-sm link-click" style="cursor:pointer;" name="${dto.no}" title="${dto.movie_title}">
 					<div class="embed-responsive embed-responsive-16by9 movie-size">
 						${dto.movie_tempsrc}
-						<!-- 
-						<iframe class="embed-responsive-item"
-							src="https://www.youtube.com/embed/kuOKUP41Fkg" frameborder="0"
-							allowfullscreen></iframe> -->
 					</div>
 					
 					<div class="media-body">
