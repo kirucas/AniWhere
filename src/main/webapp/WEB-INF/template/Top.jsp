@@ -165,7 +165,6 @@ nav a{
                             	<sec:authorize access="isAnonymous()">
 						        	<li><a href="<c:url value='/login.aw'/>">로그인</a></li>
 	                            	<li><a href="<c:url value='/member/sign_up.aw'/>">회원가입</a></li>
-	                            	<li><a href="<c:url value='/text.aw'/>">테스트용</a></li>
 			                   	</sec:authorize>
                             </ul>
                         </li>
