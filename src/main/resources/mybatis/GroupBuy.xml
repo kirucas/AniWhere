@@ -41,13 +41,13 @@
 				JOIN animal_category ac ON gb.animal_code = ac.animal_code
 				<choose>
 					<when test="animal_code != null and title != null">
-						WHERE mgb.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
+						WHERE gb.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
 					</when>
 					<when test="animal_code != null and content != null">
-						WHERE mgb.animal_code=#{animal_code} AND content like '%'||#{content}||'%'
+						WHERE gb.animal_code=#{animal_code} AND content like '%'||#{content}||'%'
 					</when>
 					<when test="animal_code != null">
-						WHERE mgb.animal_code=#{animal_code}
+						WHERE gb.animal_code=#{animal_code}
 					</when>
 					<when test="title != null">
 						WHERE title=#{title}
