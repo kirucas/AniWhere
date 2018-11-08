@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.Animal">
+
+	<select id="tokenCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM member_token
+		<if test="mem_no != null">
+			WHERE mem_no = #{mem_no}
+		</if>
+		<if test="mem_no == null and mtk_token != null">
+			WHERE mtk_token = #{mtk_token}
+		</if>
+	</select>
+	
+	<select id="tokenSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT *
+				FROM member_token
+				<if test="mem_no != null">
+					WHERE mem_no = #{mem_no}
+				</if>
+				<if test="mem_no == null and mtk_token != null">
+					WHERE mtk_token = #{mtk_token}
+				</if>
+				ORDER BY mtk_no
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="tokenSelectOne" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT *
+		FROM member_token
+		<if test="mem_no != null">
+			WHERE mem_no = #{mem_no}
+		</if>
+		<if test="mem_no == null and mtk_token != null">
+			WHERE mtk_token = #{mtk_token}
+		</if>
+	</select>
+	
+	<insert id="tokenInsert" parameterType="java.util.Map">
+		INSERT INTO member_token
+		VALUES(seq_member_token.nextval, #{mem_no}, #{mtk_token})
+	</insert>
+	
+	<update id="tokenUpdate" parameterType="java.util.Map">
+	</update>
+	
+	<delete id="tokenDelete" parameterType="java.util.Map">
+		DELETE FROM member_token
+		WHERE
+		<choose>
+			<when test="mem_no != null">
+				mem_no = #{mem_no}
+			</when>
+			<when test="mtk_no != null">
+				mtk_no = #{mtk_no}
+			</when>
+			<when test="mtk_token != null">
+				mtk_token = #{mtk_token}
+			</when>
+		</choose>
+	</delete>
+	
+</mapper>
