@@ -37,6 +37,7 @@
 	height:600px;
 	overflow: auto;
 	background-color: black;
+	margin-top:100px;
 }
 #reservation_view div{
 	margin-top:5px;

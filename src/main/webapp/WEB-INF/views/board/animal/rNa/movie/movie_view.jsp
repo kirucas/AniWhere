@@ -5,33 +5,48 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-	/* 
-	//jQuery ui의 https://jqueryui.com/effect/참조함
-	$(function(){
-		 $( ".container" ).effect( 'slide', {},1500 );	
-	});
-	 */
+/* 삭제 시 확인 질문  */
 var isDelete = function(){	
 		if(confirm("정말로 삭제 하시겠습니까?"))
 			location.replace("<c:url value='/rNa/movie/delete.aw?no=${dto.no}'/>");
 	}; 
 	
-	/*댓글 입력 시 한 글자 이상 입력하도록.  */
-	function check() {
-		if (fr.inputcomment.value == "") {
+	 /*댓글 입력 시 한 글자 이상 입력하도록.  */
+    function check() {
+        if (fr.inputcomment.value == "") {
 
-			alert("댓글을 한글자 이상 입력해 주세요.");
+            alert("댓글을 한글자 이상 입력해 주세요.");
 
-			fr.inputcomment.focus();
+            fr.inputcomment.focus();
 
-			return false;
-		} 
-		 else {
-			 alert("댓글이 정상적으로 등록되었습니다.");
-			 return true;
-		 }
-	}
-	
+            return false;
+        }
+        else if ($('#submit').html() == '수정') {
+            if (confirm("댓글을 수정하시겠습니까?")) {
+                alert("댓글이 정상적으로 수정되었습니다.")
+                location.replace("");
+                return true;
+            }
+            else
+            	return false;
+        }
+
+        else {
+            alert("댓글이 정상적으로 등록되었습니다.");
+            return true;
+        }
+    }
+
+    var commentDelete = function () {
+        if (confirm("댓글을 삭제 하시겠습니까?")){
+        	 alert("댓글이 정상적으로 수정되었습니다.")
+             location.replace("");
+        	 return true;
+        }
+        else{
+        	return false;
+        }
+    };
 	
 	//댓글
 	//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
@@ -47,8 +62,6 @@ var isDelete = function(){
 		});
 	};
 	//해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
-	//data는 아래 형태로 
-	//[{"NO":2,"ONELINECOMMENT":"댓글2","CPOSTDATE":"2018-09-12","CNO":3,"ID":"LEE","NAME":"이길동"},{"NO":2,"ONELINECOMMENT":"댓글1","CPOSTDATE":"2018-09-12","CNO":2,"ID":"PARK","NAME":"박길동"}]
 	function displayComments(data){
 		console.log("data :"+data);
 		var commentString="<div class='form-group'>";
@@ -57,9 +70,6 @@ var isDelete = function(){
 		}
 	
 		 $.each(data,function(index,comment){
-
-			 /*로그인한 사용자가 먼저 댓글한 사용자가 아닐 때는 삭제 수정이 불가능함  */
-			//if('${sessionScope.mem_no}' != '${dto.mem_no}')
 				commentString+="<label>"+comment['nickname']+"</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 				commentString+="<label style='color: gray;'>"+comment['regidate']+"</label><br/>";
 				commentString+='<label title="' + comment.cmt_no + '">'+comment['comment_content']+'</label>';
@@ -82,18 +92,20 @@ var isDelete = function(){
 	
 	//코멘트 수정/삭제 처리
 	$(document).on('click','.commentEdit',function(){
-		//cno값 출력
+		//cmt_no값 출력
 		var cmt_no = $(this).attr("title");
 		
 		$('#cmt_content').val($("label[title="+cmt_no+"]").html());
 		$('#submit').html('수정');
 		
-		//form의 hidden속성중 name="cno"값 설정
+		//form의 hidden속성중 name="cmt_no"값 설정
 		$('input[name=cmt_no]').val(cmt_no);
 	});
 	$(document).on('click','.commentDelete',function(){
 		var cno_value = $(this).attr("title");
-		
+		 if(!commentDelete())
+	    		return;
+		 
 		$.ajax({
 			url:"<c:url value='/board/animal/rNa/movie/commentDelete.awa'/>",
 			data:{cmt_no:cno_value, no:"${dto.no}" },
@@ -110,7 +122,9 @@ var isDelete = function(){
 	
 		//코멘트 입력처리]
 		$('#submit').click(function(){
-			check();
+			if(!check())
+        		return;
+			
 			if($(this).html()=='댓글')
 				var action="<c:url value='/security/animal/rNa/movie/commentWrite.awa'/>";
 			else
@@ -135,9 +149,7 @@ var isDelete = function(){
 			});		
 		});
 });
-	
-	
-	
+		
 </script>
 
 <style>
@@ -237,12 +249,5 @@ a:visited { color:white; text-decoration: none;}
 <form id="comments">
 	<!-- 한줄 코멘트 목록-->
 	<!-- ajax로 아래에 코멘트 목록 뿌리기 -->
-<%-- 	
-	<div class="form-group">
-		<label>닉네임 : ${dto.mem_nickname }</label>
-		<label>댓글 날짜 : ${cmtdto.regidate}</label> <br/>
-		<p>댓글 내용 ${cmtdto.cmt_content}</p>
-	</div><br/>
- --%>
 </form>
 <!-- 내용 끝 -->

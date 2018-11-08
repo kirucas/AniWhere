@@ -85,10 +85,10 @@ input[type=text]:not(.browser-default):focus.valid ~ label{
 input[type=password]:not(.browser-default):focus:not([readonly])+label{
 	color:white;
 }
-.error, .errorTxt1{
+.error, .errorTxt1, .errorTxt5{
 	color:#ff7070;
 }
-.errorTxt1{
+.errorTxt1, .errorTxt5{
 	font-family: 메이플스토리;
 }
 btn_submit i{
@@ -97,9 +97,10 @@ btn_submit i{
 
 </style>
 <script>
-
 $(function(){
 	var id;
+	var idck=0;
+	var nick=0;
 	$( "#frm" ).validate({
 		  rules: {
 		    mem_id: {
@@ -115,10 +116,14 @@ $(function(){
 	                dataType: 'json',
 	                async: true,
 	                success: function(data) {
-	                	if(data.result==0)
+	                	if(data.result==0){
 	                		$('.errorTxt1').text('');
-	                	else if(data.result==1)
+	                		idck=1;
+	                	}
+	                	else{
+	                		idck=0;
 	                		$('.errorTxt1').text('사용할 수 없는 아이디입니다.');		                		
+	                	}
 	                }
 		    	}
 		    },
@@ -128,7 +133,27 @@ $(function(){
 		    },
 		    mem_nickname:{
 		    	required: true,
-		    	maxlength:40
+		    	maxlength: 40,
+		    	remote:{
+		    		data:{ 
+		    			"mem_nickname" : function(){return $('input[name=mem_nickname]').val()}
+	    			},
+		    		type: 'POST',
+		    		cache: false,
+	                url: "<c:url value='/member/nickchk.aw'/>",
+	                dataType: 'json',
+	                async: true,
+	                success: function(data) {
+	                	if(data.result==0){
+	                		$('.errorTxt5').text('');
+	                		nick=1;
+	                	}
+	                	else{
+	                		nick=0;
+	                		$('.errorTxt5').text('사용할 수 없는 닉네임입니다.');		                		
+	                	}
+	                }
+		    	}
 		    },
 		    mem_pw: {
 		      required: true,
@@ -183,11 +208,25 @@ $(function(){
 	        errorPlacement: function(error, element) {
 	          var placement = $(element).data('error');
 	          if (placement) {
-	            $(placement).append(error)
+	            $(placement).append(error);
 	          } else {
 	            error.insertAfter(element);
 	          }
 	        }
+	});
+	$(document).on('click','#sign',function(){
+		if(idck==0){
+	        alert('아이디 중복입니다. 다른 아이디를 써주세요.');
+	        return false;
+	    }
+	    if(nick==0){
+	    	alert('닉네임 중복입니다. 다른 닉네임을 써주세요.');
+	    	return false;
+	    }
+	    else{
+	    	console.log("들어왔니");
+	    	$("#frm").submit();
+	    }
 	});
 });
 </script>
@@ -297,7 +336,7 @@ $(function(){
 				  </div>
 				  <div class="row">
 				  	<div class="input-field inline col s2 offset-s4" id="btn_submit">
-         			 <input type="submit" class="btn waves-effect waves-light col s12" value="회원가입"/>
+         			 <input id="sign" type="submit" class="btn waves-effect waves-light col s12" value="회원가입"/>
 				  	</div>
 			  	    <div class="input-field col s12">
          			 	<p class="margin center medium-small sign-up">이미 계정이 있으세요? <a href="<c:url value='/login.aw' />">Login</a></p>

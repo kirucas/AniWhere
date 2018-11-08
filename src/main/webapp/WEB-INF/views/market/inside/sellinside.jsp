@@ -226,6 +226,53 @@
 
 		</div>
       <!-- /.row -->
+      
+      		<script>
+   		$(function(){
+   			var arr = new Array();
+   			$('img[name=sellpic]').each(function(index,value){
+   				arr.push($(value).prop('src'));
+   			});
+   			
+   			$('#product').prop("src",arr[0]);
+   			$.each(arr,function(index,value){
+				console.log("들어왔니");
+				$('img[name=product]').eq(index).prop("src",value);
+			});
+   		});
+
+</script>
+      
+      
+      <div class="row">
+		
+        <div class="col-md-6 col-sm-6 mb-6 view overlay zoom" >
+        
+            <img name="product" id="product1" onclick="javascript:changeimage1()"  class="img-fluid shadow scale" src="#" alt="" style="width: 400px; height: 400px;">
+         
+        </div>
+
+        <div class="col-md-6 col-sm-6 mb-6 view overlay zoom">
+         
+            <img name="product" id="product2" onclick="javascript:changeimage2()"  class="img-fluid shadow scale" src="#" alt="" style="width: 400px; height: 400px;">
+       
+        </div>
+      
+    
+        <div class="col-md-6 col-sm-6 mb-6 view overlay zoom" style="margin-top: 80px">
+        
+            <img name="product" id="product3" onclick="javascript:changeimage3()"  class="img-fluid shadow scale" src="#" alt="" style="width: 400px; height: 400px;">
+        
+        </div>
+    <div style="margin-top: 100px"></div>
+        <div class="col-md-6 col-sm-6 mb-6 view overlay zoom" style="margin-top: 80px">
+      
+            <img name="product" id="product4" onclick="javascript:changeimage4()"  class="img-fluid shadow scale" src="#" alt="" style="width: 400px; height: 400px;">
+
+        </div>
+       
+
+      </div>
       <div style="margin-top:10px">
    </div><br/>
       

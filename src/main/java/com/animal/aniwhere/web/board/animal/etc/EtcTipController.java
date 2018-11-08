@@ -1,13 +1,14 @@
 package com.animal.aniwhere.web.board.animal.etc;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Vector;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
+import com.animal.aniwhere.service.AllCommentDTO;
 import com.animal.aniwhere.service.animal.TipBoardDTO;
+import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.animal.TipBoardServiceImpl;
 import com.animal.aniwhere.web.board.FileUpDownUtils;	
@@ -29,6 +31,9 @@ public class EtcTipController {
 	
 	@Resource(name="tipService")
 	private TipBoardServiceImpl tipservice;
+	
+	@Resource(name="allCommentService")
+	private AllCommentServiceImpl cmtservice;
 	
 	@Value("${PAGESIZE}")
 	private int pageSize;
@@ -52,12 +57,39 @@ public class EtcTipController {
 		map.put("start",start);
 		map.put("end",end);
 		//페이징을 위한 로직 끝]
-		List list = tipservice.selectList(map);
+		List<TipBoardDTO> list = tipservice.selectList(map);
+		List<Map> collect = new Vector<>();
+		
+		for(TipBoardDTO dto : list) {
+			Map record = new HashMap();
+			record.put("dto", dto);
+			Map temp = new HashMap();
+			temp.put("table_name","tip");
+			temp.put("no", dto.getNo());
+			record.put("cmtCount", cmtservice.commentCount(temp));
+			
+			collect.add(record);
+		}	
+		
 		//페이징 문자열을 위한 로직 호출]
-		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/board/animal/etc/tip/list.aw?");
+				if(map.get("searchWord") != null) {
+					String searchWord = map.get("searchWord").toString();	
+					String searchColumn = map.get("searchColumn").toString();	
+
+					String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+							req.getContextPath()+"/board/animal/etc/tip/list.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+					
+					model.addAttribute("pagingString", pagingString);
+				}
+				
+				else {
+					String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+							req.getContextPath()+"/board/animal/etc/tip/list.aw?");
+					model.addAttribute("pagingString", pagingString);
+				}
 		//데이터 저장]
-		model.addAttribute("pagingString", pagingString);
-		model.addAttribute("list", list);
+				
+		model.addAttribute("list", collect);
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		model.addAttribute("pageSize", pageSize);
 		model.addAttribute("nowPage", nowPage);
@@ -142,5 +174,79 @@ public class EtcTipController {
 		
 		return "success";
 	}//////////////hit()
+	
+	///댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글///
+	
+		//tip_birdComment
+		@ResponseBody
+		@RequestMapping(value = "/animal/etcTip/cmt_write.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+		public String write(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+
+			map.put("mem_no", session.getAttribute("mem_no"));
+			map.put("table_name", "tip");
+			map.put("no", map.get("no"));
+
+			cmtservice.insert(map);
+
+			return map.get("no").toString();
+
+		}///////////////////
+
+		@ResponseBody
+		@RequestMapping(value = "/animal/etcTip/cmt_list.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+		public String list(@RequestParam Map map, HttpSession model) throws Exception {
+
+			map.put("table_name", "tip");
+			map.put("origin_no", map.get("no"));
+
+			List<AllCommentDTO> collections = cmtservice.selectList(map);
+
+			List<Map> comments = new Vector<>();
+
+			for (AllCommentDTO dto : collections) {
+
+				Map record = new HashMap();
+				record.put("cmt_no", dto.getCmt_no());
+				model.setAttribute("cmt_no", dto.getCmt_no());
+				record.put("cmt_content", dto.getCmt_content());
+				record.put("mem_nickname", dto.getMem_nickname());
+				record.put("regidate", dto.getRegidate().toString());
+				record.put("origin_no", dto.getOrigin_no());
+				record.put("mem_no", dto.getMem_no());
+
+				comments.add(record);
+			}
+
+			return JSONArray.toJSONString(comments);
+		}//////////////////
+
+		@ResponseBody
+		@RequestMapping(value = "/animal/etcTip/cmt_edit.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+		public String update(@RequestParam Map map, HttpSession session) throws Exception {
+
+			map.put("table_name", "tip");
+			map.put("cmt_content", map.get("cmt_content"));
+			/*
+			 * Set<String> set = map.keySet(); for(String key:set) {
+			 * System.out.println(key+":"+map.get(key)); }
+			 */
+			cmtservice.update(map);
+
+			return map.get("no").toString();
+		}////////////
+
+		@ResponseBody
+		@RequestMapping(value = "/animal/etcTip/cmt_delete.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+		public String delete(@RequestParam Map map, HttpSession session) throws Exception {
+
+			map.put("table_name", "tip");
+			
+			//map.put("cmt_no", session.getAttribute("cmt_no"));
+
+			cmtservice.delete(map);
+
+			return map.get("no").toString();
+		}
+	
 }//////////////////// tipboardController
 
