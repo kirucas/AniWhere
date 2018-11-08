@@ -5,25 +5,27 @@
   <html>
     <head>
     <!-- jQuery UI -->
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
-    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
      <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+	
 <style>
 html { background: url("<c:url value='/resources/images/signup1.jpg'/>") no-repeat center center fixed; 
 -webkit-background-size: cover;
@@ -83,22 +85,43 @@ input[type=text]:not(.browser-default):focus.valid ~ label{
 input[type=password]:not(.browser-default):focus:not([readonly])+label{
 	color:white;
 }
-.error{
+.error, .errorTxt1, .errorTxt5{
 	color:#ff7070;
+}
+.errorTxt1, .errorTxt5{
+	font-family: 메이플스토리;
 }
 btn_submit i{
 	padding: 0px 0px 0px 0px;
 }
+
 </style>
 <script>
-
 $(function(){
+	var id;
 	$( "#frm" ).validate({
 		  rules: {
 		    mem_id: {
 		    	required: true,
-		    	minlength: 4,
-		    	maxlength: 30
+		    	maxlength: 30,
+		    	remote:{
+		    		data:{ 
+		    			"mem_id" : function(){return $('input[name=mem_id]').val()}
+	    			},
+		    		type: 'POST',
+		    		cache: false,
+	                url: "<c:url value='/member/idchk.aw'/>",
+	                dataType: 'json',
+	                async: true,
+	                success: function(data) {
+	                	if(data.result==0){
+	                		return true;
+	                	}
+	                	else{
+	                		return false;
+	                	}
+	                }
+		    	}
 		    },
 		    mem_name:{
 		    	required: true,
@@ -106,7 +129,25 @@ $(function(){
 		    },
 		    mem_nickname:{
 		    	required: true,
-		    	maxlength:40
+		    	maxlength: 40,
+		    	remote:{
+		    		data:{ 
+		    			"mem_nickname" : function(){return $('input[name=mem_nickname]').val()}
+	    			},
+		    		type: 'POST',
+		    		cache: false,
+	                url: "<c:url value='/member/nickchk.aw'/>",
+	                dataType: 'json',
+	                async: true,
+	                success: function(data) {
+	                	if(data.result==0){
+	                		return true;
+	                	}
+	                	else{
+	                		return false;
+	                	}
+	                }
+		    	}
 		    },
 		    mem_pw: {
 		      required: true,
@@ -129,8 +170,8 @@ $(function(){
 		  messages: {
 			  mem_id: {
 			    	required: "아이디를 입력해주세요.",
-			    	minlength: "최소 4글자 이상 적어주세요.",
-			    	maxlength: "최대 30글자까지 가능합니다."
+			    	maxlength: "최대 30글자까지 가능합니다.",
+			    	remote: ""
 			    },
 			    mem_name:{
 			    	required: "이름을 입력해주세요.",
@@ -138,7 +179,8 @@ $(function(){
 			    },
 			    mem_nickname:{
 			    	required:"닉네임을 입력해주세요.",
-			    	maxlength: "최대 40글자까지 가능합니다."
+			    	maxlength: "최대 40글자까지 가능합니다.",
+			    	remote: "중복 닉네임입니다. 다른 닉네임을 써주세요."
 			    },
 			    mem_pw: {
 			      required: "비밀번호를 입력해주세요.",
@@ -162,20 +204,13 @@ $(function(){
 	        errorPlacement: function(error, element) {
 	          var placement = $(element).data('error');
 	          if (placement) {
-	            $(placement).append(error)
+	            $(placement).append(error);
 	          } else {
 	            error.insertAfter(element);
 	          }
 	        }
 	});
-	$('.btn btn-danger').click(function(){
-		
-	});
 });
-	
-
-
-
 </script>
     <body>
 		<div class="container" id="signup">
@@ -188,9 +223,6 @@ $(function(){
 			      <div class="row">
 			        <div class="input-field col s4 offset-s4">
 			          <label for="mem_id">아이디(*)</label>
-			          <div style="margin-left: 80px;">
-			          	<input class="btn btn-danger" type="button" value="중복확인" data-error=".errorTxt8"></input>
-			          </div>
 			          <input id="mem_id" name="mem_id" type="text" data-error=".errorTxt1">
 			          <div class="errorTxt1"></div>
 			        </div>
@@ -286,7 +318,7 @@ $(function(){
 				  </div>
 				  <div class="row">
 				  	<div class="input-field inline col s2 offset-s4" id="btn_submit">
-         			 <input type="submit" class="btn waves-effect waves-light col s12" value="회원가입"/>
+         			 <input id="sign" type="submit" class="btn waves-effect waves-light col s12" value="회원가입"/>
 				  	</div>
 			  	    <div class="input-field col s12">
          			 	<p class="margin center medium-small sign-up">이미 계정이 있으세요? <a href="<c:url value='/login.aw' />">Login</a></p>
@@ -295,7 +327,5 @@ $(function(){
 			    </form>
 		  	</div>
 	    </div>
-        <!--JavaScript at end of body for optimized loading-->
-        <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
   </html>

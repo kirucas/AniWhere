@@ -253,7 +253,7 @@ public class WhereController {
 	}
 
 	// 예약 페이지ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
-	@RequestMapping("/where/reservation.awa")
+	@RequestMapping("/security/where/reservation.awa")
 	public String reservation_write_form(Model model, @RequestParam Map map) throws Exception {
 		model.addAttribute("store_no", map.get("store_no"));
 		model.addAttribute("bizesNm", map.get("bizesNm"));
@@ -334,8 +334,11 @@ public class WhereController {
 	) throws Exception {
 		map.put("rv_no", map.get("rv_no"));
 		ReservationDTO dto = reservationservice.selectOne(map);
+		map.put("bizesid", dto.getStore_no());
+		StoreLocationDTO store = storelocservice.selectOne(map);
 		dto.setQr_link(AwsS3Utils.LINK_ADDRESS + dto.getQr_link());
 		model.addAttribute("dto",dto);
+		model.addAttribute("store",store);
 		return "where/reservation_view.tiles";
 	}
 	
@@ -465,6 +468,7 @@ public class WhereController {
 			record.put("mem_name", list.getMem_name());
 			record.put("bizesnm", list.getBizesnm());
 			record.put("brchnm", list.getBrchnm());
+			record.put("rdnmadr", list.getRdnmadr());
 			collections.add(record);
 		}
 		System.out.println(JSONArray.toJSONString(collections));

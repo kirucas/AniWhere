@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <%@ include file="/WEB-INF/views/common/IsMember.jsp" %> --%>
+<%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 <%@ include file="/WEB-INF/views/common/loading.jsp" %>
 
 <script src="<c:url value='/Bootstrap/js/jquery.banner.js'/>"></script>
@@ -14,6 +14,17 @@
 		float:left;
 		width: 310px;
 		height: 400px;
+	}
+	.icon-wrapper{
+		 margin-bottom: 20px;
+	}
+	#btn_start{
+		 width: 200px;
+		 height: 100px;
+		 font-size: 1.5em;
+		 padding-top:20px;
+		 margin-right: 10px;
+		 font-weight: bold;
 	}
 </style>
 
@@ -62,11 +73,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="container" style="clear: both;">
+	<div style="clear: both;">
       <div class="row"><!-- #1ABC9C -->
       	<div class="col-md-12 text-center" style="color:black;margin : 30px 0px 0px 30px;">
       		<h2>아무나 만나지 않는 당신의 반려동물을 위해<br/>
-      			메이팅은 <span style="font-size: 1.5em;color : #1ABC9C">AniWhere </span>에서 시작하세요♡
+      			메이팅은 <span style="font-size: 1.5em;color : blue">Ani</span><span style="font-size: 1.5em;color : #1ABC9C">Where </span>에서 시작하세요♡
       		</h2>
       	</div>
       </div>
@@ -74,7 +85,7 @@
     <section id="service-block-main" class="section" style="margin-bottom: 30px;margin-top : 30px;">
       <!-- Container Starts -->
       <div>
-        <div class="row">        
+        <div class="row" id="h3style">        
           <div class="col-sm-6 col-md-3">
             <!-- Service-Block-1 Item Starts -->
             <div class="service-item wow fadeInUpQuick animated" data-wow-delay=".5s">
@@ -147,8 +158,8 @@
         </div>
       </div><!-- Container Ends -->
     </section><!-- Service Main Section Ends -->
-    <div class="row">
-    	<a href="<c:url value='/security/mating/Login.aw'/>" class="col-md-12 text-center" style="font-size:4em;margin-top:50px;margin-bottom:200px">시작하기</a>
+    <div style="text-align: center;width: 100%;height: 100px;">
+    	<a href="<c:url value='/security/mating/Login.aw'/>" class="col-md-12 text-center btn btn-primary" id="btn_start"><img src="<c:url value='/resources/images/mating/mating_btnstart.png'/>" style="width: 60px;height: 60px;">시 작 하 기</a>
     </div>
 </div>
 <!-- 내용 끝 -->
@@ -173,5 +184,4 @@
 		/*isBtnType:"li"*/ //라벨(버튼 타입) - 여기는 안쓰임 
 		});
 	});
-	
 </script>

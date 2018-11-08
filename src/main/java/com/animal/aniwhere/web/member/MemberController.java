@@ -8,21 +8,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.net.QCodec;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.google.api.Google;
@@ -40,10 +36,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AwsS3Utils;
+import com.animal.aniwhere.service.QRCode_Generator;
+import com.animal.aniwhere.service.impl.ReservationServiceImpl;
 import com.animal.aniwhere.service.impl.member.AndroidTokenServiceImpl;
 import com.animal.aniwhere.service.impl.member.AnimalServiceImpl;
 import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
@@ -54,6 +51,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Sender;
+import com.google.zxing.qrcode.encoder.QRCode;
 
 @Controller
 public class MemberController {
@@ -70,6 +68,9 @@ public class MemberController {
 
 	@Resource(name = "tokenService")
 	private AndroidTokenServiceImpl androidservice;
+	
+	@Resource(name = "reservationService")
+	private ReservationServiceImpl reservationservice;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -272,27 +273,31 @@ public class MemberController {
 	@RequestMapping("/signout.aw")
 	public String signOut(HttpSession session) throws Exception {
 		session.invalidate();
-
 		return "forward:/main.aw";
 	}////////////// signOut()
 
 	@RequestMapping("/member/sign_up.aw")
 	public String signUp() throws Exception {
-
 		return "member/sign_up";
 	}////////////// signUp()
 	
     @ResponseBody
-	@RequestMapping("/member/nickchk.aw")
+	@RequestMapping(value="/member/nickchk.aw",method=RequestMethod.POST)
     public String idcheck(@RequestParam Map map) {
-        System.out.println(map.get("nick"));
-        map.put("mem_nickname", map.get("nick"));
         int result = service.getTotalRecord(map);
-        System.out.println(result);
         Map resu = new HashMap<>();
         resu.put("result", result);
         return JSONObject.toJSONString(resu);
-    }
+    }/////////////idcheck
+    
+    @ResponseBody
+	@RequestMapping(value="/member/idchk.aw", method = RequestMethod.POST)
+	public String member_idchk(@RequestParam Map map) throws Exception {
+		int result = service.getTotalRecord(map);
+		Map resu = new HashMap<>();
+        resu.put("result", result);
+        return JSONObject.toJSONString(resu);
+	}
 	
 	@RequestMapping("/signUpProcess.aw")
 	public String signUpProcess(@RequestParam Map map,@RequestParam List<String> mem_interani, HttpSession session, Model model) throws Exception {
@@ -341,14 +346,6 @@ public class MemberController {
 		record = service.selectOne(map);
 		// 동물 조회
 		anirecord = aniservice.selectList(map);
-
-		String inter = record.getMem_interani();
-		StringBuffer buf = new StringBuffer();
-		String[] arr = { "강아지", "고양이", "파충류,양서류", "조류", "기타 포유류" };
-		for (int i = 0; i < inter.length(); i++) {
-			buf.append(arr[i]);
-		}
-		record.setMem_interani(buf.toString());
 		// 데이터 저장]
 		model.addAttribute("record", record);
 		model.addAttribute("anirecord", anirecord);
@@ -454,7 +451,7 @@ public class MemberController {
 
 	@ResponseBody
 	@RequestMapping(value = "/FireBasePushAsyncTask.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
-	public String androidGetToken(@RequestParam Map map) throws Exception {
+	public String FireBasePushAsyncTask(@RequestParam Map map) throws Exception {
 		Map result = androidservice.selectOne(map);
 		if (!result.get("MTK_TOKEN").equals("null")) {
 			System.out.println("FireBasePushAsyncTask");
@@ -472,6 +469,10 @@ public class MemberController {
 	        try {
 		        MulticastResult multicast = sender.send(msg,token,3);
 		        if(multicast != null) {
+		        	System.out.println("=======================1");
+		        	System.out.println(map.get("visit_time").toString());
+		        	QRCode_Generator.changeQRLink(reservationservice, map);
+		        	System.out.println("=======================2");
 		        	return "true";
 		        }
 	        }catch(Exception e) {
@@ -492,7 +493,6 @@ public class MemberController {
 		System.out.println(map.get("mem_no"));
 
 		if (!obj.equals("null")) {
-			System.out.println("널인데 왜 들어오지");
 			Map result = androidservice.selectOne(map);
 			if (result == null) {
 				androidservice.insert(map);
@@ -502,9 +502,8 @@ public class MemberController {
 				System.out.println("========2=======");
 				System.out.println(affect);
 				if (affect == 1) {
-					System.out.println("========4=======");
 					androidservice.insert(map);
-					System.out.println("========4=======");
+					System.out.println("========3=======");
 				}
 			}
 		}
