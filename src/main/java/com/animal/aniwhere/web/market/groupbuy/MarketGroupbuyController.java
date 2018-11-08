@@ -247,7 +247,7 @@ public class MarketGroupbuyController {
 					
 					allBoardService.update(map);
 					
-					return "redirect:/market/groupbuy.aw";//buy목록으로 이동
+					return "forward:/market/groupbuy.aw";//buy목록으로 이동
 				}//////////////edit()
 				
 				

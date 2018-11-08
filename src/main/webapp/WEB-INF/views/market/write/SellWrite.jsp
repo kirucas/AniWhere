@@ -56,6 +56,17 @@ function check() {
    
 else {
 	
+	 var content="\r\n=============상세사항================\r\n";
+     content+='제목:'+$('#title').val()+'\r\n';
+     content+='판매물품명:'+$('#name').val()+'\r\n';
+	    content+='희망가:'+$('#price').val()+'원\r\n';
+	    content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+	    content+='거래방법:'+$('#way').val()+'\r\n'; 
+     content+='연락처:'+$('#phone').val()+'\r\n'; 
+     content+='====================================\r\n';
+   
+     $('#summernote').summernote('editor.insertText', content);
+	
  fr.action="<c:url value='/security/market/sellinsert.aw'/>"; 
  return true;
 }
@@ -70,17 +81,7 @@ else {
 	   
 	   $('#enterBtn').click(function(){	 
 		   
-		    var content="\r\n=============상세사항================\r\n";
-		        content+='제목:'+$('#title').val()+'\r\n';
-		        content+='판매물품명:'+$('#name').val()+'\r\n';
-			    content+='희망가:'+$('#price').val()+'원\r\n';
-			    content+='거래기간:'+$('#time').val()+'일 까지\r\n';
-			    content+='거래방법:'+$('#way').val()+'\r\n'; 
-	            content+='연락처:'+$('#phone').val()+'\r\n'; 
-	            content+='====================================\r\n';
-	          
-	            $('#summernote').summernote('editor.insertText', content);
-          
+		   
           
           if(count<3){
         	  alert("사진은 최소 3장 이상 올려야 합니다");

@@ -6,63 +6,24 @@
 <head>
 
 <script>
-function check() {
-			
-    var isAttached = $('#summernote').summernote('code');
-    if (fr.title.value == "") {
-       alert("제목을 입력해 주세요.");
-       fr.title.focus();
-       return false;
-    } 
-    
-    else if (fr.title.value.length > 50) {
-       alert("제목은 50자 이내로 입력해주세요.");
-       fr.title.focus();
-       return false;
-    } 
-        
-    else if (fr.name.value=="") {
-        alert("제품명 을 입력해주세요.");
-        fr.name.focus();
-        return false;
-     } 
-    
-   else if (fr.price.value=="") {
-        alert("희망가 를 입력해주세요.");
-        fr.price.focus();
-        return false;
-     } 
-   else if (fr.time.value=="") {
-        alert("거래기간 을 입력해주세요.");
-        fr.time.focus();
-         return false;
-     } 
-   else if (fr.way.value=="") {
-         alert("거래방법을  입력해주세요.");
-         fr.way.focus();
-         return false;
-
-      } 
-    
-     else if (fr.phone.value=="") {
-         alert("연락처 를 입력해주세요.");
-         fr.phone.focus();
-         return false;
-
-      } 
-      
-    else if (fr.content.value == "") {
-       alert('내용을 입력하세요.');
-       return false;
-    }	    
-   
-else {
-	
- fr.action="<c:url value='/security/market/groupbuyinsert.aw'/>"; 
+function check() {			
+  
+	console.log("여기까지 오나?1");
+	var content="\r\n=============상세사항================\r\n";
+    content+='제목:'+$('#title').val()+'\r\n';
+    content+='판매물품명:'+$('#name').val()+'\r\n';
+    content+='희망가:'+$('#price').val()+'원\r\n';
+    content+='거래기간:'+$('#time').val()+'일 까지\r\n';	       
+    content+='연락처:'+$('#phone').val()+'\r\n'; 
+    content+='====================================\r\n';
+       
+         $('#summernote').summernote('editor.insertText', content);
+        	console.log("여기까지 오나?2");
+ fr.action="<c:url value='/security/market/groupbuyupdate.aw?groupbuy_no=${record.no}'/>"; 
  return true;
 }
     
-}
+
 
 </script>
 
@@ -77,30 +38,7 @@ else {
    $(function() {
 	   var count = 0;
 	  
-	   $('#enterBtn').click(function(){	 
-		   
-		   var content="\r\n=============상세사항================\r\n";
-	        content+='제목:'+$('#title').val()+'\r\n';
-	        content+='판매물품명:'+$('#name').val()+'\r\n';
-		    content+='희망가:'+$('#price').val()+'원\r\n';
-		    content+='거래기간:'+$('#time').val()+'일 까지\r\n';	       
-           content+='연락처:'+$('#phone').val()+'\r\n'; 
-           content+='====================================\r\n';
-         
-           $('#summernote').summernote('editor.insertText', content);
-          
-          if(count<0){
-        	  alert("사진은 최소 3장 이상 올려야 합니다");
-        	 
-          }else{
-        	  if(check()){
-	        	  console.log("성공");
-	        	  $('#fr').submit();
-        	  }
-          }
-          return false;
-           	 
-	   });
+	  
 	      
       $('#summernote').summernote({
     	 maxHeight:null,
@@ -146,10 +84,8 @@ else {
                console.log("error");
             }
                    
-         
          });
-      }
-          
+      }   
    });
      
 </script>
@@ -157,8 +93,7 @@ else {
 </head>
 
 <body>                                                      
- <form name="fr" id="fr" method="post" action="<c:url value='/security/market/groupbuyupdate.aw?groupbuy_no=${record.no}'/>"  accept-charset="utf-8" 
-				class="form-horizontal">
+ <form name="fr" id="fr" method="post" action="<c:url value='/security/market/groupbuyupdate.aw?groupbuy_no=${record.no}'/>"   accept-charset="utf-8" class="form-horizontal">
 	
 		<!--   <div class="container"> -->
 
@@ -199,6 +134,14 @@ else {
 
 				<div style="border: 1px silver solid">
 					<div class="row" style="text-align: center; margin-left: 20px">
+					
+					<div class="my-2" style="margin-right:30 px">
+						<span >판매제품명</span>
+						<input
+							style="text-align:right"
+							class="form-control" type="text" id="name" required />
+					</div>
+					
 						<div class="my-2" style="margin-right:30 px">
 						<span >희망가</span>
 						<input
@@ -207,9 +150,9 @@ else {
 					</div>
 					
 						<div class="my-2">
-						<span>거래기간 </span> 
+						<span>거래기간</span> 
 						<input type="date" min="2018-11-05" style="text-align: right;padding-left: px"
-							max="2020-01-01"  class="form-control" type="date" name="deadline"
+							max="2020-01-01"  class="form-control" type="date" name="deadline" id="time"
 							 required />
 													
 					</div>
@@ -223,7 +166,6 @@ else {
 				<p>
 					<label for="" class="" style="margin-top: 30px">프로그래스바
 						설정:목표수량</label> <input type="text" id="nickname" required  name="goal">개 
-						
 					
 				<h3 class="my-4">판매자가 올린 사진 3개이상필요</h3> 
 				<div class="col-md-12 container">
@@ -239,11 +181,8 @@ else {
 					
 					<input class="btn btn-danger" type="submit"  value="수정" id="enterBtn" >
 				</div>
-				
-			
-			
-			</form>
-			
+							
+			</form>		
 			<div style="margin-bottom: 50px"></div> 
 			
 			
