@@ -73,7 +73,7 @@ public class DogMovieController {
 				if (target_num != -1) {
 					tempResult = content.substring(target_num, content.indexOf("></iframe>") + "></iframe>".length());
 				String idAdded	= new StringBuffer(tempResult).insert(tempResult.lastIndexOf("src"), "id=\"player\" ").toString();
-					String enablejsApi = new StringBuffer(idAdded).insert(idAdded.indexOf("\"", 26), "?enablejsapi=1&rel=0").toString();
+					String enablejsApi = new StringBuffer(idAdded).insert(idAdded.indexOf("\"", 41), "?enablejsapi=1&rel=0").toString();
 					dto.setMovie_tempsrc(enablejsApi);				
 				} 
 				else {
@@ -166,7 +166,7 @@ public class DogMovieController {
 			//<iframe태그 내용만 도려내기
 			tempResult = content.substring(target_num, content.indexOf("></iframe>") + "></iframe>".length());
 			String idAdded	= new StringBuffer(tempResult).insert(tempResult.lastIndexOf("src"), "id=\"player\" ").toString();
-			String enablejsApi = new StringBuffer(idAdded).insert(idAdded.indexOf("\"", 26), "?enablejsapi=1&rel=0").toString();
+			String enablejsApi = new StringBuffer(idAdded).insert(idAdded.indexOf("\"", 41), "?enablejsapi=1&rel=0").toString();
 			//grandResult에 embed-responsive로 변환
 			String grandResult = enablejsApi.replace("note-video-clip","embed-responsive-item");
 			dto.setMovie_tempsrc(grandResult);
