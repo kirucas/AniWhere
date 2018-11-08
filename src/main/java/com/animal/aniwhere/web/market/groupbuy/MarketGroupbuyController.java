@@ -84,7 +84,7 @@ public class MarketGroupbuyController {
 					//페이징을 위한 로직 시작]
 					map.put("table_name","group_buy");
 					//전체 레코드 수
-					System.out.println("map1 :"+map);
+					///System.out.println("map1 :"+map);
 					int totalRecordCount= allBoardService.getTotalRecord(map);
 					//전체 페이지수]
 					int totalPage = (int)Math.ceil(((double)totalRecordCount/pageSize));
@@ -96,7 +96,7 @@ public class MarketGroupbuyController {
 					map.put("end",end);
 					
 					
-					System.out.println("map2 :"+map);
+				//	System.out.println("map2 :"+map);
 					//페이징을 위한 로직 끝]
 					List<GroupBuyDTO> list = (List<GroupBuyDTO>) allBoardService.selectList(map);
 					//페이징 문자열을 위한 로직 호출]
@@ -220,6 +220,31 @@ public class MarketGroupbuyController {
 					return "forward:/market/groupbuy/temporarily.aw";
 					
 				}////////////////
+				
+			
+				
+				// buy_count 에 들어간 숫자를 공동구매 갯수에 추가 한다 그리고 돌아간다
+				@ResponseBody
+				@RequestMapping(value="/groupbuy/buycount.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
+				public String groupbuy_buycount(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
+										
+					map.put("mem_no",session.getAttribute("mem_no"));
+					map.put("table_name","group_buy");
+					
+					map.put("no",map.get("groupbuy_no"));
+					map.put("buy_count", "buy_count");
+					
+					GroupBuyDTO record = allBoardService.selectOne(map);
+				
+					model.addAttribute("record", record);
+					
+					System.out.println("map:"+map);
+					
+					allBoardService.update(map);					
+				
+					return "market/inside/groupbuyinside.tiles";
+					
+				}////////// groupbuy_buycount
 				
 				
 				//수정폼 이동 --자기아이디로 자기글 view에서 수정 누르면 이쪽으로 이동 

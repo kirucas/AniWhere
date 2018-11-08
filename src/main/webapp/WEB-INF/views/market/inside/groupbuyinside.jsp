@@ -30,28 +30,30 @@ function test2() {
 <script>
 	
 /* <!-- 구매시 허가구하는 로직 --> */
-
 function buyaccept(){	
 	if (confirm("구입하시겠습니까?")){
-			
-	 var buynumber = document.getElementById("buy_number");
-	 
+	 var buy_number = document.getElementById("buy_number");
     /* <!--구입했을떄 id = buy_number 에서  ${record.buy_count}에  주어진 숫자를 추가해주는 로직 만들기 --> */
     
     $.ajax({
-    	console.log('들어오는지 확인');
-           url:'<c:url value="/groupbuy/buycount.awa"/>',
-           data:buynumber,
-           dataType:'text',
+   
+           url:"<c:url value='/groupbuy/buycount.awa'/>",
+           data:buy_number,         
            type:'post',           
-           success:function(key){ 
+           success:function(data){ 
+        	   //data를 ui에 id에 연결된 값만큼 더해줘야 한다 
+        	   alert(data.buy_number);
         	   
-        	   
+        	
         	   alert("구입해주셔서 감사합니다");
-        	   console.log('서버로부터 받는 데이타:',key);
-       }
+        	
+        	   
+       }, error : function() {
+           console.log("error");}
 	 });
+    
     }
+	
 	else 
 		return false;
 }
@@ -93,7 +95,7 @@ function buyaccept(){
 		});		
 		commentString+='</div>';
       $('#comments').html(commentString);
-      if(${sessionScope.mem_no==record.mem_no}){
+      if(${sessionScope.mem_no == record.mem_no}){
     	  
 	      //코멘트 수정/삭제 처리
 	      $('.commentEdit').click(function() {
@@ -217,13 +219,13 @@ now = new Date();
 dday = new Date(2018,10,10,18,00,00); 
 
 //원하는 날짜, 시간 정확하게 초단위까지 기입.
-days = (dday - now) / 1000 / 60 / 60 / 24; 
+days = (dday - now) /1000/60/60/24; 
 daysRound = Math.floor(days); 
-hours = (dday - now) / 1000 / 60 / 60 - (24 * daysRound); 
+hours = (dday - now) /1000/60/60 - (24 * daysRound); 
 hoursRound = Math.floor(hours); 
-minutes = (dday - now) / 1000 /60 - (24 * 60 * daysRound) - (60 * hoursRound); 
+minutes = (dday - now) /1000/60 - (24 * 60 * daysRound) - (60 * hoursRound); 
 minutesRound = Math.floor(minutes); 
-seconds = (dday - now) / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound); 
+seconds = (dday - now) /1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound); 
 secondsRound = Math.round(seconds);
 
 document.getElementById("counter0").innerHTML = daysRound; 
@@ -272,7 +274,7 @@ function printClock() {
     setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
 }
 
-function addZeros(num, digit) { // 자릿수 맞춰주기
+function addZeros(num, digit) {// 자릿수 맞춰주기
 	  var zero = '';
 	  num = num.toString();
 	  if (num.length < digit) {
@@ -433,10 +435,10 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
  
   </head>
 
-    <!-- Page Content -->
+
     <div class="container">
 
-      <!-- Portfolio Item Heading -->
+      <!-- 본문내용 시작 -->
       <div>
 			<h1 class="my-4">
 				<c:choose>
