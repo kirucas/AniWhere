@@ -57,13 +57,13 @@ public class MarketGroupbuyController {
 		@RequestMapping("/security/market/groupbuyinsert.aw")
 		public String groupbuy_insert(@RequestParam Map map,HttpSession session) throws Exception {
 			
-			System.out.println("deadline"+ map.get("deadline"));
+			//System.out.println("deadline"+ map.get("deadline"));
 			
 			map.put("table_name","group_buy");
 			map.put("mem_no", session.getAttribute("mem_no"));			
 			allBoardService.insert(map);
 			
-			System.out.println("끝까지 오는지 확인 ");
+			//System.out.println("끝까지 오는지 확인 ");
 			
 			return "redirect:/market/groupbuy/temporarily.aw";
 			

@@ -74,6 +74,7 @@ else {
 }
 </script>
 
+
 <script>
    /* content안에 뿌려줄 내용 로직 */
    $(function() {

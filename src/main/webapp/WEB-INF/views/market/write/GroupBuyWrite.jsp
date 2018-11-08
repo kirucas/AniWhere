@@ -84,24 +84,22 @@ else {
 
 <script>
 
-   $(function() {
+$(function() {
 	   var count = 0;
-	  
+	   
 	   $('#enterBtn').click(function(){	 
-		   
-	    
-          
-          if(count<3){
-        	  alert("사진은 최소 3장 이상 올려야 합니다");
-        	 
-          }else{
-        	  if(check()){
+		   		          
+       if(count<3){
+     	  alert("사진은 최소 3장 이상 올려야 합니다");
+     	 
+       }else{
+     	  if(check()){
 	        	  console.log("성공");
 	        	  $('#fr').submit();
-        	  }
-          }
-          return false;
-           	 
+     	  }
+       }
+       return false;
+        	 
 	   });
 	      
       $('#summernote').summernote({
@@ -159,7 +157,7 @@ else {
 </head>
 
 <body>                                                      
- <form name="fr" id="fr" method="post" action="<c:url value='/security/market/groupbuyinsert.aw'/>"  accept-charset="utf-8" 
+ <form name="fr" id="fr" method="post"   accept-charset="utf-8" 
 				class="form-horizontal">
 	
 		<!--   <div class="container"> -->
