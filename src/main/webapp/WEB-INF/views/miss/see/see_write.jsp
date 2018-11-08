@@ -53,6 +53,7 @@
 	}
 }
 </style>
+
 <script>
     $(function(){
         var postcode;//우편번호 변수 설정
@@ -95,12 +96,11 @@
         
      });
 </script>
+
 <!-- 내용 시작 -->
 <div class="container">
 	<div class="page-header">
-		<h2>
-			봤어요
-		</h2>
+		<h2>봤어요</h2>
 	</div>
 	<div style="width:100%">
 		<form method="post" action="<c:url value='/security/miss/see_insert.aw'/>">

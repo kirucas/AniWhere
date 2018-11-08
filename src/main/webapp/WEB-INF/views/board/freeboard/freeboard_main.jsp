@@ -14,61 +14,70 @@
 </style>
 
 
-<!-- 바디 -->
-<div class="container" style="padding-left:0px;padding-right:0px;margin-bottom:15px">
-		<div class="sub-header">
-			<div class="sub-header-info">
-				<div>
-				<h2 class="sub-header__title" style="display:inline">
-					자유 게시판
-				</h2>
+<!-- 내용 시작 -->
+<div class="container"
+	style="padding-left: 0px; padding-right: 0px; margin-bottom: 15px">
+	<div class="sub-header">
+		<div class="sub-header-info">
+			<div>
+				<h2 class="sub-header__title" style="display: inline">자유 게시판</h2>
 				<ul class="sub-link__list">
-					<li class="sub-link__item" id="defeaultlist">
-						<a href="<c:url value='/animal/freeboard.aw'/>"> <img src="https://talk.op.gg/images/icon-new@2x.png" width="24" alt=""><span>최신</span></a>
+					<li class="sub-link__item" id="defeaultlist"><a
+						href="<c:url value='/animal/freeboard.aw'/>"> <img
+							src="https://talk.op.gg/images/icon-new@2x.png" width="24" alt=""><span>최신</span></a>
 					</li>
-					<li class="sub-link__item" id="countlist">
-						<a href ="<c:url value="/animal/freeboard_count.aw"/>"><img src="https://talk.op.gg/images/icon-hot@2x.png" width="24" alt="" ><span>인기</span></a>
+					<li class="sub-link__item" id="countlist"><a
+						href="<c:url value="/animal/freeboard_count.aw"/>"><img
+							src="https://talk.op.gg/images/icon-hot@2x.png" width="24" alt=""><span>인기</span></a>
 					</li>
-					<li class="sub-link__item" id="hitlist">
-						<a href="<c:url value='/animal/freeboard_hit.aw'/>"> <img src="https://talk.op.gg/images/icon-top@2x.png" width="24" alt=""><span>TOP</span></a>
+					<li class="sub-link__item" id="hitlist"><a
+						href="<c:url value='/animal/freeboard_hit.aw'/>"> <img
+							src="https://talk.op.gg/images/icon-top@2x.png" width="24" alt=""><span>TOP</span></a>
 					</li>
-				</ul>		
+				</ul>
 				<ul class="sub-header-button">
 					<li class="sub-header-button__item sub-header-button__item--search">
 						<button id="search-toggle-button" class="button">
-							<img src="https://talk.op.gg/images/icon-search@2x.png" alt="검색하기" width="24">
+							<img src="https://talk.op.gg/images/icon-search@2x.png"
+								alt="검색하기" width="24">
 						</button>
 					</li>
 				</ul>
-				<div class="sub-header-search" style="margin-bottom:5px">
-				<a href="<c:url value='/security/animal/freeboard/write.aw'/>">
-					<img style="float:left;margin-top:5px;" src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기" width="24">
-				</a>
-                <form style="display:inline;" action="<c:url value='/animal/freeboard.aw'/>">
-                    <label>
-                    	<select name="searchColumn" style="margin-left:10px" class="sub-header-search__select">
-                            <option value="free_title">제목</option>
-                            <option value="free_content">내용</option>
-                            <option value="mem_nickname">작성자</option>
-                        </select>
-                    </label>
-                    <input style="float:right" type="text" name="searchWord" class="sub-header-search__input" placeholder="검색">
-                    <button class="sub-header-search__button"><img src="https://talk.op.gg/images/icon-search@2x.png" width="24" alt="검색"></button>
-                </form>
-            </div>
+				<div class="sub-header-search" style="margin-bottom: 5px">
+					<a href="<c:url value='/security/animal/freeboard/write.aw'/>">
+						<img style="float: left; margin-top: 5px;"
+						src="https://talk.op.gg/images/icon-write@2x.png" alt="글쓰기"
+						width="24">
+					</a>
+					<form style="display: inline;"
+						action="<c:url value='/animal/freeboard.aw'/>">
+						<label> <select name="searchColumn"
+							style="margin-left: 10px" class="sub-header-search__select">
+								<option value="free_title">제목</option>
+								<option value="free_content">내용</option>
+								<option value="mem_nickname">작성자</option>
+						</select>
+						</label> <input style="float: right" type="text" name="searchWord"
+							class="sub-header-search__input" placeholder="검색">
+						<button class="sub-header-search__button">
+							<img src="https://talk.op.gg/images/icon-search@2x.png"
+								width="24" alt="검색">
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<!-- 내용 부분 시작  -->
-		<section class="article-list article-list--fixed"></section>
-		<section class="article-list">
-			<!-- 여기서 반복문 돌려서 글 -->
-			<c:if test="${empty list }" var="isEmpty">
+	<!-- 내용 부분 시작  -->
+	<section class="article-list article-list--fixed"></section>
+	<section class="article-list">
+		<!-- 여기서 반복문 돌려서 글 -->
+		<c:if test="${empty list }" var="isEmpty">
 				   등록된 게시물이 없어요
     		</c:if>
-    		<c:if test="${not isEmpty }">
-    			<c:forEach var="record" items="${list}" varStatus="loop">
+		<c:if test="${not isEmpty }">
+			<c:forEach var="record" items="${list}" varStatus="loop">
 				<article class="article-list-item">
 					<div class="article-list-item__vote">
 						<div>
@@ -93,7 +102,9 @@
 								<span>[시사]</span>
 							</c:otherwise>
 						</c:choose>
-						<a href="<c:url value='/animal/freeboard_view.aw?no=${record.dto.no}'/>" class="article-list-item__info">
+						<a
+							href="<c:url value='/animal/freeboard_view.aw?no=${record.dto.no}'/>"
+							class="article-list-item__info">
 							<div class="article-list-item__title">
 								<span id="free_title">${record.dto.free_title}</span> <em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em>
 							</div>
@@ -124,11 +135,11 @@
 					</div>
 				</article>
 			</c:forEach>
-    		</c:if>			
-		</section>
-		</div>
-		</br>
-	<!-- 아래는 페이징 -->
-    		${pagingString}
-	<!-- 바디 끝 -->
-	</br>
+		</c:if>
+	</section>
+</div>
+<!-- 아래는 페이징 -->
+</br>
+${pagingString}
+</br>
+<!-- 내용 끝 -->
