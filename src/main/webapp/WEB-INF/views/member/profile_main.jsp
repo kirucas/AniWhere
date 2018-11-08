@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
 <link rel="stylesheet" href="https://member.op.gg/src.45ea0fc1.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 <style>
 .nav-tabs {
     border-bottom: none;
@@ -66,7 +67,10 @@
 #ani_checkbox input{
 	margin : 0px 5px 0px 5px;
 }
-
+.error{
+	font-family: 메이플스토리;
+	color:#ff7070;
+}
 </style>
 <script>
 function delete_ani(ani_no){
@@ -88,7 +92,6 @@ function delete_ani(ani_no){
 var idck = 0;
 $(function(){
 	var ani = '${record.mem_interani}';
-	console.log(ani);
 	var arr = ani.split("");
 	for(var i=0;i<=arr.length;i++){
 		switch(arr[i]){
@@ -121,6 +124,61 @@ $(function(){
 	    else{
 	    	$("#frm").submit();
 	    }
+	});
+	//pwdchange 버튼을 클릭했을떄 비밀번호 변경
+	$( "#pwdchange" ).validate({
+		  rules: {
+			currentPassword: {
+		    	required: true,
+		    	maxlength: 80,
+		    	remote : {
+		    		type : "POST",
+		    		data : {
+		    			"mem_id": '${record.mem_id}',
+		    			"mem_pw": function(){ return $('#currentPassword').val()}
+		    		},
+		    		url : "<c:url value='/member/pwdchk.aw'/>"
+		    	}
+		    },
+		    newPassword: {
+		      required: true,
+		      minlength: 8,
+		      maxlength: 80
+		    },
+		    checkNewPassword: {
+		      required: true,
+		      minlength: 8,
+		      maxlength: 80,
+		      equalTo: "#newPassword"
+		    },
+		  },
+		  messages: {
+			  currentPassword: {
+			    	required: "기존 비밀번호를 입력해주세요.",
+			    	maxlength: "최대 30글자까지 가능합니다.",
+			    	remote: "잘못된 비밀번호입니다. 현재 비밀번호를 제대로 입력 해주세요."
+			    },
+			    newPassword: {
+			      required: "비밀번호를 입력해주세요.",
+			      minlength: "최소 8글자 이상 적어주세요.",
+			      maxlength: "최대 80글자까지 가능합니다."
+			    },
+			    checkNewPassword: {
+			      required: "비밀번호확인을 입력해주세요.",
+			      minlength: "최소 8글자 이상 적어주세요.",
+			      maxlength: "최대 80글자까지 가능합니다.",
+			      equalTo: "비밀번호와 일치하지 않습니다."
+			    }
+			},
+			errorElement : 'div',
+	        errorPlacement: function(error, element) {
+	          var placement = $(element).data('error');
+	          if (placement) {
+	            $(placement).append(error);
+	          } else {
+	            error.insertAfter(element);
+	          }
+	        }
 	});
 	 //idck 버튼을 클릭했을 때 
     $("#idck").click(function() {
@@ -166,12 +224,13 @@ $(function(){
 							관리 
 						</a>
 					</li>
-					<c:if test="${record.mem_log!=1 or record.mem_log!=2 }">
-					<li class="nav-item">
-						<a class="nav-link" aria-current="false" id="passchange-tab" data-toggle="tab" href="#passchange" role="tab" aria-controls="passchange">
-							비밀번호 변경 
-						</a>
-					</li>
+					<c:set var="log" value="${record.mem_log }"/>
+					<c:if test="${log.equals('0')}">
+						<li class="nav-item">
+							<a class="nav-link" aria-current="false" id="passchange-tab" data-toggle="tab" href="#passchange" role="tab" aria-controls="passchange">
+								비밀번호 변경 
+							</a>
+						</li>
 					</c:if>
 					<li class="nav-item">
 						<a	class="nav-link" aria-current="false" id="goodbye-tab" data-toggle="tab" href="#goodbye" role="tab"	aria-controls="goodbye"> 
@@ -266,7 +325,7 @@ $(function(){
 							  <div class="card col-12 col-md-3 img_div" id="${animal.ani_no}">
 							  	<a href="#">
 								  <img class="card-img-top" src="<c:url value='${animal.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
-								</a>  
+								</a>  	
 								<div id="button_div">
 								  <a onclick="delete_ani(${animal.ani_no});" href="#" class="btn btn-danger">X</a>
 								</div>
@@ -289,7 +348,7 @@ $(function(){
 				</section>
 			</c:if>
 		</div>
-		<c:if test="${record.mem_log!=1 or record.mem_log!=2 }">
+		<c:if test="${log.equals('0')}">
 			<div class="tab-pane" id="passchange" role="tabpanel" aria-labelledby="passchange-tab">
 				<section class="member-settings-layout__content">
 					<div class="member-settings-layout__content-inner">
@@ -297,28 +356,33 @@ $(function(){
 						<div class="member-settings-layout__sub">
 							개인정보 보호를 위해 비밀번호를 주기적으로 변경해주세요.
 						</div>
-						<form  action="#" method="post">
+						<form id="pwdchange" class="formValidate" action="<c:url value='/member/passwordchange.aw'/>" method="post">
 							<div class="change-password">
 								<div class="change-password__inner">
 									<div class="member-input">
 										<div class="member-input__state">
 											<div>현재 비밀번호</div>
-											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="currentPassword" value="">
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" id="currentPassword" name="currentPassword" value=""  data-error=".errorTxt1">
+											<div class="errorTxt1"></div>
 										</div>
 									</div>
 									<div class="member-input">
 										<div class="member-input__state">
 											<div>신규 비밀번호</div>
-											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="newPassword" value="">
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" id="newPassword" name="newPassword" value="" data-error=".errorTxt2">
+											<div class="errorTxt2"></div>
 										</div>
 									</div>
 									<div class="member-input">
 										<div class="member-input__state">
 											<div>신규 비밀번호 확인</div>
-											<input class="member-input__box passwordinput" type="password" autocomplete="off" name="checkNewPassword" value="">
+											<input class="member-input__box passwordinput" type="password" autocomplete="off" id="checkNewPassword" name="checkNewPassword" value="" data-error=".errorTxt3">
+											<div class="errorTxt3"></div>
 										</div>
 									</div>
-									<button type="submit" class="member-button change-password__save-btn">확인</button>
+									<input type="hidden" name="mem_id" value="${record.mem_id}"/>
+									<input type="hidden" name="mem_no" value="${record.mem_no}"/>
+									<input id="pwdchan" type="submit" class="member-button change-password__save-btn" value="확인"/>
 								</div>
 							</div>
 						</form>

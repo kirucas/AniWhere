@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.AllCommentService;
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.animal.QuestBoardDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.web.board.FileUpDownUtils;
@@ -31,6 +32,7 @@ import com.animal.aniwhere.web.board.FileUpDownUtils;
 public class BirdQuestController {
 public static final int ANI_CATEGORY = 4;
 	
+	//서비스 주입
 	@Resource(name="questService")
 	private AllBoardService questService;
 	@Resource(name="allCommentService")
@@ -42,6 +44,7 @@ public static final int ANI_CATEGORY = 4;
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
 	
+	//목록 가져오기
 	@RequestMapping("/animal/bird/quest/quest_list.aw")
 	public String list(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
@@ -98,6 +101,7 @@ public static final int ANI_CATEGORY = 4;
 		return "board/animal/bird/quest/quest_list.tiles";
 	}////////////////list()
 	
+	//작성,답변,수정폼으로 이동
 	@RequestMapping(value="/security/animal/bird/quest/quest_{path}",method=RequestMethod.GET)
 	public String form(@PathVariable String path,Model model,@RequestParam Map map) throws Exception{
 		switch(path) {
@@ -114,68 +118,89 @@ public static final int ANI_CATEGORY = 4;
 		}		
 	}
 	
-	
+	//작성 처리
 	@RequestMapping(value="/security/animal/bird/quest/quest_write.aw",method=RequestMethod.POST)
 	public String quest_write(@RequestParam Map map,HttpSession session) throws Exception{
 		map.put("mem_no",session.getAttribute("mem_no"));
+		//서비스 호출]
 		questService.insert(map);
+		//뷰정보 반환]
 		return "forward:/animal/bird/quest/quest_list.aw";
 	}
 	
+	//답변 처리
 	@RequestMapping(value="/security/animal/bird/quest/quest_reply.aw",method=RequestMethod.POST)
 	public String quest_reply(@RequestParam Map map,HttpSession session,Model model) throws Exception {
 		map.put("mem_no",session.getAttribute("mem_no"));
+		//서비스 호출]
 		questService.insert(map);
+		//뷰정보 반환]
 		return "forward:/animal/bird/quest/quest_list.aw";
 	}
 	
+	//상세보기
 	@RequestMapping("/animal/bird/quest/quest_view.aw")
 	public String quest_view(@RequestParam Map map,Model model) throws Exception{
+		//서비스 호출]
 		QuestBoardDTO record = questService.selectOne(map);
+		//줄바꿈
 		record.setQuest_content(record.getQuest_content().replace("\r\n","<br/>"));
+		//데이타 저장]
 		model.addAttribute("record",record);
+		//뷰정보 반환]
 		return "board/animal/bird/quest/quest_view.tiles";
 	}
 	
+	//수정 처리
 	@RequestMapping("/security/animal/bird/quest/quest_edit.aw")
 	public String edit(Model model,@RequestParam Map map, HttpServletRequest req) throws Exception{
 		if(req.getMethod().equals("GET")) {
+			//서비스 호출]
 			QuestBoardDTO record = questService.selectOne(map);
+			//데이타 저장]
 			model.addAttribute("record",record);
+			//뷰정보 반환]
 			return "board/animal/bird/quest/quest_edit.tiles";
 		}
+		//서비스 호출]
 		int successFail = questService.update(map);
+		//데이타 저장]
 		model.addAttribute("successFail",successFail);
 		model.addAttribute("WHERE","EDT");
+		//뷰정보 반환]
 		return "board/animal/bird/quest/quest_message";
 	}
 
+	//삭제 처리
 	@RequestMapping("/animal/bird/quest/quest_delete.aw")
 	public String delete(@RequestParam Map map,Model model) throws Exception{
+		//서비스 호출]
 		int successFail = questService.delete(map);
+		//데이타 저장]
 		model.addAttribute("successFail",successFail);
 		model.addAttribute("checking",map.get("checking"));
+		//뷰정보 반환]
 		return "board/animal/bird/quest/quest_message";
 	}
 	
+	//이미지 업로드
 	@ResponseBody
 	@RequestMapping(value="/animal/bird/quest/Upload.aw")
 	public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("file");
 		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-		File file = new File(phisicalPath+File.separator+newFilename);
-		upload.transferTo(file);
-		return "/Upload/"+newFilename;
+		List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "quest"); // S3  업로드
+		return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
 	}
 	
+	//추천 수 
 	@ResponseBody
 	@RequestMapping(value="/animal/bird/quest/quest_hit.aw",method=RequestMethod.POST)
 	public String hit(@RequestParam Map map) throws Exception{
-	
 		map.put("no", map.get("no").toString());
+		//서비스 호출]
 		int hitCount= questService.addHitCount(map);
-		
 		return "success";
 	}//////////////hit()
 }//////////////////// StoryController
