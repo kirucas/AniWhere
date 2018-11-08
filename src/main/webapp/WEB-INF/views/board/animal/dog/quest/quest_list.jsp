@@ -68,6 +68,7 @@
 		<div style="width:100%">${pagingString}</div>
 	</div>
 	<!-- 페이징 끝 -->
+	<!-- 검색 부분 -->
 	<div class="row offset-md-3 col-md-7">
 		<div class="form-row">
 			<form class="form-inline" style="padding-bottom: 10px" method="post"
@@ -88,4 +89,5 @@
 			</form>
 		</div>
 	</div>
+	<!-- 검색 부분 -->
 </div>

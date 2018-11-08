@@ -5,7 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
 <script>
 	$(function(){
-		
+		//썸머노트에 아무것도 없으면 안넘어가게 하기위한 변수
 		var summernoteForm = $('#frm');
 	    var summernoteElement = $('#quest_content');
 	    var summernoteValidator = summernoteForm.validate({
@@ -14,7 +14,6 @@
 	        validClass: 'is-valid',
 	        ignore: ':hidden:not(#quest_content),.note-editable.card-block',
 	        errorPlacement: function (error, element) {
-	            // Add the `help-block` class to the error element
 	            error.addClass("invalid-feedback");
 	            console.log(element);
 	            if (element.hasClass("summer")) {
@@ -25,6 +24,7 @@
 	        }
 	    });
 		
+	    //썸머노트를 적용한 quest_content에 넣을 수 있는 최대 문자 수 및 null이 들어가면 메시지 뜨게하기 
 		$("#quest_content").summernote({
 			placeholder: "내용을 입력하세요",
 			height: 300,
@@ -50,7 +50,6 @@
 				onKeydown: function (e) { 
                     var t = e.currentTarget.innerText; 
                     if (t.trim().length >= 2000 ) {
-                        //delete keys, arrow keys, copy, cut
                         if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey))
                         e.preventDefault(); 
                     } 
@@ -76,6 +75,7 @@
 	            }
 			}
 		})
+		//이미지 저장을 위한 ajax
 		function sendFile(file, el, wel) {
 			var form_data = new FormData();
 			form_data.append('file', file);
@@ -104,10 +104,10 @@
 		action='<c:url value="/security/animal/dog/quest/quest_edit.aw"/>'>
 		<div class="form-row">
 			<label for="quest_title" class="col-md-2 control-label" style="font-size:20px">제목</label>
-			<c:if test="${record.checking != null }">
+			<c:if test="${record.checking == 1 }"><!-- 답변글일 땐 제목 수정 불가 -->
 				<input readonly="readonly" maxlength="50" class="form-control" autofocus="autofocus" type="text" name="quest_title" id="quest_title" placeholder="제목을 입력해주세요" value="${record.quest_title}"/>
 			</c:if>
-			<c:if test="${record.checking == null }">
+			<c:if test="${record.checking == 0 }"><!-- 원본글일 땐 제목 수정 가능 -->
 				<input maxlength="50" class="form-control" autofocus="autofocus" type="text" name="quest_title" id="quest_title" placeholder="제목을 입력해주세요" value="${record.quest_title}"/>
 			</c:if>
 		</div>
