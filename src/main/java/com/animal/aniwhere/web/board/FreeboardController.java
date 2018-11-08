@@ -247,7 +247,7 @@ public class FreeboardController {
 		return "board/freeboard/freeboard_write.tiles";
 	}////////////////
 	//입력처리]
-	@RequestMapping(value="/animal/freeboard/write.aw",method=RequestMethod.POST)
+	@RequestMapping(value="/security/animal/freeboard/write.aw",method=RequestMethod.POST)
 	public String writeOk(@RequestParam Map map,HttpSession session //,org.springframework.security.core.Authentication auth 아직 적용 안함
 		) throws Exception{
 		//서비스 호출
