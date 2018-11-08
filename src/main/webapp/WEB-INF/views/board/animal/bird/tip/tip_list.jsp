@@ -114,30 +114,30 @@
     			<c:forEach var="record" items="${list}" varStatus="loop">
 		    		<article class="article-list-item">
 						<div class="article-list-item__vote">
-							<div><span id="tip_no">${record.no}</span></div>
+							<div><span id="tip_no">${record.dto.no}</span></div>
 						</div>
 						<div class="article-list-item__content">
-							<a href="<c:url value='/animal/bird/tip/tip_view.aw?no=${record.no}'/>" class="article-list-item__info">
+							<a href="<c:url value='/animal/bird/tip/tip_view.aw?no=${record.dto.no}'/>" class="article-list-item__info">
 								<div class="article-list-item__title">
-									<span id="tip_title">${record.tip_title}</span> <em>[21]</em>
+									<span id="tip_title">${record.dto.tip_title}</span> <em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em>
 								</div>
 							</a>
 							<div class="article-list-item-meta">
 								<div class="article-list-item-meta__item">
-									<span data-tooltip data-date=${record.tip_regidate } title=""></span>
+									<span data-tooltip data-date="" title="">${record.dto.tip_regidate }</span>
 								</div>
 								<c:if test="${record.mem_nickname eq null}" var="result">
 									<div class="article-list-item-meta__item article-list-item-meta__item--author">
-										<span>X 를 눌러 조의를 표하십시오</span>
+										<span>탈퇴회원</span>
 									</div>
 								</c:if>
 								<c:if test="${not result}">
 									<div class="article-list-item-meta__item article-list-item-meta__item--author">
-										<span id="mem_no">${record.mem_nickname} </span>
+										<span id="mem_no">${record.dto.mem_nickname} </span>
 									</div>
 								</c:if>
 								<div class="article-list-item-meta__item">
-									조회수 <span id="tip_count">${record.tip_count}</span>
+									조회수 <span id="tip_count">${record.dto.tip_count}</span>
 								</div>
 							</div>
 						</div>
@@ -148,7 +148,7 @@
 									<span id="tip_hit_text">추천수</span></br>
 								</div>
 								<div>
-									<span id="tip_hit">${record.tip_hit}</span>
+									<span id="tip_hit">${record.dto.tip_hit}</span>
 								</div>
 							</div>
 			    		</div>
