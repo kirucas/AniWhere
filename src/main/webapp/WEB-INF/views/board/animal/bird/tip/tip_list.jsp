@@ -49,6 +49,13 @@
 #tip_no{
 	text-align: center;
 }
+#tip_hit_text{
+	font-size: 1.5em;
+}
+#tip_hit{
+	font-size: 1.5em;
+	color:#30e0a0;
+}
 </style>
 <!-- 바디 -->
 <div class="container" id="list_container">
@@ -106,38 +113,46 @@
     		<c:if test="${not isEmpty}">
     			<c:forEach var="record" items="${list}" varStatus="loop">
 		    		<article class="article-list-item">
-					<div class="article-list-item__vote">
-						<div><span id="tip_hit">${record.dto.tip_hit}</span></div>
-		    		</div>
-				<div class="article-list-item__content">
-					<a href="<c:url value='/animal/bird/tip/tip_view.aw?no=${record.dto.no}'/>" class="article-list-item__info">
-						<div class="article-list-item__title">
-							<span id="tip_title">${record.dto.tip_title}</span> <em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em>
+						<div class="article-list-item__vote">
+							<div><span id="tip_no">${record.no}</span></div>
 						</div>
-					</a>
-					<div class="article-list-item-meta">
-						<div class="article-list-item-meta__item">
-							<span data-tooltip data-date="" title="">${record.dto.tip_regidate }</span>
-						</div>
-						<c:if test="${record.dto.mem_nickname eq null}" var="result">
-							<div class="article-list-item-meta__item article-list-item-meta__item--author">
-								<span>탈퇴 회원</span>
+						<div class="article-list-item__content">
+							<a href="<c:url value='/animal/bird/tip/tip_view.aw?no=${record.no}'/>" class="article-list-item__info">
+								<div class="article-list-item__title">
+									<span id="tip_title">${record.tip_title}</span> <em>[21]</em>
+								</div>
+							</a>
+							<div class="article-list-item-meta">
+								<div class="article-list-item-meta__item">
+									<span data-tooltip data-date=${record.tip_regidate } title=""></span>
+								</div>
+								<c:if test="${record.mem_nickname eq null}" var="result">
+									<div class="article-list-item-meta__item article-list-item-meta__item--author">
+										<span>X 를 눌러 조의를 표하십시오</span>
+									</div>
+								</c:if>
+								<c:if test="${not result}">
+									<div class="article-list-item-meta__item article-list-item-meta__item--author">
+										<span id="mem_no">${record.mem_nickname} </span>
+									</div>
+								</c:if>
+								<div class="article-list-item-meta__item">
+									조회수 <span id="tip_count">${record.tip_count}</span>
+								</div>
 							</div>
-						</c:if>
-						<c:if test="${not result}">
-							<div class="article-list-item-meta__item article-list-item-meta__item--author">
-								<span id="mem_no">${record.dto.mem_nickname} </span>
-							</div>
-						</c:if>
-						<div class="article-list-item-meta__item">
-							조회수 <span id="tip_count">${record.dto.tip_count}</span>
 						</div>
-					</div>
-				</div>
-				<div class="article-list-item__vote">
-					<div><span id="tip_no">${record.dto.no}</span></div>
-				</div>
-			</article>
+						
+						<div class="article-list-item__vote">
+							<div>
+								<div style="margin-bottom: 10px;">
+									<span id="tip_hit_text">추천수</span></br>
+								</div>
+								<div>
+									<span id="tip_hit">${record.tip_hit}</span>
+								</div>
+							</div>
+			    		</div>
+					</article>
 	    		</c:forEach>
     		</c:if>
 		</section>
