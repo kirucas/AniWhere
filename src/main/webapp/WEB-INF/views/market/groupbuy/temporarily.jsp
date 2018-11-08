@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 
   <head>
@@ -9,8 +10,6 @@
     <title>공동구매 게시판</title>
 		<!--  작은 프로그래스바 로직 시작-->
 		<style>
-       
-
         .progress-bar {
             background-color: White;
             height: 15px;
@@ -46,12 +45,7 @@
 		
         .blue span {
             background-color:RED;   
-        }
-
-        
-
-      	
-		
+        }		
 		/*---------------------------*/		
 		
 		.stripes span {
@@ -138,12 +132,8 @@
             -webkit-animation: animate-glow 1s ease-out infinite;
             -moz-animation: animate-glow 1s ease-out infinite; 			
 		}
-
-	
 		 
-    </style>
-		
-		
+    </style>		
 	<!-- 	프로그래스바 로직끝 -->
   </head>
   <body>
@@ -207,21 +197,18 @@
 								<span>[기타포유류]</span>
 							</c:otherwise>
 						</c:choose>
-					</span>
-					
+					</span>					
 						<span id="title">${record.dto.title}</span>																													 
-								<a href="<c:url value='/market/groupbuy.aw?groupbuy_no=${record.dto.no}'/>">
-																  
+								<a href="<c:url value='/market/groupbuy.aw?groupbuy_no=${record.dto.no}'/>">															  
 								</a>
-							
 						        </td>
 						        <!--  타이틀 끝 -->
 							
 							<td><span id="mem_no">${record.dto.mem_nickname}</span></td>
 							<td><span id="count">${record.dto.count} </span> </td>
 							<td><span id="regidate">${record.dto.regidate}</span></td>
-							<td><span id="regidate">${record.dto.goal}</span></td>
-							<td><span id="regidate">${record.dto.deadline}</span></td>
+							<td><span id="goal">${record.dto.goal}</span></td>
+							<td><span id="deadline">${record.dto.deadline}</span></td>
 						</tr>
 						
 					</c:forEach>
@@ -247,12 +234,12 @@
 				
     
          <div class="card mb-4" style="margin-left:90px">
-            <img class="card-img-top" src="<c:url value='/resources/images/maketimages/pet.jpg'/>" style="width:400px;height:400px" alt="Card image cap">
+            <img class="card-img-top" src="${fn:substring(record.dto.content,fn:indexOf(record.dto.content,'img src=\"')+9,fn:indexOf(record.dto.content,'\" name='))}" style="width:400px;height:400px" alt="Card image cap">
             <div class="card-body">
-            
-            
-            
-               <h5 class="card-title"><span id="no">상품일련번호:${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)+1}</span></h5>
+            <script>
+            	console.log('${record.dto.content}');
+            </script>
+               <h5 class="card-title"><span id="no">상품일련번호:${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</span></h5>
 				<span id="title">제목:${record.dto.title}</span><em>[${record.cmtCount != null ? record.cmtCount : 0 }]</em> 
 					<br/>
 				<span id="animal_code">관련태그:

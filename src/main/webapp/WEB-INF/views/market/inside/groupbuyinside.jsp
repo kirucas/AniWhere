@@ -24,15 +24,17 @@ function test2() {
 	td.innerHTML = n - 1; 
 	if(n<=2){
 		td.innerHTML=1}
-	} 
+	}
+
 <!-- 구매시 허가구하는 로직 -->
+
 function buyaccept(){	
 	if (confirm("구입하시겠습니까?")){
 		
     alert("구입해주셔서 감사합니다");
     
     
-    action="/market/groupbuy.aw";
+    action="redirect:/market/groupbuy.aw";
          
 	}
 	else 
@@ -267,14 +269,10 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	  return zero + num;
 }
 
-
-
-
 </script>
 
     <style>
        
-
         .progress-bar {
             background-color: White;
             height: 25px;
@@ -307,7 +305,6 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
         }
 		
 		/*---------------------------*/			
-		
         .blue span {
             background-color: #34c2e3;   
         }
@@ -422,7 +419,6 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
  
   </head>
 
-  
     <!-- Page Content -->
     <div class="container">
 
@@ -461,10 +457,10 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
    			
    			$('#product').prop("src",arr[0]);
    			$.each(arr,function(index,value){
-				console.log("들어왔니");
+				console.log("이미지들어올떄마다 출력 됌");
 				$('img[name=product]').eq(index).prop("src",value);
+												
 			})
-   	
 			
 			//이미지를 클릭하면 메인화면의 큼화면에서 볼수 있게하는 로직 
    		function changeimage2() {
@@ -475,6 +471,7 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
     if (changeimage2.id.match("product2")) {
         image.src = "";
     } //안먹힘 
+    
 }
 
    			
@@ -508,16 +505,16 @@ function changeimage1() {
     } 
 }  		
    		});
-   	
-   	
+   		
+   		
+   		
+   		
    	</script>
 		<!-- 메인 사진 -->
         <div class="col-md-8">
          <!--  <img class="img-fluid" src="http://placehold.it/750x500" alt="" > -->
-           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="#" style="width: 700px; height: 500px;">
-        
+           <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="" style="width: 700px; height: 500px;">
         </div>
-
         <div class="col-md-4" style="border:1px solid silver">
         
          	<h3 class="my-3">판매자 아이디: ${record.mem_nickname}</h3>
@@ -551,31 +548,23 @@ function changeimage1() {
 			</div>
 			<div class="col-md-12" style="border: 1px solid silver;margin-top:40px">
 				<h3 class="my-4">구매 개수 등록</h3>
-				<input type="button" class="btn btn-info"  value="-" onclick="test2()">
+				<input type="button"  class="btn btn-info"  value="+" onclick="test()">			
 				<table style="width:30px;height:30px;margin-left:15px" ><tr><td id="test" >1</td></tr></table>
-				<input type="button"  class="btn btn-info"  value="+" onclick="test()"><br/>
+				<input type="button" class="btn btn-info"  value="-" onclick="test2()"><br/>
 				<input   class="btn btn-danger" type="button" value="구매"  style="magin-bottom:10px;margin-top:20px;margin-left:200px;" onclick="buyaccept();">
 		    
-			</div>
-          
+			</div>          
         </div>
-
       </div>
    <!-- Related Projects Row -->
       <h3 class="my-4">판매자가 올린 사진 3개이상</h3>
-
-      <div class="row">
-		
-        <div class="col-md-3 col-sm-6 mb-4 view overlay zoom" >
-        
-            <img name="product" id="product1" onclick="javascript:changeimage1()"  class="img-fluid shadow scale" src="#" alt="" style="width: 300px; height: 200px;">
-         
+      <div class="row">		
+        <div class="col-md-3 col-sm-6 mb-4 view overlay zoom" >        
+            <img name="product" id="product1" onclick="javascript:changeimage1()"  class="img-fluid shadow scale" src="#" alt="" style="width: 300px; height: 200px;">        
         </div>
-
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
          
-            <img name="product" id="product2" onclick="javascript:changeimage2()"  class="img-fluid shadow scale" src="#" alt="" style="width: 300px; height: 200px;">
-       
+            <img name="product" id="product2" onclick="javascript:changeimage2()"  class="img-fluid shadow scale" src="#" alt="" style="width: 300px; height: 200px;">      
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
@@ -606,7 +595,6 @@ function changeimage1() {
 	<DIV  class="col-ms-12" style="line-height:60px; color:#666;font-size:50px; text-align:center;border:1px solid yellow;	">
 	<FONT >거래시간</FONT>
 	
-
 	<SPAN  id=counter0></SPAN><FONT style="FONT-FAMILY: '굴림'; ">일</FONT>
 	<SPAN  id=counter1></SPAN><FONT >시간</FONT> <SPAN  id=counter2></SPAN><FONT >분</FONT> <SPAN  id=counter3></SPAN><FONT >초 남았습니다</FONT>
     <SPAN style="text-align:center"></SPAN>
@@ -628,11 +616,7 @@ function changeimage1() {
 </div>
 </body>
 <!-- 프로그래스바 끝 -->
- 
-	
-
    
-      
   <div style="margin-top:10px">
    </div><br/>
 
@@ -654,16 +638,15 @@ function changeimage1() {
            <div style="text-align: center">
 			<a href="<c:url value='/market/sell.aw'/>"> 
 			<input name="reset"  class="btn btn-info" type="button" value="목록"></a> 			
+			
 			<c:if test="${sessionScope.mem_no==record.mem_no }">
-			<a href="<c:url value='/security/market/selledit.aw?sell_no=${record.no}'/>" type="button" class="btn btn-danger">수정</a>
-			</c:if>			
+			<a href="<c:url value='/security/market/groupbuyedit.aw?groupbuy_no=${record.no}'/>" type="button" class="btn btn-danger">수정</a>
+			</c:if>	
 							
 				<c:if test="${sessionScope.mem_no==record.mem_no }">
 				<a href="javascript:isDelete()" type="button" class="btn">삭제</a>					
-				</c:if>
-				
-		</div>
-		
+				</c:if>				
+		</div>	
 		<div class="container border" style="margin-top: 15px;margin-bottom: 10px">
 	<div class="row">
 		<div class="col-sm-12" style="margin-top: 15px">
@@ -678,21 +661,11 @@ function changeimage1() {
 			</div>
 		</form>
 	</div>
-	
-	<div id="comments">
-		
+	<div id="comments">		
 	</div>
-</div>
-        
+</div>        
          <div style="margin-bottom: 50px" ></div>
         
-
     </div>
     
-    
-  
-
-  
-  
-
-  
+   

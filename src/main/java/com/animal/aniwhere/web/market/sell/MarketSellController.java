@@ -332,21 +332,11 @@ public class MarketSellController {
 			   
 			   @ResponseBody
 			      @RequestMapping(value="/market/sell/cmt_edit.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-			      public String buy_update(@RequestParam Map map,HttpSession session) throws Exception{
+			      public String sell_update(@RequestParam Map map,HttpSession session) throws Exception{
 			         
 			         map.put("table_name", "sell");
 			         map.put("cmt_content", map.get("cmt_content"));
-			       
-			         
-			         //System.out.println("dddd1");
-			         /*
-			         Set<String> set = map.keySet();
-			         for(String key:set) {
-			            System.out.println(key+":"+map.get(key));
-			         }
-			         */
-			         //System.out.println("dddd2");
-			         				         
+			       			   			         				         
 			         cmtService.update(map);
 			         
 			         return map.get("no").toString();
