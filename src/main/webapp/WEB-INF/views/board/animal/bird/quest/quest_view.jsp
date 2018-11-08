@@ -139,7 +139,9 @@
 				<a id="delete" href="#">| &nbsp;삭제 |</a>
 			</c:if>
 			<a href="<c:url value='/animal/bird/quest/quest_list.aw'/>"> &nbsp;&nbsp;목록</a>
-			<a href="<c:url value='/security/animal/bird/quest/quest_reply.aw?no=${record.no }'/>">|&nbsp;&nbsp;답변</a>
+			<c:if test="${record.checking == 0}">
+				<a href="<c:url value='/security/animal/bird/quest/quest_reply.aw?no=${record.no }'/>">|&nbsp;&nbsp;답변</a>
+			</c:if>
 		</div>
 	</div>
 	<div class="row border-bottom">
