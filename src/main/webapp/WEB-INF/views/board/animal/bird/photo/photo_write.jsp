@@ -72,7 +72,12 @@
 		$("#files").trigger('click');
 	}/// fileUploadAction
 	
+	var category;
+	
 	window.onload = function() {
+		// 카테고리 저장용
+		category="${category}";
+		
 		var filelength = 0;
 		// 전체 파일 저장용 변수
 		var allFiles=new Array();
@@ -141,14 +146,14 @@
 		var formData=new FormData($("form")[0]);
 		formData.append("files",data);
 		$.ajax({
-			url : "<c:url value='/security/bird/photo/write.awa'/>",
+			url : "<c:url value='/security/"+category+"/photo/write.awa'/>",
 			processData : false,
 			contentType : false,
 			data : formData,
 			type : 'POST',
 			success:function(url){
 				console.log("success");
-				location.href="<c:url value='/animal/bird/photo.aw'/>";
+				location.href="<c:url value='/animal/"+category+"/photo.aw'/>";
 	        },
 	        error:function(error){
 	            console.log("error:",error);
