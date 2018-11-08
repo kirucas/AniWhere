@@ -79,6 +79,7 @@ function delete_ani(ani_no){
 var idck = 0;
 $(function(){
 	var ani = '${record.mem_interani}';
+	console.log(ani);
 	var arr = ani.split("");
 	for(var i=0;i<=arr.length;i++){
 		switch(arr[i]){
@@ -119,7 +120,7 @@ $(function(){
         $.ajax({
             async: true,
             type : 'POST',
-            data : {"nick":nick},
+            data : {"mem_nickname":nick},
             dataType : "json",
             url : "<c:url value='/member/nickchk.aw'/>",
             success : function(data) {
