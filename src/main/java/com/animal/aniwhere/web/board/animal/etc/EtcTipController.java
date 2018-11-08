@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.animal.aniwhere.service.AllCommentDTO;
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.animal.TipBoardDTO;
 import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
@@ -159,11 +160,12 @@ public class EtcTipController {
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("file");
-		
 		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-		File file = new File(phisicalPath+File.separator+newFilename);
-		upload.transferTo(file);
-        return "/Upload/"+newFilename;
+		//File file = new File(phisicalPath+File.separator+newFilename);
+		
+		List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "tip_bird"); // S3  업로드
+		
+        return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
    }
 	@ResponseBody
 	@RequestMapping(value="/animal/etc/tip/tip_hit.aw",method=RequestMethod.POST)
