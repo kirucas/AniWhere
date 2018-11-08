@@ -1,10 +1,10 @@
 package com.animal.aniwhere.web.mating;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.annotation.Resource;
@@ -21,8 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.animal.aniwhere.service.MatingDTO;
 import com.animal.aniwhere.service.impl.DraftingServiceImpl;
 import com.animal.aniwhere.service.impl.MatingServiceImpl;
+import com.animal.aniwhere.service.impl.member.AndroidTokenServiceImpl;
 import com.animal.aniwhere.service.impl.member.AnimalServiceImpl;
 import com.animal.aniwhere.service.member.AnimalDTO;
+import com.google.android.gcm.server.Message;
+import com.google.android.gcm.server.MulticastResult;
+import com.google.android.gcm.server.Sender;
 
 @Controller
 public class MatingController {
@@ -32,6 +36,8 @@ public class MatingController {
 	private AnimalServiceImpl animalService;
 	@Resource(name="draftingService")
 	private DraftingServiceImpl draftService;
+	@Resource(name="tokenService")
+	private AndroidTokenServiceImpl androidservice;
 
 	@RequestMapping("/security/mating/main.aw")
 	public String mating_main(HttpSession session) throws Exception {
@@ -80,9 +86,9 @@ public class MatingController {
 			System.out.println("mating_no:"+mating_no);
 			map.put("mating_no", mating_no);
 			List<Map> draftMapList=draftService.selectList(map); // 위에서 알아낸 메이팅 번호로 드래프트 리스트를 구해낸다
-			if(matingListToModel.contains(dto))
+			/*if(matingListToModel.contains(dto))
 				continue;
-			else if(draftMapList.size()==0) {
+			else */if(draftMapList.size()==0) {
 				matingListToModel.add(dto);
 				System.out.println("드래프트가 없음");
 				continue;
@@ -131,7 +137,7 @@ public class MatingController {
 		String matingNo=getMatingNoToAniNo(map,session);
 		map.put("ani_gender", animal.getAni_gender().equals("M")?"F":animal.getAni_gender().equals("F")?"M":"U");
 		map.put("ani_species",animal.getAni_species());
-		System.out.println("map.get(\"ani_kind\"):"+map.get("ani_kind"));
+		//System.out.println("map.get(\"ani_kind\"):"+map.get("ani_kind"));
 		if(!(animal.getAni_species().equals("3") || animal.getAni_species().equals("5")))
 			map.remove("ani_kind");
 		// 임시
@@ -140,23 +146,24 @@ public class MatingController {
 		List<MatingDTO> matingList=matingService.selectList(map);
 		List<MatingDTO> matingListToModel=new Vector<>();
 		for(MatingDTO dto:matingList) {
-			if(!(dto.getMem_no().equals(session.getAttribute("mem_no")))){
-				matingListToModel.add(dto);
+			// 본인의 동물 거르기
+			if(dto.getMem_no().equals(session.getAttribute("mem_no")))
+				continue;
+			map.put("sending",true);
+			map.put("mating_no",dto.getMating_no());
+			map.put("start", 1);
+			map.put("end", draftService.getTotalRecord(map));
+			List<Map> draftList=draftService.selectList(map);
+			if(draftList.size()==0) matingListToModel.add(dto); 
+			for(Map draft:draftList) {
+				if(draft.get("APPLY").toString().equals("0"))
+					matingListToModel.add(dto);
 			}
-		}/// for
-		
-		map.put("mating_no", matingNo);
-		map.put("sending", true);
-		List<Map> draftMap=draftService.selectList(map);
-		String draftString="";
-		for(Map temp:draftMap) {
-			draftString+=temp.get("RECEIVE_NO")+",";
 		}/// for
 		
 		model.addAttribute("matingNo",matingNo);
 		model.addAttribute("animal",animal);
 		model.addAttribute("list",matingListToModel);
-		model.addAttribute("draftString",draftString);
 		return "mating/matingMatch.tiles";
 	}/// mating_match
 	
@@ -299,24 +306,95 @@ public class MatingController {
 	// 신청받은 만남을 수락하거나 거절
 	@ResponseBody
 	@RequestMapping(value="/mating/draftApply.awa",produces="text/plain;charset=UTF-8")
-	public String draftApply(@RequestParam Map map,Model model) throws Exception {
-		Set<String> set=map.keySet();
-		for(String key:set)
-			System.out.println(key+" : "+map.get(key));
+	public String draftApply(@RequestParam Map map,Model model,HttpSession session) throws Exception {
 		String param=map.get("dft_no").toString();
 		int affected=0;
 		if(param.contains("ok")) {
-			map.put("dft_no",map.get("dft_no").toString().replace("ok", ""));
+			map.put("dft_no",param.replace("ok", ""));
 			map.put("apply", "1"); // 수락
 			affected=draftService.update(map);
-			// 수락을 하는 순간 리시버가 
+			Map applyMap=draftService.selectOne(map);
+			// 승낙 FCM 보내기
+			map.put("mating_no",applyMap.get("SEND_NO").toString());
+			MatingDTO sender=matingService.selectOne(map);
+			
+			System.out.println("승낙 FCM 발사:"+map.get("dft_no"));
+			System.out.println(fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(applyMap,"수락")));
+			// 수락을 하는 순간 같은 리시버이면서 0인 목록들을 전부 2로 수정
+			map.put("mating_no",applyMap.get("RECEIVE_NO"));
+			map.put("start", 1);
+			map.put("end", draftService.getTotalRecord(map));
+			List<Map> abortList=draftService.selectList(map);
+			for(Map abort:abortList) {
+				if(abort.get("APPLY").toString().equals("0")) {
+					map.put("dft_no", abort.get("DFT_NO"));
+					map.put("apply", "2");
+					draftService.update(map);
+					
+					map.put("mating_no",abort.get("SEND_NO").toString());
+					sender=matingService.selectOne(map);
+					// 거절 FCM 보내기
+					if(sender.getMem_no()!=session.getAttribute("mem_no")) {
+						System.out.println("거절 FCM 발사:"+abort.get("DFT_NO"));
+						System.out.println(fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(abort,"거절")));
+					}
+				}
+			}/// for
 			
 			return "ok"+affected;
 		} else {
 			map.put("dft_no",map.get("dft_no").toString().replace("no", ""));
 			map.put("apply", "2"); // 거절
 			affected=draftService.update(map);
+			// 거절 FCM 보내기
+			Map applyMap=draftService.selectOne(map);
+			map.put("mating_no",applyMap.get("SEND_NO").toString());
+			MatingDTO sender=matingService.selectOne(map);
+			System.out.println(fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(applyMap,"거절")));
 			return "no"+affected;
 		}/// if
 	}/// draftApply
+	
+	public String keywordGenerator(Map draftMap,String keyword) {
+		Map map=new HashMap();
+		map.put("mating_no",draftMap.get("SEND_NO"));
+		MatingDTO sender=matingService.selectOne(map);
+		map.put("mating_no",draftMap.get("RECEIVE_NO"));
+		MatingDTO receiver=matingService.selectOne(map);
+		System.out.println(String.format("%s님이 귀하의 %s와(과) %s(%s)의 만남 신청을 %s했습니다.", 
+				receiver.getMem_nickname(),sender.getAni_name(),
+				receiver.getAni_name(),receiver.getAni_kind(),keyword));
+		return String.format("%s님이 귀하의 %s와 %s(%s)의 만남 신청을 %s했습니다.", 
+				receiver.getMem_nickname(),sender.getAni_name(),
+				receiver.getAni_name(),receiver.getAni_kind(),keyword);
+	}///keywordGenerator
+	
+	public String fireBasePushAsyncTask(String target_no,String message) throws Exception {
+		Map map=new HashMap();
+		map.put("mem_no", target_no);
+		Map result = androidservice.selectOne(map);
+		if (result!=null && !result.get("MTK_TOKEN").equals("null")) {
+			System.out.println("FireBasePushAsyncTask");
+
+			String API_KEY = "AAAAHkvJ_3Y:APA91bG8v0lVhWawMh5bzuUjornLGLrJhlI6SQ1CkjOC82chQHKT2sC79WmlA-eZka6Gwe6sru3GegbZmwK1zv_M_ig9Qv3dgzLf4HrL_XJj42jhY5hhnI-eFB0dE_nkqdZCPmWmDJ5o";
+			String gcmURL = "https://fcm.googleapis.com/fcm/send";
+			
+			Sender sender = new Sender(API_KEY);
+	        Message msg = new Message.Builder() 
+	        		.addData("message",message)//데이타 메시지
+	                .addData("title","만나요 알림서비스")//데이타 타이틀       
+	                .build();
+	        ArrayList<String> token = new ArrayList<String>(); 
+	        token.add(result.get("MTK_TOKEN").toString());
+	        try {
+		        MulticastResult multicast = sender.send(msg,token,3);
+		        if(multicast != null)
+		        	return "true";
+	        }catch(Exception e) {
+	        	System.out.println(e.getMessage());
+	        	return "err";
+	        }
+		}/// if
+		return "false";
+	}/// FireBasePushAsyncTask
 }// class

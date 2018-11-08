@@ -100,17 +100,15 @@
 		<section class="member-settings-layout__content">
 			<div class="member-settings-layout__content-inner" style="height: 100%;">
 				<c:forEach var="dto" items="${list}">
-					<c:if test="${not fn:contains(draftString,dto.mating_no)}">
-						<div class="card col-12 col-md-3">
-							<img class="card-img-top" src="<c:url value='${dto.ani_pic}'/>" alt="Card image">
-							<div class="card-body">
-								<h2 class="card-title" style="color:#1ABC9C">${dto.ani_name}</h2>
-								<p class="card-text">${dto.ani_age}살 ${dto.ani_kind}</p>
-									
-								<a href="#" class="btn btn-primary moda" data-target="#modalIMG" data-toggle="modal" id="${dto.mating_no}">프로필 보기</a>
-							</div>
+					<div class="card col-12 col-md-3">
+						<img class="card-img-top" src="<c:url value='${dto.ani_pic}'/>" alt="Card image">
+						<div class="card-body">
+							<h2 class="card-title" style="color:#1ABC9C">${dto.ani_name}</h2>
+							<p class="card-text">${dto.ani_age}살 ${dto.ani_kind}</p>
+								
+							<a href="#" class="btn btn-primary moda" data-target="#modalIMG" data-toggle="modal" id="${dto.mating_no}">프로필 보기</a>
 						</div>
-					</c:if>
+					</div>
 				</c:forEach>
 			</div>
 		</section>
