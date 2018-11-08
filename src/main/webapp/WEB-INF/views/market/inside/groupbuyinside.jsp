@@ -32,10 +32,15 @@ function buyaccept(){
 	if (confirm("구입하시겠습니까?")){
 		
     alert("구입해주셔서 감사합니다");
+    /* <!--구입했을떄 id = buy_number 에서  ${record.buy_count}에  주어진 숫자를 추가해주는 로직 만들기 --> */
+    
+    bn = document.getElementById("buy_number"); 
     
     
     action="redirect:/market/groupbuy.aw";
-         
+        
+   
+    
 	}
 	else 
 		return false;
@@ -549,7 +554,7 @@ function changeimage1() {
 			<div class="col-md-12" style="border: 1px solid silver;margin-top:40px">
 				<h3 class="my-4">구매 개수 등록</h3>
 				<input type="button"  class="btn btn-info"  value="+" onclick="test()">			
-				<table style="width:30px;height:30px;margin-left:15px" ><tr><td id="test" >1</td></tr></table>
+				<table style="width:30px;height:30px;margin-left:15px" ><tr><td id=buy_number>1</td></tr></table>
 				<input type="button" class="btn btn-info"  value="-" onclick="test2()"><br/>
 				<input   class="btn btn-danger" type="button" value="구매"  style="magin-bottom:10px;margin-top:20px;margin-left:200px;" onclick="buyaccept();">
 		    
@@ -601,9 +606,16 @@ function changeimage1() {
       
     </div>
     <SCRIPT>getTime()</SCRIPT>
+	<!-- 프로그래스바 로직 만들자  -->
 	
-<p style="text-align:center;">%%개 달성시 공동구매성공입니다  </p>
-    <p style="text-align:center;">현재 몇% 달성중 입니다</p>
+	<if:"${record.goal}-${record.buy_count} >0" >
+<p style="text-align:center;"> ${record.goal}-${record.buy_count} 개 달성시 공동구매성공입니다  </p>
+       </if:>    
+                         
+     <!-- if 구문을 넣어서 공동구매  카운트 수가 0이 돼었다면 ?
+     <p style="text-align:center;"> 목표수량 달성했습니다 공동구매성공입니다  </p>  
+                              -->
+    <p style="text-align:center;">현재 몇 ${record.buy_count}/${record.goal} %달성중 입니다</p>
    
 
 <div class="progress-bar blue stripes col-ms-12">
