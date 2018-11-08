@@ -161,7 +161,6 @@ public class MemberController {
 
 		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
 		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
-		System.out.println(connection);
 
 		PlusOperations plusOperations = google.plusOperations();
 		Person profile = plusOperations.getGoogleProfile();
@@ -311,18 +310,13 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/passwordchange.aw",method=RequestMethod.POST)
     public String pwdchange(@RequestParam Map map,HttpServletResponse  response,HttpSession session) throws Exception {
-		map.put("mem_pw", map.get("newPassword"));
-		System.out.println(map.get("mem_no"));
-		System.out.println(map.get("mem_id"));
-		System.out.println(map.get("mem_pw"));
+		map.put("mem_pw", passwordEncoder.encode(map.get("newPassword").toString()));
 	
 		int change = service.changePassword(map);
-		System.out.println(change);
 		PrintWriter out = response.getWriter();
 		if(change==1) {
 			out.print("<script>console.log('비밀번호 변경이 완료되었습니다. 다시 로그인 해주시기 바랍니다.')</script>");
-			session.invalidate();
-			return "/main.aw";
+			return "forward:/signout.aw";
 		}
 		else {
 			out.print("<script>history.back();</script>");
