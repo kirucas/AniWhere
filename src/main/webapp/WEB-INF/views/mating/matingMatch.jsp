@@ -87,7 +87,7 @@
 <div class="container">
 	<div class="col-lg-12 text-center" style="margin-top:50px;">
 		<h2>${animal.ani_name}의 매칭 카드</h2>
-		<span>이곳에 스피너 같은걸 넣어서 이미 매칭중인 다른 동물로 바꿀 수 있도록 해둔다</span>
+<!-- 		<span>이곳에 스피너 같은걸 넣어서 이미 매칭중인 다른 동물로 바꿀 수 있도록 해둔다</span> -->
 		<label id="matingNo" hidden="true">${matingNo}</label>
 	</div>
 	<c:if test='${empty list}' var='result'>
