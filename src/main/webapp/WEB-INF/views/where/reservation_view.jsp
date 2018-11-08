@@ -33,10 +33,9 @@
 	font-size: 2em;
 }
 /* 나머지공간 지도로채우기 */
-#reservation_map{
+#map{
 	height:600px;
 	overflow: auto;
-	background-color: black;
 }
 #reservation_view div{
 	margin-top:10px;
@@ -69,8 +68,29 @@
 		</div>
 	</div>
 </div>
-<div id="reservation_map">
-	
+<div id="map">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8940a4eb3083abd07d038b8c2839831&libraries=services,clusterer,drawing"></script>
+<script>
+	$(document).ready(function() {
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new daum.maps.LatLng('${store.lat}','${store.lon}'), // 지도의 중심좌표
+		        draggable:false,
+		        level: 5 // 지도의 확대 레벨.
+	    	};  
+			// 지도와 클러스터러를 생성하는 메소드
+			var map = new daum.maps.Map(mapContainer, mapOption); 
+			
+			// 마커가 표시될 위치입니다 
+			var markerPosition  = new daum.maps.LatLng('${store.lat}','${store.lon}'); 
+            // 마커를 생성합니다
+            var marker = new daum.maps.Marker({
+                position: markerPosition
+            });
+         	// 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
+	});
+			</script>			
 </div>
 <div id="btn">
 	<a href="javascript:isDelete()" class="btn btn-danger">예약 취소</a>

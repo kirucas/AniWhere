@@ -99,8 +99,6 @@ btn_submit i{
 <script>
 $(function(){
 	var id;
-	var idck=0;
-	var nick=0;
 	$( "#frm" ).validate({
 		  rules: {
 		    mem_id: {
@@ -117,12 +115,10 @@ $(function(){
 	                async: true,
 	                success: function(data) {
 	                	if(data.result==0){
-	                		$('.errorTxt1').text('');
-	                		idck=1;
+	                		return true;
 	                	}
 	                	else{
-	                		idck=0;
-	                		$('.errorTxt1').text('사용할 수 없는 아이디입니다.');		                		
+	                		return false;
 	                	}
 	                }
 		    	}
@@ -145,12 +141,10 @@ $(function(){
 	                async: true,
 	                success: function(data) {
 	                	if(data.result==0){
-	                		$('.errorTxt5').text('');
-	                		nick=1;
+	                		return true;
 	                	}
 	                	else{
-	                		nick=0;
-	                		$('.errorTxt5').text('사용할 수 없는 닉네임입니다.');		                		
+	                		return false;
 	                	}
 	                }
 		    	}
@@ -176,7 +170,8 @@ $(function(){
 		  messages: {
 			  mem_id: {
 			    	required: "아이디를 입력해주세요.",
-			    	maxlength: "최대 30글자까지 가능합니다."
+			    	maxlength: "최대 30글자까지 가능합니다.",
+			    	remote: ""
 			    },
 			    mem_name:{
 			    	required: "이름을 입력해주세요.",
@@ -184,7 +179,8 @@ $(function(){
 			    },
 			    mem_nickname:{
 			    	required:"닉네임을 입력해주세요.",
-			    	maxlength: "최대 40글자까지 가능합니다."
+			    	maxlength: "최대 40글자까지 가능합니다.",
+			    	remote: "중복 닉네임입니다. 다른 닉네임을 써주세요."
 			    },
 			    mem_pw: {
 			      required: "비밀번호를 입력해주세요.",
@@ -213,20 +209,6 @@ $(function(){
 	            error.insertAfter(element);
 	          }
 	        }
-	});
-	$(document).on('click','#sign',function(){
-		if(idck==0){
-	        alert('아이디 중복입니다. 다른 아이디를 써주세요.');
-	        return false;
-	    }
-	    if(nick==0){
-	    	alert('닉네임 중복입니다. 다른 닉네임을 써주세요.');
-	    	return false;
-	    }
-	    else{
-	    	console.log("들어왔니");
-	    	$("#frm").submit();
-	    }
 	});
 });
 </script>

@@ -334,8 +334,11 @@ public class WhereController {
 	) throws Exception {
 		map.put("rv_no", map.get("rv_no"));
 		ReservationDTO dto = reservationservice.selectOne(map);
+		map.put("bizesid", dto.getStore_no());
+		StoreLocationDTO store = storelocservice.selectOne(map);
 		dto.setQr_link(AwsS3Utils.LINK_ADDRESS + dto.getQr_link());
 		model.addAttribute("dto",dto);
+		model.addAttribute("store",store);
 		return "where/reservation_view.tiles";
 	}
 	

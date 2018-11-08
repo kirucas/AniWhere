@@ -284,7 +284,7 @@ public class MemberController {
     }/////////////idcheck
     
     @ResponseBody
-	@RequestMapping(value="/member/idchk.aw", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value="/member/idchk.aw", method = RequestMethod.POST)
 	public String member_idchk(@RequestParam Map map) throws Exception {
 		int result = service.getTotalRecord(map);
 		Map resu = new HashMap<>();
