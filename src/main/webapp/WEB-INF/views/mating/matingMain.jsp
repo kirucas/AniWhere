@@ -85,7 +85,7 @@
     <section id="service-block-main" class="section" style="margin-bottom: 30px;margin-top : 30px;">
       <!-- Container Starts -->
       <div>
-        <div class="row">        
+        <div class="row" id="h3style">        
           <div class="col-sm-6 col-md-3">
             <!-- Service-Block-1 Item Starts -->
             <div class="service-item wow fadeInUpQuick animated" data-wow-delay=".5s">
