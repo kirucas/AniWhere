@@ -72,7 +72,7 @@
 <!-- 내용 시작 -->
 <div class="container">
 	<div>
-		<h2 class="member-settings-layout__title">여기에 제목이 들어간다</h2>
+		<h2 class="member-settings-layout__title">${animal.ani_name}의 신청 페이지</h2>
 	</div>
 	<!-- nav부분 -->
 		<div class="settings-navigator">
