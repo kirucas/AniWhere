@@ -25,8 +25,9 @@ function test2() {
 	if(n<=2){
 		td.innerHTML=1}
 	}
+	
 
-<!-- 구매시 허가구하는 로직 -->
+/* <!-- 구매시 허가구하는 로직 --> */
 
 function buyaccept(){	
 	if (confirm("구입하시겠습니까?")){
