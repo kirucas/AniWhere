@@ -20,6 +20,7 @@ public class BuySellDAO implements AllCommonService {
 	@Override
 	public List<BuySellDTO> selectList(Map map) {
 		return template.selectList("bsSelectList", map);
+		
 	}////////// selectList
 
 	@Override

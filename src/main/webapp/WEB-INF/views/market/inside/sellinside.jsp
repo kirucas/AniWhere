@@ -56,6 +56,7 @@
             $("#submit").val('수정');
             $('input[name=cmt_no]').val($(this).attr("title"));
       });
+      
       $('.commentDelete').click(function() {
             var cno_value = $(this).attr("title");
             $.ajax({

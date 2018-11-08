@@ -89,7 +89,7 @@ else {
          
            $('#summernote').summernote('editor.insertText', content);
           
-          if(count<3){
+          if(count<0){
         	  alert("사진은 최소 3장 이상 올려야 합니다");
         	 
           }else{
@@ -175,7 +175,7 @@ else {
 					
 						
 					<input
-						class="form-control" type="text" id="title" name="title"
+						class="form-control" type="text" id="title" name="title" value="${record.title}"
 						placeholder="제목을 입력하세요">
 						
 						
