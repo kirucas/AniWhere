@@ -416,7 +416,7 @@ public class MemberController {
 		}
 
 		map.put("mem_log", Integer.parseInt(map.get("mem_log").toString()));
-
+		map.put("mem_pw",passwordEncoder.encode("google"));
 		int signup = service.insert(map);
 
 		if (signup == 2) {
