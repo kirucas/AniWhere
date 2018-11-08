@@ -11,10 +11,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -298,11 +300,13 @@ public class MatingController {
 				sendList.add(dto);
 			}
 		}
+		model.addAttribute("animal",animalService.selectOne(map));
 		model.addAttribute("dftNoList",dftNoList);
 		model.addAttribute("sendList",sendList);
 		model.addAttribute("receiveList",receiveList);
 		// 결과화면으로
 		return "mating/draftingList.tiles";
+
 	}///draftingList
 	
 	// 신청받은 만남을 수락하거나 거절
@@ -399,4 +403,70 @@ public class MatingController {
 		}/// if
 		return "false";
 	}/// FireBasePushAsyncTask
+	
+	//안드로이드 매칭 클릭했을때
+		@ResponseBody
+		@RequestMapping(value = "/androidMatching.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+		public String androidMatching(@RequestParam Map map,HttpSession session) throws Exception {
+			if(map.get("matching").toString().equals("매칭")) {
+				int affect = matingService.insert(map);
+				if(affect == 1) {
+					return "매칭";
+				}else {
+					return "매칭실패";
+				}
+			}else {//매칭 취소
+				session.setAttribute("mem_no", map.get("mem_no"));
+				String mattingNO = getMatingNoToAniNo(map,session);
+				map.put("mating_no", mattingNO);
+				int dAffect = matingService.delete(map);
+				if(dAffect == 1) {
+					return "매칭취소";
+				}else {
+					return "매칭취소실패";
+				}
+			}
+		}
+		
+		@ResponseBody
+		@RequestMapping(value = "/androidMatchingFind.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+		public String androidMatchingFind(@RequestParam Map map) throws Exception {
+			String ani_species = map.get("ani_species").toString();
+			
+			if(ani_species.equals("1") || ani_species.equals("2") || ani_species.equals("4")) {
+				map.remove("ani_kind");
+				int end = matingService.getTotalRecord(map);
+				map.put("start", 1);
+				map.put("end", end);
+				
+			}else {
+				int end = matingService.getTotalRecord(map);
+				map.put("start", 1);
+				map.put("end", end);			
+			}
+			
+			List<MatingDTO> lists = matingService.selectList(map);
+			List<Map> collections = new Vector<Map>();
+			for (MatingDTO list : lists) {
+				if(!map.get("mem_no").equals(list.getMem_no())) {
+					Map record = new HashMap();
+					record.put("mating_no", list.getMating_no());
+					record.put("ani_no", list.getAni_no());
+					record.put("mating_loc", list.getMating_loc());
+					record.put("mating_regidate", list.getMating_regidate()+"");
+					record.put("ani_name", list.getAni_name());
+					record.put("ani_age", list.getAni_age());
+					record.put("ani_species", list.getAni_species());
+					record.put("ani_kind", list.getAni_kind());
+					record.put("ani_pic", list.getAni_pic());
+					record.put("mem_no", list.getMem_no());
+					record.put("mem_nickname", list.getMem_nickname());
+					collections.add(record);
+				}
+			}
+			System.out.println("androidMatchingFind=============");
+			System.out.println(JSONArray.toJSONString(collections));
+			return JSONArray.toJSONString(collections);
+		}
+
 }// class

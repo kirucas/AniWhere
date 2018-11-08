@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllCommentDTO;
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.animal.FreeBoardDTO;
 import com.animal.aniwhere.service.animal.TipBoardDTO;
 import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
@@ -38,7 +39,7 @@ import com.animal.aniwhere.web.board.FileUpDownUtils;
 @Controller
 public class BirdTipController {
 	
-	
+	//서비스 주입
 	@Resource(name="tipService")
 	private TipBoardServiceImpl tipservice;
 	
@@ -50,6 +51,7 @@ public class BirdTipController {
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
 	
+	//페이지 목록 출력용
 	@RequestMapping("/board/animal/bird/tip/list.aw")
 	public String list(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
@@ -178,12 +180,14 @@ public class BirdTipController {
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("file");
-		
 		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-		File file = new File(phisicalPath+File.separator+newFilename);
-		upload.transferTo(file);
-        return "/Upload/"+newFilename;
+		//File file = new File(phisicalPath+File.separator+newFilename);
+		
+		List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "tip_bird"); // S3  업로드
+		
+        return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
    }
+	//추천수
 	@ResponseBody
 	@RequestMapping(value="/animal/bird/tip/tip_hit.aw",method=RequestMethod.POST)
 	public String hit(@RequestParam Map map) throws Exception{
@@ -194,9 +198,8 @@ public class BirdTipController {
 		return "success";
 	}//////////////hit()
 	
-	///댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글///
 	
-	//tip_birdComment
+	//댓글 입력용
 	@ResponseBody
 	@RequestMapping(value = "/animal/birdTip/cmt_write.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
 	public String write(@RequestParam Map map, HttpSession session, Model model) throws Exception {
@@ -210,7 +213,8 @@ public class BirdTipController {
 		return map.get("no").toString();
 
 	}///////////////////
-
+	
+	//댓글 목록용
 	@ResponseBody
 	@RequestMapping(value = "/animal/birdTip/cmt_list.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
 	public String list(@RequestParam Map map, HttpSession model) throws Exception {
@@ -238,7 +242,8 @@ public class BirdTipController {
 
 		return JSONArray.toJSONString(comments);
 	}//////////////////
-
+	
+	//댓글 수정용
 	@ResponseBody
 	@RequestMapping(value = "/animal/birdTip/cmt_edit.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
 	public String update(@RequestParam Map map, HttpSession session) throws Exception {
@@ -253,7 +258,8 @@ public class BirdTipController {
 
 		return map.get("no").toString();
 	}////////////
-
+	
+	//댓글 삭제용
 	@ResponseBody
 	@RequestMapping(value = "/animal/birdTip/cmt_delete.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
 	public String delete(@RequestParam Map map, HttpSession session) throws Exception {
