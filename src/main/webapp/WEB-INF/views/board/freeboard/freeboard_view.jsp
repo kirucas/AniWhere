@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 <script>
 	var isDelete = function(){
 		if(confirm("글을 삭제 하시겠습니까?"))
@@ -181,18 +180,20 @@
 }
 
 </style>
+
+<!-- 내용 시작 -->
 <div class="container">
 	<div id="content">
 		<div id="view">
 			<div class="article">
 				<div class="article-header">
 					<div class="article__title">
-					<c:choose>
+						<c:choose>
 							<c:when test="${record.free_category eq '1'}">
 								<span>[잡담]</span>
 							</c:when>
 							<c:when test="${record.free_category eq '2'}">
-								<span>[정보]</span>		
+								<span>[정보]</span>
 							</c:when>
 							<c:when test="${record.free_category eq '3'}">
 								<span>[유머]</span>
@@ -205,18 +206,22 @@
 							</c:otherwise>
 						</c:choose>
 						${record.free_title}
-						<div style="float:right;">
+						<div style="float: right;">
 							<!-- 글에 대한 버튼들(자기가 쓴 글이면 수정과 삭제 가능) -->
 							<!-- a href="<c:url value='/ReplyBBS/BBS/Reply.bbs?no=${record.no}'/>" class="btn btn-success">답변</a> -->
 							<c:if test="${sessionScope.mem_no==record.mem_no }">
-								<a href="<c:url value='/security/animal/freeboard/edit.aw?no=${record.no}'/>" class="article-action__button button">수정</a>
-								<a href="javascript:isDelete()" class="article-action__button button button--red button--red--border">삭제</a>
+								<a
+									href="<c:url value='/security/animal/freeboard/edit.aw?no=${record.no}'/>"
+									class="article-action__button button">수정</a>
+								<a href="javascript:isDelete()"
+									class="article-action__button button button--red button--red--border">삭제</a>
 							</c:if>
-							<a href="<c:url value='/animal/freeboard.aw'/>" class="article-action__button button">목록</a>	
-							</div>
+							<a href="<c:url value='/animal/freeboard.aw'/>"
+								class="article-action__button button">목록</a>
+						</div>
 					</div>
 					<div class="article-meta">
-								
+
 						<div class="article-meta-list">
 							<div class="article-meta__item article-meta__item--name">
 								<a
@@ -242,17 +247,18 @@
 					</div>
 				</div>
 				<div class="article-content-wrap">
-					<div class="article-content">
-						${record.free_content}
-					</div>
+					<div class="article-content">${record.free_content}</div>
 				</div>
 				<div class="btnlike">
-						<div class="like-content">					
-							<button class="btn-secondary like-review" style="margin-bottom: 10px">
-							   <span aria-hidden="true" id="likebtn">♡</span>
-							</button>
-							<p style="text-align: center">※게시물이 마음에 들면 <span style="color: blue">추천버튼</span>을 눌러주세요!</p>
-						</div>
+					<div class="like-content">
+						<button class="btn-secondary like-review"
+							style="margin-bottom: 10px">
+							<span aria-hidden="true" id="likebtn">♡</span>
+						</button>
+						<p style="text-align: center">
+							※게시물이 마음에 들면 <span style="color: blue">추천버튼</span>을 눌러주세요!
+						</p>
+					</div>
 				</div>
 				<post-vote data-my_vote_score="0" data-downvote_score="3"
 					data-upvote_score="71"></post-vote>
@@ -262,22 +268,27 @@
 				</div>
 			</div>
 		</div>
-<div class="container border" style="margin-top: 15px;margin-bottom: 10px">
-	<div class="row">
-		<div class="col-sm-12" style="margin-top: 15px">
-			<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
-		</div>
-			<form id="frm" method="post">
-				<input type="hidden" id="cmt_no" name="cmt_no" value="${cmt_no}"/>
-				<input type="hidden" id="no" name="no" value="${record.no}"/>
-				<div class="form-row" style="width:100%">
-					<input style="margin-bottom:10px ;width:83%;margin-left: 20px;margin-top: 10px;" class="form-control" id="title" name="cmt_content"  type="text" size="180" placeholder="댓글을 입력 하세요" />
-					<input style="margin-top:10px;margin-left:10px;width:7%; height: 38px" type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
+		<div class="container border"
+			style="margin-top: 15px; margin-bottom: 10px">
+			<div class="row">
+				<div class="col-sm-12" style="margin-top: 15px">
+					<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
 				</div>
-		</div>
-			<div id="comments">
-			
+				<form id="frm" method="post">
+					<input type="hidden" id="cmt_no" name="cmt_no" value="${cmt_no}" />
+					<input type="hidden" id="no" name="no" value="${record.no}" />
+					<div class="form-row" style="width: 100%">
+						<input
+							style="margin-bottom: 10px; width: 83%; margin-left: 20px; margin-top: 10px;"
+							class="form-control" id="title" name="cmt_content" type="text"
+							size="180" placeholder="댓글을 입력 하세요" /> <input
+							style="margin-top: 10px; margin-left: 10px; width: 7%; height: 38px"
+							type="button" id="submit" class="btn btn-outline-primary"
+							value="등록" />
+					</div>
 			</div>
+			<div id="comments"></div>
 		</div>
 	</div>
 </div>
+<!-- 내용 끝 -->

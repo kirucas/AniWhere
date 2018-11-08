@@ -2,18 +2,18 @@ package com.animal.aniwhere.web.member;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.net.QCodec;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,6 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Sender;
-import com.google.zxing.qrcode.encoder.QRCode;
 
 @Controller
 public class MemberController {
@@ -249,9 +248,7 @@ public class MemberController {
 		MemberDTO dto = service.selectOne(map);
 		session.setAttribute("mem_id", map.get("mem_id"));
 		session.setAttribute("mem_no", dto.getMem_no());
-	
 		return "redirect:/";
-
 	}/// security
 	
 	// 소셜 로그인에 대한 로그인 처리
@@ -282,22 +279,57 @@ public class MemberController {
 	}////////////// signUp()
 	
     @ResponseBody
-	@RequestMapping(value="/member/nickchk.aw",method=RequestMethod.POST)
-    public String idcheck(@RequestParam Map map) {
-        int result = service.getTotalRecord(map);
-        Map resu = new HashMap<>();
-        resu.put("result", result);
-        return JSONObject.toJSONString(resu);
-    }/////////////idcheck
+	@RequestMapping(value="/member/idchk.aw", method = RequestMethod.POST)
+	public void idcheck(@RequestParam Map map,HttpServletResponse  response) throws Exception {
+		int result = service.getTotalRecord(map);
+        PrintWriter out = response.getWriter();
+        if(result==0)
+        	out.print(true);
+        else
+        	out.print(false);
+	}/////////////idcheck
     
     @ResponseBody
-	@RequestMapping(value="/member/idchk.aw", method = RequestMethod.POST)
-	public String member_idchk(@RequestParam Map map) throws Exception {
-		int result = service.getTotalRecord(map);
-		Map resu = new HashMap<>();
-        resu.put("result", result);
-        return JSONObject.toJSONString(resu);
-	}
+	@RequestMapping(value="/member/nickchk.aw",method=RequestMethod.POST)
+    public void nickcheck(@RequestParam Map map,HttpServletResponse  response) throws Exception {
+        int result = service.getTotalRecord(map);
+        PrintWriter out = response.getWriter();
+        if(result==0)
+        	out.print(true);
+        else
+        	out.print(false);
+    }/////////////nickcheck
+	
+    @ResponseBody
+	@RequestMapping(value="/member/pwdchk.aw",method=RequestMethod.POST)
+    public void pwdcheck(@RequestParam Map map,HttpServletResponse  response) throws Exception {
+		PrintWriter out = response.getWriter();
+		MemberDTO dto = service.selectOne(map);
+        out.print(passwordEncoder.matches(map.get("mem_pw").toString(),dto.getMem_pw()));
+    }/////////////pwdcheck
+	
+	
+	@RequestMapping(value="/member/passwordchange.aw",method=RequestMethod.POST)
+    public String pwdchange(@RequestParam Map map,HttpServletResponse  response,HttpSession session) throws Exception {
+		map.put("mem_pw", map.get("newPassword"));
+		System.out.println(map.get("mem_no"));
+		System.out.println(map.get("mem_id"));
+		System.out.println(map.get("mem_pw"));
+	
+		int change = service.changePassword(map);
+		System.out.println(change);
+		PrintWriter out = response.getWriter();
+		if(change==1) {
+			out.print("<script>console.log('비밀번호 변경이 완료되었습니다. 다시 로그인 해주시기 바랍니다.')</script>");
+			session.invalidate();
+			return "/main.aw";
+		}
+		else {
+			out.print("<script>history.back();</script>");
+			return "/";
+		}
+		
+    }/////////////pwdchange
 	
 	@RequestMapping("/signUpProcess.aw")
 	public String signUpProcess(@RequestParam Map map,@RequestParam List<String> mem_interani, HttpSession session, Model model) throws Exception {

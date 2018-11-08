@@ -176,7 +176,6 @@
            </h1>
            <p class="section-subcontent" style="font-size: 1.8em;">아래의 메뉴를 선택하면 해당 동물 페이지로 이동해요.</p>
         </div>
-    
       <div class="mainDiv" id="icon">
 	      <div class="card" style="width: 13.6rem;">
 	        <img class="card-img-top" style="height: 122px" src="<c:url value='/resources/images/pictures/main_dog.jpg'/>" alt="Card image cap">
@@ -297,7 +296,7 @@
        <!-- 뉴스 섹션 -->
     <section id="testimonial" class="section">
       <!-- Container Starts -->
-      <div>
+      <div class="container"> 
         <div class="row">
           <div class="col-sm-12" style="padding:0px;margin-top:30px;">
              <span style="font-weight: bold;margin-left:15%;font-size: 50px;">오늘은 동물들에게 어떤 일이 있었을까요?</span>
@@ -315,7 +314,7 @@
                    <img class="card-img-top" src="<c:url value='/resources/images/news1.jpg'/>"
                      alt="Card image cap">
                    <div class="card-body" style="text-align:center">
-                     <h4 class="card-title">스타견 전문훈련사 "강성호 교수" 반려동물 행동학 책 출간 예고</h4>
+                     <h4 class="card-title">스타견 전문훈련사</h4><h4>"강성호 교수"</h4><h4>반려동물 행동학 책 출간 예고</h4>
                      <p class="card-text">반려동물뉴스(CABN) 다가오는 3월 9일(금)에 강성호 교수의 책이 출간된다고 다음강사모는 밝혔다. 이 책은 강사모 최경선 회장이 감수를 진행했으며 그 동안 강성호 교수가 직접 필드에서 뛰면서 체험한 지식과 이론을 기반으로 완성된 책이다. 강성호 교수는 현재 서울호서예술실용전문학교의 전임교수로 재직중이며 반려동물행동학과 반려견 훈련에 대한 체계적인 후진 양성활동에 전념하고 있다. 다음강사모 담당자는 "반려인들의 눈높이를 맞추어 체계적으로 설명해 줄 수 있는 반려동물행동학 책이 나와 기쁘다"고 말했다.
                        </p>
                      
@@ -328,7 +327,7 @@
                    <img class="card-img-top" src="<c:url value='/resources/images/news2.jpg'/>"
                      alt="Card image cap">
                    <div class="card-body" style="text-align:center">
-                     <h4 class="card-title">'스카이펫파크’와 ‘라이프앤도그’가 함께 하는 반려동물을 위한 기부 캠페인</h4>
+                     <h4 class="card-title">'스카이펫파크’와 </h4><h4>‘라이프앤도그’가 함께 하는 </h4><h4>반려동물을 위한 기부 캠페인</h4>
                      <p class="card-text">
 ‘러브펫챌린지’는 반려동물 전용 방송 채널 ‘스카이펫파크’와 프리미엄 펫 매거진 ‘라이프앤도그’가 함께 하는 동물보호 기부 캠페인이다. 참여하는 연예인이 미션을 수행하고, 그 결과를 통해 마련된 사료를 동물 보호 단체에 전달하는 프로젝트이다. 사료는 ‘내추럴발란스’의 후원으로 동물보호 단체인 ‘케어(care)’에 기부된다.
 
@@ -344,7 +343,7 @@
                    <img class="card-img-top" src="<c:url value='/resources/images/news3.jpg'/>"
                      alt="Card image cap">
                    <div class="card-body" style="text-align:center">
-                     <h4 class="card-title">중국 쓰촨 산사태 현장에서 주인을 애타게 찾는 강아지 사연 "반려견의 눈물"</h4>
+                     <h4 class="card-title">중국 쓰촨 산사태 현장에서 </h4><h4>주인을 애타게 찾는 강아지 </h4><h4> "반려견의 눈물"</h4>
                      <p class="card-text">중국 쓰촨성 산사태 피해로 백구 강아지의 주인은 실종됐다. 이번 산사태는 100여명이 숨지거나 실종된 산사태로 중국 CGTN은 25일(일) 밝혔다. 주인을 찾기 위해 마을 콘크리트 더미 위에서 축 늘어져 주인을 찾고 있는 백구 강아지 영상이 다양한 매체의 채널로 현재 보도 중이다. 영상에서 구조대원들은 이 강아지에게 "너의 주인은 어디에 있니?"라며 메세지를 전달했으나, 주인을 애타게 찾는 강아지는 움직이지 않았다. 
                        한편, CGTN은 트위터 계정을 통해 많은 메세지를 전달했으며 이를 지켜본 많은 인민들의 심금을 울리기도 했다.</p>
                      
@@ -362,7 +361,7 @@
                    <img class="card-img-top" src="<c:url value='/resources/images/news4.jpg'/>"
                      alt="Card image cap">
                    <div class="card-body" style="text-align:center">
-                     <h4 class="card-title">다음카카오선정, 화제의 카페에 다음강사모 반려견 커뮤니티가 선정 됐다.</h4>
+                     <h4 class="card-title">다음카카오선정, </h4><h4>화제의 카페에 다음강사모</h4><h4> 반려견 커뮤니티가 선정 됐다.</h4>
                      <p class="card-text">오늘 다음카카오는 화제의 카페에 다음강사모 카페를 선정했다. 다음강사모는 현재 반려견에 대한 소통과 다양한 반려동물 문화에 대한 콘텐츠를 통해 회원들과 소통하고 있는 반려견 커뮤니티이다.
                      다음카카오는 "초보 견주 여기 모여라! 간단한 훈련법과 노령견 관리 함께 공부하고 보듬어 주세요"라는 내용으로 강사모 카페를 소개했다. 다음세대 강사모 최경선 대표는 "강사모 카페는 특별한 것을 하는 공간이 아니라 삶의 모습이 아름다웠으면 한다"고 말하며, "앞으로 다음세대 아이들에게 반려동물 문화에 대한 메세지를 함께 느끼고 공감하는 반려동물 문화콘서트도 함께 진행한다"고 말했다.
                        </p>
@@ -375,7 +374,7 @@
                    <img class="card-img-top" src="<c:url value='/resources/images/news5.jpg'/>"
                      alt="Card image cap">
                    <div class="card-body" style="text-align:center">
-                     <h4 class="card-title">전국 동물보호 활동가들이 한 자리에 모여 정치권에 동물보호 정책 발의 촉구</h4>
+                     <h4 class="card-title">전국 동물보호 활동가들이 </h4><h4>한 자리에 모여 정치권에 </h4><h4>동물보호 정책 발의 촉구</h4>
                      <p class="card-text">지난 4월 3일(월) 국내 동물보호단체 및 수의사협회 등이 모인 전국 동물보호 활동가 네트워크는 서울시 구로구 고척동에 위치한 고척 스카이돔 앞에서 기자회견을 열였다. 이번 기자회견은 “개식용 및 도살 금지법에 대한 제정과 동물보호법 강화 그리고 동물복지 선진국으로 만들어달라”는 메시지를 담고 있다.
                      이번 기자회견에 참가한 한국고양이수의사회(KSFM) 김재영 회장은 "유기견과 유기묘가 함께 살아가는 훌륭한 대통령이 선출되었으면 좋겠다"고 말했다. 또한, 전국동물보호 활동가 네트워크는 “동물학대에 잔인하고 끔찍한 일들이 많이 발생하고 있으나 수십만원의 벌금형이나 집행유예 등의 솜방망이 처벌이 반복되고 있다”면서 “동물 학대자에 대한 처벌강화가 시급하다”고 메시지를 전달했다.
                      한편, 더불어 민주당 통합연설회에는 많은 전국의 당원들이 집결되면서 전국에서 방문한 인파로 다소 혼잡하였으나, 동물보호에 열정이 있는 사람들의 많은 참여로 행사는 무사히 마무리 되었다. 지난달 22일에는 국내 주요 동물보호단체들이 더불어 민주당과 동물권 향상을 위한 정책협약을 맺었다.
@@ -394,7 +393,7 @@
                    <img class="card-img-top" src="<c:url value='/resources/images/news6.jpg'/>"
                      alt="Card image cap">
                    <div class="card-body" style="text-align:center">
-                     <h4 class="card-title">울산남구, 큰 돌고래의 눈물을 보았는가? 동물학대 논란이 불거질 전망이다.</h4>
+                     <h4 class="card-title">울산남구, </h4><h4>큰 돌고래의 눈물을 보았는가?</h4><h4> 동물학대 논란이 불거질 전망.</h4>
                      <p class="card-text">지난 13일 울산 남구는 장생포에 온 돌고래가 수입 5일만에 숨졌다고 밝혔다. 울산에서 2009년 문을 연 울산 고래생태체험관은 현재까지 6마리의 돌고래가 죽어 나가면서 동물 학대 논란이 불거질 상황에 놓였다. 울산 남구는 지난 13일 오후 9시 15분께 장생포 고래생태체험관으로 수입한 큰돌고래(4~5세·262m·184㎏·암컷)가 폐사했다고 전달했다.
                      폐사한 큰 돌고래는 지난 8일 오전 7시 일본 와카야마(和歌山)현 다이지(太地)정을 출발하여 한국에 약 32시간 만에 울산에 도착했다. 당시 뱃길 700㎞, 육로 300㎞ 등 1,000㎞를 이동하여 한국에 도착 했으며, 긴 이송 뒤 적응기를 거치던 돌고래는 13일 오전까지 별다른 이상이 없었다. 하지만, 지난 13일 오후 2시부터 먹이를 먹지 않는 이상증세를 보이며, 결국 오후 9시께부터 호흡곤란 증상을 보이다 15분 만에 사망했다고 담당자는 전달했다.
                        </p>
@@ -414,7 +413,7 @@
                    <img class="card-img-top" src="<c:url value='/resources/images/news7.jpg'/>"
                      alt="Card image cap">
                    <div class="card-body" style="text-align:center">
-                     <h4 class="card-title">감사! 부천시 강아지공장을 부천 유기동물 쉼터로 이전하는 블루엔젤봉사단의 리얼 행복스토리</h4>
+                     <h4 class="card-title">감사! 부천시 강아지공장을</h4><h4> 부천 유기동물 쉼터로 이전하는</h4><h4> 블루엔젤봉사단의 리얼 행복스토리</h4>
                      <p class="card-text">지난 25일 내추럴발란스 블루엔젤 봉사단 13기, 연예인 봉사단이 함께 부천에 있는 강아지공장의 강아지를 부천 유기동물 쉼터로 이동하는 봉사를 진행했다. 블루엔젤봉사단은 유기동물 70여 마리에 대해서 직접 이동봉사, 의료봉사, 시설봉사, 목욕봉사, 사료지원에 모든 부분을 내추럴발란스 코리와 임직원과 후원사 직원, 연예인 봉사단과 함께 아름다운 유기동물 봉사를 지원했다. 경기도 부천시 소사구 송내동에 위치한 부천 유기동물 쉼터는 내추럴발란스와 협력된 유기동물단체와 함께 체계적인 유기견 입양 캠페인을 진행하기로 했으며, 이 캠페인에 다음강사모 및 강사모뉴스가 적극적으로 SNS/블로그/카페 홍보를 지원하기로 공식적으로 협의했다.
                        </p>
                      
@@ -427,7 +426,7 @@
                    <img class="card-img-top" src="<c:url value='/resources/images/news8.jpg'/>"
                      alt="Card image cap">
                    <div class="card-body" style="text-align:center">
-                     <h4 class="card-title">개별 동물병원용 ‘맞춤형 모바일 매거진’, 「펫메이트」 출시</h4>
+                     <h4 class="card-title">개별 동물병원용 </h4><h4>‘맞춤형 모바일 매거진’,</h4><h4> 「펫메이트」 출시</h4>
                      <p class="card-text">동물병원의 경쟁력을 강화 할 수 있는 고객관리(CRM) 서비스가 출시돼 일선 병원의 관심을 모으고 있다. 매월 기존 내원 고객(반려동물 보호자)에게 개별 동물병원용 ‘맞춤형 모바일 매거진’ 링크를 스마트폰으로 전송하는 「펫메이트」 서비스다. 서비스의 핵심은 동물병원에서 반려동물 보호자에게 발송하는 문자메시지의 전달력을 높이는 것에 있다. 기존 문자메세지는 텍스트를 기반으로 보내지기 때문에 큰 영향력을 발휘하지 못했다. 단순히 예약 정보나 동물병원의 기타 소식을 보내는 형태였기 때문에 보호자가 흥미를 가질 요소가 현저히 부족했기 때문이다.
 										○ 개별 동물병원용 ‘맞춤형 모바일 매거진’, 「펫메이트」 출시
 										   - 흥미 요소와 시각적 주목 요소를 동시에 지닌 차별화된 고객관리 서비스 –

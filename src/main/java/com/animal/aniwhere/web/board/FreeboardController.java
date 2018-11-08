@@ -101,8 +101,6 @@ public class FreeboardController {
 		return "board/freeboard/freeboard_main.tiles";
 		
 	}////////// free_main
-	
-	
 	@RequestMapping("/animal/freeboard_count.aw")
 	public String free_main_count(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
@@ -162,8 +160,7 @@ public class FreeboardController {
 		model.addAttribute("nowPage", nowPage);
 		//뷰정보 반환]
 		return "board/freeboard/freeboard_main.tiles";
-		
-	}////////// free_main_count
+	}
 	
 	@RequestMapping("/animal/freeboard_hit.aw")
 	public String free_main_hit(Model model,

@@ -85,11 +85,9 @@ input[type=text]:not(.browser-default):focus.valid ~ label{
 input[type=password]:not(.browser-default):focus:not([readonly])+label{
 	color:white;
 }
-.error, .errorTxt1, .errorTxt5{
-	color:#ff7070;
-}
-.errorTxt1, .errorTxt5{
+.error{
 	font-family: 메이플스토리;
+	color:#ff7070;
 }
 btn_submit i{
 	padding: 0px 0px 0px 0px;
@@ -98,29 +96,17 @@ btn_submit i{
 </style>
 <script>
 $(function(){
-	var id;
 	$( "#frm" ).validate({
 		  rules: {
 		    mem_id: {
 		    	required: true,
 		    	maxlength: 30,
-		    	remote:{
-		    		data:{ 
-		    			"mem_id" : function(){return $('input[name=mem_id]').val()}
-	    			},
-		    		type: 'POST',
-		    		cache: false,
-	                url: "<c:url value='/member/idchk.aw'/>",
-	                dataType: 'json',
-	                async: true,
-	                success: function(data) {
-	                	if(data.result==0){
-	                		return true;
-	                	}
-	                	else{
-	                		return false;
-	                	}
-	                }
+		    	remote : {
+		    		type : "POST",
+		    		data : {
+		    			"mem_id": function(){ return $('#mem_id').val()}
+		    		},
+		    		url : "<c:url value='/member/idchk.aw'/>"
 		    	}
 		    },
 		    mem_name:{
@@ -130,23 +116,12 @@ $(function(){
 		    mem_nickname:{
 		    	required: true,
 		    	maxlength: 40,
-		    	remote:{
-		    		data:{ 
-		    			"mem_nickname" : function(){return $('input[name=mem_nickname]').val()}
-	    			},
-		    		type: 'POST',
-		    		cache: false,
-	                url: "<c:url value='/member/nickchk.aw'/>",
-	                dataType: 'json',
-	                async: true,
-	                success: function(data) {
-	                	if(data.result==0){
-	                		return true;
-	                	}
-	                	else{
-	                		return false;
-	                	}
-	                }
+		    	remote : {
+		    		type : "POST",
+		    		data : {
+		    			"mem_nickname": function(){ return $('#mem_nickname').val()}
+		    		},
+		    		url : "<c:url value='/member/nickchk.aw'/>"
 		    	}
 		    },
 		    mem_pw: {
@@ -171,7 +146,7 @@ $(function(){
 			  mem_id: {
 			    	required: "아이디를 입력해주세요.",
 			    	maxlength: "최대 30글자까지 가능합니다.",
-			    	remote: ""
+			    	remote: "중복된 아이디입니다. 다른 아이디를 입력해주세요."
 			    },
 			    mem_name:{
 			    	required: "이름을 입력해주세요.",
@@ -180,7 +155,7 @@ $(function(){
 			    mem_nickname:{
 			    	required:"닉네임을 입력해주세요.",
 			    	maxlength: "최대 40글자까지 가능합니다.",
-			    	remote: "중복 닉네임입니다. 다른 닉네임을 써주세요."
+			    	remote : "중복된 닉네임입니다. 다른 닉네임을 입력해주세요."
 			    },
 			    mem_pw: {
 			      required: "비밀번호를 입력해주세요.",
