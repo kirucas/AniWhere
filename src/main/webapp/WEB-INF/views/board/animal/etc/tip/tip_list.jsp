@@ -125,7 +125,7 @@
                         <div class="article-list-item-meta__item">
                            <span data-tooltip data-date="" title="">${record.dto.tip_regidate }</span>
                         </div>
-                        <c:if test="${record.mem_nickname eq null}" var="result">
+                        <c:if test="${record.dto.mem_nickname eq null}" var="result">
                            <div class="article-list-item-meta__item article-list-item-meta__item--author">
                               <span>탈퇴회원</span>
                            </div>
