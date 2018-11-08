@@ -49,13 +49,19 @@
 #button_div{
 	display:none;
 	position: absolute;
-	top:200px;
+	top:220px;
+	width: 203px;
+}
+#button_div a{
+	width: 100%;
 }
 .img_div:hover #button_div{
 	display: block;
 	position: absolute;
 	top: 200px;
-	left: 200px;
+}
+.img_div{
+	padding-top: 15px;
 }
 #ani_checkbox input{
 	margin : 0px 5px 0px 5px;
@@ -64,12 +70,15 @@
 </style>
 <script>
 function delete_ani(ani_no){
+	var con = confirm("정말로 삭제 하시겠습니까?");
 	$.ajax({
 		data: {"ani_no":ani_no},
         type: "POST",
         url : "<c:url value='/security/member/animal/delete.awa'/>",
         success: function() {
-			$('[id='+ani_no+']').remove();
+        	if(con){
+				$('[id='+ani_no+']').remove();
+        	}
         },
         error : function() {
            console.log("error");
@@ -79,6 +88,7 @@ function delete_ani(ani_no){
 var idck = 0;
 $(function(){
 	var ani = '${record.mem_interani}';
+	console.log(ani);
 	var arr = ani.split("");
 	for(var i=0;i<=arr.length;i++){
 		switch(arr[i]){
@@ -119,7 +129,7 @@ $(function(){
         $.ajax({
             async: true,
             type : 'POST',
-            data : {"nick":nick},
+            data : {"mem_nickname":nick},
             dataType : "json",
             url : "<c:url value='/member/nickchk.aw'/>",
             success : function(data) {
