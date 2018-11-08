@@ -83,19 +83,20 @@ public class MatingController {
 		for(AnimalDTO dto:matingList) {
 			map.put("ani_no",dto.getAni_no());
 			String mating_no=getMatingNoToAniNo(map, session); // 각 메이팅된 동물의 메이팅 번호를 알아낸다
-			System.out.println("mating_no:"+mating_no);
+			//System.out.println("mating_no:"+mating_no);
 			map.put("mating_no", mating_no);
 			List<Map> draftMapList=draftService.selectList(map); // 위에서 알아낸 메이팅 번호로 드래프트 리스트를 구해낸다
 			/*if(matingListToModel.contains(dto))
 				continue;
 			else */if(draftMapList.size()==0) {
 				matingListToModel.add(dto);
-				System.out.println("드래프트가 없음");
+				//System.out.println("드래프트가 없음");
 				continue;
-			} else System.out.println("드래프트가 있다"+draftMapList.size());
+			} //else System.out.println("드래프트가 있다"+draftMapList.size());
 			for(Map draft:draftMapList) {
 				if(!draft.get("APPLY").toString().equals("1")) { // 만남 신청중인게 단 하나라도 있으면
 					matingListToModel.add(dto); // 리스트에 담아서 날린다. 출력해야 하기 때문
+					//System.out.println(draft.get("APPLY"));
 					break;
 				}/// if
 			}/// for
@@ -143,18 +144,19 @@ public class MatingController {
 		// 임시
 		map.put("start",1);
 		map.put("end",matingService.getTotalRecord(map));
-		List<MatingDTO> matingList=matingService.selectList(map);
+		List<MatingDTO> matingList=matingService.selectList(map); // 반대성별의 메이팅 동물 얻어옴
 		List<MatingDTO> matingListToModel=new Vector<>();
 		for(MatingDTO dto:matingList) {
 			// 본인의 동물 거르기
 			if(dto.getMem_no().equals(session.getAttribute("mem_no")))
 				continue;
-			map.put("sending",true);
 			map.put("mating_no",dto.getMating_no());
 			map.put("start", 1);
 			map.put("end", draftService.getTotalRecord(map));
 			List<Map> draftList=draftService.selectList(map);
-			if(draftList.size()==0) matingListToModel.add(dto); 
+			if(draftList.size()==0) {
+				matingListToModel.add(dto);
+			}
 			for(Map draft:draftList) {
 				if(draft.get("APPLY").toString().equals("0"))
 					matingListToModel.add(dto);
@@ -196,7 +198,7 @@ public class MatingController {
 	@ResponseBody
 	@RequestMapping(value="/mating/showProfile.awa",produces="text/plain;charset=UTF-8")
 	public String showProfile(@RequestParam Map map,Model model) throws Exception {
-		System.out.println("matingNo="+map.get("mating_no"));
+		//System.out.println("matingNo="+map.get("mating_no"));
 		MatingDTO dtoMating=matingService.selectOne(map);
 		map.put("ani_no",dtoMating.getAni_no());
 		AnimalDTO dtoAnimal=animalService.selectOne(map);
@@ -221,7 +223,7 @@ public class MatingController {
 	// 메이팅 등록된 애완동물이 만남을 신청했을때
 	@RequestMapping("/securtiy/mating/draftInsert.aw")
 	public String drafting(@RequestParam Map map,HttpServletResponse response) throws Exception {
-		System.out.println(map.get("send_no")+", "+map.get("receive_no"));
+		//System.out.println(map.get("send_no")+", "+map.get("receive_no"));
 		
 		map.put("mating_no",map.get("send_no"));
 		map.put("sending", true);
@@ -242,7 +244,7 @@ public class MatingController {
 		MatingDTO one=matingService.selectOne(map);
 		// 드래프팅 하는 거 하면됨
 		int draftResult=draftService.insert(map);
-		System.out.println(draftResult==1?"입력성공":"입력실패");
+		//System.out.println(draftResult==1?"입력성공":"입력실패");
 		// 결과화면으로
 		return "forward:/mating/draftList.aw?mating_no="+map.get("send_no")+"&ani_no="+one.getAni_no();
 	}
@@ -286,8 +288,8 @@ public class MatingController {
 		draftList=draftService.selectList(map);
 		List<MatingDTO> sendList=new Vector<>();
 		for(Map draft:draftList) {
-			System.out.println(draft);
-			System.out.println(draft.get("APPLY"));
+			//System.out.println(draft);
+			//System.out.println(draft.get("APPLY"));
 			if(!draft.get("APPLY").toString().equals("0"))
 				continue;
 			map.put("mating_no", draft.get("RECEIVE_NO"));
@@ -374,7 +376,7 @@ public class MatingController {
 		map.put("mem_no", target_no);
 		Map result = androidservice.selectOne(map);
 		if (result!=null && !result.get("MTK_TOKEN").equals("null")) {
-			System.out.println("FireBasePushAsyncTask");
+			//System.out.println("FireBasePushAsyncTask");
 
 			String API_KEY = "AAAAHkvJ_3Y:APA91bG8v0lVhWawMh5bzuUjornLGLrJhlI6SQ1CkjOC82chQHKT2sC79WmlA-eZka6Gwe6sru3GegbZmwK1zv_M_ig9Qv3dgzLf4HrL_XJj42jhY5hhnI-eFB0dE_nkqdZCPmWmDJ5o";
 			String gcmURL = "https://fcm.googleapis.com/fcm/send";
@@ -391,7 +393,7 @@ public class MatingController {
 		        if(multicast != null)
 		        	return "true";
 	        }catch(Exception e) {
-	        	System.out.println(e.getMessage());
+	        	//System.out.println(e.getMessage());
 	        	return "err";
 	        }
 		}/// if
