@@ -395,8 +395,11 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/android.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	public String androidLogin(@RequestParam Map map, HttpSession session) throws Exception {
-
+	
 		MemberDTO dto = service.selectOne(map);
+		if(dto == null) {
+			return "널";
+		}
 		boolean flag = passwordEncoder.matches(map.get("mem_pw").toString(), dto.getMem_pw());
 		if (!flag) {
 			return "false";
@@ -409,14 +412,20 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/androidsignUpProcess.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	public String androidSignUp(@RequestParam Map map) throws Exception {
-
+				
 		MemberDTO dto = service.selectOne(map);
 		if (dto != null) {
 			return dto.getMem_id() + "," + dto.getMem_no();
 		}
 
-		map.put("mem_log", Integer.parseInt(map.get("mem_log").toString()));
-		map.put("mem_pw",passwordEncoder.encode("google"));
+		map.put("mem_pw",passwordEncoder.encode(map.get("mem_pw").toString()));
+		
+		System.out.println("androidsignUpProcess");
+		System.out.println(map.get("mem_pw"));
+		System.out.println(map.get("mem_id"));
+		System.out.println(map.get("mem_name"));
+		
+		
 		int signup = service.insert(map);
 
 		if (signup == 2) {
