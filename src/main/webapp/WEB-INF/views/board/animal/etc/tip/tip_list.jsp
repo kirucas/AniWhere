@@ -114,7 +114,7 @@
     			<c:forEach var="record" items="${list}" varStatus="loop">
 		    		<article class="article-list-item">
 					<div class="article-list-item__vote">
-						<div><span id="tip_no">${record.no}</span></div>
+						<div><span id="tip_no">${record.dto.no}</span></div>
 					</div>
 				<div class="article-list-item__content">
 					<a href="<c:url value='/animal/etc/tip/tip_view.aw?no=${record.dto.no}'/>" class="article-list-item__info">
@@ -147,7 +147,7 @@
 							<span id="tip_hit_text">추천수</span></br>
 						</div>
 						<div>
-							<span id="tip_hit">${record.tip_hit}</span>
+							<span id="tip_hit">${record.dto.tip_hit}</span>
 						</div>
 					</div>
 	    		</div>
