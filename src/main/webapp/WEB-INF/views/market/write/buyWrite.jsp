@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -128,19 +127,6 @@
 						<option value="3">파충류</option>
 						<option value="4">조류</option>
 						<option value="5">기타 포유류</option>
-					</select>
-					 
-					<label for="" class="">용도분류</label> 
-					<select id="use_listSelect"
-						class="select_filter"  name="use">
-					
-						<option value="사료및간식">사료및간식</option>
-						<option value="장난감">장난감</option>
-						<option value="보금자리">보금자리</option>
-						<option value="미용용품">미용용품</option>
-						<option value="의약품">의약품</option>
-						<option value="other">기타</option>
-
 					</select>
 
 				</p>

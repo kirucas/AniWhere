@@ -53,7 +53,6 @@ public class DogMovieController {
 		// 페이징을 위한 로직 시작]
 		// 전체 레코드 수
 		int totalRecordCount = service.getTotalRecord(map);
-		System.out.println(totalRecordCount);
 		// 시작 및 끝 ROWNUM구하기]
 		int start = (nowPage - 1) * PAGESIZE + 1;
 		int end = nowPage * PAGESIZE;
@@ -65,7 +64,6 @@ public class DogMovieController {
 		while (true) {
 			for (MovieBoardDTO dto : list) {
 				String content = dto.getMovie_content();
-				System.out.println("content:" + content);
 				String src = "<iframe";
 				int target_num = content.indexOf(src);
 
@@ -75,8 +73,7 @@ public class DogMovieController {
 				if (target_num != -1) {
 					tempResult = content.substring(target_num, content.indexOf("></iframe>") + "></iframe>".length());
 				String idAdded	= new StringBuffer(tempResult).insert(tempResult.lastIndexOf("src"), "id=\"player\" ").toString();
-					String enablejsApi = new StringBuffer(idAdded).insert(idAdded.indexOf("\"", 26), "?enablejsapi=1&rel=0").toString(); 
-					System.out.println("enablejsApi : "+enablejsApi);
+					String enablejsApi = new StringBuffer(idAdded).insert(idAdded.indexOf("\"", 41), "?enablejsapi=1&rel=0").toString();
 					dto.setMovie_tempsrc(enablejsApi);				
 				} 
 				else {
@@ -134,7 +131,6 @@ public class DogMovieController {
 	//수정폼으로 이동 및 수정 처리]
 		@RequestMapping("/security/animal/dog/movie/edit.aw")
 		public String movie_edit(Model model, @RequestParam Map map, HttpServletRequest req) throws Exception{
-			System.out.println("post방식 : " + req.getMethod().equals("POST"));
 			if(!req.getMethod().equals("POST")) {
 				//서비스 호출]
 				MovieBoardDTO dto = service.selectOne(map);
@@ -148,7 +144,6 @@ public class DogMovieController {
 			model.addAttribute("successFail", successFail);
 			model.addAttribute("WHERE","EDT");
 			model.addAttribute("no",map.get("no"));
-			System.out.println("model" +model);
 			return "/board/animal/dog/movie/movieMessage";
 		}//////////////////
 	
@@ -163,7 +158,6 @@ public class DogMovieController {
 	// content안에 있는 유튜브 소스와 내용을 순서대로 분리하여
 	private void setIframe(MovieBoardDTO dto) {
 		String content = dto.getMovie_content(); //content 얻기
-		System.out.println("content:" + content);
 		String src = "<iframe"; 
 		int target_num = content.indexOf(src); //<iframe 글자 수가 target_num
 		String tempResult, result;
@@ -171,17 +165,12 @@ public class DogMovieController {
 		if (target_num != -1) { //<iframe이 소스 안에 있다면...
 			//<iframe태그 내용만 도려내기
 			tempResult = content.substring(target_num, content.indexOf("></iframe>") + "></iframe>".length());
-			//grandResult에 embed-responsive로 변환
 			String idAdded	= new StringBuffer(tempResult).insert(tempResult.lastIndexOf("src"), "id=\"player\" ").toString();
-			String enablejsApi = new StringBuffer(idAdded).insert(idAdded.indexOf("\"", 26), "?enablejsapi=1&rel=0").toString();
+			String enablejsApi = new StringBuffer(idAdded).insert(idAdded.indexOf("\"", 41), "?enablejsapi=1&rel=0").toString();
+			//grandResult에 embed-responsive로 변환
 			String grandResult = enablejsApi.replace("note-video-clip","embed-responsive-item");
 			dto.setMovie_tempsrc(grandResult);
-		/*	
-			//<iframe>을 잘라낸 나머지를 내용으로 추출.
-			String netContent = content.replace(tempResult, "");
-			System.out.printf("netContent : %s", netContent);
-			dto.setMovie_content(netContent);
-			*/
+	
 		}
 	}
 	
@@ -192,12 +181,9 @@ public class DogMovieController {
 				//맵에서 table_name 넣기
 				String movie = "movie";
 				map.put("table_name", movie);
-				//서비스 호출]		
-				//한줄 댓글 작성자 아이디 설정
-				//map.put("id",session.getAttribute("id"));
-				//스프링 씨큐러티 적용
 				map.put("mem_no",session.getAttribute("mem_no"));
 			
+				//서비스 호출]		
 				cmtservice.insert(map);	
 				return map.get("no").toString();
 			}///////////////////
@@ -210,10 +196,6 @@ public class DogMovieController {
 				map.put("table_name", movie);
 				//서비스 호출]
 				List<AllCommentDTO> comments=cmtservice.selectList(map);
-				System.out.println("comments.size() :"+comments.size());
-				//JSONArray.toJSONString(comments) 시
-				//[{"NO":2,"ONELINECOMMENT":"댓글2","CPOSTDATE":2018-09-12 10:15:38.0,"CNO":3,"ID":"LEE","NAME":"이길동"},{"NO":2,"ONELINECOMMENT":"댓글1","CPOSTDATE":2018-09-12 10:14:44.0,"CNO":2,"ID":"PARK","NAME":"박길동"}]
-				//날짜를 2018-09-12 10:15:38.0에서 " 2018-09-12"형태로 변경
 				
 				// 댓글
 				List<Map> collections = new Vector<Map>();
@@ -226,11 +208,7 @@ public class DogMovieController {
 					record.put("cmt_no", cmtdto.getCmt_no());
 					collections.add(record);
 				}
-				/*
-				for(AllCommentDTO comment:comments) {
-					comment.put("CPOSTDATE",comment.get("CPOSTDATE").toString().substring(0,10));
-				}
-				*/
+				
 				return JSONArray.toJSONString(collections);
 			}/////////////////////
 			
@@ -239,7 +217,6 @@ public class DogMovieController {
 			@RequestMapping(value="/security/animal/dog/movie/commentEdit.awa",produces="text/html; charset=UTF-8")
 			public String update(@RequestParam Map map) throws Exception{
 				map.put("table_name", "movie");
-				System.out.println("map :"+map);
 				//서비스 호출]
 				cmtservice.update(map);
 				return map.get("no").toString();
@@ -252,7 +229,6 @@ public class DogMovieController {
 				map.put("table_name", "movie");
 				//서비스 호출]
 				cmtservice.delete(map);
-				//return map.get("cmt_no").toString();
 				return map.get("no").toString();
 			}/////////////////////////
 	

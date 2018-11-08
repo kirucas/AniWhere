@@ -32,12 +32,15 @@ import com.animal.aniwhere.service.impl.member.MemberServiceImpl;
 @Controller
 public class WhereController {
 
+	//서비스 주입
 	@Resource(name = "storeLocService")
 	private StoreLocationServiceImpl storelocservice;
 
+	//서비스 주입
 	@Resource(name = "reservationService")
 	private ReservationServiceImpl reservationservice;
-	
+
+	//서비스 주입
 	@Resource(name="memberService")
 	private MemberServiceImpl memberService;
 
@@ -46,12 +49,13 @@ public class WhereController {
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
 
+	//예약 메인 페이지
 	@RequestMapping("/where/main.aw")
 	public String where_main() throws Exception {
 		return "where/whereMain.tiles";
-	}////////// mating_main
+	}// mating_main
 
-	// 전체 갖고오기 ajax
+	//db에 있는 상점들 전체 갖고오기 ajax
 	@RequestMapping(value = "/security/where/map/total.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	@ResponseBody
 	public String whole(Model model, @RequestParam Map map, HttpServletResponse response) throws Exception {
@@ -75,9 +79,9 @@ public class WhereController {
 			collections.add(record);
 		} //// for
 		return JSONArray.toJSONString(collections);
-	}///////////// whole
+	}// whole
 
-	// 옆에 하나 선택
+	//메인 페이지에서 옆에 메뉴를 선택했을 떄 해당하는 정보들 db에서 가져오기
 	@RequestMapping(value = "/security/where/map/select.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	@ResponseBody
 	public String select(Model model, @RequestParam Map map, HttpServletResponse response) throws Exception {
@@ -104,9 +108,9 @@ public class WhereController {
 			} //// inner for
 		} /// outter for
 		return JSONArray.toJSONString(collections);
-	}///////////// select
+	}// select
 
-	// 옆에 하나 선택
+	//전체 애들중에 반경 2km안에 있는 아이들의 정보들 얻기
 	@RequestMapping(value = "/security/where/map/near.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	@ResponseBody
 	public String near(Model model, @RequestParam Map map, HttpServletResponse response,
@@ -131,23 +135,23 @@ public class WhereController {
 			record.put("hoNo", list.getHono());
 
 			// 반경 계산
-
 			double diskill = 0;
 			double mylat = Double.parseDouble(mylats);
 			double mylon = Double.parseDouble(mylons);
 			diskill = LocationDistance(mylat, mylon, Double.parseDouble(record.get("lat").toString()),
 					Double.parseDouble(record.get("lon").toString()));
-
+			// 반경 계산한것을 레코드에 추가
 			record.put("diskill", String.format("%.1f", diskill));
 
+			//2km이내에 있는 정보들만 전송
 			if (diskill <= 2.0) {
 				collections.add(record);
 			}
 		} //// for
 		return JSONArray.toJSONString(collections);
-	}///////////// near
+	}// near
 
-	// 옆에 하나 선택
+	//전체 선택말고 다른 메뉴를 선택 했을 때 반경 10km이내에 있는 정보들을 리스트에 뿌려주기
 	@RequestMapping(value = "/security/where/map/nearselect.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	@ResponseBody
 	public String nearselect(Model model, @RequestParam Map map, HttpServletResponse response,
@@ -174,23 +178,23 @@ public class WhereController {
 				record.put("hoNo", list.getHono());
 
 				// 반경 계산
-
 				double diskill = 0;
 				double mylat = Double.parseDouble(mylats);
 				double mylon = Double.parseDouble(mylons);
 				diskill = LocationDistance(mylat, mylon, Double.parseDouble(record.get("lat").toString()),
 						Double.parseDouble(record.get("lon").toString()));
-
+				// 반경 계산한것을 레코드에 추가
 				record.put("diskill", String.format("%.1f", diskill));
-
+				// 반경 10km이내 것들만 전송
 				if (diskill <= 10.0) {
 					collections.add(record);
 				}
 			} //// inner for
 		} //// outter for
 		return JSONArray.toJSONString(collections);
-	}///////////// near
+	}// nearselect
 
+	//거리 계산 메소드
 	public double LocationDistance(double mylat, double mylon, double otherlat, double otherlon) {
 		// 마일(Mile) 단위
 		// double distanceMile =
@@ -221,7 +225,7 @@ public class WhereController {
 		 * @return
 		 */
 		return distanceKiloMeter;
-	}
+	}// LocationDistance
 
 	double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
 
@@ -240,19 +244,19 @@ public class WhereController {
 		}
 
 		return (dist);
-	}
+	}// distance
 
 	// This function converts decimal degrees to radians
 	private double deg2rad(double deg) {
 		return (deg * Math.PI / 180.0);
-	}
+	}// deg2rad
 
 	// This function converts radians to decimal degrees
 	private double rad2deg(double rad) {
 		return (rad * 180 / Math.PI);
-	}
+	}// rad2deg
 
-	// 예약 페이지ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
+	//지도에서 예약버튼을 눌렀을 때 예약하기 페이지
 	@RequestMapping("/security/where/reservation.awa")
 	public String reservation_write_form(Model model, @RequestParam Map map) throws Exception {
 		model.addAttribute("store_no", map.get("store_no"));
@@ -291,8 +295,9 @@ public class WhereController {
 		
 		// 뷰정보 반환]
 		return "where/Message";
-	} // reservate
+	}// reservate
 
+	//예약확인 페이지
 	@RequestMapping("/security/where/reservation_check.aw")
 	public String reservate_check(Model model, HttpServletRequest req,// 페이징용 메소드에 전달
 			HttpSession session,
@@ -323,10 +328,9 @@ public class WhereController {
 		model.addAttribute("nowPage", nowPage);
 		// 뷰정보 반환]
 		return "where/reservation_list.tiles";
-		
-		
-		
 	}// reservate_check
+	
+	//예약 뷰 페이지
 	@RequestMapping("/security/where/reservation_view.aw")
 	public String reservate_view(Model model, HttpServletRequest req, // 페이징용 메소드에 전달
 			@RequestParam Map map, // 검색용 파라미터 받기
@@ -340,7 +344,7 @@ public class WhereController {
 		model.addAttribute("dto",dto);
 		model.addAttribute("store",store);
 		return "where/reservation_view.tiles";
-	}
+	}// reservate_view
 	
 	@RequestMapping("/security/where/reservation/delete.aw")
 	public String reservate_cancel(Model model, HttpServletRequest req,@RequestParam Map map) throws Exception {
@@ -351,8 +355,9 @@ public class WhereController {
 		else
 			model.addAttribute("del", 0);
 		return "where/Message";
-	}
+	}// reservate_cancel
 	
+	//-ajax json타입 자바 컨트롤러에서 파싱하는법- ajax 필수
 	// @RequestMapping(value= "/where/map/radius.awa", method=
 	// RequestMethod.POST,produces="text/plain; charset=UTF-8")
 	// @ResponseBody
@@ -388,7 +393,7 @@ public class WhereController {
 	// return jsonObj.toJSONString();
 	// }//////////////mapdata
 
-	// 임의의 메소드 (사용하지ㅏㄶ음)
+	// REST API 파싱한 소스 (사용하진 않았음)
 	// @RequestMapping(value= "/where/map/D09A01.aw", method= RequestMethod.POST)
 	// @ResponseBody
 	// public String d09a01(@RequestParam Map map,HttpServletResponse response)
@@ -473,6 +478,28 @@ public class WhereController {
 		}
 		System.out.println(JSONArray.toJSONString(collections));
 		return JSONArray.toJSONString(collections);	
-	}// reservate_check
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/androidReservate.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	public String androidReservate(Model model, @RequestParam Map map, HttpSession session, HttpServletRequest req) throws Exception {
+		
+		String qr_link = AwsS3Utils.namingForS3("QRCodes");		
+		map.put("qr_link", qr_link);
+		
+		int insert = reservationservice.insert(map);
+		if (insert == 0) {
+			return "0";
+		}
+		
+		boolean result_QRCreate = QRCode_Generator.createQRCodeData(map, req, storelocservice, memberService, reservationservice);
+		
+		if(!result_QRCreate) {
+			reservationservice.delete(map);
+			return "QR";
+		}
+		
+		return "true";
+	}
 
 }
