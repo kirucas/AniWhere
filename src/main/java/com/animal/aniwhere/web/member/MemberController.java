@@ -2,18 +2,18 @@ package com.animal.aniwhere.web.member;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.net.QCodec;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,6 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Sender;
-import com.google.zxing.qrcode.encoder.QRCode;
 
 @Controller
 public class MemberController {
@@ -282,23 +281,26 @@ public class MemberController {
 	}////////////// signUp()
 	
     @ResponseBody
-	@RequestMapping(value="/member/nickchk.aw",method=RequestMethod.POST)
-    public String idcheck(@RequestParam Map map) {
-        int result = service.getTotalRecord(map);
-        Map resu = new HashMap<>();
-        resu.put("result", result);
-        return JSONObject.toJSONString(resu);
-    }/////////////idcheck
-    
-    @ResponseBody
 	@RequestMapping(value="/member/idchk.aw", method = RequestMethod.POST)
-	public String member_idchk(@RequestParam Map map) throws Exception {
+	public void idcheck(@RequestParam Map map,HttpServletResponse  response) throws Exception {
 		int result = service.getTotalRecord(map);
-		Map resu = new HashMap<>();
-        resu.put("result", result);
-        return JSONObject.toJSONString(resu);
-	}
-	
+        PrintWriter out = response.getWriter();
+        if(result==0)
+        	out.print(true);
+        else
+        	out.print(false);
+	}/////////////idcheck
+    
+	@RequestMapping(value="/member/nickchk.aw",method=RequestMethod.POST)
+    public void nickcheck(@RequestParam Map map,HttpServletResponse  response) throws Exception {
+        int result = service.getTotalRecord(map);
+        PrintWriter out = response.getWriter();
+        if(result==0)
+        	out.print(true);
+        else
+        	out.print(false);
+    }/////////////nickcheck
+    
 	@RequestMapping("/signUpProcess.aw")
 	public String signUpProcess(@RequestParam Map map,@RequestParam List<String> mem_interani, HttpSession session, Model model) throws Exception {
 		System.out.println(map.get("mem_pw"));
