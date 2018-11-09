@@ -287,22 +287,7 @@
 									
             </c:forEach>
                    
-     <%--  <div class="col-md-4">
-         <div class="card mb-4">
-            <img class="card-img-top" src="<c:url value='/resources/images/maketimages/pet3.jpg'/>" style="width:300px;height:300px" alt="Card image cap">
-            <div class="card-body">
-               <h5 class="card-title">[급매!]급매 말머리가 들어간 DB 제목</h5>
-               <p class="card-text">DB연동 내용</p>
-              
-  		<jsp:include page="../template/ProgressBarsmall2.jsp" />
-        <a class="btn btn-outline-dark btn-sm" href="<c:url value='/market/groupbuyinside.aw?groupbuy_no=${record.dto.no}'/>">상세보기</a>
-               
-            </div>
-         </div>
-      </div> --%>
-      
-      
-         
+
       </div>
    	
    <h3 class="pb-3 mb-4 font-italic border-bottom">

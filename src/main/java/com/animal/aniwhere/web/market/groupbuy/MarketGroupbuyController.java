@@ -115,7 +115,6 @@ public class MarketGroupbuyController {
 				         temp.put("table_name","group_buy");
 				         temp.put("no", dto.getNo());
 				         
-				         
 				         record.put("cmtCount", cmtService.commentCount(temp));
 				         
 				         collect.add(record);
@@ -233,22 +232,20 @@ public class MarketGroupbuyController {
 				
 				@ResponseBody
 				@RequestMapping(value="/groupbuy/buycount.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-				public String groupbuy_buycount(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
+				public void groupbuy_buycount(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 										
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("no",map.get("groupbuy_no"));
 					map.put("buy_count", map.get("buy_number"));
 					
+					
 					int insert = gblistservice.insert(map); 
 					if(insert==1) {
 						GroupBuyingListDTO dto = gblistservice.selectOne(map);
-						model.addAttribute("dto", dto);
+						 
 					}
-					
-					  //dto. 
-					return map.get("no").toString();
-					
-					
+								 
+					//return JSONArray.toJSONString();
 					
 				}////////// groupbuy_buycount
 				
@@ -369,6 +366,7 @@ public class MarketGroupbuyController {
 				               record.put("mem_no", dto.getMem_no());         
 
 				               comments.add(record);
+				               
 				            }   
 				         return JSONArray.toJSONString(comments);
 				      }//////////////////

@@ -37,21 +37,20 @@ function test2() {
 function buyaccept(){	
 	if (confirm("구입하시겠습니까?")){
 		var buy_number = $('#buy_number').text();
-    /* <!--구입했을떄 id = buy_number 에서  ${record.buy_count}에  주어진 숫자를 추가해주는 로직 만들기 --> */
-    var no = '${record.no}';
-    $.ajax({  
-           url:"<c:url value='/groupbuy/buycount.awa'/>",
-           data:{"buy_number":buy_number, "groupbuy_no":no},         
-           type:'post',  
-           dataType : 'json',
-           success:function(data){ 
-        	   console.log("성공!!")
-        	   
-        	   alert(data.buy_number+"개 구입 감사");
-           }, error : function() {
-           console.log("error");}
-	 });
-    
+	    /* <!--구입했을떄 id = buy_number 에서  ${record.buy_count}에  주어진 숫자를 추가해주는 로직 만들기 --> */
+	    var no = '${record.no}';
+	    $.ajax({  
+	           url:"<c:url value='/groupbuy/buycount.awa'/>",
+	           data:{"buy_number":buy_number, "groupbuy_no":no},         
+	           type:'post',  
+	           dataType : 'json',
+	           success:function(data){ 
+	        	   console.log("성공!!")
+	        	   
+	        	   alert(buy_number+"개 구입 감사");
+	           }, error : function() {
+	           console.log("error");}
+		 });
     }
 	else 
 		return false;
