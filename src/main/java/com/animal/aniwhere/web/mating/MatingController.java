@@ -180,7 +180,11 @@ public class MatingController {
 		if(temp.startsWith("insert")) {
 			temp=temp.replace("insert", "");
 			map.put("ani_no", temp);
-			matingService.insert(map);
+			int affect = matingService.insert(map);
+			if(affect ==1 ) {
+				map.put("ani_checking", "1");
+				animalService.update(map);
+			}
 			return "insert"+map.get("ani_no").toString();
 		} else {
 			temp=temp.replace("delete", ""); // 들어온 동물번호
@@ -189,7 +193,11 @@ public class MatingController {
 			
 			if(matingNo!=null) {
 				map.put("mating_no", matingNo);
-				matingService.delete(map);
+				int affect = matingService.delete(map);
+				if(affect == 1) {
+					map.put("ani_checking", "0");
+					animalService.update(map);
+				}
 				return "delete"+map.get("ani_no").toString();
 			}
 		}/// if
