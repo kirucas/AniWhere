@@ -411,6 +411,8 @@ public class MatingController {
 			if(map.get("matching").toString().equals("매칭")) {
 				int affect = matingService.insert(map);
 				if(affect == 1) {
+					map.put("ani_checking", "1");
+					animalService.update(map);
 					return "매칭";
 				}else {
 					return "매칭실패";
@@ -421,6 +423,8 @@ public class MatingController {
 				map.put("mating_no", mattingNO);
 				int dAffect = matingService.delete(map);
 				if(dAffect == 1) {
+					map.put("ani_checking", "0");
+					animalService.update(map);
 					return "매칭취소";
 				}else {
 					return "매칭취소실패";

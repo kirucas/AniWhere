@@ -564,6 +564,7 @@ public class MemberController {
 			record.put("ani_pic", list.getAni_pic());
 			record.put("mem_name", list.getMem_name());
 			record.put("mem_nickname", list.getMem_nickname());
+			record.put("ani_checking", list.getAni_checking());
 			collections.add(record);
 		}
 		System.out.println("myanimal=============");
