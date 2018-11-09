@@ -225,14 +225,12 @@ public class MarketGroupbuyController {
 					return "forward:/market/groupbuy/temporarily.aw";
 					
 				}////////////////
-				
-			
-				
+											
 				// buy_count 에 들어간 숫자를 공동구매 갯수에 추가 한다 그리고 돌아간다
 				
 				@ResponseBody
 				@RequestMapping(value="/groupbuy/buycount.awa",produces="text/html; charset=UTF-8",method = RequestMethod.POST)
-				public void groupbuy_buycount(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
+				public String groupbuy_buycount(@RequestParam Map map,HttpSession session,Model model,HttpServletRequest req) throws Exception {
 										
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("no",map.get("groupbuy_no"));
@@ -240,13 +238,13 @@ public class MarketGroupbuyController {
 					
 					
 					int insert = gblistservice.insert(map); 
-					if(insert==1) {
+					System.out.println(map.get("buy_no"));
+					if(insert>0) {
 						GroupBuyingListDTO dto = gblistservice.selectOne(map);
-						 
+						return String.valueOf(insert);
 					}
-								 
-					//return JSONArray.toJSONString();
-					
+						
+					return null;
 				}////////// groupbuy_buycount
 				
 				

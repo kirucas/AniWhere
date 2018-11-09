@@ -155,7 +155,7 @@
 						<th style="width: 50px">등록일</th>
 						<th style="width: 50px">목표수 </th>
 						<th style="width: 50px">데드라인</th>
-				<th style="width: 50px">데드라인</th>
+				<th style="width: 50px">buy_count</th>
 					</tr>
 				</thead>
 				
