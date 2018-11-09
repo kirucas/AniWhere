@@ -94,5 +94,8 @@ public class AnimalDTO {
 	public void setAni_gender(String ani_gender) {
 		this.ani_gender = ani_gender;
 	}//////////
+
+	
+	
 	
 }//////////////////// AnimalDTO

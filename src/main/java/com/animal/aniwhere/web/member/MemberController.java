@@ -557,7 +557,7 @@ public class MemberController {
 			record.put("mem_no", list.getMem_no());
 			record.put("ani_name", list.getAni_name());
 			record.put("ani_age", list.getAni_age());
-			record.put("ani_gender", list.getAni_age());
+			record.put("ani_gender", list.getAni_gender());
 			record.put("ani_species", list.getAni_species());
 			record.put("mem_name", list.getMem_name());
 			record.put("ani_kind", list.getAni_kind());

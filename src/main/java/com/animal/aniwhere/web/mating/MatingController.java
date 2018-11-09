@@ -109,7 +109,7 @@ public class MatingController {
 	}
 	
 	// 메소드로 뽑자 동물번호/유저번호로 메이팅넘버 뽑기
-	public String getMatingNoToAniNo(Map map,HttpSession session) {
+	public String getMatingNoToAniNo(Map map,HttpSession session) {	
 		AnimalDTO animal=animalService.selectOne(map);
 		// 현재 신청중인 동물 메이팅 넘버 얻어오기
 		map.put("mem_no", session.getAttribute("mem_no"));
@@ -428,42 +428,55 @@ public class MatingController {
 			}
 		}
 		
+		
 		@ResponseBody
 		@RequestMapping(value = "/androidMatchingFind.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
-		public String androidMatchingFind(@RequestParam Map map) throws Exception {
+		public String androidMatchingFind(@RequestParam Map map,HttpSession session) throws Exception {
 			String ani_species = map.get("ani_species").toString();
 			
-			if(ani_species.equals("1") || ani_species.equals("2") || ani_species.equals("4")) {
-				map.remove("ani_kind");
-				int end = matingService.getTotalRecord(map);
-				map.put("start", 1);
-				map.put("end", end);
-				
-			}else {
-				int end = matingService.getTotalRecord(map);
-				map.put("start", 1);
-				map.put("end", end);			
-			}
+			if(ani_species.equals("1") || ani_species.equals("2") || ani_species.equals("4")) 
+				map.remove("ani_kind");			
 			
-			List<MatingDTO> lists = matingService.selectList(map);
-			List<Map> collections = new Vector<Map>();
-			for (MatingDTO list : lists) {
-				if(!map.get("mem_no").equals(list.getMem_no())) {
-					Map record = new HashMap();
-					record.put("mating_no", list.getMating_no());
-					record.put("ani_no", list.getAni_no());
-					record.put("mating_loc", list.getMating_loc());
-					record.put("mating_regidate", list.getMating_regidate()+"");
-					record.put("ani_name", list.getAni_name());
-					record.put("ani_age", list.getAni_age());
-					record.put("ani_species", list.getAni_species());
-					record.put("ani_kind", list.getAni_kind());
-					record.put("ani_pic", list.getAni_pic());
-					record.put("mem_no", list.getMem_no());
-					record.put("mem_nickname", list.getMem_nickname());
-					collections.add(record);
+			map.put("start",1);
+			map.put("end",matingService.getTotalRecord(map));
+			List<MatingDTO> matingList=matingService.selectList(map); // 반대성별의 메이팅 동물 얻어옴
+			
+			List<MatingDTO> matingListToModel=new Vector<>();
+			for(MatingDTO dto:matingList) {
+				// 본인의 동물 거르기
+				if(dto.getMem_no().equals(map.get("mem_no")))
+					continue;
+				map.put("mating_no",dto.getMating_no());
+				map.put("start", 1);
+				map.put("end", draftService.getTotalRecord(map));
+				List<Map> draftList=draftService.selectList(map);
+				if(draftList.size()==0) {
+					matingListToModel.add(dto);
+					continue;
 				}
-			}
+				for(Map draft:draftList) {
+					if(draft.get("APPLY").toString().equals("0"))
+						matingListToModel.add(dto);
+				}
+			}/// for
+									
+			List<Map> collections = new Vector<Map>();
+			for (MatingDTO list : matingListToModel) {								
+				Map record = new HashMap();
+				record.put("mating_no", list.getMating_no());
+				record.put("ani_no", list.getAni_no());
+				record.put("mating_loc", list.getMating_loc());
+				record.put("mating_regidate", list.getMating_regidate()+"");
+				record.put("ani_name", list.getAni_name());
+				record.put("ani_age", list.getAni_age());
+				record.put("ani_species", list.getAni_species());
+				record.put("ani_kind", list.getAni_kind());
+				record.put("ani_pic", list.getAni_pic());
+				record.put("mem_no", list.getMem_no());
+				record.put("mem_nickname", list.getMem_nickname());
+				collections.add(record);
+			}		
+			
 			System.out.println("androidMatchingFind=============");
 			System.out.println(JSONArray.toJSONString(collections));
 			return JSONArray.toJSONString(collections);
