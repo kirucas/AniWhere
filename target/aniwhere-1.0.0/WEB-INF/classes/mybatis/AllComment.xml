@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.AllComment">
+
+	<select id="commentSelectList" parameterType="java.util.Map" resultType="CommentDTO">
+		SELECT tn.*, mem_nickname
+		FROM ${table_name}_cmt tn JOIN member mb ON tn.mem_no = mb.mem_no
+		WHERE origin_no = #{no}
+		ORDER BY cmt_no
+	</select>
+	
+	<insert id="commentInsert" parameterType="java.util.Map">
+		INSERT INTO ${table_name}_cmt(cmt_no, origin_no, mem_no, cmt_content, regidate)
+		VALUES(seq_${table_name}_cmt.nextval, #{no}, #{mem_no}, #{cmt_content}, #{today})
+	</insert>
+	
+	<update id="commentUpdate" parameterType="java.util.Map">
+		UPDATE ${table_name}_cmt
+		SET cmt_content=#{cmt_content}
+		WHERE cmt_no=#{cmt_no}
+	</update>
+	
+	<delete id="commentDelete" parameterType="java.util.Map">
+		DELETE FROM ${table_name}_cmt
+		WHERE cmt_no=#{cmt_no}
+	</delete>
+	
+	<delete id="commentDeleteAll" parameterType="java.util.Map">
+		DELETE FROM ${table_name}_cmt
+		WHERE origin_no=#{no}
+	</delete>
+	
+	<select id="commentCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM ${table_name}_cmt
+		WHERE origin_no=#{no}
+	</select>
+	
+	<update id="addHitCountComment" parameterType="java.util.Map">
+		UPDATE ${table_name}_cmt
+		SET hit=hit + 1
+		WHERE origin_no=#{no}
+	</update>
+	
+</mapper>
