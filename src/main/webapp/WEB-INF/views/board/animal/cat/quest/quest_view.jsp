@@ -112,9 +112,9 @@
 	<div class="row border-bottom" style="padding-left:23px;padding-top: 10px;margin-bottom: 0px">
 		<h4>질문 게시판</h4>
 	</div>
-	<div class="row" style="padding-left:20px;padding-top: 5px;margin-bottom: 0px;height:45px">
-		<h1>${record.quest_title}</h1>
-	</div>	
+	<div class="col-md-12 row" style="padding-left:20px;padding-top: 5px;margin-bottom: 0px;height:45px">
+		<p style="font-size:25px">${record.quest_title}</p>
+	</div>
 	<div class="row" style="padding: 10px;padding-bottom: 0px;text-align:left;padding-right:0px" >
 		<div class="col-md-1" style="text-align:left;padding-right:0px;" >
 			 &nbsp; &nbsp;글쓴이 &nbsp;&nbsp;|
