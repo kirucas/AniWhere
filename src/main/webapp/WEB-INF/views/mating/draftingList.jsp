@@ -59,6 +59,10 @@
 	       		dataType: "text",
 	       		success : function(data) {
 	       			$('#'+dft_no).closest('.card').remove();
+	       			if(data.indexOf("ok")!=-1) {
+	       				alert("만남을 수락했습니다. 목록으로 이동합니다.");
+	       				location.href="<c:url value='/security/mating/main.aw'/>";
+	       			}
 	           	},
 	           	error : function(error) {
 	           		console.log("에러발생",error);
