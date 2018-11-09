@@ -324,8 +324,8 @@ public class MatingController {
 			map.put("mating_no",applyMap.get("SEND_NO").toString());
 			MatingDTO sender=matingService.selectOne(map);
 			
-			System.out.println("승낙 FCM 발사:"+map.get("dft_no"));
-			System.out.println(fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(applyMap,"수락")));
+			//System.out.println("승낙 FCM 발사:"+map.get("dft_no"));
+			fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(applyMap,"수락"));
 			// 수락을 하는 순간 같은 리시버이면서 0인 목록들을 전부 2로 수정
 			map.put("mating_no",applyMap.get("RECEIVE_NO"));
 			map.put("start", 1);
@@ -341,8 +341,8 @@ public class MatingController {
 					sender=matingService.selectOne(map);
 					// 거절 FCM 보내기
 					if(sender.getMem_no()!=session.getAttribute("mem_no")) {
-						System.out.println("거절 FCM 발사:"+abort.get("DFT_NO"));
-						System.out.println(fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(abort,"거절")));
+						//System.out.println("거절 FCM 발사:"+abort.get("DFT_NO"));
+						fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(abort,"거절"));
 					}
 				}
 			}/// for
@@ -356,7 +356,7 @@ public class MatingController {
 			Map applyMap=draftService.selectOne(map);
 			map.put("mating_no",applyMap.get("SEND_NO").toString());
 			MatingDTO sender=matingService.selectOne(map);
-			System.out.println(fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(applyMap,"거절")));
+			fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(applyMap,"거절"));
 			return "no"+affected;
 		}/// if
 	}/// draftApply
@@ -367,9 +367,9 @@ public class MatingController {
 		MatingDTO sender=matingService.selectOne(map);
 		map.put("mating_no",draftMap.get("RECEIVE_NO"));
 		MatingDTO receiver=matingService.selectOne(map);
-		System.out.println(String.format("%s님이 귀하의 %s와(과) %s(%s)의 만남 신청을 %s했습니다.", 
+		/*System.out.println(String.format("%s님이 귀하의 %s와(과) %s(%s)의 만남 신청을 %s했습니다.", 
 				receiver.getMem_nickname(),sender.getAni_name(),
-				receiver.getAni_name(),receiver.getAni_kind(),keyword));
+				receiver.getAni_name(),receiver.getAni_kind(),keyword));*/
 		return String.format("%s님이 귀하의 %s와 %s(%s)의 만남 신청을 %s했습니다.", 
 				receiver.getMem_nickname(),sender.getAni_name(),
 				receiver.getAni_name(),receiver.getAni_kind(),keyword);
