@@ -155,6 +155,7 @@
 						<th style="width: 50px">등록일</th>
 						<th style="width: 50px">목표수 </th>
 						<th style="width: 50px">데드라인</th>
+				<th style="width: 50px">데드라인</th>
 					</tr>
 				</thead>
 				
@@ -167,6 +168,7 @@
 						<td>2018-08-17</td>
 						<td>목표수</td>
 						<td>데드라인</td>
+						
 					</tr>					
 					<c:forEach var="record" items="${list}" varStatus="loop">
 				
@@ -209,6 +211,7 @@
 							<td><span id="regidate">${record.dto.regidate}</span></td>
 							<td><span id="goal">${record.dto.goal}</span></td>
 							<td><span id="deadline">${record.dto.deadline}</span></td>
+							<td><span id="ㅇㅇㅇ">${record.dto.buy_count}</span></td>
 						</tr>
 						
 					</c:forEach>
@@ -307,7 +310,7 @@
    </h3>
        
    </div>
-   
+
 ${pagingString}   
    
    <!-- 검색용 UI -->

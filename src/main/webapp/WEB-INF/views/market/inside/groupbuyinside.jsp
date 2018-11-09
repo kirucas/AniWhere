@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+
 
 <script>
 	var isDelete = function() {
@@ -24,7 +27,8 @@ function test2() {
 	var n = Number(td.innerHTML); 
 	td.innerHTML = n - 1; 
 	if(n<=2){
-		td.innerHTML=1}
+		td.innerHTML=1;
+		}
 }
 </script>
 <script>
@@ -32,28 +36,23 @@ function test2() {
 /* <!-- 구매시 허가구하는 로직 --> */
 function buyaccept(){	
 	if (confirm("구입하시겠습니까?")){
-	 var buy_number = document.getElementById("buy_number");
+		var buy_number = $('#buy_number').text();
     /* <!--구입했을떄 id = buy_number 에서  ${record.buy_count}에  주어진 숫자를 추가해주는 로직 만들기 --> */
-    
-    $.ajax({
-   
+    var no = '${record.no}';
+    $.ajax({  
            url:"<c:url value='/groupbuy/buycount.awa'/>",
-           data:buy_number,         
-           type:'post',           
+           data:{"buy_number":buy_number, "groupbuy_no":no},         
+           type:'post',  
+           dataType : 'json',
            success:function(data){ 
-        	   //data를 ui에 id에 연결된 값만큼 더해줘야 한다 
-        	   alert(data.buy_number);
+        	   console.log("성공!!")
         	   
-        	
-        	   alert("구입해주셔서 감사합니다");
-        	
-        	   
-       }, error : function() {
+        	   alert(data.buy_number+"개 구입 감사");
+           }, error : function() {
            console.log("error");}
 	 });
     
     }
-	
 	else 
 		return false;
 }
@@ -105,6 +104,7 @@ function buyaccept(){
 	            $("#submit").val('수정');
 	            $('input[name=cmt_no]').val($(this).attr("title"));
 	      });
+	      
 	      $('.commentDelete').click(function() {
 	            var cno_value = $(this).attr("title");
 	            $.ajax({
@@ -113,7 +113,7 @@ function buyaccept(){
 	                dataType:'text',
 	                type:'post',
 	                success:function(key){
-	                   showComments(key);                   
+	                showComments(key);                   
 	                }
 	             });
 	      });
@@ -216,7 +216,18 @@ function buyaccept(){
 //시간 구하기 표시하기 로직
 function getTime() { 
 now = new Date(); 
-dday = new Date(2018,10,10,18,00,00); 
+
+var time ="${record.deadline}";
+
+//2018-11-21 이렇게 뜸...
+//요안에 dead_line 넣어야 함  넣기만 하면 돼는데...
+
+ var yyyy= time.substring(0,4);
+ var mm=time.substring(5,7);
+ var dd= time.substring(8,11); 
+
+dday = new Date(yyyy,mm-1,dd,18,00,00); 
+
 
 //원하는 날짜, 시간 정확하게 초단위까지 기입.
 days = (dday - now) /1000/60/60/24; 
@@ -432,9 +443,7 @@ function addZeros(num, digit) {// 자릿수 맞춰주기
     </style>
 <!-- 프로그래바를 위한 로직끝 -->
 
- 
   </head>
-
 
     <div class="container">
 
@@ -460,7 +469,6 @@ function addZeros(num, digit) {// 자릿수 맞춰주기
 				</c:choose>
 				<small>${record.title}</small>
 			</h1>
-
 		</div>
       <!-- Portfolio Item Row -->
       <div class="row">
@@ -476,9 +484,7 @@ function addZeros(num, digit) {// 자릿수 맞춰주기
 				//console.log("이미지들어올떄마다 출력 됌");
 				$('img[name=product]').eq(index).prop("src",value);
 												
-			});
-			
-		
+			});		
 });
 
       		
@@ -489,12 +495,9 @@ function addZeros(num, digit) {// 자릿수 맞춰주기
          <!--  <img class="img-fluid" src="http://placehold.it/750x500" alt="" > -->
            <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="" style="width: 700px; height: 500px;">
         </div>
-        <div class="col-md-4" style="border:1px solid silver">
-        
-         	<h3 class="my-3">판매자 아이디: ${record.mem_nickname}</h3>
-       
-          <h3 class="my-3" id="animal_code">
-          
+        <div class="col-md-4" style="border:1px solid silver">        
+         	<h3 class="my-3">판매자 아이디: ${record.mem_nickname}</h3>      
+          <h3 class="my-3" id="animal_code">          
 					관련태그:
 					<c:choose>
 						<c:when test="${record.animal_code eq '1'}">
@@ -579,17 +582,19 @@ function addZeros(num, digit) {// 자릿수 맞춰주기
 	<!-- 프로그래스바 로직 만들자  -->
 	
 	<%-- "${record.goal}-${record.buy_count} >0" > 만약 필요갯수가 0보타 클시에는 보여주고 --%>
-<p style="text-align:center;"> ${record.goal}-${record.buy_count} 개 달성시 공동구매성공입니다  </p>
-   
-                         
+	<%-- ${record.buy_count} 이사람 한개 뿐만이 아니라 모든 buy_count 종합 group_buy의  buy_no 테이블의 모든값 구해야 함  --%>
+	
+<p style="text-align:center;"> ${record.goal}-${dto.buy_count} 개 달성시 공동구매성공입니다  </p>
+                                                                
      <!-- if 구문을 넣어서 공동구매  카운트 수가 0이 돼었다면 ?
      <p style="text-align:center;"> 목표수량 달성했습니다 공동구매성공입니다  </p>  
                               -->
-    <p style="text-align:center;">현재 몇 ${record.buy_count}/${record.goal} %달성중 입니다</p>
+                              
+    <p style="text-align:center;">현재 몇 ${dto.buy_count}/${record.goal} %달성중 입니다</p>
    
-
 <div class="progress-bar blue stripes col-ms-12">
-    <span style="width: 80%"></span> 
+                     
+    <span style="width: (${dto.buy_count}/${record.goal}*100)"></span> 
     
     <!-- 안쪽에 % 숫자 로직으로 조절 -->
 </div>
