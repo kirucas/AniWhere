@@ -14,9 +14,14 @@
 	<select id="memberCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM member
-		<if test="mem_nickname != null">
-			WHERE mem_nickname = #{mem_nickname}
-		</if>
+		<choose>
+			<when test="mem_nickname != null">
+				WHERE mem_nickname = #{mem_nickname}
+			</when>
+			<when test="mem_id != null">
+				WHERE mem_id = #{mem_id}
+			</when>
+		</choose>
 	</select>
 	
 	<select id="memberSelectList" parameterType="java.util.Map" resultType="MemberDTO">
@@ -43,28 +48,32 @@
 		</if>
 	</select>
 	
-	<insert id="memberInsert">
+	<insert id="memberInsert" parameterType="java.util.Map">
 		INSERT ALL
 			INTO member VALUES(seq_member.nextval, #{mem_id}, #{mem_pw}, #{mem_name}, #{mem_nickname}, #{mem_gender}, #{mem_log}, #{mem_interani})
 			INTO member_security(mem_no) VALUES(seq_member.currval)
 			SELECT * FROM dual
 	</insert>
 	
-	<update id="memberUpdate">
+	<update id="memberUpdate" parameterType="java.util.Map">
 		UPDATE member
 		SET mem_id=#{mem_id}, mem_pw=#{mem_pw}, mem_name=#{mem_name}, mem_nickname=#{mem_nickname}, mem_gender=#{mem_gender}, mem_interani=#{mem_interani}
 		WHERE mem_no=#{mem_no}
 	</update>
 	
-	<delete id="memberDelete">
+	<delete id="memberDelete" parameterType="java.util.Map">
 		DELETE member
 		WHERE mem_no=#{mem_no}
 	</delete>
 	
-	<update id="visitCount">
-		UPDATE member_visit_count
-		SET visit_count = visit_count + 1
-		WHERE TO_CHAR(today) = TO_CHAR(sysdate)
+	<update id="changePassword" parameterType="java.util.Map">
+		UPDATE member
+		SET mem_pw=#{mem_pw}
+		WHERE
+		<choose>
+			<when test="mem_id != null">mem_id=#{mem_id}</when>
+			<when test="mem_no != null">mem_no=#{mem_no}</when>
+		</choose>
 	</update>
-	
+
 </mapper>

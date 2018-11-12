@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:if test="${not empty mem_no }">
-<script>
-	alert("${mem_no}");
-</script>
-</c:if>
+
 <style>
 
 .margin-top-10 {
@@ -32,14 +28,9 @@ function pre_view() {
 	ntWin.document.write("<html><body>");
 	 
 	ntWin.document.getElementsByTagName("body")[0].style.fontFamily ="메이플스토리";
-	/* 게시판 명 */
-//	ntWin.document.write("<br/>" + document.forms[0].movie_panel.value + "<br/>");
 	 
 	/* 제목 */
 	ntWin.document.write("<br/>제목 : " + document.forms[0].movie_title.value + "<br/><hr />");
-	
-	/* 닉네임 */
-//	ntWin.document.write("<br/>작성자 : 닉네임" + ${mem_id} + " [작성 후 닉네임으로 변경 됨]<br/>");
 
 	/* 내용 컨텐츠 */
 	ntWin.document.write("<br/>" + document.forms[0].movie_content.value + "<br/>");
@@ -145,7 +136,6 @@ function pre_view() {
 				placeholder: '영상을 첨부해주시고 내용을 반드시 작성해주세요.',
 				// set focus to editable area after initializing summernote
 				toolbar : [
-				// [groupName, [list of button]]
 				[ 'style', [ 'bold', 'italic', 'underline', 'clear' ] ],
 						[ 'font', [ 'strikethrough' ] ],
 						[ 'fontsize', [ 'fontsize' ] ],

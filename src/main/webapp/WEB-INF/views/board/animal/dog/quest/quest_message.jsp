@@ -18,6 +18,10 @@
 
 <script>
 	<c:choose>
+		<c:when test="${WHERE != 'EDT' and successFail >= 1}">
+			alert("${successMessage}");
+			location.replace("<c:url value='${successMoveUrl}'/>");
+		</c:when>
 		<c:when test="${successFail==1}">
 			alert("${successMessage}");
 			location.replace("<c:url value='${successMoveUrl}'/>");

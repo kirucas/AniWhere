@@ -11,55 +11,20 @@
     <title>부트스트랩  템플릿</title>
 	
 
-    
-
-
+   
 
 </head>
 <body>
 <div class="container">
-
 <!-- top 와야하는 자리 -->
-
-
-
-	<header> </header>
-
-	
 	
 		<jsp:include page="../market/template/MaketTop.jsp" />
-	
-	<div class="card mb-5" style="margin-top: 50px" >
-	
-	
-		<jsp:include page="../market/template/BuyPartMain.jsp" />
-	
-		</div>
-
-<div>
-<div class="card mb-5" style="margin-top: 50px">
-		<div class="card-header" class="border border-primary">판매게시판</div>
-	<jsp:include page="../market/template/SellPartMain.jsp" />
-	
-	
-	
-	</div>
-
-	</div>
-	
-	<div class="card mb-12" style="margin-top: 50px">
-		<div class="card-header" class="border border-primary">공동구매게시판</div>
-	<jsp:include page="../market/template/WithBuyMain.jsp" />
-	</div>
-
-	
+			
 	<!-- 푸터 와야하는 자리 -->
 	<div style="margin-top: 50px;">
 	
 	</div>
 	
-	
-
 </div>
 </body>
 

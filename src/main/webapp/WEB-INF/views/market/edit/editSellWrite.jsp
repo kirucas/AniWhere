@@ -1,21 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <head>
+
+<!-- 
+$( "#target" ).submit(function( event ) {
+	  alert( "Handler for .submit() called." );
+	  event.preventDefault();
+	});
+-->
+
 <script>
+	
+   $(function() {
+	   var count = 0;	    	
+	  	   	   
+      $('#summernote').summernote({
+    	 maxHeight:null,
+    	 minHeight:null,
+    	 height:630,
+         callbacks : {
+            onImageUpload : function(files, editor, welEditable) {
+               for (var i = files.length - 1; i >= 0; i--) {
+                  sendFile(files[i], this);	
+               }
+            }
+         }
+      });
+          
+      function sendFile(file, el, wel) {
+     	 if(count>3){
+            	 alert('사진은 최대 4장까지 가능합니다')
+            	 return false;
+          }
+      
+  
+         var form_data = new FormData();
+         form_data.append('file', file);
+         $.ajax({
+            data: form_data,
+            type: "POST",
+            url : "<c:url value='/market/sell/Upload.aw'/>",
+            cache: false,
+            contentType: false,
+            processData: false,
+            
+            success: function(url) {
+           	 //$('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
+           	 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />", function (image) {
+           		  image.css('width',150);
+           		  image.css('height',150);
+					  image.attr('name', 'sellpic');
+				});
+           	 $('img[name=product]').eq(count).attr("src","<c:url value='"+url+"' />");
+                count++;
+                console.log("success");
+           },
+           error : function() {
+              console.log("error");
+           }
+                        
+        });
+     }    
+  });
+     
+</script>
 
-
-
-
+<script>
 function check() {
+
     var isAttached = $('#summernote').summernote('code');
     if (fr.title.value == "") {
        alert("제목을 입력해 주세요.");
        fr.title.focus();
        return false;
-
     } 
     
     else if (fr.title.value.length > 50) {
@@ -44,102 +103,40 @@ function check() {
          alert("거래방법을  입력해주세요.");
          fr.way.focus();
          return false;
+
       } 
     
-    else if (fr.phone.value=="") {
+     else if (fr.phone.value=="") {
          alert("연락처 를 입력해주세요.");
          fr.phone.focus();
          return false;
+
       } 
-       
     else if (fr.content.value == "") {
        alert('내용을 입력하세요.');
        return false;
-    }	      
+    }	    
+   
 else {
-	
-	
-	fr.action="<c:url value='/security/market/sellupdate.aw?sell_no=${record.no}'/>"
+	console.log("여기까지 오나?1");
+	 var content="\r\n==========수정후 상세사항================\r\n";
+     content+='제목:'+$('#title').val()+'\r\n';
+     content+='판매물품명:'+$('#name').val()+'\r\n';
+	    content+='희망가:'+$('#price').val()+'원\r\n';
+	    content+='거래기간:'+$('#time').val()+'일 까지\r\n';
+	    content+='거래방법:'+$('#way').val()+'\r\n'; 
+     content+='연락처:'+$('#phone').val()+'\r\n'; 
+     content+='====================================\r\n';
+   
+     $('#summernote').summernote('editor.insertText', content);
+ 	console.log("여기까지 오나?2");
+     fr.action="<c:url value='/security/market/sellupdate.aw?sell_no=${record.no}'/>"
  return true;
-
 }
     
 }
-
 </script>
-<!-- 
-$( "#target" ).submit(function( event ) {
-	  alert( "Handler for .submit() called." );
-	  event.preventDefault();
-	});
--->
-
-<script>
-	
-   $(function() {
-	   
-	   $('#enterBtn').click(function(){
-		 
-		   var content="========판매현황 정리입니다.============\r\n";
-		   content+='제목:'+$('#title').val()+'\r\n';
-		   content+='판매물품명:'+$('#name').val()+'\r\n';
- 		   content+='희망가:'+$('#price').val()+'원\r\n';
- 		   content+='거래기간:'+$('#time').val()+'일 까지\r\n';
-		   content+='거래방법:'+$('#way').val()+'\r\n'; 
-           content+='연락처:'+$('#phone').val()+'\r\n'; 
-           content+='====================================\r\n';
-           
-           $('#summernote').append(content);
-           
-           fr.action="<c:url value='/security/market/sellupdate.aw?sell_no=${record.no}'/>";
-           	   
-	   });
-	   	   
-      $('#summernote').summernote({
-    	 maxHeight:null,
-    	 minHeight:null,
-    	 height:630,
-         callbacks : {
-            onImageUpload : function(files, editor, welEditable) {
-               for (var i = files.length - 1; i >= 0; i--) {
-                  sendFile(files[i], this);	
-               }
-            }
-         }
-      });
-      
-      function sendFile(file, el, wel) {
-         var form_data = new FormData();
-         form_data.append('file', file);
-         $.ajax({
-            data: form_data,
-            type: "POST",
-            url : "<c:url value='/market/sell/Upload.aw'/>",
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='/"+url+"' />");
-            },
-            error : function() {
-               console.log("error");
-            }
-         });
-      }
-          
-   });
-   
-   
-   
-   
-   
-</script>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-<title>쓰기게시판 내부</title>
-
-
+		
 
 <!-- include summernote css/js-->
 <link
@@ -178,19 +175,6 @@ $( "#target" ).submit(function( event ) {
 						<option value="5" ${record.animal_code == 5 ? "selected" : "" }>기타 포유류</option>
 					</select>
 					
-					 <label for="" class="">용도분류</label> 
-					 <select id="use_listSelect"
-					class="select_filter" >
-					
-					<option value="food">사료및간식</option>
-					<option value="playtoy">장난감</option>
-					<option value="home">보금자리</option>
-					<option value="buty">미용용품</option>
-					<option value="medicine">의약품</option>
-					<option value="other">기타</option>
-				</select>
-
-
 			</p>
 			</div>
 		
@@ -216,12 +200,9 @@ $( "#target" ).submit(function( event ) {
 							max="2020-01-01"  class="form-control" type="date"
 							id="time" required />
 							
-							<!--  거래기간 넣어주고 제한 걸어주는 로직 만들어야 함  -->
-							
+							<!--  거래기간 넣어주고 제한 걸어주는 로직 만들어야 함  -->							
 					</div>
-
 					<!--  도로명 주소 인증키:	U01TX0FVVEgyMDE4MTAxNTIxMzIwODEwODIzNjM= -->
-
 					<div class="my-2">
 						<span>거래방법</span> <input class="form-control" type="text"
 							placeholder="예)직거래,택배등" style="text-align: right;padding-left:px" id="way" required />
@@ -232,9 +213,7 @@ $( "#target" ).submit(function( event ) {
 					</div>
 
 				</div>
-				
-				
-							
+											
 		     <br/>
 							
 				<!-- Related Projects Row -->
@@ -242,11 +221,7 @@ $( "#target" ).submit(function( event ) {
 				
 				<!--  사진  3개이상 유효성 검사 항목 추가  -->
                  
-				<input multiple="multiple" type="file" 
-					style="color: slategray; border: 1 solid silver; width: 300; height: 20">(최대 5M)
-				
-
-				<div class="row">
+				<%-- <div class="row">
 
 					<div class="col-md-3 col-sm-6 mb-4 view overlay zoom">
 
@@ -279,25 +254,20 @@ $( "#target" ).submit(function( event ) {
 							alt="" style="width: 300px; height: 200px;">
 					</div>
 
-				</div>
+				</div> --%>
 				<!--사진 로직 끝 -->
-
 				
 				<div class="col-md-12 container">
-<textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
-				class="output"		maxlength="2048" required >
-※판매물품을 등록하려면 사진 3장이상 4장이하가 필수 입니다.											
-					
-</textarea>
+          <textarea id="summernote" name="content" class="col-md-12 container" style="border: 1px solid blue; height: 500px"
+				class="output"		maxlength="2048" required >${record.content}													
+          </textarea>
 				</div>
 							
 				<div style="text-align: center">
 					<a href="<c:url value='/market/sell.aw'/>">
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>					
-					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" onclick="return check()">
-
-				</div>
-				  											
+					<input class="btn btn-danger" type="submit"  value="수정" id="enterBtn" >
+				</div>				  											
 			</form>
 						
 			<div style="margin-bottom: 50px"></div>

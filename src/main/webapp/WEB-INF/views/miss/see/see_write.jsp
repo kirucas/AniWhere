@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -53,6 +52,7 @@
 	}
 }
 </style>
+
 <script>
     $(function(){
         var postcode;//우편번호 변수 설정
@@ -95,18 +95,16 @@
         
      });
 </script>
+
 <!-- 내용 시작 -->
 <div class="container">
 	<div class="page-header">
-		<h2>
-			봤어요
-		</h2>
+		<h2>봤어요</h2>
 	</div>
 	<div style="width:100%">
 		<form method="post" action="<c:url value='/security/miss/see_insert.aw'/>">
 			<div class="form-group form-row">
 				<input type="hidden" name="table_name" value="see">
-				<input type="hidden" name="mem_no" value="#" />
                  	<select name="animal_code" style="width:100px;height:38px;margin-right:10px;">
                          <option value="1">고양이</option>
                          <option value="2">강아지</option>

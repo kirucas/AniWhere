@@ -23,6 +23,7 @@ DROP TABLE freeboard_cmt CASCADE CONSTRAINTS;
 DROP TABLE freeboard CASCADE CONSTRAINTS;
 DROP TABLE lost_animal CASCADE CONSTRAINTS;
 DROP TABLE member_security CASCADE CONSTRAINTS;
+DROP TABLE member_token CASCADE CONSTRAINTS;
 DROP TABLE movie_cmt CASCADE CONSTRAINTS;
 DROP TABLE movie CASCADE CONSTRAINTS;
 DROP TABLE photo_cmt CASCADE CONSTRAINTS;
@@ -34,7 +35,6 @@ DROP TABLE reservation CASCADE CONSTRAINTS;
 DROP TABLE tip_cmt CASCADE CONSTRAINTS;
 DROP TABLE tip CASCADE CONSTRAINTS;
 DROP TABLE member CASCADE CONSTRAINTS;
-DROP TABLE member_visit_count CASCADE CONSTRAINTS;
 DROP TABLE store_category CASCADE CONSTRAINTS;
 DROP TABLE store_location CASCADE CONSTRAINTS;
 
@@ -65,6 +65,7 @@ CREATE TABLE animal
 	ani_kind nvarchar2(20) NOT NULL,
 	ani_pic nvarchar2(500) NOT NULL,
 	ani_regidate date DEFAULT SYSDATE,
+	ani_checking number(1) DEFAULT 0 CHECK(ani_checking IN (0, 1)),
 	PRIMARY KEY (ani_no)
 );
 
@@ -91,12 +92,13 @@ CREATE TABLE buy_cmt
 
 CREATE TABLE drafting
 (
-	dtf_no number NOT NULL,
-	send_no number NOT NULL,
-	receive_no number NOT NULL,
-	apply number(1),
-	dtf_date date DEFAULT SYSDATE,
-	PRIMARY KEY (dtf_no)
+	dft_no number NOT NULL,
+	send_no number,
+	receive_no number,
+	apply number(1) DEFAULT 0,
+	dft_date date DEFAULT SYSDATE,
+	result_date date,
+	PRIMARY KEY (dft_no)
 );
 
 
@@ -251,15 +253,12 @@ CREATE TABLE member_security
 );
 
 
-CREATE TABLE member_visit_count
+CREATE TABLE member_token
 (
-	no number NOT NULL,
-	today date DEFAULT SYSDATE,
-	year number(4) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'YYYY')),
-	month number(2) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'MM')),
-	day number(2) DEFAULT TO_NUMBER(TO_CHAR(SYSDATE, 'DD')),
-	visit_count number DEFAULT 0,
-	PRIMARY KEY (no)
+	mtk_no number NOT NULL,
+	mem_no number NOT NULL,
+	mtk_token varchar2(300) NOT NULL,
+	PRIMARY KEY (mtk_no)
 );
 
 
@@ -413,6 +412,8 @@ CREATE TABLE reservation
 	store_no number,
 	apply_date date DEFAULT sysdate,
 	booking_date date NOT NULL,
+	qr_link varchar2(300),
+	visit_time nvarchar2(30) DEFAULT '(아직 방문하지 않았습니다)',
 	PRIMARY KEY (rv_no)
 );
 
@@ -585,15 +586,16 @@ ALTER TABLE sell_cmt
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (receive_no)
+	ADD FOREIGN KEY (send_no)
 	REFERENCES mating (mating_no)
 	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE drafting
-	ADD FOREIGN KEY (send_no)
+	ADD FOREIGN KEY (receive_no)
 	REFERENCES mating (mating_no)
+	ON DELETE CASCADE
 ;
 
 
@@ -668,6 +670,13 @@ ALTER TABLE market_sell
 
 
 ALTER TABLE member_security
+	ADD FOREIGN KEY (mem_no)
+	REFERENCES member (mem_no)
+	ON DELETE CASCADE
+;
+
+
+ALTER TABLE member_token
 	ADD FOREIGN KEY (mem_no)
 	REFERENCES member (mem_no)
 	ON DELETE CASCADE

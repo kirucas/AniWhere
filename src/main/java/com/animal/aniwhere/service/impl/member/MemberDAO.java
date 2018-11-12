@@ -53,8 +53,8 @@ public class MemberDAO implements AllMemberService {
 		return (Integer) template.selectOne("memberCheck", map) == 1 ? true : false;
 	}////////// isMemeber
 	
-	public int visitCountUpdate() {
-		return template.update("visitCount");
-	}////////// visitCountUpdate
+	public int changePassword(Map map) {
+		return template.update("changePassword", map);
+	}////////// changePassword
 
 }//////////////////// MemberDAO class

@@ -1,13 +1,15 @@
 package com.animal.aniwhere.web.board.animal.cat;
 
-import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.animal.aniwhere.service.AllCommentDTO;
+import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.animal.TipBoardDTO;
+import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.animal.TipBoardServiceImpl;
 import com.animal.aniwhere.web.board.FileUpDownUtils;	
@@ -26,15 +31,19 @@ import com.animal.aniwhere.web.board.FileUpDownUtils;
 @Controller
 public class CatTipController {
 	
-	
+	//서비스 주입
 	@Resource(name="tipService")
 	private TipBoardServiceImpl tipservice;
+	
+	@Resource(name="allCommentService")
+	private AllCommentServiceImpl cmtservice;
 	
 	@Value("${PAGESIZE}")
 	private int pageSize;
 	@Value("${BLOCKPAGE}")
 	private int blockPage;
 	
+	//목록 뿌려주기
 	@RequestMapping("/board/animal/cat/tip/list.aw")
 	public String list(Model model,
 			HttpServletRequest req,//페이징용 메소드에 전달
@@ -52,12 +61,39 @@ public class CatTipController {
 		map.put("start",start);
 		map.put("end",end);
 		//페이징을 위한 로직 끝]
-		List list = tipservice.selectList(map);
+		List<TipBoardDTO> list = tipservice.selectList(map);
+		List<Map> collect = new Vector<>();
+		
+		for(TipBoardDTO dto : list) {
+			Map record = new HashMap();
+			record.put("dto", dto);
+			Map temp = new HashMap();
+			temp.put("table_name","tip");
+			temp.put("no", dto.getNo());
+			record.put("cmtCount", cmtservice.commentCount(temp));
+			
+			collect.add(record);
+		}	
+		
 		//페이징 문자열을 위한 로직 호출]
-		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage, nowPage,req.getContextPath()+ "/board/animal/cat/tip/list.aw?");
+				if(map.get("searchWord") != null) {
+					String searchWord = map.get("searchWord").toString();	
+					String searchColumn = map.get("searchColumn").toString();	
+
+					String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+							req.getContextPath()+"/board/animal/cat/tip/list.aw?searchColumn="+searchColumn+"&searchWord="+searchWord+"&");
+					
+					model.addAttribute("pagingString", pagingString);
+				}
+				
+				else {
+					String pagingString = PagingUtil.pagingBootStrapStyle(totalRecordCount, pageSize, blockPage,nowPage,
+							req.getContextPath()+"/board/animal/cat/tip/list.aw?");
+					model.addAttribute("pagingString", pagingString);
+				}
 		//데이터 저장]
-		model.addAttribute("pagingString", pagingString);
-		model.addAttribute("list", list);
+				
+		model.addAttribute("list", collect);
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		model.addAttribute("pageSize", pageSize);
 		model.addAttribute("nowPage", nowPage);
@@ -128,12 +164,14 @@ public class CatTipController {
     public String imageUpload(MultipartHttpServletRequest mhsr) throws Exception {
 		String phisicalPath = mhsr.getServletContext().getRealPath("/Upload");
 		MultipartFile upload = mhsr.getFile("file");
-		
 		String newFilename = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-		File file = new File(phisicalPath+File.separator+newFilename);
-		upload.transferTo(file);
-        return "/Upload/"+newFilename;
+		//File file = new File(phisicalPath+File.separator+newFilename);
+		
+		List<String> uploadList=AwsS3Utils.uploadFileToS3(mhsr, "tip_bird"); // S3  업로드
+		
+        return AwsS3Utils.LINK_ADDRESS+uploadList.get(0);
    }
+	//추천수
 	@ResponseBody
 	@RequestMapping(value="/animal/cat/tip/tip_hit.aw",method=RequestMethod.POST)
 	public String hit(@RequestParam Map map) throws Exception{
@@ -143,5 +181,81 @@ public class CatTipController {
 		
 		return "success";
 	}//////////////hit()
+	
+	
+	
+	//댓글 입력
+	@ResponseBody
+	@RequestMapping(value = "/animal/catTip/cmt_write.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+	public String write(@RequestParam Map map, HttpSession session, Model model) throws Exception {
+
+		map.put("mem_no", session.getAttribute("mem_no"));
+		map.put("table_name", "tip");
+		map.put("no", map.get("no"));
+
+		cmtservice.insert(map);
+
+		return map.get("no").toString();
+
+	}///////////////////
+	
+	//댓글 목록
+	@ResponseBody
+	@RequestMapping(value = "/animal/catTip/cmt_list.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+	public String list(@RequestParam Map map, HttpSession model) throws Exception {
+
+		map.put("table_name", "tip");
+		map.put("origin_no", map.get("no"));
+
+		List<AllCommentDTO> collections = cmtservice.selectList(map);
+
+		List<Map> comments = new Vector<>();
+
+		for (AllCommentDTO dto : collections) {
+
+			Map record = new HashMap();
+			record.put("cmt_no", dto.getCmt_no());
+			model.setAttribute("cmt_no", dto.getCmt_no());
+			record.put("cmt_content", dto.getCmt_content());
+			record.put("mem_nickname", dto.getMem_nickname());
+			record.put("regidate", dto.getRegidate().toString());
+			record.put("origin_no", dto.getOrigin_no());
+			record.put("mem_no", dto.getMem_no());
+
+			comments.add(record);
+		}
+
+		return JSONArray.toJSONString(comments);
+	}//////////////////
+	
+	//댓글 수정
+	@ResponseBody
+	@RequestMapping(value = "/animal/catTip/cmt_edit.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+	public String update(@RequestParam Map map, HttpSession session) throws Exception {
+
+		map.put("table_name", "tip");
+		map.put("cmt_content", map.get("cmt_content"));
+		/*
+		 * Set<String> set = map.keySet(); for(String key:set) {
+		 * System.out.println(key+":"+map.get(key)); }
+		 */
+		cmtservice.update(map);
+
+		return map.get("no").toString();
+	}////////////
+	
+	//댓글 삭제
+	@ResponseBody
+	@RequestMapping(value = "/animal/catTip/cmt_delete.awa", produces = "text/html; charset=UTF-8", method = RequestMethod.POST)
+	public String delete(@RequestParam Map map, HttpSession session) throws Exception {
+
+		map.put("table_name", "tip");
+		
+		//map.put("cmt_no", session.getAttribute("cmt_no"));
+
+		cmtservice.delete(map);
+
+		return map.get("no").toString();
+	}
 }//////////////////// tipboardController
 

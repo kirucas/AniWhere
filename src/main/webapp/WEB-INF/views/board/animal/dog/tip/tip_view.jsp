@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 <script>
 	var isDelete = function(){
 		if(confirm("글을 삭제 하시겠습니까?"))
@@ -22,7 +21,7 @@
 	    		success : function(){
 	    			if(text == "♡"){
 						hit = hit+1;
-						document.getElementById("tip_hit").innerHTML = hit;
+						document.getElementById("tip_hit").innerHTML = "추천수 "+hit;
 						document.getElementById("likebtn").innerHTML = "♥";
 						console.log(text);
 	    			}
@@ -41,31 +40,97 @@
 	    	
 	    });
 	});
-  //해당 글번호에 대한 코멘트 목록을 가져오는 함수 
+</script>
+
+<script>
+//해당 글번호에 대한 코멘트 목록을 가져오는 함수 
 	var showComments = function(key){		
 		$.ajax({
-			url:"<c:url value='/Comment/List.aw'/>",
-			data:{no:data},
+			url:"<c:url value='/animal/dogTip/cmt_list.awa'/>",
+			data:{no:key},
 			dataType:'json',
 			type:'post',
-			success: displayCommnets
-				
+			success:displayComments			
 		});
 	};
-	var displayComments = function(data){
-		console.JSON.stringify(data);
-		var commnetString="asdfsdf";
+	
+	//해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
+	var displayComments	 = function(data){
+		console.log(JSON.stringify(data));
+		var commentString='<h2 data-v-f39b78c2="" class="comment__title" style="margin-top: 20px;margin-bottom: 15px;">댓글 목록</h2>';
+			commentString+='<div class="row border-top">';
+		if(data.length==0){
+			commentString+="<h3 class='text-center' style='padding-top:10px;width:100%'>등록된 댓글이 없습니다</h3>";
+		}
+		$.each(data,function(index,cmt){			
+			commentString+='<div class="col-sm-5" style="margin-top: 10px">';
+			commentString+=cmt["mem_nickname"]+'&nbsp;&nbsp; '+cmt["regidate"];
+			commentString+='</div>';
+			commentString+='<div class="offset-sm-5 col-sm-2" style="text-align:right;padding-top: 10px">';
+			if('${sessionScope.mem_no}' == cmt["mem_no"])
+				commentString+='<span title="'+cmt["cmt_no"]+'" class="commentDelete" style="cursor: pointer; color: orange; font-weight: bold">삭제</span>';
+			else
+				commentString+='';
+			commentString+='</div>';
+			commentString+='<div class="col-sm-12">';
+			commentString+='<h4 class="commentEdit" style="cursor: pointer;" title="'+cmt["cmt_no"]+'">'+cmt["cmt_content"]+'</h4>';
+			commentString+='</div>';
+		});		
+		commentString+='</div>';
+		$('#comments').html(commentString);
+		
+		//코멘트 수정/삭제 처리
+	      $('.commentEdit').click(function() {
+	            $("#title").val($(this).html());
+	            //console.log($(this).html());
+	            $("#submit").val('수정');
+	            console.log($(this).attr("title"));
+	            $('input[name=cmt_no]').val($(this).attr("title"));
+	      });
+		
+		//댓글 삭제 처리
+		$('.commentDelete').click(function(){			
+			var cno_value = $(this).attr("title");
+			$.ajax({
+				url:"<c:url value='/animal/dogTip/cmt_delete.awa'/>",
+				data:{cmt_no:cno_value,no:${record.no}},
+				dataType:'text',
+				type:'post',
+				success:function(key){					
+					showComments(key);					
+				}		
+			});
+		});
 	};
 	
-	
-	
-	
-    $('#btnwrite').click(function(){
-    	alert("작동띠");
-    });
-	    
-	    
-
+	$(function(){
+		//페이지 로드시 코멘트 목록 뿌려주기
+		showComments(${record.no});
+		//코멘트 입력처리]
+		$('#submit').click(function(){	
+			if($(this).val()=='등록')
+				var action="<c:url value='/animal/dogTip/cmt_write.awa'/>";
+			else
+			    var action = "<c:url value='/animal/dogTip/cmt_edit.awa'/>";
+			    
+			$.ajax({
+				url:action,
+				data:$('#frm').serialize(),
+				dataType:'text',
+				type:'post',
+				success:function(key){					
+					showComments(key);
+					if($('#submit').val()=='등록'){
+		            	   $("#title").val('');
+		            }
+		            if($('#submit').val()=='수정'){
+		                $("#submit").val('등록');
+		                $("#title").val('');
+		            }
+				}		
+			});			
+		});
+	});
 </script>
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
@@ -146,21 +211,11 @@
 							<input type="hidden" id="tip_no" value="${requestParam.no}"/>
 						<div class="article-meta-list article-meta-list--right">
 							<div class="article-meta__item" >
-								<span id="tip_count">${record.tip_count}</span>
+								<span id="tip_count">조회수 ${record.tip_count}</span>
 							</div>
 							<div class="article-meta__item">
-								<span>댓글 56</span>
+								<span id="tip_hit">추천수 ${record.tip_hit}</span>
 							</div>
-							<div class="article-meta__item">
-								<span id="tip_hit">${record.tip_hit}</span>
-							</div>
-						</div>
-					</div>
-					<div class="btnlike">
-						<div class="like-content">
-							<button class="btn-secondary like-review">
-							   <span aria-hidden="true" id="likebtn">♡</span>
-							</button>
 						</div>
 					</div>
 				</div>
@@ -168,6 +223,14 @@
 					<div class="article-content">
 						${record.tip_content}
 					</div>
+				</div>
+				<div class="btnlike">
+						<div class="like-content">					
+							<button class="btn-secondary like-review" style="margin-bottom: 10px">
+							   <span aria-hidden="true" id="likebtn">♡</span>
+							</button>
+							<p style="text-align: center">※게시물이 마음에 들면 <span style="color: blue">추천버튼</span>을 눌러주세요!</p>
+						</div>
 				</div>
 				<post-vote data-my_vote_score="0" data-downvote_score="3"
 					data-upvote_score="71"></post-vote>
@@ -178,51 +241,25 @@
 			</div>
 		</div>
 	</div>
-	<form data-v-f39b78c2="" method="POST">
-		<div data-v-f39b78c2="" class="comment-write-inner">
-			<div data-v-f39b78c2="" class="comment-write__name">${record.mem_nickname}</div> 
-				<div data-v-f39b78c2="" class="comment-write__content">
-					<textarea data-v-f39b78c2="" name="content" id="writeComment" placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다." style="overflow: hidden; overflow-wrap: break-word; height: 44px;"></textarea>
-				</div> 
-			<div data-v-f39b78c2="" class="comment-write-footer">
-				<div data-v-f39b78c2="" class="comment-write-submit">
-					<button data-v-f39b78c2="" type="submit" class="button button--green" id="btnwrite">작성</button>
-				</div>
+	<!-- 댓글 부분 -->
+<div class="container border" style="margin-top: 15px;margin-bottom: 10px">
+	<div class="row">
+		<div class="col-sm-12" style="margin-top: 15px">
+			<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
+		</div>
+		<form id="frm" method="post">
+			<div class="form-row" style="width:100%">
+				<input type="hidden" id="no" name="no" value="${record.no}"/>
+				<input type="hidden" name="cmt_no"/>
+				<input style="margin-bottom:10px ;width:83%;margin-left: 20px;margin-top: 10px;" class="form-control" id="title" name="cmt_content"  type="text" size="180" placeholder="댓글을 입력 하세요" />
+				<input style="margin-top:10px;margin-left:10px;width:7%; height: 38px" type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
 			</div>
-		</div>
-	</form>
-	<div data-v-f39b78c2="" data-post="820136">
-		<div data-v-f39b78c2="" class="comment-wrap">
-			<!---->
-			<div data-v-f39b78c2="" class="comment-header">
-				<h2 data-v-f39b78c2="" class="comment__title">댓글</h2> 
-				<span data-v-f39b78c2="" class="comment__count">총 <em data-v-f39b78c2="">16</em>개</span> 
-			 	<!---->
-			 </div>
-		</div>
-			<!---->
-			<div data-v-f39b78c2="">
-				<div data-v-f39b78c2="" class="comment-sort">
-					<ul data-v-f39b78c2="" class="comment-sort__list">
-						<li data-v-f39b78c2=""
-							class="comment-sort__item comment-sort__item--active"><button
-								data-v-f39b78c2="" type="button">인기순</button></li>
-						<li data-v-f39b78c2="" class="comment-sort__item"><button
-								data-v-f39b78c2="" type="button">최신순</button></li>
-					</ul>
-				</div>
-				<div data-v-f39b78c2="" class="comment-list">
-					<div data-v-f39b78c2="" class="comment-l">
-						<!---->
-						<div data-v-f39b78c2="" class="comment" id="comment">
-							
-						</div>
-						<!---->
-					</div>
-				</div>
-				<!---->
-			</div>
-		</div>
+		</form>
+	</div>
+	<div id="comments">
+		
+	</div>
+</div>
 		<!---->
 		<!---->
 	</div>

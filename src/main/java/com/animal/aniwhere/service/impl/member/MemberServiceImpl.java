@@ -52,8 +52,8 @@ public class MemberServiceImpl implements AllMemberService {
 		return dao.isMember(map);
 	}////////// isMember
 	
-	public int visitCountUpdate() {
-		return dao.visitCountUpdate();
-	}////////// visitCountUpdate
+	public int changePassword(Map map) {
+		return dao.changePassword(map);
+	}////////// changePassword
 
 }//////////////////// MemberServiceImpl class

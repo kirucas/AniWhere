@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 <script>
 	var isDelete = function(){
 		if(confirm("글을 삭제 하시겠습니까?"))
 			location.replace("<c:url value='/miss/see_delete.aw?see_no=${record.no}'/>");
 	};
 </script>
+
 <style>
 @import url("https://talk.op.gg/css/app.css?id=43e12108193fdc5b2d34");
 #content{
@@ -28,7 +28,7 @@
       });
    };
    
- //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
+ 	//해당 글번호에 대한 코멘트 목록을 뿌려주는 함수 
 	var displayComments	 = function(data){
 		console.log(JSON.stringify(data));
 		var commentString='<h2 data-v-f39b78c2="" class="comment__title" style="margin-top: 20px;margin-bottom: 15px;">댓글 목록</h2>';
@@ -47,7 +47,7 @@
 				commentString+='';
 			commentString+='</div>';
 			commentString+='<div class="col-sm-12">';
-			commentString+='<h4 class="commentEdit" style="cursor: pointer;">'+cmt["cmt_content"]+'</h4>';
+			commentString+='<h4 class="commentEdit" style="cursor: pointer;" title="'+cmt["cmt_no"]+'">'+cmt["cmt_content"]+'</h4>';
 			commentString+='</div>';
 		});		
 		commentString+='</div>';
@@ -58,13 +58,13 @@
              console.log($(this).attr("title"));
                 $("#title").val($(this).html());
                 $("#submit").val('수정');
-                $('input[mem_nickname=mem_no]').val($(this).attr("title"));
+                $('input[name=cmt_no]').val($(this).attr("title"));
           });
           $('.commentDelete').click(function() {
                 var cno_value = $(this).attr("title");
                 $.ajax({
-                    url:'<c:url value="/miss/find/cmt_delete.awa"/>',
-                    data:{cno:cno_value,no:${record.no}},
+                    url:'<c:url value="/miss/see/cmt_delete.awa"/>',
+                    data:{cmt_no:cno_value,no:${record.no}},
                     dataType:'text',
                     type:'post',
                     success:function(key){
@@ -108,7 +108,7 @@
    });
 </script>
 
-
+<!-- 내용 시작 -->
 <div class="container">
 	<div id="content">
 		<div id="view">
@@ -132,13 +132,13 @@
 								<span>[양서류]</span>
 							</c:otherwise>
 						</c:choose>
-						<span>[${record.addr}]</span>
-						${record.title}
+						<span>[${record.addr}]</span> ${record.title}
 						<div style="float: right;">
 							<!-- 글에 대한 버튼들(자기가 쓴 글이면 수정과 삭제 가능) -->
 							<!-- a href="<c:url value='/ReplyBBS/BBS/Reply.bbs?free_no=${record.no}'/>" class="btn btn-success">답변</a> -->
 							<c:if test="${sessionScope.mem_no==record.mem_no }">
-								<a href="<c:url value='/security/miss/see_edit.aw?see_no=${record.no}'/>"
+								<a
+									href="<c:url value='/security/miss/see_edit.aw?see_no=${record.no}'/>"
 									class="article-action__button button">수정</a>
 								<a href="javascript:isDelete()"
 									class="article-action__button button button--red button--red--border">삭제</a>
@@ -179,22 +179,26 @@
 			</div>
 		</div>
 	</div>
-<div class="container border" style="margin-top: 15px;margin-bottom: 10px">
-	<div class="row">
-		<div class="col-sm-12" style="margin-top: 15px">
-			<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
-		</div>
-		<form id="frm" method="post">
-			<input type="hidden" name="cmt_no" />
-			<input type="hidden" id="no" name="no" value="${record.no}"/>
-			<div class="form-row" style="width:100%">
-				<input style="margin-bottom:10px ;width:83%;margin-left: 20px;margin-top: 10px;" class="form-control" id="title" name="cmt_content"  type="text" size="180" placeholder="댓글을 입력 하세요" />
-				<input style="margin-top:10px;margin-left:10px;width:7%; height: 38px" type="button" id="submit" class="btn btn-outline-primary" value="등록"/>
+	<div class="container border"
+		style="margin-top: 15px; margin-bottom: 10px">
+		<div class="row">
+			<div class="col-sm-12" style="margin-top: 15px">
+				<h2 data-v-f39b78c2="" class="comment__title">댓글 입력</h2>
 			</div>
-		</form>
-	</div>
-	<div id="comments">
-		
+			<form id="frm" method="post">
+				<div class="form-row" style="width: 100%">
+					<input type="hidden" name="cmt_no" /> <input type="hidden" id="no"
+						name="no" value="${record.no}" /> <input
+						style="margin-bottom: 10px; width: 83%; margin-left: 20px; margin-top: 10px;"
+						class="form-control" id="title" name="cmt_content" type="text"
+						size="180" placeholder="댓글을 입력 하세요" /> <input
+						style="margin-top: 10px; margin-left: 10px; width: 7%; height: 38px"
+						type="button" id="submit" class="btn btn-outline-primary"
+						value="등록" />
+				</div>
+			</form>
+		</div>
+		<div id="comments"></div>
 	</div>
 </div>
-</div>
+<!-- 내용 끝-->

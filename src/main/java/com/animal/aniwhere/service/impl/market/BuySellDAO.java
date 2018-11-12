@@ -20,6 +20,7 @@ public class BuySellDAO implements AllCommonService {
 	@Override
 	public List<BuySellDTO> selectList(Map map) {
 		return template.selectList("bsSelectList", map);
+		
 	}////////// selectList
 
 	@Override
@@ -30,7 +31,7 @@ public class BuySellDAO implements AllCommonService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public BuySellDTO selectOne(Map map) {
-		if(map.get("view") != null)
+		if(map.get("view") == null)
 			template.update("addCountBS", map);
 		return template.selectOne("bsSelectOne", map);
 	}////////// selectOne

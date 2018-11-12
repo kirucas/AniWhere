@@ -11,21 +11,23 @@
 			SELECT mgb.*, mem_nickname, animal_name
 			FROM market_group_buy mgb LEFT JOIN member mb ON mgb.mem_no=mb.mem_no
 			JOIN animal_category ac ON mgb.animal_code = ac.animal_code
-			<if test="animal_code != null and title != null">
-				WHERE mgb.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
-			</if>
-			<if test="animal_code != null and content != null">
-				WHERE mgb.animal_code=#{animal_code} AND content like '%'||#{content}||'%'
-			</if>
-			<if test="animal_code != null">
-				WHERE mgb.animal_code=#{animal_code}
-			</if>
-			<if test="title != null">
-				WHERE title=#{title}
-			</if>
-			<if test="content != null">
-				WHERE content=#{content}
-			</if>
+			<choose>
+				<when test="animal_code != null and title != null">
+					WHERE mgb.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
+				</when>
+				<when test="animal_code != null and content != null">
+					WHERE mgb.animal_code=#{animal_code} AND content like '%'||#{content}||'%'
+				</when>
+				<when test="animal_code != null">
+					WHERE mgb.animal_code=#{animal_code}
+				</when>
+				<when test="title != null">
+					WHERE title=#{title}
+				</when>
+				<when test="content != null">
+					WHERE content=#{content}
+				</when>
+			</choose>
 			)
 	</select>
 	
@@ -37,21 +39,23 @@
 				SELECT gb.*, mem_nickname, animal_name
 				FROM market_group_buy gb LEFT JOIN member mb ON gb.mem_no = mb.mem_no
 				JOIN animal_category ac ON gb.animal_code = ac.animal_code
-				<if test="animal_code != null and title != null">
-					WHERE gb.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
-				</if>
-				<if test="animal_code != null and content != null">
-					WHERE gb.animal_code=#{animal_code} AND content like '%'||#{content}||'%'
-				</if>
-				<if test="animal_code != null">
-					WHERE gb.animal_code=#{animal_code}
-				</if>
-				<if test="title != null">
-					WHERE title=#{title}
-				</if>
-				<if test="content != null">
-					WHERE content=#{content}
-				</if>
+				<choose>
+					<when test="animal_code != null and title != null">
+						WHERE gb.animal_code=#{animal_code} AND title like '%'||#{title}||'%'
+					</when>
+					<when test="animal_code != null and content != null">
+						WHERE gb.animal_code=#{animal_code} AND content like '%'||#{content}||'%'
+					</when>
+					<when test="animal_code != null">
+						WHERE gb.animal_code=#{animal_code}
+					</when>
+					<when test="title != null">
+						WHERE title=#{title}
+					</when>
+					<when test="content != null">
+						WHERE content=#{content}
+					</when>
+				</choose>
 				ORDER BY no DESC
 				) T
 			)
@@ -72,7 +76,7 @@
 	</select>
 	
 	<insert id="groupbuyInsert" parameterType="java.util.Map">
-		INSERT INFO market_group_buy(no, mem_no, animal_code, title, content, goal, deadline, regidate)
+		INSERT INTO market_group_buy(no, mem_no, animal_code, title, content, goal, deadline, regidate)
 		VALUES(seq_group_buy.nextval, #{mem_no}, #{animal_code}, #{title}, #{content}, #{goal}, #{deadline}, #{today})
 	</insert>
 	

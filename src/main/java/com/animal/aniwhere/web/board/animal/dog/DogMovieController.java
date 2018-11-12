@@ -1,19 +1,26 @@
 package com.animal.aniwhere.web.board.animal.dog;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.animal.aniwhere.service.AllCommentDTO;
 import com.animal.aniwhere.service.animal.MovieBoardDTO;
+import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.animal.MovieBoardServiceImpl;
 
@@ -27,6 +34,10 @@ public class DogMovieController {
 	@Resource(name = "movieService")
 	private MovieBoardServiceImpl service;
 
+	@Resource(name = "allCommentService")
+	private AllCommentServiceImpl cmtservice; //댓글 서비스
+	
+	
 	// 목록처리]
 	// 리소스파일(memo.properties)에서 읽어오기
 	@Value("${BLOCKPAGE}")
@@ -42,7 +53,6 @@ public class DogMovieController {
 		// 페이징을 위한 로직 시작]
 		// 전체 레코드 수
 		int totalRecordCount = service.getTotalRecord(map);
-		System.out.println(totalRecordCount);
 		// 시작 및 끝 ROWNUM구하기]
 		int start = (nowPage - 1) * PAGESIZE + 1;
 		int end = nowPage * PAGESIZE;
@@ -54,17 +64,17 @@ public class DogMovieController {
 		while (true) {
 			for (MovieBoardDTO dto : list) {
 				String content = dto.getMovie_content();
-				System.out.println("content:" + content);
 				String src = "<iframe";
 				int target_num = content.indexOf(src);
+
 				String tempResult, result;
-				String lightBox = " data-toggle=\"lightbox\"";
+				String enablejsapi = "?enablejsapi=1";
+				
 				if (target_num != -1) {
 					tempResult = content.substring(target_num, content.indexOf("></iframe>") + "></iframe>".length());
-					result = new StringBuffer(tempResult).insert(tempResult.lastIndexOf("></iframe>"), lightBox)
-							.toString();
-					System.out.println("result:" + result);
-					dto.setMovie_tempsrc(result);
+				String idAdded	= new StringBuffer(tempResult).insert(tempResult.lastIndexOf("src"), "id=\"player\" ").toString();
+					String enablejsApi = new StringBuffer(idAdded).insert(idAdded.indexOf("\"", 41), "?enablejsapi=1&rel=0").toString();
+					dto.setMovie_tempsrc(enablejsApi);				
 				} 
 				else {
 					continue;
@@ -121,7 +131,6 @@ public class DogMovieController {
 	//수정폼으로 이동 및 수정 처리]
 		@RequestMapping("/security/animal/dog/movie/edit.aw")
 		public String movie_edit(Model model, @RequestParam Map map, HttpServletRequest req) throws Exception{
-			System.out.println("post방식 : " + req.getMethod().equals("POST"));
 			if(!req.getMethod().equals("POST")) {
 				//서비스 호출]
 				MovieBoardDTO dto = service.selectOne(map);
@@ -135,7 +144,6 @@ public class DogMovieController {
 			model.addAttribute("successFail", successFail);
 			model.addAttribute("WHERE","EDT");
 			model.addAttribute("no",map.get("no"));
-			System.out.println("model" +model);
 			return "/board/animal/dog/movie/movieMessage";
 		}//////////////////
 	
@@ -150,7 +158,6 @@ public class DogMovieController {
 	// content안에 있는 유튜브 소스와 내용을 순서대로 분리하여
 	private void setIframe(MovieBoardDTO dto) {
 		String content = dto.getMovie_content(); //content 얻기
-		System.out.println("content:" + content);
 		String src = "<iframe"; 
 		int target_num = content.indexOf(src); //<iframe 글자 수가 target_num
 		String tempResult, result;
@@ -158,19 +165,71 @@ public class DogMovieController {
 		if (target_num != -1) { //<iframe이 소스 안에 있다면...
 			//<iframe태그 내용만 도려내기
 			tempResult = content.substring(target_num, content.indexOf("></iframe>") + "></iframe>".length());
-			//result에 light박스 토글 추가
-			result = new StringBuffer(tempResult).insert(tempResult.lastIndexOf("></iframe>"), lightBox).toString();
+			String idAdded	= new StringBuffer(tempResult).insert(tempResult.lastIndexOf("src"), "id=\"player\" ").toString();
+			String enablejsApi = new StringBuffer(idAdded).insert(idAdded.indexOf("\"", 41), "?enablejsapi=1&rel=0").toString();
 			//grandResult에 embed-responsive로 변환
-			String grandResult = result.replace("note-video-clip","embed-responsive-item");
-			System.out.println("grandResult:" + grandResult);
+			String grandResult = enablejsApi.replace("note-video-clip","embed-responsive-item");
 			dto.setMovie_tempsrc(grandResult);
-		/*	
-			//<iframe>을 잘라낸 나머지를 내용으로 추출.
-			String netContent = content.replace(tempResult, "");
-			System.out.printf("netContent : %s", netContent);
-			dto.setMovie_content(netContent);
-			*/
+	
 		}
 	}
+	
+	//코멘트 입력처리]
+			@ResponseBody
+			@RequestMapping(value="/security/animal/dog/movie/commentWrite.awa",produces="text/plain; charset=UTF-8")
+			public String write(@RequestParam Map map, HttpSession session,Model model) throws Exception{
+				//맵에서 table_name 넣기
+				String movie = "movie";
+				map.put("table_name", movie);
+				map.put("mem_no",session.getAttribute("mem_no"));
+			
+				//서비스 호출]		
+				cmtservice.insert(map);	
+				return map.get("no").toString();
+			}///////////////////
+			//특정 글번호에 대한 코멘트 전체 목록 가져오기
+			@ResponseBody
+			@RequestMapping(value="/board/animal/dog/movie/commentList.awa",produces="text/html; charset=UTF-8")
+			public String list(@RequestParam Map map) throws Exception{
+				//맵에서 table_name 넣기
+				String movie = "movie";
+				map.put("table_name", movie);
+				//서비스 호출]
+				List<AllCommentDTO> comments=cmtservice.selectList(map);
+				
+				// 댓글
+				List<Map> collections = new Vector<Map>();
+				for (AllCommentDTO cmtdto : comments) {
+					Map record = new HashMap();
+					record.put("regidate", cmtdto.getRegidate().toString());
+					record.put("nickname", cmtdto.getMem_nickname());
+					record.put("comment_content", cmtdto.getCmt_content());
+					record.put("mem_no", cmtdto.getMem_no());
+					record.put("cmt_no", cmtdto.getCmt_no());
+					collections.add(record);
+				}
+				
+				return JSONArray.toJSONString(collections);
+			}/////////////////////
+			
+			//코멘트 수정 처리
+			@ResponseBody
+			@RequestMapping(value="/security/animal/dog/movie/commentEdit.awa",produces="text/html; charset=UTF-8")
+			public String update(@RequestParam Map map) throws Exception{
+				map.put("table_name", "movie");
+				//서비스 호출]
+				cmtservice.update(map);
+				return map.get("no").toString();
+			}/////////////////////////
+			
+			//코멘트 삭제처리]
+			@ResponseBody
+			@RequestMapping(value="/board/animal/dog/movie/commentDelete.awa",produces="text/html; charset=UTF-8")
+			public String delete(@RequestParam Map map) throws Exception{
+				map.put("table_name", "movie");
+				//서비스 호출]
+				cmtservice.delete(map);
+				return map.get("no").toString();
+			}/////////////////////////
 	
 }//////////////////// MovieController class

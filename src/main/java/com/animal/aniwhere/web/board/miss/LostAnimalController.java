@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.animal.aniwhere.service.impl.miss.LostAnimalServiceImpl;
-import com.animal.aniwhere.service.member.MemberDTO;
 import com.animal.aniwhere.service.miss.LostAnimalDTO;
 
 @Controller
@@ -29,8 +28,14 @@ public class LostAnimalController {
  	public String androidLostAnimal(@RequestParam Map map) throws Exception{
 		
 		int count = service.getTotalRecord(null);
-		map.put("start", 1);
-		map.put("end", 10);
+		if(map.get("mian") != null) {
+			int end = (int) (Math.random() * 10) + 1;
+			map.put("start", end);
+			map.put("end", end);
+		}else {
+			map.put("start", 1);
+			map.put("end", 10);
+		}		
 		List<LostAnimalDTO> lists = service.selectList(map);		
 		List<Map> collections = new Vector<Map>();
 		

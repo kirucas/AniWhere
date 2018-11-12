@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,6 +14,15 @@
 
 <script>
    $(function() {
+	   var count=0;
+	   
+	   $('#enterBtn').click(function(){	
+		   title+='['+$('#use_listSelect').val()+']';
+		   $('#title').append(title);
+		   console.log("성공")
+		   
+	   });
+	   	   
       $('#summernote').summernote({
     	 maxHeight:null,
     	 minHeight:null,
@@ -39,8 +47,7 @@
             contentType: false,
             processData: false,
             success: function(url) {
-                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");
-            },
+                 $('#summernote').summernote('insertImage', "<c:url value='"+url+"' />");},
             error : function() {
                console.log("error");
             }
@@ -48,8 +55,7 @@
       }
    });
    
-       
-	   	   
+       	   	   
 	   function check() {
 	      var isAttached = $('#summernote').summernote('code');
 	      if (fr.title.value == "") {
@@ -94,13 +100,13 @@
 
 		<div class="col-md-12">
 
-			<form name="fr" method="post" onsubmit="return check()"  accept-charset="utf-8" 
+			<form name="fr" method="post"  accept-charset="utf-8" 
 				class="form-horizontal" action="<c:url value='/security/market/buyinsert.aw'/>">		
 				<div class="form-row">
 				
 				<input type="hidden" name="table_name" value="buy"/>
 				 <input type="hidden" name="mem_no" value="${mem_no }">
-<!-- 				<input type="hidden" name="mem_no" value="#" /> -->
+<!-- 	<input type="hidden" name="mem_no" value="#" /> -->
 				
 					<label for="title" class="col-sm-2 control-label">제목</label> 
 					<input
@@ -122,19 +128,6 @@
 						<option value="4">조류</option>
 						<option value="5">기타 포유류</option>
 					</select>
-					 
-					<label for="" class="">용도분류</label> 
-					<select id="use_listSelect"
-						class="select_filter"  name="use">
-					
-						<option value="food">사료및간식</option>
-						<option value="playtoy">장난감</option>
-						<option value="home">보금자리</option>
-						<option value="buty">미용용품</option>
-						<option value="medicine">의약품</option>
-						<option value="other">기타</option>
-
-					</select>
 
 				</p>
 
@@ -154,7 +147,7 @@
 					<a href="<c:url value='/market/buy.aw'/>"> 
 					<input class="btn btn-info" type="button" id="exitBtn" value="취소"></a>
 
-				<button class="btn btn-primary" type="submit" role="button">확인</button>
+				<button class="btn btn-primary" type="submit" role="button" id="enterBtn">확인</button>
 				
 				</div>
 				
