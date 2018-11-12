@@ -65,6 +65,7 @@ CREATE TABLE animal
 	ani_kind nvarchar2(20) NOT NULL,
 	ani_pic nvarchar2(500) NOT NULL,
 	ani_regidate date DEFAULT SYSDATE,
+	ani_checking number(1) DEFAULT 0 CHECK(ani_checking IN (0, 1)),
 	PRIMARY KEY (ani_no)
 );
 
