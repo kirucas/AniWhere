@@ -207,7 +207,7 @@
 <!-- 내용 끝 -->
 
 <div class="modal fade" id="telModal" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
 				<label id="dftNo" hidden="true"></label>
@@ -216,7 +216,7 @@
 			</div>
 			<div class="modal-footer">
 				<div>
-					<a href="#" class="send" data-dismiss="modal" class="btn btn-secondary">보내기</a>
+					<a href="#" data-dismiss="modal" class="btn btn-secondary send">보내기</a>
 					<a href="#" data-dismiss="modal" class="btn btn-danger">닫기</a>
 				</div>
 			</div>
