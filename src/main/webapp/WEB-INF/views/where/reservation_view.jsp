@@ -61,7 +61,7 @@
 			<span>상가 이름 :</span><span id="under_line"> ${dto.bizesnm }</span>
 		</div>
 		<div>
-			<span>상가 주소 :</span><span id="under_line"><br /> ${dto.rdnmadr }</span>
+			<span>상가 주소 :</span><span id="under_line"></br> ${dto.rdnmadr }</span>
 		</div>
 		<div>
 			<span>등록 날짜 :</span><span id="under_line"> ${dto.apply_date }</span>
@@ -70,7 +70,7 @@
 			<span>예약 날짜 :</span><span id="under_line"> ${dto.booking_date }</span>
 		</div>
 		<div>
-			<span>방문 시각 :</span><span id="under_line"> ${dto.visit_time }</span>
+			<span>방문 시각 :</span><span id="under_line"> ${dto.booking_date }</span>
 		</div>
 	</div>
 </div>
