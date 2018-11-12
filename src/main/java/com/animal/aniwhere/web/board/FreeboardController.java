@@ -3,7 +3,6 @@ package com.animal.aniwhere.web.board;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.annotation.Resource;
@@ -26,8 +25,7 @@ import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.animal.FreeBoardDTO;
 import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
-import com.animal.aniwhere.service.impl.animal.FreeBoardServiceImpl;
-import com.animal.aniwhere.service.miss.FindSeeDTO;	
+import com.animal.aniwhere.service.impl.animal.FreeBoardServiceImpl;	
 
 @Controller
 public class FreeboardController {
