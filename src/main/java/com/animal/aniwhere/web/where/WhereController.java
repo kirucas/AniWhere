@@ -56,7 +56,7 @@ public class WhereController {
 	}// mating_main
 
 	//db에 있는 상점들 전체 갖고오기 ajax
-	@RequestMapping(value = "/security/where/map/total.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	@RequestMapping(value = "/where/map/total.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	@ResponseBody
 	public String whole(Model model, @RequestParam Map map, HttpServletResponse response) throws Exception {
 		List<StoreLocationDTO> lists = storelocservice.selectList(map);
@@ -82,7 +82,7 @@ public class WhereController {
 	}// whole
 
 	//메인 페이지에서 옆에 메뉴를 선택했을 떄 해당하는 정보들 db에서 가져오기
-	@RequestMapping(value = "/security/where/map/select.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	@RequestMapping(value = "/where/map/select.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	@ResponseBody
 	public String select(Model model, @RequestParam Map map, HttpServletResponse response) throws Exception {
 		String[] codes = ((String) map.get("indssclscd")).split(" ");
@@ -111,7 +111,7 @@ public class WhereController {
 	}// select
 
 	//전체 애들중에 반경 2km안에 있는 아이들의 정보들 얻기
-	@RequestMapping(value = "/security/where/map/near.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	@RequestMapping(value = "/where/map/near.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	@ResponseBody
 	public String near(Model model, @RequestParam Map map, HttpServletResponse response,
 			@RequestParam(value = "mylat") String mylats, @RequestParam(value = "mylon") String mylons)
@@ -152,7 +152,7 @@ public class WhereController {
 	}// near
 
 	//전체 선택말고 다른 메뉴를 선택 했을 때 반경 10km이내에 있는 정보들을 리스트에 뿌려주기
-	@RequestMapping(value = "/security/where/map/nearselect.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+	@RequestMapping(value = "/where/map/nearselect.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
 	@ResponseBody
 	public String nearselect(Model model, @RequestParam Map map, HttpServletResponse response,
 			@RequestParam(value = "mylat") String mylats, @RequestParam(value = "mylon") String mylons)

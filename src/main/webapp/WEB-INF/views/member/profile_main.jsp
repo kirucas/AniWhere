@@ -89,7 +89,7 @@ function delete_ani(ani_no){
         }
     });
 }
-var idck = 0;
+var nickduple = 0;
 $(function(){
 	var ani = '${record.mem_interani}';
 	var arr = ani.split("");
@@ -113,11 +113,11 @@ $(function(){
 		}
 	}
 	$("#mem_nickname").change(function(){
-		idck=0;
-		$("#idck").prop("disabled",false);
+		nickduple=0;
+		$("#nickduple").prop("disabled",false);
 	});
 	$("#edit").click(function() {
-	    if(idck==0){
+	    if(nickduple==0){
 	        alert('닉네임 중복체크를 해주세요');
 	        return false;
 	    }
@@ -181,24 +181,23 @@ $(function(){
 	        }
 	});
 	 //idck 버튼을 클릭했을 때 
-    $("#idck").click(function() {
+    $("#nickduple").click(function() {
         var nick =  $("#mem_nickname").val(); 
-        console.log(nick);
         $.ajax({
             async: true,
             type : 'POST',
             data : {"mem_nickname":nick},
             dataType : "json",
-            url : "<c:url value='/member/nickchk.aw'/>",
+            url : "<c:url value='/member/nick_change.aw'/>",
             success : function(data) {
             	var result = data.result;
-                if (result > 0) {
+                if (result != 0) {
                     alert("닉네임이 존재합니다. 다른 닉네임을 입력해주세요.");
                     $("#mem_nickname").focus();
                 } else {
                     alert("사용가능한 닉네임입니다.");
-                    $("#idck").prop("disabled",true);
-                    idck = 1;
+                    $("#nickduple").prop("disabled",true);
+                    nickduple = 1;
                 }
             },
             error : function(error) {
@@ -277,7 +276,7 @@ $(function(){
 			                                          <input class="member-input__box" type="text" autocomplete="off" name="mem_nickname" id="mem_nickname"style="text-decoration:underline" value="${record.mem_nickname}">
 			                                       </div>
 			                                       <div>
-			                                          <input id="idck" class="btn btn-primary" type="button" value="중복확인"></input>
+			                                          <input id="nickduple" class="btn btn-primary" type="button" value="중복확인"></input>
 			                                       </div>
 			                                    </div>
 			                                 </div>
