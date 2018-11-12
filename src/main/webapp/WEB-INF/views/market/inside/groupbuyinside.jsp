@@ -583,7 +583,7 @@ function addZeros(num, digit) {// 자릿수 맞춰주기
 	<%-- "${record.goal}-${record.buy_count} >0" > 만약 필요갯수가 0보타 클시에는 보여주고 --%>
 	<%-- ${record.buy_count} 이사람 한개 뿐만이 아니라 모든 buy_count 종합 group_buy의  buy_no 테이블의 모든값 구해야 함  --%>
 	
-<p style="text-align:center;"> ${record.goal}-${dto.buy_count} 개 달성시 공동구매성공입니다  </p>
+<p style="text-align:center;">${record.goal}-${dto.buy_count} 개 달성시 공동구매성공입니다  </p>
                                                                 
      <!-- if 구문을 넣어서 공동구매  카운트 수가 0이 돼었다면 ?
      <p style="text-align:center;"> 목표수량 달성했습니다 공동구매성공입니다  </p>  
@@ -593,7 +593,7 @@ function addZeros(num, digit) {// 자릿수 맞춰주기
    
 <div class="progress-bar blue stripes col-ms-12">
                      
-    <span style="width: (${dto.buy_count}/${record.goal}*100)"></span> 
+    <span style="width: (${dto.buy_count}/${record.goal})"></span> 
     
     <!-- 안쪽에 % 숫자 로직으로 조절 -->
 </div>
