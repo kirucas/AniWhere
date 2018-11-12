@@ -29,7 +29,7 @@
 								 상품설명을 자세히 부탁드립니다</p>
             <p><a class="btn btn-secondary" href="<c:url value='/market/sell.aw' />" role="button">View details &raquo;</a></p>
           </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4" style="border: 1px solid gray;">
+         <%--  <div class="col-lg-4" style="border: 1px solid gray;">
             <img class="rounded-circle" src="<c:url value='/resources/images/maketimages/babydog.jpg' />" alt="Generic placeholder image" width="200" height="200" style="margin-top: 20px;margin-left: 70px">
             <h2>공동구매게시판은<br /> 이쪽입니다</h2> 
             <p>	초보 집사님인 당신을 위해 준비했습니다<br />
@@ -37,7 +37,7 @@
 						 	    <br /> 최상의 가격과 품질로 선물해 드립니다</p>
 							    
             <p><a class="btn btn-secondary" href="<c:url value='/market/groupbuy.aw' />" role="button">View details &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
+          </div><!-- /.col-lg-4 --> --%>
         </div><!-- /.row -->
     
     </div>

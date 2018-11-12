@@ -117,7 +117,7 @@
 					<div class="article__title">
 						<c:choose>
 							<c:when test="${record.animal_code eq '1'}">
-									<span>[고양이]</span>
+									z<span>[고양이]</span>
 							</c:when>
 							<c:when test="${record.animal_code eq '2'}">
 								<span>[강아지]</span>

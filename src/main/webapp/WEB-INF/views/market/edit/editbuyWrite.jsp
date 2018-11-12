@@ -3,9 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <head>
-
 <script>
-
 
 </script>
 
@@ -82,8 +80,6 @@ $(function() {
 				<label for="" class="" >제목</label> 
 			<input class="form-control" type="text" id="title" name="title" placeholder="제목을 입력하세요" required value="${record.title}"/>
 
-									
-
 				<p style="margin-top: 30px;">
 				<label for="" class="">동물분류</label> 
 					 <select
@@ -115,9 +111,7 @@ $(function() {
 					
 					<input class="btn btn-danger" type="submit"  value="확인" id="enterBtn" >
 				</div>
-				
-			
-			
+	
 			</form>
 			
 			<div style="margin-bottom: 50px"></div> 
