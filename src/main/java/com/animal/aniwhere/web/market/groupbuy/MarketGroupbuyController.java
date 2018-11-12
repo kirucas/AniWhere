@@ -235,9 +235,8 @@ public class MarketGroupbuyController {
 					map.put("mem_no",session.getAttribute("mem_no"));
 					map.put("no",map.get("groupbuy_no"));
 					map.put("buy_count", map.get("buy_number"));
-					
-					
-					int insert = gblistservice.insert(map); 
+										
+					int insert = gblistservice.insert(map);
 					System.out.println(map.get("buy_no"));
 					if(insert>0) {
 						GroupBuyingListDTO dto = gblistservice.selectOne(map);
