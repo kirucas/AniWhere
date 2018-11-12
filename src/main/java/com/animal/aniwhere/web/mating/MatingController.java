@@ -328,6 +328,11 @@ public class MatingController {
 			map.put("dft_no",param.replace("ok", ""));
 			map.put("apply", "1"); // 수락
 			affected=draftService.update(map);
+			//안드로이드 버튼 초기화
+			map.put("ani_checking", "0");
+			map.put("ani_no", map.get("ani_no").toString().replaceAll("buttonPlace", ""));
+			animalService.update(map);
+			
 			Map applyMap=draftService.selectOne(map);
 			// 승낙 FCM 보내기
 			map.put("mating_no",applyMap.get("SEND_NO").toString());
@@ -361,6 +366,10 @@ public class MatingController {
 			map.put("dft_no",map.get("dft_no").toString().replace("no", ""));
 			map.put("apply", "2"); // 거절
 			affected=draftService.update(map);
+			//안드로이드 버튼 초기화
+			map.put("ani_checking", "0");
+			map.put("ani_no", map.get("ani_no").toString().replaceAll("buttonPlace", ""));
+			animalService.update(map);
 			// 거절 FCM 보내기
 			Map applyMap=draftService.selectOne(map);
 			map.put("mating_no",applyMap.get("SEND_NO").toString());
@@ -493,6 +502,33 @@ public class MatingController {
 			System.out.println("androidMatchingFind=============");
 			System.out.println(JSONArray.toJSONString(collections));
 			return JSONArray.toJSONString(collections);
+		}
+		
+		@ResponseBody
+		@RequestMapping(value = "/androidDraftInsert.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+		public String androidDraftInsert(@RequestParam Map map,HttpSession session) throws Exception {
+			session.setAttribute("mem_no", map.get("mem_no"));
+			String mattingNO = getMatingNoToAniNo(map,session);
+			map.put("send_no", mattingNO);
+			int affect = draftService.insert(map);
+			
+			if(affect == 1) {
+				return "true";
+			}
+			
+			return "false";
+		}
+		
+		@ResponseBody
+		@RequestMapping(value = "/androidGetTargetAnimal.awa", method = RequestMethod.POST, produces = "text/plain; charset=UTF-8")
+		public String androidGetTargetAnimal(@RequestParam Map map,HttpSession session) throws Exception {
+			AnimalDTO dto = animalService.selectOne(map);
+			JSONObject json = new JSONObject();
+			json.put("ani_pic", dto.getAni_pic());
+			json.put("ani_name", dto.getAni_name());
+			json.put("ani_gender", dto.getAni_gender());
+			json.put("ani_species", dto.getAni_species());			
+			return json.toJSONString();
 		}
 
 }// class
