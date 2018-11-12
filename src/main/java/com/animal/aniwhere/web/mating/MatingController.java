@@ -321,6 +321,8 @@ public class MatingController {
 	@ResponseBody
 	@RequestMapping(value="/mating/draftApply.awa",produces="text/plain;charset=UTF-8")
 	public String draftApply(@RequestParam Map map,Model model,HttpSession session) throws Exception {
+		System.out.println();
+		System.out.println(map.get("tel").toString());
 		String param=map.get("dft_no").toString();
 		int affected=0;
 		if(param.contains("ok")) {
@@ -333,7 +335,7 @@ public class MatingController {
 			MatingDTO sender=matingService.selectOne(map);
 			
 			//System.out.println("승낙 FCM 발사:"+map.get("dft_no"));
-			fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(applyMap,"수락"));
+			fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(applyMap,"수락"),map.get("tel").toString());
 			// 수락을 하는 순간 같은 리시버이면서 0인 목록들을 전부 2로 수정
 			map.put("mating_no",applyMap.get("RECEIVE_NO"));
 			map.put("start", 1);
@@ -350,7 +352,7 @@ public class MatingController {
 					// 거절 FCM 보내기
 					if(sender.getMem_no()!=session.getAttribute("mem_no")) {
 						//System.out.println("거절 FCM 발사:"+abort.get("DFT_NO"));
-						fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(abort,"거절"));
+						fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(abort,"거절"),null);
 					}
 				}
 			}/// for
@@ -364,7 +366,7 @@ public class MatingController {
 			Map applyMap=draftService.selectOne(map);
 			map.put("mating_no",applyMap.get("SEND_NO").toString());
 			MatingDTO sender=matingService.selectOne(map);
-			fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(applyMap,"거절"));
+			fireBasePushAsyncTask(sender.getMem_no(),keywordGenerator(applyMap,"거절"), null);
 			return "no"+affected;
 		}/// if
 	}/// draftApply
@@ -383,7 +385,7 @@ public class MatingController {
 				receiver.getAni_name(),receiver.getAni_kind(),keyword);
 	}///keywordGenerator
 	
-	public String fireBasePushAsyncTask(String target_no,String message) throws Exception {
+	public String fireBasePushAsyncTask(String target_no,String message,String tel) throws Exception {
 		Map map=new HashMap();
 		map.put("mem_no", target_no);
 		Map result = androidservice.selectOne(map);
@@ -395,7 +397,7 @@ public class MatingController {
 			
 			Sender sender = new Sender(API_KEY);
 	        Message msg = new Message.Builder() 
-	        		.addData("message",message)//데이타 메시지
+	        		.addData("message",message+"@"+tel)//데이타 메시지
 	                .addData("title","만나요 알림서비스")//데이타 타이틀       
 	                .build();
 	        ArrayList<String> token = new ArrayList<String>(); 

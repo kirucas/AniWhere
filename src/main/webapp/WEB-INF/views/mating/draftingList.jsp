@@ -52,25 +52,33 @@
 	$(function(){
 		$(document).on('click','.permit',function(){
 			var dft_no=$(this).prop("id");
-			$.ajax({
-				url:"<c:url value='/mating/draftApply.awa'/>",
-	       		type:"POST",
-				data:{"dft_no":dft_no},
-	       		dataType: "text",
-	       		success : function(data) {
-	       			$('#'+dft_no).closest('.card').remove();
-	       			if(data.indexOf("ok")!=-1) {
-	       				alert("만남을 수락했습니다. 목록으로 이동합니다.");
-	       				location.href="<c:url value='/security/mating/main.aw'/>";
-	       			}
-	           	},
-	           	error : function(error) {
-	           		console.log("에러발생",error);
-		       	}
-			});
+			$("#dftNo").html(dft_no);
+			$("#telModal").modal("show");
+		});
+		
+		$(document).on('click','.send',function(){
+			doApply($("#dftNo").html(),$("#tel").val());
 		});
 	});
 
+	function doApply(dft_no,tel){
+		$.ajax({
+			url:"<c:url value='/mating/draftApply.awa'/>",
+       		type:"POST",
+			data:{"dft_no":dft_no,"tel":tel},
+       		dataType: "text",
+       		success : function(data) {
+       			$('#'+dft_no).closest('.card').remove();
+       			if(data.indexOf("ok")!=-1) {
+       				alert("만남을 수락했습니다. 목록으로 이동합니다.");
+       				location.href="<c:url value='/security/mating/main.aw'/>";
+       			}
+           	},
+           	error : function(error) {
+           		console.log("에러발생",error);
+	       	}
+		});
+	}
 </script>
 
 <!-- 내용 시작 -->
@@ -184,52 +192,23 @@
 				</div>
 			</section>
 		</div>
-	</div>
-	
-					
-	<%-- <section class="member-settings-layout__content">
-		<div class="member-settings-layout__content-inner" style="height: 100%;">
-				<c:forEach var="record" items="${draftList}" varStatus="loop">
-				  	<div class="card col-12 col-lg-6 col-md-12">
-					  	<img class="card-img-top" src="<c:url value='${record.ani_pic}'/>" alt="애완동물 사진" id="ani_profile">
-					 	<div class="card-body">
-					    	<h2 class="card-title">이름 : ${record.ani_name}</h2>
-						    <div style="float:left;width:50%">
-							    <span>나이 : ${record.ani_age}</span>
-							</div>
-							<div style="display:inline;">
-					    		<span>성별 : 
-					    			<c:choose>
-					    				<c:when test="${record.ani_gender eq 'M'}">수</c:when>
-					    				<c:when test="${record.ani_gender eq 'F'}">암</c:when>
-					    				<c:otherwise>기타</c:otherwise>
-					    			</c:choose>
-					    		</span>
-						    </div>
-						    <div>
-					    		<span>
-					    			대분류 : 
-					    			<c:choose>
-					    				<c:when test="${record.ani_species eq 1}">강아지</c:when>
-					    				<c:when test="${record.ani_species eq 2}">고양이</c:when>
-					    				<c:when test="${record.ani_species eq 3}">파충류/양서류</c:when>
-					    				<c:when test="${record.ani_species eq 4}">조류</c:when>
-					    				<c:otherwise>기타 포유류</c:otherwise>
-					    			</c:choose>
-					    		</span><br>
-				    			<span>중분류 : ${record.ani_kind}</span>
-			    			</div>
-			    			<!-- <div style="display: inline;float: left;margin-top: 10px;">
-			    				<p class="card-text">검색 위치
-			    			</div> -->
-			    			<div style="text-align:right;display: inline;float: right;" id="buttonPlace${record.ani_no}">
-							    <a href="#" class="btn btn-primary mate" id="">수락</a>
-							    <a href="#" class="btn btn-primary mate" id="">거절</a>
-		    				</div>
-					  	</div>
-					</div>
-				</c:forEach>
-		</div>	
-	</section> --%>
+	</div>	
 </div>
 <!-- 내용 끝 -->
+
+<div class="modal fade" id="telModal" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<label id="dftNo" hidden="true"></label>
+				<input type="text" id="tel" style="margin: 10px" placeholder="전화번호를 입력해주세요"/>
+			</div>
+			<div class="modal-footer">
+				<div>
+					<a href="#" class="send" data-dismiss="modal" class="btn btn-secondary">보내기</a>
+					<a href="#" data-dismiss="modal" class="btn btn-danger">닫기</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
