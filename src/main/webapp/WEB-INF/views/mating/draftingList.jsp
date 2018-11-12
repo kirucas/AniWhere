@@ -52,20 +52,30 @@
 	$(function(){
 		$(document).on('click','.permit',function(){
 			var dft_no=$(this).prop("id");
+			var ani_no=$(this).parent().prop("id");
 			$("#dftNo").html(dft_no);
+			$("#aniNo").html(ani_no);
 			$("#telModal").modal("show");
 		});
 		
 		$(document).on('click','.send',function(){
-			doApply($("#dftNo").html(),$("#tel").val());
+			doApply($("#dftNo").html(),$("#tel").val(),$("#aniNo").html());
+		});
+		
+		$(document).on('click','.dismiss',function(){
+			var dft_no=$(this).prop("id");
+			$("#dftNo").html(dft_no);
+			doApply($("#dftNo").html(),null,null);
 		});
 	});
+	
+	
 
-	function doApply(dft_no,tel){
+	function doApply(dft_no,tel,ani_no){
 		$.ajax({
 			url:"<c:url value='/mating/draftApply.awa'/>",
        		type:"POST",
-			data:{"dft_no":dft_no,"tel":tel},
+			data:{"dft_no":dft_no,"tel":tel,"ani_no":ani_no},
        		dataType: "text",
        		success : function(data) {
        			$('#'+dft_no).closest('.card').remove();
@@ -182,7 +192,7 @@
 						    			</div> -->
 						    			<div style="text-align:right;display: inline;float: right;" id="buttonPlace${record.ani_no}">
 										    <a href="#" class="btn btn-primary permit" id="ok${dftNoList[loop.index]}">수락</a>
-										    <a href="#" class="btn btn-primary permit" id="no${dftNoList[loop.index]}">거절</a>
+										    <a href="#" class="btn btn-primary dismiss" id="no${dftNoList[loop.index]}">거절</a>
 					    				</div>
 								  	</div>
 								</div>
@@ -201,6 +211,7 @@
 		<div class="modal-content">
 			<div class="modal-body">
 				<label id="dftNo" hidden="true"></label>
+				<label id="aniNo" hidden="true"></label>
 				<input type="text" id="tel" style="margin: 10px" placeholder="전화번호를 입력해주세요"/>
 			</div>
 			<div class="modal-footer">
