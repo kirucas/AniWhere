@@ -1,4 +1,4 @@
-﻿package com.animal.aniwhere.web.board;
+package com.animal.aniwhere.web.board;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

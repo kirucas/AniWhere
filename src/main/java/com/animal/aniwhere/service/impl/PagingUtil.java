@@ -1,4 +1,4 @@
-﻿package com.animal.aniwhere.service.impl;
+package com.animal.aniwhere.service.impl;
 
 public class PagingUtil {
 
