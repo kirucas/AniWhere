@@ -33,7 +33,7 @@ span .mr-auto{
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
     <!-- 구글 로그인 -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name = "google-signin-client_id"content = "696950404959-v8jmcjjtc6kubvuoc9r8ctebi5rff7qk.apps.googleusercontent.com">
+    <meta name = "google-signin-client_id"content = "114002391093-2pah7et1b4fatvqhjob82j3pnrdt68hr.apps.googleusercontent.com">
 </head>
 <!-- <body> -->
    <c:if test="${not empty sign_error }">
@@ -74,22 +74,29 @@ span .mr-auto{
                                     </div>
                                 </div>
                                 <div class="form-group" style="float:left;">
-                                    <button class="btn btn-primary submit-btn">로그인</button>
+                                    <button style="width:100%;" class="btn btn-primary submit-btn">로그인</button>
                                 </div>
                            </form>
                                 <div class="row">
-                                	<ul style="list-style:none;margin:0;padding:0">
+                                	<ul style="width:100%;list-style:none;margin:0;padding:0">
                                			<li style="float:left;padding-right:10px">
                                 			<a href="${url}">
-                                				<img class="logins" style="width:126px;height:36px;" id="naverLogin" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
+                                				<img class="logins" style="width:225px;height:36px;" id="naverLogin" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
                                				</a>
                             			</li>
                                			<li style="float:left">
-                               				<div class="g-signin2 logins" data-onsuccess="onSignIn"></div>	
+                            				
+                            				<div id="google_id_login" style="text-align:center">
+                            					<a href="${google_url}"><img class="glogins" style="width:225px;height:36px;" src="<c:url value='/resources/images/googleicon.png'/>"/></a>
+                            				</div>
                                			</li>
                                		</ul>
                   				</div>
-    			 				<p style="margin-top:1.rem;" class="margin center medium-small sign-up">계정이 없으십니까?<a href="<c:url value='/member/sign_up.aw' />"> Sign Up</a></p>
+                  				<div class="row" style="margin-top: 20px;">
+	    			 				<p style="margin-top:1.rem;" class="margin center medium-small sign-up">계정이 없으십니까?
+	    			 					<a href="<c:url value='/member/sign_up.aw' />"> Sign Up</a>
+	    			 				</p>
+    			 				</div>
                            <div class="wrapper mt-5 text-gray">
                                <p class="footer-text">Copyright © 2018 Bootstrapdash. All rights reserved.</p>
                                <ul class="auth-footer text-gray">

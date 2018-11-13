@@ -45,8 +45,8 @@
 		<selectKey order="BEFORE" resultType="int" keyProperty="no">
 			SELECT seq_photo.nextval FROM DUAL
 		</selectKey>
-		INSERT INTO photo(no, mem_no, photo_title, photo_content, ani_category)
-		VALUES(#{no}, #{mem_no}, #{photo_title}, #{photo_content}, #{ani_category})
+		INSERT INTO photo(no, mem_no, photo_title, photo_content, ani_category, photo_regidate)
+		VALUES(#{no}, #{mem_no}, #{photo_title}, #{photo_content}, #{ani_category}, #{today})
 	</insert>
 	
 	<update id="photoUpdate" parameterType="java.util.Map">
@@ -64,7 +64,7 @@
 		SELECT *
 		FROM photo_link
 		WHERE no=#{no}
-		ORDER link_no
+		ORDER BY link_no
 	</select>
 	
 	<insert id="linkInsert" parameterType="java.util.Map">
@@ -77,7 +77,7 @@
 	
 	<delete id="linkDelete" parameterType="java.util.Map">
 		DELETE FROM photo_link
-		WHERE origin_no=#{no}
+		WHERE no=#{no}
 	</delete>
 	
 	<update id="addHitCountPhoto" parameterType="java.util.Map">
@@ -87,11 +87,9 @@
 	</update>
 	
 	<update id="addCountPhoto" parameterType="java.util.Map">
-		<if test="view != null">
-			UPDATE photo
-			SET photo_count=photo_count + 1
-			WHERE no=#{no}
-		</if>
+		UPDATE photo
+		SET photo_count=photo_count + 1
+		WHERE no=#{no}
 	</update>
 	
 </mapper>

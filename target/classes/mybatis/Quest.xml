@@ -43,12 +43,12 @@
 	<insert id="questInsert" parameterType="java.util.Map">
 		INSERT INTO quest
 		<if test="checking == null">
-			(no, mem_no, quest_title, quest_content, origin_no, ani_category)
-			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, seq_quest.currval, #{ani_category})
+			(no, mem_no, quest_title, quest_content, origin_no, ani_category, quest_regidate)
+			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, seq_quest.currval, #{ani_category}, #{today})
 		</if>
 		<if test="checking != null">
-			(no, mem_no, quest_title, quest_content, origin_no, checking)
-			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, origin_no, 1, #{ani_category})
+			(no, mem_no, quest_title, quest_content, origin_no, checking, ani_category, quest_regidate)
+			VALUES(seq_quest.nextval, #{mem_no}, #{quest_title}, #{quest_content}, #{origin_no}, 1, #{ani_category}, #{today})
 		</if>
 	</insert>
 	
@@ -61,6 +61,9 @@
 	<delete id="questDelete" parameterType="java.util.Map">
 		DELETE quest
 		WHERE no=#{no}
+		<if test="checking != null and checking == 0">
+			OR origin_no=#{no}
+		</if>
 	</delete>
 	
 	<update id="addHitCountQuest" parameterType="java.util.Map">
@@ -70,11 +73,9 @@
 	</update>
 	
 	<update id="addCountQuest" parameterType="java.util.Map">
-		<if test="view != null">
-			UPDATE quest
-			SET quest_count=quest_count + 1
-			WHERE no=#{no}
-		</if>
+		UPDATE quest
+		SET quest_count=quest_count + 1
+		WHERE no=#{no}
 	</update>
 	
 </mapper>

@@ -13,7 +13,7 @@ public class CatMainController {
 		return "board/animal/cat/cat_main.tiles";
 	}////////// cat_main
 	
-	@RequestMapping(value="/animal/cat/{path}", method=RequestMethod.GET)
+	@RequestMapping(value="/animal/cat/{path}")
 	public String move_board(@PathVariable String path) throws Exception {
 		return "board/animal/cat/"+ path + "/" + path + "_list.tiles";
 	}////////// move_board

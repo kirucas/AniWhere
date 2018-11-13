@@ -27,7 +27,17 @@
 				<if test="searchColumn != null">
 					WHERE ${searchColumn} like '%'||#{searchWord}||'%'
 				</if>
-				ORDER BY no DESC
+				<choose>
+					<when test="hit != null"> <!-- 추천수 정렬 -->
+						ORDER BY free_hit DESC
+					</when>
+					<when test="count != null"> <!-- 조회수 정렬 -->
+						ORDER BY free_count DESC
+					</when>
+					<otherwise>
+						ORDER BY no DESC
+					</otherwise>
+				</choose>
 				) T
 			)
 		WHERE R BETWEEN #{start} AND #{end}
@@ -40,13 +50,13 @@
 	</select>
 	
 	<insert id="freeInsert" parameterType="java.util.Map">
-		INSERT INTO freeboard(no, mem_no, free_title, free_content, free_category)
-		VALUES(seq_freeboard.nextval, #{mem_no}, #{free_title}, #{free_content}, #{free_category})
+		INSERT INTO freeboard(no, mem_no, free_title, free_content, free_category, free_regidate)
+		VALUES(seq_freeboard.nextval, #{mem_no}, #{free_title}, #{free_content}, #{free_category}, #{today})
 	</insert>
 	
 	<update id="freeUpdate" parameterType="java.util.Map">
 		UPDATE freeboard
-		SET free_title=#{free_title}, free_content=#{free_content}, #{free_category})
+		SET free_title=#{free_title}, free_content=#{free_content}, free_category=#{free_category}
 		WHERE no=#{no}
 	</update>
 	
@@ -67,11 +77,9 @@
 	</update>
 	
 	<update id="addCountFree" parameterType="java.util.Map">
-		<if test="view != null">
-			UPDATE freeboard
-			SET free_count=free_count + 1
-			WHERE no=#{no}
-		</if>
+		UPDATE freeboard
+		SET free_count=free_count + 1
+		WHERE no=#{no}
 	</update>
 	
 </mapper>

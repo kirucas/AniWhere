@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.animal.aniwhere.service.animal.PhotoBoardDTO;
 import com.animal.aniwhere.service.animal.PhotoService;
 
+
 @Repository
 public class PhotoBoardDAO implements PhotoService {
 
@@ -30,12 +31,14 @@ public class PhotoBoardDAO implements PhotoService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public PhotoBoardDTO selectOne(Map map) {
-		template.update("addCountPhoto", map);
+		if(map.get("view") == null)
+			template.update("addCountPhoto", map);
 		return template.selectOne("photoSelectOne", map);
 	}////////// selectOne
 
 	@Override
 	public int insert(Map map) {
+		map.put("today", new java.sql.Date(new java.util.Date().getTime()));
 		return template.insert("photoInsert", map);
 	}////////// insert
 

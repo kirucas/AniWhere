@@ -11,9 +11,9 @@ public class LostAnimalDTO {
 	private String gender;
 	private String neuter;
 	private String addr;
-	private String careNm;
-	private String careTel;
-	private String chargeNm;
+	private String carenm;
+	private String caretel;
+	private String chargenm;
 	
 	public String getNo() {
 		return no;
@@ -86,29 +86,29 @@ public class LostAnimalDTO {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}//////////
-	
-	public String getCareNm() {
-		return careNm;
+
+	public String getCarenm() {
+		return carenm;
 	}//////////
-	
-	public void setCareNm(String careNm) {
-		this.careNm = careNm;
+
+	public void setCarenm(String carenm) {
+		this.carenm = carenm;
 	}//////////
-	
-	public String getCareTel() {
-		return careTel;
+
+	public String getCaretel() {
+		return caretel;
 	}//////////
-	
-	public void setCareTel(String careTel) {
-		this.careTel = careTel;
+
+	public void setCaretel(String caretel) {
+		this.caretel = caretel;
 	}//////////
-	
-	public String getChargeNm() {
-		return chargeNm;
+
+	public String getChargenm() {
+		return chargenm;
 	}//////////
-	
-	public void setChargeNm(String chargeNm) {
-		this.chargeNm = chargeNm;
+
+	public void setChargenm(String chargenm) {
+		this.chargenm = chargenm;
 	}//////////
 	
 }//////////////////// LostAnimalDTO class

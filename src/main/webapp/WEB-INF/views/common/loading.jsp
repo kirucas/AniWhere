@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp"%>
 
 <meta charset="utf-8">
 
@@ -27,28 +26,21 @@
 
     </style>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
 	<script type="text/javascript">
-
 		$(document).ready(function() {
 
 		    $('.loading').show();
 
+		
+			$(window).on('load', function() {
+	
+			    $('.loading').hide();
+	
+			}); 
 		});
-
-		$(window).on('load', function() {
-
-		    $('.loading').hide();
-
-		});
-
 	</script>
-
-
-	<div class="loading">
+	<div class="loading" id="content">
 
 		<img alt="loading" src="<c:url value='/resources/images/loading.gif'/>">
 
 	</div>
-

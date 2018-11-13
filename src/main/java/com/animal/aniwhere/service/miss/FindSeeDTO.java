@@ -9,6 +9,7 @@ public class FindSeeDTO {
 	private java.sql.Date regidate;
 	private String count;
 	private String animal_code;
+	private String addr;
 	
 	// 작성자 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
@@ -85,6 +86,14 @@ public class FindSeeDTO {
 	
 	public void setAnimal_name(String animal_name) {
 		this.animal_name = animal_name;
+	}//////////
+
+	public String getAddr() {
+		return addr;
+	}//////////
+
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}//////////
 	
 }//////////////////// FindBoardDTO class

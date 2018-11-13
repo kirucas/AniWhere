@@ -15,6 +15,9 @@
    #files{
       opacity: 0;
    }
+   #btnupload{
+   		width: auto;
+   }
 </style>
 
 <!-- 내용 시작 -->
@@ -30,29 +33,30 @@
 			<div class="form-group">
 				<label for="title" class="col-md-2 control-label">제목</label>
 				<div class="col-md-12">
-					<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요">
+					<input type="text" class="form-control" id="photo_title" name="photo_title" placeholder="제목을 입력해주세요">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="content" class="col-sm-2 control-label">내용</label>
 				<div class="col-sm-12">
-					<textarea rows="10" placeholder="내용을 입력해주세요" id="content" name="content" class="form-control" style="height: 300px;"></textarea>
+					<textarea rows="10" placeholder="내용을 입력해주세요" id="photo_content" name="photo_content" class="form-control" style="height: 300px;"></textarea>
 				</div>
 			</div>
-			<div class="row">
-				<div class="form-group"">
-					<a href="javascript:" onclick="fileUploadAction();"	class="btn btn-primary">사진 업로드</a> 
-					<a href="javascript:" id="imgdelete" class="btn btn-danger">되돌리기</a> 
-					<input id="files" type="file" multiple name="files" style="display:none;"/>
-				</div>
-				<div style="float:right;">
-					<input id="uploadButton" type="button" class="btn btn-primary" value="등록"/>
-<!-- 					<a href="#" class="btn btn-primary">등록</a> -->
+			<div class="container">
+				<div class="row">
+					<div class="form-group" style="width: 100%;">
+						<a href="javascript:" onclick="fileUploadAction();"	class="btn btn-primary">사진 업로드</a> 
+						<a href="javascript:" id="imgdelete" class="btn btn-danger">삶을 되돌아보기</a> 
+						<input id="files" type="file" multiple name="files" style="display:none;"/>
+						<input id="uploadButton" type="button" class="btn btn-primary" value="등록" style="float: right;"/>
+	<!-- 					<a href="#" class="btn btn-primary">등록</a> -->
+					</div>
 				</div>
 			</div>
 			<div id="result">
-				<!-- 사진 업로드 결과가 나오는 div 인듯 -->			
+				<!-- 사진 업로드 결과가 나오는 div 인듯 -->		
+				<!-- 그렇다 -->	
 			</div>
 		</form>
 		<!-- 입력 폼 종료 -->
@@ -68,7 +72,12 @@
 		$("#files").trigger('click');
 	}/// fileUploadAction
 	
+	var category;
+	
 	window.onload = function() {
+		// 카테고리 저장용
+		category="${category}";
+		
 		var filelength = 0;
 		// 전체 파일 저장용 변수
 		var allFiles=new Array();
@@ -137,17 +146,17 @@
 		var formData=new FormData($("form")[0]);
 		formData.append("files",data);
 		$.ajax({
-			url : "<c:url value='/board/animal/bird/photo/write.aw'/>",
+			url : "<c:url value='/security/"+category+"/photo/write.awa'/>",
 			processData : false,
 			contentType : false,
 			data : formData,
 			type : 'POST',
 			success:function(url){
 				console.log("success");
-				location.href="<c:url value='/animal/bird/photo.aw'/>";
+				location.href="<c:url value='/animal/"+category+"/photo.aw'/>";
 	        },
-	        error:function(){
-	            console.log("error");
+	        error:function(error){
+	            console.log("error:",error);
 	        }
 		});
 	}/// upload

@@ -8,6 +8,14 @@
 			alert("회원가입 성공! 로그인페이지로 이동합니다.");
 			location.replace("<c:url value='/login.aw'/>");
 		</c:when>
+		<c:when test="${check==2}">
+			alert("네이버 회원가입 성공!");
+			location.replace("<c:url value='/signInProcess.aw'/>");
+		</c:when>
+		<c:when test="${check==3}">
+			alert("구글 회원가입 성공!");
+			location.replace("<c:url value='/signInProcess.aw'/>");
+		</c:when>
 		<c:when test="${check==0}">
 			alert("회원가입 실패! 회원가입페이지로 이동합니다.");
 			history.back();

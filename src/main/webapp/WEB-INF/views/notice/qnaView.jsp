@@ -58,7 +58,7 @@
 					<tr>
 						<th colspan="2">내용</th>
 					</tr>
-					<tr>
+					<tr> 
 						<td colspan="2">${record.content}</td>
 					</tr>
 				</thead>

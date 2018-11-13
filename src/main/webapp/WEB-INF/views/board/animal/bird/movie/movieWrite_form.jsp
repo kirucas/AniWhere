@@ -1,31 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:if test="${not empty mem_no }">
-<script>
-	alert("${mem_no}");
-</script>
-</c:if>
+
 <style>
-.content {
-	text-align: left;
-	font-size: 16px;
-}
-
-.margin-top-7 {
-	margin-top: 7px;
-}
-
-.margin-top-8 {
-	margin-top: 8px;
-}
 
 .margin-top-10 {
 	margin-top: 1.0em;
-}
-
-.margin-top-30 {
-	margin-top: 3.0em;
 }
 
 .margin-right-10 {
@@ -43,20 +23,23 @@
 
 	function pre_view() {
 		var ntWin;
-		ntWin = window.open('', 'popup', 'width=600,height=500');
+		ntWin = window.open('', 'popup', 'width=640,height=600');
 		ntWin.document.getElementsByTagName("body")[0].innerHTML = '';
-		
+		ntWin.document.write("<html><body>");
+		 
+		ntWin.document.getElementsByTagName("body")[0].style.fontFamily ="메이플스토리";
+	
 		/* 제목 */
-		ntWin.document.write("<br/>" + document.forms[0].movie_title.value + "<br/>");
+		ntWin.document.write("<br/>제목 : " + document.forms[0].movie_title.value + "<br/><hr />");
 		
 		/* 내용 컨텐츠 */
 		ntWin.document.write("<br/>" + document.forms[0].movie_content.value + "<br/>");
+		
+		ntWin.document.write("</body></html>");
 	}
-	
 	
 	function check() {
 		var isAttached = $('#summernote').summernote('code');
-		console.log(isAttached);
 		if (fr.movie_title.value == "") {
 
 			alert("제목을 입력해 주세요.");
@@ -66,6 +49,17 @@
 			return false;
 
 		} 
+		
+		else if (fr.movie_title.value.length > 50) {
+
+			alert("제목은 50자 이내로 입력해주세요.");
+
+			fr.movie_title.focus();
+
+			return false;
+
+		} 
+		
 		else if (fr.movie_content.value == "") {
 			alert('내용을 입력하세요.');
 			return false;
@@ -76,32 +70,30 @@
 			return false;
 		}
 		
+		/* 영상을 두 개 이상 올리는 것을 막는 루트이나 일단 쓰지 않고 넣어만 둠.
 		else if (isAttached.match(/<\/iframe>/gi).length >= 2) {
-			alert(console.log(isAttached));
 			alert('영상은 하나만 첨부하세요.');
 			return false;
 		}
-
+ */		
 		 else {
-			 alert(console.log(isAttached));
 			 return true;
 		 }
 	}
-
 </script>
 
 <div class="container">
-	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/animal/bird/movie/Write.aw'/>">
+	<form name="fr" method="post" onsubmit="return check()" action="<c:url value='/security/animal/bird/movie/Write.aw'/>">
 		<input type="hidden" name="mem_no" value="${mem_no }">
 		<input type="hidden" name="ani_category" value="4">
 		<div class="form-group row">
 			<label for="validationDefaultUsername"
 				class="offset-sm-1 col-sm-1 col-form-label">게시판</label>
 			<!-- 내가 지금 어느 게시판에서 쓰고 있는지를 보여주는 disabled input태그 -->
-			<div class="col-sm-9">
+			<div class="col-sm-9 ">
 				<input type="text" class="form-control-planintext"
-					id="validationDefaultUsername" disabled="disabled"
-					placeholder="예:조류게시판">
+					id="validationDefaultUsername" value="조류게시판" disabled="disabled"
+					placeholder="조류게시판">
 				<!-- required disabled -->
 			</div>
 		</div>
@@ -109,7 +101,7 @@
 			<label for="title" class="offset-sm-1 col-sm-1 col-form-label">제목</label>
 			<div class="col-sm-9">
 				<input class="form-control" type="text" id="title"
-					name="movie_title" placeholder="제목">
+					name="movie_title" placeholder="제목은 50자 이내로 작성해주세요">
 			</div>
 		</div>
 
@@ -138,20 +130,14 @@
 				width : $('#summernote').parent().css('width'),
 				minHeight : null, // set minimum height of editor
 				maxHeight : null, // set maximum height of editor
-				/* airMode: true, */
 				focus : true,
-				placeholder: '영상 및 내용',
-				// set focus to editable area after initializing summernote
+				placeholder: '영상을 첨부해주시고 내용을 반드시 작성해주세요.',
 				toolbar : [
-				// [groupName, [list of button]]
 				[ 'style', [ 'bold', 'italic', 'underline', 'clear' ] ],
 						[ 'font', [ 'strikethrough' ] ],
 						[ 'fontsize', [ 'fontsize' ] ],
 						[ 'color', [ 'color' ] ],
 						[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-						[ 'height', [ 'height' ] ], [ 'video', [ 'video' ] ] ]
-				
+						[ 'height', [ 'height' ] ], [ 'video', [ 'video' ] ] ]	
 			});
-	
-	
 </script>

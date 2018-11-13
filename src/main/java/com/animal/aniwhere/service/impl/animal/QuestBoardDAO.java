@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.animal.QuestBoardDTO;
 
+
 @Repository
 public class QuestBoardDAO implements AllBoardService {
 
@@ -30,12 +31,14 @@ public class QuestBoardDAO implements AllBoardService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public QuestBoardDTO selectOne(Map map) {
-		template.update("addCountQuest", map);
+		if(map.get("view") == null)
+			template.update("addCountQuest", map);
 		return template.selectOne("questSelectOne", map);
 	}////////// selectOne
 
 	@Override
 	public int insert(Map map) {
+		map.put("today", new java.sql.Date(new java.util.Date().getTime()));
 		return template.insert("questInsert", map);
 	}////////// insert
 

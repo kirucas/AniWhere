@@ -41,8 +41,8 @@
 	</select>
 	
 	<insert id="tipInsert" parameterType="java.util.Map">
-		INSERT INTO tip(no, mem_no, tip_title, tip_content, ani_category)
-		VALUES(seq_tip.nextval, #{mem_no}, #{tip_title}, #{tip_content}, #{ani_category})
+		INSERT INTO tip(no, mem_no, tip_title, tip_content, ani_category, tip_regidate)
+		VALUES(seq_tip.nextval, #{mem_no}, #{tip_title}, #{tip_content}, #{ani_category}, #{today})
 	</insert>
 	
 	<update id="tipUpdate" parameterType="java.util.Map">
@@ -63,11 +63,9 @@
 	</update>
 	
 	<update id="addCountTip" parameterType="java.util.Map">
-		<if test="view != null">
 			UPDATE tip
 			SET tip_count = tip_count + 1
 			WHERE no=#{no}
-		</if>
 	</update>
 	
 </mapper>

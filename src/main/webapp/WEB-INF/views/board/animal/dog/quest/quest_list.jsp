@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/views/common/IsMember.jsp" %>
-<%@ include file="/WEB-INF/views/common/loading.jsp" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 <style>
-/* 아이콘을 위한 것 */	
-@import("https://use.fontawesome.com/releases/v5.3.1/css/all.css" )
+	.fas {font-family : 'FontAwesome'! important; } 
 </style>
 <div class="container">
 	<div class="page-header">
@@ -14,25 +12,23 @@
 		</h2>
 	</div>
 	<div>
-		<form action='<c:url value="/animal/dog/quest/quest_write.aw"/>'>
-			<div class="offset-sm-9 col-sm-3" style="padding: 5px;padding-right: 0px">	
+		<form action='<c:url value="/security/animal/dog/quest/quest_write.aw"/>'>
+			<div class="offset-md-9 col-md-3" style="padding: 5px;padding-right: 0px">	
 				<div align="right">
-					<a href="<c:url value='/animal/dog/quest/quest_write.aw'/>"class="btn btn-success">
-						<i class="fas fa-pen-square" >글쓰기</i><!-- 아이콘 -->
-					</a>
+					<a href="<c:url value='/security/animal/dog/quest/quest_write.aw'/>" class="btn btn-sm btn-outline-success" style="font-size:15px"><i class="fas fa-edit fa-lg"></i> 글쓰기</a>
 				</div>
 			</div>
 		</form>
 	</div>
 	<div class="row">
 		<table class="table table-hover table-bordered">
-			<thead id="thead"style="background-color:#1ABC9C">
+			<thead id="thead"style="background-color:#1fcfcc">
 				<tr>
-					<th scope="col" style="width:8%" class="text-center">글번호</th>
+					<th scope="col" style="width:6%" class="text-center">글번호</th>
 					<th class="text-center" scope="col" >제목<small>(댓글)</small></th>
-					<th class="text-center" scope="col" style="width:8%">작성자</th>
-					<th class="text-center" scope="col" style="width:8%">조회수</th>
-					<th class="text-center" scope="col" style="width:8%">추천수</th>
+					<th class="text-center" scope="col" style="width:10%">작성자</th>
+					<th class="text-center" scope="col" style="width:6%">조회수</th>
+					<th class="text-center" scope="col" style="width:6%">추천수</th>
 					<th class="text-center" scope="col" style="width:12%">작성일</th>
 				</tr>
 			</thead>
@@ -45,16 +41,21 @@
 				<c:if test="${not isEmpty }">
 					<c:forEach var="record" items="${list}" varStatus="loop">
 						<tr>
-							<td class="text-center" scope="row">${record.quest_no}</td>
+							<td class="text-center" scope="row">${record.dto.no}</td>
 							<td>
-								<a style="color:black;" href="<c:url value='/animal/dog/quest/quest_view.aw?quest_no=${record.quest_no}'/>">${record.quest_title}
-									<span class="badge badge-info">${record.quest_hit}</span>
+								<a style="color:black;" href="<c:url value='/animal/dog/quest/quest_view.aw?no=${record.dto.no}'/>">${record.dto.quest_title}
+									<span class="badge badge-info">${record.cmtCount != null ? record.cmtCount : 0 }</span>
 								</a>
 							</td>
-							<td class="text-center">${record.mem_nickname}</td>
-							<td class="text-center">${record.quest_count}</td>
-							<td class="text-center">${record.quest_hit}</td>
-							<td class="text-center">${record.quest_regidate}</td>
+							<c:if test="${record.dto.mem_no == null }">
+								<td class="text-center">탈퇴한 회원</td>
+							</c:if>
+							<c:if test="${record.dto.mem_no != null }">
+								<td class="text-center">${record.dto.mem_nickname}</td>
+							</c:if>
+							<td class="text-center">${record.dto.quest_count}</td>
+							<td class="text-center">${record.dto.quest_hit}</td>
+							<td class="text-center">${record.dto.quest_regidate}</td>
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -62,11 +63,12 @@
 		</table>
 	</div>
 	<!-- 페이징 시작 -->
-	<div class="form-row">
-		<div class="offset-sm-5 col-sm-2">${pagingString}</div>
+	<div class="form-row text-center">
+		<div style="width:100%">${pagingString}</div>
 	</div>
 	<!-- 페이징 끝 -->
-	<div class="row offset-sm-3 col-sm-7">
+	<!-- 검색 부분 -->
+	<div class="row offset-md-3 col-md-7">
 		<div class="form-row">
 			<form class="form-inline" style="padding-bottom: 10px" method="post"
 				action="<c:url value='/animal/dog/quest/quest_list.aw'/>">
@@ -81,11 +83,10 @@
 					<input type="text" class="form-control" name="searchWord" />
 				</div>
 				<div class="form-group" style="padding-left:5px">
-					<button type="submit" class="btn btn-outline-primary btn-sm" style="padding-left:10px;font-size:20px">
-						<i class="fas fa-search"></i>검색
-					</button>
+					<button type="submit" class="btn btn-outline-primary btn-sm" style="padding-left:10px;font-size:20px"><i class="fas fa-search"></i>검색</button>
 				</div>
 			</form>
 		</div>
 	</div>
+	<!-- 검색 부분 -->
 </div>

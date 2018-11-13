@@ -14,12 +14,6 @@
    padding-top:90px;
    padding-bottom:90px;
 }
-
-@media (max-width: 767px) {
-	#aniFooter {
-		display:none;
-	}
-}
 .footul{
    font-weight:bold;
    font-size:20px;   
@@ -36,8 +30,6 @@
 .footul a{
    color:black;
 }
-
-
 </style>
 
 <!-- footer -->
@@ -84,8 +76,7 @@
 			</div>
 			<div class="mbr-footer-content col-xs-12 col-md-3">
 					<ul class="footul">
-						<a href="<c:url value='/notice.aw' />"><span>공지사항</span></a>
-						<li><a href="<c:url value='/qna.aw' />"><span>1대1 문의</span></a></li>
+						<a href="#" id="notice"><span>공지사항</span></a>
 					</ul>
 					<ul class="footul">
 						<span>주소</span>

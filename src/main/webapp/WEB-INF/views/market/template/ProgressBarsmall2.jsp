@@ -1,4 +1,4 @@
-v<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -6,23 +6,7 @@ v<%@ page language="java" contentType="text/html; charset=UTF-8"
     <title>프로그레스바 </title>
     
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script>
-	$(document).ready(function(){  // 몇퍼센트나 채웠는 결과값 계산해서 뿌려주는 로직 만들것
-		$('.quarter').click(function(){
-			$(this).parent().prev().children('span').css('width','25%');
-			});
-		$('.half').click(function(){
-			$(this).parent().prev().children('span').css('width','50%');
-			});
-		$('.three-quarters').click(function(){
-			$(this).parent().prev().children('span').css('width','75%');
-			});
-		$('.full').click(function(){
-			$(this).parent().prev().children('span').css('width','100%');
-			});			
-	});
-</script>
-
+  
     <style>
        
 
@@ -163,9 +147,9 @@ v<%@ page language="java" contentType="text/html; charset=UTF-8"
 <div style="border:1px solid silver;">
 <p>%%개 달성시<br/> 공동구매 성공입니다!   </p>
     <p style="text-align:center;">현재 몇 60% 달성중 입니다</p>
-    <div class="col-md-4 col-sm-6 ">
+    <div class="col-md-12 col-sm-12 ">
 
-<div class="progress-bar blue stripes">
+<div  style="magin-left:30px;" class="progress-bar blue stripes">
     <span style="width: 60%"></span>
 </div>
 

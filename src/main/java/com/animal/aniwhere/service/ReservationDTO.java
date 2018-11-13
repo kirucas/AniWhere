@@ -7,9 +7,15 @@ public class ReservationDTO {
 	private String store_no;
 	private java.sql.Date apply_date; // 신청일
 	private java.sql.Date booking_date; // 예약일
+	private String qr_link; // QR Code 이미지 링크
 
 	// 신청자의 이름 저장을 위한 속성 추가
 	private String mem_name;
+	// 신청한 상가명을 저장하기 위한 속성 추가
+	private String bizesnm;
+	private String brchnm;
+	private String rdnmadr;
+	
 
 	public String getRv_no() {
 		return rv_no;
@@ -57,6 +63,38 @@ public class ReservationDTO {
 
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
+	}//////////
+
+	public String getBizesnm() {
+		return bizesnm;
+	}//////////
+
+	public void setBizesnm(String bizesnm) {
+		this.bizesnm = bizesnm;
+	}//////////
+
+	public String getBrchnm() {
+		return brchnm;
+	}//////////
+
+	public void setBrchnm(String brchnm) {
+		this.brchnm = brchnm;
+	}//////////
+
+	public String getQr_link() {
+		return qr_link;
+	}//////////
+
+	public void setQr_link(String qr_link) {
+		this.qr_link = qr_link;
+	}//////////
+
+	public String getRdnmadr() {
+		return rdnmadr;
+	}//////////
+
+	public void setRdnmadr(String rdnmadr) {
+		this.rdnmadr = rdnmadr;
 	}//////////
 
 }//////////////////// ReservationDTO class

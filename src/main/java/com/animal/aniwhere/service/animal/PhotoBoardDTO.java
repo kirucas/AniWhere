@@ -13,6 +13,15 @@ public class PhotoBoardDTO {
 	
 	// 작성자 별명을 저장하기 위한 속성 추가
 	private String mem_nickname;
+	private int totalImgCount;
+
+	public int getTotalImgCount() {
+		return totalImgCount;
+	}
+
+	public void setTotalImgCount(int totalImgCount) {
+		this.totalImgCount = totalImgCount;
+	}
 
 	public String getMem_no() {
 		return mem_no;

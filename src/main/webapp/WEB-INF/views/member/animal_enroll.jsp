@@ -17,6 +17,8 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 <style>
 html { background: url("<c:url value='/resources/images/signup1.jpg'/>") no-repeat center center fixed; 
 -webkit-background-size: cover;
@@ -26,18 +28,17 @@ html { background: url("<c:url value='/resources/images/signup1.jpg'/>") no-repe
 .input-field>label{
 	color:white;
 }
-.btn:hover, .btn-large:hover, .btn-small:hover {
-    background-color: white;
-    color:black;
-}
 *{
    font-family: 메이플스토리;
    color:white;
 }
-.btn{
-   background-color: #ccd5f0;
-   font-family: 메이플스토리;
-   color:black;
+
+.waves-button-input{
+	width: 120px;
+	height: 36px;
+}
+[value="애완동물 등록"]{
+	font-family: 메이플스토리;
 }
 [type="checkbox"]:checked+span:not(.lever):before {
 	border-right: 2px solid #ebc594;
@@ -72,29 +73,72 @@ input[type=date]:not(.browser-default):focus:not([readonly]){
     -webkit-box-shadow: 0 1px 0 0 #ebc594;
     box-shadow: 0 1px 0 0 #ebc594;
 }
+.error{
+	color:#ff7070;
+}
+#ani_photo-error{
+	margin-top:5px;
+}
 </style>
-
 <script>
-$(document).ready(function() {
-      $('#birthdate').click(function(){
-        $('.datepicker').pickadate({
-            selectMonths: true,
-            selectYears: 150, 
-            format: 'yyyy-mm-dd',
-            min: new Date(1900,1,1),
-            max: true
-        });
-    });
-
-        initBindings();
-    });
-
-    function initBindings(){
-        $('#birthdate-icon').click(function(){
-            $('#birthdate').click();
-        });
-    };
-
+$(function(){
+	$( "#frm" ).validate({
+		  rules: {
+		   	ani_name:{
+		    	required: true,
+		    	maxlength: 20
+		    },
+		    ani_age:{
+		    	required: true,
+		    	maxlength:3
+		    },
+		    ani_species: {
+		      required: true
+		    },
+		    ani_gender: {
+		      required: true
+		    },
+		    ani_kind: {
+		      required: true,
+		      maxlength:10
+		    },
+		    ani_photo:{
+		    	required: true
+		    }
+		  },messages: {
+			    ani_name: {
+			    	required: "애완동물의 이름을 입력해주세요.",
+			    	maxlength: "최대 20글자까지 가능합니다."
+			    },
+			    ani_age:{
+			    	required:"나이 입력해주세요.",
+			    	maxlength: "최대 3글자까지 가능합니다."
+			    },
+			    ani_species: {
+			      required: "대분류를 선택해주세요.",
+			    },
+			    ani_gender: {
+			      required: "성별을 선택해주세요.",
+			    },
+			    ani_kind:{
+			    	required:"중분류를 선택해 주세요",
+			    	maxlength:"최대 10글자까지 가능합니다"
+			    },
+			    ani_photo:{
+			    	required:"사진을 첨부해주세요"
+			    }
+			},
+		  errorElement : 'div',
+	      errorPlacement: function(error, element) {
+	        var placement = $(element).data('error');
+	        if (placement) {
+	          $(placement).append(error)
+	        } else {
+	          error.insertAfter(element);
+	        }
+	      }
+	});
+});
 </script>
     <body>
 		<div class="container" id="signup">
@@ -103,44 +147,46 @@ $(document).ready(function() {
 		          <h4>애완동물 등록</h4>
 		          <p class="center">지금 당장 애완동물을 등록하세요!</p>
 		        </div>
-		    	<form action="<c:url value='/enrollProcess.aw'/>" class="col s12" method="post" enctype="multipart/form-data">
+		    	<form id="frm" action="<c:url value='/enrollProcess.aw'/>" class="col s12" method="post" enctype="multipart/form-data">
 			      <div class="row">
 			        <div class="input-field col s4 offset-s4">
-			          <input id="ani_name" name="ani_name" type="text" class="validate">
-			          <label for="ani_name">애완동물 이름</label>
+			          <input id="ani_name" name="ani_name" type="text" class="validate" data-error=".errorTxt1">
+			          <label for="ani_name">애완동물 이름(*)</label>
+			          <div class="errorTxt1"></div>
 			        </div>
 			      </div>
 			      <div class="row">
-			      	<div class="col s4 offset-s4">
-		      			<span>애완동물 나이</span>
-	      			</div>
 			      	<div class="input-field col s4 offset-s4">
-			      		<input type="text" class="datepicker" name="ani_age">
+			      		 <input id="ani_age" name="ani_age" type="text" class="validate" data-error=".errorTxt2">
+			          <label for="ani_age">애완동물 나이(*)</label>
+			          <div class="errorTxt2"></div>
 			      	</div>
 				  </div>
 			      <div class="row">
 			      	<div class="col s4 offset-s4">
-			      		<span>애완동물 성별</span>
+			      		<span>애완동물 성별(*)</span>
+			      		<div class="errorTxt3"></div>
 			      	</div>
 			        <div class="input-field inline col s2 offset-s4">
 	     			    <label>
-	        				<input name="ani_gender" type="radio" value="M" />
-	        				<span>암</span>
+	        				<input name="ani_gender" type="radio" value="M"  data-error=".errorTxt3"/>
+	        				<span>수</span>
 	     				</label>
 			        </div>
 			        <div class="input-field inline col s2">
 				        <label>
 					        <input name="ani_gender" type="radio" value="F" />
-					        <span>수</span>
+					        <span>암</span>
 					    </label>
 				    </div>  
 			      </div>
 				  <div class="row">
 			      	<div class="input-field col s4 offset-s4">
-			      		<span>애완동물 대분류</span>
+			      		<span>애완동물 대분류(*)</span>
+			      		<div class="errorTxt4"></div>
 			      		<p>
 			      		<label>
-	        				<input type="radio" name="ani_species" value="1"/>
+	        				<input type="radio" name="ani_species" value="1" data-error=".errorTxt4"/>
 	        				<span>강아지</span>
       					</label>
       					</p>
@@ -172,18 +218,20 @@ $(document).ready(function() {
 				  </div>
 				  <div class="row">
 			        <div class="input-field col s4 offset-s4">
-			          <input id="ani_kind" name="ani_kind" type="text" class="validate">
-			          <label for="ani_kind">애완동물 중분류</label>
+			          <input id="ani_kind" name="ani_kind" type="text" class="validate" data-error=".errorTxt5">
+			          <label for="ani_kind">애완동물 중분류(*)</label>
+			          <div class="errorTxt5"></div>
 			        </div>
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s4 offset-s4">
-			          <input id="ani_photo" name="ani_photo" type="file" class="validate">
+			          <input id="ani_photo" name="ani_photo" type="file" class="validate" data-error=".errorTxt6">
+			          <div class="errorTxt6"></div>
 			        </div>
 			      </div>
 				  <div class="row">
 				  	<div class="input-field inline col s2 offset-s4">
-         			 <button id="anienroll" type="submit" class="btn waves-effect waves-light col s12">애완동물 등록</button>
+         			  <input type="submit" class="btn waves-effect waves-light col s12" value="애완동물 등록"/>
 				  	</div>
 				  </div>
 		    	</form>
