@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<!-- table_name은 (동물)_photo 의 형식으로 넘어와야 함 -->
+<mapper namespace="mybatis.Photo">
+
+	<select id="photoCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM (
+			SELECT p.*, mem_nickname
+			FROM photo p LEFT JOIN member m ON p.mem_no=m.mem_no
+			WHERE ani_category=#{ani_category}
+			<if test="searchColumn != null">
+				AND ${searchColumn} like '%'||#{searchWord}||'%'
+			</if>
+			)
+	</select>
+	
+	<select id="photoSelectList" parameterType="java.util.Map" resultType="PhotoDTO">
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT p.*, mem_nickname
+				FROM photo p LEFT JOIN member m ON p.mem_no=m.mem_no
+				WHERE ani_category=#{ani_category}
+				<if test="searchColumn != null">
+					AND ${searchColumn} like '%'||#{searchWord}||'%'
+				</if>
+				ORDER BY no DESC
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="photoSelectOne" parameterType="java.util.Map" resultType="PhotoDTO">
+		SELECT tn.*, mem_nickname
+		FROM photo tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
+		WHERE no=#{no}
+	</select>
+	
+	<insert id="photoInsert" parameterType="java.util.Map">
+		<selectKey order="BEFORE" resultType="int" keyProperty="no">
+			SELECT seq_photo.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO photo(no, mem_no, photo_title, photo_content, ani_category, photo_regidate)
+		VALUES(#{no}, #{mem_no}, #{photo_title}, #{photo_content}, #{ani_category}, #{today})
+	</insert>
+	
+	<update id="photoUpdate" parameterType="java.util.Map">
+		UPDATE photo
+		SET photo_title=#{photo_title}, photo_content=#{photo_content}
+		WHERE no=#{no}
+	</update>
+	
+	<delete id="photoDelete" parameterType="java.util.Map">
+		DELETE FROM photo
+		WHERE no=#{no}
+	</delete>
+	
+	<select id="linkSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT *
+		FROM photo_link
+		WHERE no=#{no}
+		ORDER BY link_no
+	</select>
+	
+	<insert id="linkInsert" parameterType="java.util.Map">
+		INSERT INTO photo_link
+		VALUES(seq_photo_link.nextval, #{no}, #{link_url})
+	</insert>
+	
+	<update id="linkUpate" parameterType="java.util.Map">
+	</update>
+	
+	<delete id="linkDelete" parameterType="java.util.Map">
+		DELETE FROM photo_link
+		WHERE no=#{no}
+	</delete>
+	
+	<update id="addHitCountPhoto" parameterType="java.util.Map">
+		UPDATE photo
+		SET photo_hit=photo_hit + 1
+		WHERE no=#{no}
+	</update>
+	
+	<update id="addCountPhoto" parameterType="java.util.Map">
+		UPDATE photo
+		SET photo_count=photo_count + 1
+		WHERE no=#{no}
+	</update>
+	
+</mapper>
