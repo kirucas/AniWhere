@@ -98,6 +98,13 @@
 	});
 			</script>			
 </div>
+<c:if test="${dto.booking_date ne '' }" var="result">
+<div id="btn">
+	<a href="javascript:isDelete()" class="btn btn-danger">방문 기록 삭제</a>
+</div>
+</c:if>
+<c:if test="${not result }">
 <div id="btn">
 	<a href="javascript:isDelete()" class="btn btn-danger">예약 취소</a>
 </div>
+</c:if>
