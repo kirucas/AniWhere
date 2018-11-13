@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.BuySell">
+
+	<select id="bsCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM (
+			SELECT tn.*, mem_nickname, animal_name
+			FROM market_${table_name} tn LEFT JOIN member mb ON tn.mem_no=mb.mem_no
+			JOIN animal_category ac ON tn.animal_code=ac.animal_code
+			<if test="animal_code != null and searchColumn != null">
+				WHERE tn.animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
+			</if>
+			<if test="animal_code != null">
+				WHERE tn.animal_code=#{animal_code}
+			</if>
+			<if test="searchColumn != null">
+				WHERE ${searchColumn} like '%'||#{searchWord}||'%'
+			</if>
+			)
+	</select>
+	
+	<select id="bsSelectList" parameterType="java.util.Map" resultType="BSDTO">
+		SELECT *
+		FROM (
+			SELECT T.*, ROWNUM R
+			FROM (
+				SELECT tn.*, mem_nickname, animal_name
+				FROM market_${table_name} tn LEFT JOIN member mb ON tn.mem_no=mb.mem_no
+				JOIN animal_category ac ON tn.animal_code=ac.animal_code
+				<if test="animal_code != null and searchColumn != null">
+					WHERE tn.animal_code=#{animal_code} AND ${searchColumn} like '%'||#{searchWord}||'%'
+				</if>
+				<if test="animal_code != null">
+					WHERE tn.animal_code=#{animal_code}
+				</if>
+				<if test="searchColumn != null">
+					WHERE ${searchColumn} like '%'||#{searchWord}||'%'
+				</if>
+				ORDER BY no DESC
+				) T
+			)
+		WHERE R BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="bsSelectOne" parameterType="java.util.Map" resultType="BSDTO">
+		SELECT tn.*, mem_nickname, animal_name
+		FROM market_${table_name} tn LEFT JOIN member mb ON tn.mem_no = mb.mem_no
+		JOIN animal_category ac ON tn.animal_code = ac.animal_code
+		WHERE no=#{no}
+	</select>
+	
+	<insert id="bsInsert" parameterType="java.util.Map">
+		INSERT INTO market_${table_name}(no, mem_no, animal_code, title, content, regidate)
+		VALUES(seq_${table_name}.nextval, #{mem_no}, #{animal_code}, #{title}, #{content}, #{today})
+	</insert>
+	
+	<update id="bsUpdate" parameterType="java.util.Map">
+		UPDATE market_${table_name}
+		SET animal_code=#{animal_code}, title=#{title}, content=#{content}
+		WHERE no=#{no}
+	</update>
+	
+	<delete id="bsDelete" parameterType="java.util.Map">
+		DELETE market_${table_name}
+		WHERE no=#{no}
+	</delete>
+	
+	<update id="addCountBS" parameterType="java.util.Map">
+		UPDATE market_${table_name}
+		SET count=count + 1
+		WHERE no=#{no}
+	</update>
+	
+</mapper>

@@ -248,7 +248,7 @@ button{
 				$.ajax({
 		            type: "POST",
 		            dataType : "json",
-		            url : "<c:url value='/security/where/map/total.awa'/>",
+		            url : "<c:url value='/where/map/total.awa'/>",
 		            success: function(jsonObj) {
 		            	map.setLevel(14);	
 		            	clusterer.removeMarkers(markers);
@@ -356,7 +356,7 @@ button{
 		         $.ajax({
 		        	data : {indssclscd:code},
 		            type: "POST",
-		            url : "<c:url value='/security/where/map/select.awa'/>",
+		            url : "<c:url value='/where/map/select.awa'/>",
 		            dataType : "json",
 		            success: function(jsonObj) {
 		            	map.setLevel(14);
@@ -464,7 +464,7 @@ button{
 					data: {'mylat':mylat,'mylon':mylon},
 		            type: "POST",
 		            dataType : "json",
-		            url : "<c:url value='/security/where/map/near.awa'/>",
+		            url : "<c:url value='/where/map/near.awa'/>",
 		            success: function(jsonObj) {
 		            	var nearString = '';
 		            	$.each(jsonObj, function(index, value){
@@ -513,7 +513,7 @@ button{
 					data: {indssclscd:code,'mylat':mylat,'mylon':mylon},
 		            type: "POST",
 		            dataType : "json",
-		            url : "<c:url value='/security/where/map/nearselect.awa'/>",
+		            url : "<c:url value='/where/map/nearselect.awa'/>",
 		            success: function(jsonObj) {
 		            	var nearString = '';
 		            	var curl = "<c:url value='/resources/images/"+pic+".png'/>";

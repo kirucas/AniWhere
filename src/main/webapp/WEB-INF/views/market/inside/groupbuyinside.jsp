@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+
 
 <script>
 	var isDelete = function() {
@@ -8,40 +11,51 @@
 			location.replace("<c:url value='/market/groupbuy/delete.aw?groupbuy_no=${record.no}'/>");
 	};
 </script>
+
 <!-- 구매량 +  - 하는 로직 -->
-<script type="text/javascript"> 
-function test() { 
-var td = document.getElementById("test"); 
-var n = Number(td.innerHTML); 
+<script> 
+
+function test1() {
+var td = document.getElementById("buy_number"); 
+var n = Number(td.innerHTML);
 td.innerHTML = n + 1; 
 
 } 
 
-
 function test2() { 
-	var td = document.getElementById("test"); 
+	var td = document.getElementById("buy_number"); 
 	var n = Number(td.innerHTML); 
 	td.innerHTML = n - 1; 
 	if(n<=2){
-		td.innerHTML=1}
-	}
-
-<!-- 구매시 허가구하는 로직 -->
-
+		td.innerHTML=1;
+		}
+}
+</script>
+<script>
+	
+/* <!-- 구매시 허가구하는 로직 --> */
 function buyaccept(){	
 	if (confirm("구입하시겠습니까?")){
-		
-    alert("구입해주셔서 감사합니다");
-    
-    
-    action="redirect:/market/groupbuy.aw";
-         
-	}
+		var buy_number = $('#buy_number').text();
+	    /* <!--구입했을떄 id = buy_number 에서  ${record.buy_count}에  주어진 숫자를 추가해주는 로직 만들기 --> */
+	    var no = '${record.no}';
+	    $.ajax({  
+	           url:"<c:url value='/groupbuy/buycount.awa'/>",
+	           data:{"buy_number":buy_number, "groupbuy_no":no},         
+	           type:'post',  
+	           dataType : 'json',
+	           success:function(data){ 
+	        	   console.log("성공!!")
+	        	   
+	        	   alert(buy_number+"개 구입 감사");
+	           }, error : function() {
+	           console.log("error");}
+		 });
+    }
 	else 
 		return false;
 }
 </script> 
-
 
 <script>
    //해당 글번호에 대한 코멘트 목록을 뿌려주는 함수
@@ -62,6 +76,7 @@ function buyaccept(){
 		if(data.length==0){
 			commentString+="<h3 class='text-center' style='padding-top:10px;width:100%'>등록된 댓글이 없습니다</h3>";
 		}
+		
 		$.each(data,function(index,cmt){			
 			commentString+='<div class="col-sm-5" style="margin-top: 10px">';
 			commentString+=cmt["mem_nickname"]+'&nbsp;&nbsp; '+cmt["regidate"];
@@ -78,7 +93,7 @@ function buyaccept(){
 		});		
 		commentString+='</div>';
       $('#comments').html(commentString);
-      if(${sessionScope.mem_no==record.mem_no}){
+      if(${sessionScope.mem_no == record.mem_no}){
     	  
 	      //코멘트 수정/삭제 처리
 	      $('.commentEdit').click(function() {
@@ -88,6 +103,7 @@ function buyaccept(){
 	            $("#submit").val('수정');
 	            $('input[name=cmt_no]').val($(this).attr("title"));
 	      });
+	      
 	      $('.commentDelete').click(function() {
 	            var cno_value = $(this).attr("title");
 	            $.ajax({
@@ -96,7 +112,7 @@ function buyaccept(){
 	                dataType:'text',
 	                type:'post',
 	                success:function(key){
-	                   showComments(key);                   
+	                showComments(key);                   
 	                }
 	             });
 	      });
@@ -196,20 +212,30 @@ function buyaccept(){
   <!-- 여기서부터 끝까지는 프로그래스바를 위한 로직  -->  
 
 <SCRIPT> 
-
 //시간 구하기 표시하기 로직
 function getTime() { 
 now = new Date(); 
-dday = new Date(2018,10,10,18,00,00); 
+
+var time ="${record.deadline}";
+
+//2018-11-21 이렇게 뜸...
+//요안에 dead_line 넣어야 함  넣기만 하면 돼는데...
+
+ var yyyy= time.substring(0,4);
+ var mm=time.substring(5,7);
+ var dd= time.substring(8,11); 
+
+dday = new Date(yyyy,mm-1,dd,18,00,00); 
+
 
 //원하는 날짜, 시간 정확하게 초단위까지 기입.
-days = (dday - now) / 1000 / 60 / 60 / 24; 
+days = (dday - now) /1000/60/60/24; 
 daysRound = Math.floor(days); 
-hours = (dday - now) / 1000 / 60 / 60 - (24 * daysRound); 
+hours = (dday - now) /1000/60/60 - (24 * daysRound); 
 hoursRound = Math.floor(hours); 
-minutes = (dday - now) / 1000 /60 - (24 * 60 * daysRound) - (60 * hoursRound); 
+minutes = (dday - now) /1000/60 - (24 * 60 * daysRound) - (60 * hoursRound); 
 minutesRound = Math.floor(minutes); 
-seconds = (dday - now) / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound); 
+seconds = (dday - now) /1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound); 
 secondsRound = Math.round(seconds);
 
 document.getElementById("counter0").innerHTML = daysRound; 
@@ -258,7 +284,7 @@ function printClock() {
     setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
 }
 
-function addZeros(num, digit) { // 자릿수 맞춰주기
+function addZeros(num, digit) {// 자릿수 맞춰주기
 	  var zero = '';
 	  num = num.toString();
 	  if (num.length < digit) {
@@ -416,13 +442,11 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
     </style>
 <!-- 프로그래바를 위한 로직끝 -->
 
- 
   </head>
 
-    <!-- Page Content -->
     <div class="container">
 
-      <!-- Portfolio Item Heading -->
+      <!-- 본문내용 시작 -->
       <div>
 			<h1 class="my-4">
 				<c:choose>
@@ -444,7 +468,6 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 				</c:choose>
 				<small>${record.title}</small>
 			</h1>
-
 		</div>
       <!-- Portfolio Item Row -->
       <div class="row">
@@ -457,69 +480,23 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
    			
    			$('#product').prop("src",arr[0]);
    			$.each(arr,function(index,value){
-				console.log("이미지들어올떄마다 출력 됌");
+				//console.log("이미지들어올떄마다 출력 됌");
 				$('img[name=product]').eq(index).prop("src",value);
 												
-			})
-			
-			//이미지를 클릭하면 메인화면의 큼화면에서 볼수 있게하는 로직 
-   		function changeimage2() {
-    var image = document.getElementById('product');
-    var changeimage2=document.getElementById('product2');
-    
-    
-    if (changeimage2.id.match("product2")) {
-        image.src = "";
-    } //안먹힘 
-    
-}
+			});		
+});
 
-   			
-function changeimage3() {
-    var image = document.getElementById('product');
-    var changeimage3=document.getElementById('product3');
-    
-    if (changeimage3.id.match("product3")) {
-        image.src = "<c:url value='/resources/images/maketimages/product3.jpg'/>";
-    } 
-
-}
-
-
-function changeimage4() {
-    var image = document.getElementById('product');
-    var changeimage4=document.getElementById('product4');
-    
-    if (changeimage4.id.match("product4")) {
-        image.src = "<c:url value='/resources/images/maketimages/product4.png'/>";
-    } 
-
-}
-
-function changeimage1() {
-    var image = document.getElementById('product');
-    var changeimage1=document.getElementById('product1');
-    
-    if (changeimage1.id.match("product1")) {
-        image.src = "<c:url value='/resources/images/maketimages/product1.jpg'/>";
-    } 
-}  		
-   		});
-   		
-   		
-   		
-   		
+      		
+    		
    	</script>
 		<!-- 메인 사진 -->
         <div class="col-md-8">
          <!--  <img class="img-fluid" src="http://placehold.it/750x500" alt="" > -->
            <img id="product" class="card-img-right flex-auto d-none d-lg-block" alt="판매상품" src="" style="width: 700px; height: 500px;">
         </div>
-        <div class="col-md-4" style="border:1px solid silver">
-        
-         	<h3 class="my-3">판매자 아이디: ${record.mem_nickname}</h3>
-       
-          <h3 class="my-3" id="animal_code">
+        <div class="col-md-4" style="border:1px solid silver">        
+         	<h3 class="my-3">판매자 아이디: ${record.mem_nickname}</h3>      
+          <h3 class="my-3" id="animal_code">          
 					관련태그:
 					<c:choose>
 						<c:when test="${record.animal_code eq '1'}">
@@ -548,8 +525,8 @@ function changeimage1() {
 			</div>
 			<div class="col-md-12" style="border: 1px solid silver;margin-top:40px">
 				<h3 class="my-4">구매 개수 등록</h3>
-				<input type="button"  class="btn btn-info"  value="+" onclick="test()">			
-				<table style="width:30px;height:30px;margin-left:15px" ><tr><td id="test" >1</td></tr></table>
+				<input type="button"  class="btn btn-info"  value="+" onclick="test1()">			
+				<table style="width:30px;height:30px;margin-left:15px" ><tr><td id=buy_number>1</td></tr></table>
 				<input type="button" class="btn btn-info"  value="-" onclick="test2()"><br/>
 				<input   class="btn btn-danger" type="button" value="구매"  style="magin-bottom:10px;margin-top:20px;margin-left:200px;" onclick="buyaccept();">
 		    
@@ -601,13 +578,22 @@ function changeimage1() {
       
     </div>
     <SCRIPT>getTime()</SCRIPT>
+	<!-- 프로그래스바 로직 만들자  -->
 	
-<p style="text-align:center;">%%개 달성시 공동구매성공입니다  </p>
-    <p style="text-align:center;">현재 몇% 달성중 입니다</p>
+	<%-- "${record.goal}-${record.buy_count} >0" > 만약 필요갯수가 0보타 클시에는 보여주고 --%>
+	<%-- ${record.buy_count} 이사람 한개 뿐만이 아니라 모든 buy_count 종합 group_buy의  buy_no 테이블의 모든값 구해야 함  --%>
+	
+<p style="text-align:center;">${record.goal}-${dto.buy_count} 개 달성시 공동구매성공입니다  </p>
+                                                                
+     <!-- if 구문을 넣어서 공동구매  카운트 수가 0이 돼었다면 ?
+     <p style="text-align:center;"> 목표수량 달성했습니다 공동구매성공입니다  </p>  
+                              -->
+                              
+    <p style="text-align:center;">현재 몇 ${dto.buy_count}/${record.goal} %달성중 입니다</p>
    
-
 <div class="progress-bar blue stripes col-ms-12">
-    <span style="width: 80%"></span> 
+                     
+    <span style="width: (${dto.buy_count}/${record.goal})"></span> 
     
     <!-- 안쪽에 % 숫자 로직으로 조절 -->
 </div>

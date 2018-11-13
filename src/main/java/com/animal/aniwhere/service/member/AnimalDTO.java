@@ -10,6 +10,7 @@ public class AnimalDTO {
 	private String ani_species;
 	private String ani_kind;
 	private String ani_pic;
+	private String ani_checking;
 	
 	// 해당 동물에 대한 주인 정보를 저장 할 속성 추가
 	private String mem_name;
@@ -93,6 +94,14 @@ public class AnimalDTO {
 
 	public void setAni_gender(String ani_gender) {
 		this.ani_gender = ani_gender;
+	}//////////
+
+	public String getAni_checking() {
+		return ani_checking;
+	}//////////
+
+	public void setAni_checking(String ani_checking) {
+		this.ani_checking = ani_checking;
 	}//////////
 	
 }//////////////////// AnimalDTO

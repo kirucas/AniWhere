@@ -35,7 +35,7 @@
 	
 	<update id="animalUpdate" parameterType="java.util.Map">
 		UPDATE animal
-		SET ani_name=#{ani_name}, ani_age=#{ani_age}, ani_gender=#{ani_gender}, ani_species=#{ani_species}, ani_kind=#{ani_kind}, ani_pic=#{ani_pic}
+		SET ani_checking=#{ani_checking}
 		WHERE ani_no=#{ani_no}
 	</update>
 	
