@@ -1,22 +1,15 @@
 package com.animal.aniwhere.web.board.animal.bird;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.json.simple.JSONArray;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +22,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllCommentDTO;
 import com.animal.aniwhere.service.AwsS3Utils;
-import com.animal.aniwhere.service.animal.FreeBoardDTO;
 import com.animal.aniwhere.service.animal.TipBoardDTO;
 import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;

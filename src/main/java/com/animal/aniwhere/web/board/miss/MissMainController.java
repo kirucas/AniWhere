@@ -1,10 +1,8 @@
 package com.animal.aniwhere.web.board.miss;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.annotation.Resource;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllCommentDTO;
@@ -31,7 +28,6 @@ import com.animal.aniwhere.service.impl.miss.FindSeeServiceImpl;
 import com.animal.aniwhere.service.impl.miss.LostAnimalServiceImpl;
 import com.animal.aniwhere.service.miss.FindSeeDTO;
 import com.animal.aniwhere.service.miss.LostAnimalDTO;
-import com.animal.aniwhere.web.board.FileUpDownUtils;
 
 
 @Controller

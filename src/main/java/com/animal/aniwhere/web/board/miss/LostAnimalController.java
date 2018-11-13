@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.animal.aniwhere.service.impl.miss.LostAnimalServiceImpl;
-import com.animal.aniwhere.service.member.MemberDTO;
 import com.animal.aniwhere.service.miss.LostAnimalDTO;
 
 @Controller

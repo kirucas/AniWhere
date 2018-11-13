@@ -2,8 +2,6 @@ package com.animal.aniwhere.web.board.animal.bird;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,12 +10,10 @@ import java.util.Vector;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AwsS3Utils;
-import com.animal.aniwhere.service.animal.MovieBoardDTO;
 import com.animal.aniwhere.service.animal.PhotoBoardDTO;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.animal.PhotoBoardServiceImpl;
@@ -60,7 +54,7 @@ public class BirdPhotoController {
 		switch (category) {
 			case "dog":category_no=1;break;
 			case "cat":category_no=2;break;
-			case "rna":category_no=3;break;
+			case "rNa":category_no=3;break;
 			case "bird":category_no=4;break;
 			default:category_no=5;break;
 		}
@@ -87,7 +81,7 @@ public class BirdPhotoController {
 		switch (category) {
 			case "dog":category_no=1;break;
 			case "cat":category_no=2;break;
-			case "rna":category_no=3;break;
+			case "rNa":category_no=3;break;
 			case "bird":category_no=4;break;
 		default:category_no=5;break;
 		}
