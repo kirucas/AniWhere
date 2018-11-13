@@ -54,7 +54,7 @@ public class BirdPhotoController {
 		switch (category) {
 			case "dog":category_no=1;break;
 			case "cat":category_no=2;break;
-			case "rna":category_no=3;break;
+			case "rNa":category_no=3;break;
 			case "bird":category_no=4;break;
 			default:category_no=5;break;
 		}
@@ -81,7 +81,7 @@ public class BirdPhotoController {
 		switch (category) {
 			case "dog":category_no=1;break;
 			case "cat":category_no=2;break;
-			case "rna":category_no=3;break;
+			case "rNa":category_no=3;break;
 			case "bird":category_no=4;break;
 		default:category_no=5;break;
 		}

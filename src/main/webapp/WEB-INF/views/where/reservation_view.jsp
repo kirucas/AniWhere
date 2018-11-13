@@ -67,7 +67,7 @@
 			<span>등록 날짜 :</span><span id="under_line"> ${dto.apply_date }</span>
 		</div>
 		<div>
-			<span>예약 날짜 :</span><span id="under_line"> ${dto.booking_date }</span>
+			<span>예약 날짜 :</span><span id="under_line"> ${dto.booking_date}</span>
 		</div>
 		<div>
 			<span>방문 시각 :</span><span id="under_line"> ${dto.visit_time }</span>
