@@ -29,7 +29,7 @@
 	</select>
 	
 	<insert id="animalInsert" parameterType="java.util.Map">
-		INSERT INTO animal
+		INSERT INTO animal(ani_no, mem_no, ani_name, ani_age, ani_gender, ani_kind, ani_pic, ani_regidate, ani_species)
 		VALUES(seq_animal.nextval, #{mem_no}, #{ani_name}, #{ani_age}, #{ani_gender}, #{ani_kind}, #{ani_pic}, #{today}, #{ani_species})
 	</insert>
 	
