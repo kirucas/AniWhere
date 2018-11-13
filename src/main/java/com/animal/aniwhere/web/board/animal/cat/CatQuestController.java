@@ -1,6 +1,5 @@
 package com.animal.aniwhere.web.board.animal.cat;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

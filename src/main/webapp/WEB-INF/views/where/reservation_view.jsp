@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script>
 	var isDelete = function(){
 		if(confirm("예약을 취소 하시겠습니까?"))
@@ -67,7 +68,7 @@
 			<span>등록 날짜 :</span><span id="under_line"> ${dto.apply_date }</span>
 		</div>
 		<div>
-			<span>예약 날짜 :</span><span id="under_line"> ${dto.booking_date }</span>
+			<span>예약 날짜 :</span><span id="under_line"> ${dto.booking_date}</span>
 		</div>
 		<div>
 			<span>방문 시각 :</span><span id="under_line"> ${dto.visit_time }</span>
@@ -98,6 +99,13 @@
 	});
 			</script>			
 </div>
+<c:if test="${fn:contains(dto.visit_time,'(아직 방문하지 않았습니다)') }" var="result">
 <div id="btn">
 	<a href="javascript:isDelete()" class="btn btn-danger">예약 취소</a>
 </div>
+</c:if>
+<c:if test="${not result }">
+<div id="btn">
+	<a href="javascript:isDelete()" class="btn btn-danger">방문 기록 삭제</a>
+</div>
+</c:if>

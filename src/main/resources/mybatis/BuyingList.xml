@@ -29,8 +29,11 @@
 	</select>
 	
 	<insert id="buyingInsert" parameterType="java.util.Map">
-		INSERT INTO group_buy
+		INSERT INTO group_buy(buy_no,no,mem_no,buy_count)
 		VALUES(seq_group_buy.nextval, #{no}, #{mem_no}, #{buy_count})
+		<selectKey keyProperty="buy_no" resultType="int" order="AFTER">
+    		select seq_group_buy.currval FROM DUAL
+  		</selectKey>
 	</insert>
 	
 	<update id="buyingUpdate" parameterType="java.util.Map">

@@ -296,6 +296,16 @@ public class MemberController {
         	out.print(false);
     }/////////////nickcheck
 	
+    //닉네임 중복체크
+    @ResponseBody
+	@RequestMapping(value="/member/nick_change.aw",method=RequestMethod.POST)
+    public String nick_change(@RequestParam Map map) throws Exception {
+        int result = service.getTotalRecord(map);
+        map.put("result", result);
+        JSONObject object = new JSONObject(map);
+        return object.toJSONString();
+    }/////////////nick_change
+    
     //비밀번호 중복체크
     @ResponseBody
 	@RequestMapping(value="/member/pwdchk.aw",method=RequestMethod.POST)

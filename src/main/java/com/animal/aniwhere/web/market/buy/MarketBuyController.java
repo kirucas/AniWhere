@@ -1,10 +1,8 @@
 package com.animal.aniwhere.web.market.buy;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.annotation.Resource;
@@ -23,13 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.animal.aniwhere.service.AllCommentDTO;
-import com.animal.aniwhere.service.AllCommonService;
 import com.animal.aniwhere.service.AwsS3Utils;
 import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.market.BuySellServiceImpl;
 import com.animal.aniwhere.service.market.BuySellDTO;
-import com.animal.aniwhere.service.miss.FindSeeDTO;
 import com.animal.aniwhere.web.board.FileUpDownUtils;
 
 @Controller
