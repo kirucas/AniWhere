@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.animal.aniwhere.service.AllBoardService;
 import com.animal.aniwhere.service.NoticeDTO;
-import com.animal.aniwhere.service.animal.FreeBoardDTO;
 import com.animal.aniwhere.service.impl.NoticeServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 
