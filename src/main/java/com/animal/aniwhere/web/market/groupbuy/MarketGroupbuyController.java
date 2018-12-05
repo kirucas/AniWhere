@@ -3,7 +3,6 @@ package com.animal.aniwhere.web.market.groupbuy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.annotation.Resource;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +27,6 @@ import com.animal.aniwhere.service.impl.AllCommentServiceImpl;
 import com.animal.aniwhere.service.impl.PagingUtil;
 import com.animal.aniwhere.service.impl.market.GroupBuyServiceImpl;
 import com.animal.aniwhere.service.impl.market.GroupBuyingListServiceImpl;
-import com.animal.aniwhere.service.market.BuySellDTO;
 import com.animal.aniwhere.service.market.GroupBuyDTO;
 import com.animal.aniwhere.service.market.GroupBuyingListDTO;
 import com.animal.aniwhere.web.board.FileUpDownUtils;
