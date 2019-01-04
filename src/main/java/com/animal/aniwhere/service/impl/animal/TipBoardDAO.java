@@ -34,7 +34,7 @@ public class TipBoardDAO implements AllBoardService {
 		if(map.get("view") == null)
 			template.update("addCountTip", map);
 		return template.selectOne("tipSelectOne", map);
-	}////////// getTotalRecord
+	}/////////// getTotalRecord
 
 	@Override
 	public int insert(Map map) {
